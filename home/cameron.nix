@@ -4,8 +4,6 @@
   home.username = "cameron";
   home.homeDirectory = "/home/cameron";
 
-  programs.home-manager.enable = true;
-
   home.packages = with pkgs; [
     zsh
 
@@ -14,18 +12,34 @@
     ripgrep
   ];
 
-  programs.zsh = {
-    enable = true;
-    ohMyZsh.enable = true;
-    autosuggestions.enable = true;
-    zsh-autoenv.enable = true;
-    syntaxHighlighting.enable = true;
-  };
+  programs = {
+    home-manager.enable = true;
 
-  programs.git = {
-    enable = true;
-    userName = "thebananathief";
-    userEmail = "cameron.salomone@gmail.com";
+    #zsh = {
+      #enable = true;
+      #enableAutosuggestions = true;
+      #enableCompletion = true;
+      #autocd = true;
+      #history.ignoreAllDups = true;
+      #oh-my-zsh = {
+        #enable = true;
+        #plugins = [
+          #"git-auto-fetch"
+          #"sudo"
+        #];
+      #};
+      #syntaxHighlighting.enable = true;
+      #dirHashes = {
+        #nixos = "/etc/nixos";
+        #gits = "$HOME/github";
+      #};
+    #};
+
+    git = {
+      enable = true;
+      userName = "thebananathief";
+      userEmail = "cameron.salomone@gmail.com";
+    };
   };
 
   #home-manager.users.cameron = {
@@ -52,4 +66,6 @@
       #};
     #};
   #};
-};
+
+  home.stateVersion = "23.05";
+}

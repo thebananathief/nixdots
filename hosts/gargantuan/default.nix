@@ -135,13 +135,13 @@
     hyprland.xwayland.enable = true;
     thunar.enable = true;
     thunar.plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
-    #zsh = {
-      #enable = true;
-      #ohMyZsh.enable = true;
-      #autosuggestions.enable = true;
-      #zsh-autoenv.enable = true;
-      #syntaxHighlighting.enable = true;
-    #};
+    zsh = {
+      enable = true;
+      ohMyZsh.enable = true;
+      autosuggestions.enable = true;
+      zsh-autoenv.enable = true;
+      syntaxHighlighting.enable = true;
+    };
   };
 
   # Enable sound with pipewire.
@@ -265,7 +265,7 @@
       fontconfig
       fontfor
       fontpreview
-      cut
+      #cut
 
     ## Desktop environment
       gsettings-qt
