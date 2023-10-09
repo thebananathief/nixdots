@@ -12,7 +12,7 @@
 
   outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
     let
-      currSystem = "x86_64-linux";
+      system = builtins.currentSystem;
       defaultModules = [
         { _module.args = { inherit inputs; }; }
         home-manager.nixosModules.home-manager
@@ -27,8 +27,8 @@
         };
       mkSystem = extraModules:
         nixpkgs.lib.nixosSystem rec {
-          pkgs = mkPkgs currSystem;
-          system = currSystem;
+          pkgs = mkPkgs system;
+          system = "x86_64-linux";
           modules = defaultModules ++ extraModules;
         };
     in {
