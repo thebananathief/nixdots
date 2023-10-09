@@ -10,8 +10,23 @@
   # Utils
     eza
     ripgrep
+
+  # fonts
+    material-symbols
+    noto-fonts
+    noto-fonts-emoji
+    roboto
+    lexend
+    jost
+    #(nerdfonts.override { fonts = [ "jetbrainsmono" "firacode" "firamono" "meslo" "mplus" "robotomono" ]; })
   ];
 
+  fonts.fontconfig.enable = true;
+
+  qt = {
+  };
+  gtk = {
+  };
   programs = {
     home-manager.enable = true;
 

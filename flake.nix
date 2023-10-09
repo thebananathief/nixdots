@@ -12,6 +12,7 @@
 
   outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
     let
+      currSystem = "x86_64-linux";
       defaultModules = [
         { _module.args = { inherit inputs; }; }
         home-manager.nixosModules.home-manager
@@ -22,16 +23,19 @@
       ];
       mkPkgs = system:
         import nixpkgs {
-          #inherit system overlays;
           config.allowUnfree = true;
         };
       mkSystem = extraModules:
         nixpkgs.lib.nixosSystem rec {
-          pkgs = mkPkgs "x86_64-linux";
-          system = "x86_64-linux";
+          pkgs = mkPkgs currSystem;
+          system = currSystem;
           modules = defaultModules ++ extraModules;
         };
     in {
+      lib = { inherit mkSystem; };
+      nixosModules.default = { ... }: {
+        imports = defaultModules ++ [ ./common ];
+      };
       nixosConfigurations.gargantuan = mkSystem [
         ./hosts/gargantuan
         nixos-hardware.nixosModules.framework

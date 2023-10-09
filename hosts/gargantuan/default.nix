@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }: {
   imports = [ 
     ./hardware-configuration.nix
@@ -163,39 +159,36 @@
     pam.services.swaylock.text = "auth include login";
   };
 
-  nix.settings.trusted-users = [ "root" "cameron"];
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
   # Fonts
-  fonts = {
-    packages = with pkgs; [
-      # fira-code
-      # fira
-      # cooper-hewitt
-      # ibm-plex
-      # iosevka
-      # bitmap
-      # spleen
-      # fira-code-symbols
-      # powerline-fonts
-      material-symbols
-      noto-fonts
-      noto-fonts-emoji
-      roboto
-      lexend
-      jost
-      (nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" "FiraMono" "Meslo" "MPlus" "RobotoMono" ]; })
-    ];
+  #fonts = {
+    #packages = with pkgs; [
+      ## fira-code
+      ## fira
+      ## cooper-hewitt
+      ## ibm-plex
+      ## iosevka
+      ## bitmap
+      ## spleen
+      ## fira-code-symbols
+      ## powerline-fonts
+      #material-symbols
+      #noto-fonts
+      #noto-fonts-emoji
+      #roboto
+      #lexend
+      #jost
+      #(nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" "FiraMono" "Meslo" "MPlus" "RobotoMono" ]; })
+    #];
 
-    enableDefaultPackages = false;
+    #enableDefaultPackages = false;
 
-    fontconfig.defaultFonts = {
-      serif = ["Noto Serif" "Noto Color Emoji"];
-      sansSerif = ["Noto Sans" "Noto Color Emoji"];
-      monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
-      emoji = ["Noto Color Emoji"];
-    };
-  };
+    #fontconfig.defaultFonts = {
+      #serif = ["Noto Serif" "Noto Color Emoji"];
+      #sansSerif = ["Noto Sans" "Noto Color Emoji"];
+      #monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
+      #emoji = ["Noto Color Emoji"];
+    #};
+  #};
 
   environment = {
     sessionVariables = {
