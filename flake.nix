@@ -13,6 +13,7 @@
   outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
     let
       system = builtins.currentSystem;
+      pkgs = import nixpkgs { inherit system; };
       defaultModules = [
         { _module.args = { inherit inputs; }; }
         home-manager.nixosModules.home-manager
