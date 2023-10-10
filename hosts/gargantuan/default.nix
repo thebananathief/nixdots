@@ -1,6 +1,7 @@
 { config, pkgs, ... }: {
   imports = [ 
     ./hardware-configuration.nix
+    ../../modules/zsh.nix
   ];
 
   hardware = {
@@ -131,25 +132,18 @@
     hyprland.xwayland.enable = true;
     thunar.enable = true;
     thunar.plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
-    zsh = {
-      enable = true;
-      ohMyZsh.enable = true;
-      autosuggestions.enable = true;
-      zsh-autoenv.enable = true;
-      syntaxHighlighting.enable = true;
-    };
   };
 
   # Enable sound with pipewire.
   sound.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.defaultUserShell = pkgs.zsh;
-  users.users.cameron = {
-    isNormalUser = true;
-    description = "Cameron";
-    extraGroups = [ "networkmanager" "wheel" "network" "input" ];
-  };
+  # users.defaultUserShell = pkgs.zsh;
+  # users.users.cameron = {
+  #   isNormalUser = true;
+  #   description = "Cameron";
+  #   extraGroups = [ "networkmanager" "wheel" "network" "input" ];
+  # };
 
   security = {
     sudo.wheelNeedsPassword = false;
@@ -192,8 +186,8 @@
 
   environment = {
     sessionVariables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
+      #EDITOR = "nvim";
+      #VISUAL = "nvim";
       TERM = "alacritty";
       MOZ_ENABLE_WAYLAND = "1";
       #POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
@@ -224,7 +218,6 @@
 
     systemPackages = with pkgs; [
     ## CLI
-      zsh
       fzf
       neofetch
       btop
@@ -335,7 +328,7 @@
 
     ## Coding
       git
-      neovim
+      #neovim
       go
       nodejs-slim
       rustup

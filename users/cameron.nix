@@ -4,9 +4,11 @@
   home.username = "cameron";
   home.homeDirectory = "/home/cameron";
 
-  home.packages = with pkgs; [
-    zsh
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
 
+  home.packages = with pkgs; [
   # Utils
     eza
     ripgrep
@@ -55,25 +57,31 @@
       vimdiffAlias = true;
     };
       
-    #zsh = {
-      #enable = true;
-      #enableAutosuggestions = true;
-      #enableCompletion = true;
-      #autocd = true;
-      #history.ignoreAllDups = true;
-      #oh-my-zsh = {
-        #enable = true;
-        #plugins = [
-          #"git-auto-fetch"
-          #"sudo"
-        #];
-      #};
-      #syntaxHighlighting.enable = true;
-      #dirHashes = {
-        #nixos = "/etc/nixos";
-        #gits = "$HOME/github";
-      #};
-    #};
+    # zsh = {
+    #   enable = true;
+    #   enableAutosuggestions = true;
+    #   enableCompletion = true;
+    #   autocd = true;
+    #   history.ignoreAllDups = true;
+    #   oh-my-zsh = {
+    #     enable = true;
+    #     plugins = [
+    #       "git-auto-fetch"
+    #       "sudo"
+    #     ];
+    #   };
+    #   syntaxHighlighting.enable = true;
+    #   dirHashes = {
+    #     nixos = "/etc/nixos";
+    #     gits = "$HOME/github";
+    #   };
+    # };
+
+    autojump = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
 
     git = {
       enable = true;
