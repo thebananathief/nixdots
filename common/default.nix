@@ -18,11 +18,10 @@
     #./xserver.nix
   #];
 
-  #nixpkgs.config.allowUnfree = true;
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "root" "cameron" ];
+      trusted-users = [ "root" "@wheel" ];
       auto-optimise-store = true;
       #substituters = lib.mkBefore [
         #"https://cache.jrnet.win/main?priority=1"

@@ -132,6 +132,8 @@
     hyprland.xwayland.enable = true;
     thunar.enable = true;
     thunar.plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
+    neovim.enable = true;
+    neovim.defaultEditor = true;
   };
 
   # Enable sound with pipewire.
@@ -139,11 +141,11 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   # users.defaultUserShell = pkgs.zsh;
-  # users.users.cameron = {
-  #   isNormalUser = true;
-  #   description = "Cameron";
-  #   extraGroups = [ "networkmanager" "wheel" "network" "input" ];
-  # };
+  users.users.cameron = {
+    isNormalUser = true;
+    description = "Cameron";
+    extraGroups = [ "networkmanager" "wheel" "network" "input" ];
+  };
 
   security = {
     sudo.wheelNeedsPassword = false;
@@ -185,10 +187,12 @@
   };
 
   environment = {
-    sessionVariables = {
-      #EDITOR = "nvim";
-      #VISUAL = "nvim";
+    variables = {
       TERM = "alacritty";
+    };
+    sessionVariables = {
+      # EDITOR = "nvim";
+      # VISUAL = "nvim";
       MOZ_ENABLE_WAYLAND = "1";
       #POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
       POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-qt}/lib/libpolkit-qt5-agent-1.so.1.114.0";
@@ -343,7 +347,7 @@
       spicetify-cli
       discord
       bitwarden
-      starship
+      # starship
       #trayscale
       tailscale-systray
       # thunderbird
