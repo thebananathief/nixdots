@@ -23,10 +23,10 @@
 
   fonts.fontconfig.enable = true;
 
-  qt = {
-  };
-  gtk = {
-  };
+  #qt = {
+  #};
+  #gtk = {
+  #};
   programs = {
     home-manager.enable = true;
 

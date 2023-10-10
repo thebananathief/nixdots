@@ -1,5 +1,5 @@
 { pkgs, lib, ... }: {
-  imports = [
+  #imports = [
     #./audio.nix
     #./autorandr.nix
     #./devlopment.nix
@@ -16,9 +16,9 @@
     #./tailscale.nix
     #./users
     #./xserver.nix
-  ];
+  #];
 
-  nixpkgs.config.allowUnfree = true;
+  #nixpkgs.config.allowUnfree = true;
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];

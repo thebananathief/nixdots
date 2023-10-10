@@ -3,42 +3,38 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
     let
-      system = builtins.currentSystem;
-      pkgs = import nixpkgs { inherit system; };
+      system = "x86_64-linux";
       defaultModules = [
         { _module.args = { inherit inputs; }; }
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+          home-manager.users.cameron = import ./users/cameron.nix;
         }
       ];
-      mkPkgs = system:
-        import nixpkgs {
-          config.allowUnfree = true;
-        };
+      mkPkgs = import nixpkgs { config.allowUnfree = true; inherit system; };
       mkSystem = extraModules:
         nixpkgs.lib.nixosSystem rec {
-          pkgs = mkPkgs system;
+          pkgs = mkPkgs;
           system = "x86_64-linux";
           modules = defaultModules ++ extraModules;
         };
     in {
-      lib = { inherit mkSystem; };
-      nixosModules.default = { ... }: {
-        imports = defaultModules ++ [ ./common ];
-      };
+      #lib = { inherit mkSystem; };
+      #nixosModules.default = { ... }: {
+        #imports = defaultModules ++ [ ./common ];
+      #};
       nixosConfigurations.gargantuan = mkSystem [
         ./hosts/gargantuan
+        ./common
         nixos-hardware.nixosModules.framework
       ];
     };

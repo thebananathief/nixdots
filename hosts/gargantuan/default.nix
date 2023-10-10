@@ -160,8 +160,8 @@
   };
 
   # Fonts
-  #fonts = {
-    #packages = with pkgs; [
+  fonts = {
+    packages = with pkgs; [
       ## fira-code
       ## fira
       ## cooper-hewitt
@@ -171,24 +171,24 @@
       ## spleen
       ## fira-code-symbols
       ## powerline-fonts
-      #material-symbols
-      #noto-fonts
-      #noto-fonts-emoji
-      #roboto
-      #lexend
-      #jost
-      #(nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" "FiraMono" "Meslo" "MPlus" "RobotoMono" ]; })
-    #];
+      material-symbols
+      noto-fonts
+      noto-fonts-emoji
+      roboto
+      lexend
+      jost
+      (nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" "FiraMono" "Meslo" "MPlus" "RobotoMono" ]; })
+    ];
 
-    #enableDefaultPackages = false;
+    enableDefaultPackages = false;
 
-    #fontconfig.defaultFonts = {
-      #serif = ["Noto Serif" "Noto Color Emoji"];
-      #sansSerif = ["Noto Sans" "Noto Color Emoji"];
-      #monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
-      #emoji = ["Noto Color Emoji"];
-    #};
-  #};
+    fontconfig.defaultFonts = {
+      serif = ["Noto Serif" "Noto Color Emoji"];
+      sansSerif = ["Noto Sans" "Noto Color Emoji"];
+      monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
+      emoji = ["Noto Color Emoji"];
+    };
+  };
 
   environment = {
     sessionVariables = {
