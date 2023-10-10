@@ -339,6 +339,7 @@
       go
       nodejs-slim
       rustup
+      python311Packages.pip
 
     ## General desktop
       krita

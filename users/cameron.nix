@@ -30,6 +30,31 @@
   programs = {
     home-manager.enable = true;
 
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      #generatedConfigs = {
+        #lua = ''
+        #''
+      #};
+      #extraLuaConfig = ''
+      #''
+      plugins = with pkgs.vimPlugins; [
+        vim-nix
+        lsp-zero-nvim
+        toggleterm-nvim
+        nvim-tree-lua
+        nvim-treesitter
+        comment-nvim
+        tagbar
+        catppuccin-nvim
+        feline-nvim
+      ];
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
+    };
+      
     #zsh = {
       #enable = true;
       #enableAutosuggestions = true;
