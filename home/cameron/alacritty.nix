@@ -2,8 +2,11 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      "import" = [ "${config.home.homeDirectory}/.config/alacritty/themes/catppuccin.yaml" ];
-      font = let family = "JetBrainsMono Nerd Font"; in {
+      "import" = [
+        "${config.home.homeDirectory}/.config/alacritty/themes/catppuccin.yaml"
+      ];
+      font = let family = "JetBrainsMono Nerd Font";
+      in {
         size = 11;
         normal.family = family;
         normal.style = "Regular";

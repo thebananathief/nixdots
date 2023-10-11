@@ -1,9 +1,7 @@
 {
   description = "NixOS configuration";
 
-  nixConfig = {
-    experimental-features = [ "nix-command" "flakes" ];
-  };
+  nixConfig = { experimental-features = [ "nix-command" "flakes" ]; };
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -25,7 +23,10 @@
         }
         ./common
       ];
-      mkPkgs = import nixpkgs { config.allowUnfree = true; inherit system; };
+      mkPkgs = import nixpkgs {
+        config.allowUnfree = true;
+        inherit system;
+      };
       mkSystem = extraModules:
         nixpkgs.lib.nixosSystem rec {
           pkgs = mkPkgs;

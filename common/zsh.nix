@@ -9,9 +9,10 @@
       enable = true;
       theme = "avit";
       plugins = [
-        "git"
+        # "git"
         "git-auto-fetch"
         "sudo"
+        "fzf"
       ];
     };
     autosuggestions.enable = true;
@@ -19,7 +20,5 @@
     syntaxHighlighting.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    fzf
-  ];
+  environment.systemPackages = with pkgs; [ fzf ];
 }

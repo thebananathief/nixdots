@@ -179,16 +179,16 @@
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
-    # wlr.enable = true;
-    # extraPortals = with pkgs; [
-    #   xdg-desktop-portal
-    #   xdg-desktop-portal-hyprland
+    wlr.enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal
+      xdg-desktop-portal-hyprland
       #xdg-desktop-portal-wlr
       #xdg-desktop-portal-gtk
       #xdg-desktop-portal-xapp
       #libsForQt5.xdg-desktop-portal-kde
       #xdg-desktop-portal-gnome
       #lxqt.xdg-desktop-portal-lxqt
-    # ];
+    ];
   };
 }

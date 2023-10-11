@@ -1,4 +1,4 @@
-{ pkgs, ... }: { 
+{ pkgs, ... }: {
   imports = [
     ./alacritty.nix
     ./neovim.nix
@@ -17,19 +17,19 @@
   #   nic = "edit ~/github/nixdots";
   #   vic = "edit ~/github/dotfiles/.config/nvim";
   # };
-  
+
   home.sessionVariables = {
-   EDITOR = "nvim";
-   VISUAL = "nvim";
-   TERM = "alacritty";
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+    TERM = "alacritty";
   };
 
   home.packages = with pkgs; [
-  # Utils
+    # Utils
     eza
     ripgrep
 
-  # fonts
+    # fonts
     # material-symbols
     # noto-fonts
     # noto-fonts-emoji
