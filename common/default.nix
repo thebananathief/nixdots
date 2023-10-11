@@ -1,9 +1,9 @@
 { pkgs, ... }: {
   imports = [
-    ../modules/zsh.nix
-    ../modules/neovim.nix
-    ../modules/security.nix
-    ../modules/tailscale.nix
+    ./zsh.nix
+    ./neovim.nix
+    ./security.nix
+    ./tailscale.nix
     # ./audio.nix
     # ./autorandr.nix
     # ./devlopment.nix
