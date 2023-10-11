@@ -4,6 +4,7 @@
     ./neovim.nix
     ./zsh.nix
     ./git.nix
+    ./zathura.nix
     ./xdg.nix
   ];
 
