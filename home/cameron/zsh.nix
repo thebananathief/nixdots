@@ -15,7 +15,7 @@
         ];
       };
       syntaxHighlighting.enable = true;
-      profileExtra = builtins.readFile "/home/cameron/github/dotfiles/.bash_aliases";
+      initExtra = builtins.readFile "~/github/dotfiles/.bash_aliases";
     };
 
     fzf = {
@@ -29,5 +29,4 @@
       enableZshIntegration = true;
     };
   };
-  # home.file.".bash_aliases".text = builtins.readFile "/home/cameron/github/dotfiles/.bash_aliases";
 }
