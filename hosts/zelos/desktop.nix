@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, libs, ... }: {
   environment = {
     sessionVariables = {
       #POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
@@ -113,14 +113,14 @@
   };
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
-  hardware.bluetooth.enable = true;
-  sound.enable = true;
+  hardware.pulseaudio.enable = libs.mkForce false;
+  hardware.bluetooth.enable = libs.mkForce true;
+  sound.enable = libs.mkForce true;
   services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
+    enable = libs.mkForce true;
+    alsa.enable = libs.mkForce true;
+    alsa.support32Bit = libs.mkForce true;
+    pulse.enable = libs.mkForce true;
     #jack.enable = true;
   };
 
