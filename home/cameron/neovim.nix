@@ -1,4 +1,4 @@
-{ pkgs, configs, ... }: {
+{ pkgs, config, ... }: {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -18,8 +18,8 @@
     vimdiffAlias = true;
   };
   xdg.configFile."nvim" = {
-    source = "${configs.home.homeDirectory}/github/dotfiles/.config/nvim";
-    target = "${configs.home.homeDirectory}/.config/nvim";
+    source = "${config.home.homeDirectory}/github/dotfiles/.config/nvim";
+    target = "${config.home.homeDirectory}/.config/nvim";
     recursive = true;
   };
 }
