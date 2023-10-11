@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }: {
   programs = {
     zsh = {
       enable = true;
@@ -15,7 +15,7 @@
         ];
       };
       syntaxHighlighting.enable = true;
-      initExtra = builtins.readFile "~/github/dotfiles/.bash_aliases";
+      initExtra = builtins.readFile "${config.home.homeDirectory}/github/dotfiles/.bash_aliases";
     };
 
     fzf = {

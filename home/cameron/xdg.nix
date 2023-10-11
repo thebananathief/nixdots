@@ -1,4 +1,4 @@
-{config, ...}: let
+{ config, ... }: let
   browser =  [ "firefox.desktop" ];
   textEditor =  [ "edit.desktop" ];
 
