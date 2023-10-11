@@ -1,8 +1,5 @@
 { pkgs, ... }: {
-    programs.tailscale.enable = true;
-    programs.tailscale.useRoutingFeatures = "client";
-    environment.systemPackages = with pkgs; [
-      tailscale-systray
-      #trayscale
-    ];
+    services.tailscale.enable = true;
+    services.tailscale.useRoutingFeatures = "client";
+    environment.systemPackages = [ pkgs.tailscale-systray ];
 }
