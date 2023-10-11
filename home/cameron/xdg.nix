@@ -27,7 +27,7 @@
     # "x-scheme-handler/tg" = ["telegramdesktop.desktop"];
     "x-scheme-handler/spotify" = ["spotify.desktop"];
     "application/pdf" = ["org.pwmt.zathura.desktop.desktop"];
-    "inode/directory" = ["thunar.desktop"]
+    "inode/directory" = ["thunar.desktop"];
 
     "audio/*" = ["mpv.desktop"];
     "video/*" = ["mpv.dekstop"];
