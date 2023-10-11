@@ -4,6 +4,7 @@
     settings = {
       "import" = [ "${config.home.homeDirectory}/.config/alacritty/themes/catppuccin.yaml" ];
       font = let family = "JetBrainsMono Nerd Font"; in {
+        size = 11;
         normal.family = family;
         normal.style = "Regular";
         italic.family = family;
@@ -12,7 +13,6 @@
         bold.style = "Bold";
         bold_italic.family = family;
         bold_italic.style = "Bold Italic";
-        size = 11;
         antialias = true;
         autohint = true;
       };
@@ -28,21 +28,21 @@
         multiplier = 3;
         auto_scroll = false;
       };
-      hints = {
-        alphabet = "jfkdls;ahgurieowpq";
-        enabled = [
-          {
-            regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\\u0000-\\u001F\\u007F-\\u009F<>\"\\s{-}\\^⟨⟩`]+";
-            hyperlinks = true;
-            command = "xdg-open";
-            post_processing = true;
-            mouse.enabled = true;
-            mouse.mods = "None";
-            binding.key = "U";
-            binding.mods = "Control|Shift";
-          }
-        ];
-      };
+      # hints = {
+      #   alphabet = "jfkdls;ahgurieowpq";
+      #   enabled = [
+      #     {
+      #       regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|http[s]:|news:|file:|git:|ssh:|ftp:)[^\\u0000-\\u001F\\u007F-\\u009F<>\"\s{-}\^⟨⟩`]+";
+      #       hyperlinks = true;
+      #       command = "xdg-open";
+      #       post_processing = true;
+      #       mouse.enabled = true;
+      #       mouse.mods = "None";
+      #       binding.key = "U";
+      #       binding.mods = "Control|Shift";
+      #     }
+      #   ];
+      # };
     };
   };
 }
