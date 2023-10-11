@@ -152,9 +152,9 @@
     excludePackages = [ pkgs.xterm ];
 
     desktopManager.plasma5.enable = lib.mkForce false;
-    displayManager.sddm.enable = lib.mkForce false;
-    displayManager.gdm.enable = true;
-    displayManager.gdm.wayland = true;
+    # displayManager.sddm.enable = lib.mkForce false;
+    # displayManager.gdm.enable = true;
+    # displayManager.gdm.wayland = true;
 
     libinput = {
       enable = true;
