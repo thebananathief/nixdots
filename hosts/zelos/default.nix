@@ -3,9 +3,8 @@
     ./desktop.nix
     ./packages.nix
     ../../theme
+    <nixpkgs/nixos/modules/installer/virtualbox-demo.nix>
   ];
-
-  imports = [ <nixpkgs/nixos/modules/installer/virtualbox-demo.nix> ];
 
   networking = {
     hostName = "zelos";
