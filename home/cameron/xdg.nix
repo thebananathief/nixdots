@@ -55,11 +55,11 @@ in {
     
     desktopEntries."edit" = {
       name = "Edit w/ Neovim";
-      genericName = "Neovim";
+      genericName = "Text Editor";
       comment = "Open the file in neovim on top of alacritty"; 
-      icon = "neovim";
+      icon = "nvim";
       terminal = true;
-      exec = "${pkgs.neovim}";
+      exec = "nvim %f";
       #exec = "${pkgs.alacritty}/bin/alacritty --command nvim";
       type = "Application";
       mimeType = [
