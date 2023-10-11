@@ -42,7 +42,7 @@
         ./hosts/gargantuan
         nixos-hardware.nixosModules.framework
       ];
-      nixosConfigurations.nixos = mkSystem [
+      nixosConfigurations.zelos = mkSystem [
         ./hosts/zelos
       ];
     };
