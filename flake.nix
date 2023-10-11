@@ -21,8 +21,9 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.cameron = import ./users/cameron.nix;
+          home-manager.users.cameron = import ./home/cameron;
         }
+        ./common
       ];
       mkPkgs = import nixpkgs { config.allowUnfree = true; inherit system; };
       mkSystem = extraModules:
@@ -33,13 +34,13 @@
         };
     in {
       #lib = { inherit mkSystem; };
-      #nixosModules.default = { ... }: {
-        #imports = defaultModules ++ [ ./common ];
-      #};
+      # nixosModules.default = { ... }: {
+      #   imports = defaultModules ++ [ ./common ];
+      # };
       nixosConfigurations.gargantuan = mkSystem [
         ./hosts/gargantuan
-        ./common
         nixos-hardware.nixosModules.framework
+        # ./common
       ];
     };
 }

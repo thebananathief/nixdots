@@ -1,15 +1,14 @@
 {
   pkgs,
-  inputs,
   ...
 }:
 # games
 {
-  home.packages = with pkgs; [
-    #steam
+  environment.systemPackages = with pkgs; [
+    steam
     prismlauncher
-    #protonup-qt
-    #protontricks
+    protonup-qt
+    protontricks
     #gamescope
     #(lutris.override {extraPkgs = p: [p.libnghttp2];})
   ];

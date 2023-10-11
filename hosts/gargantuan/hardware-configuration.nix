@@ -49,11 +49,6 @@
     fsType = "vfat";
   };
 
-  #fileSYstems."/boot/efi" = {
-    #device = "/dev/disk/by-uuid/C797-96B9";
-    #fsType = "vfat";
-  #};
-
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

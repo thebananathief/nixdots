@@ -42,10 +42,6 @@
   };
   boot.kernelModules = ["tcp_bbr"];
 
-  # So we don't have to do this later...
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "fufexan@proton.me";
-  };
+  security.sudo.wheelNeedsPassword = false;
 }
 

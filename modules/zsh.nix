@@ -1,11 +1,7 @@
 { config, lib, pkgs, ... }: {
-  environment = {
-    # systemPackages = with pkgs; [
-    #
-    # ];
-    shells = [ pkgs.zsh ];
-    pathsToLink = [ "/share/zsh" ];
-  };
+  environment.shells = [ pkgs.zsh ];
+  environment.pathsToLink = [ "/share/zsh" ];
+  users.defaultUserShell = pkgs.zsh;
 
   programs.zsh = {
     enable = true;
@@ -27,6 +23,4 @@
       vic = "edit ~/github/dotfiles/.config/nvim";
     };
   };
-
-  users.defaultUserShell = pkgs.zsh;
 }
