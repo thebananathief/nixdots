@@ -2,7 +2,7 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      import = [ "~/.config/alacritty/themes/catppuccin.yaml" ];
+      "import" = [ "${config.home.homeDirectory}/.config/alacritty/themes/catppuccin.yaml" ];
       font = let family = "JetBrainsMono Nerd Font"; in {
         normal.family = family;
         normal.style = "Regular";
