@@ -15,7 +15,17 @@
         ];
       };
       syntaxHighlighting.enable = true;
-      initExtra = builtins.readFile "${config.home.homeDirectory}/github/dotfiles/.bash_aliases";
+      initExtra = ''
+        # case insensitive tab completion
+        zstyle ':completion:*' completer _complete _ignored _approximate
+        zstyle ':completion:*' list-colors '\'
+        zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+        zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+        zstyle ':completion:*' menu select
+        zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+        zstyle ':completion:*' verbose true
+        _comp_options+=(globdots)
+      '';
     };
 
     fzf = {
