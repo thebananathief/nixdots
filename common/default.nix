@@ -4,39 +4,8 @@
     ./neovim.nix
     ./security.nix
     ./tailscale.nix
-    # ./audio.nix
-    # ./autorandr.nix
-    # ./devlopment.nix
-    # ./containers.nix
-    # ./essentials.nix
-    # ./fonts.nix
-    # ./gestures
-    # ./kernel.nix
-    # ./network-shares.nix
-    # ./programs.nix
-    # ./plymouth.nix
-    # ./ssh.nix
-    # ./sudo.nix
-    # ./tailscale.nix
-    # ./users
-    # ./xserver.nix
+    ./aliases.nix
   ];
-
-  environment.shellAliases = {
-    edit = "$EDITOR";
-    e = "$EDITOR";
-    nic = "sudo edit ~/github/nixdots";
-    vic = "sudo edit ~/github/dotfiles/.config/nvim";
-    grep = "grep --color";
-    ip = "ip --color";
-    l = "exa -l";
-    la = "exa -la";
-    md = "mkdir -p";
-
-    us = "systemctl --user";
-    rs = "sudo systemctl";
-  };
-  # shellGlobalAliases = {exa = "exa --icons --git";};
 
   nix = {
     gc = {
@@ -64,6 +33,6 @@
   };
 
   # https://github.com/NixOS/nixpkgs/issues/180175
-  #systemd.services.NetworkManager-wait-online.enable = false;
+  systemd.services.NetworkManager-wait-online.enable = false;
 }
 

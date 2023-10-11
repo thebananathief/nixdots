@@ -12,11 +12,14 @@
         "git"
         "git-auto-fetch"
         "sudo"
-        "fzf-zsh"
       ];
     };
     autosuggestions.enable = true;
     zsh-autoenv.enable = true;
     syntaxHighlighting.enable = true;
   };
+
+  environment.systemPackages = with pkgs; [
+    fzf
+  ];
 }

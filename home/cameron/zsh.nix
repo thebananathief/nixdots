@@ -10,8 +10,10 @@
         enable = true;
         theme = "avit";
         plugins = [
+          "git"
           "git-auto-fetch"
           "sudo"
+          "fzf"
         ];
       };
       syntaxHighlighting.enable = true;
@@ -25,6 +27,10 @@
         zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
         zstyle ':completion:*' verbose true
         _comp_options+=(globdots)
+
+        if [ -f ~/.bash_aliases ]; then
+          . ~/.bash_aliases
+        fi
       '';
     };
 
@@ -39,4 +45,9 @@
       enableZshIntegration = true;
     };
   };
+
+  home.packages = with pkgs; [
+    fzf
+    zsh-fzf-tab
+  ];
 }
