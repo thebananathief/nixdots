@@ -1,6 +1,5 @@
 { pkgs, ... }: {
   imports = [
-    ../../modules/zathura.nix
     ../../modules/games.nix
   ];
   environment.systemPackages = with pkgs; [

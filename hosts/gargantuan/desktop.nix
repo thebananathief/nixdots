@@ -158,19 +158,8 @@
     xkbVariant = "";
     excludePackages = [ pkgs.xterm ];
 
-    # Desktop Environments
-    #desktopManager.plasma5.enable = true;
-    #desktopManager.plasma5.useQtScaling = true;
-    #desktopManager.gnome.enable = true;
-
-    # Display managers
-    #displayManager.sddm.enable = true;
-    #displayManager.sddm.enableHidpi = true;
     displayManager.gdm.enable = true;
     displayManager.gdm.wayland = true;
-    #displayManager.lightdm.enable = true;
-
-    # Window Managers
 
     libinput = {
       enable = true;
