@@ -38,8 +38,7 @@
     firefox
     megacmd
     obsidian
-    spotify
-    spicetify-cli
+    spotify spicetify-cli
     discord
     bitwarden
     # starship

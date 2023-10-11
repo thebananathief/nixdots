@@ -21,9 +21,6 @@
       NIXOS_OZONE_WL = "1";
     };
     systemPackages = with pkgs; [
-      intel-media-driver
-      linux-firmware
-      mesa
       rofi-wayland
       rofi-rbw
       rofi-calc

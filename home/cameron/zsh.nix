@@ -1,4 +1,6 @@
 { config, ... }: {
+  home.packages = with pkgs; [ fzf zsh-fzf-tab ];
+
   programs = {
     zsh = {
       enable = true;
@@ -45,6 +47,4 @@
       enableZshIntegration = true;
     };
   };
-
-  home.packages = with pkgs; [ fzf zsh-fzf-tab ];
 }
