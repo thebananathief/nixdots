@@ -29,7 +29,6 @@
       rofi-file-browser
       hyprpaper
       hyprpicker
-      xwayland
       dunst
       cliphist
       wl-clipboard
@@ -46,7 +45,6 @@
       swayidle
       swaylock-effects
       libinput
-      # libinput-gestures
       fusuma
       glib
       waybar
@@ -128,9 +126,9 @@
     gvfs.enable = true;
     tumbler.enable = true;
 
-    blueman.enable = true;
-    printing.enable = true;
-    flatpak.enable = true;
+    # blueman.enable = true;
+    # printing.enable = true;
+    # flatpak.enable = true;
     
     # use Ambient Light Sensors for auto brightness adjustment
     # clight = {
@@ -153,18 +151,19 @@
 
     # The NixOS minimal image has plasma and sddm enabled by default
     desktopManager.plasma5.enable = lib.mkForce false;
-    displayManager.sddm.enable = true;
-    displayManager.sddm.wayland.enable = true;
-    # displayManager.gdm.enable = true;
-    # displayManager.gdm.wayland = true;
+    displayManager.sddm.enable = lib.mkForce false;
+    # displayManager.sddm.enable = true;
+    # displayManager.sddm.wayland.enable = true;
+    displayManager.gdm.enable = true;
+    displayManager.gdm.wayland = true;
 
     libinput = {
       enable = true;
-      touchpad = {
-        accelProfile = "flat";
-        accelSpeed = "0.5";
-        naturalScrolling = false;
-      };
+      # touchpad = {
+      #   accelProfile = "flat";
+      #   accelSpeed = "0.5";
+      #   naturalScrolling = false;
+      # };
       mouse = {
         accelProfile = "flat";
         accelSpeed = "1.0";
@@ -176,16 +175,14 @@
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
-    wlr.enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal
-      xdg-desktop-portal-hyprland
+    # wlr.enable = true;
+    # extraPortals = with pkgs; [
       #xdg-desktop-portal-wlr
       #xdg-desktop-portal-gtk
       #xdg-desktop-portal-xapp
       #libsForQt5.xdg-desktop-portal-kde
       #xdg-desktop-portal-gnome
       #lxqt.xdg-desktop-portal-lxqt
-    ];
+    # ];
   };
 }
