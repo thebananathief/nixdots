@@ -1,5 +1,5 @@
 { pkgs, config, ... }: {
-  home.packages = with pkgs; [ fzf zsh-fzf-tab ];
+  # home.packages = with pkgs; [ zsh fzf zsh-fzf-tab ];
 
   programs = {
     zsh = {

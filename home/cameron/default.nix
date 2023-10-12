@@ -1,23 +1,17 @@
-{ pkgs, ... }: {
+{ pkgs, builtins, ... }: {
   imports = [
     ./xdg.nix
     ./git.nix
     ./alacritty.nix
     ./zsh.nix
     ./neovim.nix
+    ./aliases.nix
     ./zathura.nix
     ./fusuma.nix
   ];
 
   home.username = "cameron";
   # home.homeDirectory = "/home/cameron";
-
-  # home.shellAliases = {
-  #   edit = "$EDITOR";
-  #   e = "$EDITOR";
-  #   nic = "edit ~/github/nixdots";
-  #   vic = "edit ~/github/dotfiles/.config/nvim";
-  # };
 
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -84,6 +78,17 @@
       enableAliases = true;
       icons = true;
     };
+  };
+
+  # Install dotfiles repo and link configs
+  home.file."github/dotfiles" = {
+    recursive = true;
+    source = builtins.fetchGit {
+      url = "ssh://git@github.com:thebananathief/dotfiles.git";
+      rev = "latest";
+      ref = "main";
+    };
+    target = "github/dotfiles";
   };
 
   home.stateVersion = "23.05";

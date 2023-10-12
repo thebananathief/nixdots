@@ -1,6 +1,9 @@
 { config, lib, pkgs, ... }: {
-  environment.shells = [ pkgs.zsh ];
-  environment.pathsToLink = [ "/share/zsh" ];
+  environment = {
+    systemPackages = with pkgs; [ fzf zsh-fzf-tab ];
+    shells = [ pkgs.zsh ];
+    pathsToLink = [ "/share/zsh" ];
+  };
   users.defaultUserShell = pkgs.zsh;
 
   programs.zsh = {
@@ -19,6 +22,4 @@
     zsh-autoenv.enable = true;
     syntaxHighlighting.enable = true;
   };
-
-  environment.systemPackages = with pkgs; [ fzf ];
 }
