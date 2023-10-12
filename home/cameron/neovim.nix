@@ -17,10 +17,12 @@
     vimAlias = true;
     vimdiffAlias = true;
   };
-  xdg.configFile."nvim" = {
-    source = "${config.home.homeDirectory}/github/dotfiles/.config/nvim";
-    # source = "/home/demo/github/dotfiles/.config/nvim";
-    target = "${config.home.homeDirectory}/.config/nvim";
-    recursive = true;
-  };
+  # xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/github/dotfiles/.config/nvim"; 
+
+  # {
+  #   source = "${config.home.homeDirectory}/github/dotfiles/.config/nvim";
+  #   # source = "/home/demo/github/dotfiles/.config/nvim";
+  #   target = "${config.home.homeDirectory}/.config/nvim";
+  #   recursive = true;
+  # };
 }

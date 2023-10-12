@@ -59,6 +59,7 @@
       libsForQt5.ark
       libsForQt5.kclock
       nwg-displays
+      wlr-randr
       networkmanagerapplet
       #libsForQt5.networkmanager-qt # alternative nm-tray
       

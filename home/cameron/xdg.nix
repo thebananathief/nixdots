@@ -23,6 +23,7 @@ let
     "application/x-trash" = textEditor;
     "application/x-zerosize" = textEditor;
     "application/xml" = textEditor;
+    "text/plain" = textEditor;
 
     # "x-scheme-handler/discord" = ["discordcanary.desktop"];
     # "x-scheme-handler/tg" = ["telegramdesktop.desktop"];

@@ -1,4 +1,4 @@
-{ pkgs, builtins, ... }: {
+{ pkgs, lib, ... }: {
   imports = [
     ./xdg.nix
     ./git.nix
@@ -32,6 +32,16 @@
     # jost
     #(nerdfonts.override { fonts = [ "jetbrainsmono" "firacode" "firamono" "meslo" "mplus" "robotomono" ]; })
   ];
+
+  # Install dotfiles repo and link configs
+  home.file."github/dotfiles" = {
+    recursive = true;
+    source = builtins.fetchGit {
+      url = "https://github.com/thebananathief/dotfiles.git";
+      ref = "main";
+    };
+    target = "./github/dotfiles";
+  };
 
   fonts.fontconfig.enable = true;
 
@@ -77,17 +87,6 @@
       enableAliases = true;
       icons = true;
     };
-  };
-
-  # Install dotfiles repo and link configs
-  home.file."github/dotfiles" = {
-    recursive = true;
-    source = builtins.fetchGit {
-      url = "ssh://git@github.com:thebananathief/dotfiles.git";
-      rev = "latest";
-      ref = "main";
-    };
-    target = "github/dotfiles";
   };
 
   home.stateVersion = "23.05";

@@ -22,7 +22,6 @@
     dua
     ffmpegthumbnailer
     efibootmgr
-    nixfmt
     #cut
 
   ## Coding

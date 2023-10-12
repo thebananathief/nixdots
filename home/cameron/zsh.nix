@@ -35,11 +35,8 @@
         # zstyle ':completion:*' verbose true
         _comp_options+=(globdots)
 
-        if [ -f ~/.bash_aliases ]; then
-          . ~/.bash_aliases
-        fi
-
         source ~/.config/zsh/fzf/fzf-tab.plugin.zsh
+        source ~/.bash_aliases
       '';
     };
 
