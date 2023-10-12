@@ -5,7 +5,6 @@
     ./alacritty.nix
     ./zsh.nix
     ./neovim.nix
-    ./aliases.nix
     ./zathura.nix
     ./fusuma.nix
   ];
