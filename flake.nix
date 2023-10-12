@@ -41,7 +41,9 @@
       nixosConfigurations.gargantuan = mkSystem [
         ./hosts/gargantuan
         nixos-hardware.nixosModules.framework
-        # ./common
+      ];
+      nixosConfigurations.zelos = mkSystem [
+        ./hosts/zelos
       ];
     };
 }

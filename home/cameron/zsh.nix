@@ -1,4 +1,6 @@
-{ config, pkgs, ... }: {
+{ pkgs, config, ... }: {
+  home.packages = with pkgs; [ fzf zsh-fzf-tab ];
+
   programs = {
     zsh = {
       enable = true;
@@ -53,8 +55,7 @@
     };
   };
 
-  home.packages = with pkgs; [ zsh fzf zsh-fzf-tab ];
-  home.sessionVariables = {
-    SHELL = "/etc/profiles/per-user/cameron/bin/zsh";
-  };
+  # home.sessionVariables = {
+  #   SHELL = "/etc/profiles/per-user/cameron/bin/zsh";
+  # };
 }

@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   environment = {
     sessionVariables = {
       #POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
@@ -21,9 +21,6 @@
       NIXOS_OZONE_WL = "1";
     };
     systemPackages = with pkgs; [
-      intel-media-driver
-      linux-firmware
-      mesa
       rofi-wayland
       rofi-rbw
       rofi-calc
@@ -114,14 +111,14 @@
   };
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
-  hardware.bluetooth.enable = true;
-  sound.enable = true;
+  hardware.pulseaudio.enable = lib.mkForce false;
+  hardware.bluetooth.enable = lib.mkForce true;
+  sound.enable = lib.mkForce true;
   services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
+    enable = lib.mkForce true;
+    alsa.enable = lib.mkForce true;
+    alsa.support32Bit = lib.mkForce true;
+    pulse.enable = lib.mkForce true;
     #jack.enable = true;
   };
 
@@ -129,9 +126,9 @@
     gvfs.enable = true;
     tumbler.enable = true;
 
-    blueman.enable = true;
-    printing.enable = true;
-    flatpak.enable = true;
+    # blueman.enable = true;
+    # printing.enable = true;
+    # flatpak.enable = true;
     
     # use Ambient Light Sensors for auto brightness adjustment
     # clight = {
@@ -152,16 +149,21 @@
     xkbVariant = "";
     excludePackages = [ pkgs.xterm ];
 
+    # The NixOS minimal image has plasma and sddm enabled by default
+    desktopManager.plasma5.enable = lib.mkForce false;
+    displayManager.sddm.enable = lib.mkForce false;
+    # displayManager.sddm.enable = true;
+    # displayManager.sddm.wayland.enable = true;
     displayManager.gdm.enable = true;
     displayManager.gdm.wayland = true;
 
     libinput = {
       enable = true;
-      touchpad = {
-        accelProfile = "flat";
-        accelSpeed = "0.5";
-        naturalScrolling = false;
-      };
+      # touchpad = {
+      #   accelProfile = "flat";
+      #   accelSpeed = "0.5";
+      #   naturalScrolling = false;
+      # };
       mouse = {
         accelProfile = "flat";
         accelSpeed = "1.0";
