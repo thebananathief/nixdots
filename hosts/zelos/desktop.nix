@@ -151,8 +151,10 @@
     xkbVariant = "";
     excludePackages = [ pkgs.xterm ];
 
+    # The NixOS minimal image has plasma and sddm enabled by default
     desktopManager.plasma5.enable = lib.mkForce false;
-    # displayManager.sddm.enable = lib.mkForce false;
+    displayManager.sddm.enable = true;
+    displayManager.sddm.wayland.enable = true;
     # displayManager.gdm.enable = true;
     # displayManager.gdm.wayland = true;
 

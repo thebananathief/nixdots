@@ -14,6 +14,7 @@
 
   users.users.cameron = {
     isNormalUser = true;
+    password = "";
     description = "Cameron";
     extraGroups = [ "networkmanager" "wheel" "network" "input" ];
   };
