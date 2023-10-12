@@ -18,16 +18,13 @@
         notification_limit = 5;
         follow = "mouse";
         transparency = 10;
-        
+
         progress_bar = true;
         progress_bar_height = 10;
       };
-      urgency_low = {
-      };
-      urgency_normal = {
-      };
-      urgency_critical = {
-      };
+      urgency_low = { };
+      urgency_normal = { };
+      urgency_critical = { };
       # experimental.per_monitor_dpi = true;
     };
   };

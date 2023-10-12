@@ -1,11 +1,12 @@
 { pkgs, ... }: {
   imports = [
-    ./alacritty.nix
-    ./neovim.nix
-    ./zsh.nix
-    ./git.nix
-    ./zathura.nix
     ./xdg.nix
+    ./git.nix
+    ./alacritty.nix
+    ./zsh.nix
+    ./neovim.nix
+    ./zathura.nix
+    ./fusuma.nix
   ];
 
   home.username = "cameron";
