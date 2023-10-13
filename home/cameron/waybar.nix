@@ -1,173 +1,182 @@
-{ pkgs  ... }: {
+{ pkgs, stdenv, fetchurl, ... }:
+let
+  colors = fetchurl {
+    url = "https://raw.githubusercontent.com/catppuccin/waybar/main/themes/mocha.css";
+    sha256 = "f74ab1eecf2dcaf22569b396eed53b2b2fbe8aff";
+  };
+in {
   programs.waybar = {
     enable = true;
     settings = {
-      layer = "top";
-      position = "top";
-      mod = "dock";
-      height = 35;
-      exclusive = true;
-      passthrough = false;
-      gtk-layer-shell = true;
+      mainBar = {
+        layer = "top";
+        position = "top";
+        mod = "dock";
+        height = 35;
+        exclusive = true;
+        passthrough = false;
+        gtk-layer-shell = true;
 
-      modules-left = ["custom/padd" "custom/l_end" "custom/power" "custom/cliphist" "custom/wbar" "custom/mode" "custom/wallchange" "custom/r_end" "custom/l_end" "custom/spotify" "custom/r_end" "" "custom/padd"];
-      modules-center = ["custom/padd" "custom/l_end" "idle_inhibitor" "wlr/taskbar" "clock" "custom/r_end" "custom/padd"];
-      modules-right = ["custom/padd" "custom/l_end" "tray" "custom/r_end" "custom/l_end" "battery" "network" "bluetooth" "pulseaudio" "pulseaudio#microphone" "custom/r_end" "custom/padd"];
+        modules-left = ["custom/padd" "custom/l_end" "custom/power" "custom/cliphist" "custom/wbar" "custom/mode" "custom/wallchange" "custom/r_end" "custom/l_end" "custom/spotify" "custom/r_end" "" "custom/padd"];
+        modules-center = ["custom/padd" "custom/l_end" "idle_inhibitor" "wlr/taskbar" "clock" "custom/r_end" "custom/padd"];
+        modules-right = ["custom/padd" "custom/l_end" "tray" "custom/r_end" "custom/l_end" "battery" "network" "bluetooth" "pulseaudio" "pulseaudio#microphone" "custom/r_end" "custom/padd"];
 
-      "custom/power" = {
-        format = "{}";
-        exec = "echo ; echo  logout";
-        on-click = "~/.config/hypr/scripts/logoutlaunch.sh 2";
-        interval = 86400;
-        tooltip = true;
-      };
+        "custom/power" = {
+          format = "{}";
+          exec = "echo ; echo  logout";
+          on-click = "~/.config/hypr/scripts/logoutlaunch.sh 2";
+          interval = 86400;
+          tooltip = true;
+        };
 
-      "wlr/taskbar" = {
-        format = "{icon}";
-        icon-size = 18;
-        icon-theme = "Tela-circle-dracula";
-        spacing = 0;
-        tooltip-format = "{title}";
-        on-click = "activate";
-        on-click-middle = "close";
-        ignore-list = [
-          "Alacritty"
-        ];
-        app_ids-mapping = {
-          firefoxdeveloperedition = "firefox-developer-edition";
+        "wlr/taskbar" = {
+          format = "{icon}";
+          icon-size = 18;
+          icon-theme = "Tela-circle-dracula";
+          spacing = 0;
+          tooltip-format = "{title}";
+          on-click = "activate";
+          on-click-middle = "close";
+          ignore-list = [
+            "Alacritty"
+          ];
+          app_ids-mapping = {
+            firefoxdeveloperedition = "firefox-developer-edition";
+          };
+        };
+
+        "custom/playback" = {
+          format = "{} ";
+          on-click = "playerctl play-pause --player spotify";
+          on-scroll-up = "playerctl next";
+          on-scroll-down = "playerctl previous";
+          exec = "/usr/bin/python3 /home/tittu/.config/waybar/modules/mediaplayer.py --player spotify";
+          return-type = "json";
+        };
+
+        "idle_inhibitor" = {
+          format = "{icon}";
+          format-icons.activated = "󰥔";
+          format-icons.deactivated = "";
+        };
+
+        "clock" = {
+          format = "{:%I:%M %p 󰃭 %a %d}";
+          format-alt = "{:%H:%M  %b %Y}";
+          tooltip-format = "<tt><big>{calendar}</big></tt>";
+        };
+
+        "tray" = {
+          icon-size = 18;
+          spacing = 5;
+        };
+
+        "battery" = {
+          states.good = 95;
+          states.warning = 30;
+          states.critical = 20;
+          format = "{icon} {capacity}%";
+          format-charging = " {capacity}%";
+          format-plugged = " {capacity}%";
+          format-alt = "{time} {icon}";
+          format-icons = [ "󰂎" "󰁺" "󰁻"  "󰁼"  "󰁽"  "󰁾"  "󰁿"  "󰂀"  "󰂁"  "󰂂"  "󰁹" ];
+        };
+
+        "network" = {
+          format-wifi = "󰤨 {essid}";
+          format-ethernet = "󱘖 Wired";
+          format-linked = "󱘖 {ifname} (No IP)";
+          format-disconnected = " Disconnected";
+          format-alt = "󰤨 {signalStrength}%";
+          interval = 5;
+          tooltip-format = "󱘖 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}";
+        };
+
+        "bluetooth" = {
+          format = "";
+          format-disabled = "";
+          format-connected = " {num_connections}";
+          tooltip-format = " {device_alias}";
+          tooltip-format-connected = "{device_enumerate}";
+          tooltip-format-enumerate-connected = " {device_alias}";
+        };
+
+        "pulseaudio" = {
+          format = "{icon} {volume}";
+          format-muted = "婢";
+          on-click = "pavucontrol -t 3";
+          on-click-middle = "~/.config/hypr/scripts/volumecontrol.sh -o m";
+          on-scroll-up = "~/.config/hypr/scripts/volumecontrol.sh -o i";
+          on-scroll-down = "~/.config/hypr/scripts/volumecontrol.sh -o d";
+          tooltip-format = "{icon} {desc} // {volume}%";
+          scroll-step = 5;
+          format-icons = {
+            headphone = "";
+            hands-free = "";
+            headset = "";
+            phone = "";
+            portable = "";
+            car = "";
+            default = ["" "" ""];
+          };
+        };
+
+        "pulseaudio#microphone" = {
+          format = "{format_source}";
+          format-source = "";
+          format-source-muted = "";
+          on-click = "pavucontrol -t 4";
+          on-click-middle = "~/.config/hypr/scripts/volumecontrol.sh -i m";
+          on-scroll-up = "~/.config/hypr/scripts/volumecontrol.sh -i i";
+          on-scroll-down = "~/.config/hypr/scripts/volumecontrol.sh -i d";
+          tooltip-format = "{format_source} {source_desc} // {source_volume}%";
+          scroll-step = 5;
+        };
+
+        "custom/l_end" = {
+          format = " ";
+          interval = "once";
+          tooltip = false;
+        };
+
+        "custom/r_end" = {
+          format = " ";
+          interval = "once";
+          tooltip = false;
+        };
+
+        "custom/sl_end" = {
+          format = " ";
+          interval = "once";
+          tooltip = false;
+        };
+
+        "custom/sr_end" = {
+          format = " ";
+          interval = "once";
+          tooltip = false;
+        };
+
+        "custom/rl_end" = {
+          format = " ";
+          interval = "once";
+          tooltip = false;
+        };
+
+        "custom/rr_end" = {
+          format = " ";
+          interval = "once";
+          tooltip = false;
+        };
+
+        "custom/padd" = {
+          format = "  ";
+          interval = "once";
+          tooltip = false;
         };
       };
-
-      "custom/playback" = {
-        format = "{} ";
-        on-click = "playerctl play-pause --player spotify";
-        on-scroll-up = "playerctl next";
-        on-scroll-down = "playerctl previous";
-        exec = "/usr/bin/python3 /home/tittu/.config/waybar/modules/mediaplayer.py --player spotify";
-        return-type = "json";
-      };
-
-      "idle_inhibitor" = {
-        format = "{icon}";
-        format-icons.activated = "󰥔";
-        format-icons.deactivated = "";
-      };
-
-      "clock" = {
-        format = "{:%I:%M %p 󰃭 %a %d}";
-        format-alt = "{:%H:%M  %b %Y}";
-        tooltip-format = "<tt><big>{calendar}</big></tt>";
-      };
-
-      "tray" = {
-        icon-size = 18;
-        spacing = 5;
-      };
-
-      "battery" = {
-        states.good = 95;
-        states.warning = 30;
-        states.critical = 20;
-        format = "{icon} {capacity}%";
-        format-charging = " {capacity}%";
-        format-plugged = " {capacity}%";
-        format-alt = "{time} {icon}";
-        format-icons = [ "󰂎" "󰁺" "󰁻"  "󰁼"  "󰁽"  "󰁾"  "󰁿"  "󰂀"  "󰂁"  "󰂂"  "󰁹" ];
-      };
-
-      "network" = {
-        format-wifi = "󰤨 {essid}";
-        format-ethernet = "󱘖 Wired";
-        format-linked = "󱘖 {ifname} (No IP)";
-        format-disconnected = " Disconnected";
-        format-alt = "󰤨 {signalStrength}%";
-        interval = 5;
-        tooltip-format = "󱘖 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}";
-      };
-
-      "bluetooth" = {
-        format = "";
-        format-disabled = "";
-        format-connected = " {num_connections}";
-        tooltip-format = " {device_alias}";
-        tooltip-format-connected = "{device_enumerate}";
-        tooltip-format-enumerate-connected = " {device_alias}";
-      };
-
-      "pulseaudio" = {
-        format = "{icon} {volume}";
-        format-muted = "婢";
-        on-click = "pavucontrol -t 3";
-        on-click-middle = "~/.config/hypr/scripts/volumecontrol.sh -o m";
-        on-scroll-up = "~/.config/hypr/scripts/volumecontrol.sh -o i";
-        on-scroll-down = "~/.config/hypr/scripts/volumecontrol.sh -o d";
-        tooltip-format = "{icon} {desc} // {volume}%";
-        scroll-step = 5;
-        format-icons = [
-          headphone = "";
-          hands-free = "";
-          headset = "";
-          phone = "";
-          portable = "";
-          car = "";
-          default = ["", "", ""];
-        ];
-      };
-
-      "pulseaudio#microphone" = {
-        format = "{format_source}";
-        format-source = "";
-        format-source-muted = "";
-        on-click = "pavucontrol -t 4";
-        on-click-middle = "~/.config/hypr/scripts/volumecontrol.sh -i m";
-        on-scroll-up = "~/.config/hypr/scripts/volumecontrol.sh -i i";
-        on-scroll-down = "~/.config/hypr/scripts/volumecontrol.sh -i d";
-        tooltip-format = "{format_source} {source_desc} // {source_volume}%";
-        scroll-step = 5;
-      };
-
-      "custom/l_end" = {
-        format = " ";
-        interval = "once";
-        tooltip = false;
-      };
-
-      "custom/r_end" = {
-        format = " ";
-        interval = "once";
-        tooltip = false;
-      };
-
-      "custom/sl_end" = {
-        format = " ";
-        interval = "once";
-        tooltip = false;
-      };
-
-      "custom/sr_end" = {
-        format = " ";
-        interval = "once";
-        tooltip = false;
-      };
-
-      "custom/rl_end" = {
-        format = " ";
-        interval = "once";
-        tooltip = false;
-      };
-
-      "custom/rr_end" = {
-        format = " ";
-        interval = "once";
-        tooltip = false;
-      };
-
-      "custom/padd" = {
-        format = "  ";
-        interval = "once";
-        tooltip = false;
-      };
     };
+
     style = ''
 * {
     border: none;
@@ -178,7 +187,7 @@
     min-height: 12px;
 }
 
-@import "${fetchUrl "https://raw.githubusercontent.com/catppuccin/waybar/main/themes/mocha.css"}";
+@import "${colors}";
 
 window#waybar {
     background: @bar-bg;
