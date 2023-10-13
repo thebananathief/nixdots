@@ -7,6 +7,8 @@
     ./neovim.nix
     ./zathura.nix
     ./fusuma.nix
+    ./waybar.nix
+    ./hyprland.nix
   ];
 
   home.username = "cameron";
@@ -34,14 +36,14 @@
   ];
 
   # Install dotfiles repo and link configs
-  home.file."github/dotfiles" = {
-    recursive = true;
-    source = builtins.fetchGit {
-      url = "https://github.com/thebananathief/dotfiles.git";
-      ref = "main";
-    };
-    target = "./github/dotfiles";
-  };
+  # home.file."github/dotfiles" = {
+  #   recursive = true;
+  #   source = builtins.fetchGit {
+  #     url = "https://github.com/thebananathief/dotfiles.git";
+  #     ref = "main";
+  #   };
+  #   target = "./github/dotfiles";
+  # };
 
   fonts.fontconfig.enable = true;
 

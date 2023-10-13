@@ -9,7 +9,6 @@
     multitail
     dos2unix
     tldr
-    alacritty
     wgnord
     cage
     zig
@@ -31,6 +30,7 @@
     vscodium
 
   ## General desktop
+    alacritty
     krita
     libreoffice
     firefox

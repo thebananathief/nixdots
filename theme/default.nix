@@ -15,8 +15,9 @@
       # QT_QPA_PLATFORMTHEME = "qt5ct";
       # QT_STYLE_OVERRIDE = "kvantum";
       GTK_THEME = "Catppuccin-Mocha-Compact-Mauve-Dark";
-      XCURSOR_SIZE = "24";
-      XCURSOR_THEME = "Bibata-Modern-Ice 24";
+      GDK_SCALE = "1";
+      XCURSOR_SIZE = "20";
+      XCURSOR_THEME = "Bibata-Modern-Ice";
     };
     systemPackages = with pkgs; [
       catppuccin-kvantum
@@ -30,6 +31,7 @@
       #tela-icon-theme
       bibata-cursors
       papirus-icon-theme
+      catppuccin-papirus-folders
 
       gsettings-qt
       gsettings-desktop-schemas
