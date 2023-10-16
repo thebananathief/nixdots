@@ -1,8 +1,8 @@
-{ pkgs, stdenv, fetchurl, ... }:
+{ ... }:
 let
-  colors = fetchurl {
+  colors = builtins.fetchurl {
     url = "https://raw.githubusercontent.com/catppuccin/waybar/main/themes/mocha.css";
-    sha256 = "f74ab1eecf2dcaf22569b396eed53b2b2fbe8aff";
+    sha256 = "be23160de35635f484dd3701a13821cd262a8b420ac4c410937a9f481d877895";
   };
 in {
   programs.waybar = {

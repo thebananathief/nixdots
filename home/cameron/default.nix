@@ -47,47 +47,49 @@
 
   fonts.fontconfig.enable = true;
 
-  # qt = {
-  #   enable = true;
-  #   platformTheme = "qtct";
-  #   style = {
-  #     name = "kvantum";
-  #     package = pkgs.qt6Packages.qtstyleplugin-kvantum;
-  #   };
-  # };
-  #
-  # gtk = {
-  #   enable = true;
-  #   cursorTheme = {
-  #     name = "";
-  #     package = pkgs.;
-  #     size = 16;
-  #   };
-  #   font = {
-  #     name = "";
-  #     package = pkgs.;
-  #     size = 8;
-  #   };
-  #   iconTheme = {
-  #     name = "";
-  #     package = pkgs.;
-  #   };
-  #   theme = {
-  #     name = "";
-  #     package = pkgs.;
-  #   };
-  #   gtk3.bookmarks = [
-  #     "file:///home/cameron/github"
-  #   ];
-  # };
+  qt = {
+    enable = true;
+    platformTheme = "qtct";
+    style = {
+      name = "kvantum";
+    };
+  };
+
+  gtk = {
+    enable = true;
+    cursorTheme = {
+      name = "Catppuccin-Mocha-Mauve";
+      package = pkgs.catppuccin-cursors.mochaMauve;
+      size = 24;
+    };
+    font = {
+      name = "Lexend";
+      package = pkgs.lexend;
+      size = 11;
+    };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+    theme = {
+      name = "Catppuccin-Mocha-Mauve-Dark";
+      package = (pkgs.catppuccin-gtk.override {
+        variant = "mocha";
+        accents = ["mauve"];
+      });
+    };
+    gtk3.bookmarks = [
+      "file:///home/cameron/github"
+    ];
+  };
 
   programs = {
     home-manager.enable = true;
 
     eza = {
       enable = true;
-      enableAliases = true;
-      icons = true;
+      enableAliases = false;
+      icons = false;
     };
   };
 

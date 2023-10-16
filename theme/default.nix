@@ -7,31 +7,41 @@
   programs.dconf.enable = true;
 
   qt.enable = true;
-  qt.style = "kvantum";
   qt.platformTheme = "qt5ct";
+  # qt.style = "adwaita-dark";
 
   environment = {
     sessionVariables = {
-      # QT_QPA_PLATFORMTHEME = "qt5ct";
-      # QT_STYLE_OVERRIDE = "kvantum";
       GTK_THEME = "Catppuccin-Mocha-Compact-Mauve-Dark";
       GDK_SCALE = "1";
-      XCURSOR_SIZE = "20";
+      XCURSOR_SIZE = "24";
       XCURSOR_THEME = "Bibata-Modern-Ice";
     };
     systemPackages = with pkgs; [
-      catppuccin-kvantum
-      catppuccin-cursors
-      (catppuccin-gtk.override {
-        accents = ["mauve"];
-        size = "compact";
-        variant = "mocha";
+      # (catppuccin.override {
+      #   accent = "mauve";
+      #   variant = "mocha";
+      # })
+      (catppuccin-kvantum.override {
+        accent = "Mauve";
+        variant = "Mocha";
       })
-      #catppuccin-kde
-      #tela-icon-theme
-      bibata-cursors
+      (catppuccin-gtk.override {
+        variant = "mocha";
+        accents = ["mauve"];
+      })
+      (catppuccin-kde.override {
+        flavour = ["mocha"];
+        accents = ["mauve"];
+      })
+      (catppuccin-papirus-folders.override {
+        flavor = "mocha";
+        accent = "mauve";
+      })
+      catppuccin-cursors.mochaMauve
+      # bibata-cursors
       papirus-icon-theme
-      catppuccin-papirus-folders
+      libsForQt5.breeze-grub
 
       gsettings-qt
       gsettings-desktop-schemas
@@ -40,13 +50,12 @@
       fontconfig
       fontfor
       
+    # GUI Styling apps
+      # qtct apps are through the nixos qt.nix module
       fontpreview
-      libsForQt5.breeze-grub
-      nwg-look
       libsForQt5.qtstyleplugin-kvantum
       qt6Packages.qtstyleplugin-kvantum
-      libsForQt5.qt5ct
-      qt6Packages.qt6ct
+      nwg-look
     ];
   };
 }

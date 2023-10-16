@@ -12,7 +12,6 @@
     wgnord
     cage
     zig
-    ranger
     wev
     imagemagick
     broot

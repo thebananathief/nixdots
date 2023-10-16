@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   imports =
-    [ ./zsh.nix ./neovim.nix ./security.nix ./tailscale.nix ];
+    [ ./zsh.nix ./neovim.nix ./security.nix ./tailscale.nix ./filebrowse.nix ];
 
   nix = {
     gc = {
