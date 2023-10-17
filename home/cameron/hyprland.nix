@@ -22,6 +22,7 @@
         # Test buttons to restart waybar and print active window info
         "$mainMod, U, exec, hyprctl activewindow >> ~/text.txt"
         "$mainMod, Y, exec, killall .waybar-wrapped ; waybar"
+        "$mainMod, Y, exec, killall .fusuma-wrapped ; fusuma"
         
         # Media key binds
         ", XF86AudioMute, exec, pamixer -t"
@@ -95,10 +96,10 @@
 
       binde = [
         # Resize windows
-        "$mainMod, right, resizeactive, 10 0"
-        "$mainMod, left, resizeactive, -10 0"
-        "$mainMod, up, resizeactive, 0 -10"
-        "$mainMod, down, resizeactive, 0 10"
+        "$mainMod, right, resizeactive, 30 0"
+        "$mainMod, left, resizeactive, -30 0"
+        "$mainMod, up, resizeactive, 0 -30"
+        "$mainMod, down, resizeactive, 0 30"
 
         # Volume keys
         ", XF86AudioRaiseVolume, exec, ~/github/dotfiles/.config/hypr/scripts/volumecontrol.sh -o i"
@@ -147,7 +148,7 @@
         "swayidle -w timeout 600 '~/github/dotfiles/.config/hypr/scripts/lock.sh' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
 
         # THEME THEMING
-        # "hyprctl setcursor Bibata-Modern-Ice 20"
+        "hyprctl setcursor Catppuccin-Mocha-Mauve 24"
         # "kvantummanager --set Catppuccin-Mocha"
       ];
 

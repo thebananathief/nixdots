@@ -39,4 +39,11 @@ in {
       emoji = ["Noto Color Emoji"];
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    # fontpreview
+    # font-manager
+    # fontfor
+    fontconfig
+  ];
 }

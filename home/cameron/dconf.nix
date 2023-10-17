@@ -1,13 +1,14 @@
 { ... }: {
+  # Apparently these are also set via home-manager gtk.*
   dconf.settings = {
     "org/gnome/desktop/interface" = {
-      cursor-theme = "Bibata-Modern-Ice";
-      cursor-size = 20;
+      # cursor-theme = "Bibata-Modern-Ice";
+      cursor-size = 24;
       icon-theme = "Papirus-Dark";
-      gtk-theme = "Catppuccin-Mocha";
+      # gtk-theme = "Catppuccin-Mocha";
       color-scheme = "prefer-dark";
-      font-name = "Cantarell 10";
-      document-font-name = "Cantarell 10";
+      # font-name = "Lexend 10";
+      document-font-name = "Lexend 10";
       monospace-font-name = "JetBrainsMono Nerd Font 10";
       font-antialiasing = "rgba";
       font-hinting = "full";

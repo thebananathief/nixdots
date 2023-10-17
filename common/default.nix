@@ -1,6 +1,6 @@
 { lib, pkgs, ... }: {
   imports =
-    [ ./zsh.nix ./neovim.nix ./security.nix ./tailscale.nix ];
+    [ ./shell.nix ./neovim.nix ./security.nix ./tailscale.nix ];
 
   nix = {
     gc = {
@@ -28,14 +28,7 @@
   systemd.services.NetworkManager-wait-online.enable = false;
 
   environment.systemPackages = with pkgs; [
-    git
-    wget
-    curl
-    htop
-    unzip
-    tmux
-    tree
-    killall
+    git wget curl htop unzip tmux tree killall
   ];
 }
 

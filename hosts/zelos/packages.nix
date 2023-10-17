@@ -12,7 +12,6 @@
     alacritty
     wgnord
     cage
-    autojump
     zig
     ranger
     wev

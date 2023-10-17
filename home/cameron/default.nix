@@ -22,19 +22,8 @@
     TERM = "alacritty";
   };
 
-  home.packages = with pkgs; [
-    # Utils
-    ripgrep
-
-    # fonts
-    # material-symbols
-    # noto-fonts
-    # noto-fonts-emoji
-    # roboto
-    # lexend
-    # jost
-    #(nerdfonts.override { fonts = [ "jetbrainsmono" "firacode" "firamono" "meslo" "mplus" "robotomono" ]; })
-  ];
+  # home.packages = with pkgs; [
+  # ];
 
   # Install dotfiles repo and link configs
   # home.file."github/dotfiles" = {
@@ -51,9 +40,7 @@
   qt = {
     enable = true;
     platformTheme = "qtct";
-    style = {
-      name = "kvantum";
-    };
+    style.name = "kvantum";
   };
 
   gtk = {

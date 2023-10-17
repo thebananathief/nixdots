@@ -15,7 +15,8 @@
           # "git"
           "git-auto-fetch"
           "sudo"
-          "fzf"
+          # "fzf"
+          # "zoxide"
         ];
       };
       syntaxHighlighting.enable = true;
@@ -40,19 +41,26 @@
       '';
     };
 
-    fzf = {
+    zoxide = {
+      enable = true;
       enableBashIntegration = true;
-      enableZshIntegration = true;
+      enableZshIntegration = true; # i think this is the same as declaring it in ohmyzsh plugins
+    };
+
+    fzf = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true; # i think this is the same as declaring it in ohmyzsh plugins
       defaultOptions = [
         "--preview 'pistol {}'"
       ];
     };
 
-    autojump = {
-      enable = true;
-      enableBashIntegration = true;
-      enableZshIntegration = true;
-    };
+    # autojump = {
+    #   enable = true;
+    #   enableBashIntegration = true;
+    #   enableZshIntegration = true;
+    # };
   };
 
   # home.sessionVariables = {

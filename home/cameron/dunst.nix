@@ -2,16 +2,16 @@
   services.dunst = {
     enable = true;
     iconTheme = {
-      name = "Tela-circle-dracula";
-      # package = pkgs.;
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
       size = "16x16";
     };
     settings = {
       global = {
         monitor = 0;
-        font = "JetbrainsMono 12";
-        width = 300;
-        height = 200;
+        font = "JetBrainsMono 11";
+        width = 400;
+        height = 150;
         origin = "top-right";
         offset = "24x24";
         scale = 0;

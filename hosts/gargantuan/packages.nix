@@ -6,17 +6,13 @@
     ethtool
     just
     universal-ctags
-    multitail
     dos2unix
     tldr
     wgnord
     cage
     zig
     wev
-    imagemagick
-    fd
     dua
-    ffmpegthumbnailer
     efibootmgr
     #cut
 
@@ -37,7 +33,6 @@
     spicetify-cli
     discord
     bitwarden
-    # starship
     # thunderbird
     # parsec-bin
   ];

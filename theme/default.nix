@@ -47,12 +47,9 @@
       gsettings-desktop-schemas
       gnome.dconf-editor
       xsettingsd
-      fontconfig
-      fontfor
       
     # GUI Styling apps
       # qtct apps are through the nixos qt.nix module
-      fontpreview
       libsForQt5.qtstyleplugin-kvantum
       qt6Packages.qtstyleplugin-kvantum
       nwg-look
