@@ -20,12 +20,12 @@
       intel-media-driver
       linux-firmware
       mesa
-      rofi-wayland
-      rofi-rbw
-      rofi-calc
-      rofi-vpn
-      rofi-bluetooth
-      rofi-file-browser
+      # rofi-wayland
+      # rofi-rbw
+      # rofi-calc
+      # rofi-vpn
+      # rofi-bluetooth
+      # rofi-file-browser
       hyprpaper
       hyprpicker
       dunst
