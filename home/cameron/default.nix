@@ -1,12 +1,14 @@
 { pkgs, lib, ... }: {
   imports = [
     ./xdg.nix
+    # ./dconf.nix
     ./git.nix
     ./alacritty.nix
     ./zsh.nix
-    ./neovim.nix
+    # ./neovim.nix
     ./zathura.nix
     ./fusuma.nix
+    ./rofi.nix
     ./waybar.nix
     ./hyprland.nix
   ];
@@ -22,7 +24,6 @@
 
   home.packages = with pkgs; [
     # Utils
-    eza
     ripgrep
 
     # fonts
@@ -90,6 +91,19 @@
       enable = true;
       enableAliases = false;
       icons = false;
+      extraOptions = [
+        "--all"
+        "--color=always"
+      ];
+    };
+
+    yazi = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      settings = {
+        manager.show_hidden = true;
+      };
     };
   };
 

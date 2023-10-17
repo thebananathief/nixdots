@@ -17,14 +17,48 @@ in {
         passthrough = false;
         gtk-layer-shell = true;
 
-        modules-left = ["custom/padd" "custom/l_end" "custom/power" "custom/cliphist" "custom/wbar" "custom/mode" "custom/wallchange" "custom/r_end" "custom/l_end" "custom/spotify" "custom/r_end" "" "custom/padd"];
-        modules-center = ["custom/padd" "custom/l_end" "idle_inhibitor" "wlr/taskbar" "clock" "custom/r_end" "custom/padd"];
-        modules-right = ["custom/padd" "custom/l_end" "tray" "custom/r_end" "custom/l_end" "battery" "network" "bluetooth" "pulseaudio" "pulseaudio#microphone" "custom/r_end" "custom/padd"];
+        modules-left = [
+          "custom/padd"
+          "custom/l_end"
+          "custom/power"
+          "custom/cliphist"
+          "custom/wbar"
+          "custom/mode"
+          "custom/wallchange"
+          "custom/r_end"
+          "custom/l_end"
+          "custom/spotify"
+          "custom/r_end"
+          "custom/padd"
+        ];
+        modules-center = [
+          "custom/padd"
+          "custom/l_end"
+          "idle_inhibitor"
+          "wlr/taskbar"
+          "clock"
+          "custom/r_end"
+          "custom/padd"
+        ];
+        modules-right = [
+          "custom/padd"
+          "custom/l_end"
+          "tray"
+          "custom/r_end"
+          "custom/l_end"
+          "battery"
+          "network"
+          "bluetooth"
+          "pulseaudio"
+          "pulseaudio#microphone"
+          "custom/r_end"
+          "custom/padd"
+        ];
 
         "custom/power" = {
           format = "{}";
           exec = "echo ; echo  logout";
-          on-click = "~/.config/hypr/scripts/logoutlaunch.sh 2";
+          on-click = "~/github/dotfiles/.config/hypr/scripts/logoutlaunch.sh 2";
           interval = 86400;
           tooltip = true;
         };
@@ -50,7 +84,7 @@ in {
           on-click = "playerctl play-pause --player spotify";
           on-scroll-up = "playerctl next";
           on-scroll-down = "playerctl previous";
-          exec = "/usr/bin/python3 /home/tittu/.config/waybar/modules/mediaplayer.py --player spotify";
+          exec = "/usr/bin/python3 ~/github/dotfiles/.config/hypr/scripts/mediaplayer.py --player spotify";
           return-type = "json";
         };
 
@@ -105,9 +139,9 @@ in {
           format = "{icon} {volume}";
           format-muted = "婢";
           on-click = "pavucontrol -t 3";
-          on-click-middle = "~/.config/hypr/scripts/volumecontrol.sh -o m";
-          on-scroll-up = "~/.config/hypr/scripts/volumecontrol.sh -o i";
-          on-scroll-down = "~/.config/hypr/scripts/volumecontrol.sh -o d";
+          on-click-middle = "~/github/dotfiles/.config/hypr/scripts/volumecontrol.sh -o m";
+          on-scroll-up = "~/github/dotfiles/.config/hypr/scripts/volumecontrol.sh -o i";
+          on-scroll-down = "~/github/dotfiles/.config/hypr/scripts/volumecontrol.sh -o d";
           tooltip-format = "{icon} {desc} // {volume}%";
           scroll-step = 5;
           format-icons = {
@@ -126,9 +160,9 @@ in {
           format-source = "";
           format-source-muted = "";
           on-click = "pavucontrol -t 4";
-          on-click-middle = "~/.config/hypr/scripts/volumecontrol.sh -i m";
-          on-scroll-up = "~/.config/hypr/scripts/volumecontrol.sh -i i";
-          on-scroll-down = "~/.config/hypr/scripts/volumecontrol.sh -i d";
+          on-click-middle = "~/github/dotfiles/.config/hypr/scripts/volumecontrol.sh -i m";
+          on-scroll-up = "~/github/dotfiles/.config/hypr/scripts/volumecontrol.sh -i i";
+          on-scroll-down = "~/github/dotfiles/.config/hypr/scripts/volumecontrol.sh -i d";
           tooltip-format = "{format_source} {source_desc} // {source_volume}%";
           scroll-step = 5;
         };

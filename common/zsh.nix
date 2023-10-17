@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }: {
   environment = {
-    systemPackages = with pkgs; [ fzf zsh-fzf-tab ];
+    systemPackages = with pkgs; [
+      pistol
+      fzf
+      zsh-fzf-tab
+    ];
     shells = [ pkgs.zsh ];
     pathsToLink = [ "/share/zsh" ];
   };

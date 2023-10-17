@@ -43,6 +43,9 @@
     fzf = {
       enableBashIntegration = true;
       enableZshIntegration = true;
+      defaultOptions = [
+        "--preview 'pistol {}'"
+      ];
     };
 
     autojump = {

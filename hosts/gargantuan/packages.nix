@@ -14,8 +14,6 @@
     zig
     wev
     imagemagick
-    broot
-    fzf
     fd
     dua
     ffmpegthumbnailer
