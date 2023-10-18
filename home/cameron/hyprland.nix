@@ -22,7 +22,7 @@
         # Test buttons to restart waybar and print active window info
         "$mainMod, U, exec, hyprctl activewindow >> ~/text.txt"
         "$mainMod, Y, exec, killall .waybar-wrapped ; waybar"
-        "$mainMod, Y, exec, killall .fusuma-wrapped ; fusuma"
+        "$mainMod, Y, exec, killall .fusuma-wrapped ; fusuma -d"
         
         # Media key binds
         ", XF86AudioMute, exec, pamixer -t"
@@ -140,7 +140,7 @@
         "wl-paste --type text --watch cliphist store" #Stores only text data
         "wl-paste --type image --watch cliphist store" #Stores only image data
         "udiskie & hyprpaper & blueman-applet & waybar & nm-applet --indicator & mega-cmd"
-        # "fusuma -d"
+        "fusuma -d"
         "firefox"
         "~/github/dotfiles/.config/hypr/scripts/batterynotify.sh" # battery notification
         "sudo wgnord c atlanta"
@@ -273,9 +273,9 @@
         "float, title:^(File Operation Progress)$"
         "float, title:^(Confirm to replace files)$"
 
-        "float, class:^(org.kde.polkit-kde-authentication-agent-1)$"
-        "size 20% 20%, class:^(org.kde.polkit-kde-authentication-agent-1)$"
-        "center, class:^(org.kde.polkit-kde-authentication-agent-1)$"
+        # "float, class:^(org.kde.polkit-kde-authentication-agent-1)$"
+        # "size 20% 20%, class:^(org.kde.polkit-kde-authentication-agent-1)$"
+        # "center, class:^(org.kde.polkit-kde-authentication-agent-1)$"
 
         "float, class:^(blueman-manager)$"
         "float, class:^(trayscale)$"

@@ -7,6 +7,7 @@
     ./fingerprint-reader.nix
     ../../modules/games.nix
     ../../theme
+    ../../packages/fontpreview-ueberzug
   ];
 
   hardware.opengl = {

@@ -14,6 +14,7 @@
     wev
     dua
     efibootmgr
+    jsonfmt
     #cut
 
   ## Coding

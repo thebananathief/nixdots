@@ -64,6 +64,7 @@
       package = (pkgs.catppuccin-gtk.override {
         variant = "mocha";
         accents = ["mauve"];
+        size = "compact";
       });
     };
     gtk3.bookmarks = [

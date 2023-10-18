@@ -10,5 +10,10 @@
       rofi-file-browser
       rofi-rbw
     ];
+    extraConfig = {
+      modi = "drun,emoji,ssh";
+      kb-primary-paste = "Control+V,Shift+Insert";
+      kb-secondary-paste = "Control+v,Insert";
+    };
   };
 }
