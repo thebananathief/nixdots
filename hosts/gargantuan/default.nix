@@ -7,7 +7,10 @@
     ./fingerprint-reader.nix
     ../../modules/games.nix
     ../../theme
-    ../../packages/fontpreview-cli
+  ];
+
+  environment.systemPackages = with pkgs; [
+    (callPackage ../../packages/fontpreview-cli/derivation.nix {})
   ];
 
   hardware.opengl = {

@@ -1,4 +1,4 @@
-{ stdenv, lib, fetchFromGitHub, makeWrapper, fzf, imagemagick, ueberzugpp, getopt }:
+{ stdenv, lib, fetchFromGitHub, makeWrapper, fzf, imagemagick, ueberzugpp }:
 stdenv.mkDerivation rec {
   pname = "fontpreview-ueberzug";
   version = "f10f40c";
@@ -11,7 +11,7 @@ stdenv.mkDerivation rec {
   #   sha256 = "14yvbw6k5c2g4lm06zk2m8mkh83h038zw8wq7hgld8ln5y7wn9rm";
   # };
 
-  src = ./.
+  src = ./.;
 
   # nativeBuildInputs = [ makeWrapper ];
   nativeBuildInputs = [ makeWrapper ];
@@ -35,7 +35,7 @@ stdenv.mkDerivation rec {
 
   postInstall = ''
     wrapProgram $out/bin/fontpreview-ueberzugpp \
-      --prefix PATH : ${lib.makeBinPath [ imagemagick fzf ueberzugpp getopt ]}
+      --prefix PATH : ${lib.makeBinPath [ imagemagick fzf ueberzugpp ]}
   '';
 
   meta = with lib; {
