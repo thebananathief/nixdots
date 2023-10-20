@@ -4,9 +4,9 @@
     settings = {
       swipe = {
         "3" = {
-          up.update.command = "~/github/dotfiles/.config/hypr/scripts/volumecontrol.sh -o i 1";
+          up.update.command = "~/github/nixdots/configs/hypr/scripts/volumecontrol.sh -o i 1";
           up.update.interval = 0.1;
-          down.update.command = "~/github/dotfiles/.config/hypr/scripts/volumecontrol.sh -o d 1";
+          down.update.command = "~/github/nixdots/configs/hypr/scripts/volumecontrol.sh -o d 1";
           down.update.interval = 0.1;
         };
         "4" = {
@@ -17,7 +17,7 @@
       };
       hold = {
         "3" = {
-          end.command = "~/github/dotfiles/.config/hypr/scripts/volumecontrol.sh -o p";
+          end.command = "~/github/nixdots/configs/hypr/scripts/volumecontrol.sh -o p";
         };
       };
     };

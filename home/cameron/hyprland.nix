@@ -2,6 +2,7 @@
   home.sessionVariables = {
     XDG_CURRENT_DESKTOP = "Hyprland";
     XDG_SESSION_DESKTOP = "Hyprland";
+    XDG_SESSION_TYPE = "wayland";
   };
 
   wayland.windowManager.hyprland = {
@@ -91,7 +92,7 @@
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
 
-        "$mainMod, F5, exec, ~/github/dotfiles/.config/hypr/scripts/gamemode.sh" # disable hypr effects for gamemode
+        "$mainMod, F5, exec, ~/github/nixdots/configs/hypr/scripts/gamemode.sh" # disable hypr effects for gamemode
       ];
 
       binde = [
@@ -102,30 +103,30 @@
         "$mainMod, down, resizeactive, 0 30"
 
         # Volume keys
-        ", XF86AudioRaiseVolume, exec, ~/github/dotfiles/.config/hypr/scripts/volumecontrol.sh -o i"
-        ", XF86AudioLowerVolume, exec, ~/github/dotfiles/.config/hypr/scripts/volumecontrol.sh -o d"
+        ", XF86AudioRaiseVolume, exec, ~/github/nixdots/configs/hypr/scripts/volumecontrol.sh -o i"
+        ", XF86AudioLowerVolume, exec, ~/github/nixdots/configs/hypr/scripts/volumecontrol.sh -o d"
 
         # Brightness control
-        ", XF86MonBrightnessUp, exec, ~/github/dotfiles/.config/hypr/scripts/brightnesscontrol.sh i"
-        ", XF86MonBrightnessDown, exec, ~/github/dotfiles/.config/hypr/scripts/brightnesscontrol.sh d s"
+        ", XF86MonBrightnessUp, exec, ~/github/nixdots/configs/hypr/scripts/brightnesscontrol.sh i"
+        ", XF86MonBrightnessDown, exec, ~/github/nixdots/configs/hypr/scripts/brightnesscontrol.sh d s"
       ];
 
       bindr = [
         # Rofi stuff
-        "$mainMod, R, exec, pkill rofi || ~/github/dotfiles/.config/hypr/scripts/rofilaunch.sh d" # launch desktop applications
-        # "$mainMod, tab, exec, pkill rofi || ~/github/dotfiles/.config/hypr/scripts/rofilaunch.sh w" # switch between desktop applications
-        "$mainMod, T, exec, pkill rofi || ~/github/dotfiles/.config/hypr/scripts/rofilaunch.sh f" # browse system files
-        "$mainMod, G, exec, pkill rofi || ~/github/dotfiles/.config/hypr/scripts/gamelauncher.sh 3" # steam game launcher
+        "$mainMod, R, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/rofilaunch.sh d" # launch desktop applications
+        # "$mainMod, tab, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/rofilaunch.sh w" # switch between desktop applications
+        "$mainMod, T, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/rofilaunch.sh f" # browse system files
+        "$mainMod, G, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/gamelauncher.sh 3" # steam game launcher
         # "$mainMod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy" # clipboard chooser
 
         # Mod-Q to lock Mod-Ctrl-Q to get logout menu
-        "$mainMod, Q, exec, ~/github/dotfiles/.config/hypr/scripts/lock.sh" # lock screen
-        "$mainMod Ctrl, Q, exec, ~/github/dotfiles/.config/hypr/scripts/logoutlaunch.sh 1" # logout menu
+        "$mainMod, Q, exec, ~/github/nixdots/configs/hypr/scripts/lock.sh" # lock screen
+        "$mainMod Ctrl, Q, exec, ~/github/nixdots/configs/hypr/scripts/logoutlaunch.sh 1" # logout menu
       ];
 
       bindl = [
         ## Trigger when the switch is turning off
-        ", switch:on:Lid Switch, exec, ~/github/dotfiles/.config/hypr/scripts/lock.sh && systemctl suspend"
+        ", switch:on:Lid Switch, exec, ~/github/nixdots/configs/hypr/scripts/lock.sh && systemctl suspend"
       ];
 
       bindm = [
@@ -135,17 +136,17 @@
       ];
 
       exec-once = [
-        # "~/github/dotfiles/.config/hypr/scripts/resetxdgportal.sh"
-        "~/github/dotfiles/.config/hypr/scripts/gsettings.sh"
+        # "~/github/nixdots/configs/hypr/scripts/resetxdgportal.sh"
+        "~/github/nixdots/configs/hypr/scripts/gsettings.sh"
         "wl-paste --type text --watch cliphist store" #Stores only text data
         "wl-paste --type image --watch cliphist store" #Stores only image data
         "udiskie & hyprpaper & blueman-applet & waybar & nm-applet --indicator & mega-cmd"
         "fusuma -d"
         "firefox"
-        "~/github/dotfiles/.config/hypr/scripts/batterynotify.sh" # battery notification
+        "~/github/nixdots/configs/hypr/scripts/batterynotify.sh" # battery notification
         "sudo wgnord c atlanta"
         "tailscale up & tailscale-systray"
-        "swayidle -w timeout 600 '~/github/dotfiles/.config/hypr/scripts/lock.sh' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
+        "swayidle -w timeout 600 '~/github/nixdots/configs/hypr/scripts/lock.sh' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
 
         # THEME THEMING
         "hyprctl setcursor Catppuccin-Mocha-Mauve 24"
@@ -305,24 +306,24 @@
 
 
 # Window/Session actions
-#bind = $mainMod, Q, exec, ~/github/dotfiles/.config/hypr/scripts/dontkillsteam.sh # killactive, kill the window on focus
-#bind = ALT, F4, exec, ~/github/dotfiles/.config/hypr/scripts/dontkillsteam.sh # killactive, kill the window on focus
+#bind = $mainMod, Q, exec, ~/github/nixdots/configs/hypr/scripts/dontkillsteam.sh # killactive, kill the window on focus
+#bind = ALT, F4, exec, ~/github/nixdots/configs/hypr/scripts/dontkillsteam.sh # killactive, kill the window on focus
 #bind = $mainMod, delete, exit, # kill hyperland session
 #bind = $mainMod, W, togglefloating, # toggle the window on focus to float
 #bind = $mainMod, G, togglegroup, # toggle the window on focus to float
 
 ## Screenshot/Screencapture
-#bind = $mainMod, P, exec, ~/github/dotfiles/.config/hypr/scripts/screenshot.sh s # screenshot snip
-#bind = $mainMod ALT, P, exec, ~/github/dotfiles/.config/hypr/scripts/screenshot.sh p # print current screen
+#bind = $mainMod, P, exec, ~/github/nixdots/configs/hypr/scripts/screenshot.sh s # screenshot snip
+#bind = $mainMod ALT, P, exec, ~/github/nixdots/configs/hypr/scripts/screenshot.sh p # print current screen
 
 ## Exec custom scripts
-#bind = $mainMod ALT, right, exec, ~/github/dotfiles/.config/hypr/scripts/swwwallpaper.sh -n # next wallpaper
-#bind = $mainMod ALT, left, exec, ~/github/dotfiles/.config/hypr/scripts/swwwallpaper.sh -p # previous wallpaper
-#bind = $mainMod ALT, up, exec, ~/github/dotfiles/.config/hypr/scripts/wbarconfgen.sh n # next waybar mode
-#bind = $mainMod ALT, down, exec, ~/github/dotfiles/.config/hypr/scripts/wbarconfgen.sh p # previous waybar mode
-#bind = $mainMod SHIFT, D, exec, ~/github/dotfiles/.config/hypr/scripts/togglewallbash.sh  # toggle wallbash on/off
-#bind = $mainMod SHIFT, T, exec, pkill rofi || ~/github/dotfiles/.config/hypr/scripts/themeselect.sh # theme select menu
-#bind = $mainMod SHIFT, A, exec, pkill rofi || ~/github/dotfiles/.config/hypr/scripts/rofiselect.sh # rofi style select menu
-#bind = $mainMod SHIFT, W, exec, pkill rofi || ~/github/dotfiles/.config/hypr/scripts/swwwallselect.sh # rofi wall select menu
-#bind = $mainMod, V, exec, pkill rofi || ~/github/dotfiles/.config/hypr/scripts/cliphist.sh c  # open Pasteboard in screen center
+#bind = $mainMod ALT, right, exec, ~/github/nixdots/configs/hypr/scripts/swwwallpaper.sh -n # next wallpaper
+#bind = $mainMod ALT, left, exec, ~/github/nixdots/configs/hypr/scripts/swwwallpaper.sh -p # previous wallpaper
+#bind = $mainMod ALT, up, exec, ~/github/nixdots/configs/hypr/scripts/wbarconfgen.sh n # next waybar mode
+#bind = $mainMod ALT, down, exec, ~/github/nixdots/configs/hypr/scripts/wbarconfgen.sh p # previous waybar mode
+#bind = $mainMod SHIFT, D, exec, ~/github/nixdots/configs/hypr/scripts/togglewallbash.sh  # toggle wallbash on/off
+#bind = $mainMod SHIFT, T, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/themeselect.sh # theme select menu
+#bind = $mainMod SHIFT, A, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/rofiselect.sh # rofi style select menu
+#bind = $mainMod SHIFT, W, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/swwwallselect.sh # rofi wall select menu
+#bind = $mainMod, V, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/cliphist.sh c  # open Pasteboard in screen center
 

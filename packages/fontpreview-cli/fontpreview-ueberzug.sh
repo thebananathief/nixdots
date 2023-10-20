@@ -1,10 +1,6 @@
-#!/bin/sh
 # Font preview with ueberzug and fzf
 # This is inspired by https://github.com/sdushantha/fontpreview
 
-# TODO: trap 'notify-send hello' WINCH
-# Checking for environment variables if available.
-# These are compatible with original fontpreview.
 SIZE=${FONTPREVIEW_SIZE:-800x800}
 FONT_SIZE=${FONTPREVIEW_FONT_SIZE:-72}
 BG_COLOR=${FONTPREVIEW_BG_COLOR:-#ffffff}
@@ -31,14 +27,9 @@ usage() {
 
 start_ueberzug() {
     [ -p "$FIFO" ] && rm -f "$FIFO"
-    mkfifo "$FIFO" || exit 1
-    touch "$IMAGE" || exit 1
-    # use ueberzugpp if available
-    if command -v ueberzugpp > /dev/null; then
-        ueberzugpp layer --no-cache --silent < "$FIFO" &
-    else
-        ueberzug layer --parser json --silent < "$FIFO" &
-    fi
+    mkfifo "$FIFO"# || exit 1
+    touch "$IMAGE"# || exit 1
+    ueberzugpp layer --no-cache --silent < "$FIFO" &
     # https://github.com/seebye/ueberzug/issues/54#issuecomment-502869935
     exec 3>"$FIFO"
 }
@@ -47,6 +38,7 @@ stop_ueberzug() {
     exec 3>&-
     rm -f "$FIFO" "$IMAGE"
 }
+trap stop_ueberzug EXIT QUIT INT TERM
 
 preview() {
     [ "$TEXT_ALIGN" = center ] || [ "$TEXT_ALIGN" = south ] || [ "$TEXT_ALIGN" = north ] || PADDING=50
@@ -73,9 +65,11 @@ while getopts "a:hs:b:f:t:" arg; do
     esac
 done
 shift $((OPTIND - 1))
-
+if [ $1 = "a" ]; then
+  cd ~/Downloads/Roboto
+  preview("./Roboto-Light.ttf")
+fi
 if [ "$#" = 0 ]; then
-    trap stop_ueberzug EXIT QUIT INT TERM
     # Prepare
     start_ueberzug
     # Export cli args as environment variables for preview command
@@ -90,6 +84,6 @@ if [ "$#" = 0 ]; then
     grep -i '\.\(ttc\|otf\|ttf\)$' | sort | uniq |
     fzf --with-nth 1 --delimiter "\t" --layout=reverse --preview "sh $0 {}" \
         --preview-window "left:50%:noborder:wrap"
-elif [ "$#" = 1 ]; then
-    [ -p "$FIFO" ] && preview "$1"
+# elif [ "$#" = 1 ]; then
+#     [ -p "$FIFO" ] && preview "$1"
 fi
