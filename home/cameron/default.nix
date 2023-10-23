@@ -8,7 +8,8 @@
     # ./neovim.nix
     ./zathura.nix
     ./fusuma.nix
-    ./rofi.nix
+    # ./rofi.nix
+    ./anyrun.nix
     ./waybar.nix
     ./hyprland.nix
   ];

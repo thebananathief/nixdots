@@ -10,6 +10,7 @@
       rofi-file-browser
       rofi-rbw
     ];
+    theme = "glue_pro_blue";
     extraConfig = {
       modi = "drun,ssh";
       kb-primary-paste = "Control+V,Shift+Insert";
