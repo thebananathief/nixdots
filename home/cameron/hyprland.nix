@@ -164,7 +164,7 @@
       ];
 
       workspace = [
-        "1, monitor:DP-1, default:true"
+        "1, monitor:eDP-1, default:true"
         "2, monitor:DP-6, default:true"
         "3, monitor:DP-5, default:true"
       ];

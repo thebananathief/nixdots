@@ -48,7 +48,7 @@
     cursorTheme = {
       name = "Catppuccin-Mocha-Mauve";
       package = pkgs.catppuccin-cursors.mochaMauve;
-      size = 24;
+      size = 32;
     };
     font = {
       name = "Lexend";

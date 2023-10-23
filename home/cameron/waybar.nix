@@ -12,47 +12,31 @@ in {
         layer = "top";
         position = "top";
         mod = "dock";
-        height = 35;
+        # height = 35;
         exclusive = true;
         passthrough = false;
         gtk-layer-shell = true;
 
         modules-left = [
-          "custom/padd"
-          "custom/l_end"
           "custom/power"
           "custom/cliphist"
           "custom/wbar"
           "custom/mode"
           "custom/wallchange"
-          "custom/r_end"
-          "custom/l_end"
           "custom/spotify"
-          "custom/r_end"
-          "custom/padd"
         ];
         modules-center = [
-          "custom/padd"
-          "custom/l_end"
           "idle_inhibitor"
           "wlr/taskbar"
           "clock"
-          "custom/r_end"
-          "custom/padd"
         ];
         modules-right = [
-          "custom/padd"
-          "custom/l_end"
           "tray"
-          "custom/r_end"
-          "custom/l_end"
           "battery"
           "network"
           "bluetooth"
           "pulseaudio"
           "pulseaudio#microphone"
-          "custom/r_end"
-          "custom/padd"
         ];
 
         "custom/power" = {
@@ -165,48 +149,6 @@ in {
           on-scroll-down = "~/github/nixdots/configs/hypr/scripts/volumecontrol.sh -i d";
           tooltip-format = "{format_source} {source_desc} // {source_volume}%";
           scroll-step = 5;
-        };
-
-        "custom/l_end" = {
-          format = " ";
-          interval = "once";
-          tooltip = false;
-        };
-
-        "custom/r_end" = {
-          format = " ";
-          interval = "once";
-          tooltip = false;
-        };
-
-        "custom/sl_end" = {
-          format = " ";
-          interval = "once";
-          tooltip = false;
-        };
-
-        "custom/sr_end" = {
-          format = " ";
-          interval = "once";
-          tooltip = false;
-        };
-
-        "custom/rl_end" = {
-          format = " ";
-          interval = "once";
-          tooltip = false;
-        };
-
-        "custom/rr_end" = {
-          format = " ";
-          interval = "once";
-          tooltip = false;
-        };
-
-        "custom/padd" = {
-          format = "  ";
-          interval = "once";
-          tooltip = false;
         };
       };
     };
@@ -340,42 +282,6 @@ tooltip {
 #workspaces,
 #taskbar {
     padding: 0px;
-}
-
-#custom-r_end {
-    border-radius: 0px 21px 21px 0px;
-    margin-right: 9px;
-    padding-right: 3px;
-}
-
-#custom-l_end {
-    border-radius: 21px 0px 0px 21px;
-    margin-left: 9px;
-    padding-left: 3px;
-}
-
-#custom-sr_end {
-    border-radius: 0px;
-    margin-right: 9px;
-    padding-right: 3px;
-}
-
-#custom-sl_end {
-    border-radius: 0px;
-    margin-left: 9px;
-    padding-left: 3px;
-}
-
-#custom-rr_end {
-    border-radius: 0px 7px 7px 0px;
-    margin-right: 9px;
-    padding-right: 3px;
-}
-
-#custom-rl_end {
-    border-radius: 7px 0px 0px 7px;
-    margin-left: 9px;
-    padding-left: 3px;
 }
 '';
   };

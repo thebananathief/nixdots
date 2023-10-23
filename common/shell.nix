@@ -10,6 +10,7 @@
       zoxide
       ueberzugpp
       imagemagick
+      kitty
 
     # Yazi previewers
       unar

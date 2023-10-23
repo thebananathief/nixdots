@@ -28,7 +28,7 @@ stdenv.mkDerivation rec {
 
   preInstall = "mkdir -p $out/bin";
   installPhase = ''
-    install -D -m 755 $src/fontpreview-ueberzug.sh $out/bin/fontpreview-ueberzug
+    install -D -m 755 $src/fontpreview-ueberzug.sh $out/bin/fontpreview-ueberzug.sh
     # cp $out/fontpreview-ueberzug $out/bin
   '';
   postInstall = ''

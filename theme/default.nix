@@ -14,7 +14,7 @@
     sessionVariables = {
       GTK_THEME = "Catppuccin-Mocha-Compact-Mauve-Dark";
       GDK_SCALE = "1";
-      XCURSOR_SIZE = "24";
+      XCURSOR_SIZE = "32";
       XCURSOR_THEME = "Bibata-Modern-Ice";
     };
     systemPackages = with pkgs; [

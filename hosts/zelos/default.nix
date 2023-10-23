@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [ 
-    ./desktop.nix
-    ./packages.nix
+    # ./desktop.nix
+    # ./packages.nix
     ../../theme
     <nixpkgs/nixos/modules/installer/virtualbox-demo.nix>
   ];

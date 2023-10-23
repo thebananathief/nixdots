@@ -43,8 +43,9 @@
   boot.kernelModules = [ "tcp_bbr" ];
 
   security.sudo.wheelNeedsPassword = false;
-  security.sudo.extraConfig = ''
-    Defaults env_keep+=XDG_RUNTIME_DIR
-  '';
+  # security.sudo.extraConfig = ''
+  #   Defaults env_keep += "XDG_RUNTIME_DIR"
+  #   Defaults env_keep += "WAYLAND_DISPLAY"
+  # '';
 }
 

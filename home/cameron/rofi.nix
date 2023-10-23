@@ -11,7 +11,7 @@
       rofi-rbw
     ];
     extraConfig = {
-      modi = "drun,emoji,ssh";
+      modi = "drun,ssh";
       kb-primary-paste = "Control+V,Shift+Insert";
       kb-secondary-paste = "Control+v,Insert";
     };

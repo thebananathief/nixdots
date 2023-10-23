@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }: {
   services.fusuma = {
     enable = true;
     settings = {
@@ -22,4 +22,6 @@
       };
     };
   };
+
+  xdg.configFile."fusuma/config.yml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/fusuma/config.yaml";
 }

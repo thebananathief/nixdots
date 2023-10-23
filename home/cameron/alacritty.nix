@@ -1,9 +1,12 @@
-{ config, ... }: {
+{ config, fetchurl, ... }: {
   programs.alacritty = {
     enable = true;
     settings = {
       "import" = [
-        "${config.home.homeDirectory}/.config/alacritty/themes/catppuccin.yaml"
+        (fetchurl {
+          url = "https://raw.githubusercontent.com/catppuccin/alacritty/main/catppuccin-mocha.yml";
+          hash = "sha256-dbc4efb5ff00febc78d09f4f2971fa34bde1fce29f9f74d04f52bd1bc8960a43";
+        })
       ];
       font = let family = "JetBrainsMono Nerd Font";
       in {
