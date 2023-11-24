@@ -65,6 +65,10 @@
           ./hosts/gargantuan
           nixos-hardware.nixosModules.framework
         ];
+        talos = mkSystem
+        [
+          ./hosts/talos
+        ];
         zelos = mkSystem
         [
           ./hosts/zelos

@@ -16,15 +16,6 @@
     extraPackages = with pkgs; [ intel-media-driver ];
   };
 
-  # SMB share
-  # fileSystems."/mnt/talos/storage" = {
-  #   device = "//talos/storage";
-  #   fsType = "cifs";
-  #   options = [
-  #
-  #   ];
-  # }
-
   networking = {
     hostName = "gargantuan";
     networkmanager.enable = true;

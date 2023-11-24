@@ -17,6 +17,15 @@
     wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   };
 
+  # SMB share
+#  fileSystems."/mnt/talos/storage" = {
+#   device = "//talos/storage";
+#   fsType = "cifs";
+#   options = [
+#
+#   ];
+#  }
+
   users.users.cameron = {
     isNormalUser = true;
     description = "Cameron";
@@ -25,4 +34,3 @@
 
   system.stateVersion = "23.05";
 }
-
