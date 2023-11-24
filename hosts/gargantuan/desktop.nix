@@ -3,18 +3,8 @@
     sessionVariables = {
       #POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
       POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-qt}/lib/libpolkit-qt5-agent-1.so.1.114.0";
-      MOZ_ENABLE_WAYLAND = "1";
-      SDL_VIDEODRIVER = "wayland";
-      CLUTTER_BACKEND = "wayland";
-      # WLR_RENDERER = "vulkan";
-      WLR_NO_HARDWARE_CURSORS = "1";
-      GTK_USE_PORTAL = "1";
-      GDK_BACKEND = "wayland,x11";
-      QT_QPA_PLATFORM = "wayland;xcb";
-      QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-      NIXOS_OZONE_WL = "1";
     };
+
     systemPackages = with pkgs; [
       intel-media-driver
       linux-firmware
@@ -42,6 +32,11 @@
       waybar
       handlr
       trashy
+      yad # dialog cli
+
+      wf-recorder # screen recording
+      grim # screenshots
+      slurp # select region for screenshot
 
     # General DE programs
       libsForQt5.kcalc
@@ -56,17 +51,27 @@
       zathura # docs
       mpv     # video & audio
       imv     # image
-      #libsForQt5.elisa
+      # libsForQt5.elisa
       # clapper
       # libsForQt5.okular
+      # viewnior # image
+
+    # Audio
       playerctl
       pavucontrol
       ncpamixer
       pamixer
       amberol # audio
-      # viewnior # image
+
+      # alsa-utils # may be added by programs or services
+      # mako # notify daemon
+      # mpd # audio player
+      # mpc-cli # cli mpd interface
+      # ncmpcpp # curses mpd interface
     ];
   };
+
+  environment.pathsToLink = [ "/libexec" ];
 
   security = {
     rtkit.enable = true;
@@ -99,8 +104,15 @@
   programs = {
     hyprland.enable = true;
     hyprland.xwayland.enable = true;
+
     thunar.enable = true;
     thunar.plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
+
+    # Monitor backlight control
+    light.enable = true;
+
+    # Start the ssh-agent for ssh passphrases
+    ssh.startAgent = true;
   };
 
   # Enable sound with pipewire.
@@ -140,10 +152,13 @@
     enable = true;
     layout = "us";
     xkbVariant = "";
-    excludePackages = [ pkgs.xterm ];
+    desktopManager.xterm.enable = false;
 
-    displayManager.gdm.enable = true;
-    displayManager.gdm.wayland = true;
+    displayManager = {
+      defaultSession = "hyprland";
+      gdm.enable = true;
+      gdm.wayland = true;
+    };
 
     libinput = {
       enable = true;
@@ -163,14 +178,14 @@
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
-    # wlr.enable = true;
-    # extraPortals = with pkgs; [
-      #xdg-desktop-portal-wlr
-      #xdg-desktop-portal-gtk
-      #xdg-desktop-portal-xapp
-      #libsForQt5.xdg-desktop-portal-kde
-      #xdg-desktop-portal-gnome
-      #lxqt.xdg-desktop-portal-lxqt
-    # ];
+    wlr.enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk
+      # xdg-desktop-portal-xapp
+      # libsForQt5.xdg-desktop-portal-kde
+      # xdg-desktop-portal-gnome
+      # lxqt.xdg-desktop-portal-lxqt
+    ];
   };
 }

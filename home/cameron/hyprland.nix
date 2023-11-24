@@ -1,9 +1,11 @@
-{ pkgs, ... }: {
+{ pkgs, ... }: rec {
   home.sessionVariables = {
     XDG_CURRENT_DESKTOP = "Hyprland";
     XDG_SESSION_DESKTOP = "Hyprland";
     XDG_SESSION_TYPE = "wayland";
   };
+
+  systemd.user.sessionVariables = home.sessionVariables;
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -34,11 +36,14 @@
 
         # Window actions
         "$mainMod, W, killactive,"
-        "$mainMod, O, togglefloating,"
         "$mainMod, I, togglegroup"
-        "$mainMod, P, pseudo," # dwindle
-        "$mainMod, M, togglesplit," # dwindle
         "ALT, return, fullscreen,"
+        "$mainMod, P, pseudo," # dwindle
+        "$mainMod, mouse:276, pseudo," # dwindle
+        "$mainMod, M, togglesplit," # dwindle
+        "$mainMod, mouse:275, togglesplit," # dwindle
+        "$mainMod, O, togglefloating,"
+        "$mainMod, mouse:274, togglefloating,"
 
         # Cycle window focus
         "$mainMod, Tab, cyclenext,"
@@ -112,12 +117,11 @@
       ];
 
       bindr = [
-        # Rofi stuff
-        "$mainMod, R, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/rofilaunch.sh d" # launch desktop applications
-        # "$mainMod, tab, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/rofilaunch.sh w" # switch between desktop applications
-        "$mainMod, T, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/rofilaunch.sh f" # browse system files
-        "$mainMod, G, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/gamelauncher.sh 3" # steam game launcher
-        # "$mainMod, V, exec, cliphist list | wofi --dmenu | cliphist decode | wl-copy" # clipboard chooser
+        "$mainMod, R, exec, pkill anyrun || ~/github/nixdots/configs/hypr/scripts/runner.sh d" # launch desktop applications
+        "$mainMod, T, exec, pkill anyrun || ~/github/nixdots/configs/hypr/scripts/runner.sh f" # browse system files
+        "$mainMod, G, exec, pkill anyrun || ~/github/nixdots/configs/hypr/scripts/gamelauncher.sh 3" # steam game launcher
+        # "$mainMod, tab, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/runner.sh w" # switch between desktop applications
+        # "$mainMod, V, exec, cliphist list | anyrun --dmenu | cliphist decode | wl-copy" # clipboard chooser
 
         # Mod-Q to lock Mod-Ctrl-Q to get logout menu
         "$mainMod, Q, exec, ~/github/nixdots/configs/hypr/scripts/lock.sh" # lock screen
@@ -159,8 +163,10 @@
       monitor = [
         "eDP-1,highres,0x0,auto"
         "DP-1,highres,0x0,auto"
-        "DP-6,highres,1128x0,auto"
-        "DP-5,highres,3048x0,auto"
+        "DP-5,highres,1128x0,auto"
+        "DP-6,highres,3048x0,auto"
+        # "DP-6,highres,1128x0,auto"
+        # "DP-5,highres,3048x0,auto"
       ];
 
       workspace = [
@@ -187,7 +193,7 @@
         # kb_rules =
 
         follow_mouse = 1;
-        sensitivity = 0.5; # -1.0 - 1.0, 0 means no modification.
+        sensitivity = 1; # -1.0 - 1.0, 0 means no modification.
         force_no_accel = 1;
         touchpad.natural_scroll = "yes";
       };
@@ -240,6 +246,7 @@
       gestures.workspace_swipe = "on";
       gestures.workspace_swipe_fingers = 4;
 
+      "device:logitech-m510".sensitivity = 1.0;
       "device:logitech-g203-prodigy-gaming-mouse".sensitivity = -0.2;
       "device:pixa3854:00-093a:0274-touchpad".sensitivity = 1.0;
 
@@ -273,6 +280,7 @@
         "float, title:^(Picture-in-Picture)$"
         "float, title:^(File Operation Progress)$"
         "float, title:^(Confirm to replace files)$"
+        "float, title:^(Open folder as vault)$"
 
         # "float, class:^(org.kde.polkit-kde-authentication-agent-1)$"
         # "size 20% 20%, class:^(org.kde.polkit-kde-authentication-agent-1)$"

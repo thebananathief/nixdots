@@ -8,6 +8,8 @@
           up.update.interval = 0.1;
           down.update.command = "~/github/nixdots/configs/hypr/scripts/volumecontrol.sh -o d 1";
           down.update.interval = 0.1;
+          left.end.command = "playerctl previous";
+          right.end.command = "playerctl next";
         };
         "4" = {
           update.command = "echo $move_x $move_y | tee -a ~/fust";

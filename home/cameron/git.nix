@@ -5,6 +5,22 @@
     userEmail = "cameron.salomone@gmail.com";
     ignores = [ "*~" "*.swp" "*result*" ".direnv" "node_modules" ];
     extraConfig = {
+      init.defaultBranch = "main";
+      push.autoSetupRemote = true;
+      pull.rebase = true;
+
+      url = {
+        "ssh://git@github.com/" = {
+          insteadOf = "https://github.com/";
+        };
+        "ssh://git@gitlab.com/" = {
+          insteadOf = "https://gitlab.com/";
+        };
+        "ssh://git@bitbucket.com/" = {
+          insteadOf = "https://bitbucket.com/";
+        };
+      };
+
       # diff.colorMoved = "default";
       merge.conflictstyle = "diff3";
     };

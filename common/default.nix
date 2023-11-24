@@ -31,7 +31,14 @@
   systemd.services.NetworkManager-wait-online.enable = false;
 
   environment.systemPackages = with pkgs; [
-    git wget curl htop unzip tmux tree killall
+    git
+    wget
+    curl
+    htop
+    unzip
+    tmux
+    tree
+    killall
   ];
 }
 

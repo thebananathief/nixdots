@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, inputs, ... }: rec {
   imports = [
     ./xdg.nix
     # ./dconf.nix
@@ -9,7 +9,7 @@
     ./zathura.nix
     ./fusuma.nix
     # ./rofi.nix
-    ./anyrun.nix
+    # ./anyrun.nix
     ./waybar.nix
     ./hyprland.nix
   ];
@@ -17,14 +17,29 @@
   home.username = "cameron";
   # home.homeDirectory = "/home/cameron";
 
-  home.sessionVariables = {
+  systemd.user.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
-    TERM = "alacritty";
+    TERMINAL = "alacritty";
+    SHELL = "zsh";
+    BROWSER = "firefox";
+
+    _JAVA_AWT_WM_NONREPARENTING = "1";
+    MOZ_ENABLE_WAYLAND = "1";
+    SDL_VIDEODRIVER = "wayland";
+    CLUTTER_BACKEND = "wayland";
+    WLR_RENDERER = "vulkan";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    GTK_USE_PORTAL = "1";
+    NIXOS_XDG_OPEN_USE_PORTAL = "1";
+    GDK_BACKEND = "wayland,x11";
+    QT_QPA_PLATFORM = "wayland;xcb";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    NIXOS_OZONE_WL = "1";
   };
 
-  # home.packages = with pkgs; [
-  # ];
+  home.sessionVariables = systemd.user.sessionVariables;
 
   # Install dotfiles repo and link configs
   # home.file."github/dotfiles" = {
@@ -37,6 +52,14 @@
   # };
 
   fonts.fontconfig.enable = true;
+
+  home.pointerCursor = {
+    name = "Catppuccin-Mocha-Mauve";
+    package = pkgs.catppuccin-cursors.mochaMauve;
+    size = 32;
+    gtk.enable = true;
+    x11.enable = true;
+  };
 
   qt = {
     enable = true;
@@ -62,14 +85,15 @@
     };
     theme = {
       name = "Catppuccin-Mocha-Mauve-Dark";
-      package = (pkgs.catppuccin-gtk.override {
+      package = pkgs.catppuccin-gtk.override {
         variant = "mocha";
         accents = ["mauve"];
         size = "compact";
-      });
+      };
     };
     gtk3.bookmarks = [
       "file:///home/cameron/github"
+      "file:///home/cameron/MEGA"
     ];
   };
 
@@ -78,7 +102,7 @@
 
     eza = {
       enable = true;
-      enableAliases = false;
+      enableAliases = true;
       icons = false;
       extraOptions = [
         "--all"

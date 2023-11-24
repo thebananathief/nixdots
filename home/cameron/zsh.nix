@@ -62,8 +62,4 @@
     #   enableZshIntegration = true;
     # };
   };
-
-  # home.sessionVariables = {
-  #   SHELL = "/etc/profiles/per-user/cameron/bin/zsh";
-  # };
 }
