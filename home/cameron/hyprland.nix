@@ -31,7 +31,7 @@
         "$mainMod, C, exec, hyprpicker -a -n"
 
         # Test buttons to restart waybar and print active window info
-        "$mainMod, U, exec, hyprctl activewindow >> ~/text.txt"
+        "$mainMod, U, exec, hyprctl activewindow | yad --text-info"
         "$mainMod, Y, exec, killall .waybar-wrapped ; waybar"
         "$mainMod, Y, exec, killall .fusuma-wrapped ; fusuma -d"
         
@@ -299,8 +299,8 @@
         # "size 20% 20%, class:^(org.kde.polkit-kde-authentication-agent-1)$"
         # "center, class:^(org.kde.polkit-kde-authentication-agent-1)$"
 
-        "float, pavucontrol|yad|nm-connection-editor|nm-applet|blueman-manager"
-        "float, qt5ct|kvantummanager|nwg-look"
+        "float, class:(pavucontrol|yad|nm-connection-editor|nm-applet|blueman-manager)"
+        "float, class:(qt5ct|kvantummanager|nwg-look)"
 
         # fix xwayland apps
         "rounding 0, xwayland:1, floating:1"

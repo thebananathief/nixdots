@@ -29,7 +29,7 @@
   users.users.cameron = {
     isNormalUser = true;
     description = "Cameron";
-    extraGroups = [ "networkmanager" "wheel" "network" "input" ];
+    extraGroups = [ "networkmanager" "wheel" "network" ];
   };
 
   system.stateVersion = "23.05";
