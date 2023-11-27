@@ -30,49 +30,64 @@
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs @ { nixpkgs, anyrun, nixos-hardware, home-manager, ... }:
+  outputs = inputs @ { self, nixpkgs, nixos-hardware, home-manager, ... }:
     let
+      # TODO: These should really be obfuscated
+      username = "cameron";
+      userfullName = "Cameron Salomone";
+      useremail = "cameron.salomone@gmail.com";
+
+      nixosSystem = import ./lib/nixosSystem.nix;
+      
       system = "x86_64-linux";
-      defaultModules = [
-        # { _module.args = { inherit inputs; }; }
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.cameron = import ./home/cameron;
-        }
-        ./common
-        { environment.systemPackages = [ anyrun.packages.${system}.anyrun ]; }
-      ];
-      mkPkgs = import nixpkgs {
-        config.allowUnfree = true;
-        inherit system;
-      };
-      mkSystem = extraModules:
-        nixpkgs.lib.nixosSystem rec {
-          pkgs = mkPkgs;
-          system = "x86_64-linux";
-          modules = defaultModules ++ extraModules;
-          specialArgs = { inherit inputs; };
+
+      x64_specialArgs = {
+        inherit username userfullName useremail;
+        # This part allows us to install non-free software from nixpkgs
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
         };
-      # specialArgs =
-      # {} // inputs;
+      # The // inputs part here is us feeding in the inputs from this flake into the special args, the special args go into the different modules to be used further
+      } // inputs;
     in {
       #lib = { inherit mkSystem; };
-      nixosConfigurations = {
-        gargantuan = mkSystem
-        [
-          ./hosts/gargantuan
-          nixos-hardware.nixosModules.framework
-        ];
-        talos = mkSystem
-        [
-          ./hosts/talos
-        ];
-        zelos = mkSystem
-        [
-          ./hosts/zelos
-        ];
+      nixosConfigurations = let
+        sys_gargantuan = {
+          nixos-modules = [
+            nixos-hardware.nixosModules.framework
+            ./hosts/gargantuan
+          ];
+          home-module = import ./home/cameron;
+        };
+
+        sys_talos = {
+          nixos-modules = [ ./hosts/talos ];
+          home-module = import ./home/server;
+        };
+        
+        sys_zelos = {
+          nixos-modules = [ ./hosts/zelos ];
+          home-module = import ./home/cameron;
+        };
+        
+        base_args = {
+          inherit home-manager;
+          system = "x86_64-linux";
+          specialArgs = x64_specialArgs;
+          nixpkgs = nixpkgs;
+        };
+      in {
+        # gargantuan = nixosSystem {
+        #   nixos-modules = [
+        #     nixos-hardware.nixosModules.framework
+        #     ./hosts/gargantuan
+        #   ];
+        #   home-module = import ./home/cameron;
+        # } // base_args;
+        gargantuan = nixosSystem (sys_gargantuan // base_args);
+        talos = nixosSystem (sys_talos // base_args);
+        zelos = nixosSystem (sys_zelos // base_args);
       };
     };
 }

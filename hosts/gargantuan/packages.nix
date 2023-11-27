@@ -25,13 +25,14 @@
 
     (python311.withPackages (ps: 
       with ps; [
-        ansible
+        # ansible
         yamllint
     ]))
 
   ## Coding
+    tree-sitter
     go
-    nodejs-slim
+    nodejs_20
     rustup
     vscodium
     dbeaver
