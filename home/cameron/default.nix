@@ -26,6 +26,7 @@
 
     _JAVA_AWT_WM_NONREPARENTING = "1";
     MOZ_ENABLE_WAYLAND = "1";
+    MOZ_WEBRENDER = "1";
     SDL_VIDEODRIVER = "wayland";
     CLUTTER_BACKEND = "wayland";
     WLR_RENDERER = "vulkan";

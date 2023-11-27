@@ -11,14 +11,22 @@
     enable = true;
     settings = {
       "$mainMod" = "SUPER";
+      "$terminal" = "alacritty";
+      "$files" = "thunar";
+      "$browser" = "firefox";
+      "$runner" = "~/github/nixdots/configs/hypr/scripts/runner.sh";
+      "$volume" = "~/github/nixdots/configs/hypr/scripts/volumecontrol.sh";
+      "$lockscreen" = "~/github/nixdots/configs/hypr/scripts/lock.sh";
+      "$wlogout" = "~/github/nixdots/configs/hypr/scripts/logoutlaunch.sh";
+      "$brightness" = "~/github/nixdots/configs/hypr/scripts/brightnesscontrol.sh";
 
       # https://wiki.hyprland.org/Configuring/Binds/
       bind = [
         # Commonn apps
-        "$mainMod, A, exec, alacritty"
-        "$mainMod, E, exec, thunar"
+        "$mainMod, A, exec, $terminal"
+        "$mainMod, E, exec, $files"
         "$mainMod, S, exec, spotify"
-        "$mainMod, F, exec, firefox"
+        "$mainMod, F, exec, $browser"
         "$mainMod, D, exec, obsidian"
         "$mainMod, C, exec, hyprpicker -a -n"
 
@@ -38,8 +46,8 @@
         "$mainMod, W, killactive,"
         "$mainMod, I, togglegroup"
         "ALT, return, fullscreen,"
-        "$mainMod, P, pseudo," # dwindle
-        "$mainMod, mouse:276, pseudo," # dwindle
+        # "$mainMod, P, pseudo," # dwindle
+        # "$mainMod, mouse:276, pseudo," # dwindle
         "$mainMod, M, togglesplit," # dwindle
         "$mainMod, mouse:275, togglesplit," # dwindle
         "$mainMod, O, togglefloating,"
@@ -108,24 +116,24 @@
         "$mainMod, down, resizeactive, 0 30"
 
         # Volume keys
-        ", XF86AudioRaiseVolume, exec, ~/github/nixdots/configs/hypr/scripts/volumecontrol.sh -o i"
-        ", XF86AudioLowerVolume, exec, ~/github/nixdots/configs/hypr/scripts/volumecontrol.sh -o d"
+        ", XF86AudioRaiseVolume, exec, $volume -o i"
+        ", XF86AudioLowerVolume, exec, $volume -o d"
 
         # Brightness control
-        ", XF86MonBrightnessUp, exec, ~/github/nixdots/configs/hypr/scripts/brightnesscontrol.sh i"
-        ", XF86MonBrightnessDown, exec, ~/github/nixdots/configs/hypr/scripts/brightnesscontrol.sh d s"
+        ", XF86MonBrightnessUp, exec, $brightness i"
+        ", XF86MonBrightnessDown, exec, $brightness d s"
       ];
 
       bindr = [
-        "$mainMod, R, exec, pkill anyrun || ~/github/nixdots/configs/hypr/scripts/runner.sh d" # launch desktop applications
-        "$mainMod, T, exec, pkill anyrun || ~/github/nixdots/configs/hypr/scripts/runner.sh f" # browse system files
+        "$mainMod, R, exec, pkill anyrun || $runner d" # launch desktop applications
+        "$mainMod, T, exec, pkill anyrun || $runner f" # browse system files
         "$mainMod, G, exec, pkill anyrun || ~/github/nixdots/configs/hypr/scripts/gamelauncher.sh 3" # steam game launcher
         # "$mainMod, tab, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/runner.sh w" # switch between desktop applications
         # "$mainMod, V, exec, cliphist list | anyrun --dmenu | cliphist decode | wl-copy" # clipboard chooser
 
         # Mod-Q to lock Mod-Ctrl-Q to get logout menu
-        "$mainMod, Q, exec, ~/github/nixdots/configs/hypr/scripts/lock.sh" # lock screen
-        "$mainMod Ctrl, Q, exec, ~/github/nixdots/configs/hypr/scripts/logoutlaunch.sh 1" # logout menu
+        "$mainMod, Q, exec, $lockscreen" # lock screen
+        "$mainMod Ctrl, Q, exec, $wlogout 1" # logout menu
       ];
 
       bindl = [
@@ -153,8 +161,13 @@
         "swayidle -w timeout 600 '~/github/nixdots/configs/hypr/scripts/lock.sh' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
 
         # THEME THEMING
-        "hyprctl setcursor Catppuccin-Mocha-Mauve 24"
+        "hyprctl setcursor \"Catppuccin-Mocha-Mauve\" 24"
         # "kvantummanager --set Catppuccin-Mocha"
+      ];
+
+      env = [
+        "XCURSOR_SIZE,48"
+        "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
       ];
 
       # xwayland.force_zero_scaling = true;
@@ -236,7 +249,7 @@
       ];
 
       dwindle = {
-          pseudotile = "yes";
+          pseudotile = "0";
           preserve_split = "yes";
           no_gaps_when_only = false;
       };
@@ -286,11 +299,13 @@
         # "size 20% 20%, class:^(org.kde.polkit-kde-authentication-agent-1)$"
         # "center, class:^(org.kde.polkit-kde-authentication-agent-1)$"
 
-        "float, class:^(blueman-manager)$"
-        "float, class:^(trayscale)$"
-        "float, class:^(nm-applet)$"
-        "float, class:^(nm-connection-editor)$"
-        "float, class:^(pavucontrol)$"
+        "float, pavucontrol|yad|nm-connection-editor|nm-applet|blueman-manager"
+        "float, qt5ct|kvantummanager|nwg-look"
+
+        # fix xwayland apps
+        "rounding 0, xwayland:1, floating:1"
+        "center, class:^(.*jetbrains.*)$, title:^(Confirm Exit|Open Project|win424|win201|splash)$"
+        "size 640 400, class:^(.*jetbrains.*)$, title:^(splash)$"
 
         "size 20% 40%, class:^(org.kde.kcalc)$"
         "float, class:^(org.kde.kcalc)$"

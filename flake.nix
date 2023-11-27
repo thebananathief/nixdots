@@ -30,7 +30,7 @@
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs @ { nixpkgs, anyrun, nixos-hardware, home-manager, ... }:
+  outputs = inputs @ { nixpkgs, nixos-hardware, home-manager, ... }:
     let
       system = "x86_64-linux";
       defaultModules = [
@@ -42,7 +42,6 @@
           home-manager.users.cameron = import ./home/cameron;
         }
         ./common
-        { environment.systemPackages = [ anyrun.packages.${system}.anyrun ]; }
       ];
       mkPkgs = import nixpkgs {
         config.allowUnfree = true;
