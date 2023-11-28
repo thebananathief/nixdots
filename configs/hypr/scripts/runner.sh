@@ -6,17 +6,17 @@
 
 # rofi action
 
-case $1 in
-    d)  r_mode="drun" ;; 
-    w)  r_mode="window" ;;
-    f)  r_mode="+filebrowser" ;;
-    h)  echo -e "rofilaunch.sh [action]\nwhere action,"
-        echo "d :  drun mode"
-        echo "w :  window mode"
-        echo "f :  filebrowser mode,"
-        exit 0 ;;
-    *)  r_mode="drun" ;;
-esac
+# case $1 in
+#     d)  r_mode="drun" ;; 
+#     w)  r_mode="window" ;;
+#     f)  r_mode="+filebrowser" ;;
+#     h)  echo -e "rofilaunch.sh [action]\nwhere action,"
+#         echo "d :  drun mode"
+#         echo "w :  window mode"
+#         echo "f :  filebrowser mode,"
+#         exit 0 ;;
+#     *)  r_mode="drun" ;;
+# esac
 
 
 # read hypr theme border
@@ -40,8 +40,6 @@ esac
 # icon_override=`gsettings get org.gnome.desktop.interface icon-theme | sed "s/'//g"`
 # icon_override="configuration {icon-theme: \"${icon_override}\";}"
 
-
-# launch rofi
-
-anyrun -show $r_mode 
+killall anyrun
+anyrun
 

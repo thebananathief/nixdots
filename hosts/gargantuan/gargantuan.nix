@@ -3,7 +3,7 @@
     ./hardware-configuration.nix
     ./packages.nix
     # ../../modules/games.nix
-    ../../modules/desktops/hyprland.nix
+    ../../modules/desktop
     ../../modules/theme
   ];
 

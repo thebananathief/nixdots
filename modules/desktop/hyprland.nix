@@ -2,6 +2,12 @@
 # This module's purpose is to install a full desktop environment with Hyprland
 # as the Window Manager. The scope of this should be as large as GNOME or Plasma.
 
+  services.xserver.displayManager = {
+    defaultSession = "hyprland";
+    gdm.enable = true;
+    gdm.wayland = true;
+  };
+
   environment = {
     sessionVariables = {
       #POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
@@ -21,9 +27,6 @@
       udiskie
       wtype
       polkit
-      libsForQt5.polkit-qt
-      #libsForQt5.polkit-kde-agent
-      libsForQt5.qt5.qtwayland
       qt6.qtwayland
       wlogout
       brightnessctl
@@ -43,13 +46,9 @@
       slurp # select region for screenshot
 
     # General DE programs
-      libsForQt5.kcalc
-      libsForQt5.ark
-      libsForQt5.kclock
       nwg-displays
       wlr-randr
       networkmanagerapplet
-      #libsForQt5.networkmanager-qt # alternative nm-tray
       
     # Media
       zathura # docs
@@ -72,7 +71,15 @@
       # mpd # audio player
       # mpc-cli # cli mpd interface
       # ncmpcpp # curses mpd interface
-    ];
+    ]) ++ (with pkgs.libsForQt5; [
+      kcalc
+      ark
+      kclock
+      polkit-qt
+      # polkit-kde-agent
+      qt5.qtwayland
+      networkmanager-qt # alternative nm-tray
+    ]);
   };
 
   security = {
@@ -118,34 +125,6 @@
     #     screen.disabled = true;
     #   };
     # };
-  };
-
-  # Configure X11, desktop, and keymap
-  services.xserver = {
-    enable = true;
-    layout = "us";
-    xkbVariant = "";
-    desktopManager.xterm.enable = false;
-
-    displayManager = {
-      defaultSession = "hyprland";
-      gdm.enable = true;
-      gdm.wayland = true;
-    };
-
-    libinput = {
-      enable = true;
-      touchpad = {
-        accelProfile = "flat";
-        accelSpeed = "0.5";
-        naturalScrolling = false;
-      };
-      mouse = {
-        accelProfile = "flat";
-        accelSpeed = "1.0";
-        naturalScrolling = false;
-      };
-    };
   };
 
   xdg.portal = {

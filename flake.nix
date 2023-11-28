@@ -32,10 +32,10 @@
       url = "github:Kirottu/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    mysecrets = {
-      url = "git+ssh://git@github.com/thebananathief/nix-secrets.git?shallow=1";
-      flake = false;
-    };
+    # mysecrets = {
+    #   url = "git+ssh://git@github.com/thebananathief/nix-secrets.git?shallow=1";
+    #   flake = false;
+    # };
   };
 
   outputs = inputs @ { self, nixpkgs, nixos-hardware, home-manager, ... }:

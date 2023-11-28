@@ -1,26 +1,7 @@
 { pkgs, ... }: {
-  # Configure X11, desktop, and keymap
   services.xserver = {
-    enable = true;
-    layout = "us";
-    xkbVariant = "";
-
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
-
-    libinput = {
-      enable = true;
-      touchpad = {
-        accelProfile = "flat";
-        accelSpeed = "0.5";
-        naturalScrolling = false;
-      };
-      mouse = {
-        accelProfile = "flat";
-        accelSpeed = "1.0";
-        naturalScrolling = false;
-      };
-    };
   };
   
 #   services.gnome.games.enable = true;

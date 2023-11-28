@@ -1,27 +1,8 @@
 { pkgs, ... }: {
-  # Configure X11, desktop, and keymap
   services.xserver = {
-    enable = true;
-    layout = "us";
-    xkbVariant = "";
-
     displayManager.sddm.enable = true;
 #    displayManager.defaultSession = "plasmawayland";
     desktopManager.plasma5.enable = true;
-
-    libinput = {
-      enable = true;
-      touchpad = {
-        accelProfile = "flat";
-        accelSpeed = "0.5";
-        naturalScrolling = false;
-      };
-      mouse = {
-        accelProfile = "flat";
-        accelSpeed = "1.0";
-        naturalScrolling = false;
-      };
-    };
   };
 
 #   services.power-profiles-daemon.enable = lib.mkForce false;

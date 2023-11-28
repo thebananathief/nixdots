@@ -125,9 +125,9 @@
       ];
 
       bindr = [
-        "$mainMod, R, exec, pkill anyrun || $runner d" # launch desktop applications
-        "$mainMod, T, exec, pkill anyrun || $runner f" # browse system files
-        "$mainMod, G, exec, pkill anyrun || ~/github/nixdots/configs/hypr/scripts/gamelauncher.sh 3" # steam game launcher
+        "$mainMod, R, exec, $runner d" # launch desktop applications
+        "$mainMod, T, exec, $runner f" # browse system files
+        "$mainMod, G, exec, $runner g" # steam game launcher
         # "$mainMod, tab, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/runner.sh w" # switch between desktop applications
         # "$mainMod, V, exec, cliphist list | anyrun --dmenu | cliphist decode | wl-copy" # clipboard chooser
 

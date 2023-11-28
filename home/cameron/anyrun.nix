@@ -13,15 +13,15 @@
       ];
 
       width = { fraction = 0.3; };
-      position = "top";
-      verticalOffset = { absolute = 0; };
+      x = { fraction = 0.5; };
+      y = { fraction = 0.5; };
       hideIcons = false;
       ignoreExclusiveZones = false;
       layer = "overlay";
       hidePluginInfo = false;
       closeOnClick = true;
       showResultsImmediately = false;
-      # maxEntries = null;
+      # maxEntries = 5;
     };
 
     extraCss = ''
