@@ -5,7 +5,6 @@
   };
   
 #   services.gnome.games.enable = true;
-#   services.power-profiles-daemon.enable = lib.mkForce false;
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   environment.systemPackages = (with pkgs; [

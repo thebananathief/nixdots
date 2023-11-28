@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   imports = [ 
     ./hardware-configuration.nix
     ./packages.nix
@@ -51,7 +51,6 @@
 
   # Power saving profile
   # Consider:
-  # power-profiles-daemon
   # upower
   services.tlp = {
     enable = true;
@@ -62,6 +61,8 @@
       NMI_WATCHDOG = 0;
     };
   };
+  # This part is required if the above is enabled
+  services.power-profiles-daemon.enable = lib.mkForce false;
 
   hardware.opengl = {
     enable = true;

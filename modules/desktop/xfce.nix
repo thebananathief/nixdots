@@ -1,8 +1,7 @@
 { pkgs, ... }: {
   services.xserver = {
-    displayManager.sddm.enable = true;
-#    displayManager.defaultSession = "plasmawayland";
-    desktopManager.plasma5.enable = true;
+    desktopManager.xfce.enable = true;
+    displayManager.defaultSession = "xfce";
   };
 
   environment.systemPackages = (with pkgs; [

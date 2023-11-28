@@ -1,6 +1,9 @@
-{ ... }: {
-  import = [
+{ pkgs, ... }: {
+  imports = [
+    # ./plasma.nix
+    # ./hyprland.nix
     ./gnome.nix
+    # ./xfce.nix
   ];
 
   services.xserver = {
