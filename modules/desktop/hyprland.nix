@@ -14,7 +14,7 @@
       POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-qt}/lib/libpolkit-qt5-agent-1.so.1.114.0";
     };
 
-    systemPackages = with pkgs; [
+    systemPackages = (with pkgs; [
       anyrun.packages.${system}.anyrun
       intel-media-driver
       linux-firmware
@@ -64,7 +64,7 @@
       pavucontrol
       ncpamixer
       pamixer
-      amberol # audio
+      amberol
 
       # alsa-utils # may be added by programs or services
       # mako # notify daemon

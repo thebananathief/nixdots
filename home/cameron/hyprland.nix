@@ -309,7 +309,7 @@
 
         # Fix tooltips taking away window focus
         # https://github.com/hyprwm/Hyprland/issues/2412
-        "nofocus,class:^jetbrains-(?!toolbox),floating:1,title:^win\d+$"
+        "nofocus,class:^jetbrains-(?!toolbox),floating:1,title:^win\d+"
 
         "size 20% 40%, class:^(org.kde.kcalc)$"
         "float, class:^(org.kde.kcalc)$"
