@@ -22,16 +22,12 @@
         "https://cache.nixos.org/?priority=5"
         "https://nix-community.cachix.org?priority=10"
         "https://anyrun.cachix.org"
-"https://hyprland.cachix.org"
-        "https://nixpkgs-wayland.cachix.org"
-              ];
+      ];
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
-"hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-        "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
-              ];
+      ];
     };
   };
 
@@ -57,22 +53,34 @@
   };
   
   environment.systemPackages = with pkgs; [
-    git
-    wget
-    curl
-    htop
-    unzip
-    tmux
-    tree
-    killall
-    neofetch
-    ethtool
-    just
-#    universal-ctags
-    dos2unix
-    tldr
-#    dua
-    #cut
+    git wget curl unzip killall ethtool lm-sensors
+    htop tmux neofetch
+    tailspin bat dua
+    dos2unix tldr just
+
+    # universal-ctags
+    # dua
+    # cut
+    # intel-gpu-tools
+    # dnsutils
+    # net-tools
+    # iftop
+    # iotop
+    # fio
+    # hddtemp
+    # nmap
+  ];
+
+  boot.supportedFilesystems = [
+    "ext4"
+    # "btrfs"
+    "xfs"
+    #"zfs"
+    "ntfs"
+    "fat"
+    # "vfat"
+    "exfat"
+    # "cifs" # mount windows share
   ];
 }
 

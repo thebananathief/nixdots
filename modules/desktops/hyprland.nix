@@ -1,4 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs, anyrun, ... }: {
+# This module's purpose is to install a full desktop environment with Hyprland
+# as the Window Manager. The scope of this should be as large as GNOME or Plasma.
+
   environment = {
     sessionVariables = {
       #POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
@@ -6,6 +9,7 @@
     };
 
     systemPackages = with pkgs; [
+      anyrun.packages.${system}.anyrun
       intel-media-driver
       linux-firmware
       mesa
@@ -78,28 +82,29 @@
     pam.services.swaylock.text = "auth include login";
   };
   
-  # Window manager and GUI file explorer
   programs = {
+    # Window manager
     hyprland.enable = true;
     hyprland.xwayland.enable = true;
 
+    # GUI file explorer
     thunar.enable = true;
     thunar.plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
 
     # Monitor backlight control
-    light.enable = true;
+    # light.enable = true;
   };
 
-  # TODO: Need to see if these need to be enabled here, not sure if other DE's install these by default
   # For flatpaks I think?
   #  environment.pathsToLink = [ "/libexec" ];
   #services.flatpak.enable = true;
 
   services = {
+    # Addons for thunar to detect USB devices and display thumbnails 
     gvfs.enable = true;
     tumbler.enable = true;
 
-    # TODO: Need to see if these need to be enabled here, not sure if other DE's install these by default
+    # TODO: Need to see if these need to be enabled here, not sure if other DE's have these by default
 #    blueman.enable = true;
 #    printing.enable = true;
     

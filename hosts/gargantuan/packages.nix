@@ -1,23 +1,12 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
   ## CLI
-    neofetch
     btop
-    ethtool
-    just
-    universal-ctags
-    dos2unix
-    tldr
     wgnord
     cage
-    zig
     wev
-    dua
     efibootmgr
     jsonfmt
-    tailspin
-    bat
-    #cut
 
   # Fun stuff
     cava # audio visualizer
@@ -29,8 +18,12 @@
         yamllint
     ]))
 
-  ## Coding
+  ## Neovim
     tree-sitter
+    universal-ctags
+
+  ## Coding
+    zig
     go
     nodejs_20
     rustup

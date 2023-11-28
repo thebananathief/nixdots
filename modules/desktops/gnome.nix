@@ -22,12 +22,20 @@
       };
     };
   };
+  
+#   services.gnome.games.enable = true;
+#   services.power-profiles-daemon.enable = lib.mkForce false;
 
-  # For systray icons
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
-  environment.systemPackages = with pkgs; [
-    gnomeExtensions.appindicator
-  ];
+  environment.systemPackages = (with pkgs; [
+    
+  ]) ++ (with pkgs.gnomeExtensions; [
+    appindicator # For systray icons
+#     gsconnect
+#     ideapad-mode
+#     vitals
+#     pkgs.gnome.gnome-tweaks
+  ]);
 
 #  environment.gnome.excludePackages = (with pkgs; [
 #    gnome-photos
@@ -47,4 +55,23 @@
 #    hitori # sudoku game
 #    atomix # puzzle game
 #  ]);
+
+#   networking = {
+#     # for GSConnect
+#     firewall = {
+#       allowedTCPPortRanges = [
+#         {
+#           from = 1714;
+#           to = 1764;
+#         }
+#       ];
+#       allowedUDPPortRanges = [
+#         {
+#           from = 1714;
+#           to = 1764;
+#         }
+#       ];
+#     };
+#   };
+
 }

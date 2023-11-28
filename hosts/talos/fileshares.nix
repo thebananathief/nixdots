@@ -37,6 +37,12 @@
         "read only" = "no";
         "inherit permissions" = "yes";
       };
+      gameservers = {
+        path = "/mnt/ssd/gameservers";
+        browseable = "yes";
+        "read only" = "no";
+        "inherit permissions" = "yes";
+      };
       appdata = {
         path = "/opt/appdata";
         browseable = "yes";
