@@ -12,6 +12,15 @@
 
   home.sessionVariables = systemd.user.sessionVariables;
 
+  home.shellAliases = {
+    dtail = "docker logs -tf --tail='50'";
+    dstop = "docker stop `docker ps -aq`";
+    drm = "docker rm `docker ps -aq`";
+    dps = "docker ps --format 'table {{ '{{' }}.Names{{ '}}' }}\\t{{ '{{' }}.Ports{{ '}}' }}\\t{{ '{{' }}.Status{{ '}}' }}'";
+    appd = "cd /opt/appdata";
+    stor = "cd /mnt/storage";
+  };
+
   # Install dotfiles repo and link configs
   # home.file."github/dotfiles" = {
   #   recursive = true;
