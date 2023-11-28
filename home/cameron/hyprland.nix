@@ -307,6 +307,10 @@
         "center, class:^(.*jetbrains.*)$, title:^(Confirm Exit|Open Project|win424|win201|splash)$"
         "size 640 400, class:^(.*jetbrains.*)$, title:^(splash)$"
 
+        # Fix tooltips taking away window focus
+        # https://github.com/hyprwm/Hyprland/issues/2412
+        "nofocus,class:^jetbrains-(?!toolbox),floating:1,title:^win\d+$"
+
         "size 20% 40%, class:^(org.kde.kcalc)$"
         "float, class:^(org.kde.kcalc)$"
 
@@ -349,4 +353,3 @@
 #bind = $mainMod SHIFT, A, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/rofiselect.sh # rofi style select menu
 #bind = $mainMod SHIFT, W, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/swwwallselect.sh # rofi wall select menu
 #bind = $mainMod, V, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/cliphist.sh c  # open Pasteboard in screen center
-
