@@ -1,7 +1,11 @@
 { lib, pkgs, ... }: {
-  imports =
-    [ ./shell.nix ./neovim.nix ./security.nix ./tailscale.nix ];
+  imports = [
+    ./shell.nix
+    ./security.nix
+    ./tailscale.nix
+  ];
 
+  # These nix configs are only for the system, not the flake
   nix = {
     gc = {
       automatic = true;
@@ -27,18 +31,56 @@
     };
   };
 
-  # https://github.com/NixOS/nixpkgs/issues/180175
-  systemd.services.NetworkManager-wait-online.enable = false;
+  # Set your time zone.
+#  services.ntp.enable = true;
+  time.timeZone = "America/New_York";
 
+  console.keyMap = "us";
+  console.font = "Lat2-Terminus16";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
+  };
+  
   environment.systemPackages = with pkgs; [
-    git
-    wget
-    curl
-    htop
-    unzip
-    tmux
-    tree
-    killall
+    git wget curl unzip killall ethtool lm-sensors
+    htop tmux neofetch
+    tailspin bat dua
+    dos2unix tldr just
+
+    # universal-ctags
+    # dua
+    # cut
+    # intel-gpu-tools
+    # dnsutils
+    # net-tools
+    # iftop
+    # iotop
+    # fio
+    # hddtemp
+    # nmap
+  ];
+
+  boot.supportedFilesystems = [
+    "ext4"
+    # "btrfs"
+    "xfs"
+    #"zfs"
+    "ntfs"
+    "fat"
+    # "vfat"
+    "exfat"
+    # "cifs" # mount windows share
   ];
 }
 

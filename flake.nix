@@ -24,10 +24,18 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    anyrun.url = "github:Kirottu/anyrun";
-    anyrun.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    anyrun = {
+      url = "github:Kirottu/anyrun";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    mysecrets = {
+      url = "git+ssh://git@github.com/thebananathief/nix-secrets.git?shallow=1";
+      flake = false;
+    };
   };
 
   outputs = inputs @ { self, nixpkgs, nixos-hardware, home-manager, ... }:
@@ -43,7 +51,7 @@
 
       x64_specialArgs = {
         inherit username userfullName useremail;
-        # This part allows us to install non-free software from nixpkgs
+        # This part allows us to install non-free software from nixpkgs, you can also put this further down and ref with nixpkgs.config.allowUnfree
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
@@ -51,23 +59,22 @@
       # The // inputs part here is us feeding in the inputs from this flake into the special args, the special args go into the different modules to be used further
       } // inputs;
     in {
-      #lib = { inherit mkSystem; };
       nixosConfigurations = let
         sys_gargantuan = {
           nixos-modules = [
             nixos-hardware.nixosModules.framework
-            ./hosts/gargantuan
+            ./hosts/gargantuan/gargantuan.nix
           ];
           home-module = import ./home/cameron;
         };
 
         sys_talos = {
-          nixos-modules = [ ./hosts/talos ];
+          nixos-modules = [ ./hosts/talos/talos.nix ];
           home-module = import ./home/server;
         };
         
         sys_zelos = {
-          nixos-modules = [ ./hosts/zelos ];
+          nixos-modules = [ ./hosts/zelos/zelos.nix ];
           home-module = import ./home/cameron;
         };
         

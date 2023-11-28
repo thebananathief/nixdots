@@ -10,7 +10,10 @@
       zoxide
       ueberzugpp
       imagemagick
-      kitty
+
+      nix-zsh-completions
+      zsh-completions
+      any-nix-shell
 
     # Yazi previewers
       unar
@@ -43,5 +46,8 @@
     };
 
     yazi.enable = true;
+
+    neovim.enable = true;
+    neovim.defaultEditor = true;
   };
 }

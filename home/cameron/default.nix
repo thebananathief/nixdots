@@ -9,7 +9,7 @@
     ./zathura.nix
     ./fusuma.nix
     # ./rofi.nix
-    # ./anyrun.nix
+    ./anyrun.nix
     ./waybar.nix
     ./hyprland.nix
   ];

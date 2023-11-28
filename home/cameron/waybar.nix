@@ -34,7 +34,7 @@ in {
           "tray"
           "battery"
           "network"
-          "bluetooth"
+          # "bluetooth"
           "pulseaudio"
           "pulseaudio#microphone"
         ];
