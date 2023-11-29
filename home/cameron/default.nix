@@ -36,7 +36,6 @@
     QT_QPA_PLATFORM = "wayland;xcb";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-    NIXOS_XDG_OPEN_USE_PORTAL = "1";
     # NIXOS_OZONE_WL = "1";
   };
 
@@ -57,9 +56,9 @@
   home.pointerCursor = {
     name = "Catppuccin-Mocha-Mauve";
     package = pkgs.catppuccin-cursors.mochaMauve;
-    size = 32;
+    size = 24;
     gtk.enable = true;
-    x11.enable = true;
+    # x11.enable = true;
   };
 
   qt = {
@@ -70,11 +69,12 @@
 
   gtk = {
     enable = true;
-    cursorTheme = {
-      name = "Catppuccin-Mocha-Mauve";
-      package = pkgs.catppuccin-cursors.mochaMauve;
-      size = 32;
-    };
+    # gtk cursor gets set by the home.pointerCursor bit above
+    # cursorTheme = {
+    #   name = "Catppuccin-Mocha-Mauve";
+    #   package = pkgs.catppuccin-cursors.mochaMauve;
+    #   size = 32;
+    # };
     font = {
       name = "Lexend";
       package = pkgs.lexend;

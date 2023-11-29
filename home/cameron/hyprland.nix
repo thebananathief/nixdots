@@ -147,9 +147,15 @@
         "$mainMod, mouse:273, resizewindow"
       ];
 
+      # These are ran every reload of hyprland
+      exec = [
+        "hyprctl setcursor \"Catppuccin-Mocha-Mauve\" 24"
+        # "kvantummanager --set Catppuccin-Mocha"
+      ];
+      
       exec-once = [
         # "~/github/nixdots/configs/hypr/scripts/resetxdgportal.sh"
-        "~/github/nixdots/configs/hypr/scripts/gsettings.sh"
+        # "~/github/nixdots/configs/hypr/scripts/gsettings.sh"
         "wl-paste --type text --watch cliphist store" #Stores only text data
         "wl-paste --type image --watch cliphist store" #Stores only image data
         "udiskie & hyprpaper & blueman-applet & waybar & nm-applet --indicator & mega-cmd"
@@ -159,14 +165,10 @@
         "sudo wgnord c atlanta"
         "tailscale up & tailscale-systray"
         "swayidle -w timeout 600 '~/github/nixdots/configs/hypr/scripts/lock.sh' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
-
-        # THEME THEMING
-        "hyprctl setcursor \"Catppuccin-Mocha-Mauve\" 24"
-        # "kvantummanager --set Catppuccin-Mocha"
       ];
 
       env = [
-        "XCURSOR_SIZE,48"
+        "XCURSOR_SIZE,24"
         "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
       ];
 

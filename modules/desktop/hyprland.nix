@@ -26,7 +26,6 @@
       wl-clipboard
       udiskie
       wtype
-      polkit
       qt6.qtwayland
       wlogout
       brightnessctl
@@ -84,7 +83,6 @@
 
   security = {
     rtkit.enable = true;
-    polkit.enable = true;
     #pam.services.greetd.gnupg.enable = true;
     pam.services.swaylock.text = "auth include login";
   };
@@ -132,8 +130,8 @@
     xdgOpenUsePortal = true;
     wlr.enable = true;
     extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
-      xdg-desktop-portal-gtk
+      # xdg-desktop-portal-wlr
+      # xdg-desktop-portal-gtk
       # xdg-desktop-portal-xapp
       # libsForQt5.xdg-desktop-portal-kde
       # xdg-desktop-portal-gnome
