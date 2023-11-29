@@ -36,6 +36,7 @@
     #   url = "git+ssh://git@github.com/thebananathief/nix-secrets.git?shallow=1";
     #   flake = false;
     # };
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 
   outputs = inputs @ { self, nixpkgs, nixos-hardware, home-manager, ... }:
