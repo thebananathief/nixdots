@@ -39,7 +39,7 @@
     sops-nix.url = "github:Mic92/sops-nix";
   };
 
-  outputs = inputs @ { self, nixpkgs, nixos-hardware, home-manager, ... }:
+  outputs = inputs @ { self, nixpkgs, nixos-hardware, home-manager, sops-nix, ... }:
     let
       # TODO: These should really be obfuscated
       username = "cameron";
