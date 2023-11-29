@@ -13,7 +13,7 @@ in {
       ];
       font = let family = "JetBrainsMono Nerd Font";
       in {
-        size = 11;
+        size = 10;
         normal.family = family;
         normal.style = "Regular";
         italic.family = family;
