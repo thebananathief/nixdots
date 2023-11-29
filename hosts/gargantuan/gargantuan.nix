@@ -5,7 +5,7 @@
     # ../../modules/games.nix
     ../../modules/desktop
     ../../modules/theme
-    <sops-nix>/modules/sops
+    <sops-nix/modules/sops>
   ];
 
   networking = {
