@@ -1,11 +1,11 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, sops-nix, ... }: {
   imports = [ 
     ./hardware-configuration.nix
     ./packages.nix
     # ../../modules/games.nix
     ../../modules/desktop
     ../../modules/theme
-    <sops-nix/modules/sops>
+    sops-nix.nixosModules.sops
   ];
 
   networking = {
@@ -17,15 +17,13 @@
   sops = {
     defaultSopsFile = ../../secrets/email.yml;
     # This section is used to automatically configure the .sops.yaml i think
-    # age = {
-    #   sshKeyPaths = [
-    #     "/etc/ssh/ssh_host_ed25519_key"
-    #   ];
-    #   keyFile = [
-    #     "/var/lib/sops-nix/key.txt"
-    #   ];
-    #   generateKey = true;
-    # };
+    age = {
+      # sshKeyPaths = [
+      #   "/etc/ssh/ssh_host_ed25519_key"
+      # ];
+      keyFile = "/home/cameron/.config/sops/age/key.txt";
+      generateKey = true;
+    };
     secrets = {
       email_address = {};
       gmail_password = {};

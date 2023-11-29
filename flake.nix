@@ -67,7 +67,6 @@
         sys_gargantuan = {
           nixos-modules = [
             nixos-hardware.nixosModules.framework
-            sops-nix.nixosModules.sops
             ./hosts/gargantuan/gargantuan.nix
           ];
           home-module = import ./home/cameron;
