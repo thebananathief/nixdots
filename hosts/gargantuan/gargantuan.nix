@@ -5,12 +5,31 @@
     # ../../modules/games.nix
     ../../modules/desktop
     ../../modules/theme
+    <sops-nix>/modules/sops
   ];
 
   networking = {
     hostName = "gargantuan";
     networkmanager.enable = true;
     wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+  };
+
+  sops = {
+    defaultSopsFile = ../../secrets/email.yml;
+    # This section is used to automatically configure the .sops.yaml i think
+    # age = {
+    #   sshKeyPaths = [
+    #     "/etc/ssh/ssh_host_ed25519_key"
+    #   ];
+    #   keyFile = [
+    #     "/var/lib/sops-nix/key.txt"
+    #   ];
+    #   generateKey = true;
+    # };
+    secrets = {
+      email_address = {};
+      gmail_password = {};
+    };
   };
 
   programs.ssh.startAgent = true;
@@ -40,7 +59,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # jack.enable = true; # only used for MIDI stuff i think
+    # jack.enable = true;
   };
   
   # Fingerprint reader daemon

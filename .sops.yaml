@@ -1,0 +1,9 @@
+keys:
+  - &admin_cameron age1htjdvcdqvwe8rxx23fz2aw97a6c2zxwwu84m25jugh779vqkfg4sg5c83z
+  - &server_talos age1gvvjs8h535cau0qquy9ssyzql648qyzeseu9gd2awnwhlwlufs0qda9zj0
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yml|yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *admin_cameron
+      - *server_talos
