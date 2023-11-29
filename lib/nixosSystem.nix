@@ -1,7 +1,6 @@
 {
   nixpkgs,
   home-manager,
-  sops-nix,
   system,
   specialArgs,
   nixos-modules,
@@ -22,7 +21,6 @@ in
           home-manager.users."${username}" = home-module;
         }
         ../common
-        sops-nix.nixosModules.sops
       ];
   }
 

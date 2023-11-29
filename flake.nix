@@ -37,9 +37,10 @@
     #   flake = false;
     # };
     sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs @ { self, nixpkgs, nixos-hardware, home-manager, ... }:
+  outputs = inputs @ { self, nixpkgs, nixos-hardware, home-manager, sops-nix, ... }:
     let
       # TODO: These should really be obfuscated
       username = "cameron";
@@ -64,6 +65,7 @@
         sys_gargantuan = {
           nixos-modules = [
             nixos-hardware.nixosModules.framework
+            sops-nix.nixosModules.sops
             ./hosts/gargantuan/gargantuan.nix
           ];
           home-module = import ./home/cameron;
