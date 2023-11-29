@@ -57,9 +57,9 @@
     htop tmux neofetch
     tailspin bat dua
     dos2unix tldr just
+    age
 
     # universal-ctags
-    # dua
     # cut
     # intel-gpu-tools
     # dnsutils
