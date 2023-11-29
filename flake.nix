@@ -32,12 +32,14 @@
       url = "github:Kirottu/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # mysecrets = {
     #   url = "git+ssh://git@github.com/thebananathief/nix-secrets.git?shallow=1";
     #   flake = false;
     # };
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ { self, nixpkgs, nixos-hardware, home-manager, sops-nix, ... }:
