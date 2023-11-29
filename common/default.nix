@@ -57,7 +57,7 @@
     htop tmux neofetch
     tailspin bat dua
     dos2unix tldr just
-    age
+    age sops
 
     # universal-ctags
     # cut
