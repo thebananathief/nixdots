@@ -24,7 +24,6 @@
       dunst
       cliphist
       wl-clipboard
-      udiskie
       wtype
       qt6.qtwayland
       wlogout
@@ -109,6 +108,10 @@
     gvfs.enable = true;
     tumbler.enable = true;
 
+    # Auto-mounting removeable drives
+    udisks2.enable = true;
+    udiskie.enable = true;
+    
     # TODO: Need to see if these need to be enabled here, not sure if other DE's have these by default
 #    blueman.enable = true;
 #    printing.enable = true;

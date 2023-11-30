@@ -158,19 +158,23 @@
         # "~/github/nixdots/configs/hypr/scripts/gsettings.sh"
         "wl-paste --type text --watch cliphist store" #Stores only text data
         "wl-paste --type image --watch cliphist store" #Stores only image data
-        "udiskie & hyprpaper & blueman-applet & waybar & nm-applet --indicator & mega-cmd"
+        "hyprpaper"
+        "blueman-applet"
+        "waybar"
+        "nm-applet --indicator"
+        "mega-cmd"
         "fusuma -d"
         "firefox"
         "~/github/nixdots/configs/hypr/scripts/batterynotify.sh" # battery notification
         "sudo wgnord c atlanta"
         "tailscale up & tailscale-systray"
-        "swayidle -w timeout 600 '~/github/nixdots/configs/hypr/scripts/lock.sh' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
+        # "swayidle -w timeout 600 '~/github/nixdots/configs/hypr/scripts/lock.sh' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
       ];
 
-      env = [
-        "XCURSOR_SIZE,24"
-        "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
-      ];
+      # env = [
+      #   "XCURSOR_SIZE,24"
+      #   "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
+      # ];
 
       # xwayland.force_zero_scaling = true;
 
