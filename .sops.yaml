@@ -1,9 +1,35 @@
+# Put public keys here, these are your "authorized users/hosts" for 
+# editing/viewing secrets.
+
+# Note that this only applies on creation of new secrets, so if
+# you add a key here and try to access a past secret without that
+# new key it might error.
+# use 'sops updatekeys <file>' to manually fix this
+
+# Also called the "master keys"
+
+# TODO: Should that include all the host keys for the hosts I deploy NixOS on?
 keys:
-  - &admin_cameron age1htjdvcdqvwe8rxx23fz2aw97a6c2zxwwu84m25jugh779vqkfg4sg5c83z
+  - &admin_cameron_desktop age1zy4q5gexm35rey768sxuve8h26zj6uulagqg87vjy8383z0c7vgspk6386
+  - &admin_cameron_laptop age1htjdvcdqvwe8rxx23fz2aw97a6c2zxwwu84m25jugh779vqkfg4sg5c83z
   - &server_talos age1gvvjs8h535cau0qquy9ssyzql648qyzeseu9gd2awnwhlwlufs0qda9zj0
 creation_rules:
-  - path_regex: secrets/[^/]+\.(yml|yaml|json|env|ini)$
+  - path_regex: secrets(\\|\/)[^/]+\.(yml|yaml|json|env|ini)$
     key_groups:
     - age:
-      - *admin_cameron
+      - *admin_cameron_desktop
+      - *admin_cameron_laptop
       - *server_talos
+
+  # Possible to specify which masters can access which keys, like this
+  # - path_regex: secrets(\\|\/)talos(\\|\/)[^/]+\.(yml|yaml|json|env|ini)$
+  #   key_groups:
+  #   - age:
+  #     - *admin_cameron_desktop
+  #     - *admin_cameron_laptop
+  #     - *server_talos
+  # - path_regex: secrets(\\|\/)gargantuan(\\|\/)[^/]+\.(yml|yaml|json|env|ini)$
+  #   key_groups:
+  #   - age:
+  #     - *admin_cameron_desktop
+  #     - *admin_cameron_laptop

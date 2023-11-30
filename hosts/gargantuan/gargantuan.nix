@@ -16,7 +16,6 @@
 
   sops = {
     defaultSopsFile = ../../secrets/email.yml;
-    # This section is used to automatically configure the .sops.yaml i think
     # age = {
     #   sshKeyPaths = [
     #     "/etc/ssh/ssh_host_ed25519_key"
