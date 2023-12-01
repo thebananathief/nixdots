@@ -49,7 +49,7 @@ in {
 
         "wlr/taskbar" = {
           format = "{icon}";
-          icon-size = 18;
+          icon-size = 20;
           icon-theme = "Tela-circle-dracula";
           spacing = 0;
           tooltip-format = "{title}";

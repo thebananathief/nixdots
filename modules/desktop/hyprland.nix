@@ -107,10 +107,8 @@
     # Addons for thunar to detect USB devices and display thumbnails 
     gvfs.enable = true;
     tumbler.enable = true;
-
-    # Auto-mounting removeable drives
+    
     udisks2.enable = true;
-    udiskie.enable = true;
     
     # TODO: Need to see if these need to be enabled here, not sure if other DE's have these by default
 #    blueman.enable = true;
@@ -132,13 +130,13 @@
     enable = true;
     xdgOpenUsePortal = true;
     wlr.enable = true;
-    extraPortals = with pkgs; [
-      # xdg-desktop-portal-wlr
-      # xdg-desktop-portal-gtk
-      # xdg-desktop-portal-xapp
-      # libsForQt5.xdg-desktop-portal-kde
-      # xdg-desktop-portal-gnome
-      # lxqt.xdg-desktop-portal-lxqt
-    ];
+    # extraPortals = with pkgs; [
+    #   xdg-desktop-portal-wlr
+    #   xdg-desktop-portal-gtk
+    #   xdg-desktop-portal-xapp
+    #   libsForQt5.xdg-desktop-portal-kde
+    #   xdg-desktop-portal-gnome
+    #   lxqt.xdg-desktop-portal-lxqt
+    # ];
   };
 }

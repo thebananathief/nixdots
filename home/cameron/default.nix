@@ -92,6 +92,8 @@
         size = "compact";
       };
     };
+    
+    # These are referenced by Thunar for the navigation tree
     gtk3.bookmarks = [
       "file:///home/cameron/github"
       "file:///home/cameron/MEGA"
@@ -115,11 +117,14 @@
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
-      settings = {
-        manager.show_hidden = true;
-      };
+      # settings = {
+      #   manager.show_hidden = true;
+      # };
     };
   };
 
+  # Auto-mounting removeable drives
+  services.udiskie.enable = true;
+    
   home.stateVersion = "23.05";
 }

@@ -4,6 +4,7 @@
     ./hyprland.nix
     # ./gnome.nix
     # ./xfce.nix
+    ../theme
   ];
 
   services.xserver = {

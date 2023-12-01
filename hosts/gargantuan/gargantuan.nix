@@ -4,7 +4,6 @@
     ./packages.nix
     # ../../modules/games.nix
     ../../modules/desktop
-    ../../modules/theme
     sops-nix.nixosModules.sops
   ];
 
@@ -16,11 +15,10 @@
 
   sops = {
     defaultSopsFile = ../../secrets/email.yml;
-    # This section is used to automatically configure the .sops.yaml i think
     age = {
-      # sshKeyPaths = [
-      #   "/etc/ssh/ssh_host_ed25519_key"
-      # ];
+      sshKeyPaths = [
+        "/home/cameron/.ssh/host_ed25519_talos"
+      ];
       keyFile = "/home/cameron/.config/sops/age/key.txt";
       generateKey = true;
     };
