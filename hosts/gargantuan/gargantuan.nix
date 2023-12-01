@@ -13,18 +13,53 @@
     wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   };
 
+  # TODO: REMOVE THIS
+  services.openssh = {
+    enable = true;
+    hostKeys = [
+      {
+        comment = "gargantuan";
+        path = "/etc/ssh/ssh_host_ed25519";
+        rounds = 100;
+        type = "ed25519";
+      }
+    ];
+  };
+  
   sops = {
-    defaultSopsFile = ../../secrets/email.yml;
+    defaultSopsFile = ../../secrets/misc.yml;
     age = {
       sshKeyPaths = [
-        "/home/cameron/.ssh/host_ed25519_talos"
+        "/etc/ssh/ssh_host_ed25519"
       ];
-      keyFile = "/home/cameron/.config/sops/age/key.txt";
+      
+      keyFile = "/var/lib/sops-nix/key.txt";
       generateKey = true;
     };
     secrets = {
+      main_domain = {};
+      main_username = {};
+      main_user_password = {};
       email_address = {};
       gmail_password = {};
+      influx_db_token = {};
+      influx_db_pass = {};
+      mysql_password = {};
+      postgres_password = {};
+      webtrees_password = {};
+      nordvpn_user = {};
+      nordvpn_pass = {};
+      tailscale_authkey = {};
+      ssh_port = {};
+      discord_webhook_id = {};
+      discord_webhook_token = {};
+      cloudflare_api = {};
+      healthcheck_snapraid_uuid = {};
+      healthcheck_uptime_uuid = {};
+      sshPub_phone = {};
+      sshPub_laptop = {};
+      sshPub_desktop = {};
+      ssh_github = {};
     };
   };
 

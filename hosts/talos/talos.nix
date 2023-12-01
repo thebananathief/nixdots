@@ -7,7 +7,7 @@
     <sops-nix/modules/sops>
   ];
   
-  openssh = {
+  services.openssh = {
     enable = true;
     ports = [ 4733 ];
     openFirewall = true;
