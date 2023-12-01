@@ -79,8 +79,9 @@
   
   # Fingerprint reader daemon
   services.fprintd.enable = true;
-  # security.pam.services.login.fprintAuth = true;
-  # security.pam.services.xscreensaver.fprintAuth = true;
+  security.pam.services.login.unixAuth = true;
+  security.pam.services.login.fprintAuth = true;
+  security.pam.services.login.nodelay = true;
 
   # Power saving profile
   # Consider:
