@@ -6,7 +6,7 @@
   # home.homeDirectory = "/home/cameron";
 
   systemd.user.sessionVariables = {
-    EDITOR = "nvim";
+    # EDITOR = "nvim";
     SHELL = "zsh";
   };
 

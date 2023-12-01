@@ -4,7 +4,79 @@
   imports = [
     ./fileshares.nix
     ./containers
+    <sops-nix/modules/sops>
   ];
+  
+  openssh = {
+    enable = true;
+    ports = [ 4733 ];
+    openFirewall = true;
+    settings = {
+      X11Forwarding = false;
+      UseDns = false;
+      PasswordAuthentication = false;
+      kbdInteractiveAuthentication = false; # None of the authentication methods use this I think, so it should never be enabled, yet it defaults to yes in openssh
+      PermitRootLogin = "no";
+      AllowGroups = [ "allowssh" ];
+      LogLevel = "INFO"; # Adjusted so that fail2ban doesn't set it to VERBOSE
+    };
+    extraConfig = ''
+      PermitEmptyPasswords No
+    '';
+    banner = ''-- WARNING --
+      Unauthorized access to this system is forbidden and will be prosecuted by law.
+      By accessing this system, you agree that your actions may be monitored if unauthorized usage is suspected.
+    '';
+    hostKeys = [
+      {
+        comment = "talos";
+        path = "/etc/ssh/ssh_host_ed25519";
+        rounds = 100;
+        type = "ed25519";
+      }
+    ];
+  };
+
+  sops = {
+    defaultSopsFile = ../../secrets/misc.yml;
+    age = {
+      # These should be the paths from (config.services.openssh.hostKeys)
+      sshKeyPaths = [
+        "/etc/ssh/ssh_host_ed25519"
+      ];
+
+      # keyFile technically not used because we're currently
+      # using talos's host key to decrypt secrets
+      # keyFile = "/home/cameron/.config/sops/age/keys.txt";
+      keyFile = "/var/lib/sops-nix/key.txt";
+      generateKey = true;
+    };
+    secrets = {
+      main_domain = {};
+      main_username = {};
+      main_user_password = {};
+      email_address = {};
+      gmail_password = {};
+      influx_db_token = {};
+      influx_db_pass = {};
+      mysql_password = {};
+      postgres_password = {};
+      webtrees_password = {};
+      nordvpn_user = {};
+      nordvpn_pass = {};
+      tailscale_authkey = {};
+      ssh_port = {};
+      discord_webhook_id = {};
+      discord_webhook_token = {};
+      cloudflare_api = {};
+      healthcheck_snapraid_uuid = {};
+      healthcheck_uptime_uuid = {};
+      sshPub_phone = {};
+      sshPub_laptop = {};
+      sshPub_desktop = {};
+      ssh_github = {};
+    };
+  };
 
   # TODO: Need to have disk SMART alerts sent to me over email
   # Also reminders to buy drives
@@ -17,13 +89,14 @@
     extraGroups = [
       "wheel"
       "podman"
-      "allowssh"
+      "allowssh" # allows this user to login via ssh
     ];
+    # Public keys that are authorized for SSH access
     openssh.authorizedKeys.keyFiles = [
       ''
-      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFfIygbp1DdDJUCAlUHbrdzu7cnb7T/JTDexJtpMXCIz cameron@phone
-      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFagsyJw/RCCgkgXtOYKeNF0NH8VABZ0WP+14yeq1/5k laptop
-      ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII9BZbMAtMIr0ZZKPwxIDTq7qZMjNVDI1ktg3r+DSCdv desktop
+        /run/secrets/sshPub_desktop
+        /run/secrets/sshPub_laptop
+        /run/secrets/sshPub_phone
       ''
     ];
   };
@@ -50,27 +123,6 @@
   security.pam.enableSSHAgentAuth = true;
 
   services = {
-    openssh = {
-      enable = true;
-      ports = [ 4733 ];
-      openFirewall = true;
-      settings = {
-        X11Forwarding = false;
-        UseDns = false;
-        PasswordAuthentication = false;
-        kbdInteractiveAuthentication = false; # None of the authentication methods use this I think, so it should never be enabled, yet it defaults to yes in openssh
-        PermitRootLogin = "no";
-        AllowGroups = [ "allowssh" ];
-        LogLevel = "INFO"; # Adjusted so that fail2ban doesn't set it to VERBOSE
-      };
-      extraConfig = ''
-      PermitEmptyPasswords No
-      '';
-      banner = ''-- WARNING --
-        Unauthorized access to this system is forbidden and will be prosecuted by law.
-        By accessing this system, you agree that your actions may be monitored if unauthorized usage is suspected.
-      '';
-    };
     fail2ban = {
       enable = true;
       # TODO: Consider more config https://mynixos.com/nixpkgs/options/services.fail2ban
@@ -80,7 +132,15 @@
       systemCronJobs = [
         "*/15 * * * * curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/${ healthcheck_uptime_uuid }"
       ]
-    }
+    };
+    tailscale = {
+      useRoutingFeatures = "server";
+      authKeyFile = "/run/secrets/tailscale_authkey";
+      extraUpFlags = [
+        "--advertise-routes=192.168.0.0/24"
+        "--advertise-exit-node"
+      ];
+    };
   };
 
   snapraid = {
@@ -120,11 +180,14 @@
     ];
   };
 
+  # This is my attempt to add a healthcheck ping to the snapraid-sync
+  # service that services.snapraid creates.
   systemd.services.snapraid-sync.serviceConfig.postStart = ''
-    curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/f9152e38-9616-427f-92bc-d5b2a0cca5e3 # TODO: OBFUSCATE
+    curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/${ healthcheck_snapraid_uuid }
   '';
 
-  # TODO: This part should probably be moved to hardware-conf when made
+  # Make sure the device defines the mountpoints you want to merge
+  # (anything starting with "disk" in /mnt/)
   fileSystems."/mnt/storage" = {
     device = "/mnt/disk*:/mnt/tank/fuse";
     fsType = "fuse.mergerfs";
