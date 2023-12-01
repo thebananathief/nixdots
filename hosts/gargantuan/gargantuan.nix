@@ -37,25 +37,9 @@
       generateKey = true;
     };
     secrets = {
-      main_domain = {};
       main_username = {};
       main_user_password = {};
       email_address = {};
-      gmail_password = {};
-      influx_db_token = {};
-      influx_db_pass = {};
-      mysql_password = {};
-      postgres_password = {};
-      webtrees_password = {};
-      nordvpn_user = {};
-      nordvpn_pass = {};
-      tailscale_authkey = {};
-      ssh_port = {};
-      discord_webhook_id = {};
-      discord_webhook_token = {};
-      cloudflare_api = {};
-      healthcheck_snapraid_uuid = {};
-      healthcheck_uptime_uuid = {};
       sshPub_phone = {};
       sshPub_laptop = {};
       sshPub_desktop = {};
