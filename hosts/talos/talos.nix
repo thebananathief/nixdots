@@ -4,7 +4,7 @@
   imports = [
     ./fileshares.nix
     ./containers
-    <sops-nix/modules/sops>
+    sops-nix.nixosModules.sops
   ];
   
   services.openssh = {
@@ -53,7 +53,6 @@
     };
     secrets = {
       main_domain = {};
-      main_username = {};
       main_user_password = {};
       email_address = {};
       gmail_password = {};

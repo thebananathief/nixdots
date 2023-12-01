@@ -5,9 +5,21 @@ let
   gameserver_path = "/ssd/gameservers";
   download_path = "/mnt/disk1/downloads";
 
+  # mysql_password = config.sops.secrets.mysql_password.path;
+  mysql_password = import /run/secrets/mysql_password;
+  mumble_superpassword = import /run/secrets/mumble_superpassword;
+  webtrees_password = import /run/secrets/webtrees_password;
+  email_address = import /run/secrets/email_address;
+  main_domain = import /run/secrets/main_domain;
+  cloudflare_email = import /run/secrets/cloudflare_email;
+  cloudflare_apikey = import /run/secrets/cloudflare_apikey;
+
+  main_uid = "1000";
+  main_gid = "100";
+
   linuxserver_env = {
-    PUID = "1000"; # TODO: Any way to acquire my user's IDs dynamically?
-    PGID = "100";
+    PUID = main_uid; # TODO: Any way to acquire my user's IDs dynamically?
+    PGID = main_gid;
     # TZ = "America/New_York";
     TZ = time.timeZone; # TODO: See if we can access this nix variable from ./common
     # TZ = config.time.timeZone;
@@ -38,7 +50,7 @@ in {
         ports = [ "8081:80" ];
         environment = {
           NODE_ENV = "production";
-          UID = "${ main_uid }";
+          UID = "${ linuxserver_env.PUID }";
           GID = "${ main_gid }";
         };
         extraOptions = [

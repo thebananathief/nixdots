@@ -1,4 +1,4 @@
-{ pkgs, lib, sops-nix, ... }: {
+{ pkgs, lib, sops-nix, config, ... }: {
   imports = [ 
     ./hardware-configuration.nix
     ./packages.nix
@@ -37,8 +37,7 @@
       generateKey = true;
     };
     secrets = {
-      main_username = {};
-      main_user_password = {};
+      main_user_password = { neededForUsers = true; };
       email_address = {};
       sshPub_phone = {};
       sshPub_laptop = {};
@@ -52,6 +51,7 @@
   # TODO: Make sure to use passwd to change the password after logon!
   users.users.cameron = {
     isNormalUser = true;
+    hashedPasswordFile = config.sops.secrets.main_user_password.path;
     description = "Cameron";
     extraGroups = [
       "networkmanager"
