@@ -64,24 +64,6 @@
       } // inputs;
     in {
       nixosConfigurations = let
-        # sys_gargantuan = {
-        #   nixos-modules = [
-        #     nixos-hardware.nixosModules.framework
-        #     ./hosts/gargantuan/gargantuan.nix
-        #   ];
-        #   home-module = import ./home/cameron;
-        # };
-
-        # sys_talos = {
-        #   nixos-modules = [ ./hosts/talos/talos.nix ];
-        #   home-module = import ./home/server;
-        # };
-        
-        # sys_zelos = {
-        #   nixos-modules = [ ./hosts/zelos/zelos.nix ];
-        #   home-module = import ./home/cameron;
-        # };
-        
         base_args = {
           inherit home-manager;
           system = "x86_64-linux";
@@ -92,25 +74,21 @@
         gargantuan = nixosSystem ({
           nixos-modules = [
             nixos-hardware.nixosModules.framework
-            # sops-nix.nixosModules.sops
             ./hosts/gargantuan/gargantuan.nix
           ];
           home-module = import ./home/cameron;
         } // base_args);
 
+        # Testing environment VM
         zelos = nixosSystem ({
           nixos-modules = [ ./hosts/zelos/zelos.nix ];
-          home-module = import ./home/cameron;
+          home-module = import ./home/server;
         } // base_args);
 
         talos = nixosSystem ({
           nixos-modules = [ ./hosts/talos/talos.nix ];
           home-module = import ./home/server;
         } // base_args);
-
-        # gargantuan = nixosSystem (sys_gargantuan // base_args);
-        # talos = nixosSystem (sys_talos // base_args);
-        # zelos = nixosSystem (sys_zelos // base_args);
       };
     };
 }
