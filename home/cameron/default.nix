@@ -1,27 +1,27 @@
 { pkgs, lib, inputs, ... }: rec {
   imports = [
     ./xdg.nix
-    # ./dconf.nix
     ./git.nix
     ./alacritty.nix
     ./zsh.nix
     # ./neovim.nix
     ./zathura.nix
     ./fusuma.nix
-    # ./rofi.nix
     ./anyrun.nix
     ./waybar.nix
     ./hyprland.nix
+    ./swaylock.nix
+    ./dunst.nix
   ];
 
   home.username = "cameron";
   # home.homeDirectory = "/home/cameron";
 
   systemd.user.sessionVariables = {
-    # EDITOR = "nvim";
+    EDITOR = "nvim";
     VISUAL = "nvim";
+    # SHELL = "zsh";
     TERMINAL = "alacritty";
-    SHELL = "zsh";
     BROWSER = "firefox";
 
     _JAVA_AWT_WM_NONREPARENTING = "1";
@@ -39,6 +39,13 @@
     # NIXOS_OZONE_WL = "1";
   };
 
+  # sessionVariables = {
+  #   GTK_THEME = "Catppuccin-Mocha-Compact-Mauve-Dark";
+    # GDK_SCALE = "1";
+    # XCURSOR_SIZE = "32";
+    # XCURSOR_THEME = "Bibata-Modern-Ice";
+  # };
+    
   home.sessionVariables = systemd.user.sessionVariables;
 
   # Install dotfiles repo and link configs
@@ -67,25 +74,29 @@
     style.name = "kvantum";
   };
 
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+      document-font-name = "Lexend 10";
+      monospace-font-name = "FiraMono Nerd Font Mono 10";
+      # font-antialiasing = "rgba";
+      # font-hinting = "full";
+    };
+  };
+  
   gtk = {
     enable = true;
-    # gtk cursor gets set by the home.pointerCursor bit above
-    # cursorTheme = {
-    #   name = "Catppuccin-Mocha-Mauve";
-    #   package = pkgs.catppuccin-cursors.mochaMauve;
-    #   size = 32;
-    # };
     font = {
       name = "Lexend";
       package = pkgs.lexend;
-      size = 11;
+      size = 10;
     };
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
     theme = {
-      name = "Catppuccin-Mocha-Mauve-Dark";
+      name = "Catppuccin-Mocha-Compact-Mauve-Dark";
       package = pkgs.catppuccin-gtk.override {
         variant = "mocha";
         accents = ["mauve"];

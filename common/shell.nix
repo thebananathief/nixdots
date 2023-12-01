@@ -14,6 +14,7 @@
       nix-zsh-completions
       zsh-completions
       any-nix-shell
+      alejandra
 
     # Yazi previewers
       unar

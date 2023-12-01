@@ -12,16 +12,16 @@
         shell
       ];
 
-      width = { fraction = 0.3; };
+      width = { fraction = 0.4; };
       x = { fraction = 0.5; };
-      y = { fraction = 0.5; };
+      y = { fraction = 0.3; };
       hideIcons = false;
       ignoreExclusiveZones = false;
       layer = "overlay";
       hidePluginInfo = false;
       closeOnClick = true;
-      showResultsImmediately = false;
-      # maxEntries = 5;
+      showResultsImmediately = true;
+      maxEntries = 10;
     };
 
     extraCss = ''
@@ -35,7 +35,7 @@
       * {
         transition: 200ms ease;
         font-family: "JetBrainsMono Nerd Font";
-        font-size: 1.3rem;
+        font-size: 1.1rem;
       }
 
       #window {

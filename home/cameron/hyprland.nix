@@ -1,11 +1,11 @@
 { pkgs, ... }: rec {
-  home.sessionVariables = {
-    XDG_CURRENT_DESKTOP = "Hyprland";
-    XDG_SESSION_DESKTOP = "Hyprland";
-    XDG_SESSION_TYPE = "wayland";
-  };
-
-  systemd.user.sessionVariables = home.sessionVariables;
+  # home.sessionVariables = {
+  #   XDG_CURRENT_DESKTOP = "Hyprland";
+  #   XDG_SESSION_DESKTOP = "Hyprland";
+  #   XDG_SESSION_TYPE = "wayland";
+  # };
+  #
+  # systemd.user.sessionVariables = home.sessionVariables;
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -19,10 +19,19 @@
       "$lockscreen" = "~/github/nixdots/configs/hypr/scripts/lock.sh";
       "$wlogout" = "~/github/nixdots/configs/hypr/scripts/logoutlaunch.sh";
       "$brightness" = "~/github/nixdots/configs/hypr/scripts/brightnesscontrol.sh";
+      "$screenshot" = "~/github/nixdots/configs/hypr/scripts/screenshot.sh";
+
+      # env = [
+        # "XCURSOR_SIZE,24"
+        # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
+        # "XDG_CURRENT_DESKTOP,Hyprland"
+        # "XDG_SESSION_DESKTOP,Hyprland"
+        # "XDG_SESSION_TYPE,wayland"
+      # ];
 
       # https://wiki.hyprland.org/Configuring/Binds/
       bind = [
-        # Commonn apps
+        # Common apps
         "$mainMod, A, exec, $terminal"
         "$mainMod, E, exec, $files"
         "$mainMod, S, exec, spotify"
@@ -31,7 +40,7 @@
         "$mainMod, C, exec, hyprpicker -a -n"
 
         # Test buttons to restart waybar and print active window info
-        "$mainMod, U, exec, hyprctl activewindow | yad --text-info"
+        "$mainMod, U, exec, yad --text=\"$(hyprctl activewindow)\" --no-buttons --undecorated --escape-ok"
         "$mainMod, Y, exec, killall .waybar-wrapped ; waybar"
         "$mainMod, Y, exec, killall .fusuma-wrapped ; fusuma -d"
         
@@ -41,6 +50,10 @@
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioPause, exec, playerctl play-pause"
         ", XF86AudioNext, exec, playerctl next"
+
+        # Screenshot/Screencapture
+        "$mainMod SHIFT, S, exec, $screenshot s" # screenshot snip
+        "$mainMod ALT, P, exec, $screenshot p" # print current screen
 
         # Window actions
         "$mainMod, W, killactive,"
@@ -169,12 +182,8 @@
         "sudo wgnord c atlanta"
         "tailscale up & tailscale-systray"
         # "swayidle -w timeout 600 '~/github/nixdots/configs/hypr/scripts/lock.sh' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       ];
-
-      # env = [
-      #   "XCURSOR_SIZE,24"
-      #   "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
-      # ];
 
       # xwayland.force_zero_scaling = true;
 
@@ -211,10 +220,10 @@
         # kb_options =
         # kb_rules =
 
-        follow_mouse = 1;
+        follow_mouse = true;
         sensitivity = 1; # -1.0 - 1.0, 0 means no modification.
-        force_no_accel = 1;
-        touchpad.natural_scroll = "yes";
+        force_no_accel = true;
+        touchpad.natural_scroll = true;
       };
 
       general = {
@@ -255,14 +264,14 @@
       ];
 
       dwindle = {
-          pseudotile = "0";
-          preserve_split = "yes";
-          no_gaps_when_only = false;
+          pseudotile = false;
+          preserve_split = true;
+          no_gaps_when_only = true;
       };
 
       master.new_is_master = false;
 
-      gestures.workspace_swipe = "on";
+      gestures.workspace_swipe = true;
       gestures.workspace_swipe_fingers = 4;
 
       "device:logitech-m510".sensitivity = 1.0;
@@ -306,7 +315,7 @@
         # "center, class:^(org.kde.polkit-kde-authentication-agent-1)$"
 
         "float, class:(pavucontrol|yad|nm-connection-editor|nm-applet|blueman-manager)"
-        "float, class:(qt5ct|kvantummanager|nwg-look)"
+        "float, class:(qt5ct|qt6ct|kvantummanager|nwg-look)"
 
         # fix xwayland apps
         "rounding 0, xwayland:1, floating:1"
@@ -344,10 +353,6 @@
 #bind = $mainMod, delete, exit, # kill hyperland session
 #bind = $mainMod, W, togglefloating, # toggle the window on focus to float
 #bind = $mainMod, G, togglegroup, # toggle the window on focus to float
-
-## Screenshot/Screencapture
-#bind = $mainMod, P, exec, ~/github/nixdots/configs/hypr/scripts/screenshot.sh s # screenshot snip
-#bind = $mainMod ALT, P, exec, ~/github/nixdots/configs/hypr/scripts/screenshot.sh p # print current screen
 
 ## Exec custom scripts
 #bind = $mainMod ALT, right, exec, ~/github/nixdots/configs/hypr/scripts/swwwallpaper.sh -n # next wallpaper

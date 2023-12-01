@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
   ## CLI
+    swappy
     btop
     wgnord
     cage

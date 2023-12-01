@@ -1,22 +1,4 @@
-#!/usr/bin/env bash
-
-#original_dir="$(pwd)"
-
-#cd "$(dirname "$0")" || exit
-
-#get logo path, if none random
-#image="$HOME/icons/tux.png"
-
-#import pywal colors
-# shellcheck source=/home/master/.cache/wal/colors.sh
-#source "$HOME/.cache/wal/colors.sh"
-
-$background = 1f1d2e
-$color1 = 1f1d2e
-$color2 = 191724
-$color3 = eb6f92
-$color4 = e0def4
-$color5 = 1f1d2e
+#!/usr/bin/env sh
 
 swaylock \
   --indicator

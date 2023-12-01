@@ -28,9 +28,8 @@
       qt6.qtwayland
       wlogout
       brightnessctl
-      #bluez
       swayidle
-      swaylock-effects
+      # swaylock-effects
       libinput
       fusuma
       glib
@@ -109,10 +108,8 @@
     tumbler.enable = true;
     
     udisks2.enable = true;
-    
-    # TODO: Need to see if these need to be enabled here, not sure if other DE's have these by default
-#    blueman.enable = true;
-#    printing.enable = true;
+    blueman.enable = true;
+    printing.enable = false;
     
     # use Ambient Light Sensors for auto brightness adjustment
     # clight = {
@@ -130,13 +127,13 @@
     enable = true;
     xdgOpenUsePortal = true;
     wlr.enable = true;
-    # extraPortals = with pkgs; [
+    extraPortals = with pkgs; [
     #   xdg-desktop-portal-wlr
-    #   xdg-desktop-portal-gtk
+      xdg-desktop-portal-gtk
     #   xdg-desktop-portal-xapp
     #   libsForQt5.xdg-desktop-portal-kde
     #   xdg-desktop-portal-gnome
     #   lxqt.xdg-desktop-portal-lxqt
-    # ];
+    ];
   };
 }

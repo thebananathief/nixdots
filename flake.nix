@@ -46,7 +46,6 @@
     let
       # TODO: These should really be obfuscated
       username = "cameron";
-      userfullName = "Cameron Salomone";
       useremail = "cameron.salomone@gmail.com";
 
       nixosSystem = import ./lib/nixosSystem.nix;
@@ -54,7 +53,7 @@
       system = "x86_64-linux";
 
       x64_specialArgs = {
-        inherit username userfullName useremail;
+        inherit username useremail;
         # This part allows us to install non-free software from nixpkgs, you can also put this further down and ref with nixpkgs.config.allowUnfree
         pkgs = import nixpkgs {
           inherit system;

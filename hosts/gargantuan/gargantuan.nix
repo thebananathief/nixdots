@@ -65,6 +65,7 @@
   # location.provider = "geoclue2";
 
   hardware.bluetooth.enable = true;
+  hardware.bluetooth.package = pkgs.bluez;
 
   # Enable sound with pipewire.
   sound.enable = true;
