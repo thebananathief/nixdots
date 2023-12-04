@@ -1,5 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
+  imports = [
+    ./globalFonts.nix
+  ];
+  
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
@@ -9,6 +13,10 @@
       roboto
       lexend
       jost
+      fira
+      garamond-libre
+      gelasio
+      libre-caslon
       (nerdfonts.override { fonts = [ 
         "JetBrainsMono"
         "FiraCode"
@@ -19,9 +27,9 @@
       ];})
     ];
     fontconfig.defaultFonts = {
-      serif = ["Noto Serif" "Noto Color Emoji"];
-      sansSerif = ["Noto Sans" "Noto Color Emoji"];
-      monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
+      serif = [config.globalFont.serif "Noto Color Emoji"];
+      sansSerif = [config.globalFont.sansSerif "Noto Color Emoji"];
+      monospace = [config.globalFont.monospace "Noto Color Emoji"];
       emoji = ["Noto Color Emoji"];
     };
   };

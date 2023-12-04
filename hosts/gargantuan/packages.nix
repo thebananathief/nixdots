@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
   ## CLI
-    swappy
     btop
     wgnord
     cage
@@ -39,7 +38,7 @@
     firefox
     megacmd
     obsidian
-    zettlr
+    # zettlr
     spotify
     spicetify-cli
     discord

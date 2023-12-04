@@ -28,8 +28,7 @@
       qt6.qtwayland
       wlogout
       brightnessctl
-      swayidle
-      # swaylock-effects
+      swayidle # idle daemon to trigger sleep, suspend, monitor off, lock
       libinput
       fusuma
       glib
@@ -39,8 +38,9 @@
       yad # dialog cli
 
       wf-recorder # screen recording
-      grim # screenshots
       slurp # select region for screenshot
+      swappy # edit screenshots after clipping
+      grim # screen capture for screenshots
 
     # General DE programs
       nwg-displays
@@ -51,9 +51,7 @@
       zathura # docs
       mpv     # video & audio
       imv     # image
-      # libsForQt5.elisa
       # clapper
-      # libsForQt5.okular
       # viewnior # image
 
     # Audio
@@ -69,6 +67,8 @@
       # mpc-cli # cli mpd interface
       # ncmpcpp # curses mpd interface
     ]) ++ (with pkgs.libsForQt5; [
+      # elisa
+      # okular
       kcalc
       ark
       kclock
@@ -125,8 +125,8 @@
 
   xdg.portal = {
     enable = true;
-    xdgOpenUsePortal = true;
-    wlr.enable = true;
+    # xdgOpenUsePortal = true;
+    # wlr.enable = true;
     extraPortals = with pkgs; [
     #   xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk

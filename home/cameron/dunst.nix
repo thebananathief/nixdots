@@ -8,7 +8,7 @@
     };
     settings = {
       global = {
-        font = "FiraCode Nerd Font 10";
+        font = "Hack Code Nerd Font 12";
         follow = "mouse";
         transparency = 10;
         notification_limit = 5;
@@ -24,7 +24,7 @@
         height = 150;
         frame_width = 3;
         gap_size = 5;
-        padding = 16;
+        padding = 12;
         horizontal_padding = 16;
         text_icon_padding = 10;
         line_height = 0;
@@ -52,7 +52,7 @@
         sticky_history = true;
         history_length = 20;
         
-        dmenu = "anyrun --plugins dmenu";
+        dmenu = "anyrun --plugins stdin";
         browser = "handlr open";
         always_run_script = true;
 
@@ -73,7 +73,7 @@
         #  * foreground: use the same color as the foreground;
         #  * frame: use the same color as the frame;
         #  * anything else will be interpreted as a X color.
-        separator_color = auto;
+        separator_color = "auto";
 
         progress_bar = true;
         progress_bar_height = 10;
@@ -105,7 +105,7 @@
         # Show until the user dismisses
         timeout = 0;
       };
-      volume-conrol = {
+      volume-control = {
         summary = "volctl";
         format = "<span size=\"250%\">%a</span>\n%b";
       };

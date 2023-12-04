@@ -18,6 +18,7 @@
         "application/xhtml+xml" = browser;
         "application/xhtml_xml" = browser;
         "application/json" = browser;
+        "application/zip" = [ "org.kde.ark.desktop" ];
         
         "text/html" = browser;
         "text/xml" = browser;
@@ -53,9 +54,9 @@
     userDirs = {
       enable = true;
       createDirectories = true;
-      # extraConfig = {
-      #   XDG_SCREENSHOTS_DIR = "${config.xdg.userDirs.pictures}/Screenshots";
-      # };
+      extraConfig = {
+        XDG_SCREENSHOTS_DIR = "${config.xdg.userDirs.pictures}/Screenshots";
+      };
     };
 
     desktopEntries."edit" = {

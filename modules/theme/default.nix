@@ -8,7 +8,7 @@
 
   qt.enable = true;
   qt.platformTheme = "qt5ct";
-  # qt.style = "kvantum";
+  qt.style = "kvantum";
 
   environment = {
     systemPackages = with pkgs; [
@@ -42,11 +42,6 @@
       gsettings-desktop-schemas
       gnome.dconf-editor
       xsettingsd
-      
-    # GUI Styling apps
-      # qtct apps are through the nixos qt.nix module
-      libsForQt5.qtstyleplugin-kvantum
-      qt6Packages.qtstyleplugin-kvantum
       nwg-look
     ];
   };

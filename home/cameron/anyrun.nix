@@ -10,6 +10,9 @@
         applications
         translate
         shell
+        stdin
+        rink
+        # kidex
       ];
 
       width = { fraction = 0.4; };

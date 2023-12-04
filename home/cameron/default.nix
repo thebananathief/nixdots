@@ -33,7 +33,6 @@
     WLR_NO_HARDWARE_CURSORS = "1";
     GTK_USE_PORTAL = "1";
     GDK_BACKEND = "wayland,x11";
-    QT_QPA_PLATFORM = "wayland;xcb";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
     # NIXOS_OZONE_WL = "1";
@@ -108,6 +107,7 @@
     gtk3.bookmarks = [
       "file:///home/cameron/github"
       "file:///home/cameron/MEGA"
+      "file:///home/cameron/Pictures"
     ];
   };
 
@@ -132,6 +132,29 @@
       #   manager.show_hidden = true;
       # };
     };
+
+    bat = {
+      enable = true;
+      # themes = {
+      #   catppuccin = {
+      #     src = pkgs.fetchFromGitHub {
+      #       owner = "catppuccin";
+      #       repo = "bat";
+      #       rev = "ba4d16880d63e656acced2b7d4e034e4a93f74b1";
+      #       sha256 = "8dda4ec4bac3fc29a2a8941a8b0756a8a16623bee1ff5bcfe1433aae74ca3453";
+      #     };
+      #     file = "Catppuccin-mocha.tmTheme";
+      #   };
+      # };
+      config = {
+        theme = "Catppuccin-mocha";
+      };
+    };
+  };
+
+  xdg.configFile."bat/themes/Catppuccin-mocha.tmTheme".source = pkgs.fetchurl {
+    url = "https://raw.githubusercontent.com/catppuccin/bat/main/Catppuccin-mocha.tmTheme";
+    sha256 = "a8c40d2466489a68ebab3cbb222124639221bcf00c669ab45bab242cbb2783fc";
   };
 
   # Auto-mounting removeable drives

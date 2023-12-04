@@ -14,12 +14,12 @@
       "$terminal" = "alacritty";
       "$files" = "thunar";
       "$browser" = "firefox";
-      "$runner" = "~/github/nixdots/configs/hypr/scripts/runner.sh";
-      "$volume" = "~/github/nixdots/configs/hypr/scripts/volumecontrol.sh";
-      "$lockscreen" = "~/github/nixdots/configs/hypr/scripts/lock.sh";
-      "$wlogout" = "~/github/nixdots/configs/hypr/scripts/logoutlaunch.sh";
-      "$brightness" = "~/github/nixdots/configs/hypr/scripts/brightnesscontrol.sh";
-      "$screenshot" = "~/github/nixdots/configs/hypr/scripts/screenshot.sh";
+      "$runner" = "anyrun";
+      "$volume" = "~/github/nixdots/configs/volumecontrol";
+      "$lockscreen" = "swaylock";
+      "$wlogout" = "~/github/nixdots/configs/logoutlaunch";
+      "$brightness" = "~/github/nixdots/configs/brightnesscontrol";
+      "$screenshot" = "~/github/nixdots/configs/screenshot";
 
       # env = [
         # "XCURSOR_SIZE,24"
@@ -40,7 +40,7 @@
         "$mainMod, C, exec, hyprpicker -a -n"
 
         # Test buttons to restart waybar and print active window info
-        "$mainMod, U, exec, yad --text=\"$(hyprctl activewindow)\" --no-buttons --undecorated --escape-ok"
+        "$mainMod, U, exec, hyprctl activewindow | yad --text-info --width 50 --height 400 --no-buttons --undecorated --escape-ok"
         "$mainMod, Y, exec, killall .waybar-wrapped ; waybar"
         "$mainMod, Y, exec, killall .fusuma-wrapped ; fusuma -d"
         
@@ -53,14 +53,16 @@
 
         # Screenshot/Screencapture
         "$mainMod SHIFT, S, exec, $screenshot s" # screenshot snip
-        "$mainMod ALT, P, exec, $screenshot p" # print current screen
+        "$mainMod SHIFT, Q, exec, $screenshot w" # screenshot active window
+        "$mainMod SHIFT, W, exec, $screenshot p" # print current screen
 
         # Window actions
         "$mainMod, W, killactive,"
-        "$mainMod, I, togglegroup"
         "ALT, return, fullscreen,"
         # "$mainMod, P, pseudo," # dwindle
         # "$mainMod, mouse:276, pseudo," # dwindle
+        "$mainMod, I, togglegroup"
+        "$mainMod, mouse:276, togglegroup"
         "$mainMod, M, togglesplit," # dwindle
         "$mainMod, mouse:275, togglesplit," # dwindle
         "$mainMod, O, togglefloating,"
@@ -118,7 +120,7 @@
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
 
-        "$mainMod, F5, exec, ~/github/nixdots/configs/hypr/scripts/gamemode.sh" # disable hypr effects for gamemode
+        "$mainMod, F5, exec, ~/github/nixdots/configs/scripts/gamemode" # disable hypr effects for gamemode
       ];
 
       binde = [
@@ -138,10 +140,8 @@
       ];
 
       bindr = [
-        "$mainMod, R, exec, $runner d" # launch desktop applications
-        "$mainMod, T, exec, $runner f" # browse system files
-        "$mainMod, G, exec, $runner g" # steam game launcher
-        # "$mainMod, tab, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/runner.sh w" # switch between desktop applications
+        "$mainMod, R, exec, killall $runner; $runner" # launch desktop applications
+        # "$mainMod, T, exec, killall $runner; $runner --plugins kidex " # browse system files
         # "$mainMod, V, exec, cliphist list | anyrun --dmenu | cliphist decode | wl-copy" # clipboard chooser
 
         # Mod-Q to lock Mod-Ctrl-Q to get logout menu
@@ -151,7 +151,7 @@
 
       bindl = [
         ## Trigger when the switch is turning off
-        ", switch:on:Lid Switch, exec, ~/github/nixdots/configs/hypr/scripts/lock.sh && systemctl suspend"
+        ", switch:on:Lid Switch, exec, $lockscreen && systemctl suspend"
       ];
 
       bindm = [
@@ -162,27 +162,27 @@
 
       # These are ran every reload of hyprland
       exec = [
-        "hyprctl setcursor \"Catppuccin-Mocha-Mauve\" 24"
+        "hyprctl setcursor \"Catppuccin-Mocha-Mauve 24\""
         # "kvantummanager --set Catppuccin-Mocha"
       ];
       
       exec-once = [
-        # "~/github/nixdots/configs/hypr/scripts/resetxdgportal.sh"
-        # "~/github/nixdots/configs/hypr/scripts/gsettings.sh"
+        # "~/github/nixdots/configs/resetxdgportal"
+        # "~/github/nixdots/configs/gsettings"
         "wl-paste --type text --watch cliphist store" #Stores only text data
         "wl-paste --type image --watch cliphist store" #Stores only image data
         "hyprpaper"
-        "blueman-applet"
+        # "blueman-applet" # xdg autostart
         "waybar"
-        "nm-applet --indicator"
+        # "nm-applet --indicator" # xdg autostart
         "mega-cmd"
         "fusuma -d"
         "firefox"
-        "~/github/nixdots/configs/hypr/scripts/batterynotify.sh" # battery notification
+        "~/github/nixdots/configs/batterynotify"
         "sudo wgnord c atlanta"
         "tailscale up & tailscale-systray"
-        # "swayidle -w timeout 600 '~/github/nixdots/configs/hypr/scripts/lock.sh' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "swayidle -w timeout 600 '~/github/nixdots/configs/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
+        # "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       ];
 
       # xwayland.force_zero_scaling = true;
@@ -316,6 +316,7 @@
 
         "float, class:(pavucontrol|yad|nm-connection-editor|nm-applet|blueman-manager)"
         "float, class:(qt5ct|qt6ct|kvantummanager|nwg-look)"
+        "float, class:^(firefox), title:^Extension: \(Bitwarden\)"
 
         # fix xwayland apps
         "rounding 0, xwayland:1, floating:1"
@@ -348,19 +349,19 @@
 
 
 # Window/Session actions
-#bind = $mainMod, Q, exec, ~/github/nixdots/configs/hypr/scripts/dontkillsteam.sh # killactive, kill the window on focus
-#bind = ALT, F4, exec, ~/github/nixdots/configs/hypr/scripts/dontkillsteam.sh # killactive, kill the window on focus
+#bind = $mainMod, Q, exec, ~/github/nixdots/configs/dontkillsteam # killactive, kill the window on focus
+#bind = ALT, F4, exec, ~/github/nixdots/configs/dontkillsteam # killactive, kill the window on focus
 #bind = $mainMod, delete, exit, # kill hyperland session
 #bind = $mainMod, W, togglefloating, # toggle the window on focus to float
 #bind = $mainMod, G, togglegroup, # toggle the window on focus to float
 
 ## Exec custom scripts
-#bind = $mainMod ALT, right, exec, ~/github/nixdots/configs/hypr/scripts/swwwallpaper.sh -n # next wallpaper
-#bind = $mainMod ALT, left, exec, ~/github/nixdots/configs/hypr/scripts/swwwallpaper.sh -p # previous wallpaper
-#bind = $mainMod ALT, up, exec, ~/github/nixdots/configs/hypr/scripts/wbarconfgen.sh n # next waybar mode
-#bind = $mainMod ALT, down, exec, ~/github/nixdots/configs/hypr/scripts/wbarconfgen.sh p # previous waybar mode
-#bind = $mainMod SHIFT, D, exec, ~/github/nixdots/configs/hypr/scripts/togglewallbash.sh  # toggle wallbash on/off
-#bind = $mainMod SHIFT, T, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/themeselect.sh # theme select menu
-#bind = $mainMod SHIFT, A, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/rofiselect.sh # rofi style select menu
-#bind = $mainMod SHIFT, W, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/swwwallselect.sh # rofi wall select menu
-#bind = $mainMod, V, exec, pkill rofi || ~/github/nixdots/configs/hypr/scripts/cliphist.sh c  # open Pasteboard in screen center
+#bind = $mainMod ALT, right, exec, ~/github/nixdots/configs/swwwallpaper -n # next wallpaper
+#bind = $mainMod ALT, left, exec, ~/github/nixdots/configs/swwwallpaper -p # previous wallpaper
+#bind = $mainMod ALT, up, exec, ~/github/nixdots/configs/wbarconfgen n # next waybar mode
+#bind = $mainMod ALT, down, exec, ~/github/nixdots/configs/wbarconfgen p # previous waybar mode
+#bind = $mainMod SHIFT, D, exec, ~/github/nixdots/configs/togglewallbash  # toggle wallbash on/off
+#bind = $mainMod SHIFT, T, exec, pkill rofi || ~/github/nixdots/configs/themeselect # theme select menu
+#bind = $mainMod SHIFT, A, exec, pkill rofi || ~/github/nixdots/configs/rofiselect # rofi style select menu
+#bind = $mainMod SHIFT, W, exec, pkill rofi || ~/github/nixdots/configs/swwwallselect # rofi wall select menu
+#bind = $mainMod, V, exec, pkill rofi || ~/github/nixdots/configs/cliphist c  # open Pasteboard in screen center

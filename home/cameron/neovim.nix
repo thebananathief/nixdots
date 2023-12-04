@@ -19,6 +19,7 @@
     vimdiffAlias = true;
   };
 
+  # Make sure neovim default config can see this
   xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/github/dotfiles/.config/nvim"; 
 
   # {
