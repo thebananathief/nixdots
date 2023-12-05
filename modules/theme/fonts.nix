@@ -1,7 +1,5 @@
-{ pkgs, ... }:
-let
-  globalFont = import ./globalFonts.nix;
-in {
+{ pkgs, globalFonts, ... }:
+{
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
@@ -25,9 +23,9 @@ in {
       ];})
     ];
     fontconfig.defaultFonts = {
-      serif = [globalFont.serif "Noto Color Emoji"];
-      sansSerif = [globalFont.sansSerif "Noto Color Emoji"];
-      monospace = [globalFont.monospace "Noto Color Emoji"];
+      serif = [globalFonts.serif "Noto Color Emoji"];
+      sansSerif = [globalFonts.sansSerif "Noto Color Emoji"];
+      monospace = [globalFonts.monospace "Noto Color Emoji"];
       emoji = ["Noto Color Emoji"];
     };
   };

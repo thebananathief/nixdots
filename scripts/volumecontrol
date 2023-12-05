@@ -90,6 +90,10 @@ case $1 in
        notify_mute ;;
     p) playerctl play-pause
        notify_toggleplayback ;;
+   pi) playerctl --player="$PLAYER" volume 0.05+
+       notify_playervol ;;
+   pd) playerctl --player="$PLAYER" volume 0.05-
+       notify_playervol ;;
     *) print_error ;;
 esac
 

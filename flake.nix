@@ -47,13 +47,19 @@
       # TODO: These should really be obfuscated
       username = "cameron";
       useremail = "cameron.salomone@gmail.com";
+      globalFonts = {
+        serif = "Gelasio";
+        monospace = "FiraCode Nerd Font Regular";
+        prettyNerd = "M+1 Nerd Font";
+        sansSerif = "Lexend";
+      };
 
       nixosSystem = import ./lib/nixosSystem.nix;
       
       system = "x86_64-linux";
 
       x64_specialArgs = {
-        inherit username useremail;
+        inherit username useremail globalFonts;
         # This part allows us to install non-free software from nixpkgs, you can also put this further down and ref with nixpkgs.config.allowUnfree
         pkgs = import nixpkgs {
           inherit system;

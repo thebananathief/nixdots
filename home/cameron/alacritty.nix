@@ -43,7 +43,7 @@ in {
           {
             regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|http[s]:|news:|file:|git:|ssh:|ftp:)[^\\u0000-\\u001F\\u007F-\\u009F<>\"\s{-}\^⟨⟩`]+";
             hyperlinks = true;
-            command = "handlr";
+            command = "xdg-open";
             post_processing = true;
             mouse.enabled = true;
             mouse.mods = "None";

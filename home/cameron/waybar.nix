@@ -1,4 +1,4 @@
-{ ... }:
+{ globalFonts, ... }:
 let
   colors = builtins.fetchurl {
     url = "https://raw.githubusercontent.com/catppuccin/waybar/main/themes/mocha.css";
@@ -42,7 +42,7 @@ in {
         "custom/power" = {
           format = "{}";
           exec = "echo ; echo  logout";
-          on-click = "~/github/nixdots/configs/hypr/scripts/logoutlaunch.sh 2";
+          on-click = "~/github/nixdots/scripts/logoutlaunch 2";
           interval = 86400;
           tooltip = true;
         };
@@ -68,7 +68,8 @@ in {
           on-click = "playerctl play-pause --player spotify";
           on-scroll-up = "playerctl next";
           on-scroll-down = "playerctl previous";
-          exec = "/usr/bin/python3 ~/github/nixdots/configs/hypr/scripts/mediaplayer.py --player spotify";
+          # exec is the tooltip display i think
+          # exec = "~/github/nixdots/scripts/spotifyvolumecontrol";
           return-type = "json";
         };
 
@@ -79,9 +80,17 @@ in {
         };
 
         "clock" = {
-          format = "{:%I:%M %p 󰃭 %a %d}";
-          format-alt = "{:%H:%M  %b %Y}";
+          format = "{:%I:%M %p  %Y-%m-%d}";
+          # format = "{:%I:%M %p 󰃭 %a %d}";
+          # format-alt = "{:%H:%M  %b %Y}";
           tooltip-format = "<tt><big>{calendar}</big></tt>";
+          calendar = {
+            mode = "year";
+            # mode-mon-col = 3;
+            # weeks-pos = "right";
+            # on-scroll = 1;
+            # on-click-right = "mode";
+          };
         };
 
         "tray" = {
@@ -123,9 +132,9 @@ in {
           format = "{icon} {volume}";
           format-muted = "婢";
           on-click = "pavucontrol -t 3";
-          on-click-middle = "~/github/nixdots/configs/hypr/scripts/volumecontrol.sh -o m";
-          on-scroll-up = "~/github/nixdots/configs/hypr/scripts/volumecontrol.sh -o i";
-          on-scroll-down = "~/github/nixdots/configs/hypr/scripts/volumecontrol.sh -o d";
+          on-click-middle = "~/github/nixdots/scripts/volumecontrol -o m";
+          on-scroll-up = "~/github/nixdots/scripts/volumecontrol -o i";
+          on-scroll-down = "~/github/nixdots/scripts/volumecontrol -o d";
           tooltip-format = "{icon} {desc} // {volume}%";
           scroll-step = 5;
           format-icons = {
@@ -144,9 +153,9 @@ in {
           format-source = "";
           format-source-muted = "";
           on-click = "pavucontrol -t 4";
-          on-click-middle = "~/github/nixdots/configs/hypr/scripts/volumecontrol.sh -i m";
-          on-scroll-up = "~/github/nixdots/configs/hypr/scripts/volumecontrol.sh -i i";
-          on-scroll-down = "~/github/nixdots/configs/hypr/scripts/volumecontrol.sh -i d";
+          on-click-middle = "~/github/nixdots/scripts/volumecontrol -i m";
+          on-scroll-up = "~/github/nixdots/scripts/volumecontrol -i i";
+          on-scroll-down = "~/github/nixdots/scripts/volumecontrol -i d";
           tooltip-format = "{format_source} {source_desc} // {source_volume}%";
           scroll-step = 5;
         };
@@ -157,7 +166,7 @@ in {
 * {
     border: none;
     border-radius: 0px;
-    font-family: "M+2 Nerd Font";
+    font-family: "${globalFonts.prettyNerd}";
     font-weight: bold;
     font-size: 14px;
     min-height: 12px;
