@@ -12,7 +12,7 @@
 
   environment = {
     systemPackages = with pkgs; [
-      # This package configures the kvantum one
+      # This package configures a bunch of smaller programs, but its unstable atm
       # (catppuccin.override {
       #   accent = "mauve";
       #   variant = "mocha";

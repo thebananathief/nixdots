@@ -13,18 +13,18 @@
     wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   };
 
-  # TODO: REMOVE THIS
-  services.openssh = {
-    enable = true;
-    hostKeys = [
-      {
-        comment = "gargantuan";
-        path = "/etc/ssh/ssh_host_ed25519";
-        rounds = 100;
-        type = "ed25519";
-      }
-    ];
-  };
+  # services.openssh = {
+  #   enable = true;
+  #   # Generate a host key for this machine
+  #   hostKeys = [
+  #     {
+  #       comment = "gargantuan";
+  #       path = "/etc/ssh/ssh_host_ed25519";
+  #       rounds = 100;
+  #       type = "ed25519";
+  #     }
+  #   ];
+  # };
   
   sops = {
     defaultSopsFile = ../../secrets/misc.yml;
@@ -48,7 +48,6 @@
 
   programs.ssh.startAgent = true;
 
-  # TODO: Make sure to use passwd to change the password after logon!
   users.users.cameron = {
     isNormalUser = true;
     hashedPasswordFile = config.sops.secrets.main_user_password.path;

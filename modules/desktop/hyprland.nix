@@ -43,9 +43,8 @@
       grim # screen capture for screenshots
 
     # General DE programs
-      nwg-displays
-      wlr-randr
-      networkmanagerapplet
+      # nwg-displays
+      # wlr-randr
       
     # Media
       zathura # docs
@@ -75,7 +74,8 @@
       polkit-qt
       # polkit-kde-agent
       qt5.qtwayland
-      networkmanager-qt # alternative nm-tray
+      bluez-qt # kde bluetooth tray
+      networkmanager-qt # kde nm tray
     ]);
   };
 
@@ -94,6 +94,9 @@
     thunar.enable = true;
     thunar.plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
 
+    # GNOME network manager tray icon
+    nm-applet.enable = true;
+    
     # Monitor backlight control
     # light.enable = true;
   };

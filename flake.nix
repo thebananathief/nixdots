@@ -47,10 +47,12 @@
       # TODO: These should really be obfuscated
       username = "cameron";
       useremail = "cameron.salomone@gmail.com";
+      
       globalFonts = {
         serif = "Gelasio";
-        monospace = "FiraCode Nerd Font Regular";
-        prettyNerd = "M+1 Nerd Font";
+        monospace = "JetBrainsMono Nerd Font Regular";
+        # was M+2 (for waybar)
+        prettyNerd = "M+2 Nerd Font";
         sansSerif = "Lexend";
       };
 
