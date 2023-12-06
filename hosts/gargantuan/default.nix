@@ -1,5 +1,13 @@
-{ pkgs, lib, sops-nix, config, ... }: {
+{
+  pkgs,
+  lib, 
+  sops-nix, 
+  config, 
+  nixos-hardware,
+  ... 
+}: {
   imports = [ 
+    nixos-hardware.nixosModules.framework
     ./hardware-configuration.nix
     ./packages.nix
     # ../../modules/games.nix
@@ -12,22 +20,9 @@
     networkmanager.enable = true;
     wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   };
-
-  # services.openssh = {
-  #   enable = true;
-  #   # Generate a host key for this machine
-  #   hostKeys = [
-  #     {
-  #       comment = "gargantuan";
-  #       path = "/etc/ssh/ssh_host_ed25519";
-  #       rounds = 100;
-  #       type = "ed25519";
-  #     }
-  #   ];
-  # };
   
   sops = {
-    defaultSopsFile = ../../secrets/misc.yml;
+    defaultSopsFile = ../../secrets.yml;
     age = {
       sshKeyPaths = [
         "/etc/ssh/ssh_host_ed25519"
@@ -40,8 +35,6 @@
       main_user_password = { neededForUsers = true; };
       email_address = {};
       sshPub_phone = {};
-      sshPub_laptop = {};
-      sshPub_desktop = {};
       ssh_github = {};
     };
   };
@@ -77,11 +70,11 @@
     # jack.enable = true;
   };
   
-  # Fingerprint reader daemon
-  services.fprintd.enable = true;
-  security.pam.services.login.unixAuth = true;
+  # Allow pam login via fingerprint reader
   security.pam.services.login.fprintAuth = true;
   security.pam.services.login.nodelay = true;
+  # and unix
+  security.pam.services.login.unixAuth = true;
 
   # Power saving profile
   # Consider:
@@ -95,7 +88,7 @@
       NMI_WATCHDOG = 0;
     };
   };
-  # This part is required if the above is enabled
+  # Intel should use TLP, AMD should use power-profiles-daemon
   services.power-profiles-daemon.enable = lib.mkForce false;
 
   hardware.opengl = {

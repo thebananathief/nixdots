@@ -1,8 +1,17 @@
-{ pkgs, ... }: {
+{ 
+  pkgs, 
+  nixos-hardware,
+  ...
+}: {
   networking.hostName = "talos";
 
   imports = [
+    nixos-hardware.nixosModules.common-pc
+    nixos-hardware.nixosModules.common-pc-ssd
+    nixos-hardware.nixosModules.common-cpu-intel
+    ./hardware-configuration.nix
     ./fileshares.nix
+    ./disks.nix
     ./containers
     sops-nix.nixosModules.sops
   ];
@@ -27,18 +36,10 @@
       Unauthorized access to this system is forbidden and will be prosecuted by law.
       By accessing this system, you agree that your actions may be monitored if unauthorized usage is suspected.
     '';
-    hostKeys = [
-      {
-        comment = "talos";
-        path = "/etc/ssh/ssh_host_ed25519";
-        rounds = 100;
-        type = "ed25519";
-      }
-    ];
   };
 
   sops = {
-    defaultSopsFile = ../../secrets/misc.yml;
+    defaultSopsFile = ../../secrets.yml;
     age = {
       # These should be the paths from (config.services.openssh.hostKeys)
       sshKeyPaths = [
@@ -71,14 +72,10 @@
       healthcheck_snapraid_uuid = {};
       healthcheck_uptime_uuid = {};
       sshPub_phone = {};
-      sshPub_laptop = {};
-      sshPub_desktop = {};
       ssh_github = {};
     };
   };
 
-  # TODO: Need to have disk SMART alerts sent to me over email
-  # Also reminders to buy drives
 
 
   # TODO: Make sure to use passwd to change the password after logon!
@@ -113,10 +110,8 @@
   };
 
   environment.systemPackages = with pkgs; [
-    mergerfs
-    mergerfs-tools
-    xfsprogs
-    smartmontools
+    # mullvad-vpn
+    mullvad # TODO: consider this if only need CLI tools
   ];
 
   security.pam.enableSSHAgentAuth = true;
@@ -129,6 +124,7 @@
     cron = {
       enable = true;
       systemCronJobs = [
+        # Healthcheck to make sure TALOS is online 24/7
         "*/15 * * * * curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/${ healthcheck_uptime_uuid }"
       ]
     };
@@ -140,67 +136,6 @@
         "--advertise-exit-node"
       ];
     };
-  };
-
-  snapraid = {
-    enable = true;
-    contentFiles = [
-      "/var/snapraid.content"
-      "/mnt/parity1/snapraid.content"
-      "/mnt/disk1/snapraid.content"
-      "/mnt/disk2/snapraid.content"
-    ];
-    parityFiles = [
-      "/mnt/parity1/snapraid.parity"
-    ];
-    dataDisks = {
-      d1 = "/mnt/disk1";
-      d2 = "/mnt/disk2";
-      d3 = "/mnt/disk3";
-    };
-    exclude = [
-      "*.unrecoverable"
-      "/tmp/"
-      "/lost+found/"
-      "appdata/"
-      "downloads/"
-      "*.!sync"
-      ".AppleDouble"
-      "._AppleDouble"
-      ".DS_Store"
-      "._.DS_Store"
-      ".Thumbs.db"
-      ".fseventsd"
-      ".Spotlight-V100"
-      ".TemporaryItems"
-      ".Trashes"
-      ".AppleDB"
-      ".nfo"
-    ];
-  };
-
-  # This is my attempt to add a healthcheck ping to the snapraid-sync
-  # service that services.snapraid creates.
-  systemd.services.snapraid-sync.serviceConfig.postStart = ''
-    curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/${ healthcheck_snapraid_uuid }
-  '';
-
-  # Make sure the device defines the mountpoints you want to merge
-  # (anything starting with "disk" in /mnt/)
-  fileSystems."/mnt/storage" = {
-    device = "/mnt/disk*:/mnt/tank/fuse";
-    fsType = "fuse.mergerfs";
-    options = [
-      "defaults"
-      "nonempty"
-      "allow_other"
-      "category.create=epmfs"
-      "use_ino"
-      "moveonenospc=true"
-      "dropcacheonclose=true"
-      "minfreespace=50G"
-      "fsname=mergerfs"
-    ];
   };
 
   system.stateVersion = "23.05";

@@ -18,24 +18,19 @@
     };
   };
   # gmod = {
-  #   image = "gameservermanagers/gameserver:gmod";
   #   volumes = [ "${ gameserver_path }/gmod-darkrp:/home/gmod/server/garrysmod" ];
   #   ports = [
   #     "27015:27015/udp"
   #     "27020:27020/udp"
   #     "27005:27005/udp"
   #   ];
-  # };
-  # gmod = {
+  # # ---------------------------
+  #   image = "gameservermanagers/gameserver:gmod";
+  # # ---------- OR USE ---------
   #   image = "ceifa/garrysmod:debian"; # https://hub.docker.com/r/ceifa/garrysmod
-  #   volumes = [ "${ gameserver_path }/gmod-darkrp:/home/gmod/server/garrysmod" ];
-  #   ports = [
-  #     "27015:27015/udp"
-  #     "27005:27005/udp"
-  #   ];
   #   environment = {
   #     PRODUCTION = 0;
-  #     HOSTNAME = "Test darkrp server";
+  #     HOSTNAME = "Test server";
   #     MAXPLAYERS = 24;
   #     GAMEMODE = "sandbox";
   #     MAP = "gm_construct";

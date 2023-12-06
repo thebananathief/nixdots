@@ -42,9 +42,8 @@
     # };
   };
 
-  outputs = inputs @ { self, nixpkgs, nixos-hardware, home-manager, sops-nix, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, ... }:
     let
-      # TODO: These should really be obfuscated
       username = "cameron";
       useremail = "cameron.salomone@gmail.com";
       
@@ -79,21 +78,23 @@
         };
       in {
         gargantuan = nixosSystem ({
-          nixos-modules = [
-            nixos-hardware.nixosModules.framework
-            ./hosts/gargantuan/gargantuan.nix
-          ];
+          nixos-modules = [ ./hosts/gargantuan ];
+          home-module = import ./home/cameron;
+        } // base_args);
+
+        thoth = nixosSystem ({
+          nixos-modules = [ ./hosts/thoth ];
           home-module = import ./home/cameron;
         } // base_args);
 
         # Testing environment VM
         zelos = nixosSystem ({
-          nixos-modules = [ ./hosts/zelos/zelos.nix ];
+          nixos-modules = [ ./hosts/zelos ];
           home-module = import ./home/server;
         } // base_args);
 
         talos = nixosSystem ({
-          nixos-modules = [ ./hosts/talos/talos.nix ];
+          nixos-modules = [ ./hosts/talos ];
           home-module = import ./home/server;
         } // base_args);
       };

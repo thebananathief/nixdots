@@ -21,6 +21,10 @@
       ffmpegthumbnailer
       jq
       poppler
+
+    ## Neovim
+      tree-sitter
+      universal-ctags
     ];
     shells = [ pkgs.zsh ];
     pathsToLink = [ "/share/zsh" ];

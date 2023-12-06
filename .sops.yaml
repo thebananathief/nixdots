@@ -15,7 +15,7 @@ keys:
   - &server_talos age1gvvjs8h535cau0qquy9ssyzql648qyzeseu9gd2awnwhlwlufs0qda9zj0
   - &laptop_gargantuan age1408qgh9ekswerw33ae2yzmfu8la4kq2szl2rwvslx6cpujsfr58ss6q9tx
 creation_rules:
-  - path_regex: secrets(\\|\/)[^/]+\.(yml|yaml|json|env|ini)$
+  - path_regex: secrets[^/]+\.(yml|yaml|json|env|ini)$
     key_groups:
     - age:
       - *admin_cameron_desktop

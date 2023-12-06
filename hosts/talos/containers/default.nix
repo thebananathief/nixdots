@@ -1,18 +1,32 @@
-{ ... }:
+{ config, ... }:
 let 
   appdata_path = "/opt/appdata";
   storage_path = "/mnt/storage";
   gameserver_path = "/ssd/gameservers";
   download_path = "/mnt/disk1/downloads";
 
+  inherit (config.sops) secrets;
+  # Get secret file's path, read the contents and store them
+  # TODO: See if these are reading in the secrets just to store them in the /nix/store
+  mysql_password = "$__file{${secrets.mysql_password.path}}";
+  mumble_superpassword = "$__file{${secrets.mumble_superpassword.path}}";
+  email_address = "$__file{${secrets.email_address.path}}";
+  main_domain = "$__file{${secrets.main_domain.path}}";
+  cloudflare_email = "$__file{${secrets.cloudflare_email.path}}";
+  cloudflare_apikey = "$__file{${secrets.cloudflare_apikey.path}}";
+  
+  # Store the secret file's path (/run/secrets/<keyName>)
   # mysql_password = config.sops.secrets.mysql_password.path;
-  mysql_password = import /run/secrets/mysql_password;
-  mumble_superpassword = import /run/secrets/mumble_superpassword;
-  webtrees_password = import /run/secrets/webtrees_password;
-  email_address = import /run/secrets/email_address;
-  main_domain = import /run/secrets/main_domain;
-  cloudflare_email = import /run/secrets/cloudflare_email;
-  cloudflare_apikey = import /run/secrets/cloudflare_apikey;
+
+  # Read the file at /run/secrets/<keyName> (but through import) and store it
+  # Could you also use import declaratively like above?
+  # mysql_password = import /run/secrets/mysql_password;
+  # mumble_superpassword = import /run/secrets/mumble_superpassword;
+  # webtrees_password = import /run/secrets/webtrees_password;
+  # email_address = import /run/secrets/email_address;
+  # main_domain = import /run/secrets/main_domain;
+  # cloudflare_email = import /run/secrets/cloudflare_email;
+  # cloudflare_apikey = import /run/secrets/cloudflare_apikey;
 
   main_uid = "1000";
   main_gid = "100";
@@ -21,9 +35,8 @@ let
     PUID = main_uid; # TODO: Any way to acquire my user's IDs dynamically?
     PGID = main_gid;
     # TZ = "America/New_York";
-    TZ = time.timeZone; # TODO: See if we can access this nix variable from ./common
-    # TZ = config.time.timeZone;
-    # TZ = configs.time.timeZone;
+    # TZ = time.timeZone;
+    TZ = config.time.timeZone;
   };
 in {
   virtualisation = {

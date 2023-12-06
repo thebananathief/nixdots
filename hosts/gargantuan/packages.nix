@@ -1,9 +1,9 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
+    mullvad-vpn
   ## CLI
     btop
-    wgnord
-    cage
+    # cage
     wev
     efibootmgr
     jsonfmt
@@ -18,23 +18,20 @@
         yamllint
     ]))
 
-  ## Neovim
-    tree-sitter
-    universal-ctags
-
   ## Coding
     zig
     go
     nodejs_20
     rustup
-    vscodium
     dbeaver
+
+    vscodium
     jetbrains.idea-community
 
   ## General desktop
     alacritty
-    krita
-    libreoffice
+    # krita
+    # libreoffice
     firefox
     megacmd
     obsidian
@@ -44,6 +41,6 @@
     discord
     bitwarden
     # thunderbird
-    parsec-bin
+    # parsec-bin
   ];
 }
