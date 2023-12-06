@@ -47,7 +47,7 @@
   networking.firewall.enable = true;
 
   # You are trusting SSH connections TO these hosts
-  program.ssh.knownHosts = {
+  programs.ssh.knownHosts = {
     talos = {
       hostNames = [ "talos" ]; # TODO: This needs to be at port 4733
       publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBMxPc2k6F4SGaXPNE2r0Uj3lglIx60/NCQIpVaI7hrO";
