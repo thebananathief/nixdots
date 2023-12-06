@@ -12,8 +12,8 @@
     nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
     ../gargantuan/packages.nix
-    # ../../modules/games.nix
     ../../modules/desktop
+    # ../../modules/games.nix
     # sops-nix.nixosModules.sops
   ];
 
@@ -23,6 +23,18 @@
     wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   };
   
+  boot.loader.grub = {
+    enable = true;
+    device = "/dev/sda";
+    # extraEntries = ''
+    #   menuentry "Windows 11" {
+    #     chainloader (hd0,0)
+    #   }
+    # '';
+    # This might find windows
+    useOSProber = true;
+  };
+
   # sops = {
   #   defaultSopsFile = ../../secrets.yml;
   #   age = {
@@ -89,6 +101,6 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 }
 
