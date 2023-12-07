@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [
-    ./plasma.nix
-    # ./hyprland.nix
+    # ./plasma.nix
+    ./hyprland.nix
     # ./gnome.nix
     # ./xfce.nix
     ../theme
