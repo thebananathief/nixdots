@@ -187,22 +187,37 @@
         # "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       ];
 
-      # xwayland.force_zero_scaling = true;
-
       # See https://wiki.hyprland.org/Configuring/Monitors/
       monitor = [
-        "eDP-1,highres,0x0,auto"
-        "DP-1,highres,0x0,auto"
-        "DP-5,highres,1128x0,auto"
-        "DP-6,highres,3048x0,auto"
+        # TODO: I need a better way to separate my home config for my laptop and my desktop
+        # desktop
+        "HDMI-A-1, 1920x1080@144, 0x0, 1"
+        "DP-3, 1920x1080@60, 0x-1080, 1"
+        "DP-1, 1920x1080@75.001, 1920x-500, 1, transform, 1"
+        
+        # laptop
+        # "eDP-1,highres,0x0,auto"
+        # "DP-1,highres,0x0,auto"
+        # "DP-5,highres,1128x0,auto"
+        # "DP-6,highres,3048x0,auto"
+        
         # "DP-6,highres,1128x0,auto"
         # "DP-5,highres,3048x0,auto"
+        
+        # catchall monitor rule
+        ", preferred, auto, 1"
       ];
 
       workspace = [
-        "1, monitor:eDP-1, default:true"
-        "2, monitor:DP-6, default:true"
-        "3, monitor:DP-5, default:true"
+        # desktop setup
+        "1, monitor:HDMI-A-1, default:true"
+        "2, monitor:DP-3, default:true"
+        "3, monitor:DP-1, default:true"
+        
+        # laptop setup
+        # "1, monitor:eDP-1, default:true"
+        # "2, monitor:DP-6, default:true"
+        # "3, monitor:DP-5, default:true"
       ];
 
       misc = {
@@ -236,18 +251,22 @@
         # COLORS
         "col.active_border" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
         "col.inactive_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
-        "col.group_border_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
-        "col.group_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
-        # "col.group_border_locked_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
-        # "col.group_border_locked" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
+        "col.nogroup_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
+        # "col.nogroup_border_active" = 
         resize_on_border = true;
 
         layout = "dwindle";
       };
 
+      group = {
+        "col.border_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
+        # "col.border_inactive" = 
+        "col.border_locked_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
+        "col.border_locked_inactive" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
+      };
+
       decoration = {
         rounding = 10;
-        multisample_edges = false;
         drop_shadow = false;
         shadow_range = 4;
         shadow_render_power = 3;
@@ -258,6 +277,7 @@
           size = 3;
           passes = 1;
           new_optimizations = true;
+          xray = true;
         };
       };
 

@@ -15,8 +15,8 @@
           # "git"
           "git-auto-fetch"
           "sudo"
-          # "fzf"
-          # "zoxide"
+          "fzf"
+          "zoxide"
         ];
       };
       syntaxHighlighting.enable = true;
@@ -36,7 +36,7 @@
         # zstyle ':completion:*' verbose true
         _comp_options+=(globdots)
 
-        source ~/.config/zsh/fzf/fzf-tab.plugin.zsh
+        # source ~/.config/zsh/fzf/fzf-tab.plugin.zsh
         source ~/.bash_aliases
       '';
     };

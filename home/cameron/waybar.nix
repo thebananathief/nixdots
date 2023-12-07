@@ -16,19 +16,22 @@ in {
         exclusive = true;
         passthrough = false;
         gtk-layer-shell = true;
+        # desktop output
+        output = "HDMI-A-1";
 
         modules-left = [
           "custom/power"
-          "custom/cliphist"
-          "custom/wbar"
-          "custom/mode"
-          "custom/wallchange"
-          "custom/spotify"
+          # "custom/cliphist"
+          # "custom/wbar"
+          # "custom/mode"
+          # "custom/wallchange"
+          # "custom/spotify"
         ];
         modules-center = [
-          "idle_inhibitor"
+          # "idle_inhibitor"
           "wlr/taskbar"
           "clock"
+          "hyprland/workspaces"
         ];
         modules-right = [
           "tray"
@@ -80,7 +83,7 @@ in {
         };
 
         "clock" = {
-          format = "{:%I:%M %p  %Y-%m-%d}";
+          format = "{ :%I:%M %p  %Y-%m-%d}";
           # format = "{:%I:%M %p 󰃭 %a %d}";
           # format-alt = "{:%H:%M  %b %Y}";
           tooltip-format = "<tt><big>{calendar}</big></tt>";

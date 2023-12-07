@@ -41,7 +41,9 @@
     # zettlr
     spotify
     spicetify-cli
-    discord
+    audacity
+    # discord
+    webcord
     bitwarden
     # thunderbird
     # parsec-bin

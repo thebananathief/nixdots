@@ -42,9 +42,8 @@
       swappy # edit screenshots after clipping
       grim # screen capture for screenshots
 
-    # General DE programs
-      # nwg-displays
-      # wlr-randr
+      nwg-displays
+      wlr-randr
       
     # Media
       zathura # docs

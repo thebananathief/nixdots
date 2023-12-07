@@ -1,10 +1,11 @@
-{ pkgs, lib, inputs, ... }: rec {
+{ pkgs, lib, inputs, globalFonts, ... }: rec {
   imports = [
     ./xdg.nix
     ./git.nix
     ./alacritty.nix
     ./zsh.nix
     # ./neovim.nix
+    ./spicetify.nix
     ./zathura.nix
     ./fusuma.nix
     ./anyrun.nix
@@ -32,18 +33,17 @@
     WLR_RENDERER = "vulkan";
     WLR_NO_HARDWARE_CURSORS = "1";
     GTK_USE_PORTAL = "1";
+  #   GTK_THEME = "Catppuccin-Mocha-Compact-Mauve-Dark";
     GDK_BACKEND = "wayland,x11";
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    # GDK_SCALE = "1";
+    # QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    # XCURSOR_SIZE = "24";
+    # XCURSOR_THEME = "Catppuccin-Mocha-Mauve";
+
+    # Breaks some electron apps i think
     # NIXOS_OZONE_WL = "1";
   };
-
-  # sessionVariables = {
-  #   GTK_THEME = "Catppuccin-Mocha-Compact-Mauve-Dark";
-    # GDK_SCALE = "1";
-    # XCURSOR_SIZE = "32";
-    # XCURSOR_THEME = "Bibata-Modern-Ice";
-  # };
     
   home.sessionVariables = systemd.user.sessionVariables;
 
@@ -64,7 +64,7 @@
     package = pkgs.catppuccin-cursors.mochaMauve;
     size = 24;
     gtk.enable = true;
-    # x11.enable = true;
+    x11.enable = true;
   };
 
   qt = {
@@ -76,8 +76,8 @@
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
-      document-font-name = "Lexend 10";
-      monospace-font-name = "FiraMono Nerd Font Mono 10";
+      document-font-name = "${globalFonts.sansSerif} 10";
+      monospace-font-name = "${globalFonts.monospace} 10";
       # font-antialiasing = "rgba";
       # font-hinting = "full";
     };

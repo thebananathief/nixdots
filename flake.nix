@@ -36,6 +36,7 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    spicetify-nix.url = "github:the-argus/spicetify-nix";
     # mysecrets = {
     #   url = "git+ssh://git@github.com/thebananathief/nix-secrets.git?shallow=1";
     #   flake = false;
