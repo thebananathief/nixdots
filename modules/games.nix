@@ -4,8 +4,12 @@
 }:
 # games
 {
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
   environment.systemPackages = with pkgs; [
-    steam
+    # steam
     prismlauncher
     protonup-qt
     protontricks

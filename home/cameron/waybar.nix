@@ -21,6 +21,8 @@ in {
 
         modules-left = [
           "custom/power"
+          "battery"
+          "hyprland/window"
           # "custom/cliphist"
           # "custom/wbar"
           # "custom/mode"
@@ -30,16 +32,15 @@ in {
         modules-center = [
           # "idle_inhibitor"
           "wlr/taskbar"
-          "clock"
-          "hyprland/workspaces"
+          # "hyprland/workspaces"
         ];
         modules-right = [
           "tray"
-          "battery"
           "network"
           # "bluetooth"
           "pulseaudio"
           "pulseaudio#microphone"
+          "clock"
         ];
 
         "custom/power" = {
@@ -66,6 +67,12 @@ in {
           };
         };
 
+        "hyprland/workspaces" = {
+          format = "{icon}";
+          on-scroll-up = "hyprctl dispatch workspace e+1";
+          on-scroll-down = "hyprctl dispatch workspace e-1";
+        };
+
         "custom/playback" = {
           format = "{} ";
           on-click = "playerctl play-pause --player spotify";
@@ -83,7 +90,7 @@ in {
         };
 
         "clock" = {
-          format = "{ :%I:%M %p  %Y-%m-%d}";
+          format = "{:%I:%M %p  %Y-%m-%d}";
           # format = "{:%I:%M %p 󰃭 %a %d}";
           # format-alt = "{:%H:%M  %b %Y}";
           tooltip-format = "<tt><big>{calendar}</big></tt>";

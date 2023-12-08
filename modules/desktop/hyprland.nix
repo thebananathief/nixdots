@@ -1,4 +1,4 @@
-{ pkgs, anyrun, ... }: {
+{ pkgs, lib, anyrun, ... }: {
 # This module's purpose is to install a full desktop environment with Hyprland
 # as the Window Manager. The scope of this should be as large as GNOME or Plasma.
 
@@ -36,14 +36,17 @@
       handlr
       trashy
       yad # dialog cli
+      waylock
 
       wf-recorder # screen recording
       slurp # select region for screenshot
       swappy # edit screenshots after clipping
       grim # screen capture for screenshots
 
-      nwg-displays
-      wlr-randr
+      nwg-dock-hyprland
+      nwg-drawer
+      # nwg-displays # seemed broken last i checked
+      # wlr-randr
       
     # Media
       zathura # docs
@@ -73,21 +76,20 @@
       polkit-qt
       # polkit-kde-agent
       qt5.qtwayland
-      bluez-qt # kde bluetooth tray
-      networkmanager-qt # kde nm tray
     ]);
   };
 
   security = {
     rtkit.enable = true;
     #pam.services.greetd.gnupg.enable = true;
-    pam.services.swaylock.text = "auth include login";
+    pam.services.waylock.text = "auth include login";
   };
   
   programs = {
     # Window manager
     hyprland.enable = true;
     hyprland.xwayland.enable = true;
+    hyprland.enableNvidiaPatches = true;
 
     # GUI file explorer
     thunar.enable = true;
@@ -128,7 +130,7 @@
   xdg.portal = {
     enable = true;
     # xdgOpenUsePortal = true;
-    # wlr.enable = true;
+    wlr.enable = lib.mkForce false;
     extraPortals = with pkgs; [
     #   xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk

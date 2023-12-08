@@ -1,12 +1,11 @@
 { pkgs, ... }: {
-  # Sets up mullvad vpn stuff, we chose the GUI set of tools (pkgs.mullvad-vpn)
   services.mullvad-vpn.enable = true;
+  # pkgs.mullvad for CLI only, pkgs.mullvad-vpn for CLI and GUI
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
   environment.systemPackages = with pkgs; [
   ## CLI
     btop
-    # cage
     wev
     efibootmgr
     jsonfmt
@@ -26,26 +25,31 @@
     go
     nodejs_20
     rustup
-    dbeaver
 
-    vscodium
     jetbrains.idea-community
 
   ## General desktop
     alacritty
-    # krita
-    # libreoffice
     firefox
+    # TODO: setup some flake shit to automatically log in and create the sync
     megacmd
-    obsidian
-    # zettlr
-    spotify
-    spicetify-cli
     audacity
-    # discord
-    webcord
+    spicetify-cli # Needs to be installed even with the flake
+    
+  ## Electron apps
+    vscodium
+    obsidian
+    webcord 
     bitwarden
+    spotify 
+    
     # thunderbird
     # parsec-bin
+    # krita
+    # libreoffice
+    # zettlr
+    # discord
+    # dbeaver
+    # cage
   ];
 }

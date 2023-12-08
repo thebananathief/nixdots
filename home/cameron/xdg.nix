@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ config, pkgs, ... }: {
   xdg = {
     enable = true;
 
@@ -64,13 +64,17 @@
       genericName = "Text Editor";
       comment = "Open the file in neovim on top of alacritty";
       icon = "nvim";
-      terminal = true;
-      exec = "nvim %f";
-      #exec = "${pkgs.alacritty}/bin/alacritty --command nvim";
+      # terminal = true;
+      # exec = "nvim %f";
+      exec = "${pkgs.alacritty}/bin/alacritty --command nvim %f";
       type = "Application";
       mimeType = [ "text/plain" ];
       categories = [ "TextEditor" "Utility" ];
     };
+
+    # Make home-manager stop nagging about overwriting these files
+    configFile."mimeapps.list".force = true;
+    configFile."gtk-3.0/bookmarks".force = true;
   };
 }
 

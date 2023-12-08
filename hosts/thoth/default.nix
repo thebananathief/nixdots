@@ -9,11 +9,11 @@
     # nixos-hardware.nixosModules.common-pc
     # nixos-hardware.nixosModules.common-pc-ssd
     # nixos-hardware.nixosModules.common-gpu-nvidia
-    # nixos-hardware.nixosModules.common-cpu-intel
+    nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
     ../gargantuan/packages.nix
     ../../modules/desktop
-    # ../../modules/games.nix
+    ../../modules/games.nix
     # sops-nix.nixosModules.sops
   ];
 
@@ -39,6 +39,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  hardware.bluetooth.package = pkgs.bluez;
+  
   # sops = {
   #   defaultSopsFile = ../../secrets.yml;
   #   age = {
@@ -86,10 +90,12 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+    extraPackages = with pkgs; [ intel-media-driver ];
   };
   
   # https://nixos.wiki/wiki/Nvidia
   # Load nvidia driver for Xorg and Wayland
+  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia = {
     # Defaults from article above - all these are experimental

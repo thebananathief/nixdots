@@ -8,10 +8,22 @@
   # systemd.user.sessionVariables = home.sessionVariables;
 
   # Must have the blueman service enabled on the system config to enable blueman-applet
-  services.blueman-applet.enable = true;
+  # services.blueman-applet.enable = true;
+
+  # Some electron fixes to run on wayland
+  xdg.configFile."electron25-flags.conf".text = ''
+    --enable-features=WaylandWindowDecorations
+    --ozone-platform-hint=auto
+  '';
+  
+  xdg.configFile."electron13-flags.conf".text = ''
+    --enable-features=UseOzonePlatform
+    --ozone-platform=wayland
+  '';
   
   wayland.windowManager.hyprland = {
     enable = true;
+    enableNvidiaPatches = true;
     settings = {
       "$mainMod" = "SUPER";
       "$terminal" = "alacritty";
@@ -19,18 +31,26 @@
       "$browser" = "firefox";
       "$runner" = "anyrun";
       "$volume" = "~/github/nixdots/scripts/volumecontrol";
-      "$lockscreen" = "swaylock";
-      "$wlogout" = "~/github/nixdots/scripts/logoutlaunch";
+      "$lockscreen" = "waylock";
+      "$lockmenu" = "wlogout";
       "$brightness" = "~/github/nixdots/scripts/brightnesscontrol";
       "$screenshot" = "~/github/nixdots/scripts/screenshot";
 
-      # env = [
+      env = [
+        # QT uses these
         # "XCURSOR_SIZE,24"
         # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
-        # "XDG_CURRENT_DESKTOP,Hyprland"
-        # "XDG_SESSION_DESKTOP,Hyprland"
-        # "XDG_SESSION_TYPE,wayland"
-      # ];
+
+        # Electron stuff
+        "ELECTRON_OZONE_PLATFORM_HINT,wayland"
+        
+        # NVIDIA stuff
+        "WLR_NO_HARDWARE_CURSORS,1"
+        "LIBVA_DRIVER_NAME,nvidia"
+        "GBM_BACKEND,nvidia-drm"
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        "XDG_SESSION_TYPE,wayland"
+      ];
 
       # https://wiki.hyprland.org/Configuring/Binds/
       bind = [
@@ -123,7 +143,7 @@
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
 
-        "$mainMod, F5, exec, ~/github/nixdots/scripts/gamemode" # disable hypr effects for gamemode
+        "$mainMod, F1, exec, ~/github/nixdots/scripts/gamemode" # disable hypr effects for gamemode
       ];
 
       binde = [
@@ -143,18 +163,21 @@
       ];
 
       bindr = [
-        "$mainMod, R, exec, killall .$runner-wrapped; $runner" # launch desktop applications
+        "$mainMod, space, exec, pkill .$runner-wrapped || $runner" # launch desktop applications
+        "$mainMod, Z, exec, pkill nwg-drawer || nwg-drawer" # launch desktop applications
         # "$mainMod, T, exec, killall $runner; $runner --plugins kidex " # browse system files
         # "$mainMod, V, exec, cliphist list | anyrun --dmenu | cliphist decode | wl-copy" # clipboard chooser
 
         # Mod-Q to lock Mod-Ctrl-Q to get logout menu
         "$mainMod, Q, exec, $lockscreen" # lock screen
-        "$mainMod Ctrl, Q, exec, $wlogout 1" # logout menu
+        "$mainMod Ctrl, Q, exec, pkill $lockmenu || $lockmenu" # logout menu
       ];
 
       bindl = [
         ## Trigger when the switch is turning off
-        ", switch:on:Lid Switch, exec, $lockscreen && systemctl suspend"
+        # ", switch:on:Lid Switch, exec, $lockscreen && systemctl suspend"
+        ", switch:off:Lid Switch, exec, $lockscreen && systemctl suspend"
+        # hyprctl keyword monitor "eDP-1, disable"
       ];
 
       bindm = [
@@ -165,7 +188,6 @@
 
       # These are ran every reload of hyprland
       exec = [
-        "hyprctl setcursor \"Catppuccin-Mocha-Mauve 24\""
         # "kvantummanager --set Catppuccin-Mocha"
       ];
       
@@ -174,9 +196,9 @@
         "wl-paste --type text --watch cliphist store" #Stores only text data
         "wl-paste --type image --watch cliphist store" #Stores only image data
         "hyprpaper"
-        # "blueman-applet"
+        "blueman-applet"
         "waybar"
-        # "nm-applet --indicator"
+        # "nm-applet --indicator" # started by nixos module
         "mega-cmd"
         "fusuma -d"
         "firefox"
@@ -184,7 +206,9 @@
         "sudo wgnord c atlanta"
         "tailscale up & tailscale-systray"
         "swayidle -w timeout 600 '~/github/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
-        # "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        # "gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Mocha-Mauve'"
+        "hyprctl setcursor \"Catppuccin-Mocha-Mauve 24\""
       ];
 
       # See https://wiki.hyprland.org/Configuring/Monitors/
@@ -286,9 +310,9 @@
       ];
 
       dwindle = {
-          pseudotile = false;
-          preserve_split = true;
-          no_gaps_when_only = true;
+        pseudotile = false;
+        preserve_split = true;
+        no_gaps_when_only = true;
       };
 
       master.new_is_master = false;
@@ -348,7 +372,7 @@
         # Fix tooltips taking away window focus
         # https://github.com/hyprwm/Hyprland/issues/2412
         "nofocus,class:^jetbrains-(?!toolbox),floating:1,title:^win\d+"
-
+        
         "size 20% 40%, class:^(org.kde.kcalc)$"
         "float, class:^(org.kde.kcalc)$"
 

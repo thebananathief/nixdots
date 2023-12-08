@@ -11,7 +11,6 @@
     ./anyrun.nix
     ./waybar.nix
     ./hyprland.nix
-    ./swaylock.nix
     ./dunst.nix
   ];
 
@@ -25,23 +24,25 @@
     TERMINAL = "alacritty";
     BROWSER = "firefox";
 
+    # Wakefield is the java wayland implementation
+    # But OJDK16 can load in GTK3
+    # This var fixes blank screens on launch
     _JAVA_AWT_WM_NONREPARENTING = "1";
+    
     MOZ_ENABLE_WAYLAND = "1";
     MOZ_WEBRENDER = "1";
+    
     SDL_VIDEODRIVER = "wayland";
     CLUTTER_BACKEND = "wayland";
     WLR_RENDERER = "vulkan";
-    WLR_NO_HARDWARE_CURSORS = "1";
     GTK_USE_PORTAL = "1";
-  #   GTK_THEME = "Catppuccin-Mocha-Compact-Mauve-Dark";
     GDK_BACKEND = "wayland,x11";
     # GDK_SCALE = "1";
-    # QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-    # XCURSOR_SIZE = "24";
-    # XCURSOR_THEME = "Catppuccin-Mocha-Mauve";
 
     # Breaks some electron apps i think
+    # Better to provide specific version config files for electron
     # NIXOS_OZONE_WL = "1";
   };
     
@@ -60,11 +61,13 @@
   fonts.fontconfig.enable = true;
 
   home.pointerCursor = {
+    # name = "Bibata-Modern-Amber";
+    # package = pkgs.bibata-cursors;
     name = "Catppuccin-Mocha-Mauve";
     package = pkgs.catppuccin-cursors.mochaMauve;
     size = 24;
     gtk.enable = true;
-    x11.enable = true;
+    # x11.enable = true;
   };
 
   qt = {

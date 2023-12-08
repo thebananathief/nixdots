@@ -53,7 +53,8 @@
   };
   
   environment.systemPackages = with pkgs; [
-    git wget curl unzip killall ethtool lm_sensors
+    git wget curl unzip killall
+    ethtool lm_sensors pciutils
     htop tmux neofetch
     tailspin bat dua tree
     dos2unix tldr just
