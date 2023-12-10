@@ -5,7 +5,6 @@
 
   environment.systemPackages = with pkgs; [
   ## CLI
-    btop
     wev
     efibootmgr
     jsonfmt

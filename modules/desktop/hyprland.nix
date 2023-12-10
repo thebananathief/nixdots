@@ -8,10 +8,12 @@
     gdm.wayland = true;
   };
 
+  security.polkit.enable = true;
+  
   environment = {
     sessionVariables = {
-      #POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
-      POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-qt}/lib/libpolkit-qt5-agent-1.so.1.114.0";
+      POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
+      # POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-qt}/lib/libpolkit-qt5-agent-1.so.1.114.0";
     };
 
     systemPackages = (with pkgs; [
@@ -73,8 +75,8 @@
       kcalc
       ark
       kclock
-      polkit-qt
-      # polkit-kde-agent
+      # polkit-qt
+      polkit-kde-agent
       qt5.qtwayland
     ]);
   };

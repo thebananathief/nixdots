@@ -1,4 +1,4 @@
-{ pkgs, ... }: rec {
+{ pkgs, config, ... }: rec {
   # home.sessionVariables = {
   #   XDG_CURRENT_DESKTOP = "Hyprland";
   #   XDG_SESSION_DESKTOP = "Hyprland";
@@ -38,7 +38,7 @@
 
       env = [
         # QT uses these
-        # "XCURSOR_SIZE,24"
+         "XCURSOR_SIZE,24"
         # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
 
         # Electron stuff
@@ -192,9 +192,15 @@
       ];
       
       exec-once = [
-        # "~/github/nixdots/scripts/resetxdgportal"
         "wl-paste --type text --watch cliphist store" #Stores only text data
         "wl-paste --type image --watch cliphist store" #Stores only image data
+        
+        # Taken from CTT
+        # "~/github/nixdots/scripts/resetxdgportal"
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        # "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+        
         "hyprpaper"
         "blueman-applet"
         "waybar"
@@ -203,12 +209,11 @@
         "fusuma -d"
         "firefox"
         "~/github/nixdots/scripts/batterynotify"
-        "sudo wgnord c atlanta"
+        # TODO: mullvad connect handled by itself? conflicts with tscale
         "tailscale up & tailscale-systray"
         "swayidle -w timeout 600 '~/github/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         # "gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Mocha-Mauve'"
-        "hyprctl setcursor \"Catppuccin-Mocha-Mauve 24\""
+        "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
       ];
 
       # See https://wiki.hyprland.org/Configuring/Monitors/
@@ -278,6 +283,8 @@
         "col.nogroup_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
         # "col.nogroup_border_active" = 
         resize_on_border = true;
+
+        allow_tearing = true;
 
         layout = "dwindle";
       };

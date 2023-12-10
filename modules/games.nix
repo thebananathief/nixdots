@@ -14,7 +14,14 @@
     protonup-qt
     protontricks
     #gamescope
-    #(lutris.override {extraPkgs = p: [p.libnghttp2];})
+    (lutris.override {
+      extraLibraries = pkgs: [
+      
+      ];
+      extraPkgs = pkgs: [
+        # p.libnghttp2
+      ];
+    })
   ];
 }
 

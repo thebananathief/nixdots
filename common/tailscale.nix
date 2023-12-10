@@ -9,5 +9,8 @@
       # "--advertise-exit-node"
     ];
   };
-  environment.systemPackages = [ pkgs.tailscale-systray ];
+  environment.systemPackages = with pkgs; [ 
+    tailscale
+    tailscale-systray
+  ];
 }

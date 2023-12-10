@@ -8,7 +8,7 @@
   imports = [ 
     # nixos-hardware.nixosModules.common-pc
     # nixos-hardware.nixosModules.common-pc-ssd
-    # nixos-hardware.nixosModules.common-gpu-nvidia
+    nixos-hardware.nixosModules.common-gpu-nvidia
     nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
     ../gargantuan/packages.nix
@@ -75,6 +75,10 @@
     ];
   };
 
+  environment.systemPackages = with pkgs; [
+    libva
+  ];
+
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -109,6 +113,8 @@
     
     # stable or beta should work for most modern cards
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+    prime.offload.enable = false;
   };
 
   system.stateVersion = "23.11";

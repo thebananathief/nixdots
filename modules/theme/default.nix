@@ -34,8 +34,8 @@
       #   accent = "mauve";
       # })
       # papirus-icon-theme
-      # catppuccin-cursors.mochaMauve
-      # bibata-cursors
+      catppuccin-cursors.mochaMauve
+      bibata-cursors
       # libsForQt5.breeze-grub
 
       gsettings-qt

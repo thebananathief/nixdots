@@ -61,10 +61,10 @@
   fonts.fontconfig.enable = true;
 
   home.pointerCursor = {
-    # name = "Bibata-Modern-Amber";
-    # package = pkgs.bibata-cursors;
-    name = "Catppuccin-Mocha-Mauve";
-    package = pkgs.catppuccin-cursors.mochaMauve;
+    name = "Bibata-Modern-Ice";
+    package = pkgs.bibata-cursors;
+    # name = "Catppuccin-Mocha-Mauve";
+    # package = pkgs.catppuccin-cursors.mochaMauve;
     size = 24;
     gtk.enable = true;
     # x11.enable = true;
