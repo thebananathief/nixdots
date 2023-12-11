@@ -8,7 +8,7 @@
   # systemd.user.sessionVariables = home.sessionVariables;
 
   # Must have the blueman service enabled on the system config to enable blueman-applet
-  services.blueman-applet.enable = true;
+  # services.blueman-applet.enable = true;
   
   wayland.windowManager.hyprland = {
     enable = true;
@@ -46,6 +46,7 @@
         "$mainMod, U, exec, hyprctl activewindow | yad --text-info --width 50 --height 400 --no-buttons --undecorated --escape-ok"
         "$mainMod, Y, exec, killall .waybar-wrapped ; waybar"
         "$mainMod, Y, exec, killall .fusuma-wrapped ; fusuma -d"
+        "$mainMod, Y, exec, killall blueman-applet ; blueman-applet"
         
         # Media key binds
         ", XF86AudioMute, exec, pamixer -t"
@@ -174,7 +175,7 @@
         "wl-paste --type text --watch cliphist store" #Stores only text data
         "wl-paste --type image --watch cliphist store" #Stores only image data
         "hyprpaper"
-        # "blueman-applet"
+        "blueman-applet"
         "waybar"
         # "nm-applet --indicator"
         "mega-cmd"

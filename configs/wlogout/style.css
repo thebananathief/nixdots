@@ -3,7 +3,9 @@
     font-size: ${fntSize}px;
 }
 
-@import "$HOME/.config/waybar/themes/${wbarTheme}.css";
+
+/* Catppuccin colors */
+@import "/nix/store/ix1lvswdllgfpakxfknxrcndph2382x6-mocha.css";
 
 window {
     background-color: ${WindBg};

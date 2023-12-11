@@ -42,7 +42,7 @@ in {
         "custom/power" = {
           format = "{}";
           exec = "echo ; echo  logout";
-          on-click = "~/github/nixdots/scripts/logoutlaunch 2";
+          on-click = "~/github/nixdots/scripts/logoutlaunch";
           interval = 86400;
           tooltip = true;
         };
