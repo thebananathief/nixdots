@@ -6,14 +6,14 @@
   ...
 }: {
   imports = [ 
-    nixos-hardware.nixosModules.common-pc
-    nixos-hardware.nixosModules.common-pc-ssd
+    # nixos-hardware.nixosModules.common-pc
+    # nixos-hardware.nixosModules.common-pc-ssd
     nixos-hardware.nixosModules.common-gpu-nvidia
     nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
     ../gargantuan/packages.nix
     ../../modules/desktop
-    # ../../modules/games.nix
+    ../../modules/games.nix
     # sops-nix.nixosModules.sops
   ];
 
@@ -23,18 +23,26 @@
     wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   };
   
-  boot.loader.grub = {
-    enable = true;
-    device = "/dev/sda";
+  # boot.loader.grub = {
+    # enable = true;
+    # device = "nodev";
     # extraEntries = ''
     #   menuentry "Windows 11" {
     #     chainloader (hd0,0)
     #   }
     # '';
     # This might find windows
-    useOSProber = true;
-  };
+    # useOSProber = true;
+  # };
 
+  # Bootloader
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  hardware.bluetooth.package = pkgs.bluez;
+  
   # sops = {
   #   defaultSopsFile = ../../secrets.yml;
   #   age = {
@@ -67,6 +75,10 @@
     ];
   };
 
+  environment.systemPackages = with pkgs; [
+    libva
+  ];
+
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
@@ -82,10 +94,12 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+    extraPackages = with pkgs; [ intel-media-driver ];
   };
   
   # https://nixos.wiki/wiki/Nvidia
   # Load nvidia driver for Xorg and Wayland
+  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia = {
     # Defaults from article above - all these are experimental
@@ -99,6 +113,8 @@
     
     # stable or beta should work for most modern cards
     package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+    prime.offload.enable = false;
   };
 
   system.stateVersion = "23.11";

@@ -1,4 +1,4 @@
-{ pkgs, anyrun, ... }: {
+{ pkgs, lib, anyrun, ... }: {
 # This module's purpose is to install a full desktop environment with Hyprland
 # as the Window Manager. The scope of this should be as large as GNOME or Plasma.
 
@@ -8,10 +8,12 @@
     gdm.wayland = true;
   };
 
+  security.polkit.enable = true;
+  
   environment = {
     sessionVariables = {
-      #POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
-      POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-qt}/lib/libpolkit-qt5-agent-1.so.1.114.0";
+      POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
+      # POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-qt}/lib/libpolkit-qt5-agent-1.so.1.114.0";
     };
 
     systemPackages = (with pkgs; [
@@ -36,14 +38,16 @@
       handlr
       trashy
       yad # dialog cli
+      waylock
 
       wf-recorder # screen recording
       slurp # select region for screenshot
       swappy # edit screenshots after clipping
       grim # screen capture for screenshots
 
-    # General DE programs
-      # nwg-displays
+      nwg-dock-hyprland
+      nwg-drawer
+      # nwg-displays # seemed broken last i checked
       # wlr-randr
       
     # Media
@@ -71,24 +75,23 @@
       kcalc
       ark
       kclock
-      polkit-qt
-      # polkit-kde-agent
+      # polkit-qt
+      polkit-kde-agent
       qt5.qtwayland
-      bluez-qt # kde bluetooth tray
-      networkmanager-qt # kde nm tray
     ]);
   };
 
   security = {
     rtkit.enable = true;
     #pam.services.greetd.gnupg.enable = true;
-    pam.services.swaylock.text = "auth include login";
+    pam.services.waylock.text = "auth include login";
   };
   
   programs = {
     # Window manager
     hyprland.enable = true;
     hyprland.xwayland.enable = true;
+    hyprland.enableNvidiaPatches = true;
 
     # GUI file explorer
     thunar.enable = true;
@@ -129,7 +132,7 @@
   xdg.portal = {
     enable = true;
     # xdgOpenUsePortal = true;
-    # wlr.enable = true;
+    wlr.enable = lib.mkForce false;
     extraPortals = with pkgs; [
     #   xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk

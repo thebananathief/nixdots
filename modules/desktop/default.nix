@@ -12,7 +12,7 @@
     layout = "us";
     xkbVariant = "";
 
-    excludePackages = [ pkgs.xterm ];
+    # excludePackages = [ pkgs.xterm ];
 
     libinput = {
       enable = true;

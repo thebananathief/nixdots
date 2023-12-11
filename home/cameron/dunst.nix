@@ -30,7 +30,7 @@
         line_height = 0;
         
         markup = "full";
-        format = "󰟪 %a\n<b>󰋑 %s</b>\n%b";
+        format = "󰟪 %a\\n<b>󰋑 %s</b>\\n%b";
         alignment = "left";
         vertical_alignment = "center";
 
@@ -107,11 +107,11 @@
       };
       volume-control = {
         summary = "volctl";
-        format = "<span size=\"250%\">%a</span>\n%b";
+        format = "<span size=\"250%\">%a</span>\\n%b";
       };
       brightness-control = {
         summary = "brightctl";
-        format = "<span size=\"250%\">%a</span>\n%b";
+        format = "<span size=\"250%\">%a</span>\\n%b";
       };
     };
   };

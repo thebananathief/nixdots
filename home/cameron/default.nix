@@ -1,16 +1,16 @@
-{ pkgs, lib, inputs, ... }: rec {
+{ pkgs, lib, inputs, globalFonts, ... }: rec {
   imports = [
     ./xdg.nix
     ./git.nix
     ./alacritty.nix
     ./zsh.nix
     # ./neovim.nix
+    ./spicetify.nix
     ./zathura.nix
     ./fusuma.nix
     ./anyrun.nix
     ./waybar.nix
     ./hyprland.nix
-    ./swaylock.nix
     ./dunst.nix
   ];
 
@@ -24,26 +24,27 @@
     TERMINAL = "alacritty";
     BROWSER = "firefox";
 
+    # Wakefield is the java wayland implementation
+    # But OJDK16 can load in GTK3
+    # This var fixes blank screens on launch
     _JAVA_AWT_WM_NONREPARENTING = "1";
+    
     MOZ_ENABLE_WAYLAND = "1";
     MOZ_WEBRENDER = "1";
+    
     SDL_VIDEODRIVER = "wayland";
     CLUTTER_BACKEND = "wayland";
     WLR_RENDERER = "vulkan";
-    WLR_NO_HARDWARE_CURSORS = "1";
     GTK_USE_PORTAL = "1";
     GDK_BACKEND = "wayland,x11";
+    # GDK_SCALE = "1";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+
+    # Breaks some electron apps i think
+    # Better to provide specific version config files for electron
     # NIXOS_OZONE_WL = "1";
   };
-
-  # sessionVariables = {
-  #   GTK_THEME = "Catppuccin-Mocha-Compact-Mauve-Dark";
-    # GDK_SCALE = "1";
-    # XCURSOR_SIZE = "32";
-    # XCURSOR_THEME = "Bibata-Modern-Ice";
-  # };
     
   home.sessionVariables = systemd.user.sessionVariables;
 
@@ -60,8 +61,10 @@
   fonts.fontconfig.enable = true;
 
   home.pointerCursor = {
-    name = "Catppuccin-Mocha-Mauve";
-    package = pkgs.catppuccin-cursors.mochaMauve;
+    name = "Bibata-Modern-Ice";
+    package = pkgs.bibata-cursors;
+    # name = "Catppuccin-Mocha-Mauve";
+    # package = pkgs.catppuccin-cursors.mochaMauve;
     size = 24;
     gtk.enable = true;
     # x11.enable = true;
@@ -76,8 +79,8 @@
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
-      document-font-name = "Lexend 10";
-      monospace-font-name = "FiraMono Nerd Font Mono 10";
+      document-font-name = "${globalFonts.sansSerif} 10";
+      monospace-font-name = "${globalFonts.monospace} 10";
       # font-antialiasing = "rgba";
       # font-hinting = "full";
     };

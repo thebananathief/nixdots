@@ -16,27 +16,31 @@ in {
         exclusive = true;
         passthrough = false;
         gtk-layer-shell = true;
+        # desktop output
+        output = "HDMI-A-1";
 
         modules-left = [
           "custom/power"
-          "custom/cliphist"
-          "custom/wbar"
-          "custom/mode"
-          "custom/wallchange"
-          "custom/spotify"
+          "battery"
+          "hyprland/window"
+          # "custom/cliphist"
+          # "custom/wbar"
+          # "custom/mode"
+          # "custom/wallchange"
+          # "custom/spotify"
         ];
         modules-center = [
-          "idle_inhibitor"
+          # "idle_inhibitor"
           "wlr/taskbar"
-          "clock"
+          # "hyprland/workspaces"
         ];
         modules-right = [
           "tray"
-          "battery"
           "network"
           # "bluetooth"
           "pulseaudio"
           "pulseaudio#microphone"
+          "clock"
         ];
 
         "custom/power" = {
@@ -61,6 +65,12 @@ in {
           app_ids-mapping = {
             firefoxdeveloperedition = "firefox-developer-edition";
           };
+        };
+
+        "hyprland/workspaces" = {
+          format = "{icon}";
+          on-scroll-up = "hyprctl dispatch workspace e+1";
+          on-scroll-down = "hyprctl dispatch workspace e-1";
         };
 
         "custom/playback" = {

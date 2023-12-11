@@ -53,8 +53,9 @@
   };
   
   environment.systemPackages = with pkgs; [
-    git wget curl unzip killall ethtool lm_sensors
-    htop tmux neofetch
+    git wget curl unzip killall
+    ethtool lm_sensors pciutils
+    tmux neofetch bottom
     tailspin bat dua tree
     dos2unix tldr just
     age sops

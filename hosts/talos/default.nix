@@ -109,11 +109,6 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    # mullvad-vpn
-    mullvad # TODO: consider this if only need CLI tools
-  ];
-
   security.pam.enableSSHAgentAuth = true;
 
   services = {

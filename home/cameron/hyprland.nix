@@ -1,4 +1,4 @@
-{ pkgs, ... }: rec {
+{ pkgs, config, ... }: rec {
   # home.sessionVariables = {
   #   XDG_CURRENT_DESKTOP = "Hyprland";
   #   XDG_SESSION_DESKTOP = "Hyprland";
@@ -9,9 +9,21 @@
 
   # Must have the blueman service enabled on the system config to enable blueman-applet
   # services.blueman-applet.enable = true;
+
+  # Some electron fixes to run on wayland
+  xdg.configFile."electron25-flags.conf".text = ''
+    --enable-features=WaylandWindowDecorations
+    --ozone-platform-hint=auto
+  '';
+  
+  xdg.configFile."electron13-flags.conf".text = ''
+    --enable-features=UseOzonePlatform
+    --ozone-platform=wayland
+  '';
   
   wayland.windowManager.hyprland = {
     enable = true;
+    enableNvidiaPatches = true;
     settings = {
       "$mainMod" = "SUPER";
       "$terminal" = "alacritty";
@@ -19,18 +31,26 @@
       "$browser" = "firefox";
       "$runner" = "anyrun";
       "$volume" = "~/github/nixdots/scripts/volumecontrol";
-      "$lockscreen" = "swaylock";
-      "$wlogout" = "~/github/nixdots/scripts/logoutlaunch";
+      "$lockscreen" = "waylock";
+      "$lockmenu" = "wlogout";
       "$brightness" = "~/github/nixdots/scripts/brightnesscontrol";
       "$screenshot" = "~/github/nixdots/scripts/screenshot";
 
-      # env = [
-        # "XCURSOR_SIZE,24"
+      env = [
+        # QT uses these
+         "XCURSOR_SIZE,24"
         # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
-        # "XDG_CURRENT_DESKTOP,Hyprland"
-        # "XDG_SESSION_DESKTOP,Hyprland"
-        # "XDG_SESSION_TYPE,wayland"
-      # ];
+
+        # Electron stuff
+        "ELECTRON_OZONE_PLATFORM_HINT,wayland"
+        
+        # NVIDIA stuff
+        "WLR_NO_HARDWARE_CURSORS,1"
+        "LIBVA_DRIVER_NAME,nvidia"
+        "GBM_BACKEND,nvidia-drm"
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        "XDG_SESSION_TYPE,wayland"
+      ];
 
       # https://wiki.hyprland.org/Configuring/Binds/
       bind = [
@@ -124,7 +144,7 @@
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
 
-        "$mainMod, F5, exec, ~/github/nixdots/scripts/gamemode" # disable hypr effects for gamemode
+        "$mainMod, F1, exec, ~/github/nixdots/scripts/gamemode" # disable hypr effects for gamemode
       ];
 
       binde = [
@@ -144,18 +164,21 @@
       ];
 
       bindr = [
-        "$mainMod, R, exec, killall .$runner-wrapped; $runner" # launch desktop applications
+        "$mainMod, space, exec, pkill .$runner-wrapped || $runner" # launch desktop applications
+        "$mainMod, Z, exec, pkill nwg-drawer || nwg-drawer" # launch desktop applications
         # "$mainMod, T, exec, killall $runner; $runner --plugins kidex " # browse system files
         # "$mainMod, V, exec, cliphist list | anyrun --dmenu | cliphist decode | wl-copy" # clipboard chooser
 
         # Mod-Q to lock Mod-Ctrl-Q to get logout menu
         "$mainMod, Q, exec, $lockscreen" # lock screen
-        "$mainMod Ctrl, Q, exec, $wlogout 1" # logout menu
+        "$mainMod Ctrl, Q, exec, pkill $lockmenu || $lockmenu" # logout menu
       ];
 
       bindl = [
         ## Trigger when the switch is turning off
-        ", switch:on:Lid Switch, exec, $lockscreen && systemctl suspend"
+        # ", switch:on:Lid Switch, exec, $lockscreen && systemctl suspend"
+        ", switch:off:Lid Switch, exec, $lockscreen && systemctl suspend"
+        # hyprctl keyword monitor "eDP-1, disable"
       ];
 
       bindm = [
@@ -166,44 +189,65 @@
 
       # These are ran every reload of hyprland
       exec = [
-        "hyprctl setcursor \"Catppuccin-Mocha-Mauve 24\""
         # "kvantummanager --set Catppuccin-Mocha"
       ];
       
       exec-once = [
-        # "~/github/nixdots/scripts/resetxdgportal"
         "wl-paste --type text --watch cliphist store" #Stores only text data
         "wl-paste --type image --watch cliphist store" #Stores only image data
+        
+        # Taken from CTT
+        # "~/github/nixdots/scripts/resetxdgportal"
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        # "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+        
         "hyprpaper"
         "blueman-applet"
         "waybar"
-        # "nm-applet --indicator"
+        # "nm-applet --indicator" # started by nixos module
         "mega-cmd"
         "fusuma -d"
         "firefox"
         "~/github/nixdots/scripts/batterynotify"
-        "sudo wgnord c atlanta"
+        # TODO: mullvad connect handled by itself? conflicts with tscale
         "tailscale up & tailscale-systray"
         "swayidle -w timeout 600 '~/github/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
-        # "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        # "gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Mocha-Mauve'"
+        "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
       ];
-
-      # xwayland.force_zero_scaling = true;
 
       # See https://wiki.hyprland.org/Configuring/Monitors/
       monitor = [
-        "eDP-1,highres,0x0,auto"
-        "DP-1,highres,0x0,auto"
-        "DP-5,highres,1128x0,auto"
-        "DP-6,highres,3048x0,auto"
+        # TODO: I need a better way to separate my home config for my laptop and my desktop
+        # desktop
+        "HDMI-A-1, 1920x1080@144, 0x0, 1"
+        "DP-3, 1920x1080@60, 0x-1080, 1"
+        "DP-1, 1920x1080@75.001, 1920x-500, 1, transform, 1"
+        
+        # laptop
+        # "eDP-1,highres,0x0,auto"
+        # "DP-1,highres,0x0,auto"
+        # "DP-5,highres,1128x0,auto"
+        # "DP-6,highres,3048x0,auto"
+        
         # "DP-6,highres,1128x0,auto"
         # "DP-5,highres,3048x0,auto"
+        
+        # catchall monitor rule
+        ", preferred, auto, 1"
       ];
 
       workspace = [
-        "1, monitor:eDP-1, default:true"
-        "2, monitor:DP-6, default:true"
-        "3, monitor:DP-5, default:true"
+        # desktop setup
+        "1, monitor:HDMI-A-1, default:true"
+        "2, monitor:DP-3, default:true"
+        "3, monitor:DP-1, default:true"
+        
+        # laptop setup
+        # "1, monitor:eDP-1, default:true"
+        # "2, monitor:DP-6, default:true"
+        # "3, monitor:DP-5, default:true"
       ];
 
       misc = {
@@ -237,18 +281,24 @@
         # COLORS
         "col.active_border" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
         "col.inactive_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
-        "col.group_border_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
-        "col.group_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
-        # "col.group_border_locked_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
-        # "col.group_border_locked" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
+        "col.nogroup_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
+        # "col.nogroup_border_active" = 
         resize_on_border = true;
+
+        allow_tearing = true;
 
         layout = "dwindle";
       };
 
+      group = {
+        "col.border_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
+        # "col.border_inactive" = 
+        "col.border_locked_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
+        "col.border_locked_inactive" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
+      };
+
       decoration = {
         rounding = 10;
-        multisample_edges = false;
         drop_shadow = false;
         shadow_range = 4;
         shadow_render_power = 3;
@@ -259,6 +309,7 @@
           size = 3;
           passes = 1;
           new_optimizations = true;
+          xray = true;
         };
       };
 
@@ -267,9 +318,9 @@
       ];
 
       dwindle = {
-          pseudotile = false;
-          preserve_split = true;
-          no_gaps_when_only = true;
+        pseudotile = false;
+        preserve_split = true;
+        no_gaps_when_only = true;
       };
 
       master.new_is_master = false;
@@ -329,7 +380,7 @@
         # Fix tooltips taking away window focus
         # https://github.com/hyprwm/Hyprland/issues/2412
         "nofocus,class:^jetbrains-(?!toolbox),floating:1,title:^win\d+"
-
+        
         "size 20% 40%, class:^(org.kde.kcalc)$"
         "float, class:^(org.kde.kcalc)$"
 
