@@ -260,7 +260,7 @@ in {
       #     "--cap-add=NET_ADMIN"
       #   ];
       # };
-    }
+    };
     # ++ import ./database.nix
     # ++ import ./gameserver.nix
     # ++ import ./mediaserver.nix
