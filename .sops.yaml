@@ -1,3 +1,34 @@
+keys:
+  - &admin_cameron_desktop age1zy4q5gexm35rey768sxuve8h26zj6uulagqg87vjy8383z0c7vgspk6386
+  - &admin_cameron_laptop age1htjdvcdqvwe8rxx23fz2aw97a6c2zxwwu84m25jugh779vqkfg4sg5c83z
+  - &server_talos age1gvvjs8h535cau0qquy9ssyzql648qyzeseu9gd2awnwhlwlufs0qda9zj0
+  - &server_talos2 age15ygfzth73d2q3dm305qg53x6g9u9knau9fytvnrlut4u0usg5cpqeq4s5g
+  - &laptop_gargantuan age1408qgh9ekswerw33ae2yzmfu8la4kq2szl2rwvslx6cpujsfr58ss6q9tx
+creation_rules:
+  - path_regex: secrets[^/]+\.(yml|yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *admin_cameron_desktop
+      - *admin_cameron_laptop
+      - *server_talos
+      - *server_talos2
+      - *laptop_gargantuan
+
+  # Possible to specify which masters can access which keys, like this
+  # - path_regex: secrets(\\|\/)talos(\\|\/)[^/]+\.(yml|yaml|json|env|ini)$
+  #   key_groups:
+  #   - age:
+  #     - *admin_cameron_desktop
+  #     - *admin_cameron_laptop
+  #     - *server_talos
+  # - path_regex: secrets(\\|\/)gargantuan(\\|\/)[^/]+\.(yml|yaml|json|env|ini)$
+  #   key_groups:
+  #   - age:
+  #     - *admin_cameron_desktop
+  #     - *admin_cameron_laptop
+
+
+
 # Call these "master keys", they can access the secrets
 # specified below (authorized users/hosts)
 
@@ -13,33 +44,9 @@
 # 1. Install ssh-to-age
   # go install github.com/Mic92/ssh-to-age/cmd/ssh-to-age@latest
   # nix-shell -p 'import (fetchTarball "https://github.com/Mic92/ssh-to-age/archive/main.tar.gz") {}'
-# 2. Create a key
+# 2. Create a key from an SSH priv key
   # ssh-to-age -private-key -i $HOME/.ssh/id_ed25519 -o $HOME\AppData\Roaming\sops\age\keys.txt
   # ssh-to-age -private-key -i $HOME/.ssh/id_ed25519 -o $HOME\.config\sops\age\keys.txt
+# 2. Create a key from an SSH host key
+  # ssh-keyscan -t ed25519 192.168.0.6 | ssh-to-age
 
-keys:
-  - &admin_cameron_desktop age1zy4q5gexm35rey768sxuve8h26zj6uulagqg87vjy8383z0c7vgspk6386
-  - &admin_cameron_laptop age1htjdvcdqvwe8rxx23fz2aw97a6c2zxwwu84m25jugh779vqkfg4sg5c83z
-  - &server_talos age1gvvjs8h535cau0qquy9ssyzql648qyzeseu9gd2awnwhlwlufs0qda9zj0
-  - &laptop_gargantuan age1408qgh9ekswerw33ae2yzmfu8la4kq2szl2rwvslx6cpujsfr58ss6q9tx
-creation_rules:
-  - path_regex: secrets[^/]+\.(yml|yaml|json|env|ini)$
-    key_groups:
-    - age:
-      - *admin_cameron_desktop
-      - *admin_cameron_laptop
-      - *server_talos
-      - *laptop_gargantuan
-
-  # Possible to specify which masters can access which keys, like this
-  # - path_regex: secrets(\\|\/)talos(\\|\/)[^/]+\.(yml|yaml|json|env|ini)$
-  #   key_groups:
-  #   - age:
-  #     - *admin_cameron_desktop
-  #     - *admin_cameron_laptop
-  #     - *server_talos
-  # - path_regex: secrets(\\|\/)gargantuan(\\|\/)[^/]+\.(yml|yaml|json|env|ini)$
-  #   key_groups:
-  #   - age:
-  #     - *admin_cameron_desktop
-  #     - *admin_cameron_laptop
