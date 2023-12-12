@@ -16,6 +16,7 @@ let
   cloudflare_apikey = "$__file{${secrets.cloudflare_apikey.path}}";
   webtrees_password = import /run/secrets/webtrees_password;
   postgres_password = import /run/secrets/postgres_password;
+  mullvad_privKey = import /run/secrets/mullvad_privKey;
   
   # Store the secret file's path (/run/secrets/<keyName>)
   # mysql_password = config.sops.secrets.mysql_password.path;
