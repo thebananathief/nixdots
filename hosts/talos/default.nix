@@ -3,8 +3,6 @@
   nixos-hardware,
   ...
 }: {
-  networking.hostName = "talos";
-
   imports = [
     nixos-hardware.nixosModules.common-pc
     nixos-hardware.nixosModules.common-pc-ssd
@@ -15,6 +13,26 @@
     ./containers
     sops-nix.nixosModules.sops
   ];
+
+  networking = {
+    hostName = "talos";
+    wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        443   # Traefik entrypoint >> overseerr, webtrees, filebrowser, static files, jellyfin
+      ];
+      # allowedUDPPorts = [ ]; # TODO: gameserver ports?
+    };
+  };
+
+  boot.loader.systemd-boot = {
+    enable = true;
+    configurationLimit = 30; # Helpful to prevent running out of space on /boot (gc handles it already tho)
+    # consoleMode = "max";
+  };
+  boot.loader.efi.canTouchEfiVariables = true;
   
   services.openssh = {
     enable = true;
@@ -76,8 +94,6 @@
     };
   };
 
-
-
   # TODO: Make sure to use passwd to change the password after logon!
   users.users.cameron = {
     isNormalUser = true;
@@ -97,18 +113,6 @@
     ];
   };
 
-  networking = {
-    wireless.enable = false;  # Enables wireless support via wpa_supplicant.
-
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [
-        443   # Traefik entrypoint >> overseerr, webtrees, filebrowser, static files, jellyfin
-      ];
-      # allowedUDPPorts = [ ]; # TODO: gameserver ports?
-    };
-  };
-
   security.pam.enableSSHAgentAuth = true;
 
   services = {
@@ -119,7 +123,7 @@
     cron = {
       enable = true;
       systemCronJobs = [
-        # Healthcheck to make sure TALOS is online 24/7
+        # Healthcheck to ensure TALOS is online
         "*/15 * * * * curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/${ healthcheck_uptime_uuid }"
       ]
     };
@@ -128,10 +132,10 @@
       authKeyFile = "/run/secrets/tailscale_authkey";
       extraUpFlags = [
         "--advertise-routes=192.168.0.0/24"
-        "--advertise-exit-node"
+        # "--advertise-exit-node"
       ];
     };
   };
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
 }
