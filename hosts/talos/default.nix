@@ -118,7 +118,6 @@
 
   security.pam.enableSSHAgentAuth = true;
 
-  healthcheck_uptime_uuid = "$__file{${config.sops.secrets.healthcheck_uptime_uuid.path}}";
   services = {
     fail2ban = {
       enable = true;
@@ -128,7 +127,7 @@
       enable = true;
       systemCronJobs = [
         # Healthcheck to ensure TALOS is online
-        "*/15 * * * * curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/${ healthcheck_uptime_uuid }"
+        "*/15 * * * * curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$__file{${config.sops.secrets.healthcheck_uptime_uuid.path}}"
       ];
     };
     tailscale = {

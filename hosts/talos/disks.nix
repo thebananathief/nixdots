@@ -1,4 +1,8 @@
-{ ... }:
+{ 
+  pkgs,
+  config,
+  ...
+}:
 {
   environment.systemPackages = with pkgs; [
     mergerfs
@@ -47,7 +51,7 @@
   # This is my attempt to add a healthcheck ping to the snapraid-sync
   # service that services.snapraid creates.
   systemd.services.snapraid-sync.serviceConfig.postStart = ''
-    curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/${ healthcheck_snapraid_uuid }
+    curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$__file{${config.sops.secrets.healthcheck_uptime_uuid.path}}
   '';
 
   # Make sure the device defines the mountpoints you want to merge
