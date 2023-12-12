@@ -103,23 +103,23 @@ in {
           DB_USER = "root";
           DB_PASSWORD = "${ mysql_password }";
           DB_HOST = "mysql";
-          DB_PORT = 3306;
+          DB_PORT = "3306";
           DB_NAME = "general"; # TODO: migrate "general" to "webtrees" (db name)
           WT_ADMIN = "thebananathief";
           WT_ADMINMAIL = "${ email_address }";
           WT_ADMINPW = "${ webtrees_password }";
           GROUP_ID = "${ main_gid }";
-          PORT = 8079;
+          PORT = "8079";
           DISABLE_SSL = "TRUE";
           PRETTYURLS = "TRUE";
           BASE_URL = "https://tree.${ main_domain }";
         };
         dependsOn = [ "mysql" ];
         labels = {
-          "traefik.enable" = true;
+          "traefik.enable" = "true";
           "traefik.http.routers.webtrees.rule" = "Host(`tree.${ main_domain }`)";
           "traefik.http.routers.webtrees.entrypoints" = "websecure";
-          "traefik.http.services.webtrees.loadbalancer.server.port" = 8079;
+          "traefik.http.services.webtrees.loadbalancer.server.port" = "8079";
         };
         # extraOptions = [
         #   "--network=public_access,database_only";
@@ -136,7 +136,7 @@ in {
         #   "--network=public_access";
         # ];
         labels = {
-          "traefik.enable" = true;
+          "traefik.enable" = "true";
           "traefik.http.routers.filebrowser.rule" = "Host(`files.${ main_domain }`)";
           "traefik.http.routers.filebrowser.entrypoints" = "websecure";
         };
@@ -151,7 +151,7 @@ in {
         #   "--network=public_access";
         # ];
         labels = {
-          "traefik.enable" = true;
+          "traefik.enable" = "true";
           "traefik.http.routers.static.rule" = "Host(`static.${ main_domain }`)";
           "traefik.http.routers.static.entrypoints" = "websecure";
         };
@@ -174,7 +174,7 @@ in {
           }
           '';
           CMD_DOMAIN = "notes.${ main_domain }";
-          CMD_PROTOCOL_USESSL = true; #optional - use if on a reverse proxy
+          CMD_PROTOCOL_USESSL = "true"; #optional - use if on a reverse proxy
           # CMD_URL_ADDPORT = false; #optional
           # CMD_PORT = 3000; #optional
           # CMD_ALLOW_ORIGIN = "['localhost']"; #optional
@@ -183,10 +183,10 @@ in {
         #   "--network=public_access,database_only";
         # ];
         labels = {
-          "traefik.enable" = true;
+          "traefik.enable" = "true";
           "traefik.http.routers.hedgedoc.rule" = "Host(`notes.${ main_domain }`)";
           "traefik.http.routers.hedgedoc.entrypoints" = "websecure";
-          "traefik.http.services.hedgedoc.loadbalancer.server.port" = 3000;
+          "traefik.http.services.hedgedoc.loadbalancer.server.port" = "3000";
         };
       };
       rss = {
@@ -199,7 +199,7 @@ in {
           PUID = "${ main_uid }";
           PGID = "${ main_gid }";
           DB_HOST = "postgres";
-          DB_PORT = 5432;
+          DB_PORT = "5432";
           DB_USER = "postgres";
           DB_PASS = "${ postgres_password }";
         };
@@ -210,7 +210,7 @@ in {
         ];
         dependsOn = [ "postgres" ];
         labels = {
-          "traefik.enable" = true;
+          "traefik.enable" = "true";
           "traefik.http.routers.rss.rule" = "Host(`rss.${ main_domain }`)";
           "traefik.http.routers.rss.entrypoints" = "websecure";
         };
