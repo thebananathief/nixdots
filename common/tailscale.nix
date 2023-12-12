@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   services.tailscale = {
     enable = true;
-    useRoutingFeatures = "client";
+    useRoutingFeatures = lib.mkDefault "client";
     # authKeyFile = "/run/secrets/tailscale_key";
     # authKeyFile required for the extraUpFlags attr
     # extraUpFlags = [

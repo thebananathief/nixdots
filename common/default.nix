@@ -10,7 +10,7 @@
     gc = {
       automatic = true;
       dates = "weekly";
-      options = pkgs.lib.mkDefault "--delete-older-than 7d";
+      options = lib.mkDefault "--delete-older-than 7d";
     };
 
     settings = {
