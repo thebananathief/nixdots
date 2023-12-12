@@ -4,8 +4,8 @@
   ...
 }: {
   imports = [
-    nixos-hardware.nixosModules.common-pc
-    nixos-hardware.nixosModules.common-pc-ssd
+    # nixos-hardware.nixosModules.common-pc
+    # nixos-hardware.nixosModules.common-pc-ssd
     nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
     ./fileshares.nix
