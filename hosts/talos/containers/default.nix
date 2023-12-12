@@ -156,39 +156,39 @@ in {
           "traefik.http.routers.static.entrypoints" = "websecure";
         };
       };
-      hedgedoc = {
-        image = "lscr.io/linuxserver/hedgedoc:latest";
-        volumes = [
-          "${ appdata_path }/hedgedoc:/config"
-        ];
-        environment = {
-          # DB_HOST = "mysql";
-          # DB_PORT = 3306;
-          # DB_USER = "root";
-          # DB_PASS = "${ mysql_password }";
-          # DB_NAME = "hedgedoc";
-          CMD_CONFIG_FILE = ''
-          {
-            "dialect": "sqlite",
-            "storage": "/config/hedgedoc.sqlite"
-          }
-          '';
-          CMD_DOMAIN = "notes.${ main_domain }";
-          CMD_PROTOCOL_USESSL = "true"; #optional - use if on a reverse proxy
-          # CMD_URL_ADDPORT = false; #optional
-          # CMD_PORT = 3000; #optional
-          # CMD_ALLOW_ORIGIN = "['localhost']"; #optional
-        } ++ linuxserver_env;
-        # extraOptions = [
-        #   "--network=public_access,database_only";
-        # ];
-        labels = {
-          "traefik.enable" = "true";
-          "traefik.http.routers.hedgedoc.rule" = "Host(`notes.${ main_domain }`)";
-          "traefik.http.routers.hedgedoc.entrypoints" = "websecure";
-          "traefik.http.services.hedgedoc.loadbalancer.server.port" = "3000";
-        };
-      };
+      # hedgedoc = {
+      #   image = "lscr.io/linuxserver/hedgedoc:latest";
+      #   volumes = [
+      #     "${ appdata_path }/hedgedoc:/config"
+      #   ];
+      #   environment = {
+      #     # DB_HOST = "mysql";
+      #     # DB_PORT = 3306;
+      #     # DB_USER = "root";
+      #     # DB_PASS = "${ mysql_password }";
+      #     # DB_NAME = "hedgedoc";
+      #     CMD_CONFIG_FILE = ''
+      #     {
+      #       "dialect": "sqlite",
+      #       "storage": "/config/hedgedoc.sqlite"
+      #     }
+      #     '';
+      #     CMD_DOMAIN = "notes.${ main_domain }";
+      #     CMD_PROTOCOL_USESSL = "true"; #optional - use if on a reverse proxy
+      #     # CMD_URL_ADDPORT = false; #optional
+      #     # CMD_PORT = 3000; #optional
+      #     # CMD_ALLOW_ORIGIN = "['localhost']"; #optional
+      #   } ++ linuxserver_env;
+      #   # extraOptions = [
+      #   #   "--network=public_access,database_only";
+      #   # ];
+      #   labels = {
+      #     "traefik.enable" = "true";
+      #     "traefik.http.routers.hedgedoc.rule" = "Host(`notes.${ main_domain }`)";
+      #     "traefik.http.routers.hedgedoc.entrypoints" = "websecure";
+      #     "traefik.http.services.hedgedoc.loadbalancer.server.port" = "3000";
+      #   };
+      # };
       rss = {
         image = "wangqiru/ttrss:latest";
         volumes = [
