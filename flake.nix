@@ -49,11 +49,11 @@
       useremail = "cameron.salomone@gmail.com";
       
       globalFonts = {
-        serif = "Gelasio";
+        serif = "Noto Serif";
         monospace = "JetBrainsMono Nerd Font";
         # was M+2 (for waybar)
         prettyNerd = "M+2 Nerd Font";
-        sansSerif = "Lexend";
+        sansSerif = "Noto Sans";
       };
 
       nixosSystem = import ./lib/nixosSystem.nix;

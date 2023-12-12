@@ -50,6 +50,9 @@
         "GBM_BACKEND,nvidia-drm"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
         "XDG_SESSION_TYPE,wayland"
+
+        # Screen tearing
+        "WLR_DRM_NO_ATOMIC,1"
       ];
 
       # https://wiki.hyprland.org/Configuring/Binds/
@@ -203,8 +206,8 @@
         # "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
         
         "hyprpaper"
-        "blueman-applet"
         "waybar"
+        "blueman-applet"
         # "nm-applet --indicator" # started by nixos module
         "mega-cmd"
         "fusuma -d"
@@ -290,12 +293,12 @@
         layout = "dwindle";
       };
 
-      group = {
-        "col.border_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
+      # group = {
+      #   "col.border_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
         # "col.border_inactive" = 
-        "col.border_locked_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
-        "col.border_locked_inactive" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
-      };
+        # "col.border_locked_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
+        # "col.border_locked_inactive" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
+      # };
 
       decoration = {
         rounding = 10;

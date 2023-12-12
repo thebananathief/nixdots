@@ -7,7 +7,7 @@
   ... 
 }: {
   imports = [ 
-    nixos-hardware.nixosModules.framework
+    nixos-hardware.nixosModules.framework-11th-gen-intel
     ./hardware-configuration.nix
     ./packages.nix
     # ../../modules/games.nix
@@ -20,6 +20,9 @@
     networkmanager.enable = true;
     wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   };
+
+  # Was causing errors for me earlier, so I added this line
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
   
   sops = {
     defaultSopsFile = ../../secrets.yml;
