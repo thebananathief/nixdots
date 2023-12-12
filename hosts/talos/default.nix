@@ -118,6 +118,7 @@
 
   security.pam.enableSSHAgentAuth = true;
 
+  healthcheck_uptime_uuid = "$__file{${config.sops.secrets.healthcheck_uptime_uuid.path}}";
   services = {
     fail2ban = {
       enable = true;
