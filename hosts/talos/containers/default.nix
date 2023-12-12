@@ -229,6 +229,8 @@ in {
         };
         # extraOptions = [ "--network=public_access" ];
 
+        # TODO: Prefer config only with labels - Take from appdata backup's traefik.yml
+
         # -- OLD DCP FILE --
         # command:
         # - "--entrypoints.mumble_tcp.address=:64738"
@@ -261,7 +263,4 @@ in {
     ++ import ./mediaserver.nix
     ++ import ./monitoring.nix;
   };
-
-  /opt/appdata/traefik/traefik.yml
-
 }
