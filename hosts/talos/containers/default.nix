@@ -193,8 +193,8 @@ in {
         ];
         environment = {
           SELF_URL_PATH = "https://rss.${ main_domain }/";
-          PUID = ${ main_uid };
-          PGID = ${ main_gid };
+          PUID = "${ main_uid }";
+          PGID = "${ main_gid }";
           DB_HOST = "postgres";
           DB_PORT = 5432;
           DB_USER = "postgres";
