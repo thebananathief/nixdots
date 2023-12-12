@@ -1,6 +1,9 @@
 { 
   pkgs, 
   nixos-hardware,
+  lib, 
+  sops-nix, 
+  config, 
   ...
 }: {
   imports = [
