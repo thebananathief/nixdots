@@ -66,6 +66,7 @@
         "$mainMod, U, exec, hyprctl activewindow | yad --text-info --width 50 --height 400 --no-buttons --undecorated --escape-ok"
         "$mainMod, Y, exec, killall .waybar-wrapped ; waybar"
         "$mainMod, Y, exec, killall .fusuma-wrapped ; fusuma -d"
+        "$mainMod, Y, exec, killall blueman-applet ; blueman-applet"
         
         # Media key binds
         ", XF86AudioMute, exec, pamixer -t"
