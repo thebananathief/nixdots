@@ -261,9 +261,9 @@ in {
       #   ];
       # };
     }
-    ++ import ./database.nix
-    ++ import ./gameserver.nix
-    ++ import ./mediaserver.nix
-    ++ import ./monitoring.nix;
+    # ++ import ./database.nix
+    # ++ import ./gameserver.nix
+    # ++ import ./mediaserver.nix
+    # ++ import ./monitoring.nix;
   };
 }
