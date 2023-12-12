@@ -125,7 +125,7 @@
       systemCronJobs = [
         # Healthcheck to ensure TALOS is online
         "*/15 * * * * curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/${ healthcheck_uptime_uuid }"
-      ]
+      ];
     };
     tailscale = {
       useRoutingFeatures = "server";
