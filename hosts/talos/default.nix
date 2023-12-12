@@ -45,7 +45,7 @@
       X11Forwarding = false;
       UseDns = false;
       PasswordAuthentication = false;
-      kbdInteractiveAuthentication = false; # None of the authentication methods use this I think, so it should never be enabled, yet it defaults to yes in openssh
+      KbdInteractiveAuthentication = false; # None of the authentication methods use this I think, so it should never be enabled, yet it defaults to yes in openssh
       PermitRootLogin = "no";
       AllowGroups = [ "allowssh" ];
       LogLevel = "INFO"; # Adjusted so that fail2ban doesn't set it to VERBOSE
