@@ -6,8 +6,7 @@
   linuxserver_env,
   main_uid,
   main_gid,
-  nordvpn_user,
-  nordvpn_pass,
+  mullvad_privKey,
   ...
 }: {
   plex = {
