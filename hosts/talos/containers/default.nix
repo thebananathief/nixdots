@@ -48,7 +48,7 @@ in {
       autoPrune.enable = true;
       autoPrune.flags = [
         "--all"
-      ]
+      ];
     };
 
     oci-containers.backend = "podman";
