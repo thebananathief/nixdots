@@ -17,6 +17,7 @@ let
   webtrees_password = import /run/secrets/webtrees_password;
   postgres_password = import /run/secrets/postgres_password;
   mullvad_privKey = import /run/secrets/mullvad_privKey;
+  mumble_superpassword = import /run/secrets/mumble_superpassword;
   
   # Store the secret file's path (/run/secrets/<keyName>)
   # mysql_password = config.sops.secrets.mysql_password.path;
@@ -24,7 +25,6 @@ let
   # Read the file at /run/secrets/<keyName> (but through import) and store it
   # Could you also use import declaratively like above?
   # mysql_password = import /run/secrets/mysql_password;
-  # mumble_superpassword = import /run/secrets/mumble_superpassword;
   # webtrees_password = import /run/secrets/webtrees_password;
   # email_address = import /run/secrets/email_address;
   # main_domain = import /run/secrets/main_domain;
