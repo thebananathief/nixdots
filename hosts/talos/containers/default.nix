@@ -33,8 +33,8 @@ let
     TZ = config.time.timeZone;
   };
 
-  allContainers = import ./misc.nix
-    // import ./database.nix;
+  allContainers = (import ./misc.nix)
+    // (import ./database.nix);
     # // import ./gameserver.nix
     # // import ./mediaserver.nix
     # // import ./monitoring.nix;

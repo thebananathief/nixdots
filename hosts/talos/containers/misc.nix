@@ -1,9 +1,14 @@
-
 {
-  # whoami = {
-  #   image = "traefik/whoami:latest";
-  #   ports = [ "80:80" ];
-  # };
+  appdata_path, 
+  storage_path, 
+  gameserver_path,
+  ...
+}:
+{
+  whoami = {
+    image = "traefik/whoami:latest";
+    ports = [ "80:80" ];
+  };
   # dashy = {
   #   image = "lissy93/dashy:latest";
   #   volumes = [
