@@ -1,5 +1,7 @@
 { pkgs, lib, inputs, ... }: rec {
   imports = [
+    ../cameron/zsh.nix
+    ../cameron/git.nix
   ];
 
   home.username = "cameron";
