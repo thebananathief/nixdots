@@ -25,6 +25,7 @@
       enable = true;
       allowedTCPPorts = [
         443   # Traefik entrypoint >> overseerr, webtrees, filebrowser, static files, jellyfin
+        4733
       ];
       # allowedUDPPorts = [ ]; # TODO: gameserver ports?
     };
@@ -47,7 +48,7 @@
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false; # None of the authentication methods use this I think, so it should never be enabled, yet it defaults to yes in openssh
       PermitRootLogin = "no";
-      AllowGroups = [ "allowssh" ];
+      # AllowGroups = [ "allowssh" ];
       LogLevel = "INFO"; # Adjusted so that fail2ban doesn't set it to VERBOSE
     };
     extraConfig = ''
