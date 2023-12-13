@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }: {
   environment = {
     systemPackages = with pkgs; [
-      pistol
       fzf
       zsh-fzf-tab
       ripgrep
@@ -27,11 +26,15 @@
       universal-ctags
     ];
     shells = [ pkgs.zsh ];
+    # shells = [ pkgs.fish ];
     pathsToLink = [ "/share/zsh" ];
   };
   users.defaultUserShell = pkgs.zsh;
+  # users.defaultUserShell = pkgs.fish;
 
   programs = {
+    # fish.enable = true;
+
     zsh = {
       enable = true;
       ohMyZsh = {

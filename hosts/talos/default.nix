@@ -52,11 +52,11 @@
       LogLevel = "INFO"; # Adjusted so that fail2ban doesn't set it to VERBOSE
     };
     extraConfig = ''
-      PermitEmptyPasswords No
+PermitEmptyPasswords No
     '';
     banner = ''-- WARNING --
-      Unauthorized access to this system is forbidden and will be prosecuted by law.
-      By accessing this system, you agree that your actions may be monitored if unauthorized usage is suspected.
+Unauthorized access to this system is forbidden and will be prosecuted by law.
+By accessing this system, you agree that your actions may be monitored if unauthorized usage is suspected.
     '';
   };
 
