@@ -1,8 +1,5 @@
 {
-  appdata_path, 
-  storage_path, 
   gameserver_path,
-  ...
 }: 
 {
   virtualisation.oci-containers.containers = {
