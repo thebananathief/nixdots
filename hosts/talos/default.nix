@@ -108,9 +108,9 @@
     # Public keys that are authorized for SSH access
     openssh.authorizedKeys.keyFiles = [
       ''
-        /run/secrets/sshPub_desktop
-        /run/secrets/sshPub_laptop
-        /run/secrets/sshPub_phone
+        ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII9BZbMAtMIr0ZZKPwxIDTq7qZMjNVDI1ktg3r+DSCdv desktop
+        ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFagsyJw/RCCgkgXtOYKeNF0NH8VABZ0WP+14yeq1/5k laptop
+        ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFfIygbp1DdDJUCAlUHbrdzu7cnb7T/JTDexJtpMXCIz cameron@phone
       ''
     ];
   };
