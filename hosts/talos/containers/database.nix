@@ -8,7 +8,7 @@
 {
   imports = [
     ./secr.nix
-  ]
+  ];
 
   # adminer = {
   #   image = "adminer"; # https://hub.docker.com/_/adminer
