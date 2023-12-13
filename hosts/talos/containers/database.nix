@@ -10,7 +10,7 @@
       "${ appdata_path }/postgres/data/:/var/lib/postgresql/data" # TODO: Migrate to /mnt/storage ? performance considerations?
     ];
     environment = {
-      POSTGRES_PASSWORD = "${ postgres_password }";
+      # POSTGRES_PASSWORD = "${ postgres_password }";
     };
     # extraOptions = [ "--network=database_only" ];
   };
@@ -21,7 +21,7 @@
     ];
     ports = [ "3306:3306" ];
     environment = {
-      MYSQL_ROOT_PASSWORD = "${ mysql_password }";
+      # MYSQL_ROOT_PASSWORD = "${ mysql_password }";
     };
     # extraOptions = [ "--network=database_only" ];
   };
