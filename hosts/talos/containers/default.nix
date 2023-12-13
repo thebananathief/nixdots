@@ -25,6 +25,11 @@ let
   # main_domain = "$__file{${secrets.main_domain.path}}";
   main_domain = "talos.host";
 
+  dbVars = {
+    mysql_password = "asd123asd123";
+    postgres_password = "123asd123asd";
+  };
+
   main_uid = "1000";
   main_gid = "100";
 
@@ -38,7 +43,7 @@ let
 
   allContainers = 
     (import ./misc.nix) //
-    (import ./database.nix {inherit mysql_password; inherit postgres_password;}); # //
+    (import ./database.nix {inherit dbVars;}); # //
     # (import ./gameserver.nix) //
     # (import ./mediaserver.nix) //
     # (import ./monitoring.nix);
