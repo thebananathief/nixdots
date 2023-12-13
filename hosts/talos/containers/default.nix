@@ -48,10 +48,10 @@ in {
     oci-containers.backend = "podman";
 
     oci-containers.containers = {
-      whoami = {
-        image = "traefik/whoami:latest";
-        ports = [ "80:80" ];
-      };
+      # whoami = {
+      #   image = "traefik/whoami:latest";
+      #   ports = [ "80:80" ];
+      # };
       # dashy = {
       #   image = "lissy93/dashy:latest";
       #   volumes = [
@@ -256,9 +256,9 @@ in {
       #     "--cap-add=NET_ADMIN"
       #   ];
       # };
-    };
+    }
+    ++ import ./gameserver.nix;
     # ++ import ./database.nix
-    # ++ import ./gameserver.nix
     # ++ import ./mediaserver.nix
     # ++ import ./monitoring.nix;
   };
