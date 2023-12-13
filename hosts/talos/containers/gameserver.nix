@@ -1,7 +1,7 @@
 {
   appdata_path, 
   storage_path, 
-  gameserver_path ? "/ssd/gameservers",
+  gameserver_path,
   ...
 }: 
 {
