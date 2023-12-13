@@ -46,7 +46,7 @@ in {
   imports = [
     # ./misc.nix
     # ./database.nix
-    ./gameserver.nix { gameserver_path = "/ssd/gameservers"; }
+    ./gameserver.nix
     # ./mediaserver.nix
     # ./monitoring.nix
   ];

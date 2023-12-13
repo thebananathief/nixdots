@@ -2,7 +2,9 @@
   gameserver_path,
   ...
 }: 
-{
+let
+  gameserver_path = "/ssd/gameservers";
+in {
   virtualisation.oci-containers.containers = {
     kf2 = {
       image = "kr0nus/kf2server:latest";
