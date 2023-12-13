@@ -5,10 +5,10 @@
   ...
 }:
 {
-  # whoami = {
-  #   image = "traefik/whoami:latest";
-  #   ports = [ "80:80" ];
-  # };
+  whoami = {
+    image = "traefik/whoami:latest";
+    ports = [ "80:80" ];
+  };
   # dashy = {
   #   image = "lissy93/dashy:latest";
   #   volumes = [
@@ -213,4 +213,4 @@
   #     "--cap-add=NET_ADMIN"
   #   ];
   # };
-};
+}

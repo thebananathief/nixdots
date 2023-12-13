@@ -33,12 +33,11 @@ let
     TZ = config.time.timeZone;
   };
 
-  allContainers = 
-    import ./misc.nix
-    // import ./gameserver.nix
-    // import ./database.nix
-    // import ./mediaserver.nix
-    // import ./monitoring.nix;
+  allContainers = import ./misc.nix
+    # // import ./gameserver.nix
+    # // import ./database.nix
+    # // import ./mediaserver.nix
+    # // import ./monitoring.nix;
 in {
   virtualisation = {
     oci-containers.backend = "podman";
