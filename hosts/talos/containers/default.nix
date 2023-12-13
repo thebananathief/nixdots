@@ -36,13 +36,13 @@ let
     TZ = config.time.timeZone;
   };
 
-  allContainers = (
+  allContainers = 
     (import ./misc.nix) //
-    (import ./database.nix {inherit mysql_password; inherit postgres_password;}) # //
+    (import ./database.nix {inherit mysql_password; inherit postgres_password;}); # //
     # (import ./gameserver.nix) //
     # (import ./mediaserver.nix) //
     # (import ./monitoring.nix);
-  {inherit appdata_path;});
+
 in {
   virtualisation = {
     oci-containers.backend = "podman";
