@@ -1,5 +1,6 @@
 {
   gameserver_path,
+  ...
 }: 
 {
   virtualisation.oci-containers.containers = {
