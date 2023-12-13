@@ -7,22 +7,29 @@
       "label": "git acp",
       "command": "git add --all && git commit -m 'talos deployment'",
       "type": "shell",
-      "group": "build",
+      "group": {
+        "kind": "build"
+      },
       "presentation": {
         "reveal": "always",
         "panel": "new"
-      }
+      },
+      "problemMatcher": []
     },
     {
       "label": "rebuild talos",
       "command": "ssh talos -- ./github/nixdots/quickbuild",
       "type": "shell",
-      "group": "build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
       "presentation": {
         "reveal": "always",
         "panel": "new"
       },
-      "dependsOn": "git acp"
+      "dependsOn": "git acp",
+      "problemMatcher": []
     }
   ]
 }

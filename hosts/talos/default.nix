@@ -121,8 +121,9 @@ By accessing this system, you agree that your actions may be monitored if unauth
     cron = {
       enable = true;
       systemCronJobs = [
+        # $__file{${config.sops.secrets.healthcheck_uptime_uuid.path}}
         # Healthcheck to ensure TALOS is online
-        "*/15 * * * * curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$__file{${config.sops.secrets.healthcheck_uptime_uuid.path}}"
+        "*/15 * * * * curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/855c9b0c-0630-4d21-8f11-14003b34628e"
       ];
     };
     tailscale = {
