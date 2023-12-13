@@ -47,7 +47,7 @@ in {
   imports = [
     # ./misc.nix
     # ./database.nix
-    ( ./gameserver.nix { inherit gameserver_path; })
+    ./gameserver.nix { gameserver_path = gameserver_path; }
     # ./mediaserver.nix
     # ./monitoring.nix
   ];
