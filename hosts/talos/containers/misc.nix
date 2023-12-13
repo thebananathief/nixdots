@@ -1,9 +1,9 @@
-# {
-#   appdata_path, 
-#   storage_path, 
-#   gameserver_path,
-#   ...
-# }:
+{
+  appdata_path, 
+  storage_path, 
+  gameserver_path,
+  ...
+}:
 {
   whoami = {
     image = "traefik/whoami:latest";

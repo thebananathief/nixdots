@@ -1,15 +1,11 @@
-# {
-#   appdata_path, 
-#   storage_path,
-#   postgres_password,
-#   mysql_password,
-#   ...
-# }:
 {
-  imports = [
-    ./secr.nix
-  ];
-
+  appdata_path, 
+  storage_path,
+  postgres_password,
+  mysql_password,
+  ...
+}:
+{
   # adminer = {
   #   image = "adminer"; # https://hub.docker.com/_/adminer
   #   ports = [ "8085:8080" ];
