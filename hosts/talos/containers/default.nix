@@ -33,7 +33,7 @@ let
     TZ = config.time.timeZone;
   };
 in {
-  imports = [
+  imports = { gameserver_path }: [
     ./gameserver.nix
     # ++ import ./gameserver.nix;
     # ++ import ./database.nix
