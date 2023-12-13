@@ -48,27 +48,27 @@ in {
     oci-containers.backend = "podman";
 
     oci-containers.containers = {
-      dashy = {
-        image = "lissy93/dashy:latest";
-        volumes = [
-          "${ appdata_path }/dashy/config.yml:/app/public/conf.yml"
-          "${ appdata_path }/dashy/logos:/app/public/item-icons"
-        ];
-        ports = [ "8081:80" ];
-        environment = {
-          NODE_ENV = "production";
-          UID = "${ linuxserver_env.PUID }";
-          GID = "${ main_gid }";
-        };
-        # BUG: Errors with this for some reason
-        # extraOptions = [
-        #   "--health-cmd='[CMD, node, /app/services/healthcheck]'"
-        #   "--health-interval=1m30s"
-        #   "--health-retries=3"
-        #   "--health-start-period=40s"
-        #   "--health-timeout=10s"
-        # ];
-      };
+      # dashy = {
+      #   image = "lissy93/dashy:latest";
+      #   volumes = [
+      #     "${ appdata_path }/dashy/config.yml:/app/public/conf.yml"
+      #     "${ appdata_path }/dashy/logos:/app/public/item-icons"
+      #   ];
+      #   ports = [ "8081:80" ];
+      #   environment = {
+      #     NODE_ENV = "production";
+      #     UID = "${ linuxserver_env.PUID }";
+      #     GID = "${ main_gid }";
+      #   };
+      #   # BUG: Errors with this for some reason
+      #   extraOptions = [
+      #     "--health-cmd='[CMD, node, /app/services/healthcheck]'"
+      #     "--health-interval=1m30s"
+      #     "--health-retries=3"
+      #     "--health-start-period=40s"
+      #     "--health-timeout=10s"
+      #   ];
+      # };
       # mumble = {
       #   image = "mumblevoip/mumble-server:latest"; # https://github.com/Theofilos-Chamalis/mumble-web
       #   volumes = [
