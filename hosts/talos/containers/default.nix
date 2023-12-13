@@ -33,7 +33,7 @@ let
     TZ = config.time.timeZone;
   };
 
-  allContainers = import ./misc.nix
+  allContainers = { appdata_path, mysql_password, postgres_password }: import ./misc.nix
     // import ./database.nix;
     # // import ./gameserver.nix
     # // import ./mediaserver.nix
