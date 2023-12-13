@@ -19,10 +19,10 @@ let
   # postgres_password = "$__file{${secrets.postgres_password.path}}";
   # mullvad_privKey = "$__file{${secrets.mullvad_privKey.path}}";
 
-  main_domain = builtins.readFile secrets.main_domain.path;
+  # main_domain = builtins.readFile secrets.main_domain.path;
   # main_domain = readFile /run/secrets/main_domain;
   # main_domain = "$__file{${secrets.main_domain.path}}";
-  # main_domain = import /run/secrets/main_domain;
+  main_domain = import /run/secrets/main_domain;
 
   # Read the file at /run/secrets/<keyName> (but through import) and store it
   # Could you also use import declaratively like above?
