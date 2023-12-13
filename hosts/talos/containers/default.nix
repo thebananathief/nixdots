@@ -33,6 +33,14 @@ let
     TZ = config.time.timeZone;
   };
 in {
+  imports = [
+    ./gameserver.nix
+    # ++ import ./gameserver.nix;
+    # ++ import ./database.nix
+    # ++ import ./mediaserver.nix
+    # ++ import ./monitoring.nix;
+  ];
+
   virtualisation = {
     podman = {
       enable = true;
@@ -256,10 +264,6 @@ in {
       #     "--cap-add=NET_ADMIN"
       #   ];
       # };
-    }
-    ++ import ./gameserver.nix;
-    # ++ import ./database.nix
-    # ++ import ./mediaserver.nix
-    # ++ import ./monitoring.nix;
+    };
   };
 }
