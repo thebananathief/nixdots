@@ -82,8 +82,6 @@
       mysql_password = {};
       postgres_password = {};
       webtrees_password = {};
-      nordvpn_user = {};
-      nordvpn_pass = {};
       tailscale_authkey = {};
       ssh_port = {};
       discord_webhook_id = {};
@@ -91,7 +89,6 @@
       cloudflare_api = {};
       healthcheck_snapraid_uuid = {};
       healthcheck_uptime_uuid = {};
-      sshPub_phone = {};
       ssh_github = {};
     };
   };
@@ -106,12 +103,10 @@
       "allowssh" # allows this user to login via ssh
     ];
     # Public keys that are authorized for SSH access
-    openssh.authorizedKeys.keyFiles = [
-      ''
-        ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII9BZbMAtMIr0ZZKPwxIDTq7qZMjNVDI1ktg3r+DSCdv desktop
-        ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFagsyJw/RCCgkgXtOYKeNF0NH8VABZ0WP+14yeq1/5k laptop
-        ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFfIygbp1DdDJUCAlUHbrdzu7cnb7T/JTDexJtpMXCIz cameron@phone
-      ''
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII9BZbMAtMIr0ZZKPwxIDTq7qZMjNVDI1ktg3r+DSCdv desktop"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFagsyJw/RCCgkgXtOYKeNF0NH8VABZ0WP+14yeq1/5k laptop"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFfIygbp1DdDJUCAlUHbrdzu7cnb7T/JTDexJtpMXCIz cameron@phone"
     ];
   };
 
