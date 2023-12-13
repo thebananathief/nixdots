@@ -32,7 +32,7 @@
     ];
     ports = [ "3306:3306" ];
     environment = {
-      MYSQL_ROOT_PASSWORD = builtins.readFile "/run/secrets/mysql_password" # "${ mysql_password }";
+      MYSQL_ROOT_PASSWORD = builtins.readFile "/run/secrets/mysql_password"; # "${ mysql_password }";
     };
     # extraOptions = [ "--network=database_only" ];
   };
