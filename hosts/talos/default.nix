@@ -13,7 +13,7 @@
     ./hardware-configuration.nix
     ./fileshares.nix
     ./disks.nix
-    # ./containers
+    ./containers
     sops-nix.nixosModules.sops
   ];
 
