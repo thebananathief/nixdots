@@ -60,6 +60,7 @@ in {
           UID = "${ linuxserver_env.PUID }";
           GID = "${ main_gid }";
         };
+        # BUG: Errors with this for some reason
         # extraOptions = [
         #   "--health-cmd='[CMD, node, /app/services/healthcheck]'"
         #   "--health-interval=1m30s"
@@ -116,37 +117,37 @@ in {
       #   #   "--network=public_access,database_only";
       #   # ];
       # };
-      filebrowser = {
-        image = "filebrowser/filebrowser:latest";
-        volumes = [
-          "${ storage_path }/filebrowser:/srv"
-          "${ appdata_path }/filebrowser/database.db:/database/filebrowser.db"
-          "${ appdata_path }/filebrowser/.filebrowser.json:/.filebrowser.json"
-        ];
-        # extraOptions = [
-        #   "--network=public_access";
-        # ];
-        labels = {
-          "traefik.enable" = "true";
-          "traefik.http.routers.filebrowser.rule" = "Host(`files.${ main_domain }`)";
-          "traefik.http.routers.filebrowser.entrypoints" = "websecure";
-        };
-        user = "${ main_uid }";
-      };
-      static = {
-        image = "nginx:alpine";
-        volumes = [
-          "${ storage_path }/filebrowser:/usr/share/nginx/html:ro"
-        ];
-        # extraOptions = [
-        #   "--network=public_access";
-        # ];
-        labels = {
-          "traefik.enable" = "true";
-          "traefik.http.routers.static.rule" = "Host(`static.${ main_domain }`)";
-          "traefik.http.routers.static.entrypoints" = "websecure";
-        };
-      };
+      # filebrowser = {
+      #   image = "filebrowser/filebrowser:latest";
+      #   volumes = [
+      #     "${ storage_path }/filebrowser:/srv"
+      #     "${ appdata_path }/filebrowser/database.db:/database/filebrowser.db"
+      #     "${ appdata_path }/filebrowser/.filebrowser.json:/.filebrowser.json"
+      #   ];
+      #   # extraOptions = [
+      #   #   "--network=public_access";
+      #   # ];
+      #   labels = {
+      #     "traefik.enable" = "true";
+      #     "traefik.http.routers.filebrowser.rule" = "Host(`files.${ main_domain }`)";
+      #     "traefik.http.routers.filebrowser.entrypoints" = "websecure";
+      #   };
+      #   user = "${ main_uid }";
+      # };
+      # static = {
+      #   image = "nginx:alpine";
+      #   volumes = [
+      #     "${ storage_path }/filebrowser:/usr/share/nginx/html:ro"
+      #   ];
+      #   # extraOptions = [
+      #   #   "--network=public_access";
+      #   # ];
+      #   labels = {
+      #     "traefik.enable" = "true";
+      #     "traefik.http.routers.static.rule" = "Host(`static.${ main_domain }`)";
+      #     "traefik.http.routers.static.entrypoints" = "websecure";
+      #   };
+      # };
       # hedgedoc = {
       #   image = "lscr.io/linuxserver/hedgedoc:latest";
       #   volumes = [
