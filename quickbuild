@@ -5,9 +5,7 @@ git pull
 
 old=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
 sudo nixos-rebuild switch --flake '.#talos' --show-trace
-generation=$(ls -l /nix/var/nix/profiles | tail -n 1 | awk -F'-' '{print $2}')
 current=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
 
 echo
-echo "Generation $generation built!"
-echo "Switched from gen $old -> $current"
+echo "Switch generation $old -> $current"

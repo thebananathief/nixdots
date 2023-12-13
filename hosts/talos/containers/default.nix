@@ -257,7 +257,7 @@ in {
       #   ];
       # };
     }
-    ++ import ./gameserver.nix;
+    // import ./gameserver.nix;
     # ++ import ./database.nix
     # ++ import ./mediaserver.nix
     # ++ import ./monitoring.nix;
