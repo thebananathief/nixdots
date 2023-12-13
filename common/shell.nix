@@ -24,6 +24,7 @@
     ## Neovim
       tree-sitter
       universal-ctags
+      zig
     ];
     shells = [ pkgs.zsh ];
     # shells = [ pkgs.fish ];

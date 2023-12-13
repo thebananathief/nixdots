@@ -20,7 +20,6 @@
     ]))
 
   ## Coding
-    zig
     go
     nodejs_20
     rustup

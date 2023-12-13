@@ -45,9 +45,9 @@ let
 
 in {
   imports = [
-    ./misc.nix
-    ./database.nix
-    # ./gameserver.nix
+    # ./misc.nix
+    # ./database.nix
+    ./gameserver.nix
     # ./mediaserver.nix
     # ./monitoring.nix
   ];
