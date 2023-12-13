@@ -36,17 +36,25 @@ let
     TZ = config.time.timeZone;
   };
 
-  allContainers = 
-    (import ./misc.nix) //
-    (import ./database.nix); # //
+  # allContainers = 
+  #   (import ./misc.nix) //
+  #   (import ./database.nix); # //
     # (import ./gameserver.nix) //
     # (import ./mediaserver.nix) //
     # (import ./monitoring.nix);
 
 in {
+  imports = [
+    ./misc.nix
+    ./database.nix
+    # ./gameserver.nix
+    # ./mediaserver.nix
+    # ./monitoring.nix
+  ];
+
   virtualisation = {
     oci-containers.backend = "podman";
-    oci-containers.containers = allContainers;
+    # oci-containers.containers = allContainers;
     podman = {
       enable = true;
       dockerCompat = true;
