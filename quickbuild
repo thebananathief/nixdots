@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+cd $HOME/github/nixdots
+git pull
+sudo nixos-rebuild switch --flake '.#talos' --show-trace
