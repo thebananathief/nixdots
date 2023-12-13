@@ -7,5 +7,5 @@ set windows-shell := ['pwsh.exe', '-NoLogo', '-Command']
 
 alias n := nix
 nix:
-  git add --all && git commit -m 'talos deployment'
+  git add --all && git commit -m 'talos deployment' && git push
   ssh talos -- ./github/nixdots/quickbuild
