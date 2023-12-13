@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, builtins, ... }:
 let 
   appdata_path = "/opt/appdata";
   storage_path = "/mnt/storage";
@@ -19,7 +19,7 @@ let
   # postgres_password = "$__file{${secrets.postgres_password.path}}";
   # mullvad_privKey = "$__file{${secrets.mullvad_privKey.path}}";
 
-  main_domain = readFile secrets.main_domain.path;
+  main_domain = builtins.readFile secrets.main_domain.path;
   # main_domain = readFile /run/secrets/main_domain;
   # main_domain = "$__file{${secrets.main_domain.path}}";
   # main_domain = import /run/secrets/main_domain;
