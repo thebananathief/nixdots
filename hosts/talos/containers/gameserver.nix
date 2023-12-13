@@ -1,9 +1,10 @@
+# {
+#   appdata_path, 
+#   storage_path, 
+#   gameserver_path,
+#   ...
+# }: 
 {
-  appdata_path, 
-  storage_path, 
-  gameserver_path,
-  ...
-}: {
   kf2 = {
     image = "kr0nus/kf2server:latest";
     volumes = [ "${ gameserver_path }/kf2:/data" ];
