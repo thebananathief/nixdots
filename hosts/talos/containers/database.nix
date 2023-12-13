@@ -3,6 +3,7 @@
   storage_path,
   postgres_password,
   mysql_password,
+  config,
   ...
 }:
 {
