@@ -10,5 +10,4 @@ current=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
 
 echo
 echo "Generation $generation built!"
-echo "Was using generation $old"
-echo "Currently using generation $current"
+echo "Switched from gen $old -> $current"
