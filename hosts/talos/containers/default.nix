@@ -23,7 +23,6 @@ let
 
   # main_domain = builtins.readFile secrets.main_domain.path;
   # main_domain = "$__file{${secrets.main_domain.path}}";
-  # main_domain = "talos.host";
 
   main_uid = "1000";
   main_gid = "100";
@@ -47,7 +46,7 @@ in {
   imports = [
     # ./misc.nix
     # ./database.nix
-    ./gameserver.nix { inherit gameserver_path; }
+    ./gameserver.nix { gameserver_path = gameserver_path; }
     # ./mediaserver.nix
     # ./monitoring.nix
   ];
