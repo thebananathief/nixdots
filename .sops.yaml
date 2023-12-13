@@ -36,15 +36,21 @@ creation_rules:
 # Use 'sops updatekeys <file>' to manually fix this using
 # a master that was already on the list
 
+# Remember that sops only deals in GPG or AGE keys, it won't
+# automatically convert your SSH keys for you. So you're basically
+# mimicking your SSH key setup but converted into AGE keys for sops.
+
 # Keep in mind that sometimes your keys will need to be at $HOME\.config\sops\age\keys.txt
-# 
+# TALOS = Converted its SSH host key at /etc/ssh to an age key at .config/sops/age/keys.txt
+# Also used that same SSH host key (or its public key) to generate the public age key to put in this file
 
 # 1. Install ssh-to-age
   # go install github.com/Mic92/ssh-to-age/cmd/ssh-to-age@latest
   # nix-shell -p 'import (fetchTarball "https://github.com/Mic92/ssh-to-age/archive/main.tar.gz") {}'
 # 2. Create a key from an SSH priv key
   # ssh-to-age -private-key -i $HOME/.ssh/id_ed25519 -o $HOME\AppData\Roaming\sops\age\keys.txt
-  # ssh-to-age -private-key -i $HOME/.ssh/id_ed25519 -o $HOME\.config\sops\age\keys.txt
+  # ssh-to-age -private-key -i $HOME/.ssh/id_ed25519 -o $HOME/.config/sops/age/keys.txt
 # 2. Create a key from an SSH host key
   # ssh-keyscan -t ed25519 192.168.0.6 | ssh-to-age
-
+  # ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key -o $HOME\.config\sops\age\keys.txt
+  # other host keys at /etc/ssh
