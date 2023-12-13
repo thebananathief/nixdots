@@ -3,3 +3,5 @@
 cd $HOME/github/nixdots
 git pull
 sudo nixos-rebuild switch --flake '.#talos' --show-trace
+generation=$(ls /nix/var/nix/profiles | tail -n 1 | awk -F'-' '{print $2}')
+echo 'Generation $generation build and switch to!'
