@@ -1,6 +1,6 @@
 { config, builtins, ... }:
 let 
-  appdata_path = "/opt/appdata";
+  appdata_path = "/var/appdata";
   storage_path = "/mnt/storage";
   gameserver_path = "/ssd/gameservers";
   download_path = "/mnt/disk1/downloads";
