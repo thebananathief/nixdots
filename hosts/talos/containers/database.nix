@@ -1,4 +1,15 @@
+# {
+#   appdata_path, 
+#   storage_path,
+#   postgres_password,
+#   mysql_password,
+#   ...
+# }:
 {
+  imports = [
+    ./secr.nix
+  ]
+
   # adminer = {
   #   image = "adminer"; # https://hub.docker.com/_/adminer
   #   ports = [ "8085:8080" ];
@@ -21,7 +32,7 @@
     ];
     ports = [ "3306:3306" ];
     environment = {
-      MYSQL_ROOT_PASSWORD = "${ mysql_password }";
+      MYSQL_ROOT_PASSWORD = builtins.readFile "/run/secrets/mysql_password" # "${ mysql_password }";
     };
     # extraOptions = [ "--network=database_only" ];
   };
