@@ -56,21 +56,21 @@
 
   # Make sure the device defines the mountpoints you want to merge
   # (anything starting with "disk" in /mnt/)
-  fileSystems."/mnt/storage" = {
-    device = "/mnt/disk*:/mnt/tank/fuse";
-    fsType = "fuse.mergerfs";
-    options = [
-      "defaults"
-      "nonempty"
-      "allow_other"
-      "category.create=epmfs"
-      "use_ino"
-      "moveonenospc=true"
-      "dropcacheonclose=true"
-      "minfreespace=50G"
-      "fsname=mergerfs"
-    ];
-  };
+  # fileSystems."/mnt/storage" = {
+  #   device = "/mnt/disk*:/mnt/tank/fuse";
+  #   fsType = "fuse.mergerfs";
+  #   options = [
+  #     "defaults"
+  #     "nonempty"
+  #     "allow_other"
+  #     "category.create=epmfs"
+  #     "use_ino"
+  #     "moveonenospc=true"
+  #     "dropcacheonclose=true"
+  #     "minfreespace=50G"
+  #     "fsname=mergerfs"
+  #   ];
+  # };
 
   
   # TODO: Need to have disk SMART alerts sent to me over email
