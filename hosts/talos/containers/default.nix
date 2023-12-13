@@ -48,6 +48,10 @@ in {
     oci-containers.backend = "podman";
 
     oci-containers.containers = {
+      whoami = {
+        image = "traefik/whoami:latest";
+        ports = [ "80:80" ];
+      };
       # dashy = {
       #   image = "lissy93/dashy:latest";
       #   volumes = [
