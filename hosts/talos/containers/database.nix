@@ -2,7 +2,7 @@
   appdata_path, 
   storage_path,
   postgres_password,
-  mysql_password,
+  # mysql_password,
   config,
   ...
 }:
@@ -30,7 +30,7 @@
       ];
       ports = [ "3306:3306" ];
       environment = {
-        MYSQL_ROOT_PASSWORD = builtins.readFile config.sops.secrets.mysql_password.path; # "${ mysql_password }";
+        MYSQL_ROOT_PASSWORD = import config.sops.secrets.mysql_password.path; # "${ mysql_password }";
       };
       # extraOptions = [ "--network=database_only" ];
     };
