@@ -43,7 +43,7 @@ let
 
   allContainers = 
     (import ./misc.nix) //
-    (import ./database.nix {inherit mysql_password;}); # //
+    (import ./database.nix {mysql_password = mysql_password;}); # //
     # (import ./gameserver.nix) //
     # (import ./mediaserver.nix) //
     # (import ./monitoring.nix);
