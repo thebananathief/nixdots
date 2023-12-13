@@ -20,21 +20,7 @@ let
   # mullvad_privKey = "$__file{${secrets.mullvad_privKey.path}}";
 
   # main_domain = builtins.readFile secrets.main_domain.path;
-  # main_domain = readFile /run/secrets/main_domain;
-  # main_domain = "$__file{${secrets.main_domain.path}}";
-  main_domain = import /run/secrets/main_domain;
-
-  # Read the file at /run/secrets/<keyName> (but through import) and store it
-  # Could you also use import declaratively like above?
-  # mysql_password = import /run/secrets/mysql_password;
-  # webtrees_password = import /run/secrets/webtrees_password;
-  # postgres_password = import /run/secrets/postgres_password;
-  # mullvad_privKey = import /run/secrets/mullvad_privKey;
-  # mumble_superpassword = import /run/secrets/mumble_superpassword;
-  # email_address = import /run/secrets/email_address;
-  # main_domain = import /run/secrets/main_domain;
-  # cloudflare_email = import /run/secrets/cloudflare_email;
-  # cloudflare_apikey = import /run/secrets/cloudflare_apikey;
+  main_domain = "$__file{${secrets.main_domain.path}}";
 
   main_uid = "1000";
   main_gid = "100";

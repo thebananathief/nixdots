@@ -70,7 +70,6 @@
       # keyFile technically not used because we're currently
       # using talos's host key to decrypt secrets
       keyFile = "/home/cameron/.config/sops/age/keys.txt";
-      # keyFile = "/var/lib/sops-nix/key.txt";
       generateKey = true;
     };
     secrets = {
