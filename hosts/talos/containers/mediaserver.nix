@@ -16,7 +16,7 @@ in {
       environment = {
         PLEX_CLAIM = "nope";
         VERSION = "docker";
-      } ++ cfg.common_env;
+      } // cfg.common_env;
       extraOptions = [
         "--network=host"
         "--device=/dev/dri:/dev/dri"
@@ -37,7 +37,7 @@ in {
       ];
       environment = {
         # JELLYFIN_PublishedServerUrl = "watch.${ main_domain }";
-      } ++ cfg.common_env;
+      } // cfg.common_env;
       extraOptions = [
         # "--network=public_access"
         "--device=/dev/dri:/dev/dri"
@@ -136,7 +136,7 @@ in {
       environment = {
         # WHITELIST = "192.168.0.0/24";
         # TRANSMISSION_WEB_HOME = "";
-      } ++ cfg.common_env;
+      } // cfg.common_env;
       # This uses the gluetun network stack so that its behind VPN
       extraOptions = [ "--network=container:gluetun" ];
     };
