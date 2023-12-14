@@ -87,7 +87,8 @@ in {
       #   "traefik.http.routers.filebrowser.rule" = "Host(`files.${ main_domain }`)";
       #   "traefik.http.routers.filebrowser.entrypoints" = "websecure";
       # };
-      user = "${ main_uid }";
+      user = "${ cfg.common_env.PUID }:${ cfg.common_env.PGID}";
+      # user = "cameron:docker";
     };
     static = {
       image = "nginx:alpine";
