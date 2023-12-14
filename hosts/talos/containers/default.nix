@@ -52,17 +52,25 @@ in {
   ];
 
   virtualisation = {
-    oci-containers.backend = "podman";
+    # oci-containers.backend = "podman";
+    oci-containers.backend = "docker";
     # oci-containers.containers = allContainers;
-    podman = {
+    docker = {
       enable = true;
-      dockerCompat = true;
-      dockerSocket.enable = true; # UNSAFE: This allows anyone in the "podman" group to gain root access - It also allows containers to do a bunch of stuff
-      defaultNetwork.settings.dns_enabled = true;
       autoPrune.enable = true;
       autoPrune.flags = [
         "--all"
       ];
     };
+    # podman = {
+    #   enable = true;
+    #   dockerCompat = true;
+    #   dockerSocket.enable = true; # UNSAFE: This allows anyone in the "podman" group to gain root access - It also allows containers to do a bunch of stuff
+    #   defaultNetwork.settings.dns_enabled = true;
+    #   autoPrune.enable = true;
+    #   autoPrune.flags = [
+    #     "--all"
+    #   ];
+    # };
   };
 }
