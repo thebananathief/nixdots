@@ -1,7 +1,4 @@
 {
-  appdata_path, 
-  storage_path, 
-  gameserver_path,
   config,
   ...
 }:
@@ -27,8 +24,8 @@ in {
     dashy = {
       image = "lissy93/dashy:latest";
       volumes = [
-        "${ appdata_path }/dashy/config.yml:/app/public/conf.yml"
-        "${ appdata_path }/dashy/logos:/app/public/item-icons"
+        "${ paths.appdata }/dashy/config.yml:/app/public/conf.yml"
+        "${ paths.appdata }/dashy/logos:/app/public/item-icons"
       ];
       ports = [ "8081:80" ];
       environment = {
@@ -49,7 +46,7 @@ in {
     # mumble = {
     #   image = "mumblevoip/mumble-server:latest"; # https://github.com/Theofilos-Chamalis/mumble-web
     #   volumes = [
-    #     "${ appdata_path }/mumble:/data"
+    #     "${ paths.appdata }/mumble:/data"
     #   ];
     #   ports = [ "64738:64738" ];
     #   environment = {
@@ -65,8 +62,8 @@ in {
     #   image = "dtjs48jkt/webtrees:latest"; # https://hub.docker.com/r/dtjs48jkt/webtrees/
     #   volumes = [
     #     "/etc/localtime:/etc/localtime:ro"
-    #     "${ appdata_path }/webtrees/data:/var/www/html/data"
-    #     "${ appdata_path }/webtrees/modules:/var/www/html/modules_v4"
+    #     "${ paths.appdata }/webtrees/data:/var/www/html/data"
+    #     "${ paths.appdata }/webtrees/modules:/var/www/html/modules_v4"
     #   ];
     #   environment = {
     #     DB_USER = "root";
@@ -98,8 +95,8 @@ in {
     #   image = "filebrowser/filebrowser:latest";
     #   volumes = [
     #     "${ storage_path }/filebrowser:/srv"
-    #     "${ appdata_path }/filebrowser/database.db:/database/filebrowser.db"
-    #     "${ appdata_path }/filebrowser/.filebrowser.json:/.filebrowser.json"
+    #     "${ paths.appdata }/filebrowser/database.db:/database/filebrowser.db"
+    #     "${ paths.appdata }/filebrowser/.filebrowser.json:/.filebrowser.json"
     #   ];
     #   # extraOptions = [
     #   #   "--network=public_access";
@@ -128,7 +125,7 @@ in {
     # hedgedoc = {
     #   image = "lscr.io/linuxserver/hedgedoc:latest";
     #   volumes = [
-    #     "${ appdata_path }/hedgedoc:/config"
+    #     "${ paths.appdata }/hedgedoc:/config"
     #   ];
     #   environment = {
     #     # DB_HOST = "mysql";
@@ -161,7 +158,7 @@ in {
     # rss = {
     #   image = "wangqiru/ttrss:latest";
     #   volumes = [
-    #     "${ appdata_path }/ttrss/feed-icons:/var/www/feed-icons/"
+    #     "${ paths.appdata }/ttrss/feed-icons:/var/www/feed-icons/"
     #   ];
     #   environment = {
     #     SELF_URL_PATH = "https://rss.${ main_domain }/";
@@ -188,7 +185,7 @@ in {
     #   image = "traefik:latest";
     #   volumes = [
     #     "/var/run/docker.sock:/var/run/docker.sock:ro" # TODO: migrate to podman socket
-    #     "${ appdata_path }/traefik:/etc/traefik" # TODO: Need to get our traefik.yml file out here BEFORE the container starts
+    #     "${ paths.appdata }/traefik:/etc/traefik" # TODO: Need to get our traefik.yml file out here BEFORE the container starts
     #   ];
     #   ports = [
     #     "80:80"
@@ -214,8 +211,8 @@ in {
     # adguard = {
     #   image = "adguard/adguardhome:latest"; # https://hub.docker.com/r/adguard/adguardhome
     #   volumes = [
-    #     "${ appdata_path }/adguard/conf:/opt/adguardhome/conf"
-    #     "${ appdata_path }/adguard/work:/opt/adguardhome/work"
+    #     "${ paths.appdata }/adguard/conf:/opt/adguardhome/conf"
+    #     "${ paths.appdata }/adguard/work:/opt/adguardhome/work"
     #   ];
     #   ports = [
     #     "53:53"

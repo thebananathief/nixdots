@@ -1,5 +1,5 @@
 {
-  appdata_path, 
+  paths.appdata, 
   storage_path,
   postgres_password,
   # mysql_password,
@@ -29,7 +29,7 @@ in {
     postgres = {
       image = "postgres:13-alpine";
       volumes = [
-        "${ appdata_path }/postgres/data/:/var/lib/postgresql/data" # TODO: Migrate to /mnt/storage ? performance considerations?
+        "${ paths.appdata }/postgres/data/:/var/lib/postgresql/data" # TODO: Migrate to /mnt/storage ? performance considerations?
       ];
       environment = {
         POSTGRES_PASSWORD = "${ postgres_password }";
@@ -39,7 +39,7 @@ in {
     mysql = {
       image = "mysql";
       volumes = [
-        "${ appdata_path }/mysql:/var/lib/mysql" # TODO: Migrate to /mnt/storage ? performance considerations?
+        "${ paths.appdata }/mysql:/var/lib/mysql" # TODO: Migrate to /mnt/storage ? performance considerations?
       ];
       ports = [ "3306:3306" ];
       environment = {
@@ -51,8 +51,8 @@ in {
     # influxdb = {
     #   image = "influxdb:alpine"; # https://hub.docker.com/_/influxdb/
     #   volumes = [
-    #     "${ appdata_path }/influxdb/config:/etc/influxdb2"
-    #     "${ appdata_path }/influxdb/data:/var/lib/influxdb2"
+    #     "${ paths.appdata }/influxdb/config:/etc/influxdb2"
+    #     "${ paths.appdata }/influxdb/data:/var/lib/influxdb2"
     #   ];
     #   ports = [ "8086:8086" ];
     #   environment = {

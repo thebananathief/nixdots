@@ -1,12 +1,4 @@
 { 
-  appdata_path,
-  storage_path,
-  download_path,
-  main_domain,
-  common_env,
-  main_uid,
-  main_gid,
-  mullvad_privKey,
   ...
 }:
 let
@@ -27,8 +19,8 @@ in {
     plex = {
       image = "lscro.io/linuxserver/plex:latest"; # https://hub.docker.com/r/linuxserver/plex/
       volumes = [
-        "${ appdata_path }/plex:/config"
-        "${ storage_path }/media:/media"
+        "${ paths.appdata }/plex:/config"
+        "${ paths.storage }/media:/media"
         "/etc/localtime:/etc/localtime:ro"
       ];
       environment = {
@@ -43,8 +35,8 @@ in {
     jellyfin = {
       image = "jellyfin/jellyfin";
       volumes = [
-        "${ appdata_path }/jellyfin:/config"
-        "${ storage_path }/media:/data"
+        "${ paths.appdata }/jellyfin:/config"
+        "${ paths.storage }/media:/data"
         # "/dev/shm:/transcode" # ram transcode
       ];
       environment = {
@@ -66,7 +58,7 @@ in {
     requestrr = {
       image = "lscr.io/linuxserver/requestrr:latest"; # https://hub.docker.com/r/linuxserver/requestrr
       volumes = [
-        "${ appdata_path }/requestrr:/config"
+        "${ paths.appdata }/requestrr:/config"
       ];
       ports = [ "4545:4545" ];
       environment = common_env;
@@ -74,7 +66,7 @@ in {
     overseerr = {
       image = "lscr.io/linuxserver/overseerr:latest";
       volumes = [
-        "${ appdata_path }/overseerr:/config"
+        "${ paths.appdata }/overseerr:/config"
       ];
       environment = common_env;
       # extraOptions = [
@@ -91,7 +83,7 @@ in {
     prowlarr = {
       image = "lscr.io/linuxserver/prowlarr:latest";
       volumes = [
-        "${ appdata_path }/prowlarr:/config"
+        "${ paths.appdata }/prowlarr:/config"
       ];
       ports = [ "9696:9696" ];
       environment = common_env;
@@ -99,8 +91,8 @@ in {
     radarr = {
       image = "lscr.io/linuxserver/radarr:latest";
       volumes = [
-        "${ appdata_path }/radarr:/config"
-        "${ storage_path }:/storage"
+        "${ paths.appdata }/radarr:/config"
+        "${ paths.storage }:/storage"
       ];
       ports = [ "7878:7878" ];
       environment = common_env;
@@ -108,8 +100,8 @@ in {
     sonarr = {
       image = "lscr.io/linuxserver/sonarr:latest";
       volumes = [
-        "${ appdata_path }/sonarr:/config"
-        "${ storage_path }:/storage"
+        "${ paths.appdata }/sonarr:/config"
+        "${ paths.storage }:/storage"
       ];
       ports = [ "8989:8989" ];
       environment = common_env;
@@ -139,7 +131,7 @@ in {
     transmission = {
       image = "lscr.io/linuxserver/transmission:latest ";
       volumes = [
-        "${ appdata_path }/transmission:/config"
+        "${ paths.appdata }/transmission:/config"
         "${ download_path }:/downloads"
         "${ download_path }:/watch" # TODO: Adjust this to a torrent blackhole
       ];
