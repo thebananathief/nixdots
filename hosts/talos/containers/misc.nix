@@ -2,6 +2,7 @@
 let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
+  main_domain = secrets.main_domain.path;
 in {
   virtualisation.oci-containers.containers = {
     whoami = {
@@ -14,13 +15,12 @@ in {
         "${ cfg.dataDir }/dashy/config.yml:/app/public/conf.yml"
         "${ cfg.dataDir }/dashy/logos:/app/public/item-icons"
       ];
-      ports = [ "8081:80" ];
+      ports = [ "8000:80" ];
       environment = {
         NODE_ENV = "production";
         UID = cfg.common_env.PUID;
         GID = cfg.common_env.PGID;
       };
-      # user = "cameron:users";
     };
     # mumble = {
     #   image = "mumblevoip/mumble-server:latest"; # https://github.com/Theofilos-Chamalis/mumble-web
@@ -37,70 +37,73 @@ in {
     #   #   "traefik.enable" = true;
     #   # };
     # };
-    # webtrees = {
-    #   image = "dtjs48jkt/webtrees:latest"; # https://hub.docker.com/r/dtjs48jkt/webtrees/
-    #   volumes = [
-    #     "/etc/localtime:/etc/localtime:ro"
-    #     "${ cfg.dataDir }/webtrees/data:/var/www/html/data"
-    #     "${ cfg.dataDir }/webtrees/modules:/var/www/html/modules_v4"
-    #   ];
-    #   environment = {
-    #     DB_USER = "root";
-    #     DB_PASSWORD = "${ mysql_password }";
-    #     DB_HOST = "mysql";
-    #     DB_PORT = "3306";
-    #     DB_NAME = "general"; # TODO: migrate "general" to "webtrees" (db name)
-    #     WT_ADMIN = "thebananathief";
-    #     WT_ADMINMAIL = "${ email_address }";
-    #     WT_ADMINPW = "${ webtrees_password }";
-    #     GROUP_ID = "${ main_gid }";
-    #     PORT = "8079";
-    #     DISABLE_SSL = "TRUE";
-    #     PRETTYURLS = "TRUE";
-    #     BASE_URL = "https://tree.${ main_domain }";
-    #   };
-    #   dependsOn = [ "mysql" ];
-    #   labels = {
-    #     "traefik.enable" = "true";
-    #     "traefik.http.routers.webtrees.rule" = "Host(`tree.${ main_domain }`)";
-    #     "traefik.http.routers.webtrees.entrypoints" = "websecure";
-    #     "traefik.http.services.webtrees.loadbalancer.server.port" = "8079";
-    #   };
-    #   # extraOptions = [
-    #   #   "--network=public_access,database_only";
-    #   # ];
-    # };
-    # filebrowser = {
-    #   image = "filebrowser/filebrowser:latest";
-    #   volumes = [
-    #     "${ storage_path }/filebrowser:/srv"
-    #     "${ cfg.dataDir }/filebrowser/database.db:/database/filebrowser.db"
-    #     "${ cfg.dataDir }/filebrowser/.filebrowser.json:/.filebrowser.json"
-    #   ];
-    #   # extraOptions = [
-    #   #   "--network=public_access";
-    #   # ];
-    #   labels = {
-    #     "traefik.enable" = "true";
-    #     "traefik.http.routers.filebrowser.rule" = "Host(`files.${ main_domain }`)";
-    #     "traefik.http.routers.filebrowser.entrypoints" = "websecure";
-    #   };
-    #   user = "${ main_uid }";
-    # };
-    # static = {
-    #   image = "nginx:alpine";
-    #   volumes = [
-    #     "${ storage_path }/filebrowser:/usr/share/nginx/html:ro"
-    #   ];
-    #   # extraOptions = [
-    #   #   "--network=public_access";
-    #   # ];
-    #   labels = {
-    #     "traefik.enable" = "true";
-    #     "traefik.http.routers.static.rule" = "Host(`static.${ main_domain }`)";
-    #     "traefik.http.routers.static.entrypoints" = "websecure";
-    #   };
-    # };
+    webtrees = {
+      image = "dtjs48jkt/webtrees:latest"; # https://hub.docker.com/r/dtjs48jkt/webtrees/
+      volumes = [
+        "/etc/localtime:/etc/localtime:ro"
+        "${ cfg.dataDir }/webtrees/data:/var/www/html/data"
+        "${ cfg.dataDir }/webtrees/modules:/var/www/html/modules_v4"
+      ];
+      ports = [ "8013:8079" ];
+      environment = {
+        DB_USER = "root";
+        DB_PASSWORD = "${ secrets.mysql_password.path }";
+        DB_HOST = "mysql";
+        DB_PORT = "3306";
+        DB_NAME = "webtrees"; # TODO: migrate "general" to "webtrees" (db name)
+        WT_ADMIN = "thebananathief";
+        WT_ADMINMAIL = "${ secrets.email_address.path }";
+        WT_ADMINPW = "${ secrets.webtrees_password.path }";
+        GROUP_ID = "${ cfg.common_env.PGID }";
+        PORT = "8079";
+        DISABLE_SSL = "TRUE";
+        PRETTYURLS = "TRUE";
+        # BASE_URL = "https://tree.${ main_domain }";
+      };
+      dependsOn = [ "mysql" ];
+      # labels = {
+      #   "traefik.enable" = "true";
+      #   "traefik.http.routers.webtrees.rule" = "Host(`tree.${ main_domain }`)";
+      #   "traefik.http.routers.webtrees.entrypoints" = "websecure";
+      #   "traefik.http.services.webtrees.loadbalancer.server.port" = "8079";
+      # };
+      # extraOptions = [
+      #   "--network=public_access,database_only";
+      # ];
+    };
+    filebrowser = {
+      image = "filebrowser/filebrowser:latest";
+      volumes = [
+        "${ cfg.storageDir }/filebrowser:/srv"
+        "${ cfg.dataDir }/filebrowser/database.db:/database/filebrowser.db"
+        "${ cfg.dataDir }/filebrowser/.filebrowser.json:/.filebrowser.json"
+      ];
+      ports = [ "8009:80" ];
+      # extraOptions = [
+      #   "--network=public_access";
+      # ];
+      # labels = {
+      #   "traefik.enable" = "true";
+      #   "traefik.http.routers.filebrowser.rule" = "Host(`files.${ main_domain }`)";
+      #   "traefik.http.routers.filebrowser.entrypoints" = "websecure";
+      # };
+      user = "${ main_uid }";
+    };
+    static = {
+      image = "nginx:alpine";
+      volumes = [
+        "${ cfg.storageDir }/filebrowser:/usr/share/nginx/html:ro"
+      ];
+      ports = [ "8010:80" ];
+      # extraOptions = [
+      #   "--network=public_access";
+      # ];
+      # labels = {
+      #   "traefik.enable" = "true";
+      #   "traefik.http.routers.static.rule" = "Host(`static.${ main_domain }`)";
+      #   "traefik.http.routers.static.entrypoints" = "websecure";
+      # };
+    };
     # hedgedoc = {
     #   image = "lscr.io/linuxserver/hedgedoc:latest";
     #   volumes = [
@@ -134,32 +137,33 @@ in {
     #     "traefik.http.services.hedgedoc.loadbalancer.server.port" = "3000";
     #   };
     # };
-    # rss = {
-    #   image = "wangqiru/ttrss:latest";
-    #   volumes = [
-    #     "${ cfg.dataDir }/ttrss/feed-icons:/var/www/feed-icons/"
-    #   ];
-    #   environment = {
-    #     SELF_URL_PATH = "https://rss.${ main_domain }/";
-    #     PUID = "${ main_uid }";
-    #     PGID = "${ main_gid }";
-    #     DB_HOST = "postgres";
-    #     DB_PORT = "5432";
-    #     DB_USER = "postgres";
-    #     DB_PASS = "${ postgres_password }";
-    #   };
-    #   extraOptions = [
-    #     # "--network=public_access,database_only"
-    #     "--tty"
-    #     "--interactive"
-    #   ];
-    #   dependsOn = [ "postgres" ];
-    #   labels = {
-    #     "traefik.enable" = "true";
-    #     "traefik.http.routers.rss.rule" = "Host(`rss.${ main_domain }`)";
-    #     "traefik.http.routers.rss.entrypoints" = "websecure";
-    #   };
-    # };
+    rss = {
+      image = "wangqiru/ttrss:latest";
+      volumes = [
+        "${ cfg.dataDir }/ttrss/feed-icons:/var/www/feed-icons/"
+      ];
+      ports = [ "8011:80" ];
+      environment = {
+        SELF_URL_PATH = "https://rss.${ main_domain }/";
+        # PUID = "${ cfg.common_env.PUID }";
+        # PGID = "${ main_gid }";
+        DB_HOST = "postgres";
+        DB_PORT = "5432";
+        DB_USER = "postgres";
+        DB_PASS = "${ secrets.postgres_password.path }";
+      } ++ cfg.common_env;
+      extraOptions = [
+        # "--network=public_access,database_only"
+        "--tty"
+        "--interactive"
+      ];
+      dependsOn = [ "postgres" ];
+      # labels = {
+      #   "traefik.enable" = "true";
+      #   "traefik.http.routers.rss.rule" = "Host(`rss.${ main_domain }`)";
+      #   "traefik.http.routers.rss.entrypoints" = "websecure";
+      # };
+    };
     # traefik = {
     #   image = "traefik:latest";
     #   volumes = [

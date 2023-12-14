@@ -2,6 +2,7 @@
 let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
+  main_domain = secrets.main_domain.path;
 in {
   virtualisation.oci-containers.containers = {
     # Media players
@@ -28,19 +29,26 @@ in {
         "${ cfg.storageDir }/media:/data"
         # "/dev/shm:/transcode" # ram transcode
       ];
+      ports = [
+        "8096:8096"
+        # "8920:8920" # HTTPS web interface
+        "7359:7359/udp" # Optional - Allows clients to discover Jellyfin on the local network.
+        "1900:1900/udp" # Optional - Service discovery used by DNLA and clients.
+      ];
       environment = {
-        JELLYFIN_PublishedServerUrl = "watch.${ main_domain }";
+        # JELLYFIN_PublishedServerUrl = "watch.${ main_domain }";
       } ++ cfg.common_env;
       extraOptions = [
         # "--network=public_access"
         "--device=/dev/dri:/dev/dri"
       ];
-      labels = {
-        "traefik.enable" = true;
-        "traefik.http.routers.jellyfin.rule" = "Host(`watch.${ main_domain }`)";
-        "traefik.http.routers.jellyfin.entrypoints" = "websecure";
-        "traefik.http.services.jellyfin.loadbalancer.server.port" = 8096;
-      };
+      # labels = {
+      #   "traefik.enable" = true;
+      #   "traefik.http.routers.jellyfin.rule" = "Host(`watch.${ main_domain }`)";
+      #   "traefik.http.routers.jellyfin.entrypoints" = "websecure";
+      #   "traefik.http.services.jellyfin.loadbalancer.server.port" = 8096;
+      # };
+      user = "cameron:docker";
     };
 
     # Media requesters
@@ -49,7 +57,7 @@ in {
       volumes = [
         "${ cfg.dataDir }/requestrr:/config"
       ];
-      ports = [ "4545:4545" ];
+      ports = [ "8006:4545" ];
       environment = cfg.common_env;
     };
     overseerr = {
@@ -57,15 +65,16 @@ in {
       volumes = [
         "${ cfg.dataDir }/overseerr:/config"
       ];
+      ports = [ "8005:5055" ];
       environment = cfg.common_env;
       # extraOptions = [
       #   "--network=public_access";
       # ];
-      labels = {
-        "traefik.enable" = true;
-        "traefik.http.routers.overseerr.rule" = "Host(`request.${ main_domain }`)";
-        "traefik.http.routers.overseerr.entrypoints" = "websecure";
-      };
+      # labels = {
+      #   "traefik.enable" = true;
+      #   "traefik.http.routers.overseerr.rule" = "Host(`request.${ main_domain }`)";
+      #   "traefik.http.routers.overseerr.entrypoints" = "websecure";
+      # };
     };
 
     # Media indexing, metadata and organizing, coordinating
@@ -74,7 +83,7 @@ in {
       volumes = [
         "${ cfg.dataDir }/prowlarr:/config"
       ];
-      ports = [ "9696:9696" ];
+      ports = [ "8002:9696" ];
       environment = cfg.common_env;
     };
     radarr = {
@@ -83,7 +92,7 @@ in {
         "${ cfg.dataDir }/radarr:/config"
         "${ cfg.storageDir }:/storage"
       ];
-      ports = [ "7878:7878" ];
+      ports = [ "8003:7878" ];
       environment = cfg.common_env;
     };
     sonarr = {
@@ -92,7 +101,7 @@ in {
         "${ cfg.dataDir }/sonarr:/config"
         "${ cfg.storageDir }:/storage"
       ];
-      ports = [ "8989:8989" ];
+      ports = [ "8004:8989" ];
       environment = cfg.common_env;
     };
 
@@ -103,7 +112,7 @@ in {
       environment = {
         VPN_SERVICE_PROVIDER = "mullvad";
         VPN_TYPE = "wireguard";
-        WIREGUARD_PRIVATE_KEY = "${ mullvad_privKey }";
+        WIREGUARD_PRIVATE_KEY = "${ secrets.mullvad_privKey.path }";
         WIREGUARD_ADDRESSES = "10.67.197.145/32";
         SERVER_COUNTRIES = "Switzerland";
         # OWNED_ONLY = "yes"; # Use if you want only servers owned by Mullvad
@@ -112,7 +121,7 @@ in {
       # NOTE: Any containers using the gluetun network stack need to
       # have portforwards set here instead of that container
       ports = [ 
-        "9092:9091" # transmission web ui
+        "8001:9091" # transmission web ui
         "51413:51413" # torrent ports ?
         "51413:51413/udp"
       ];

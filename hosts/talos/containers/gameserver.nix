@@ -10,7 +10,7 @@ in {
         "27015:27015/udp"
         "20560:20560/udp"
         "7777:7777/udp"
-        "8078:8080/tcp"
+        "8012:8080/tcp"
       ];
       environment = {
         KF2_OPTS = "KF-BurningParis?Game=ZedternalReborn.WMGameInfo_Endless?difficulty=1";

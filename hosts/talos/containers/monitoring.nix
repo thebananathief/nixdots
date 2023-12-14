@@ -3,16 +3,13 @@ let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
 in {
-  # dozzle    8082:8080
-  # scrutiny  8084:8080
-
   virtualisation.oci-containers.containers = {
     dozzle = {
       image = "amir20/dozzle:latest"; # https://github.com/amir20/dozzle
       volumes = [
         "/var/run/docker.sock:/var/run/docker.sock" # TODO: migrate to podman socket
       ];
-      ports = [ "8082:8080" ];
+      ports = [ "8008:8080" ];
     };
     # grafana = {
     #   image = "grafana/grafana-oss:latest"; # https://hub.docker.com/r/grafana/grafana/
@@ -55,7 +52,7 @@ in {
         "${ cfg.dataDir }/scrutiny/config:/opt/scrutiny/config"
         "${ cfg.dataDir }/scrutiny/influxdb:/opt/scrutiny/influxdb"
       ];
-      ports = [ "8084:8080" ];
+      ports = [ "8007:8080" ];
       extraOptions = [
         "--cap-add=SYS_RAWIO"
         "--device=/dev/sda"
