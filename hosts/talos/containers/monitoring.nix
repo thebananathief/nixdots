@@ -7,7 +7,8 @@ in {
     dozzle = {
       image = "amir20/dozzle:latest"; # https://github.com/amir20/dozzle
       volumes = [
-        "/var/run/docker.sock:/var/run/docker.sock" # TODO: migrate to podman socket
+        # "/var/run/docker.sock:/var/run/docker.sock"
+        "/run/podman/podman.sock:/var/run/docker.sock"
       ];
       ports = [ "8008:8080" ];
     };
@@ -32,7 +33,7 @@ in {
     #   volumes = [
     #     "${ appdata_path }/diun:/data"
     #     # "${ appdata_path }/diun/config.yml:/diun.yml:ro"
-    #     "/var/run/docker.sock:/var/run/docker.sock" # TODO: migrate to podman socket
+    #     "/var/run/docker.sock:/var/run/docker.sock"
     #   ];
     #   environment = {
     #     LOG_LEVEL = "info";
