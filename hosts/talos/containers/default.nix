@@ -44,11 +44,11 @@ let
 
 in {
   imports = [
-    ./misc.nix
+    # ./misc.nix
     # ./database.nix
     ./gameserver.nix
     # ./mediaserver.nix
-    ./monitoring.nix
+    # ./monitoring.nix
   ];
 
   virtualisation = {
