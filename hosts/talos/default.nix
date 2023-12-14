@@ -81,6 +81,7 @@ By accessing this system, you agree that your actions may be monitored if unauth
       influx_db_token = {};
       influx_db_pass = {};
       mysql_password = {};
+      mullvad_privKey = {};
       postgres_password = {};
       webtrees_password = {};
       tailscale_authkey = {};
