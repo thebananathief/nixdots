@@ -52,7 +52,6 @@
     };
   };
 
-  # If you use firewall
   networking.firewall = {
     enable = true;
     allowPing = true;
