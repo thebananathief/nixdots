@@ -34,6 +34,7 @@ in {
         # docker group?
         GID = "131";
       };
+      user = "cameron:users";
       # BUG: Errors with this for some reason
       # extraOptions = [
       #   "--health-cmd='[CMD, node, /app/services/healthcheck]'"
