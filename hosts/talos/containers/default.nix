@@ -8,6 +8,11 @@
     ./monitoring.nix
   ];
 
+  environment.variables = {
+    PUID = "1000";
+    PGID = "131";
+  }
+
   virtualisation = {
     oci-containers.backend = "docker";
     docker = {
