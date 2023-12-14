@@ -37,40 +37,40 @@ in {
     #   #   "traefik.enable" = true;
     #   # };
     # };
-    webtrees = {
-      image = "dtjs48jkt/webtrees:latest"; # https://hub.docker.com/r/dtjs48jkt/webtrees/
-      volumes = [
-        "/etc/localtime:/etc/localtime:ro"
-        "${ cfg.dataDir }/webtrees/data:/var/www/html/data"
-        "${ cfg.dataDir }/webtrees/modules:/var/www/html/modules_v4"
-      ];
-      ports = [ "8013:8079" ];
-      environment = {
-        DB_USER = "root";
-        DB_PASSWORD = "${ secrets.mysql_password.path }";
-        DB_HOST = "mysql";
-        DB_PORT = "3306";
-        DB_NAME = "webtrees"; # TODO: migrate "general" to "webtrees" (db name)
-        WT_ADMIN = "thebananathief";
-        WT_ADMINMAIL = "${ secrets.email_address.path }";
-        WT_ADMINPW = "${ secrets.webtrees_password.path }";
-        GROUP_ID = "${ cfg.common_env.PGID }";
-        PORT = "8079";
-        DISABLE_SSL = "TRUE";
-        PRETTYURLS = "TRUE";
-        # BASE_URL = "https://tree.${ main_domain }";
-      };
-      dependsOn = [ "mysql" ];
-      # labels = {
-      #   "traefik.enable" = "true";
-      #   "traefik.http.routers.webtrees.rule" = "Host(`tree.${ main_domain }`)";
-      #   "traefik.http.routers.webtrees.entrypoints" = "websecure";
-      #   "traefik.http.services.webtrees.loadbalancer.server.port" = "8079";
-      # };
-      # extraOptions = [
-      #   "--network=public_access,database_only";
-      # ];
-    };
+    # webtrees = {
+    #   image = "dtjs48jkt/webtrees:latest"; # https://hub.docker.com/r/dtjs48jkt/webtrees/
+    #   volumes = [
+    #     "/etc/localtime:/etc/localtime:ro"
+    #     "${ cfg.dataDir }/webtrees/data:/var/www/html/data"
+    #     "${ cfg.dataDir }/webtrees/modules:/var/www/html/modules_v4"
+    #   ];
+    #   ports = [ "8013:8079" ];
+    #   environment = {
+    #     DB_USER = "root";
+    #     DB_PASSWORD = "${ secrets.mysql_password.path }";
+    #     DB_HOST = "mysql";
+    #     DB_PORT = "3306";
+    #     DB_NAME = "webtrees"; # TODO: migrate "general" to "webtrees" (db name)
+    #     WT_ADMIN = "thebananathief";
+    #     WT_ADMINMAIL = "${ secrets.email_address.path }";
+    #     WT_ADMINPW = "${ secrets.webtrees_password.path }";
+    #     GROUP_ID = "${ cfg.common_env.PGID }";
+    #     PORT = "8079";
+    #     DISABLE_SSL = "TRUE";
+    #     PRETTYURLS = "TRUE";
+    #     # BASE_URL = "https://tree.${ main_domain }";
+    #   };
+    #   dependsOn = [ "mysql" ];
+    #   # labels = {
+    #   #   "traefik.enable" = "true";
+    #   #   "traefik.http.routers.webtrees.rule" = "Host(`tree.${ main_domain }`)";
+    #   #   "traefik.http.routers.webtrees.entrypoints" = "websecure";
+    #   #   "traefik.http.services.webtrees.loadbalancer.server.port" = "8079";
+    #   # };
+    #   # extraOptions = [
+    #   #   "--network=public_access,database_only";
+    #   # ];
+    # };
     filebrowser = {
       image = "filebrowser/filebrowser:latest";
       volumes = [
