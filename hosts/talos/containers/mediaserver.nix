@@ -3,7 +3,7 @@
   storage_path,
   download_path,
   main_domain,
-  linuxserver_env,
+  common_env,
   main_uid,
   main_gid,
   mullvad_privKey,
@@ -34,7 +34,7 @@ in {
       environment = {
         PLEX_CLAIM = "nope";
         VERSION = "docker";
-      } ++ linuxserver_env;
+      } ++ common_env;
       extraOptions = [
         "--network=host"
         "--device=/dev/dri:/dev/dri"
@@ -49,7 +49,7 @@ in {
       ];
       environment = {
         JELLYFIN_PublishedServerUrl = "watch.${ main_domain }";
-      } ++ linuxserver_env;
+      } ++ common_env;
       extraOptions = [
         # "--network=public_access"
         "--device=/dev/dri:/dev/dri"
@@ -69,14 +69,14 @@ in {
         "${ appdata_path }/requestrr:/config"
       ];
       ports = [ "4545:4545" ];
-      environment = linuxserver_env;
+      environment = common_env;
     };
     overseerr = {
       image = "lscr.io/linuxserver/overseerr:latest";
       volumes = [
         "${ appdata_path }/overseerr:/config"
       ];
-      environment = linuxserver_env;
+      environment = common_env;
       # extraOptions = [
       #   "--network=public_access";
       # ];
@@ -94,7 +94,7 @@ in {
         "${ appdata_path }/prowlarr:/config"
       ];
       ports = [ "9696:9696" ];
-      environment = linuxserver_env;
+      environment = common_env;
     };
     radarr = {
       image = "lscr.io/linuxserver/radarr:latest";
@@ -103,7 +103,7 @@ in {
         "${ storage_path }:/storage"
       ];
       ports = [ "7878:7878" ];
-      environment = linuxserver_env;
+      environment = common_env;
     };
     sonarr = {
       image = "lscr.io/linuxserver/sonarr:latest";
@@ -112,7 +112,7 @@ in {
         "${ storage_path }:/storage"
       ];
       ports = [ "8989:8989" ];
-      environment = linuxserver_env;
+      environment = common_env;
     };
 
     
@@ -146,7 +146,7 @@ in {
       environment = {
         # WHITELIST = "192.168.0.0/24";
         # TRANSMISSION_WEB_HOME = "";
-      } ++ linuxserver_env;
+      } ++ common_env;
       # This uses the gluetun network stack so that its behind VPN
       extraOptions = [ "--network=container:gluetun" ];
     };

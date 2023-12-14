@@ -33,7 +33,7 @@ in {
       ports = [ "8081:80" ];
       environment = {
         NODE_ENV = "production";
-        UID = linuxserver_env.PUID;
+        UID = common_env.PUID;
         # docker group?
         GID = "131";
       };
