@@ -3,6 +3,7 @@ let
   cfg = config.myOptions.containers;
 in {
   virtualisation.oci-containers.containers = {
+    # Media players
     plex = {
       image = "lscro.io/linuxserver/plex:latest"; # https://hub.docker.com/r/linuxserver/plex/
       volumes = [
@@ -41,7 +42,7 @@ in {
       };
     };
 
-
+    # Media requesters
     requestrr = {
       image = "lscr.io/linuxserver/requestrr:latest"; # https://hub.docker.com/r/linuxserver/requestrr
       volumes = [
@@ -66,7 +67,7 @@ in {
       };
     };
 
-
+    # Media indexing, metadata and organizing, coordinating
     prowlarr = {
       image = "lscr.io/linuxserver/prowlarr:latest";
       volumes = [
@@ -94,7 +95,7 @@ in {
       environment = cfg.common_env;
     };
 
-    
+    # VPN and download client
     # https://github.com/qdm12/gluetun-wiki/
     gluetun = {
       image = "qmcgaw/gluetun:latest";

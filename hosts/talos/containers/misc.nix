@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  containerCfg = config.myOptions.containers;
+  cfg = config.myOptions.containers;
 in {
   virtualisation.oci-containers.containers = {
     # whoami = {
@@ -10,14 +10,14 @@ in {
     dashy = {
       image = "lissy93/dashy:latest";
       volumes = [
-        "${ containerCfg.dataDir }/dashy/config.yml:/app/public/conf.yml"
-        "${ containerCfg.dataDir }/dashy/logos:/app/public/item-icons"
+        "${ cfg.dataDir }/dashy/config.yml:/app/public/conf.yml"
+        "${ cfg.dataDir }/dashy/logos:/app/public/item-icons"
       ];
       ports = [ "8081:80" ];
       environment = {
         NODE_ENV = "production";
-        UID = containerCfg.common_env.PUID;
-        GID = containerCfg.common_env.PGID;
+        UID = cfg.common_env.PUID;
+        GID = cfg.common_env.PGID;
       };
       # user = "cameron:users";
       # BUG: Errors with this for some reason
@@ -32,7 +32,7 @@ in {
     # mumble = {
     #   image = "mumblevoip/mumble-server:latest"; # https://github.com/Theofilos-Chamalis/mumble-web
     #   volumes = [
-    #     "${ containerCfg.dataDir }/mumble:/data"
+    #     "${ cfg.dataDir }/mumble:/data"
     #   ];
     #   ports = [ "64738:64738" ];
     #   environment = {
@@ -48,8 +48,8 @@ in {
     #   image = "dtjs48jkt/webtrees:latest"; # https://hub.docker.com/r/dtjs48jkt/webtrees/
     #   volumes = [
     #     "/etc/localtime:/etc/localtime:ro"
-    #     "${ containerCfg.dataDir }/webtrees/data:/var/www/html/data"
-    #     "${ containerCfg.dataDir }/webtrees/modules:/var/www/html/modules_v4"
+    #     "${ cfg.dataDir }/webtrees/data:/var/www/html/data"
+    #     "${ cfg.dataDir }/webtrees/modules:/var/www/html/modules_v4"
     #   ];
     #   environment = {
     #     DB_USER = "root";
@@ -81,8 +81,8 @@ in {
     #   image = "filebrowser/filebrowser:latest";
     #   volumes = [
     #     "${ storage_path }/filebrowser:/srv"
-    #     "${ containerCfg.dataDir }/filebrowser/database.db:/database/filebrowser.db"
-    #     "${ containerCfg.dataDir }/filebrowser/.filebrowser.json:/.filebrowser.json"
+    #     "${ cfg.dataDir }/filebrowser/database.db:/database/filebrowser.db"
+    #     "${ cfg.dataDir }/filebrowser/.filebrowser.json:/.filebrowser.json"
     #   ];
     #   # extraOptions = [
     #   #   "--network=public_access";
@@ -111,7 +111,7 @@ in {
     # hedgedoc = {
     #   image = "lscr.io/linuxserver/hedgedoc:latest";
     #   volumes = [
-    #     "${ containerCfg.dataDir }/hedgedoc:/config"
+    #     "${ cfg.dataDir }/hedgedoc:/config"
     #   ];
     #   environment = {
     #     # DB_HOST = "mysql";
@@ -144,7 +144,7 @@ in {
     # rss = {
     #   image = "wangqiru/ttrss:latest";
     #   volumes = [
-    #     "${ containerCfg.dataDir }/ttrss/feed-icons:/var/www/feed-icons/"
+    #     "${ cfg.dataDir }/ttrss/feed-icons:/var/www/feed-icons/"
     #   ];
     #   environment = {
     #     SELF_URL_PATH = "https://rss.${ main_domain }/";
@@ -171,7 +171,7 @@ in {
     #   image = "traefik:latest";
     #   volumes = [
     #     "/var/run/docker.sock:/var/run/docker.sock:ro" # TODO: migrate to podman socket
-    #     "${ containerCfg.dataDir }/traefik:/etc/traefik" # TODO: Need to get our traefik.yml file out here BEFORE the container starts
+    #     "${ cfg.dataDir }/traefik:/etc/traefik" # TODO: Need to get our traefik.yml file out here BEFORE the container starts
     #   ];
     #   ports = [
     #     "80:80"
@@ -197,8 +197,8 @@ in {
     # adguard = {
     #   image = "adguard/adguardhome:latest"; # https://hub.docker.com/r/adguard/adguardhome
     #   volumes = [
-    #     "${ containerCfg.dataDir }/adguard/conf:/opt/adguardhome/conf"
-    #     "${ containerCfg.dataDir }/adguard/work:/opt/adguardhome/work"
+    #     "${ cfg.dataDir }/adguard/conf:/opt/adguardhome/conf"
+    #     "${ cfg.dataDir }/adguard/work:/opt/adguardhome/work"
     #   ];
     #   ports = [
     #     "53:53"

@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  containerCfg = config.myOptions.containers;
+  cfg = config.myOptions.containers;
 in {
   virtualisation.oci-containers.containers = {
     dozzle = {

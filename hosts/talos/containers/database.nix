@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  containerCfg = config.myOptions.containers;
+  cfg = config.myOptions.containers;
 in {
   virtualisation.oci-containers.containers = {
     # adminer = {
@@ -11,7 +11,7 @@ in {
     postgres = {
       image = "postgres:13-alpine";
       volumes = [
-        "${ containerCfg.dataDir }/postgres/data/:/var/lib/postgresql/data" # TODO: Migrate to /mnt/storage ? performance considerations?
+        "${ cfg.dataDir }/postgres/data/:/var/lib/postgresql/data" # TODO: Migrate to /mnt/storage ? performance considerations?
       ];
       environment = {
         POSTGRES_PASSWORD = "${ postgres_password }";
@@ -21,7 +21,7 @@ in {
     mysql = {
       image = "mysql";
       volumes = [
-        "${ containerCfg.dataDir }/mysql:/var/lib/mysql" # TODO: Migrate to /mnt/storage ? performance considerations?
+        "${ cfg.dataDir }/mysql:/var/lib/mysql" # TODO: Migrate to /mnt/storage ? performance considerations?
       ];
       ports = [ "3306:3306" ];
       environment = {
@@ -33,8 +33,8 @@ in {
     # influxdb = {
     #   image = "influxdb:alpine"; # https://hub.docker.com/_/influxdb/
     #   volumes = [
-    #     "${ containerCfg.dataDir }/influxdb/config:/etc/influxdb2"
-    #     "${ containerCfg.dataDir }/influxdb/data:/var/lib/influxdb2"
+    #     "${ cfg.dataDir }/influxdb/config:/etc/influxdb2"
+    #     "${ cfg.dataDir }/influxdb/data:/var/lib/influxdb2"
     #   ];
     #   ports = [ "8086:8086" ];
     #   environment = {
