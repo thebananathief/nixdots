@@ -2,6 +2,7 @@
   appdata_path, 
   storage_path, 
   gameserver_path,
+  config,
   ...
 }:
 let
