@@ -101,6 +101,7 @@ By accessing this system, you agree that your actions may be monitored if unauth
     extraGroups = [
       "wheel"
       "podman"
+      "docker"
       "allowssh" # allows this user to login via ssh
     ];
     # Public keys that are authorized for SSH access
