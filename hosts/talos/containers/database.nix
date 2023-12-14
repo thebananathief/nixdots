@@ -6,7 +6,20 @@
   config,
   ...
 }:
-{
+let
+  paths = {
+    appdata = "/var/appdata";
+    downloads = "/mnt/disk1/downloads";
+    storage = "/mnt/storage";
+    gameservers = "/mnt/ssd/gameservers";
+  };
+  common_env = {
+    # TODO: Any way to acquire my user's IDs dynamically?
+    PUID = "1000";
+    PGID = "100";
+    TZ = config.time.timeZone;
+  };
+in {
   virtualisation.oci-containers.containers = {
     # adminer = {
     #   image = "adminer"; # https://hub.docker.com/_/adminer

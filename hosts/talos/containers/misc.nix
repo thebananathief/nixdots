@@ -6,14 +6,16 @@
   ...
 }:
 let
-  appdata_path = "/var/appdata";
-  main_uid = "1000";
-  main_gid = "100";
-  linuxserver_env = {
-    PUID = main_uid; # TODO: Any way to acquire my user's IDs dynamically?
-    PGID = main_gid;
-    # TZ = "America/New_York";
-    # TZ = time.timeZone;
+  paths = {
+    appdata = "/var/appdata";
+    downloads = "/mnt/disk1/downloads";
+    storage = "/mnt/storage";
+    gameservers = "/mnt/ssd/gameservers";
+  };
+  common_env = {
+    # TODO: Any way to acquire my user's IDs dynamically?
+    PUID = "1000";
+    PGID = "100";
     TZ = config.time.timeZone;
   };
 in {
@@ -31,8 +33,9 @@ in {
       ports = [ "8081:80" ];
       environment = {
         NODE_ENV = "production";
-        UID = main_uid;
-        GID = main_gid;
+        UID = linuxserver_env.PUID;
+        # docker group?
+        GID = "131";
       };
       # BUG: Errors with this for some reason
       extraOptions = [

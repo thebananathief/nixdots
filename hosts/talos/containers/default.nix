@@ -1,10 +1,5 @@
 { config, builtins, ... }:
 let 
-  appdata_path = "/var/appdata";
-  storage_path = "/mnt/storage";
-  gameserver_path = "/mnt/ssd/gameservers";
-  download_path = "/mnt/disk1/downloads";
-
   inherit (config.sops) secrets;
   # TODO: See if these are reading in the secrets just to store them in the /nix/store
   
@@ -23,25 +18,6 @@ let
 
   # main_domain = builtins.readFile secrets.main_domain.path;
   # main_domain = "$__file{${secrets.main_domain.path}}";
-
-  main_uid = "1000";
-  main_gid = "100";
-
-  linuxserver_env = {
-    PUID = main_uid; # TODO: Any way to acquire my user's IDs dynamically?
-    PGID = main_gid;
-    # TZ = "America/New_York";
-    # TZ = time.timeZone;
-    TZ = config.time.timeZone;
-  };
-
-  # allContainers = 
-    # (import ./misc.nix) //
-  #   (import ./database.nix); # //
-    # (import ./gameserver.nix) //
-    # (import ./mediaserver.nix) //
-    # (import ./monitoring.nix);
-
 in {
   imports = [
     ./misc.nix
