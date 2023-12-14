@@ -24,10 +24,10 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [
-        443   # Traefik entrypoint >> overseerr, webtrees, filebrowser, static files, jellyfin
+        443
         4733
       ];
-      # allowedUDPPorts = [ ]; # TODO: gameserver ports?
+      # allowedUDPPorts = [ ]; # TODO: gameserver ports? any of the ones in docker containers?
     };
   };
 
@@ -133,9 +133,10 @@ By accessing this system, you agree that your actions may be monitored if unauth
     };
     tailscale = {
       useRoutingFeatures = "server";
-      authKeyFile = "/run/secrets/tailscale_authkey";
+      authKeyFile = config.sops.secrets.tailscale_authkey.path;
+      # openFirewall = false; # opens port 41641
       extraUpFlags = [
-        "--advertise-routes=192.168.0.0/24"
+        # "--advertise-routes=192.168.0.0/24"
         # "--advertise-exit-node"
       ];
     };
