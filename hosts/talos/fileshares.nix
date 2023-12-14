@@ -44,7 +44,7 @@
         "inherit permissions" = "yes";
       };
       appdata = {
-        path = "/var/appdata";
+        path = "/appdata";
         browseable = "yes";
         "read only" = "no";
         "inherit permissions" = "yes";

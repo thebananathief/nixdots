@@ -17,8 +17,7 @@ in {
       environment = {
         NODE_ENV = "production";
         UID = containerCfg.common_env.PUID;
-        # docker group?
-        GID = "131";
+        GID = containerCfg.common_env.PGID;
       };
       # user = "cameron:users";
       # BUG: Errors with this for some reason

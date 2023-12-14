@@ -26,7 +26,8 @@
         default = {
           # TODO: Any way to acquire my user's IDs dynamically?
           PUID = "1000";
-          PGID = "100";
+          PGID = "131"; # docker
+          # PGID = "100"; # users
           TZ = config.time.timeZone;
         };
         description = "Environment variables used in many containers.";
