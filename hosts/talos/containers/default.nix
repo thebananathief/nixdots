@@ -2,7 +2,7 @@
 let 
   appdata_path = "/var/appdata";
   storage_path = "/mnt/storage";
-  gameserver_path = "/ssd/gameservers";
+  gameserver_path = "/mnt/ssd/gameservers";
   download_path = "/mnt/disk1/downloads";
 
   inherit (config.sops) secrets;
@@ -36,7 +36,7 @@ let
   };
 
   # allContainers = 
-  #   (import ./misc.nix) //
+    # (import ./misc.nix) //
   #   (import ./database.nix); # //
     # (import ./gameserver.nix) //
     # (import ./mediaserver.nix) //
@@ -44,7 +44,7 @@ let
 
 in {
   imports = [
-    # ./misc.nix
+    ./misc.nix
     # ./database.nix
     ./gameserver.nix
     # ./mediaserver.nix
