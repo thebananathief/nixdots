@@ -48,7 +48,7 @@ in {
     # ./database.nix
     ./gameserver.nix
     # ./mediaserver.nix
-    # ./monitoring.nix
+    ./monitoring.nix
   ];
 
   virtualisation = {
