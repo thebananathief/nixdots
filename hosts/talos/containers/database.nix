@@ -1,24 +1,6 @@
-{
-  paths.appdata, 
-  storage_path,
-  postgres_password,
-  # mysql_password,
-  config,
-  ...
-}:
+{ config, ... }:
 let
-  paths = {
-    appdata = "/var/appdata";
-    downloads = "/mnt/disk1/downloads";
-    storage = "/mnt/storage";
-    gameservers = "/mnt/ssd/gameservers";
-  };
-  common_env = {
-    # TODO: Any way to acquire my user's IDs dynamically?
-    PUID = "1000";
-    PGID = "100";
-    TZ = config.time.timeZone;
-  };
+  containerCfg = config.myOptions.containers;
 in {
   virtualisation.oci-containers.containers = {
     # adminer = {
@@ -29,7 +11,7 @@ in {
     postgres = {
       image = "postgres:13-alpine";
       volumes = [
-        "${ paths.appdata }/postgres/data/:/var/lib/postgresql/data" # TODO: Migrate to /mnt/storage ? performance considerations?
+        "${ containerCfg.dataDir }/postgres/data/:/var/lib/postgresql/data" # TODO: Migrate to /mnt/storage ? performance considerations?
       ];
       environment = {
         POSTGRES_PASSWORD = "${ postgres_password }";
@@ -39,7 +21,7 @@ in {
     mysql = {
       image = "mysql";
       volumes = [
-        "${ paths.appdata }/mysql:/var/lib/mysql" # TODO: Migrate to /mnt/storage ? performance considerations?
+        "${ containerCfg.dataDir }/mysql:/var/lib/mysql" # TODO: Migrate to /mnt/storage ? performance considerations?
       ];
       ports = [ "3306:3306" ];
       environment = {
@@ -51,8 +33,8 @@ in {
     # influxdb = {
     #   image = "influxdb:alpine"; # https://hub.docker.com/_/influxdb/
     #   volumes = [
-    #     "${ paths.appdata }/influxdb/config:/etc/influxdb2"
-    #     "${ paths.appdata }/influxdb/data:/var/lib/influxdb2"
+    #     "${ containerCfg.dataDir }/influxdb/config:/etc/influxdb2"
+    #     "${ containerCfg.dataDir }/influxdb/data:/var/lib/influxdb2"
     #   ];
     #   ports = [ "8086:8086" ];
     #   environment = {

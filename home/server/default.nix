@@ -19,7 +19,7 @@
     dstop = "docker stop `docker ps -aq`";
     drm = "docker rm `docker ps -aq`";
     dps = "docker ps --format 'table {{ '{{' }}.Names{{ '}}' }}\\t{{ '{{' }}.Ports{{ '}}' }}\\t{{ '{{' }}.Status{{ '}}' }}'";
-    appd = "cd /var/appdata";
+    appd = "cd /appdata";
     stor = "cd /mnt/storage";
   };
 

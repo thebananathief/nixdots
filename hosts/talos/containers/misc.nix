@@ -1,20 +1,6 @@
-{
-  config,
-  ...
-}:
+{ config, ... }:
 let
-  paths = {
-    appdata = "/var/appdata";
-    downloads = "/mnt/disk1/downloads";
-    storage = "/mnt/storage";
-    gameservers = "/mnt/ssd/gameservers";
-  };
-  common_env = {
-    # TODO: Any way to acquire my user's IDs dynamically?
-    PUID = "1000";
-    PGID = "100";
-    TZ = config.time.timeZone;
-  };
+  containerCfg = config.myOptions.containers;
 in {
   virtualisation.oci-containers.containers = {
     # whoami = {

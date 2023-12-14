@@ -1,14 +1,11 @@
-{
-  gameserver_path,
-  ...
-}: 
+{ config, ... }:
 let
-  gameserver_path = "/mnt/ssd/gameservers";
+  containerCfg = config.myOptions.containers;
 in {
   virtualisation.oci-containers.containers = {
     kf2 = {
       image = "kr0nus/kf2server:latest";
-      volumes = [ "${ gameserver_path }/kf2:/data" ];
+      volumes = [ "${ containerCfg.gameserverDir }/kf2:/data" ];
       ports = [
         "27015:27015/udp"
         "20560:20560/udp"
@@ -20,7 +17,7 @@ in {
       };
     };
     # gmod = {
-    #   volumes = [ "${ gameserver_path }/gmod-darkrp:/home/gmod/server/garrysmod" ];
+    #   volumes = [ "${ containerCfg.gameserverDir }/gmod-darkrp:/home/gmod/server/garrysmod" ];
     #   ports = [
     #     "27015:27015/udp"
     #     "27020:27020/udp"
@@ -44,8 +41,8 @@ in {
     # pufferpanel = {
     #   image = "pufferpanel/pufferpanel:latest";
     #   volumes = [
-    #     "${ gameserver_path }/pufferpanel/config:/etc/pufferpanel"
-    #     "${ gameserver_path }/pufferpanel/data:/var/lib/pufferpanel"
+    #     "${ containerCfg.gameserverDir }/pufferpanel/config:/etc/pufferpanel"
+    #     "${ containerCfg.gameserverDir }/pufferpanel/data:/var/lib/pufferpanel"
     #     "/var/run/docker.sock:/var/run/docker.sock" # TODO: migrate to podman socket
     #   ];
     #   # ports = [

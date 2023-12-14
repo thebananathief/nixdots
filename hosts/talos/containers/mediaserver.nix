@@ -1,32 +1,19 @@
-{ 
-  ...
-}:
+{ config, ... }:
 let
-  paths = {
-    appdata = "/var/appdata";
-    downloads = "/mnt/disk1/downloads";
-    storage = "/mnt/storage";
-    gameservers = "/mnt/ssd/gameservers";
-  };
-  common_env = {
-    # TODO: Any way to acquire my user's IDs dynamically?
-    PUID = "1000";
-    PGID = "100";
-    TZ = config.time.timeZone;
-  };
+  cfg = config.myOptions.containers;
 in {
   virtualisation.oci-containers.containers = {
     plex = {
       image = "lscro.io/linuxserver/plex:latest"; # https://hub.docker.com/r/linuxserver/plex/
       volumes = [
-        "${ paths.appdata }/plex:/config"
-        "${ paths.storage }/media:/media"
+        "${ cfg.dataDir }/plex:/config"
+        "${ cfg.storageDir }/media:/media"
         "/etc/localtime:/etc/localtime:ro"
       ];
       environment = {
         PLEX_CLAIM = "nope";
         VERSION = "docker";
-      } ++ common_env;
+      } ++ cfg.common_env;
       extraOptions = [
         "--network=host"
         "--device=/dev/dri:/dev/dri"
@@ -35,13 +22,13 @@ in {
     jellyfin = {
       image = "jellyfin/jellyfin";
       volumes = [
-        "${ paths.appdata }/jellyfin:/config"
-        "${ paths.storage }/media:/data"
+        "${ cfg.dataDir }/jellyfin:/config"
+        "${ cfg.storageDir }/media:/data"
         # "/dev/shm:/transcode" # ram transcode
       ];
       environment = {
         JELLYFIN_PublishedServerUrl = "watch.${ main_domain }";
-      } ++ common_env;
+      } ++ cfg.common_env;
       extraOptions = [
         # "--network=public_access"
         "--device=/dev/dri:/dev/dri"
@@ -58,17 +45,17 @@ in {
     requestrr = {
       image = "lscr.io/linuxserver/requestrr:latest"; # https://hub.docker.com/r/linuxserver/requestrr
       volumes = [
-        "${ paths.appdata }/requestrr:/config"
+        "${ cfg.dataDir }/requestrr:/config"
       ];
       ports = [ "4545:4545" ];
-      environment = common_env;
+      environment = cfg.common_env;
     };
     overseerr = {
       image = "lscr.io/linuxserver/overseerr:latest";
       volumes = [
-        "${ paths.appdata }/overseerr:/config"
+        "${ cfg.dataDir }/overseerr:/config"
       ];
-      environment = common_env;
+      environment = cfg.common_env;
       # extraOptions = [
       #   "--network=public_access";
       # ];
@@ -83,28 +70,28 @@ in {
     prowlarr = {
       image = "lscr.io/linuxserver/prowlarr:latest";
       volumes = [
-        "${ paths.appdata }/prowlarr:/config"
+        "${ cfg.dataDir }/prowlarr:/config"
       ];
       ports = [ "9696:9696" ];
-      environment = common_env;
+      environment = cfg.common_env;
     };
     radarr = {
       image = "lscr.io/linuxserver/radarr:latest";
       volumes = [
-        "${ paths.appdata }/radarr:/config"
-        "${ paths.storage }:/storage"
+        "${ cfg.dataDir }/radarr:/config"
+        "${ cfg.storageDir }:/storage"
       ];
       ports = [ "7878:7878" ];
-      environment = common_env;
+      environment = cfg.common_env;
     };
     sonarr = {
       image = "lscr.io/linuxserver/sonarr:latest";
       volumes = [
-        "${ paths.appdata }/sonarr:/config"
-        "${ paths.storage }:/storage"
+        "${ cfg.dataDir }/sonarr:/config"
+        "${ cfg.storageDir }:/storage"
       ];
       ports = [ "8989:8989" ];
-      environment = common_env;
+      environment = cfg.common_env;
     };
 
     
@@ -131,14 +118,14 @@ in {
     transmission = {
       image = "lscr.io/linuxserver/transmission:latest ";
       volumes = [
-        "${ paths.appdata }/transmission:/config"
-        "${ download_path }:/downloads"
-        "${ download_path }:/watch" # TODO: Adjust this to a torrent blackhole
+        "${ cfg.dataDir }/transmission:/config"
+        "${ cfg.downloadDir }:/downloads"
+        "${ cfg.downloadDir }:/watch" # TODO: Adjust this to a torrent blackhole
       ];
       environment = {
         # WHITELIST = "192.168.0.0/24";
         # TRANSMISSION_WEB_HOME = "";
-      } ++ common_env;
+      } ++ cfg.common_env;
       # This uses the gluetun network stack so that its behind VPN
       extraOptions = [ "--network=container:gluetun" ];
     };
@@ -147,7 +134,7 @@ in {
     #   image = "haugene/transmission-openvpn:latest";
     #   volumes = [
     #     "/etc/localtime:/etc/localtime:ro"
-    #     "${ download_path }:/data"
+    #     "${ cfg.downloadDir }:/data"
     #   ];
     #   ports = [ "9092:9091" ];
     #   environment = {

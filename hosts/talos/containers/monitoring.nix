@@ -1,8 +1,7 @@
-{
-  appdata_path, 
-  storage_path, 
-  ...
-}: {
+{ config, ... }:
+let
+  containerCfg = config.myOptions.containers;
+in {
   virtualisation.oci-containers.containers = {
     dozzle = {
       image = "amir20/dozzle:latest"; # https://github.com/amir20/dozzle
