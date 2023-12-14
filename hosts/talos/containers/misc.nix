@@ -4,7 +4,18 @@
   gameserver_path,
   ...
 }:
-{
+let
+  appdata_path = "/var/appdata";
+  main_uid = "1000";
+  main_gid = "100";
+  linuxserver_env = {
+    PUID = main_uid; # TODO: Any way to acquire my user's IDs dynamically?
+    PGID = main_gid;
+    # TZ = "America/New_York";
+    # TZ = time.timeZone;
+    TZ = config.time.timeZone;
+  };
+in {
   virtualisation.oci-containers.containers = {
     # whoami = {
     #   image = "traefik/whoami:latest";
@@ -19,8 +30,8 @@
       ports = [ "8081:80" ];
       environment = {
         NODE_ENV = "production";
-        UID = "${ linuxserver_env.PUID }";
-        GID = "${ main_gid }";
+        UID = main_uid;
+        GID = main_gid;
       };
       # BUG: Errors with this for some reason
       extraOptions = [
