@@ -3,7 +3,7 @@
   ...
 }: 
 let
-  gameserver_path = "/ssd/gameservers";
+  gameserver_path = "/mnt/ssd/gameservers";
 in {
   virtualisation.oci-containers.containers = {
     kf2 = {
