@@ -20,14 +20,6 @@ in {
         GID = cfg.common_env.PGID;
       };
       # user = "cameron:users";
-      # BUG: Errors with this for some reason
-      extraOptions = [
-        "--health-cmd='[CMD, node, /app/services/healthcheck]'"
-        "--health-interval=1m30s"
-        "--health-retries=3"
-        "--health-start-period=40s"
-        "--health-timeout=10s"
-      ];
     };
     # mumble = {
     #   image = "mumblevoip/mumble-server:latest"; # https://github.com/Theofilos-Chamalis/mumble-web

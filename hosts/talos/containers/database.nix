@@ -8,16 +8,16 @@ in {
     #   ports = [ "8085:8080" ];
     #   extraOptions = [ "--network=database_only" ];
     # };
-    postgres = {
-      image = "postgres:13-alpine";
-      volumes = [
-        "${ cfg.dataDir }/postgres/data/:/var/lib/postgresql/data" # TODO: Migrate to /mnt/storage ? performance considerations?
-      ];
-      environment = {
-        POSTGRES_PASSWORD = "${ postgres_password }";
-      };
-      # extraOptions = [ "--network=database_only" ];
-    };
+    # postgres = {
+    #   image = "postgres:13-alpine";
+    #   volumes = [
+    #     "${ cfg.dataDir }/postgres/data/:/var/lib/postgresql/data" # TODO: Migrate to /mnt/storage ? performance considerations?
+    #   ];
+    #   environment = {
+    #     POSTGRES_PASSWORD = "${ postgres_password }";
+    #   };
+    #   # extraOptions = [ "--network=database_only" ];
+    # };
     mysql = {
       image = "mysql";
       volumes = [
@@ -25,7 +25,7 @@ in {
       ];
       ports = [ "3306:3306" ];
       environment = {
-        MYSQL_ROOT_PASSWORD = import config.sops.secrets.mysql_password.path; # "${ mysql_password }";
+        MYSQL_ROOT_PASSWORD = "${config.sops.secrets.mysql_password.path}";
       };
       # extraOptions = [ "--network=database_only" ];
     };

@@ -21,7 +21,7 @@ let
 in {
   imports = [
     ./misc.nix
-    # ./database.nix
+    ./database.nix
     ./gameserver.nix
     # ./mediaserver.nix
     ./monitoring.nix
