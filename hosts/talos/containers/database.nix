@@ -1,6 +1,7 @@
 { config, ... }:
 let
   cfg = config.myOptions.containers;
+  inherit (config.sops) secrets;
 in {
   virtualisation.oci-containers.containers = {
     # adminer = {
@@ -14,7 +15,7 @@ in {
         "${ cfg.dataDir }/postgres/data/:/var/lib/postgresql/data" # TODO: Migrate to /mnt/storage ? performance considerations?
       ];
       environment = {
-        POSTGRES_PASSWORD = "${config.sops.secrets.postgres_password.path}";
+        POSTGRES_PASSWORD = "${secrets.postgres_password.path}";
       };
       # extraOptions = [ "--network=database_only" ];
     };
@@ -25,7 +26,7 @@ in {
       ];
       ports = [ "3306:3306" ];
       environment = {
-        MYSQL_ROOT_PASSWORD = "${config.sops.secrets.mysql_password.path}";
+        MYSQL_ROOT_PASSWORD = "${secrets.mysql_password.path}";
       };
       # extraOptions = [ "--network=database_only" ];
     };
