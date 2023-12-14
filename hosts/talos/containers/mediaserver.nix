@@ -107,12 +107,23 @@ in {
 
     # VPN and download client
     # https://github.com/qdm12/gluetun-wiki/
+
+    # BUG: Need to fix importing this wireguard key. The env var can't take a file path.
+    # I want to use the --env-file or environmentFiles to get it in but I think
+    # these next lines are how you do it ?
+    # secrets.mullvad_privKey = {
+    #   file = "${inputs.secrets}/secrets/linkding-user-pass.age";
+    # };
+
     gluetun = {
       image = "qmcgaw/gluetun:latest";
+      environmentFiles = [
+        secrets.mullvad_privKey.path # WIREGUARD_PRIVATE_KEY
+      ];
       environment = {
         VPN_SERVICE_PROVIDER = "mullvad";
         VPN_TYPE = "wireguard";
-        WIREGUARD_PRIVATE_KEY = "${ secrets.mullvad_privKey.path }";
+        # WIREGUARD_PRIVATE_KEY = "${  }";
         WIREGUARD_ADDRESSES = "10.67.197.145/32";
         SERVER_COUNTRIES = "Switzerland";
         # OWNED_ONLY = "yes"; # Use if you want only servers owned by Mullvad
