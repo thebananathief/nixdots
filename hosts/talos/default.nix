@@ -112,6 +112,10 @@ By accessing this system, you agree that your actions may be monitored if unauth
     ];
   };
 
+  environment.systemPackages = with pkgs; [
+    lazydocker
+  ];
+
   security.pam.enableSSHAgentAuth = true;
 
   services = {
