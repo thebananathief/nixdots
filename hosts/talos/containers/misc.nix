@@ -1,6 +1,7 @@
 { config, ... }:
 let
   cfg = config.myOptions.containers;
+  inherit (config.sops) secrets;
 in {
   virtualisation.oci-containers.containers = {
     whoami = {

@@ -1,7 +1,11 @@
 { config, ... }:
 let
   cfg = config.myOptions.containers;
+  inherit (config.sops) secrets;
 in {
+  # dozzle    8082:8080
+  # scrutiny  8084:8080
+
   virtualisation.oci-containers.containers = {
     dozzle = {
       image = "amir20/dozzle:latest"; # https://github.com/amir20/dozzle
@@ -44,21 +48,21 @@ in {
     #   };
     #   cmd = [ "serve" ];
     # };
-    # scrutiny = {
-    #   image = "ghcr.io/analogj/scrutiny:master-omnibus"; # https://github.com/AnalogJ/scrutiny
-    #   volumes = [
-    #     "/run/udev:/run/udev:ro"
-    #     "${ appdata_path }/scrutiny/config:/opt/scrutiny/config"
-    #     "${ appdata_path }/scrutiny/influxdb:/opt/scrutiny/influxdb"
-    #   ];
-    #   ports = [ "8084:8080" ];
-    #   extraOptions = [
-    #     "--cap-add=SYS_RAWIO"
-    #     "--device=/dev/sda"
-    #     "--device=/dev/sdb"
-    #     "--device=/dev/sdc"
-    #     "--device=/dev/sdd"
-    #   ];
-    # };
+    scrutiny = {
+      image = "ghcr.io/analogj/scrutiny:master-omnibus"; # https://github.com/AnalogJ/scrutiny
+      volumes = [
+        "/run/udev:/run/udev:ro"
+        "${ cfg.dataDir }/scrutiny/config:/opt/scrutiny/config"
+        "${ cfg.dataDir }/scrutiny/influxdb:/opt/scrutiny/influxdb"
+      ];
+      ports = [ "8084:8080" ];
+      extraOptions = [
+        "--cap-add=SYS_RAWIO"
+        "--device=/dev/sda"
+        "--device=/dev/sdb"
+        "--device=/dev/sdc"
+        "--device=/dev/sdd"
+      ];
+    };
   };
 }
