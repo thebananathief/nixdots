@@ -11,19 +11,20 @@
   # services.blueman-applet.enable = true;
 
   # Some electron fixes to run on wayland
-  xdg.configFile."electron25-flags.conf".text = ''
-    --enable-features=WaylandWindowDecorations
-    --ozone-platform-hint=auto
-  '';
-  
-  xdg.configFile."electron13-flags.conf".text = ''
-    --enable-features=UseOzonePlatform
-    --ozone-platform=wayland
-  '';
+  # BUG: One of these broke mullvad-gui
+  # xdg.configFile."electron25-flags.conf".text = ''
+  #   --enable-features=WaylandWindowDecorations
+  #   --ozone-platform-hint=auto
+  # '';
+  # 
+  # xdg.configFile."electron13-flags.conf".text = ''
+  #   --enable-features=UseOzonePlatform
+  #   --ozone-platform=wayland
+  # '';
   
   wayland.windowManager.hyprland = {
     enable = true;
-    enableNvidiaPatches = true;
+    # enableNvidiaPatches = true;
     settings = {
       "$mainMod" = "SUPER";
       "$terminal" = "alacritty";
@@ -31,28 +32,28 @@
       "$browser" = "firefox";
       "$runner" = "anyrun";
       "$volume" = "~/github/nixdots/scripts/volumecontrol";
-      "$lockscreen" = "waylock";
+      "$lockscreen" = "waylock -init-color 0x101010 -input-color 0x353535 -fail-color 0x150505";
       "$lockmenu" = "wlogout";
       "$brightness" = "~/github/nixdots/scripts/brightnesscontrol";
       "$screenshot" = "~/github/nixdots/scripts/screenshot";
 
       env = [
         # QT uses these
-         "XCURSOR_SIZE,24"
+         # "XCURSOR_SIZE,24"
         # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
 
         # Electron stuff
         "ELECTRON_OZONE_PLATFORM_HINT,wayland"
         
         # NVIDIA stuff
-        "WLR_NO_HARDWARE_CURSORS,1"
-        "LIBVA_DRIVER_NAME,nvidia"
-        "GBM_BACKEND,nvidia-drm"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        "XDG_SESSION_TYPE,wayland"
+        # "WLR_NO_HARDWARE_CURSORS,1"
+        # "LIBVA_DRIVER_NAME,nvidia"
+        # "GBM_BACKEND,nvidia-drm"
+        # "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        # "XDG_SESSION_TYPE,wayland"
 
         # Screen tearing
-        "WLR_DRM_NO_ATOMIC,1"
+        # "WLR_DRM_NO_ATOMIC,1"
       ];
 
       # https://wiki.hyprland.org/Configuring/Binds/
@@ -201,6 +202,7 @@
         
         # Taken from CTT
         # "~/github/nixdots/scripts/resetxdgportal"
+        # For when xdg-desktop-portal-wlr doesn't want to start because these variables are missing
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         # "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
@@ -224,15 +226,15 @@
       monitor = [
         # TODO: I need a better way to separate my home config for my laptop and my desktop
         # desktop
-        "HDMI-A-1, 1920x1080@144, 0x0, 1"
-        "DP-3, 1920x1080@60, 0x-1080, 1"
-        "DP-1, 1920x1080@75.001, 1920x-500, 1, transform, 1"
+        # "HDMI-A-1, 1920x1080@144, 0x0, 1"
+        # "DP-3, 1920x1080@60, 0x-1080, 1"
+        # "DP-1, 1920x1080@75.001, 1920x-500, 1, transform, 1"
         
         # laptop
-        # "eDP-1,highres,0x0,auto"
-        # "DP-1,highres,0x0,auto"
-        # "DP-5,highres,1128x0,auto"
-        # "DP-6,highres,3048x0,auto"
+        "eDP-1,highres,0x0,auto"
+        "DP-1,highres,0x0,auto"
+        "DP-5,highres,1128x0,auto"
+        "DP-6,highres,3048x0,auto"
         
         # "DP-6,highres,1128x0,auto"
         # "DP-5,highres,3048x0,auto"
@@ -243,14 +245,14 @@
 
       workspace = [
         # desktop setup
-        "1, monitor:HDMI-A-1, default:true"
-        "2, monitor:DP-3, default:true"
-        "3, monitor:DP-1, default:true"
+        # "1, monitor:HDMI-A-1, default:true"
+        # "2, monitor:DP-3, default:true"
+        # "3, monitor:DP-1, default:true"
         
         # laptop setup
-        # "1, monitor:eDP-1, default:true"
-        # "2, monitor:DP-6, default:true"
-        # "3, monitor:DP-5, default:true"
+        "1, monitor:eDP-1, default:true"
+        "2, monitor:DP-6, default:true"
+        "3, monitor:DP-5, default:true"
       ];
 
       misc = {
@@ -288,7 +290,7 @@
         # "col.nogroup_border_active" = 
         resize_on_border = true;
 
-        allow_tearing = true;
+        # allow_tearing = true;
 
         layout = "dwindle";
       };

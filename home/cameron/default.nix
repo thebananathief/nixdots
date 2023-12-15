@@ -10,6 +10,7 @@
     ./fusuma.nix
     ./anyrun.nix
     ./waybar.nix
+    ./wlogout.nix
     ./hyprland.nix
     ./dunst.nix
   ];

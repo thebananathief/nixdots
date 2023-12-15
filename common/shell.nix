@@ -25,6 +25,19 @@
       tree-sitter
       universal-ctags
       zig
+      nodejs_20
+      rustup
+      gdu
+      lazygit
+      julia
+      (python311.withPackages (ps:
+        with ps; [
+          # Neovim
+          pip
+          yamllint
+          pynvim
+      ]))
+      luajitPackages.luarocks
     ];
     shells = [ pkgs.zsh ];
     # shells = [ pkgs.fish ];

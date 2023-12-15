@@ -62,7 +62,6 @@
 
       x64_specialArgs = {
         inherit username useremail globalFonts;
-        # This part allows us to install non-free software from nixpkgs, you can also put this further down and ref with nixpkgs.config.allowUnfree
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;

@@ -16,8 +16,10 @@ in {
         exclusive = true;
         passthrough = false;
         gtk-layer-shell = true;
-        # desktop output
-        output = "HDMI-A-1";
+        # desktop
+        # output = "HDMI-A-1";
+        # laptop
+        output = "DP-5";
 
         modules-left = [
           "custom/power"
