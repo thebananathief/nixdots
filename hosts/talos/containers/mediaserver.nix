@@ -36,11 +36,10 @@ in {
         "1900:1900/udp" # Optional - Service discovery used by DNLA and clients.
       ];
       environment = {
-        # JELLYFIN_PublishedServerUrl = "watch.${ main_domain }";
-        JELLYFIN_PublishedServerUrl = "talos:8096";
+        JELLYFIN_PublishedServerUrl = "watch.${ main_domain }";
       } // cfg.common_env;
       extraOptions = [
-        "--network=jellynet"
+        "--network=bridge"
         "--device=/dev/dri:/dev/dri"
       ];
       # labels = {
@@ -71,7 +70,7 @@ in {
         LOG_LEVEL = "debug";
       } // cfg.common_env;
       extraOptions = [
-        "--network=jellynet"
+        "--network=bridge"
       ];
       # labels = {
       #   "traefik.enable" = true;
