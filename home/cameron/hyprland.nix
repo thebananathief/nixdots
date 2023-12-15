@@ -32,7 +32,7 @@
       "$browser" = "firefox";
       "$runner" = "anyrun";
       "$volume" = "~/github/nixdots/scripts/volumecontrol";
-      "$lockscreen" = "waylock";
+      "$lockscreen" = "waylock -init-color 0x101010 -input-color 0x353535 -fail-color 0x150505";
       "$lockmenu" = "wlogout";
       "$brightness" = "~/github/nixdots/scripts/brightnesscontrol";
       "$screenshot" = "~/github/nixdots/scripts/screenshot";
