@@ -88,7 +88,7 @@ in {
       #   "traefik.http.routers.filebrowser.entrypoints" = "websecure";
       # };
       # user = "${ cfg.common_env.PUID }:${ cfg.common_env.PGID}";
-      user = "cameron:docker";
+      # user = "cameron:docker";
     };
     static = {
       image = "nginx:alpine";

@@ -108,7 +108,7 @@ in {
     # VPN and download client
     # https://github.com/qdm12/gluetun-wiki/
     gluetun = {
-      image = "qmcgaw/gluetun:latest";
+      image = "quay.io/qmcgaw/gluetun:latest";
       environmentFiles = [
         secrets."mullvad.env".path # WIREGUARD_PRIVATE_KEY
       ];
