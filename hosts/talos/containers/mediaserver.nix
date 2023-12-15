@@ -109,6 +109,9 @@ in {
     # https://github.com/qdm12/gluetun-wiki/
     gluetun = {
       image = "docker.io/qmcgaw/gluetun:v3";
+      volumes = [
+        "${ cfg.dataDir }/gluetun:/gluetun"
+      ];
       environmentFiles = [
         secrets."mullvad.env".path # WIREGUARD_PRIVATE_KEY
       ];
@@ -120,7 +123,10 @@ in {
         SERVER_COUNTRIES = "Switzerland";
         # OWNED_ONLY = "yes"; # Use if you want only servers owned by Mullvad
       };
-      extraOptions = [ "--cap-add=NET_ADMIN" ];
+      extraOptions = [
+        "--cap-add=NET_ADMIN"
+        "--device=/dev/net/tun:/dev/net/tun"
+      ];
       # NOTE: Any containers using the gluetun network stack need to
       # have portforwards set here instead of that container
       ports = [ 
@@ -142,6 +148,7 @@ in {
       } // cfg.common_env;
       # This uses the gluetun network stack so that its behind VPN
       extraOptions = [ "--network=container:gluetun" ];
+      dependsOn = [ "gluetun" ];
     };
   };
 }
