@@ -107,14 +107,6 @@ in {
 
     # VPN and download client
     # https://github.com/qdm12/gluetun-wiki/
-
-    # BUG: Need to fix importing this wireguard key. The env var can't take a file path.
-    # I want to use the --env-file or environmentFiles to get it in but I think
-    # these next lines are how you do it ?
-    # secrets.mullvad_privKey = {
-    #   file = "${inputs.secrets}/secrets/linkding-user-pass.age";
-    # };
-
     gluetun = {
       image = "qmcgaw/gluetun:latest";
       environmentFiles = [
@@ -123,7 +115,7 @@ in {
       environment = {
         VPN_SERVICE_PROVIDER = "mullvad";
         VPN_TYPE = "wireguard";
-        # WIREGUARD_PRIVATE_KEY = "${  }";
+        WIREGUARD_PRIVATE_KEY = "@mullvad_privKey@";
         WIREGUARD_ADDRESSES = "10.67.197.145/32";
         SERVER_COUNTRIES = "Switzerland";
         # OWNED_ONLY = "yes"; # Use if you want only servers owned by Mullvad
@@ -151,32 +143,5 @@ in {
       # This uses the gluetun network stack so that its behind VPN
       extraOptions = [ "--network=container:gluetun" ];
     };
-
-    # transmission = {
-    #   image = "haugene/transmission-openvpn:latest";
-    #   volumes = [
-    #     "/etc/localtime:/etc/localtime:ro"
-    #     "${ cfg.downloadDir }:/data"
-    #   ];
-    #   ports = [ "9092:9091" ];
-    #   environment = {
-    #     PUID = "${ main_uid }";
-    #     PGID = "${ main_gid }";
-    #     OPENVPN_PROVIDER = "NORDVPN";
-    #     NORDVPN_COUNTRY = "US";
-    #     NORDVPN_CATEGORY = "legacy_p2p";
-    #     OPENVPN_USERNAME = "${ nordvpn_user }";
-    #     OPENVPN_PASSWORD = "${ nordvpn_pass }";
-    #     OPENVPN_OPTS = "--inactive 3600 --ping 10 --ping-exit 60";
-    #     LOCAL_NETWORK = "192.168.0.0/24";
-    #     # TRANSMISSION_WEB_UI = "combustion";
-    #   };
-    #   extraOptions = [
-    #     "--cap-add=NET_ADMIN"
-    #     "--device=/dev/net/tun"
-    #     "--dns=8.8.8.8"
-    #     "--dns=8.8.4.4"
-    #   ];
-    # };
   };
 }
