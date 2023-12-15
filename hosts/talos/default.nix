@@ -122,6 +122,7 @@ By accessing this system, you agree that your actions may be monitored if unauth
     extraGroups = [
       "wheel"
       config.virtualisation.oci-containers.backend
+      "131" # docker
       "allowssh" # allows this user to login via ssh
     ];
     # Public keys that are authorized for SSH access
