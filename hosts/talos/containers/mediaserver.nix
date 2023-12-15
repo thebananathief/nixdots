@@ -110,7 +110,7 @@ in {
     gluetun = {
       image = "qmcgaw/gluetun:latest";
       environmentFiles = [
-        secrets.mullvad_privKey.path # WIREGUARD_PRIVATE_KEY
+        secrets."mullvad.env".path # WIREGUARD_PRIVATE_KEY
       ];
       environment = {
         VPN_SERVICE_PROVIDER = "mullvad";
