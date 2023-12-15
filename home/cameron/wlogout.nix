@@ -1,3 +1,46 @@
+{ ... }:
+{
+  programs.wlogout = {
+    enable = true;
+    layout = [
+      {
+        label = "lock";
+        action = "waylock";
+        text = "Lock";
+        keybind = "l";
+      }
+      {
+        label = "logout";
+        action = "hyprctl dispatch exit 0";
+        text = "Logout";
+        keybind = "e";
+      }
+      {
+        label = "suspend";
+        action = "waylock && systemctl suspend";
+        text = "Suspend";
+        keybind = "u";
+      }
+      {
+        label = "shutdown";
+        action = "systemctl poweroff";
+        text = "Shutdown";
+        keybind = "s";
+      }
+      {
+        label = "hibernate";
+        action = "systemctl hibernate";
+        text = "Hibernate";
+        keybind = "h";
+      }
+      {
+        label = "reboot";
+        action = "systemctl reboot";
+        text = "Reboot";
+        keybind = "r";
+      }
+    ];
+    style = ''
 * {
     background-image: none;
     font-size: ${fntSize}px;
@@ -103,4 +146,7 @@ button:hover#reboot {
     background-image: image(url("$HOME/.config/wlogout/icons/reboot_${BtnCol}.png"), url("/usr/share/wlogout/icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));
     border-radius: 0px ${button_rad}px ${button_rad}px 0px;
     margin : ${mgn}px ${mgn}px ${mgn}px 0px;
+}
+    '';
+  }
 }
