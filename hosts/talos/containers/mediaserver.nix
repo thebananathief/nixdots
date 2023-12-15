@@ -22,34 +22,34 @@ in {
     #     "--device=/dev/dri:/dev/dri"
     #   ];
     # };
-    # jellyfin = {
-    #   image = "jellyfin/jellyfin";
-    #   volumes = [
-    #     "${ cfg.dataDir }/jellyfin:/config"
-    #     "${ cfg.storageDir }/media:/data"
-    #     # "/dev/shm:/transcode" # ram transcode
-    #   ];
-    #   ports = [
-    #     "8096:8096"
-    #     # "8920:8920" # HTTPS web interface
-    #     "7359:7359/udp" # Optional - Allows clients to discover Jellyfin on the local network.
-    #     "1900:1900/udp" # Optional - Service discovery used by DNLA and clients.
-    #   ];
-    #   environment = {
-    #     # JELLYFIN_PublishedServerUrl = "watch.${ main_domain }";
-    #   } // cfg.common_env;
-    #   extraOptions = [
-    #     # "--network=public_access"
-    #     "--device=/dev/dri:/dev/dri"
-    #   ];
-    #   # labels = {
-    #   #   "traefik.enable" = true;
-    #   #   "traefik.http.routers.jellyfin.rule" = "Host(`watch.${ main_domain }`)";
-    #   #   "traefik.http.routers.jellyfin.entrypoints" = "websecure";
-    #   #   "traefik.http.services.jellyfin.loadbalancer.server.port" = 8096;
-    #   # };
-    #   user = "cameron:docker";
-    # };
+    jellyfin = {
+      image = "jellyfin/jellyfin";
+      volumes = [
+        "${ cfg.dataDir }/jellyfin:/config"
+        "${ cfg.storageDir }/media:/data"
+        # "/dev/shm:/transcode" # ram transcode
+      ];
+      ports = [
+        "8096:8096"
+        # "8920:8920" # HTTPS web interface
+        "7359:7359/udp" # Optional - Allows clients to discover Jellyfin on the local network.
+        "1900:1900/udp" # Optional - Service discovery used by DNLA and clients.
+      ];
+      environment = {
+        # JELLYFIN_PublishedServerUrl = "watch.${ main_domain }";
+      } // cfg.common_env;
+      extraOptions = [
+        # "--network=public_access"
+        "--device=/dev/dri:/dev/dri"
+      ];
+      # labels = {
+      #   "traefik.enable" = true;
+      #   "traefik.http.routers.jellyfin.rule" = "Host(`watch.${ main_domain }`)";
+      #   "traefik.http.routers.jellyfin.entrypoints" = "websecure";
+      #   "traefik.http.services.jellyfin.loadbalancer.server.port" = 8096;
+      # };
+      # user = "cameron:docker";
+    };
 
     # Media requesters
     requestrr = {
@@ -61,12 +61,14 @@ in {
       environment = cfg.common_env;
     };
     overseerr = {
-      image = "lscr.io/linuxserver/overseerr:latest";
+      image = "fallenbagel/jellyseerr:latest";
       volumes = [
         "${ cfg.dataDir }/overseerr:/config"
       ];
       ports = [ "8005:5055" ];
-      environment = cfg.common_env;
+      environment = {
+        LOG_LEVEL = "debug";
+      } // cfg.common_env;
       # extraOptions = [
       #   "--network=public_access";
       # ];
@@ -76,6 +78,22 @@ in {
       #   "traefik.http.routers.overseerr.entrypoints" = "websecure";
       # };
     };
+    # overseerr = {
+    #   image = "lscr.io/linuxserver/overseerr:latest";
+    #   volumes = [
+    #     "${ cfg.dataDir }/overseerr:/config"
+    #   ];
+    #   ports = [ "8005:5055" ];
+    #   environment = cfg.common_env;
+    #   # extraOptions = [
+    #   #   "--network=public_access";
+    #   # ];
+    #   # labels = {
+    #   #   "traefik.enable" = true;
+    #   #   "traefik.http.routers.overseerr.rule" = "Host(`request.${ main_domain }`)";
+    #   #   "traefik.http.routers.overseerr.entrypoints" = "websecure";
+    #   # };
+    # };
 
     # Media indexing, metadata and organizing, coordinating
     prowlarr = {
