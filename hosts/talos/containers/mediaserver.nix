@@ -63,7 +63,7 @@ in {
     overseerr = {
       image = "fallenbagel/jellyseerr:latest";
       volumes = [
-        "${ cfg.dataDir }/overseerr:/config"
+        "${ cfg.dataDir }/jellyseerr:/app/config"
       ];
       ports = [ "8005:5055" ];
       environment = {
