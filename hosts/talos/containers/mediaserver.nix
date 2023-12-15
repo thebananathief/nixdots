@@ -118,7 +118,8 @@ in {
       environment = {
         VPN_SERVICE_PROVIDER = "mullvad";
         VPN_TYPE = "wireguard";
-        WIREGUARD_PRIVATE_KEY = "@mullvad_privKey@";
+        # WIREGUARD_PRIVATE_KEY = "@mullvad_privKey@";
+        WIREGUARD_PRIVATE_KEY = "CM9GlLHE/KfaEQGu1KMWsnVuQ9jY3P0Ntq5zL7IAgVE=";
         WIREGUARD_ADDRESSES = "10.67.197.145/32";
         SERVER_COUNTRIES = "Switzerland";
         # OWNED_ONLY = "yes"; # Use if you want only servers owned by Mullvad
