@@ -60,7 +60,7 @@ in {
       ports = [ "8006:4545" ];
       environment = cfg.common_env;
     };
-    overseerr = {
+    jellyseerr = {
       image = "fallenbagel/jellyseerr:latest";
       volumes = [
         "${ cfg.dataDir }/jellyseerr:/app/config"
