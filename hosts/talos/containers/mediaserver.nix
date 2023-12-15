@@ -70,7 +70,7 @@ in {
         LOG_LEVEL = "debug";
       } // cfg.common_env;
       extraOptions = [
-        "--network=jellynet";
+        "--network=jellynet"
       ];
       # labels = {
       #   "traefik.enable" = true;
