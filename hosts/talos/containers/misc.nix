@@ -138,33 +138,33 @@ in {
     #     "traefik.http.services.hedgedoc.loadbalancer.server.port" = "3000";
     #   };
     # };
-    # rss = {
-    #   image = "wangqiru/ttrss:latest";
-    #   volumes = [
-    #     "${ cfg.dataDir }/ttrss/feed-icons:/var/www/feed-icons/"
-    #   ];
-    #   ports = [ "8011:80" ];
-    #   environment = {
-    #     SELF_URL_PATH = "https://rss.${ main_domain }/";
-    #     # PUID = "${ cfg.common_env.PUID }";
-    #     # PGID = "${ main_gid }";
-    #     DB_HOST = "postgres";
-    #     DB_PORT = "5432";
-    #     DB_USER = "postgres";
-    #     DB_PASS = "${ secrets.postgres_password.path }";
-    #   } ++ cfg.common_env;
-    #   extraOptions = [
-    #     # "--network=public_access,database_only"
-    #     "--tty"
-    #     "--interactive"
-    #   ];
-    #   dependsOn = [ "postgres" ];
-    #   # labels = {
-    #   #   "traefik.enable" = "true";
-    #   #   "traefik.http.routers.rss.rule" = "Host(`rss.${ main_domain }`)";
-    #   #   "traefik.http.routers.rss.entrypoints" = "websecure";
-    #   # };
-    # };
+    rss = {
+      image = "wangqiru/ttrss:latest";
+      volumes = [
+        "${ cfg.dataDir }/ttrss/feed-icons:/var/www/feed-icons/"
+      ];
+      ports = [ "8011:80" ];
+      environment = {
+        # SELF_URL_PATH = "https://rss.${ main_domain }/";
+        # PUID = "${ cfg.common_env.PUID }";
+        # PGID = "${ main_gid }";
+        DB_HOST = "postgres";
+        DB_PORT = "5432";
+        DB_USER = "postgres";
+        DB_PASS = "${ secrets.postgres_password.path }";
+      } // cfg.common_env;
+      extraOptions = [
+        # "--network=public_access,database_only"
+        "--tty"
+        "--interactive"
+      ];
+      dependsOn = [ "postgres" ];
+      # labels = {
+      #   "traefik.enable" = "true";
+      #   "traefik.http.routers.rss.rule" = "Host(`rss.${ main_domain }`)";
+      #   "traefik.http.routers.rss.entrypoints" = "websecure";
+      # };
+    };
     # traefik = {
     #   image = "traefik:latest";
     #   volumes = [

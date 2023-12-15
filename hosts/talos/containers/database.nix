@@ -14,6 +14,7 @@ in {
       volumes = [
         "${ cfg.dataDir }/postgres/data/:/var/lib/postgresql/data" # TODO: Migrate to /mnt/storage ? performance considerations?
       ];
+      ports = [ "5432:5432" ];
       environment = {
         POSTGRES_PASSWORD = "${secrets.postgres_password.path}";
       };
