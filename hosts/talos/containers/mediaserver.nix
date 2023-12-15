@@ -37,6 +37,7 @@ in {
       ];
       environment = {
         # JELLYFIN_PublishedServerUrl = "watch.${ main_domain }";
+        JELLYFIN_PublishedServerUrl = "talos:8096";
       } // cfg.common_env;
       extraOptions = [
         "--network=jellynet"
