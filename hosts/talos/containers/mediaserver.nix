@@ -108,7 +108,7 @@ in {
     # VPN and download client
     # https://github.com/qdm12/gluetun-wiki/
     gluetun = {
-      image = "docker.io/qmcgaw/gluetun:latest";
+      image = "docker.io/qmcgaw/gluetun:v3";
       environmentFiles = [
         secrets."mullvad.env".path # WIREGUARD_PRIVATE_KEY
       ];
