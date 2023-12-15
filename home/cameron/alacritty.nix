@@ -41,12 +41,12 @@ in {
         alphabet = "jfkdls;ahgurieowpq";
         enabled = [
           {
-            regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|http[s]:|news:|file:|git:|ssh:|ftp:)[^\\u0000-\\u001F\\u007F-\\u009F<>\"\s{-}\^⟨⟩`]+";
+            regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|http[s]:|news:|file:|git:|ssh:|ftp:)[^\\u0000-\\u001F\\u007F-\\u009F<>\"\\\\s{-}\\\\^⟨⟩`]+";
             hyperlinks = true;
             command = "xdg-open";
             post_processing = true;
             mouse.enabled = true;
-            mouse.mods = "None";
+            mouse.mods = "Control";
             binding.key = "U";
             binding.mods = "Control|Shift";
           }

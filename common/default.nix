@@ -82,7 +82,7 @@
     "fat"
     # "vfat"
     "exfat"
-    # "cifs" # mount windows share
+    "cifs" # mount windows share
   ];
 }
 

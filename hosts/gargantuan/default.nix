@@ -10,6 +10,7 @@
     nixos-hardware.nixosModules.framework-11th-gen-intel
     ./hardware-configuration.nix
     ./packages.nix
+    ./network-mount.nix
     # ../../modules/games.nix
     ../../modules/desktop
     sops-nix.nixosModules.sops
@@ -37,8 +38,8 @@
     secrets = {
       main_user_password = { neededForUsers = true; };
       email_address = {};
-      sshPub_phone = {};
       ssh_github = {};
+      smb-secrets = {};
     };
   };
 

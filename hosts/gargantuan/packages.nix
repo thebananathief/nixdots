@@ -4,27 +4,17 @@
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
   environment.systemPackages = with pkgs; [
-  ## CLI
     wev
     efibootmgr
     jsonfmt
-
-  # Fun stuff
     cava # audio visualizer
     cmatrix
+    go
 
     (python311.withPackages (ps: 
       with ps; [
         ansible
-        yamllint
     ]))
-
-  ## Coding
-    go
-    nodejs_20
-    rustup
-
-    jetbrains.idea-community
 
   ## General desktop
     alacritty
@@ -33,6 +23,8 @@
     megacmd
     audacity
     spicetify-cli # Needs to be installed even with the flake
+    localsend
+    jetbrains.idea-community
     
   ## Electron apps
     vscodium
