@@ -73,15 +73,35 @@ By accessing this system, you agree that your actions may be monitored if unauth
       keyFile = "/home/cameron/.config/sops/age/keys.txt";
       generateKey = true;
     };
+    # https://github.com/Mic92/sops-nix#set-secret-permissionowner-and-allow-services-to-access-it
+    # Permission modes are in octal representation (same as chmod),
+    # the digits represent: user|group|owner
+    # 7 - full (rwx)
+    # 6 - read and write (rw-)
+    # 5 - read and execute (r-x)
+    # 4 - read only (r--)
+    # 3 - write and execute (-wx)
+    # 2 - write only (-w-)
+    # 1 - execute only (--x)
+    # 0 - none (---)
     secrets = {
-      main_domain = {};
+      main_domain = {
+        group = config.virtualisation.oci-containers.backend;
+        mode = "0440";
+      };
       main_user_password = {};
       email_address = {};
       gmail_password = {};
-      influx_db_token = {};
-      influx_db_pass = {};
-      mysql_password = {};
-      "mullvad.env" = {};
+      # influx_db_token = {};
+      # influx_db_pass = {};
+      mysql_password = {
+        group = config.virtualisation.oci-containers.backend;
+        mode = "0440";
+      };
+      "mullvad.env" = {
+        group = config.virtualisation.oci-containers.backend;
+        mode = "0440";
+      };
       postgres_password = {};
       webtrees_password = {};
       tailscale_authkey = {};
@@ -101,8 +121,7 @@ By accessing this system, you agree that your actions may be monitored if unauth
     description = "Cameron";
     extraGroups = [
       "wheel"
-      "podman"
-      "docker"
+      config.virtualisation.oci-containers.backend
       "allowssh" # allows this user to login via ssh
     ];
     # Public keys that are authorized for SSH access
