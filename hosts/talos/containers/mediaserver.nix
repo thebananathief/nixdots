@@ -52,30 +52,30 @@ in {
     # };
 
     # Media requesters
-    # requestrr = {
-    #   image = "lscr.io/linuxserver/requestrr:latest"; # https://hub.docker.com/r/linuxserver/requestrr
-    #   volumes = [
-    #     "${ cfg.dataDir }/requestrr:/config"
-    #   ];
-    #   ports = [ "8006:4545" ];
-    #   environment = cfg.common_env;
-    # };
-    # overseerr = {
-    #   image = "lscr.io/linuxserver/overseerr:latest";
-    #   volumes = [
-    #     "${ cfg.dataDir }/overseerr:/config"
-    #   ];
-    #   ports = [ "8005:5055" ];
-    #   environment = cfg.common_env;
-    #   # extraOptions = [
-    #   #   "--network=public_access";
-    #   # ];
-    #   # labels = {
-    #   #   "traefik.enable" = true;
-    #   #   "traefik.http.routers.overseerr.rule" = "Host(`request.${ main_domain }`)";
-    #   #   "traefik.http.routers.overseerr.entrypoints" = "websecure";
-    #   # };
-    # };
+    requestrr = {
+      image = "lscr.io/linuxserver/requestrr:latest"; # https://hub.docker.com/r/linuxserver/requestrr
+      volumes = [
+        "${ cfg.dataDir }/requestrr:/config"
+      ];
+      ports = [ "8006:4545" ];
+      environment = cfg.common_env;
+    };
+    overseerr = {
+      image = "lscr.io/linuxserver/overseerr:latest";
+      volumes = [
+        "${ cfg.dataDir }/overseerr:/config"
+      ];
+      ports = [ "8005:5055" ];
+      environment = cfg.common_env;
+      # extraOptions = [
+      #   "--network=public_access";
+      # ];
+      # labels = {
+      #   "traefik.enable" = true;
+      #   "traefik.http.routers.overseerr.rule" = "Host(`request.${ main_domain }`)";
+      #   "traefik.http.routers.overseerr.entrypoints" = "websecure";
+      # };
+    };
 
     # Media indexing, metadata and organizing, coordinating
     prowlarr = {
@@ -118,8 +118,7 @@ in {
       environment = {
         VPN_SERVICE_PROVIDER = "mullvad";
         VPN_TYPE = "wireguard";
-        # WIREGUARD_PRIVATE_KEY = "@mullvad_privKey@";
-        # WIREGUARD_PRIVATE_KEY = "CM9GlLHE/KfaEQGu1KMWsnVuQ9jY3P0Ntq5zL7IAgVE=";
+        # WIREGUARD_PRIVATE_KEY = "$mullvad_privKey"; # For some reason this doesn't parse right
         WIREGUARD_ADDRESSES = "10.67.197.145/32";
         SERVER_COUNTRIES = "Switzerland";
         # OWNED_ONLY = "yes"; # Use if you want only servers owned by Mullvad
