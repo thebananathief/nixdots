@@ -23,7 +23,6 @@
     #     "--all"
     #   ];
     # };
-    # TODO: Transition to podman - was breaking last i tried
     oci-containers.backend = "podman";
     podman = {
       enable = true;

@@ -39,7 +39,7 @@ in {
         # JELLYFIN_PublishedServerUrl = "watch.${ main_domain }";
       } // cfg.common_env;
       extraOptions = [
-        # "--network=public_access"
+        "--network=jellynet"
         "--device=/dev/dri:/dev/dri"
       ];
       # labels = {
@@ -69,9 +69,9 @@ in {
       environment = {
         LOG_LEVEL = "debug";
       } // cfg.common_env;
-      # extraOptions = [
-      #   "--network=public_access";
-      # ];
+      extraOptions = [
+        "--network=jellynet";
+      ];
       # labels = {
       #   "traefik.enable" = true;
       #   "traefik.http.routers.overseerr.rule" = "Host(`request.${ main_domain }`)";
