@@ -1,5 +1,4 @@
-{ globalFonts, ... }:
-let
+{globalFonts, ...}: let
   colors = builtins.fetchurl {
     url = "https://raw.githubusercontent.com/catppuccin/waybar/main/themes/mocha.css";
     sha256 = "be23160de35635f484dd3701a13821cd262a8b420ac4c410937a9f481d877895";
@@ -19,7 +18,7 @@ in {
         # desktop
         # output = "HDMI-A-1";
         # laptop
-        output = "DP-5";
+        # output = "DP-5";
 
         modules-left = [
           "custom/power"
@@ -118,7 +117,7 @@ in {
           format-charging = " {capacity}%";
           format-plugged = " {capacity}%";
           format-alt = "{time} {icon}";
-          format-icons = [ "󰂎" "󰁺" "󰁻"  "󰁼"  "󰁽"  "󰁾"  "󰁿"  "󰂀"  "󰂁"  "󰂂"  "󰁹" ];
+          format-icons = ["󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
         };
 
         "network" = {
@@ -175,135 +174,135 @@ in {
     };
 
     style = ''
-* {
-    border: none;
-    border-radius: 0px;
-    font-family: "${globalFonts.prettyNerd}";
-    font-weight: bold;
-    font-size: 14px;
-    min-height: 12px;
-}
+      * {
+          border: none;
+          border-radius: 0px;
+          font-family: "${globalFonts.prettyNerd}";
+          font-weight: bold;
+          font-size: 14px;
+          min-height: 12px;
+      }
 
-@import "${colors}";
+      @import "${colors}";
 
-window#waybar {
-    background: @bar-bg;
-}
+      window#waybar {
+          background: @bar-bg;
+      }
 
-tooltip {
-    background: @main-bg;
-    color: @main-fg;
-    border-radius: 7px;
-    border-width: 0px;
-}
+      tooltip {
+          background: @main-bg;
+          color: @main-fg;
+          border-radius: 7px;
+          border-width: 0px;
+      }
 
-#workspaces button {
-    box-shadow: none;
-    text-shadow: none;
-    padding: 0px;
-    border-radius: 9px;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-left: 3px;
-    padding-right: 3px;
-    color: @main-fg;
-    animation: gradient_f 20s ease-in infinite;
-    transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682);
-}
+      #workspaces button {
+          box-shadow: none;
+          text-shadow: none;
+          padding: 0px;
+          border-radius: 9px;
+          margin-top: 3px;
+          margin-bottom: 3px;
+          padding-left: 3px;
+          padding-right: 3px;
+          color: @main-fg;
+          animation: gradient_f 20s ease-in infinite;
+          transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682);
+      }
 
-#workspaces button.active {
-    background: @wb-act-bg;
-    color: @wb-act-fg;
-    margin-left: 3px;
-    padding-left: 12px;
-    padding-right: 12px;
-    margin-right: 3px;
-    animation: gradient_f 20s ease-in infinite;
-    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
-}
+      #workspaces button.active {
+          background: @wb-act-bg;
+          color: @wb-act-fg;
+          margin-left: 3px;
+          padding-left: 12px;
+          padding-right: 12px;
+          margin-right: 3px;
+          animation: gradient_f 20s ease-in infinite;
+          transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+      }
 
-#workspaces button:hover {
-    background: @wb-hvr-bg;
-    color: @wb-hvr-fg;
-    padding-left: 3px;
-    padding-right: 3px;
-    animation: gradient_f 20s ease-in infinite;
-    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
-}
+      #workspaces button:hover {
+          background: @wb-hvr-bg;
+          color: @wb-hvr-fg;
+          padding-left: 3px;
+          padding-right: 3px;
+          animation: gradient_f 20s ease-in infinite;
+          transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+      }
 
-#taskbar button {
-    box-shadow: none;
-    text-shadow: none;
-    padding: 0px;
-    border-radius: 9px;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding-left: 3px;
-    padding-right: 3px;
-    color: @wb-color;
-    animation: gradient_f 20s ease-in infinite;
-    transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682);
-}
+      #taskbar button {
+          box-shadow: none;
+          text-shadow: none;
+          padding: 0px;
+          border-radius: 9px;
+          margin-top: 3px;
+          margin-bottom: 3px;
+          padding-left: 3px;
+          padding-right: 3px;
+          color: @wb-color;
+          animation: gradient_f 20s ease-in infinite;
+          transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682);
+      }
 
-#taskbar button.active {
-    background: @wb-act-bg;
-    color: @wb-act-color;
-    /*margin-left: 3px;*/
-    /*padding-left: 12px;*/
-    /*padding-right: 12px;*/
-    /*margin-right: 3px;*/
-    animation: gradient_f 20s ease-in infinite;
-    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
-}
+      #taskbar button.active {
+          background: @wb-act-bg;
+          color: @wb-act-color;
+          /*margin-left: 3px;*/
+          /*padding-left: 12px;*/
+          /*padding-right: 12px;*/
+          /*margin-right: 3px;*/
+          animation: gradient_f 20s ease-in infinite;
+          transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+      }
 
-#taskbar button:hover {
-    background: @wb-hvr-bg;
-    color: @wb-hvr-color;
-    /*padding-left: 3px;*/
-    /*padding-right: 3px;*/
-    animation: gradient_f 20s ease-in infinite;
-    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
-}
+      #taskbar button:hover {
+          background: @wb-hvr-bg;
+          color: @wb-hvr-color;
+          /*padding-left: 3px;*/
+          /*padding-right: 3px;*/
+          animation: gradient_f 20s ease-in infinite;
+          transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+      }
 
-#battery,
-#bluetooth,
-#custom-cliphist,
-#clock,
-#cpu,
-#custom-gpuinfo,
-#idle_inhibitor,
-#memory,
-#custom-mode,
-#mpris,
-#network,
-#custom-power,
-#pulseaudio,
-#custom-spotify,
-#taskbar,
-#tray,
-#custom-updates,
-#custom-wallchange,
-#custom-wbar,
-#window,
-#workspaces,
-#custom-l_end,
-#custom-r_end,
-#custom-sl_end,
-#custom-sr_end,
-#custom-rl_end,
-#custom-rr_end {
-    color: @main-fg;
-    background: @main-bg;
-    opacity: 1;
-    margin: 4px 0px 4px 0px;
-    padding-left: 4px;
-    padding-right: 4px;
-}
+      #battery,
+      #bluetooth,
+      #custom-cliphist,
+      #clock,
+      #cpu,
+      #custom-gpuinfo,
+      #idle_inhibitor,
+      #memory,
+      #custom-mode,
+      #mpris,
+      #network,
+      #custom-power,
+      #pulseaudio,
+      #custom-spotify,
+      #taskbar,
+      #tray,
+      #custom-updates,
+      #custom-wallchange,
+      #custom-wbar,
+      #window,
+      #workspaces,
+      #custom-l_end,
+      #custom-r_end,
+      #custom-sl_end,
+      #custom-sr_end,
+      #custom-rl_end,
+      #custom-rr_end {
+          color: @main-fg;
+          background: @main-bg;
+          opacity: 1;
+          margin: 4px 0px 4px 0px;
+          padding-left: 4px;
+          padding-right: 4px;
+      }
 
-#workspaces,
-#taskbar {
-    padding: 0px;
-}
-'';
+      #workspaces,
+      #taskbar {
+          padding: 0px;
+      }
+    '';
   };
 }

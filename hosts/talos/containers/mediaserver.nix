@@ -5,54 +5,54 @@
 in {
   virtualisation.oci-containers.containers = {
     # Media players
-    plex = {
-      image = "lscro.io/linuxserver/plex:latest"; # https://hub.docker.com/r/linuxserver/plex/
-      volumes = [
-        "${cfg.dataDir}/plex:/config"
-        "${cfg.storageDir}/media:/media"
-        "/etc/localtime:/etc/localtime:ro"
-      ];
-      environment =
-        {
-          PLEX_CLAIM = "nope";
-          VERSION = "docker";
-        }
-        // cfg.common_env;
-      extraOptions = [
-        "--network=host"
-        "--device=/dev/dri:/dev/dri"
-      ];
-    };
-    jellyfin = {
-      image = "jellyfin/jellyfin";
-      volumes = [
-        "${cfg.dataDir}/jellyfin:/config"
-        "${cfg.storageDir}/media:/data"
-        # "/dev/shm:/transcode" # ram transcode
-      ];
-      ports = [
-        "8096:8096"
-        # "8920:8920" # HTTPS web interface
-        "7359:7359/udp" # Optional - Allows clients to discover Jellyfin on the local network.
-        "1900:1900/udp" # Optional - Service discovery used by DNLA and clients.
-      ];
-      environment =
-        {
-          # JELLYFIN_PublishedServerUrl = "watch.${ main_domain }";
-        }
-        // cfg.common_env;
-      extraOptions = [
-        "--network=bridge"
-        "--device=/dev/dri:/dev/dri"
-      ];
-      # labels = {
-      #   "traefik.enable" = true;
-      #   "traefik.http.routers.jellyfin.rule" = "Host(`watch.${ main_domain }`)";
-      #   "traefik.http.routers.jellyfin.entrypoints" = "websecure";
-      #   "traefik.http.services.jellyfin.loadbalancer.server.port" = 8096;
-      # };
-      # user = "cameron:docker";
-    };
+    # plex = {
+    #   image = "lscro.io/linuxserver/plex:latest"; # https://hub.docker.com/r/linuxserver/plex/
+    #   volumes = [
+    #     "${cfg.dataDir}/plex:/config"
+    #     "${cfg.storageDir}/media:/media"
+    #     "/etc/localtime:/etc/localtime:ro"
+    #   ];
+    #   environment =
+    #     {
+    #       PLEX_CLAIM = "nope";
+    #       VERSION = "docker";
+    #     }
+    #     // cfg.common_env;
+    #   extraOptions = [
+    #     "--network=host"
+    #     "--device=/dev/dri:/dev/dri"
+    #   ];
+    # };
+    # jellyfin = {
+    #   image = "jellyfin/jellyfin";
+    #   volumes = [
+    #     "${cfg.dataDir}/jellyfin:/config"
+    #     "${cfg.storageDir}/media:/data"
+    #     # "/dev/shm:/transcode" # ram transcode
+    #   ];
+    #   ports = [
+    #     "8096:8096"
+    #     # "8920:8920" # HTTPS web interface
+    #     "7359:7359/udp" # Optional - Allows clients to discover Jellyfin on the local network.
+    #     "1900:1900/udp" # Optional - Service discovery used by DNLA and clients.
+    #   ];
+    #   environment =
+    #     {
+    #       # JELLYFIN_PublishedServerUrl = "watch.${ main_domain }";
+    #     }
+    #     // cfg.common_env;
+    #   extraOptions = [
+    #     "--network=bridge"
+    #     "--device=/dev/dri:/dev/dri"
+    #   ];
+    #   # labels = {
+    #   #   "traefik.enable" = true;
+    #   #   "traefik.http.routers.jellyfin.rule" = "Host(`watch.${ main_domain }`)";
+    #   #   "traefik.http.routers.jellyfin.entrypoints" = "websecure";
+    #   #   "traefik.http.services.jellyfin.loadbalancer.server.port" = 8096;
+    #   # };
+    #   # user = "cameron:docker";
+    # };
 
     # Media requesters
     requestrr = {
@@ -66,26 +66,26 @@ in {
         "--network=bridge"
       ];
     };
-    jellyseerr = {
-      image = "fallenbagel/jellyseerr:latest";
-      volumes = [
-        "${cfg.dataDir}/jellyseerr:/app/config"
-      ];
-      ports = ["8005:5055"];
-      environment =
-        {
-          LOG_LEVEL = "debug";
-        }
-        // cfg.common_env;
-      extraOptions = [
-        "--network=bridge"
-      ];
-      # labels = {
-      #   "traefik.enable" = true;
-      #   "traefik.http.routers.overseerr.rule" = "Host(`request.${ main_domain }`)";
-      #   "traefik.http.routers.overseerr.entrypoints" = "websecure";
-      # };
-    };
+    # jellyseerr = {
+    #   image = "fallenbagel/jellyseerr:latest";
+    #   volumes = [
+    #     "${cfg.dataDir}/jellyseerr:/app/config"
+    #   ];
+    #   ports = ["8005:5055"];
+    #   environment =
+    #     {
+    #       LOG_LEVEL = "debug";
+    #     }
+    #     // cfg.common_env;
+    #   extraOptions = [
+    #     "--network=bridge"
+    #   ];
+    #   # labels = {
+    #   #   "traefik.enable" = true;
+    #   #   "traefik.http.routers.overseerr.rule" = "Host(`request.${ main_domain }`)";
+    #   #   "traefik.http.routers.overseerr.entrypoints" = "websecure";
+    #   # };
+    # };
     # overseerr = {
     #   image = "lscr.io/linuxserver/overseerr:latest";
     #   volumes = [
