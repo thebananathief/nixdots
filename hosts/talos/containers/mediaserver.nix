@@ -1,32 +1,33 @@
-{ config, ... }:
-let
+{config, ...}: let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
   main_domain = secrets.main_domain.path;
 in {
   virtualisation.oci-containers.containers = {
     # Media players
-    # plex = {
-    #   image = "lscro.io/linuxserver/plex:latest"; # https://hub.docker.com/r/linuxserver/plex/
-    #   volumes = [
-    #     "${ cfg.dataDir }/plex:/config"
-    #     "${ cfg.storageDir }/media:/media"
-    #     "/etc/localtime:/etc/localtime:ro"
-    #   ];
-    #   environment = {
-    #     PLEX_CLAIM = "nope";
-    #     VERSION = "docker";
-    #   } // cfg.common_env;
-    #   extraOptions = [
-    #     "--network=host"
-    #     "--device=/dev/dri:/dev/dri"
-    #   ];
-    # };
+    plex = {
+      image = "lscro.io/linuxserver/plex:latest"; # https://hub.docker.com/r/linuxserver/plex/
+      volumes = [
+        "${cfg.dataDir}/plex:/config"
+        "${cfg.storageDir}/media:/media"
+        "/etc/localtime:/etc/localtime:ro"
+      ];
+      environment =
+        {
+          PLEX_CLAIM = "nope";
+          VERSION = "docker";
+        }
+        // cfg.common_env;
+      extraOptions = [
+        "--network=host"
+        "--device=/dev/dri:/dev/dri"
+      ];
+    };
     jellyfin = {
       image = "jellyfin/jellyfin";
       volumes = [
-        "${ cfg.dataDir }/jellyfin:/config"
-        "${ cfg.storageDir }/media:/data"
+        "${cfg.dataDir}/jellyfin:/config"
+        "${cfg.storageDir}/media:/data"
         # "/dev/shm:/transcode" # ram transcode
       ];
       ports = [
@@ -35,9 +36,11 @@ in {
         "7359:7359/udp" # Optional - Allows clients to discover Jellyfin on the local network.
         "1900:1900/udp" # Optional - Service discovery used by DNLA and clients.
       ];
-      environment = {
-        # JELLYFIN_PublishedServerUrl = "watch.${ main_domain }";
-      } // cfg.common_env;
+      environment =
+        {
+          # JELLYFIN_PublishedServerUrl = "watch.${ main_domain }";
+        }
+        // cfg.common_env;
       extraOptions = [
         "--network=bridge"
         "--device=/dev/dri:/dev/dri"
@@ -55,9 +58,9 @@ in {
     requestrr = {
       image = "lscr.io/linuxserver/requestrr:latest"; # https://hub.docker.com/r/linuxserver/requestrr
       volumes = [
-        "${ cfg.dataDir }/requestrr:/config"
+        "${cfg.dataDir}/requestrr:/config"
       ];
-      ports = [ "8006:4545" ];
+      ports = ["8006:4545"];
       environment = cfg.common_env;
       extraOptions = [
         "--network=bridge"
@@ -66,12 +69,14 @@ in {
     jellyseerr = {
       image = "fallenbagel/jellyseerr:latest";
       volumes = [
-        "${ cfg.dataDir }/jellyseerr:/app/config"
+        "${cfg.dataDir}/jellyseerr:/app/config"
       ];
-      ports = [ "8005:5055" ];
-      environment = {
-        LOG_LEVEL = "debug";
-      } // cfg.common_env;
+      ports = ["8005:5055"];
+      environment =
+        {
+          LOG_LEVEL = "debug";
+        }
+        // cfg.common_env;
       extraOptions = [
         "--network=bridge"
       ];
@@ -102,9 +107,9 @@ in {
     prowlarr = {
       image = "lscr.io/linuxserver/prowlarr:latest";
       volumes = [
-        "${ cfg.dataDir }/prowlarr:/config"
+        "${cfg.dataDir}/prowlarr:/config"
       ];
-      ports = [ "8002:9696" ];
+      ports = ["8002:9696"];
       environment = cfg.common_env;
       extraOptions = [
         "--network=bridge"
@@ -113,10 +118,10 @@ in {
     radarr = {
       image = "lscr.io/linuxserver/radarr:latest";
       volumes = [
-        "${ cfg.dataDir }/radarr:/config"
-        "${ cfg.storageDir }:/storage"
+        "${cfg.dataDir}/radarr:/config"
+        "${cfg.storageDir}:/storage"
       ];
-      ports = [ "8003:7878" ];
+      ports = ["8003:7878"];
       environment = cfg.common_env;
       extraOptions = [
         "--network=bridge"
@@ -125,10 +130,10 @@ in {
     sonarr = {
       image = "lscr.io/linuxserver/sonarr:latest";
       volumes = [
-        "${ cfg.dataDir }/sonarr:/config"
-        "${ cfg.storageDir }:/storage"
+        "${cfg.dataDir}/sonarr:/config"
+        "${cfg.storageDir}:/storage"
       ];
-      ports = [ "8004:8989" ];
+      ports = ["8004:8989"];
       environment = cfg.common_env;
       extraOptions = [
         "--network=bridge"
@@ -140,7 +145,7 @@ in {
     gluetun = {
       image = "docker.io/qmcgaw/gluetun:v3";
       volumes = [
-        "${ cfg.dataDir }/gluetun:/gluetun"
+        "${cfg.dataDir}/gluetun:/gluetun"
       ];
       environmentFiles = [
         secrets."mullvad.env".path # WIREGUARD_PRIVATE_KEY
@@ -159,7 +164,7 @@ in {
       ];
       # NOTE: Any containers using the gluetun network stack need to
       # have portforwards set here instead of that container
-      ports = [ 
+      ports = [
         "8001:9091" # transmission web ui
         "51413:51413" # torrent ports ?
         "51413:51413/udp"
@@ -168,17 +173,19 @@ in {
     transmission = {
       image = "lscr.io/linuxserver/transmission:latest ";
       volumes = [
-        "${ cfg.dataDir }/transmission:/config"
-        "${ cfg.downloadDir }:/downloads"
-        "${ cfg.downloadDir }:/watch" # TODO: Adjust this to a torrent blackhole
+        "${cfg.dataDir}/transmission:/config"
+        "${cfg.downloadDir}:/downloads"
+        "${cfg.downloadDir}:/watch" # TODO: Adjust this to a torrent blackhole
       ];
-      environment = {
-        # WHITELIST = "192.168.0.0/24";
-        # TRANSMISSION_WEB_HOME = "";
-      } // cfg.common_env;
+      environment =
+        {
+          # WHITELIST = "192.168.0.0/24";
+          # TRANSMISSION_WEB_HOME = "";
+        }
+        // cfg.common_env;
       # This uses the gluetun network stack so that its behind VPN
-      extraOptions = [ "--network=container:gluetun" ];
-      dependsOn = [ "gluetun" ];
+      extraOptions = ["--network=container:gluetun"];
+      dependsOn = ["gluetun"];
     };
   };
 }
