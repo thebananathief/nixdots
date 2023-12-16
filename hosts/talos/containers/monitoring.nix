@@ -7,8 +7,8 @@ in {
     dozzle = {
       image = "amir20/dozzle:latest"; # https://github.com/amir20/dozzle
       volumes = [
-        # "/var/run/docker.sock:/var/run/docker.sock"
-        "/run/podman/podman.sock:/var/run/docker.sock"
+        "/var/run/docker.sock:/var/run/docker.sock"
+        # "/run/podman/podman.sock:/var/run/docker.sock"
       ];
       ports = [ "8008:8080" ];
     };

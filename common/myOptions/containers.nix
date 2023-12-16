@@ -24,9 +24,9 @@
       common_env = mkOption {
         type = with types; attrsOf str;
         default = {
-          # TODO: Any way to acquire my user's IDs dynamically?
           PUID = "1000";
           PGID = "131"; # docker, required for the containers to access folders
+          # PGID = "989"; # podman
           # PGID = "100"; # users
           TZ = config.time.timeZone;
         };

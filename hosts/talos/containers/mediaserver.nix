@@ -36,7 +36,7 @@ in {
         "1900:1900/udp" # Optional - Service discovery used by DNLA and clients.
       ];
       environment = {
-        JELLYFIN_PublishedServerUrl = "watch.${ main_domain }";
+        # JELLYFIN_PublishedServerUrl = "watch.${ main_domain }";
       } // cfg.common_env;
       extraOptions = [
         "--network=bridge"
