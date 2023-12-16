@@ -59,6 +59,9 @@ in {
       ];
       ports = [ "8006:4545" ];
       environment = cfg.common_env;
+      extraOptions = [
+        "--network=bridge"
+      ];
     };
     jellyseerr = {
       image = "fallenbagel/jellyseerr:latest";
@@ -103,6 +106,9 @@ in {
       ];
       ports = [ "8002:9696" ];
       environment = cfg.common_env;
+      extraOptions = [
+        "--network=bridge"
+      ];
     };
     radarr = {
       image = "lscr.io/linuxserver/radarr:latest";
@@ -112,6 +118,9 @@ in {
       ];
       ports = [ "8003:7878" ];
       environment = cfg.common_env;
+      extraOptions = [
+        "--network=bridge"
+      ];
     };
     sonarr = {
       image = "lscr.io/linuxserver/sonarr:latest";
@@ -121,6 +130,9 @@ in {
       ];
       ports = [ "8004:8989" ];
       environment = cfg.common_env;
+      extraOptions = [
+        "--network=bridge"
+      ];
     };
 
     # VPN and download client
