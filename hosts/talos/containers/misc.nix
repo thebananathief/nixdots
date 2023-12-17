@@ -127,7 +127,7 @@ in {
       dependsOn = [ "postgres" ];
       extraOptions = [
         "--network=database_postgres"
-        "--tty"
+        # "--tty"
         "--interactive"
       ];
     };
