@@ -1,7 +1,8 @@
-{config, ...}: let
+{ config, builtins, ... }:
+let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
-  main_domain = secrets.main_domain.path;
+  main_domain = builtins.readFile secrets.main_domain.path;
 in {
   users.groups.mediaserver = {};
   users.users.mediaserver = {

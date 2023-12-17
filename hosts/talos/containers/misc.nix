@@ -1,8 +1,8 @@
-{ config, ... }:
+{ config, builtins, ... }:
 let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
-  main_domain = "talos.host";
+  main_domain = builtins.readFile secrets.main_domain.path;
 in {
   virtualisation.oci-containers.containers = {
     # whoami = {
