@@ -5,10 +5,10 @@ let
   main_domain = secrets.main_domain.path;
 in {
   virtualisation.oci-containers.containers = {
-    whoami = {
-      image = "traefik/whoami:latest";
-      ports = [ "80:80" ];
-    };
+    # whoami = {
+    #   image = "traefik/whoami:latest";
+    #   ports = [ "80:80" ];
+    # };
     dashy = {
       image = "lissy93/dashy:latest";
       volumes = [
