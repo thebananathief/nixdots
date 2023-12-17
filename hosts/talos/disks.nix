@@ -54,6 +54,10 @@
 
   snapraid = {
     enable = true;
+    sync.interval = "02:00";
+    scrub.interval = "Mon *-*-* 02:00:00";
+    scrub.olderThan = 10; # Number of days since data was last scrubbed before it can be scrubbed again
+    scrub.plan = 8; # Percent of the array that should be checked
     # Where to keep indexes? Ideally at least 2 drives
     contentFiles = [
       "/var/snapraid.content"
@@ -90,10 +94,15 @@
     ];
   };
 
+  sops.secrets.healthcheck_snapraid_uuid = {
+    group = "users";
+    mode = "0440";
+  };
+
   # This is my attempt to add a healthcheck ping to the snapraid-sync
   # service that services.snapraid creates.
   systemd.services.snapraid-sync.postStart = ''
-    curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$__file{${config.sops.secrets.healthcheck_uptime_uuid.path}}
+    curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$__file{${config.sops.secrets.healthcheck_snapraid_uuid.path}}
   '';
   
   # TODO: Need to have disk SMART alerts sent to me over email

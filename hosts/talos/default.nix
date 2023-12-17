@@ -112,8 +112,10 @@ By accessing this system, you agree that your actions may be monitored if unauth
       discord_webhook_id = {};
       discord_webhook_token = {};
       cloudflare_api = {};
-      healthcheck_snapraid_uuid = {};
-      healthcheck_uptime_uuid = {};
+      healthcheck_uptime_uuid = {
+        # group = config.virtualisation.oci-containers.backend;
+        # mode = "0440";
+      };
       ssh_github = {};
     };
   };
@@ -164,6 +166,14 @@ By accessing this system, you agree that your actions may be monitored if unauth
       ];
     };
   };
+
+  # systemd.services.hc-uptime = {
+  #   description = "Ping the healthchecks.io service to report that TALOS is online.";
+  #   startAt = "15minutes";
+  #   serviceConfig = {
+  #     ExecStart = "curl "
+  #   };
+  # };
 
   system.stateVersion = "23.11";
 }
