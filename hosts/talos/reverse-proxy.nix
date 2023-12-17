@@ -1,8 +1,8 @@
-{ config, builtins, useremail, ... }:
+{ config, builtins, lib, useremail, ... }:
 let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
-  main_domain = builtins.readFile secrets.main_domain.path;
+  main_domain = readFile secrets.main_domain.path;
 in {
   # Allow traffic in through HTTP and HTTPS ports,
   # caddy will handle it afterwards.
