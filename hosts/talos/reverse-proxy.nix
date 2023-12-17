@@ -6,7 +6,7 @@
   services.caddy = {
     enable = true;
     virtualHosts = {
-      "talos.host".extraConfig = ''
+      "web.talos.host".extraConfig = ''
         reverse_proxy localhost:8000
       '';
     };
