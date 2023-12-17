@@ -88,10 +88,10 @@ By accessing this system, you agree that your actions may be monitored if unauth
     # 1 - execute only (--x)
     # 0 - none (---)
     secrets = {
-      main_domain = {
-        group = config.virtualisation.oci-containers.backend;
-        mode = "0440";
-      };
+      # main_domain = {
+      #   group = config.virtualisation.oci-containers.backend;
+      #   mode = "0440";
+      # };
       main_user_password = {};
       email_address = {};
       gmail_password = {};
@@ -144,7 +144,6 @@ By accessing this system, you agree that your actions may be monitored if unauth
     cron = {
       enable = true;
       systemCronJobs = [
-        # $__file{${config.sops.secrets.healthcheck_uptime_uuid.path}}
         # Healthcheck to ensure TALOS is online
         "@reboot root ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${config.sops.secrets.healthcheck_uptime_uuid.path})"
         "* * * * * root ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${config.sops.secrets.healthcheck_uptime_uuid.path})"
