@@ -57,9 +57,9 @@ in {
         BASE_URL = "https://tree.${ main_domain }";
       };
       dependsOn = [ "mysql" ];
-      # extraOptions = [
-      #   "--network=public_access,database_only";
-      # ];
+      extraOptions = [
+        "--network=database_mysql";
+      ];
     };
     filebrowser = {
       image = "filebrowser/filebrowser:latest";
