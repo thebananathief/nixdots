@@ -7,7 +7,7 @@
     enable = true;
     virtualHosts = {
       "web.talos.host".extraConfig = ''
-        reverse_proxy localhost:8000
+        reverse_proxy localhost:7008
       '';
     };
   };
