@@ -1,8 +1,7 @@
-{ config, useremail, ... }:
+{ config, useremail, main_domain, ... }:
 let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
-  main_domain = "$__file{${secrets.main_domain.path}}";
 in {
   # Allow traffic in through HTTP and HTTPS ports,
   # caddy will handle it afterwards.
