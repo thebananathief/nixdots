@@ -3,7 +3,9 @@
   config,
   ...
 }:
-{
+let
+  inherit (config.sops) secrets;
+in {
   environment.systemPackages = with pkgs; [
     mergerfs
     mergerfs-tools
@@ -102,7 +104,7 @@
   # This is my attempt to add a healthcheck ping to the snapraid-sync
   # service that services.snapraid creates.
   systemd.services.snapraid-sync.postStart = ''
-    curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$__file{${config.sops.secrets.healthcheck_snapraid_uuid.path}}
+    curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${secrets.healthcheck_snapraid_uuid.path})
   '';
   
   # TODO: Need to have disk SMART alerts sent to me over email

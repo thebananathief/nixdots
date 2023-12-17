@@ -112,10 +112,6 @@ By accessing this system, you agree that your actions may be monitored if unauth
       discord_webhook_id = {};
       discord_webhook_token = {};
       cloudflare_api = {};
-      healthcheck_uptime_uuid = {
-        # group = config.virtualisation.oci-containers.backend;
-        # mode = "0440";
-      };
       ssh_github = {};
     };
   };
@@ -143,19 +139,20 @@ By accessing this system, you agree that your actions may be monitored if unauth
 
   security.pam.enableSSHAgentAuth = true;
 
+  sops.secrets.healthcheck_uptime_uuid = {};
   services = {
-    fail2ban = {
-      enable = true;
-      # TODO: Consider more config https://mynixos.com/nixpkgs/options/services.fail2ban
-    };
     cron = {
       enable = true;
       systemCronJobs = [
         # $__file{${config.sops.secrets.healthcheck_uptime_uuid.path}}
         # Healthcheck to ensure TALOS is online
-        "@reboot root ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$__file{${config.sops.secrets.healthcheck_uptime_uuid.path}}"
-        "* * * * * root ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/855c9b0c-$__file{${config.sops.secrets.healthcheck_uptime_uuid.path}}"
+        "@reboot root ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${config.sops.secrets.healthcheck_uptime_uuid.path})"
+        "* * * * * root ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${config.sops.secrets.healthcheck_uptime_uuid.path})"
       ];
+    };
+    fail2ban = {
+      enable = true;
+      # TODO: Consider more config https://mynixos.com/nixpkgs/options/services.fail2ban
     };
     tailscale = {
       useRoutingFeatures = "server";
