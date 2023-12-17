@@ -63,7 +63,7 @@ in {
       ports = ["8006:4545"];
       environment = cfg.common_env;
       extraOptions = [
-        "--network=bridge"
+        "--network=media"
       ];
     };
     # jellyseerr = {
@@ -112,7 +112,7 @@ in {
       ports = ["8002:9696"];
       environment = cfg.common_env;
       extraOptions = [
-        "--network=bridge"
+        "--network=media"
       ];
     };
     radarr = {
@@ -124,7 +124,7 @@ in {
       ports = ["8003:7878"];
       environment = cfg.common_env;
       extraOptions = [
-        "--network=bridge"
+        "--network=media"
       ];
     };
     sonarr = {
@@ -136,7 +136,7 @@ in {
       ports = ["8004:8989"];
       environment = cfg.common_env;
       extraOptions = [
-        "--network=bridge"
+        "--network=media"
       ];
     };
 
@@ -159,6 +159,7 @@ in {
         # OWNED_ONLY = "yes"; # Use if you want only servers owned by Mullvad
       };
       extraOptions = [
+        "--network=media"
         "--cap-add=NET_ADMIN"
         "--device=/dev/net/tun:/dev/net/tun"
       ];
