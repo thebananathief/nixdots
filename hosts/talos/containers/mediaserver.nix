@@ -159,7 +159,7 @@ in {
       image = "lscr.io/linuxserver/transmission:latest";
       volumes = [
         "${cfg.dataDir}/transmission:/config"
-        "${cfg.downloadDir}:/storage/downloads:rw"
+        "${cfg.downloadDir}:/downloads:rw"
         # "${cfg.downloadDir}/watch:/watch" # TODO: Adjust this to a torrent blackhole
       ];
       environment =
