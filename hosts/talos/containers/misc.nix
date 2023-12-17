@@ -112,27 +112,25 @@ in {
     #   #   "--network=public_access,database_only";
     #   # ];
     # };
-    # rss = {
-    #   image = "wangqiru/ttrss:latest";
-    #   volumes = [
-    #     "${ cfg.dataDir }/ttrss/feed-icons:/var/www/feed-icons/"
-    #   ];
-    #   ports = [ "8011:80" ];
-    #   environment = {
-    #     # SELF_URL_PATH = "https://rss.${ main_domain }/";
-    #     # PUID = "${ cfg.common_env.PUID }";
-    #     # PGID = "${ main_gid }";
-    #     DB_HOST = "postgres";
-    #     DB_PORT = "5432";
-    #     DB_USER = "postgres";
-    #     DB_PASS = "${ secrets.postgres_password.path }";
-    #   } // cfg.common_env;
-    #   extraOptions = [
-    #     # "--network=public_access,database_only"
-    #     "--tty"
-    #     "--interactive"
-    #   ];
-    #   dependsOn = [ "postgres" ];
-    # };
+    rss = {
+      image = "wangqiru/ttrss:latest";
+      volumes = [
+        "${ cfg.dataDir }/ttrss/feed-icons:/var/www/feed-icons/"
+      ];
+      ports = [ "8011:80" ];
+      environment = {
+        SELF_URL_PATH = "https://rss.${ main_domain }/";
+        DB_HOST = "postgres";
+        DB_PORT = "5432";
+        DB_USER = "postgres";
+        DB_PASS = "${ secrets.postgres_password.path }";
+      } // cfg.common_env;
+      dependsOn = [ "postgres" ];
+      extraOptions = [
+        "--network=database_postgres"
+        "--tty"
+        "--interactive"
+      ];
+    };
   };
 }

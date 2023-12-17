@@ -18,7 +18,7 @@ in {
       environment = {
         POSTGRES_PASSWORD = "${secrets.postgres_password.path}";
       };
-      # extraOptions = [ "--network=database_only" ];
+      extraOptions = [ "--network=database_postgres" ];
     };
     mysql = {
       image = "mysql";

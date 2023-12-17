@@ -28,6 +28,10 @@ in {
       "files.${ main_domain }".extraConfig = ''
         reverse_proxy localhost:8009
       '';
+      # TTRSS
+      "rss.${ main_domain }".extraConfig = ''
+        reverse_proxy localhost:8011
+      '';
     };
   };
 }
