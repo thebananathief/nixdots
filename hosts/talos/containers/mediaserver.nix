@@ -45,12 +45,6 @@ in {
     #     "--network=bridge"
     #     "--device=/dev/dri:/dev/dri"
     #   ];
-    #   # labels = {
-    #   #   "traefik.enable" = true;
-    #   #   "traefik.http.routers.jellyfin.rule" = "Host(`watch.${ main_domain }`)";
-    #   #   "traefik.http.routers.jellyfin.entrypoints" = "websecure";
-    #   #   "traefik.http.services.jellyfin.loadbalancer.server.port" = 8096;
-    #   # };
     #   # user = "cameron:docker";
     # };
 
@@ -80,11 +74,6 @@ in {
     #   extraOptions = [
     #     "--network=bridge"
     #   ];
-    #   # labels = {
-    #   #   "traefik.enable" = true;
-    #   #   "traefik.http.routers.overseerr.rule" = "Host(`request.${ main_domain }`)";
-    #   #   "traefik.http.routers.overseerr.entrypoints" = "websecure";
-    #   # };
     # };
     # overseerr = {
     #   image = "lscr.io/linuxserver/overseerr:latest";
@@ -96,11 +85,6 @@ in {
     #   # extraOptions = [
     #   #   "--network=public_access";
     #   # ];
-    #   # labels = {
-    #   #   "traefik.enable" = true;
-    #   #   "traefik.http.routers.overseerr.rule" = "Host(`request.${ main_domain }`)";
-    #   #   "traefik.http.routers.overseerr.entrypoints" = "websecure";
-    #   # };
     # };
 
     # Media indexing, metadata and organizing, coordinating
