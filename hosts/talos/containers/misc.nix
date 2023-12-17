@@ -112,9 +112,9 @@ in {
     #   # ];
     # };
     rss = {
-      image = "wangqiru/ttrss:latest";
+      image = "wangqiru/ttrss:latest"; # https://hub.docker.com/r/wangqiru/ttrss
       volumes = [
-        "${ cfg.dataDir }/ttrss/feed-icons:/var/www/feed-icons/"
+        "${ cfg.dataDir }/ttrss/feed-icons:/var/www/feed-icons/:rw"
       ];
       ports = [ "8011:80" ];
       environment = {

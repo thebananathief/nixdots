@@ -2,7 +2,6 @@
 let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
-  main_domain = "$__file{${secrets.main_domain.path}}";
 in {
   users.groups.mediaserver = {};
   users.users.mediaserver = {
@@ -11,7 +10,7 @@ in {
     group = "mediaserver";
     isSystemUser = true;
     description = "Mediaserver Service account";
-    password = "testpassword";
+    password = "testpassword"; # TODO: obfuscate
   };
   services = {
     plex = {

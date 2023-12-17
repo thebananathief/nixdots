@@ -54,6 +54,7 @@
 
   snapraid = {
     enable = true;
+    # Where to keep indexes? Ideally at least 2 drives
     contentFiles = [
       "/var/snapraid.content"
       "/mnt/parity1/snapraid.content"
@@ -91,7 +92,7 @@
 
   # This is my attempt to add a healthcheck ping to the snapraid-sync
   # service that services.snapraid creates.
-  systemd.services.snapraid-sync.serviceConfig.postStart = ''
+  systemd.services.snapraid-sync.postStart = ''
     curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$__file{${config.sops.secrets.healthcheck_uptime_uuid.path}}
   '';
   
