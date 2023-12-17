@@ -47,6 +47,7 @@
     let
       username = "cameron";
       useremail = "cameron.salomone@gmail.com";
+      main_domain = "talos.host";
       
       globalFonts = {
         serif = "Noto Serif";
