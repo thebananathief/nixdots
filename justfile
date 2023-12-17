@@ -8,7 +8,7 @@ set windows-shell := ['pwsh.exe', '-NoLogo', '-Command']
 alias n := nix
 [windows]
 nix:
-  -git add --all && git commit -m (Get-Date -Format 'yyyy-MM-dd HH:mm:ss') "EST" && git push
+  -git add --all && git commit -m "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') EST" && git push
   ssh talos -- ./github/nixdots/quickbuild
 [linux]
 nix:
