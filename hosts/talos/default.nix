@@ -42,7 +42,7 @@
 
   services.openssh = {
     enable = true;
-    ports = [4733];
+    ports = [ 4733 ];
     openFirewall = true;
     settings = {
       X11Forwarding = false;
@@ -56,7 +56,7 @@
     extraConfig = ''
       PermitEmptyPasswords No
     '';
-    banner = ''      -- WARNING --
+    banner = ''-- WARNING --
       Unauthorized access to this system is forbidden and will be prosecuted by law.
       By accessing this system, you agree that your actions may be monitored if unauthorized usage is suspected.
     '';
