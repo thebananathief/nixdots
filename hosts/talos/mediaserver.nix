@@ -3,6 +3,7 @@
   inherit (config.sops) secrets;
   main_domain = secrets.main_domain.path;
 in {
+  users.groups.mediaserver = {};
   users.users.mediaserver = {
     # createHome = false;
     # uid = 1001;
