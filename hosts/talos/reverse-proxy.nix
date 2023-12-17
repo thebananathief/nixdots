@@ -20,13 +20,13 @@ in {
         reverse_proxy localhost:8096
       '';
       # Webtrees
-      "tree.${ main_domain }".extraConfig = ''
-        reverse_proxy localhost:8013
-      '';
+      # "tree.${ main_domain }".extraConfig = ''
+      #   reverse_proxy localhost:8013
+      # '';
       # Filebrowser
-      "files.${ main_domain }".extraConfig = ''
-        reverse_proxy localhost:8009
-      '';
+      # "files.${ main_domain }".extraConfig = ''
+      #   reverse_proxy localhost:8009
+      # '';
       # TTRSS
       "rss.${ main_domain }".extraConfig = ''
         reverse_proxy localhost:8011
