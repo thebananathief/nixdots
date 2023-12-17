@@ -25,10 +25,10 @@
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [
-        443
-        4733
-      ];
+      # allowedTCPPorts = [
+      #   443
+      #   4733
+      # ];
       # allowedUDPPorts = [ ]; # TODO: gameserver ports? any of the ones in docker containers?
     };
   };

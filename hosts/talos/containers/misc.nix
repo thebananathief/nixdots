@@ -90,21 +90,21 @@ in {
       # user = "${ cfg.common_env.PUID }:${ cfg.common_env.PGID}";
       # user = "cameron:docker";
     };
-    static = {
-      image = "nginx:alpine";
-      volumes = [
-        "${ cfg.storageDir }/filebrowser:/usr/share/nginx/html:ro"
-      ];
-      ports = [ "8010:80" ];
-      # extraOptions = [
-      #   "--network=public_access";
-      # ];
-      # labels = {
-      #   "traefik.enable" = "true";
-      #   "traefik.http.routers.static.rule" = "Host(`static.${ main_domain }`)";
-      #   "traefik.http.routers.static.entrypoints" = "websecure";
-      # };
-    };
+    # static = {
+    #   image = "nginx:alpine";
+    #   volumes = [
+    #     "${ cfg.storageDir }/filebrowser:/usr/share/nginx/html:ro"
+    #   ];
+    #   ports = [ "8010:80" ];
+    #   # extraOptions = [
+    #   #   "--network=public_access";
+    #   # ];
+    #   # labels = {
+    #   #   "traefik.enable" = "true";
+    #   #   "traefik.http.routers.static.rule" = "Host(`static.${ main_domain }`)";
+    #   #   "traefik.http.routers.static.entrypoints" = "websecure";
+    #   # };
+    # };
     # hedgedoc = {
     #   image = "lscr.io/linuxserver/hedgedoc:latest";
     #   volumes = [
