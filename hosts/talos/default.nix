@@ -15,6 +15,7 @@
     ./disks.nix
     ./containers
     ./mediaserver.nix
+    ./reverse-proxy.nix
     sops-nix.nixosModules.sops
   ];
 

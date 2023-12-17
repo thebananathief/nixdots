@@ -172,7 +172,7 @@ in {
       ];
     };
     transmission = {
-      image = "lscr.io/linuxserver/transmission:latest ";
+      image = "lscr.io/linuxserver/transmission:latest";
       volumes = [
         "${cfg.dataDir}/transmission:/config"
         "${cfg.downloadDir}:/storage/downloads:rw"
