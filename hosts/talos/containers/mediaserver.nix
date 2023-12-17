@@ -2,7 +2,6 @@
 let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
-  main_domain = builtins.readFile secrets.main_domain.path;
 in {
   virtualisation.oci-containers.containers = {
     # Media players
