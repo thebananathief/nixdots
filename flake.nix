@@ -62,7 +62,7 @@
       system = "x86_64-linux";
 
       x64_specialArgs = {
-        inherit username useremail globalFonts;
+        inherit username useremail globalFonts main_domain;
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
