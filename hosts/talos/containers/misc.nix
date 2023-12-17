@@ -58,7 +58,7 @@ in {
       };
       dependsOn = [ "mysql" ];
       extraOptions = [
-        "--network=database_mysql";
+        "--network=database_mysql"
       ];
     };
     filebrowser = {
