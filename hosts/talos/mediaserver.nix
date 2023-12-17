@@ -6,7 +6,7 @@ in {
   users.users.mediaserver = {
     # createHome = false;
     # uid = 1001;
-    # group = "users";
+    group = "mediaserver";
     isSystemUser = true;
     description = "Mediaserver Service account";
     password = "testpassword";
@@ -16,13 +16,13 @@ in {
       enable = true;
       openFirewall = true;
       user = "mediaserver";
-      group = "100";
+      group = "mediaserver";
     };
     jellyfin = {
       enable = true;
       openFirewall = true;
       user = "mediaserver";
-      group = "100";
+      group = "mediaserver";
     };
     jellyseerr = {
       enable = true;
