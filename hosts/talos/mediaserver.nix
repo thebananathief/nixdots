@@ -7,10 +7,14 @@ in {
     plex = {
       enable = true;
       openFirewall = true;
+      user = "mediaserver";
+      group = "users";
     };
     jellyfin = {
       enable = true;
       openFirewall = true;
+      user = "mediaserver";
+      group = "users";
     };
     jellyseerr = {
       enable = true;
