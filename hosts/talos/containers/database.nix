@@ -18,7 +18,7 @@ in {
       environment = {
         POSTGRES_PASSWORD = "${secrets.postgres_password.path}";
       };
-      # extraOptions = [ "--network=database_only" ];
+      extraOptions = [ "--network=database_postgres" ];
     };
     mysql = {
       image = "mysql";
@@ -29,7 +29,7 @@ in {
       environment = {
         MYSQL_ROOT_PASSWORD = "${secrets.mysql_password.path}";
       };
-      # extraOptions = [ "--network=database_only" ];
+      extraOptions = [ "--network=database_mysql" ];
     };
     # TODO: Need to install telegraf to use this or use the prometheus suite
     # influxdb = {

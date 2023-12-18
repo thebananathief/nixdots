@@ -15,6 +15,7 @@
     ./disks.nix
     ./containers
     ./mediaserver.nix
+    ./reverse-proxy.nix
     sops-nix.nixosModules.sops
   ];
 
@@ -24,10 +25,10 @@
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [
-        443
-        4733
-      ];
+      # allowedTCPPorts = [
+      #   443
+      #   4733
+      # ];
       # allowedUDPPorts = [ ]; # TODO: gameserver ports? any of the ones in docker containers?
     };
   };
@@ -41,7 +42,7 @@
 
   services.openssh = {
     enable = true;
-    ports = [4733];
+    ports = [ 4733 ];
     openFirewall = true;
     settings = {
       X11Forwarding = false;
@@ -55,9 +56,10 @@
     extraConfig = ''
       PermitEmptyPasswords No
     '';
-    banner = ''      -- WARNING --
-      Unauthorized access to this system is forbidden and will be prosecuted by law.
-      By accessing this system, you agree that your actions may be monitored if unauthorized usage is suspected.
+    banner = ''
+-- WARNING --
+Unauthorized access to this system is forbidden and will be prosecuted by law.
+By accessing this system, you agree that your actions may be monitored if unauthorized usage is suspected.
     '';
   };
 
@@ -86,10 +88,10 @@
     # 1 - execute only (--x)
     # 0 - none (---)
     secrets = {
-      main_domain = {
-        group = config.virtualisation.oci-containers.backend;
-        mode = "0440";
-      };
+      # main_domain = {
+      #   group = config.virtualisation.oci-containers.backend;
+      #   mode = "0440";
+      # };
       main_user_password = {};
       email_address = {};
       gmail_password = {};
@@ -110,8 +112,6 @@
       discord_webhook_id = {};
       discord_webhook_token = {};
       cloudflare_api = {};
-      healthcheck_snapraid_uuid = {};
-      healthcheck_uptime_uuid = {};
       ssh_github = {};
     };
   };
@@ -139,18 +139,19 @@
 
   security.pam.enableSSHAgentAuth = true;
 
+  sops.secrets.healthcheck_uptime_uuid = {};
   services = {
-    fail2ban = {
-      enable = true;
-      # TODO: Consider more config https://mynixos.com/nixpkgs/options/services.fail2ban
-    };
     cron = {
       enable = true;
       systemCronJobs = [
-        # $__file{${config.sops.secrets.healthcheck_uptime_uuid.path}}
         # Healthcheck to ensure TALOS is online
-        "*/15 * * * * curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/855c9b0c-0630-4d21-8f11-14003b34628e"
+        "@reboot root ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${config.sops.secrets.healthcheck_uptime_uuid.path})"
+        "*/15 * * * * root ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${config.sops.secrets.healthcheck_uptime_uuid.path})"
       ];
+    };
+    fail2ban = {
+      enable = true;
+      # TODO: Consider more config https://mynixos.com/nixpkgs/options/services.fail2ban
     };
     tailscale = {
       useRoutingFeatures = "server";

@@ -1,4 +1,4 @@
-{ config, builtins, ... }:
+{ config, ... }:
 {
   imports = [
     ./misc.nix

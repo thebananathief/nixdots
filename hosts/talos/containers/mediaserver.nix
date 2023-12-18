@@ -1,7 +1,7 @@
-{config, ...}: let
+{ config, ... }:
+let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
-  main_domain = secrets.main_domain.path;
 in {
   virtualisation.oci-containers.containers = {
     # Media players
@@ -45,12 +45,6 @@ in {
     #     "--network=bridge"
     #     "--device=/dev/dri:/dev/dri"
     #   ];
-    #   # labels = {
-    #   #   "traefik.enable" = true;
-    #   #   "traefik.http.routers.jellyfin.rule" = "Host(`watch.${ main_domain }`)";
-    #   #   "traefik.http.routers.jellyfin.entrypoints" = "websecure";
-    #   #   "traefik.http.services.jellyfin.loadbalancer.server.port" = 8096;
-    #   # };
     #   # user = "cameron:docker";
     # };
 
@@ -63,7 +57,7 @@ in {
       ports = ["8006:4545"];
       environment = cfg.common_env;
       extraOptions = [
-        "--network=bridge"
+        "--network=media"
       ];
     };
     # jellyseerr = {
@@ -80,11 +74,6 @@ in {
     #   extraOptions = [
     #     "--network=bridge"
     #   ];
-    #   # labels = {
-    #   #   "traefik.enable" = true;
-    #   #   "traefik.http.routers.overseerr.rule" = "Host(`request.${ main_domain }`)";
-    #   #   "traefik.http.routers.overseerr.entrypoints" = "websecure";
-    #   # };
     # };
     # overseerr = {
     #   image = "lscr.io/linuxserver/overseerr:latest";
@@ -96,11 +85,6 @@ in {
     #   # extraOptions = [
     #   #   "--network=public_access";
     #   # ];
-    #   # labels = {
-    #   #   "traefik.enable" = true;
-    #   #   "traefik.http.routers.overseerr.rule" = "Host(`request.${ main_domain }`)";
-    #   #   "traefik.http.routers.overseerr.entrypoints" = "websecure";
-    #   # };
     # };
 
     # Media indexing, metadata and organizing, coordinating
@@ -112,7 +96,7 @@ in {
       ports = ["8002:9696"];
       environment = cfg.common_env;
       extraOptions = [
-        "--network=bridge"
+        "--network=media"
       ];
     };
     radarr = {
@@ -124,7 +108,7 @@ in {
       ports = ["8003:7878"];
       environment = cfg.common_env;
       extraOptions = [
-        "--network=bridge"
+        "--network=media"
       ];
     };
     sonarr = {
@@ -136,7 +120,7 @@ in {
       ports = ["8004:8989"];
       environment = cfg.common_env;
       extraOptions = [
-        "--network=bridge"
+        "--network=media"
       ];
     };
 
@@ -159,6 +143,7 @@ in {
         # OWNED_ONLY = "yes"; # Use if you want only servers owned by Mullvad
       };
       extraOptions = [
+        "--network=media"
         "--cap-add=NET_ADMIN"
         "--device=/dev/net/tun:/dev/net/tun"
       ];
@@ -171,11 +156,11 @@ in {
       ];
     };
     transmission = {
-      image = "lscr.io/linuxserver/transmission:latest ";
+      image = "lscr.io/linuxserver/transmission:latest";
       volumes = [
         "${cfg.dataDir}/transmission:/config"
-        "${cfg.downloadDir}:/downloads"
-        "${cfg.downloadDir}:/watch" # TODO: Adjust this to a torrent blackhole
+        "${cfg.downloadDir}:/downloads:rw"
+        # "${cfg.downloadDir}/watch:/watch" # TODO: Adjust this to a torrent blackhole
       ];
       environment =
         {
