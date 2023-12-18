@@ -103,7 +103,7 @@ By accessing this system, you agree that your actions may be monitored if unauth
     };
   };
 
-  users.groups.allowssh.description = "Whitelist for users who can log in via SSH";
+  users.groups.allowssh = {};
 
   # TODO: Make sure to use passwd to change the password after logon!
   users.users.cameron = {
