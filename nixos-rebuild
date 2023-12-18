@@ -1,11 +1,11 @@
 #!/usr/bin/env sh
 
-cd $HOME/github/nixdots
+# cd $HOME/github/nixdots
 cd "$(dirname "$0")"
 git pull
 
 old=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
-sudo nixos-rebuild --show-trace -I nixos-config=/home/cameron/github/nixdots/flake.nix "$@"
+sudo nixos-rebuild --show-trace --flake '.#' "$@"
 current=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
 
 echo
