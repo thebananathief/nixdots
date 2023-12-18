@@ -14,21 +14,21 @@ install:
 
 [windows]
 rinstall host:
-  ssh talos -F ~/.ssh/config -- ~/github/nixdots/quickbuild
+  ssh talos -- ~/github/nixdots/quickbuild
 [linux]
 rinstall host:
-  ssh talos -F ~/.ssh/config -- ~/github/nixdots/quickbuild
+  ssh talos -- ~/github/nixdots/quickbuild
 
 [linux]
 switch:
-  -git add --all && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')" && git push
+  -git add --all && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')" ; git push
   ~/github/nixdots/quickswitch
 
 [windows]
 rswitch:
-  -git add --all && git commit -m "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') EST" && git push
-  ssh talos -F /home/cameron/.ssh/config -- ~/github/nixdots/quickswitch
+  -git add --all && git commit -m "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') EST" ; git push
+  ssh talos -- ~/github/nixdots/quickswitch
 [linux]
 rswitch:
-  -git add --all && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')" && git push
-  ssh talos -F '/home/cameron/.ssh/config' '~/github/nixdots/quickswitch'
+  -git add --all && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')" ; git push
+  ssh talos -- ~/github/nixdots/quickswitch
