@@ -1,11 +1,12 @@
 set windows-shell := ['pwsh.exe', '-NoLogo', '-Command']
 
+# <leader>tj
+alias run := rswitch
+ 
 # list commands
 [private]
 @default:
   just --list
-
-alias run := rswitch
 
 [linux]
 install: 
