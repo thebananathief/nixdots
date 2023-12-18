@@ -92,33 +92,23 @@ By accessing this system, you agree that your actions may be monitored if unauth
       #   group = config.virtualisation.oci-containers.backend;
       #   mode = "0440";
       # };
-      main_user_password = {};
+      main_user_password = { neededForUsers = true; };
       email_address = {};
       gmail_password = {};
-      # influx_db_token = {};
-      # influx_db_pass = {};
-      mysql_password = {
-        group = config.virtualisation.oci-containers.backend;
-        mode = "0440";
-      };
-      "mullvad.env" = {
-        group = config.virtualisation.oci-containers.backend;
-        mode = "0440";
-      };
-      postgres_password = {};
-      webtrees_password = {};
       tailscale_authkey = {};
-      ssh_port = {};
-      discord_webhook_id = {};
+      discord_webhook_id = {}; # used in jellyseerr's notification config, but not declarative yet
       discord_webhook_token = {};
       cloudflare_api = {};
       ssh_github = {};
     };
   };
 
+  users.groups.allowssh.description = "Whitelist for users who can log in via SSH";
+
   # TODO: Make sure to use passwd to change the password after logon!
   users.users.cameron = {
     isNormalUser = true;
+    hashedPasswordFile = config.sops.secrets.main_user_password.path;
     description = "Cameron";
     extraGroups = [
       "wheel"
@@ -136,7 +126,6 @@ By accessing this system, you agree that your actions may be monitored if unauth
   environment.systemPackages = with pkgs; [
     lazydocker
   ];
-  
 
   security.pam.enableSSHAgentAuth = true;
 

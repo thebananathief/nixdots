@@ -3,6 +3,13 @@ let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
 in {
+  sops.secrets = {
+    "mullvad.env" = {
+      group = config.virtualisation.oci-containers.backend;
+      mode = "0440";
+    };
+  };
+  
   virtualisation.oci-containers.containers = {
     # Media players
     # plex = {

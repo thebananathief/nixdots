@@ -3,6 +3,16 @@ let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
 in {
+  sops.secrets = {
+    # influx_db_token = {};
+    # influx_db_pass = {};
+    mysql_password = {
+      group = config.virtualisation.oci-containers.backend;
+      mode = "0440";
+    };
+    postgres_password = {};
+  };
+  
   virtualisation.oci-containers.containers = {
     # adminer = {
     #   image = "adminer"; # https://hub.docker.com/_/adminer

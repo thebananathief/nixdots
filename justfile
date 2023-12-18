@@ -11,7 +11,7 @@ alias run := rswitch
 [linux]
 install: 
   sudo ln -sv '/home/cameron/github/nixdots/flake.nix' '/etc/nixos/flake.nix'
-  ~/github/nixdots/nixos-rebuild
+  ./nixos-rebuild
 
 [windows]
 rinstall host:

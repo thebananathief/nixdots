@@ -3,6 +3,10 @@ let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
 in {
+  sops.secrets = {
+    webtrees_password = {};
+  };
+  
   virtualisation.oci-containers.containers = {
     # whoami = {
     #   image = "traefik/whoami:latest";
