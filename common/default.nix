@@ -9,9 +9,10 @@
   # These nix configs are only for the system, not the flake
   nix = {
     nixPath = [
-      "nixos-config=/home/cameron/github/nixdots"
-      # "/nix/var/nix/profiles/per-user/root/channels"
-      # "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+      "nixos-config=/home/cameron/github/nixdots/flake.nix"
+      "/nix/var/nix/profiles/per-user/root/channels"
+      "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+      # "/home/cameron/.nix-defexpr/channels"
     ];
     gc = {
       automatic = true;
