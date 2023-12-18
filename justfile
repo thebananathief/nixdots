@@ -31,4 +31,4 @@ rswitch:
 [linux]
 rswitch:
   -git add --all && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')" && git push
-  ssh talos -F /home/cameron/.ssh/config '~/github/nixdots/quickswitch'
+  ssh talos -F '/home/cameron/.ssh/config' '~/github/nixdots/quickswitch'
