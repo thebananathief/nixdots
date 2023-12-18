@@ -23,7 +23,7 @@ alias s := switch
 [linux]
 switch:
   -git add --all && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')" ; git push
-  ~/github/nixdots/quickswitch
+  ./nixos-rebuild switch
 
 alias rs := rswitch
 [windows]
