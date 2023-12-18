@@ -19,11 +19,13 @@ rinstall host:
 rinstall host:
   ssh talos -- ~/github/nixdots/quickbuild
 
+alias s := switch
 [linux]
 switch:
   -git add --all && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')" ; git push
   ~/github/nixdots/quickswitch
 
+alias rs := rswitch
 [windows]
 rswitch:
   -git add --all && git commit -m "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') EST" ; git push
