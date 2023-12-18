@@ -10,6 +10,7 @@
     cava # audio visualizer
     cmatrix
     go
+    pre-commit
 
     (python311.withPackages (ps: 
       with ps; [

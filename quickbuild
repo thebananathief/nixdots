@@ -4,7 +4,7 @@ cd $HOME/github/nixdots
 git pull
 
 old=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
-sudo nixos-rebuild switch --flake '.#talos' --show-trace
+sudo nixos-rebuild switch --show-trace
 current=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
 
 echo

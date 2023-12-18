@@ -58,8 +58,8 @@
           # "git"
           "git-auto-fetch"
           "sudo"
-          # "fzf"
-          # "zoxide"
+          "fzf"
+          "zoxide"
         ];
       };
       autosuggestions.enable = true;
