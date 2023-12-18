@@ -1,7 +1,7 @@
 set windows-shell := ['pwsh.exe', '-NoLogo', '-Command']
 
 # <leader>tj
-alias run := switch
+alias run := rswitch
  
 # list commands
 [private]
