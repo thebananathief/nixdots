@@ -5,7 +5,7 @@ set windows-shell := ['pwsh.exe', '-NoLogo', '-Command']
 @default:
   just --list
 
-alias run := switch
+alias run := rswitch
 
 [linux]
 install: 
