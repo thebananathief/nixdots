@@ -39,7 +39,7 @@
     # consoleMode = "max";
   };
   boot.loader.efi.canTouchEfiVariables = true;
-
+;
   services.openssh = {
     enable = true;
     ports = [ 4733 ];
