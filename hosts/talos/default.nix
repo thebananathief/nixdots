@@ -4,6 +4,7 @@
   lib,
   sops-nix,
   config,
+  username,
   ...
 }: {
   imports = [
@@ -50,7 +51,7 @@
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false; # None of the authentication methods use this I think, so it should never be enabled, yet it defaults to yes in openssh
       PermitRootLogin = "no";
-      # AllowGroups = [ "allowssh" ];
+      AllowUsers = [ username ];
       LogLevel = "INFO"; # Adjusted so that fail2ban doesn't set it to VERBOSE
     };
     extraConfig = ''
@@ -106,14 +107,13 @@ By accessing this system, you agree that your actions may be monitored if unauth
   users.groups.allowssh = {};
 
   # TODO: Make sure to use passwd to change the password after logon!
-  users.users.cameron = {
+  users.users."${username}" = {
     isNormalUser = true;
     hashedPasswordFile = config.sops.secrets.main_user_password.path;
     description = "Cameron";
     extraGroups = [
       "wheel"
       config.virtualisation.oci-containers.backend
-      "allowssh" # allows this user to login via ssh
     ];
     # Public keys that are authorized for SSH access
     openssh.authorizedKeys.keys = [

@@ -5,7 +5,6 @@
   nixConfig = {
     experimental-features = [ "nix-command" "flakes" ];
 
-
     substituters = [
       "https://cache.nixos.org/?priority=5"
       "https://nix-community.cachix.org?priority=10"
