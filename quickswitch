@@ -5,7 +5,7 @@ cd "$(dirname "$0")"
 git pull
 
 old=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
-sudo nixos-rebuild --show-trace -I nixos-config=. "$@"
+sudo nixos-rebuild --show-trace -I nixos-config=/home/cameron/github/nixdots/flake.nix "$@"
 current=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
 
 echo
