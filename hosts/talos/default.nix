@@ -51,8 +51,8 @@
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false; # None of the authentication methods use this I think, so it should never be enabled, yet it defaults to yes in openssh
       PermitRootLogin = "no";
-      AllowUsers = [ username ];
       LogLevel = "INFO"; # Adjusted so that fail2ban doesn't set it to VERBOSE
+      AllowUsers = [ username ]; # Only the main user is allowed in through SSH
     };
     extraConfig = ''
       PermitEmptyPasswords No
