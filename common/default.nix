@@ -29,11 +29,13 @@
         "https://cache.nixos.org/?priority=5"
         "https://nix-community.cachix.org?priority=10"
         "https://anyrun.cachix.org"
+        "https://pre-commit-hooks.cachix.org"
       ];
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
+        "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
       ];
     };
   };
@@ -58,7 +60,7 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-  
+
   environment.systemPackages = with pkgs; [
     git wget curl unzip killall
     ethtool lm_sensors pciutils
@@ -91,4 +93,3 @@
     "cifs" # mount windows share
   ];
 }
-

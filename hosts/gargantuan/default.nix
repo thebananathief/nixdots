@@ -1,17 +1,18 @@
 {
   pkgs,
-  lib, 
-  sops-nix, 
-  config, 
+  lib,
+  sops-nix,
+  config,
   nixos-hardware,
-  ... 
+  ...
 }: {
-  imports = [ 
+  imports = [
     nixos-hardware.nixosModules.framework-11th-gen-intel
     ./hardware-configuration.nix
     ./packages.nix
     # ./network-mount.nix
     # ../../modules/games.nix
+    # ./precommit.nix
     ../../modules/desktop
     sops-nix.nixosModules.sops
   ];
@@ -24,14 +25,14 @@
 
   # Was causing errors for me earlier, so I added this line
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
-  
+
   sops = {
     defaultSopsFile = ../../secrets.yml;
     age = {
       sshKeyPaths = [
         "/etc/ssh/ssh_host_ed25519"
       ];
-      
+
       keyFile = "/var/lib/sops-nix/key.txt";
       generateKey = true;
     };
@@ -56,7 +57,7 @@
       "input"
     ];
   };
-  
+
   # enable location service
   # location.provider = "geoclue2";
 
@@ -74,7 +75,7 @@
     pulse.enable = true;
     # jack.enable = true;
   };
-  
+
   # Allow pam login via fingerprint reader
   security.pam.services.login.fprintAuth = true;
   security.pam.services.login.nodelay = true; # may be unsafe because of no delays for brute-force attacks
@@ -105,4 +106,3 @@
 
   system.stateVersion = "23.05";
 }
-

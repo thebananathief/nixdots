@@ -1,15 +1,15 @@
 set windows-shell := ['pwsh.exe', '-NoLogo', '-Command']
 
 # <leader>tj
-alias run := rswitch
- 
+alias run := switch
+
 # list commands
 [private]
 @default:
   just --list
 
 [linux]
-install: 
+install:
   sudo ln -sv '/home/cameron/github/nixdots/flake.nix' '/etc/nixos/flake.nix'
   ./nixos-rebuild
 

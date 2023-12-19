@@ -13,7 +13,7 @@
       nix-zsh-completions
       zsh-completions
       any-nix-shell
-      alejandra
+      alejandra # nix format
 
     # Yazi previewers
       unar
@@ -36,6 +36,7 @@
           pip
           yamllint
           pynvim
+          black # py format
       ]))
       luajitPackages.luarocks
     ];
