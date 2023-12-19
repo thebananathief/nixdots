@@ -48,7 +48,7 @@
       username = "cameron";
       useremail = "cameron.salomone@gmail.com";
       main_domain = "talos.host";
-      
+
       globalFonts = {
         serif = "Noto Serif";
         monospace = "JetBrainsMono Nerd Font";
@@ -58,7 +58,7 @@
       };
 
       nixosSystem = import ./lib/nixosSystem.nix;
-      
+
       system = "x86_64-linux";
 
       x64_specialArgs = {
