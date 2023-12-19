@@ -29,13 +29,10 @@ in {
       #   reverse_proxy localhost:8009
       # '';
       # Static
-      "files.${ main_domain }".extraConfig = ''
-        basicauth {
-          cameron ${secrets.main_user_password.path}
-        }  
-        root * /mnt/storage/filebrowser
-        file_server browse
-      '';
+      # "files.${ main_domain }".extraConfig = ''
+      #   root * /mnt/storage/filebrowser
+      #   file_server browse
+      # '';
       # TTRSS
       "rss.${ main_domain }".extraConfig = ''
         reverse_proxy localhost:8011

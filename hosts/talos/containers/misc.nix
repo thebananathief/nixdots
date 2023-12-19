@@ -78,16 +78,6 @@ in {
     #   # user = "${ cfg.common_env.PUID }:${ cfg.common_env.PGID}";
     #   # user = "cameron:docker";
     # };
-    # static = {
-    #   image = "nginx:alpine";
-    #   volumes = [
-    #     "${ cfg.storageDir }/filebrowser:/usr/share/nginx/html:ro"
-    #   ];
-    #   ports = [ "8010:80" ];
-    #   # extraOptions = [
-    #   #   "--network=public_access";
-    #   # ];
-    # };
     # hedgedoc = {
     #   image = "lscr.io/linuxserver/hedgedoc:latest";
     #   volumes = [
