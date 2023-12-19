@@ -28,6 +28,11 @@ in {
       # "files.${ main_domain }".extraConfig = ''
       #   reverse_proxy localhost:8009
       # '';
+      # Static
+      "static.${ main_domain }".extraConfig = ''
+        root * /mnt/storage/filebrowser
+        file_server browse
+      '';
       # TTRSS
       "rss.${ main_domain }".extraConfig = ''
         reverse_proxy localhost:8011

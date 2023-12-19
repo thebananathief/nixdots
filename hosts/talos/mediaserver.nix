@@ -5,11 +5,11 @@ let
 in {
   users.groups.mediaserver = {};
   users.users.mediaserver = {
-    # createHome = false;
     # uid = 1001;
     group = "mediaserver";
     isSystemUser = true;
     description = "Mediaserver Service account";
+    # hashedPasswordFile = secrets.main_user_password.path;
     password = "testpassword"; # TODO: obfuscate
   };
   services = {
