@@ -374,7 +374,8 @@
         # "size 20% 20%, class:^(org.kde.polkit-kde-authentication-agent-1)$"
         # "center, class:^(org.kde.polkit-kde-authentication-agent-1)$"
 
-        "float, class:^(firefox), title:^(Extension: \(Bitwarden)"
+        # "float, class:^(firefox), title:^(Extension: \(Bitwarden)"
+        "float, class:^(firefox), title:^Extension: \(Bitwarden"
         "float, class:(pavucontrol|yad|nm-connection-editor|nm-applet|blueman-manager)"
         "float, class:(qt5ct|qt6ct|kvantummanager|nwg-look)"
 
