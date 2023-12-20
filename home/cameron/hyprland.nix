@@ -169,8 +169,8 @@
       ];
 
       bindr = [
-        "$mainMod, space, exec, pkill .$runner-wrapped || $runner" # launch desktop applications
-        "$mainMod, Z, exec, pkill nwg-drawer || nwg-drawer" # launch desktop applications
+        # "$mainMod, space, exec, pkill .$runner-wrapped || $runner" # launch desktop applications
+        "$mainMod, R, exec, pkill nwg-drawer || nwg-drawer" # launch desktop applications
         # "$mainMod, T, exec, killall $runner; $runner --plugins kidex " # browse system files
         # "$mainMod, V, exec, cliphist list | anyrun --dmenu | cliphist decode | wl-copy" # clipboard chooser
 
@@ -216,8 +216,10 @@
         "fusuma -d"
         "firefox"
         "~/github/nixdots/scripts/batterynotify"
+        "kanshi"
         # TODO: mullvad connect handled by itself? conflicts with tscale
         "tailscale-systray"
+        "nwg-dock-hyprland"
         "swayidle -w timeout 600 '~/github/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
         # "gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Mocha-Mauve'"
         "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
@@ -231,17 +233,17 @@
         # "DP-3, 1920x1080@60, 0x-1080, 1"
         # "DP-1, 1920x1080@75.001, 1920x-500, 1, transform, 1"
 
-        # laptop
-        "eDP-1,highres,0x0,auto"
-        "DP-1,highres,0x0,auto"
-        "DP-5,highres,1128x0,auto"
-        "DP-6,highres,3048x0,auto"
+        # laptop @ work
+        # "eDP-1, highres, 0x0, auto"
+        # "DP-1, highres, 0x0, auto"
+        # "DP-5, highres, 1128x0, auto"
+        # "DP-6, highres, 3048x0, auto"
 
-        # "DP-6,highres,1128x0,auto"
-        # "DP-5,highres,3048x0,auto"
+        # laptop alone
+        # "eDP-1, highres, auto, auto"
 
         # catchall monitor rule
-        ", preferred, auto, 1"
+        # ", preferred, auto, 1"
       ];
 
       workspace = [
@@ -251,9 +253,9 @@
         # "3, monitor:DP-1, default:true"
 
         # laptop setup
-        "1, monitor:eDP-1, default:true"
-        "2, monitor:DP-6, default:true"
-        "3, monitor:DP-5, default:true"
+        # "1, monitor:eDP-1, default:true, persistent:true"
+        # "2, monitor:DP-6, default:true, persistent:true"
+        # "3, monitor:DP-5, default:true, persistent:true"
       ];
 
       misc = {

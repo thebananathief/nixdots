@@ -28,6 +28,7 @@
     jetbrains.idea-community
 
     tailscale-systray
+    kanshi
 
   ## Electron apps
     vscodium

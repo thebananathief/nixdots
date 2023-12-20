@@ -11,6 +11,7 @@
     ./anyrun.nix
     ./waybar.nix
     ./wlogout.nix
+    ./kanshi.nix
     ./hyprland.nix
     ./dunst.nix
   ];
@@ -29,10 +30,10 @@
     # But OJDK16 can load in GTK3
     # This var fixes blank screens on launch
     _JAVA_AWT_WM_NONREPARENTING = "1";
-    
+
     MOZ_ENABLE_WAYLAND = "1";
     MOZ_WEBRENDER = "1";
-    
+
     SDL_VIDEODRIVER = "wayland";
     CLUTTER_BACKEND = "wayland";
     WLR_RENDERER = "vulkan";
@@ -46,7 +47,7 @@
     # Better to provide specific version config files for electron
     # NIXOS_OZONE_WL = "1";
   };
-    
+
   home.sessionVariables = systemd.user.sessionVariables;
 
   # Install dotfiles repo and link configs
@@ -86,7 +87,7 @@
       # font-hinting = "full";
     };
   };
-  
+
   gtk = {
     enable = true;
     font = {
@@ -106,7 +107,7 @@
         size = "compact";
       };
     };
-    
+
     # These are referenced by Thunar for the navigation tree
     gtk3.bookmarks = [
       "file:///home/cameron/github"
@@ -163,6 +164,6 @@
 
   # Auto-mounting removeable drives
   services.udiskie.enable = true;
-    
+
   home.stateVersion = "23.05";
 }
