@@ -41,7 +41,7 @@
       gsettings-qt
       gsettings-desktop-schemas
       gnome.dconf-editor
-      xsettingsd
+      # xsettingsd
       nwg-look
     ];
   };

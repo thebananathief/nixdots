@@ -29,7 +29,7 @@ while true; do
         dunstify -u NORMAL "Battery Charged" "Battery is at $battery_percentage%. You can unplug the charger."
     fi
 
-    sleep 300  # Sleep for 5 minutes before checking again
+    sleep 600  # Sleep for 10 minutes before checking again
   done
 
 fi
