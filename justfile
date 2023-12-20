@@ -35,3 +35,7 @@ rswitch:
 rswitch:
   -git add --all && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')" ; git push
   ssh talos -- ~/github/nixdots/nixos-rebuild switch
+
+[linux]
+update:
+  nix flake update
