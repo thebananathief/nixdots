@@ -219,7 +219,6 @@
         "kanshi"
         # TODO: mullvad connect handled by itself? conflicts with tscale
         "tailscale-systray"
-        "nwg-dock-hyprland"
         "swayidle -w timeout 600 '~/github/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
         # "gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Mocha-Mauve'"
         "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""

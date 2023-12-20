@@ -45,7 +45,6 @@
       swappy # edit screenshots after clipping
       grim # screen capture for screenshots
 
-      # nwg-dock-hyprland
       nwg-drawer
       # nwg-displays # seemed broken last i checked
       # wlr-randr
