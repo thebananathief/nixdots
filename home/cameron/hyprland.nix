@@ -44,7 +44,7 @@
         # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
 
         # Electron stuff
-        "ELECTRON_OZONE_PLATFORM_HINT,wayland"
+        # "ELECTRON_OZONE_PLATFORM_HINT,wayland"
 
         # NVIDIA stuff
         # "WLR_NO_HARDWARE_CURSORS,1"
