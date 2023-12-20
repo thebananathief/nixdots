@@ -390,7 +390,7 @@
         "size 20% 40%, class:^(org.kde.kcalc)$"
         "float, class:^(org.kde.kcalc)$"
 
-        "idleinhibit fullscreen, class:^(firefox)$"
+        # "idleinhibit fullscreen, class:^(firefox)$"
       ];
     };
   };
