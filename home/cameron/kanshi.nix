@@ -2,6 +2,8 @@
 {
   services.kanshi = {
     enable = true;
+    systemdTarget = "hyprland-session.target";
+
     profiles = {
       undocked = {
         outputs = [
@@ -28,7 +30,8 @@
           {
             criteria = "HP Inc. HP V24 1CR0440LFS";
             mode = "1920x1080@60.00000Hz";
-            position = "1128,0";
+            # position = "1128,0";
+            position = "0,-1080";
             scale = 1.0;
             adaptiveSync = false;
             status = "enable";
