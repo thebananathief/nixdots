@@ -5,8 +5,10 @@ cd "$(dirname "$0")"
 git pull
 
 old=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
-sudo nixos-rebuild --show-trace --flake '.#' "$@"
-current=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
+echo "---- OLD GENERATION $old ----"
 
+sudo nixos-rebuild --show-trace --flake '.#' "$@"
+
+current=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
 echo
 echo "Generation $old -> $current"
