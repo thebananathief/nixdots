@@ -8,7 +8,7 @@
       undocked = {
         outputs = [
           {
-            criteria = "BOE 0x095F";
+            criteria = "eDP-1";
             mode = "2256x1504@59.99900";
             position = "0,0";
             scale = 1.0;
@@ -20,7 +20,7 @@
       docked = {
         outputs = [
           {
-            criteria = "BOE 0x095F";
+            criteria = "eDP-1";
             mode = "2256x1504@59.99900Hz";
             position = "0,0";
             scale = 1.0;

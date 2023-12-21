@@ -11,7 +11,7 @@
     ./hardware-configuration.nix
     ./packages.nix
     # ./network-mount.nix
-    # ../../modules/games.nix
+    ../../modules/games.nix
     # ./precommit.nix
     ../../modules/desktop
     sops-nix.nixosModules.sops
