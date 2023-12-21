@@ -7,7 +7,7 @@ git pull
 old=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
 echo "---- OLD GENERATION $old ----"
 
-sudo nixos-rebuild --show-trace --accept-flake-config --flake '.#' "$@"
+sudo nixos-rebuild --show-trace --flake '.#' "$@"
 
 current=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
 echo
