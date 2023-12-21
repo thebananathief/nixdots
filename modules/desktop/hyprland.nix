@@ -9,7 +9,7 @@
   };
 
   security.polkit.enable = true;
-  
+
   environment = {
     sessionVariables = {
       POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
@@ -45,11 +45,10 @@
       swappy # edit screenshots after clipping
       grim # screen capture for screenshots
 
-      nwg-dock-hyprland
       nwg-drawer
       # nwg-displays # seemed broken last i checked
       # wlr-randr
-      
+
     # Media
       zathura # docs
       mpv     # video & audio
@@ -86,7 +85,7 @@
     #pam.services.greetd.gnupg.enable = true;
     pam.services.waylock.text = "auth include login";
   };
-  
+
   programs = {
     # Window manager
     hyprland.enable = true;
@@ -99,9 +98,16 @@
 
     # GNOME network manager tray icon
     nm-applet.enable = true;
-    
+
     # Monitor backlight control
     # light.enable = true;
+
+    gnupg = {
+      agent = {
+        enable = true;
+        enableBrowserSocket = true;
+      };
+    };
   };
 
   # For flatpaks I think?
@@ -109,14 +115,14 @@
   #services.flatpak.enable = true;
 
   services = {
-    # Addons for thunar to detect USB devices and display thumbnails 
+    # Addons for thunar to detect USB devices and display thumbnails
     gvfs.enable = true;
     tumbler.enable = true;
-    
+
     udisks2.enable = true;
     blueman.enable = true;
     printing.enable = false;
-    
+
     # use Ambient Light Sensors for auto brightness adjustment
     # clight = {
     #   enable = true;

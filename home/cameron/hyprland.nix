@@ -7,7 +7,8 @@
   #
   # systemd.user.sessionVariables = home.sessionVariables;
 
-  # Must have the blueman service enabled on the system config to enable blueman-applet
+  # Must have the blueman service enabled on the system config to enable blueman-applet through this
+  # Also didn't actually work for me
   # services.blueman-applet.enable = true;
 
   # Some electron fixes to run on wayland
@@ -16,12 +17,12 @@
   #   --enable-features=WaylandWindowDecorations
   #   --ozone-platform-hint=auto
   # '';
-  # 
+  #
   # xdg.configFile."electron13-flags.conf".text = ''
   #   --enable-features=UseOzonePlatform
   #   --ozone-platform=wayland
   # '';
-  
+
   wayland.windowManager.hyprland = {
     enable = true;
     # enableNvidiaPatches = true;
@@ -43,8 +44,8 @@
         # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
 
         # Electron stuff
-        "ELECTRON_OZONE_PLATFORM_HINT,wayland"
-        
+        # "ELECTRON_OZONE_PLATFORM_HINT,wayland"
+
         # NVIDIA stuff
         # "WLR_NO_HARDWARE_CURSORS,1"
         # "LIBVA_DRIVER_NAME,nvidia"
@@ -71,7 +72,7 @@
         "$mainMod, Y, exec, killall .waybar-wrapped ; waybar"
         "$mainMod, Y, exec, killall .fusuma-wrapped ; fusuma -d"
         "$mainMod, Y, exec, killall blueman-applet ; blueman-applet"
-        
+
         # Media key binds
         ", XF86AudioMute, exec, pamixer -t"
         ", XF86AudioPrev, exec, playerctl previous"
@@ -168,8 +169,8 @@
       ];
 
       bindr = [
-        "$mainMod, space, exec, pkill .$runner-wrapped || $runner" # launch desktop applications
-        "$mainMod, Z, exec, pkill nwg-drawer || nwg-drawer" # launch desktop applications
+        # "$mainMod, space, exec, pkill .$runner-wrapped || $runner" # launch desktop applications
+        "$mainMod, R, exec, pkill nwg-drawer || nwg-drawer" # launch desktop applications
         # "$mainMod, T, exec, killall $runner; $runner --plugins kidex " # browse system files
         # "$mainMod, V, exec, cliphist list | anyrun --dmenu | cliphist decode | wl-copy" # clipboard chooser
 
@@ -195,18 +196,18 @@
       exec = [
         # "kvantummanager --set Catppuccin-Mocha"
       ];
-      
+
       exec-once = [
         "wl-paste --type text --watch cliphist store" #Stores only text data
         "wl-paste --type image --watch cliphist store" #Stores only image data
-        
+
         # Taken from CTT
         # "~/github/nixdots/scripts/resetxdgportal"
         # For when xdg-desktop-portal-wlr doesn't want to start because these variables are missing
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         # "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-        
+
         "hyprpaper"
         "waybar"
         "blueman-applet"
@@ -215,8 +216,9 @@
         "fusuma -d"
         "firefox"
         "~/github/nixdots/scripts/batterynotify"
+        "kanshi"
         # TODO: mullvad connect handled by itself? conflicts with tscale
-        "tailscale up & tailscale-systray"
+        "tailscale-systray"
         "swayidle -w timeout 600 '~/github/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
         # "gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Mocha-Mauve'"
         "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
@@ -229,18 +231,18 @@
         # "HDMI-A-1, 1920x1080@144, 0x0, 1"
         # "DP-3, 1920x1080@60, 0x-1080, 1"
         # "DP-1, 1920x1080@75.001, 1920x-500, 1, transform, 1"
-        
-        # laptop
-        "eDP-1,highres,0x0,auto"
-        "DP-1,highres,0x0,auto"
-        "DP-5,highres,1128x0,auto"
-        "DP-6,highres,3048x0,auto"
-        
-        # "DP-6,highres,1128x0,auto"
-        # "DP-5,highres,3048x0,auto"
-        
+
+        # laptop @ work
+        # "eDP-1, highres, 0x0, auto"
+        # "DP-1, highres, 0x0, auto"
+        # "DP-5, highres, 1128x0, auto"
+        # "DP-6, highres, 3048x0, auto"
+
+        # laptop alone
+        # "eDP-1, highres, auto, auto"
+
         # catchall monitor rule
-        ", preferred, auto, 1"
+        # ", preferred, auto, 1"
       ];
 
       workspace = [
@@ -248,11 +250,11 @@
         # "1, monitor:HDMI-A-1, default:true"
         # "2, monitor:DP-3, default:true"
         # "3, monitor:DP-1, default:true"
-        
+
         # laptop setup
-        "1, monitor:eDP-1, default:true"
-        "2, monitor:DP-6, default:true"
-        "3, monitor:DP-5, default:true"
+        # "1, monitor:eDP-1, default:true, persistent:true"
+        # "2, monitor:DP-6, default:true, persistent:true"
+        # "3, monitor:DP-5, default:true, persistent:true"
       ];
 
       misc = {
@@ -287,7 +289,7 @@
         "col.active_border" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
         "col.inactive_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
         "col.nogroup_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
-        # "col.nogroup_border_active" = 
+        # "col.nogroup_border_active" =
         resize_on_border = true;
 
         # allow_tearing = true;
@@ -297,7 +299,7 @@
 
       # group = {
       #   "col.border_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
-        # "col.border_inactive" = 
+        # "col.border_inactive" =
         # "col.border_locked_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
         # "col.border_locked_inactive" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
       # };
@@ -373,9 +375,10 @@
         # "size 20% 20%, class:^(org.kde.polkit-kde-authentication-agent-1)$"
         # "center, class:^(org.kde.polkit-kde-authentication-agent-1)$"
 
+        "float, class:^(firefox), title:^(Extension: \(Bitwarden)"
+        # "float, class:^(firefox), title:^Extension: \(Bitwarden"
         "float, class:(pavucontrol|yad|nm-connection-editor|nm-applet|blueman-manager)"
         "float, class:(qt5ct|qt6ct|kvantummanager|nwg-look)"
-        "float, class:^(firefox), title:^Extension: \(Bitwarden\)"
 
         # fix xwayland apps
         "rounding 0, xwayland:1, floating:1"
@@ -385,11 +388,11 @@
         # Fix tooltips taking away window focus
         # https://github.com/hyprwm/Hyprland/issues/2412
         "nofocus,class:^jetbrains-(?!toolbox),floating:1,title:^win\d+"
-        
+
         "size 20% 40%, class:^(org.kde.kcalc)$"
         "float, class:^(org.kde.kcalc)$"
 
-        "idleinhibit fullscreen, class:^(firefox)$"
+        # "idleinhibit fullscreen, class:^(firefox)$"
       ];
     };
   };

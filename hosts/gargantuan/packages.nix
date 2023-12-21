@@ -12,7 +12,7 @@
     go
     pre-commit
 
-    (python311.withPackages (ps: 
+    (python311.withPackages (ps:
       with ps; [
         ansible
     ]))
@@ -26,14 +26,17 @@
     spicetify-cli # Needs to be installed even with the flake
     localsend
     jetbrains.idea-community
-    
+
+    tailscale-systray
+    kanshi
+
   ## Electron apps
     vscodium
     obsidian
-    webcord 
+    webcord
     bitwarden
-    spotify 
-    
+    spotify
+
     # thunderbird
     # parsec-bin
     # krita
