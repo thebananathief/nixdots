@@ -46,4 +46,15 @@
     # dbeaver
     # cage
   ];
+
+  pkgs.symlinkJoin {
+    name = "spotify";
+    paths = [ pkgs.spotify ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/spotify \
+        --enable-features=UseOzonePlatform \
+        --ozone-platform=wayland
+    '';
+  }
 }
