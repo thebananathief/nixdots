@@ -44,9 +44,9 @@
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
 
-    # Breaks some electron apps i think
-    # Better to provide specific version config files for electron
+    # EXPERIMENTAL: breaks some electron apps
     NIXOS_OZONE_WL = "1";
+    # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
   };
 
   home.sessionVariables = systemd.user.sessionVariables;
