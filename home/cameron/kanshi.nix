@@ -23,7 +23,7 @@
             criteria = "eDP-1";
             mode = "2256x1504@59.99900Hz";
             position = "0,0";
-            scale = 1.0;
+            scale = 2.0;
             adaptiveSync = false;
             status = "enable";
           }
