@@ -95,41 +95,41 @@ in {
     # };
 
     # Media indexing, metadata and organizing, coordinating
-    # prowlarr = {
-    #   image = "lscr.io/linuxserver/prowlarr:latest";
-    #   volumes = [
-    #     "${cfg.dataDir}/prowlarr:/config"
-    #   ];
-    #   ports = ["8002:9696"];
-    #   environment = cfg.common_env;
-    #   extraOptions = [
-    #     "--network=media"
-    #   ];
-    # };
-    # radarr = {
-    #   image = "lscr.io/linuxserver/radarr:latest";
-    #   volumes = [
-    #     "${cfg.dataDir}/radarr:/config"
-    #     "${cfg.storageDir}:/storage"
-    #   ];
-    #   ports = ["8003:7878"];
-    #   environment = cfg.common_env;
-    #   extraOptions = [
-    #     "--network=media"
-    #   ];
-    # };
-    # sonarr = {
-    #   image = "lscr.io/linuxserver/sonarr:latest";
-    #   volumes = [
-    #     "${cfg.dataDir}/sonarr:/config"
-    #     "${cfg.storageDir}:/storage"
-    #   ];
-    #   ports = ["8004:8989"];
-    #   environment = cfg.common_env;
-    #   extraOptions = [
-    #     "--network=media"
-    #   ];
-    # };
+    prowlarr = {
+      image = "lscr.io/linuxserver/prowlarr:latest";
+      volumes = [
+        "${cfg.dataDir}/prowlarr:/config"
+      ];
+      ports = ["8002:9696"];
+      environment = cfg.common_env;
+      extraOptions = [
+        "--network=media"
+      ];
+    };
+    radarr = {
+      image = "lscr.io/linuxserver/radarr:latest";
+      volumes = [
+        "${cfg.dataDir}/radarr:/config"
+        "${cfg.storageDir}:/storage"
+      ];
+      ports = ["8003:7878"];
+      environment = cfg.common_env;
+      extraOptions = [
+        "--network=media"
+      ];
+    };
+    sonarr = {
+      image = "lscr.io/linuxserver/sonarr:latest";
+      volumes = [
+        "${cfg.dataDir}/sonarr:/config"
+        "${cfg.storageDir}:/storage"
+      ];
+      ports = ["8004:8989"];
+      environment = cfg.common_env;
+      extraOptions = [
+        "--network=media"
+      ];
+    };
 
     # VPN and download client
     # https://github.com/qdm12/gluetun-wiki/
