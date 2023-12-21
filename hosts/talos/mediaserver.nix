@@ -30,5 +30,19 @@ in {
       openFirewall = true;
       port = 8005;
     };
+    sonarr = {
+      enable = true;
+      openFirewall = false;
+      user = "mediaserver";
+      group = "mediaserver";
+      # dataDir = "/var/lib/sonarr/.config/NzbDrone";
+    };
+    radarr = {
+      enable = true;
+      openFirewall = false;
+      user = "mediaserver";
+      group = "mediaserver";
+      # dataDir = "/var/lib/radarr/.config/Radarr";
+    };
   };
 }

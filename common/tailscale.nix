@@ -9,6 +9,7 @@
       "--operator=${username}"
       # "--advertise-routes=192.168.0.0/24"
       # "--advertise-exit-node"
+      "--reset" # prevents error on autoconnect service when I change these options
     ];
   };
   environment.systemPackages = with pkgs; [
