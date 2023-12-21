@@ -113,6 +113,7 @@ By accessing this system, you agree that your actions may be monitored if unauth
     description = "Cameron";
     extraGroups = [
       "wheel"
+      "mediaserver" # needed for /tv, /movies, /books
       config.virtualisation.oci-containers.backend
     ];
     # Public keys that are authorized for SSH access

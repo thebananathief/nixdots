@@ -1,7 +1,7 @@
 set windows-shell := ['pwsh.exe', '-NoLogo', '-Command']
 
 # <leader>tj
-alias run := switch
+alias run := rswitch
 
 # list commands
 [private]
@@ -21,6 +21,8 @@ rinstall host:
   ssh talos -- ~/github/nixdots/nixos-rebuild switch
 
 alias s := switch
+[windows]
+switch:
 [linux]
 switch:
   -git add --all && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')" ; git push
