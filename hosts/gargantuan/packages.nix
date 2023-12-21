@@ -1,5 +1,5 @@
 { pkgs, ... }:
-let
+# let
     # wrapspotify = pkgs.symlinkJoin {
     #   name = "spotify";
     #   paths = [ pkgs.spotify ];
@@ -10,7 +10,8 @@ let
     #       --ozone-platform=wayland
     #   '';
     # };
-in {
+# in {
+{
   services.mullvad-vpn.enable = true;
   # pkgs.mullvad for CLI only, pkgs.mullvad-vpn for CLI and GUI
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
@@ -28,6 +29,7 @@ in {
       with ps; [
         ansible
     ]))
+
 
   ## General desktop
     alacritty
