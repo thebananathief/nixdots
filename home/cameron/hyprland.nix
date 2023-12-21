@@ -25,7 +25,6 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    # enableNvidiaPatches = true;
     settings = {
       "$mainMod" = "SUPER";
       "$terminal" = "alacritty";

@@ -90,7 +90,6 @@
     # Window manager
     hyprland.enable = true;
     hyprland.xwayland.enable = true;
-    hyprland.enableNvidiaPatches = true;
 
     # GUI file explorer
     thunar.enable = true;
