@@ -50,6 +50,10 @@ in {
     webcord
     bitwarden
     wrapspotify
+    (pkgs.writeScriptBin "spotify" ''
+      #! ${pkgs.bash}/bin/bash
+      exec ${pkgs.spotify}/bin/spotify --enable-features=UseOzonePlatform --ozone-platform=wayland "$@"
+    '')
 
     # thunderbird
     # parsec-bin
