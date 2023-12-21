@@ -1,15 +1,15 @@
 { pkgs, ... }:
 let
-    wrapspotify = pkgs.symlinkJoin {
-      name = "spotify";
-      paths = [ pkgs.spotify ];
-      buildInputs = [ pkgs.makeWrapper ];
-      postBuild = ''
-        wrapProgram $out/bin/spotify \
-          --enable-features=UseOzonePlatform \
-          --ozone-platform=wayland
-      '';
-    };
+    # wrapspotify = pkgs.symlinkJoin {
+    #   name = "spotify";
+    #   paths = [ pkgs.spotify ];
+    #   buildInputs = [ pkgs.makeWrapper ];
+    #   postBuild = ''
+    #     wrapProgram $out/bin/spotify \
+    #       --enable-features=UseOzonePlatform \
+    #       --ozone-platform=wayland
+    #   '';
+    # };
 in {
   services.mullvad-vpn.enable = true;
   # pkgs.mullvad for CLI only, pkgs.mullvad-vpn for CLI and GUI
@@ -47,7 +47,7 @@ in {
     obsidian
     webcord
     bitwarden
-    wrapspotify
+    spotify
 
     # thunderbird
     # parsec-bin
