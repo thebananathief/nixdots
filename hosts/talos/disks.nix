@@ -54,7 +54,7 @@ in {
     ];
   };
 
-  snapraid = {
+  services.snapraid = {
     enable = true;
     sync.interval = "02:00";
     scrub.interval = "Mon *-*-* 03:00:00";
