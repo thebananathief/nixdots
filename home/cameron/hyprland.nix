@@ -193,7 +193,6 @@
 
       # These are ran every reload of hyprland
       exec = [
-        # "kvantummanager --set Catppuccin-Mocha"
       ];
 
       exec-once = [
@@ -221,6 +220,7 @@
         "swayidle -w timeout 600 '~/github/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
         # "gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Mocha-Mauve'"
         "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
+        "kvantummanager --set Catppuccin-Mocha-Mauve"
       ];
 
       # See https://wiki.hyprland.org/Configuring/Monitors/

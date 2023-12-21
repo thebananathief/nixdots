@@ -10,28 +10,21 @@
 
   boot = {
     loader = {
-      #systemd-boot = {
-      #  enable = true;
-      #  configurationLimit = 30;
-      #  consoleMode = "max";
-      #};
+      systemd-boot = {
+       enable = true;
+       configurationLimit = 20;
+       consoleMode = "max";
+      };
       efi.canTouchEfiVariables = true;
       #efi.efiSysMountPoint = "/boot/efi";
-      grub = {
-        enable = true;
-        #splashImage = "";
-        #useOSProber = true;
-        device = "nodev";
-        efiSupport = true;
-        #theme = pkgs.libsForQt5.breeze-grub;
-        fontSize = 48;
-        #extraConfig = "set theme=${pkgs.libsForQt5.breeze-grub}/themes/breeze/theme.txt";
-      };
+      # grub = {
+      #   enable = true;
+      #   device = "nodev";
+      #   efiSupport = true;
+      #   fontSize = 48;
+      # };
     };
-    #plymouth = {
-      #enable = true;
-      #theme = "breeze";
-    #};
+
     initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
     initrd.kernelModules = [ ];
     kernelModules = [ "kvm-intel" ];
