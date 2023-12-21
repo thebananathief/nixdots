@@ -46,7 +46,7 @@
 
     # Breaks some electron apps i think
     # Better to provide specific version config files for electron
-    # NIXOS_OZONE_WL = "1";
+    NIXOS_OZONE_WL = "1";
   };
 
   home.sessionVariables = systemd.user.sessionVariables;
