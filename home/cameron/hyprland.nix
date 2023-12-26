@@ -255,6 +255,8 @@
         "1, monitor:eDP-1, default:true, persistent:true"
         # "2, monitor:DP-6, default:true, persistent:true"
         # "3, monitor:DP-5, default:true, persistent:true"
+        # "2, monitor:DP-7, default:true, persistent:true"
+        # "3, monitor:DP-8, default:true, persistent:true"
         "2, monitor:HP Inc. HP V24 1CR0440LFS, default:true, persistent:true"
         "3, monitor:HP Inc. HP V214a CNC7160VL4, default:true, persistent:true"
       ];
