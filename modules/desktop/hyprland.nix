@@ -136,6 +136,7 @@
 
   xdg.portal = {
     enable = true;
+    # I think this breaks xdg-open slightly, can't open http
     # xdgOpenUsePortal = true;
     wlr.enable = lib.mkForce false;
     extraPortals = with pkgs; [

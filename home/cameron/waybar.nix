@@ -237,8 +237,8 @@ in {
           border-radius: 9px;
           margin-top: 3px;
           margin-bottom: 3px;
-          padding-left: 3px;
-          padding-right: 3px;
+          padding-left: 1px;
+          padding-right: 1px;
           color: @wb-color;
           animation: gradient_f 20s ease-in infinite;
           transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682);
@@ -247,10 +247,10 @@ in {
       #taskbar button.active {
           background: @wb-act-bg;
           color: @wb-act-color;
-          /*margin-left: 3px;*/
-          /*padding-left: 12px;*/
-          /*padding-right: 12px;*/
-          /*margin-right: 3px;*/
+          margin-left: 3px;
+          padding-left: 12px;
+          padding-right: 12px;
+          margin-right: 3px;
           animation: gradient_f 20s ease-in infinite;
           transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
       }
@@ -258,8 +258,8 @@ in {
       #taskbar button:hover {
           background: @wb-hvr-bg;
           color: @wb-hvr-color;
-          /*padding-left: 3px;*/
-          /*padding-right: 3px;*/
+          padding-left: 1px;
+          padding-right: 1px;
           animation: gradient_f 20s ease-in infinite;
           transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
       }
