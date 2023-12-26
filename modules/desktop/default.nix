@@ -18,12 +18,12 @@
       enable = true;
       touchpad = {
         accelProfile = "flat";
-        accelSpeed = "0.5";
+        accelSpeed = "0.0";
         naturalScrolling = false;
       };
       mouse = {
         accelProfile = "flat";
-        accelSpeed = "1.0";
+        accelSpeed = "0.0";
         naturalScrolling = false;
       };
     };

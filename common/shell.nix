@@ -70,7 +70,12 @@
 
     yazi.enable = true;
 
-    neovim.enable = true;
-    neovim.defaultEditor = true;
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      vimAlias = true;
+      viAlias = true;
+      withNodeJs = true;
+    };
   };
 }
