@@ -43,6 +43,7 @@
         # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
 
         # Electron stuff
+        # "NIXOS_OZONE_WL,1"
         # "ELECTRON_OZONE_PLATFORM_HINT,wayland"
 
         # NVIDIA stuff
