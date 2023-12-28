@@ -43,6 +43,7 @@
         # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
 
         # Electron stuff
+        # "NIXOS_OZONE_WL,1"
         # "ELECTRON_OZONE_PLATFORM_HINT,wayland"
 
         # NVIDIA stuff
@@ -251,10 +252,19 @@
         # "3, monitor:DP-1, default:true"
 
         # laptop setup
-        # "1, monitor:eDP-1, default:true, persistent:true"
+        "1, monitor:eDP-1, default:true, persistent:true"
         # "2, monitor:DP-6, default:true, persistent:true"
         # "3, monitor:DP-5, default:true, persistent:true"
+        # "2, monitor:DP-7, default:true, persistent:true"
+        # "3, monitor:DP-8, default:true, persistent:true"
+        "2, monitor:HP Inc. HP V24 1CR0440LFS, default:true, persistent:true"
+        "3, monitor:HP Inc. HP V214a CNC7160VL4, default:true, persistent:true"
       ];
+
+      # xwayland = {
+      #   use_nearest_neighbor = true;
+      #   force_zero_scaling = true;
+      # };
 
       misc = {
         vrr = 0;
@@ -374,8 +384,7 @@
         # "size 20% 20%, class:^(org.kde.polkit-kde-authentication-agent-1)$"
         # "center, class:^(org.kde.polkit-kde-authentication-agent-1)$"
 
-        "float, class:^(firefox), title:^(Extension: \(Bitwarden)"
-        # "float, class:^(firefox), title:^Extension: \(Bitwarden"
+        "float, class:^(firefox), title:^(Extension: \(Bitwarden (-|—) Free Password Manager\) (-|—) Bitwarden (-|—) Mozilla Firefox)"
         "float, class:(pavucontrol|yad|nm-connection-editor|nm-applet|blueman-manager)"
         "float, class:(qt5ct|qt6ct|kvantummanager|nwg-look)"
 

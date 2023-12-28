@@ -44,7 +44,6 @@ in {
     kanshi
 
   ## Electron apps
-    vscodium
     obsidian
     webcord
     bitwarden

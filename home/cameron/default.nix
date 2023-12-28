@@ -19,6 +19,7 @@
   home.username = "cameron";
   # home.homeDirectory = "/home/cameron";
 
+  # home.sessionVariables = {
   systemd.user.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
@@ -31,6 +32,7 @@
     # This var fixes blank screens on launch
     _JAVA_AWT_WM_NONREPARENTING = "1";
 
+    # Mozilla wayland support
     MOZ_ENABLE_WAYLAND = "1";
     MOZ_WEBRENDER = "1";
 
