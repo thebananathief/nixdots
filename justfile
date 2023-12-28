@@ -23,7 +23,8 @@ rinstall host:
 
 alias s := switch
 [windows]
-switch:
+switch *args:
+  just rswitch {{args}} 
 [linux]
 switch *args:
   -git add --all && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')"
