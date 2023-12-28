@@ -64,10 +64,10 @@ in {
         "--network=database_mysql"
       ];
     };
-    focalboard = {
-      image = "mattermost/focalboard";
-      ports = [ "8014:8000" ];
-    };
+    # focalboard = {
+    #   image = "mattermost/focalboard";
+    #   ports = [ "8014:8000" ];
+    # };
     # filebrowser = {
     #   image = "filebrowser/filebrowser:latest";
     #   volumes = [
