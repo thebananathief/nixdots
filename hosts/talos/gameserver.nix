@@ -13,6 +13,9 @@
         difficulty = 3;
         gamemode = 1;
         max-players = 24;
+        enable-rcon = true;
+        "rcon.port" = 25575;
+        "rcon.password" = "stupidpassword";
       };
     };
   };
