@@ -49,6 +49,9 @@ in {
     bitwarden
     # wrapspotify
     spotify
+    libreoffice-qt
+    hunspell
+    hunspellDicts.en_US
 
     # thunderbird
     # parsec-bin
