@@ -365,7 +365,8 @@
         "float, title:^(File Operation Progress)$"
         "float, title:^(Confirm to replace files)$"
         "float, title:^(Open folder as vault)$"
-        "opacity 1.0, title:(Save)"
+        # "opacity 1.0, title:(Save)"
+        "forcergbx, title:(Save)"
 
         # "float, class:^(org.kde.polkit-kde-authentication-agent-1)$"
         # "size 20% 20%, class:^(org.kde.polkit-kde-authentication-agent-1)$"
