@@ -42,8 +42,8 @@
 
       # hyprpaper
       # swww
-      waypaper
-      swaybg
+      # swaybg
+      wpaperd
 
       wf-recorder # screen recording
       slurp # select region for screenshot

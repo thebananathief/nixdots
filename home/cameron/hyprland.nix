@@ -23,6 +23,17 @@
   #   --ozone-platform=wayland
   # '';
 
+  programs.wpaperd = {
+    enable = true;
+    settings = {
+      default = {
+        path = "~/Wallpapers/";
+        duration = "30m";
+        apply-shadow = true;
+      };
+    };
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -209,8 +220,8 @@
 
         # "hyprpaper"
         # "swww init"
-        "waypaper --backend swaybg --restore"
         # "swaybg"
+        # "wpaperd"
 
         "waybar"
         "blueman-applet"
