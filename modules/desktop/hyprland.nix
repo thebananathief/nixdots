@@ -41,8 +41,9 @@
       wlogout
 
       # hyprpaper
-      swww
+      # swww
       waypaper
+      swaybg
 
       wf-recorder # screen recording
       slurp # select region for screenshot

@@ -209,7 +209,8 @@
 
         # "hyprpaper"
         # "swww init"
-        "waypaper --backend swww --restore"
+        "waypaper --backend swaybg --restore"
+        # "swaybg"
 
         "waybar"
         "blueman-applet"
