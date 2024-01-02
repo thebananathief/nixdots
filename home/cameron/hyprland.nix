@@ -306,7 +306,7 @@
         "col.shadow" = "rgba(1a1a1aee)";
 
         blur = {
-          enabled = true;
+          enabled = false;
           size = 3;
           passes = 1;
           new_optimizations = true;
@@ -314,9 +314,10 @@
         };
       };
 
-      blurls = [
-        "waybar"
-      ];
+      # Not very documented, but enables blur under these gtk-layer-shell namespaces
+      # blurls = [
+      #   "waybar"
+      # ];
 
       dwindle = {
         pseudotile = false;
@@ -366,7 +367,7 @@
         "float, title:^(Confirm to replace files)$"
         "float, title:^(Open folder as vault)$"
         # "forcergbx, title:(Save)"
-        "noblur, title:(Save)"
+        # "noblur, title:(Save)"
 
         # "float, class:^(org.kde.polkit-kde-authentication-agent-1)$"
         # "size 20% 20%, class:^(org.kde.polkit-kde-authentication-agent-1)$"
