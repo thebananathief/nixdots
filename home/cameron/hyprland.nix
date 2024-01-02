@@ -253,12 +253,12 @@
 
         # laptop setup
         "1, monitor:eDP-1, default:true, persistent:true"
-        # "2, monitor:DP-6, default:true, persistent:true"
-        # "3, monitor:DP-5, default:true, persistent:true"
-        # "2, monitor:DP-7, default:true, persistent:true"
-        # "3, monitor:DP-8, default:true, persistent:true"
-        "2, monitor:HP Inc. HP V24 1CR0440LFS, default:true, persistent:true"
-        "3, monitor:HP Inc. HP V214a CNC7160VL4, default:true, persistent:true"
+        "2, monitor:DP-5, default:true, persistent:true"
+        "3, monitor:DP-6, default:true, persistent:true"
+        "2, monitor:DP-7, default:true, persistent:true"
+        "3, monitor:DP-8, default:true, persistent:true"
+        # "2, monitor:HP Inc. HP V24 1CR0440LFS, default:true, persistent:true"
+        # "3, monitor:HP Inc. HP V214a CNC7160VL4, default:true, persistent:true"
       ];
 
       # xwayland = {
@@ -406,12 +406,15 @@
   };
 
   xdg.configFile."hypr/hyprpaper.conf".text = ''
-    preload = ~/Wallpapers/pexels-felix-mittermeier-1329917.jpg
+    preload = ~/Wallpapers/space1.jpg
+    preload = ~/Wallpapers/space2.jpg
 
-    wallpaper = eDP-1,~/Wallpapers/pexels-felix-mittermeier-1329917.jpg
-    wallpaper = DP-5,~/Wallpapers/pexels-felix-mittermeier-1329917.jpg
-    wallpaper = DP-6,~/Wallpapers/pexels-felix-mittermeier-1329917.jpg
-    wallpaper = ,~/Wallpapers/pexels-felix-mittermeier-1329917.jpg
+    wallpaper = eDP-1,~/Wallpapers/space1.jpg
+    wallpaper = DP-5,~/Wallpapers/space2.jpg
+    wallpaper = DP-6,~/Wallpapers/space2.jpg
+    wallpaper = DP-7,~/Wallpapers/space2.jpg
+    wallpaper = DP-8,~/Wallpapers/space2.jpg
+    wallpaper = ,~/Wallpapers/space2.jpg
   '';
 }
 
