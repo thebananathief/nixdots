@@ -207,7 +207,10 @@
         # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         # "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 
-        "hyprpaper"
+        # "hyprpaper"
+        # "swww init"
+        "waypaper --backend swww --restore"
+
         "waybar"
         "blueman-applet"
         # "nm-applet --indicator" # started by nixos module
