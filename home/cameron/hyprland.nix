@@ -210,7 +210,7 @@
         # "hyprpaper"
         # "swww init"
         # "swaybg"
-        # "wpaperd"
+        "wpaperd"
 
         "waybar"
         "blueman-applet"
