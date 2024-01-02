@@ -354,22 +354,25 @@
       };
 
       windowrulev2 = [
-        "float, title:notification"
-        "float, title:dialog"
-        "float, title:confirm"
-        "float, title:error"
-        "float, title:download"
-        "float, title:attention"
+        # "float, title:notification"
+        # "float, title:dialog"
+        # "float, title:confirm"
+        # "float, title:error"
+        # "float, title:download"
+        # "float, title:attention"
+        # "float, title:save"
         "float, title:^(Picture-in-Picture)$"
         "float, title:^(File Operation Progress)$"
         "float, title:^(Confirm to replace files)$"
         "float, title:^(Open folder as vault)$"
+        "opaque, title:(Save)"
 
         # "float, class:^(org.kde.polkit-kde-authentication-agent-1)$"
         # "size 20% 20%, class:^(org.kde.polkit-kde-authentication-agent-1)$"
         # "center, class:^(org.kde.polkit-kde-authentication-agent-1)$"
 
-        "float, class:^(firefox), title:^(Extension: \(Bitwarden (-|—) Free Password Manager\) (-|—) Bitwarden (-|—) Mozilla Firefox)"
+        # "float, class:^(firefox), title:^(Extension: \(Bitwarden (-|—) Free Password Manager\) (-|—) Bitwarden (-|—) Mozilla Firefox)"
+        "float, title:^(Extension: \(Bitwarden)"
         "float, class:(pavucontrol|yad|nm-connection-editor|nm-applet|blueman-manager)"
         "float, class:(qt5ct|qt6ct|kvantummanager|nwg-look)"
 

@@ -9,6 +9,7 @@
       defaultApplications = let
         browser = [ "firefox.desktop" ];
         editTerminal = [ "edit.desktop" ];
+        archive = [ "org.kde.ark.desktop" ];
       in {
         "application/x-extension-htm" = browser;
         "application/x-extension-html" = browser;
@@ -18,18 +19,19 @@
         "application/xhtml+xml" = browser;
         "application/xhtml_xml" = browser;
         "application/json" = browser;
-        "application/zip" = [ "org.kde.ark.desktop" ];
-        
+        "application/zip" = archive;
+        "application/x-7z-compressed" = archive;
+
         "text/html" = browser;
         "text/xml" = browser;
-        
+
         "x-scheme-handler/about" = browser;
         "x-scheme-handler/chrome" = [ "chromium-browser.desktop" ];
         "x-scheme-handler/ftp" = browser;
         "x-scheme-handler/http" = browser;
         "x-scheme-handler/https" = browser;
         "x-scheme-handler/unknown" = browser;
-        
+
         "application/x-shellscript" = editTerminal;
         "application/x-trash" = editTerminal;
         "application/x-zerosize" = editTerminal;
@@ -77,4 +79,3 @@
     configFile."gtk-3.0/bookmarks".force = true;
   };
 }
-
