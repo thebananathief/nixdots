@@ -366,6 +366,7 @@
         "float, title:^(Confirm to replace files)$"
         "float, title:^(Open folder as vault)$"
         "opaque, title:(Save)"
+        "opacity 0.5"
 
         # "float, class:^(org.kde.polkit-kde-authentication-agent-1)$"
         # "size 20% 20%, class:^(org.kde.polkit-kde-authentication-agent-1)$"
