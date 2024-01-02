@@ -69,8 +69,6 @@
     dos2unix tldr just
     age sops
 
-    # universal-ctags
-    # cut
     # intel-gpu-tools
     # dnsutils
     # net-tools

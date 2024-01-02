@@ -1,27 +1,14 @@
 { pkgs, config, ... }: rec {
-  # home.sessionVariables = {
-  #   XDG_CURRENT_DESKTOP = "Hyprland";
-  #   XDG_SESSION_DESKTOP = "Hyprland";
-  #   XDG_SESSION_TYPE = "wayland";
-  # };
-  #
-  # systemd.user.sessionVariables = home.sessionVariables;
-
-  # Must have the blueman service enabled on the system config to enable blueman-applet through this
-  # Also didn't actually work for me
-  # services.blueman-applet.enable = true;
-
-  # Some electron fixes to run on wayland
-  # BUG: One of these broke mullvad-gui
-  # xdg.configFile."electron25-flags.conf".text = ''
-  #   --enable-features=WaylandWindowDecorations
-  #   --ozone-platform-hint=auto
-  # '';
-  #
-  # xdg.configFile."electron13-flags.conf".text = ''
-  #   --enable-features=UseOzonePlatform
-  #   --ozone-platform=wayland
-  # '';
+  programs.wpaperd = {
+    enable = true;
+    settings = {
+      default = {
+        path = "/home/cameron/Wallpapers/";
+        duration = "30m";
+        apply-shadow = true;
+      };
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -41,10 +28,6 @@
         # QT uses these
          # "XCURSOR_SIZE,24"
         # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
-
-        # Electron stuff
-        # "NIXOS_OZONE_WL,1"
-        # "ELECTRON_OZONE_PLATFORM_HINT,wayland"
 
         # NVIDIA stuff
         # "WLR_NO_HARDWARE_CURSORS,1"
@@ -207,11 +190,7 @@
         # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         # "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 
-        # "hyprpaper"
-        # "swww init"
-        # "swaybg"
         "wpaperd"
-
         "waybar"
         "blueman-applet"
         # "nm-applet --indicator" # started by nixos module
@@ -220,7 +199,8 @@
         "firefox"
         "~/github/nixdots/scripts/batterynotify"
         "kanshi"
-        # TODO: mullvad connect handled by itself? conflicts with tscale
+        # TODO: mullvad connect handled by itself? conflicts with tscale, we start the gui here for the tray icon
+        "mullvad-gui"
         "tailscale-systray"
         "swayidle -w timeout 600 '~/github/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
         # "gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Mocha-Mauve'"
@@ -229,6 +209,7 @@
       ];
 
       # See https://wiki.hyprland.org/Configuring/Monitors/
+      # Handled by Kanshi now
       monitor = [
         # TODO: I need a better way to separate my home config for my laptop and my desktop
         # desktop
@@ -408,29 +389,6 @@
       ];
     };
   };
-
-  programs.wpaperd = {
-    enable = true;
-    settings = {
-      default = {
-        path = "/home/cameron/Wallpapers/";
-        duration = "30m";
-        apply-shadow = true;
-      };
-    };
-  };
-
-  # xdg.configFile."hypr/hyprpaper.conf".text = ''
-  #   preload = ~/Wallpapers/space1.jpg
-  #   preload = ~/Wallpapers/space2.jpg
-  #
-  #   wallpaper = eDP-1,~/Wallpapers/space1.jpg
-  #   wallpaper = DP-5,~/Wallpapers/space2.jpg
-  #   wallpaper = DP-6,~/Wallpapers/space2.jpg
-  #   wallpaper = DP-7,~/Wallpapers/space2.jpg
-  #   wallpaper = DP-8,~/Wallpapers/space2.jpg
-  #   wallpaper = ,~/Wallpapers/space2.jpg
-  # '';
 }
 
 

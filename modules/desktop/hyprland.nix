@@ -35,15 +35,11 @@
       handlr
       trashy
       yad # dialog cli
+      # wpaperd
 
       waylock
       swayidle # idle daemon to trigger sleep, suspend, monitor off, lock
       wlogout
-
-      # hyprpaper
-      # swww
-      # swaybg
-      wpaperd
 
       wf-recorder # screen recording
       slurp # select region for screenshot
