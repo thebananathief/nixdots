@@ -23,17 +23,6 @@
   #   --ozone-platform=wayland
   # '';
 
-  programs.wpaperd = {
-    enable = true;
-    settings = {
-      default = {
-        path = "~/Wallpapers/";
-        duration = "30m";
-        apply-shadow = true;
-      };
-    };
-  };
-
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -420,17 +409,28 @@
     };
   };
 
-  xdg.configFile."hypr/hyprpaper.conf".text = ''
-    preload = ~/Wallpapers/space1.jpg
-    preload = ~/Wallpapers/space2.jpg
+  programs.wpaperd = {
+    enable = true;
+    settings = {
+      default = {
+        path = "~/Wallpapers/";
+        duration = "30m";
+        apply-shadow = true;
+      };
+    };
+  };
 
-    wallpaper = eDP-1,~/Wallpapers/space1.jpg
-    wallpaper = DP-5,~/Wallpapers/space2.jpg
-    wallpaper = DP-6,~/Wallpapers/space2.jpg
-    wallpaper = DP-7,~/Wallpapers/space2.jpg
-    wallpaper = DP-8,~/Wallpapers/space2.jpg
-    wallpaper = ,~/Wallpapers/space2.jpg
-  '';
+  # xdg.configFile."hypr/hyprpaper.conf".text = ''
+  #   preload = ~/Wallpapers/space1.jpg
+  #   preload = ~/Wallpapers/space2.jpg
+  #
+  #   wallpaper = eDP-1,~/Wallpapers/space1.jpg
+  #   wallpaper = DP-5,~/Wallpapers/space2.jpg
+  #   wallpaper = DP-6,~/Wallpapers/space2.jpg
+  #   wallpaper = DP-7,~/Wallpapers/space2.jpg
+  #   wallpaper = DP-8,~/Wallpapers/space2.jpg
+  #   wallpaper = ,~/Wallpapers/space2.jpg
+  # '';
 }
 
 
