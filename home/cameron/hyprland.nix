@@ -413,7 +413,7 @@
     enable = true;
     settings = {
       default = {
-        path = "~/Wallpapers/";
+        path = "/home/cameron/Wallpapers/";
         duration = "30m";
         apply-shadow = true;
       };
