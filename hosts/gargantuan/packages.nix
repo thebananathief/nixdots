@@ -40,8 +40,10 @@ in {
     localsend
     jetbrains.idea-community
 
-    tailscale-systray
     kanshi
+    # tailscale-systray
+    trayscale
+    ktailctl
 
   ## Electron apps
     obsidian

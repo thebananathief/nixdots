@@ -1,6 +1,6 @@
 { config, lib, ... }:
 with lib; {
-  imports = [ ./containers.nix ./tailscale.nix ];
+  imports = [ ./containers.nix ];
 
   options.myOptions = {
     graphics.enable = mkEnableOption "Enable graphics";
