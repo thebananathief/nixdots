@@ -7,7 +7,7 @@ in {
     extraUsers.minecraft = {
       isSystemUser = true;
       group = "minecraft";
-      home = "/var/minecraft-ups";
+      home = "/mnt/ssd/gameservers/minecraft-ups";
       createHome = true;
       packages = with pkgs; [
         temurin-jre-bin-17
