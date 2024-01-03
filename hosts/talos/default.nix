@@ -15,7 +15,7 @@
     ./fileshares.nix
     ./disks.nix
     ./containers
-    ./gameserver.nix
+    # ./gameserver.nix
     ./mediaserver.nix
     ./voiceserver.nix
     ./reverse-proxy.nix
@@ -116,6 +116,7 @@ By accessing this system, you agree that your actions may be monitored if unauth
     extraGroups = [
       "wheel"
       "mediaserver" # needed for /tv, /movies, /books
+      "minecraft" # needed for minecraft data dir
       config.virtualisation.oci-containers.backend
     ];
     # Public keys that are authorized for SSH access
