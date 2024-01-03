@@ -23,6 +23,7 @@ in {
     cmatrix
     go
     pre-commit
+    mcrcon # minecraft rcon client
 
     (python311.withPackages (ps:
       with ps; [
