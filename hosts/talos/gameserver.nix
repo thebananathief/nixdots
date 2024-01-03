@@ -107,7 +107,7 @@ in {
       SystemCallArchitectures = "native";
       UMask = "0077";
     };
-    prestart = ''
+    preStart = ''
       ln -sf ${eulaFile} eula.txt
       if [ -e .declarative ]; then
 
