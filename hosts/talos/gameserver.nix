@@ -1,4 +1,5 @@
 { config, lib, pkgs, ... }:
+with lib;
 let
   serverPort = 25565;
   rconPort = 25575;
