@@ -15,7 +15,7 @@
     ./fileshares.nix
     ./disks.nix
     ./containers
-    # ./gameserver.nix
+    ./gameserver.nix
     ./mediaserver.nix
     ./voiceserver.nix
     ./reverse-proxy.nix
