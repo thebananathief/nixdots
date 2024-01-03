@@ -22,6 +22,7 @@ in {
     device = "/dev/disk/by-uuid/bb0b2728-3662-4fef-b862-5f1be6d54172";
     fsType = "ext4";
   };
+  # Not installed atm
   # fileSystems."/mnt/disk4" = {
   #   device = "/dev/disk/by-uuid/db4a98ac-3a13-4a49-a40e-10a06f2db023";
   #   fsType = "";
@@ -99,6 +100,7 @@ in {
 
   # This is my attempt to add a healthcheck ping to the snapraid-sync
   # service that services.snapraid creates.
+  # TODO: Here I used an inline read file command to get the secret from the file
   systemd.services.snapraid-sync.postStart = ''
     ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${secrets.healthcheck_snapraid_uuid.path})
   '';
