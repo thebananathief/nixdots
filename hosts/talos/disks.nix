@@ -1,4 +1,4 @@
-{ 
+{
   pkgs,
   config,
   ...
@@ -12,7 +12,7 @@ in {
     xfsprogs
     smartmontools
   ];
-  
+
   # Storage/Parity drives
   fileSystems."/mnt/disk1" = {
     device = "/dev/disk/by-uuid/16165a4b-d650-4a84-a55d-9db8f83d0271";
@@ -104,9 +104,9 @@ in {
   # This is my attempt to add a healthcheck ping to the snapraid-sync
   # service that services.snapraid creates.
   systemd.services.snapraid-sync.postStart = ''
-    curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${secrets.healthcheck_snapraid_uuid.path})
+    ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${secrets.healthcheck_snapraid_uuid.path})
   '';
-  
+
   # TODO: Need to have disk SMART alerts sent to me over email
   # Also reminders to buy drives
 }

@@ -15,7 +15,7 @@
     ./fileshares.nix
     ./disks.nix
     ./containers
-    ./gameserver.nix
+    ./minecraft.nix
     ./mediaserver.nix
     ./voiceserver.nix
     ./reverse-proxy.nix
@@ -28,11 +28,6 @@
 
     firewall = {
       enable = true;
-      # allowedTCPPorts = [
-      #   443
-      #   4733
-      # ];
-      # allowedUDPPorts = [ ]; # TODO: gameserver ports? any of the ones in docker containers?
     };
   };
 

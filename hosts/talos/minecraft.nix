@@ -1,3 +1,7 @@
+# This is a way to do a modded minecraft server, you still
+# have to go manually download and install the minecraft forge
+# installer. Then change some paths in here to make it work.
+
 { config, lib, pkgs, ... }:
 with lib;
 let
