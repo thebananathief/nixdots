@@ -35,7 +35,7 @@
       handlr
       trashy
       yad # dialog cli
-      # wpaperd
+      kanshi
 
       waylock
       swayidle # idle daemon to trigger sleep, suspend, monitor off, lock

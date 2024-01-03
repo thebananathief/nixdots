@@ -204,7 +204,7 @@
         "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
         "kvantummanager --set Catppuccin-Mocha-Mauve"
         # BUG: mullvad and tailscale networks conflict
-        "tailscale-systray"
+        # "tailscale-systray"
       ];
 
       # See https://wiki.hyprland.org/Configuring/Monitors/
@@ -305,7 +305,7 @@
         "col.shadow" = "rgba(1a1a1aee)";
 
         blur = {
-          enabled = false;
+          enabled = true;
           size = 3;
           passes = 1;
           new_optimizations = true;
@@ -314,9 +314,9 @@
       };
 
       # Not very documented, but enables blur under these gtk-layer-shell namespaces
-      # blurls = [
-      #   "waybar"
-      # ];
+      blurls = [
+        "waybar"
+      ];
 
       dwindle = {
         pseudotile = false;
@@ -332,6 +332,7 @@
       "device:logitech-m510".sensitivity = 1.0;
       "device:logitech-g203-prodigy-gaming-mouse".sensitivity = -0.2;
       "device:pixa3854:00-093a:0274-touchpad".sensitivity = 1.0;
+      "device:glorious-model-d".sensitivity = -0.5;
 
       animations = {
         enabled = "yes";

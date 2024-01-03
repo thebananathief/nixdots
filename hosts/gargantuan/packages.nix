@@ -40,9 +40,10 @@ in {
     localsend
     jetbrains.idea-community
 
-    kanshi
+    wireguard-tools
+
     # tailscale-systray
-    trayscale
+    # trayscale
     ktailctl
 
   ## Electron apps
