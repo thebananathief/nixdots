@@ -268,7 +268,7 @@
         # kb_rules =
 
         follow_mouse = true;
-        sensitivity = 1; # -1.0 - 1.0, 0 means no modification.
+        sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
         force_no_accel = true;
         touchpad.natural_scroll = true;
       };
