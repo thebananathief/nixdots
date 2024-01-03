@@ -15,21 +15,21 @@ in {
     };
   };
 
-  systemd.services.minecraft = {
-    enable = true;
-    description = "Forge Minecraft Server";
-    serviceConfig = {
-      ExecStart = "${pkgs.temurin-jre-bin-17}/bin/java ${jvmOpts} -jar ./forge.jar nogui";
-      WorkingDirectory = "${config.users.extraUsers.minecraft.home}/forge";
-      Restart = "always";
-      RestartSec = 60;
-    };
-    after = [ "network.target" ];
-    wantedBy = [ "default.target" ];
-  };
-
-  networking.firewall.allowedTCPPorts = [ <portA> <portB> ];
-  networking.firewall.allowedUDPPorts = [ <portA> <portB> ];
+  # systemd.services.minecraft = {
+  #   enable = true;
+  #   description = "Forge Minecraft Server";
+  #   serviceConfig = {
+  #     ExecStart = "${pkgs.temurin-jre-bin-17}/bin/java ${jvmOpts} -jar ./forge.jar nogui";
+  #     WorkingDirectory = "${config.users.extraUsers.minecraft.home}/forge";
+  #     Restart = "always";
+  #     RestartSec = 60;
+  #   };
+  #   after = [ "network.target" ];
+  #   wantedBy = [ "default.target" ];
+  # };
+  #
+  # networking.firewall.allowedTCPPorts = [ <portA> <portB> ];
+  # networking.firewall.allowedUDPPorts = [ <portA> <portB> ];
 
   # services = {
   #   minecraft-server = {
