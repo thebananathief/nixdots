@@ -67,5 +67,49 @@ in {
   services.smokeping = {
     enable = true;
     port = 8014;
+    targetConfig = ''
+      probe = FPing
+      menu = Top
+      title = Network Latency Grapher
+      remark = TALOS SmokePing.
+      
+      + services
+      menu = Service latency
+      title = Service latency (DNS, HTTP)
+      
+      ++ DNS
+      probe = DNS
+      menu = DNS latency
+      title = Service latency (DNS)
+      
+      +++ dns1
+      host = 1.1.1.1
+      
+      +++ dns2
+      host = 8.8.8.8
+      
+      ++ HTTP
+      menu = HTTP latency
+      title = Service latency (HTTP)
+      
+      +++ www1
+      host = www.cloudflare.com
+      
+      +++ www2
+      host = www.google.com
+
+
+      + Local
+      menu = Local
+      title = Local Network
+
+      ++ Styx
+      host = styx.local
+
+      ++ LocalMachine
+      menu = Local Machine
+      title = This host
+      host = localhost
+    '';
   };
 }
