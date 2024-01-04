@@ -76,20 +76,19 @@ in {
       + Global
       menu = Global
       title = Global services
-      
+
       ++ CloudFlare
       host = www.cloudflare.com
       
       ++ Google
       host = www.google.com
 
-
       + Local
       menu = Local
       title = Local Network
 
       ++ Styx
-      host = styx.local
+      host = styx
 
       ++ LocalMachine
       menu = Local Machine
