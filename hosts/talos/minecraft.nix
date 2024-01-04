@@ -41,7 +41,7 @@ let
     done
   '';
 
-  forgeInstaller = fetchurl {
+  forgeInstaller = builtins.fetchurl {
     url = "https://maven.neoforged.net/releases/net/neoforged/forge/${forgeVersion}/forge-${forgeVersion}-installer.jar";
     sha256 = "0808v59k6fyrz79qgb5v36wxc606vx278qv0ihb28w49wxq92d40";
   };
