@@ -6,6 +6,7 @@ let
 
   jvmOpts = "-Xms4G -Xmx6G";
   # jvmOpts = "-Xms4G -Xmx4G -XX:+UseG1GC -XX:+CMSIncrementalPacing -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=2 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10";
+  forgeVersion = "1.20.1-47.1.84"; # This is used for downloads and filepaths, very important
 
   serverProperties = {
     motd = "The UPS Store";
@@ -65,6 +66,8 @@ in {
     };
   };
 
+  # TODO: Figure out how to get the modloader installed using the version number
+
   # https://neoforged.net/
   # wget https://maven.neoforged.net/releases/net/neoforged/forge/1.20.1-47.1.84/forge-1.20.1-47.1.84-installer.jar
   # java -jar <installer jar> --installServer
@@ -73,15 +76,12 @@ in {
   systemd.services.minecraft-ups = {
     enable = true;
     description = "Forge Minecraft Server";
-    # after = [ "network.target" ];
-    # wantedBy = [ "default.target" ];
     wantedBy      = [ "multi-user.target" ];
     requires      = [ "minecraft-ups.socket" ];
     after         = [ "network.target" "minecraft-ups.socket" ];
     serviceConfig = {
       WorkingDirectory = "${config.users.extraUsers.minecraft.home}";
-      # ExecStart = "${pkgs.temurin-jre-bin-17}/bin/java ${jvmOpts} @libraries/net/minecraftforge/forge/1.20.1-47.2.19/unix_args.txt";
-      ExecStart = "/bin/sh ${config.users.extraUsers.minecraft.home}/run.sh";
+      ExecStart = "${pkgs.temurin-jre-bin-17}/bin/java ${jvmOpts} @libraries/net/neoforged/forge/${forgeVersion}/unix_args.txt";
       ExecStop = "${stopScript} $MAINPID";
       Restart = "always";
       RestartSec = 60;
@@ -119,10 +119,6 @@ in {
       # Needs to be writable for us to overwrite
       chmod +w server.properties
       cp -f ${serverPropertiesFile} server.properties
-
-      # Replace java in run.sh with the correct path
-      # sed -iE 's/java/${pkgs.temurin-jre-bin-17}/bin/java/' run.sh
-      awk '{gsub(/$(cat run.sh | grep "^[^#;]" | cut --delimiter=' ' -f 1)/,${pkgs.temurin-jre-bin-17}/bin/java)}1' run.sh
     '';
   };
 
