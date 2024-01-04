@@ -64,8 +64,6 @@
       pamixer
       amberol
 
-      gnome.nautilus
-
       # alsa-utils # may be added by programs or services
       # mako # notify daemon
       # mpd # audio player
@@ -80,6 +78,7 @@
       # polkit-qt
       polkit-kde-agent
       qt5.qtwayland
+      dolphin
     ]);
   };
 
