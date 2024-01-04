@@ -37,10 +37,6 @@ in {
       "rss.${ main_domain }".extraConfig = ''
         reverse_proxy localhost:8011
       '';
-      # Minecraft
-      "ups.${ main_domain }".extraConfig = ''
-        reverse_proxy localhost:25565
-      '';
       # matrix-conduit
       "chat.${ main_domain }".extraConfig = ''
         reverse_proxy localhost:6167
