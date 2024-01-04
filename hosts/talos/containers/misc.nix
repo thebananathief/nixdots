@@ -1,4 +1,4 @@
-{ config, main_domain, ... }:
+{ config, ... }:
 let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
@@ -57,7 +57,7 @@ in {
         PORT = "8013";
         DISABLE_SSL = "TRUE";
         PRETTYURLS = "TRUE";
-        BASE_URL = "https://tree.${ main_domain }";
+        BASE_URL = "https://tree.${ config.networking.fqdn }";
       };
       dependsOn = [ "mysql" ];
       extraOptions = [
@@ -99,7 +99,7 @@ in {
     #       "storage": "/config/hedgedoc.sqlite"
     #     }
     #     '';
-    #     CMD_DOMAIN = "notes.${ main_domain }";
+    #     CMD_DOMAIN = "notes.${ config.networking.fqdn }";
     #     CMD_PROTOCOL_USESSL = "true"; #optional - use if on a reverse proxy
     #     # CMD_URL_ADDPORT = false; #optional
     #     # CMD_PORT = 3000; #optional
@@ -116,7 +116,7 @@ in {
       ];
       ports = [ "8011:80" ];
       environment = {
-        SELF_URL_PATH = "https://rss.${ main_domain }/";
+        SELF_URL_PATH = "https://rss.${ config.networking.fqdn }/";
         DB_HOST = "postgres";
         DB_PORT = "5432";
         DB_USER = "postgres";

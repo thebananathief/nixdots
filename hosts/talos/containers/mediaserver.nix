@@ -45,7 +45,7 @@ in {
     #   ];
     #   environment =
     #     {
-    #       # JELLYFIN_PublishedServerUrl = "watch.${ main_domain }";
+    #       # JELLYFIN_PublishedServerUrl = "watch.${ config.networking.fqdn }";
     #     }
     #     // cfg.common_env;
     #   extraOptions = [

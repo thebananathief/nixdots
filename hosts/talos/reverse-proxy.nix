@@ -1,4 +1,4 @@
-{ config, useremail, main_domain, ... }:
+{ config, useremail, ... }:
 let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
@@ -13,32 +13,32 @@ in {
     email = useremail;
     virtualHosts = {
       # Jellyseerr
-      "request.${ main_domain }".extraConfig = ''
+      "request.${ config.networking.fqdn }".extraConfig = ''
         reverse_proxy localhost:8005
       '';
       # Jellyfin
-      "watch.${ main_domain }".extraConfig = ''
+      "watch.${ config.networking.fqdn }".extraConfig = ''
         reverse_proxy localhost:8096
       '';
       # Webtrees
-      # "tree.${ main_domain }".extraConfig = ''
+      # "tree.${ config.networking.fqdn }".extraConfig = ''
       #   reverse_proxy localhost:8013
       # '';
       # Filebrowser
-      # "files.${ main_domain }".extraConfig = ''
+      # "files.${ config.networking.fqdn }".extraConfig = ''
       #   reverse_proxy localhost:8009
       # '';
       # Static
-      # "files.${ main_domain }".extraConfig = ''
+      # "files.${ config.networking.fqdn }".extraConfig = ''
       #   root * /mnt/storage/filebrowser
       #   file_server browse
       # '';
       # TTRSS
-      "rss.${ main_domain }".extraConfig = ''
+      "rss.${ config.networking.fqdn }".extraConfig = ''
         reverse_proxy localhost:8011
       '';
       # matrix-conduit
-      "chat.${ main_domain }".extraConfig = ''
+      "chat.${ config.networking.fqdn }".extraConfig = ''
         reverse_proxy localhost:6167
       '';
     };

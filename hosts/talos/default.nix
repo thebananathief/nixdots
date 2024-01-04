@@ -24,6 +24,7 @@
 
   networking = {
     hostName = "talos";
+    fqdn = "talos.host";
     wireless.enable = false; # Enables wireless support via wpa_supplicant.
 
     firewall = {
@@ -86,10 +87,6 @@ By accessing this system, you agree that your actions may be monitored if unauth
     # 1 - execute only (--x)
     # 0 - none (---)
     secrets = {
-      # main_domain = {
-      #   group = config.virtualisation.oci-containers.backend;
-      #   mode = "0440";
-      # };
       main_user_password = { neededForUsers = true; };
       email_address = {};
       gmail_password = {};

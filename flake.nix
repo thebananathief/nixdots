@@ -45,8 +45,7 @@
     let
       username = "cameron";
       useremail = "cameron.salomone@gmail.com";
-      main_domain = "talos.host";
-
+      
       globalFonts = {
         serif = "Noto Serif";
         monospace = "JetBrainsMono Nerd Font";
@@ -60,7 +59,7 @@
       system = "x86_64-linux";
 
       x64_specialArgs = {
-        inherit username useremail globalFonts main_domain;
+        inherit username useremail globalFonts;
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;

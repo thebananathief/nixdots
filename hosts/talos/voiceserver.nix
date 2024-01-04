@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   services = {
     matrix-conduit = {
@@ -10,7 +10,7 @@
         allow_federation = true;
         allow_check_for_updates = true;
         allow_encryption = true;
-        server_name = "chat.talos.host";
+        server_name = "chat.${config.networking.fqdn}";
         trusted_servers = [
           "matrix.org"
         ];
