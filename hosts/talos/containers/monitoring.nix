@@ -96,4 +96,7 @@ in {
       host = localhost
     '';
   };
+
+  # The smokeping module didn't have an openFirewall option, so here it is
+  networking.firewall.allowedTCPPorts = [ config.services.smokeping.port ];
 }
