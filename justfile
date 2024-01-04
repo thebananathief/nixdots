@@ -24,22 +24,25 @@ rinstall host:
 alias s := switch
 [windows]
 switch *args:
-  just rswitch {{args}} 
+  just rswitch {{args}}
 [linux]
 switch *args:
-  -git add --all && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')"
+  -git add --all
+  -git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')"
   -git push
   ./nixos-rebuild switch {{args}}
 
 alias rs := rswitch
 [windows]
 rswitch *args:
-  -git add --all && git commit -m "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') EST"
+  -git add --all
+  -git commit -m "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') EST"
   -git push
   ssh talos -- ~/github/nixdots/nixos-rebuild switch {{args}}
 [linux]
 rswitch *args:
-  -git add --all && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')"
+  -git add --all
+  -git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')"
   -git push
   ssh talos -- ~/github/nixdots/nixos-rebuild switch {{args}}
 

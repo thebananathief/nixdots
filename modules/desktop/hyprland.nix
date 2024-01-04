@@ -64,6 +64,8 @@
       pamixer
       amberol
 
+      gnome.nautilus
+
       # alsa-utils # may be added by programs or services
       # mako # notify daemon
       # mpd # audio player
