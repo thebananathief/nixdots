@@ -122,7 +122,7 @@ in {
 
       # Replace java in run.sh with the correct path
       # sed -iE 's/java/${pkgs.temurin-jre-bin-17}/bin/java/' run.sh
-      awk '{gsub(/java/,${pkgs.temurin-jre-bin-17}/bin/java)}1' run.sh
+      awk '{gsub(/$(cat run.sh | grep "^[^#;]" | cut --delimiter=' ' -f 1)/,${pkgs.temurin-jre-bin-17}/bin/java)}1' run.sh
     '';
   };
 
