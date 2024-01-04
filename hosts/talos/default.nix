@@ -24,7 +24,7 @@
 
   networking = {
     hostName = "talos";
-    fqdn = "talos.host";
+    domain = "host";
     wireless.enable = false; # Enables wireless support via wpa_supplicant.
 
     firewall = {
