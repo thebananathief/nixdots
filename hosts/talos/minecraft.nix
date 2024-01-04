@@ -40,6 +40,11 @@ let
       sleep 1s
     done
   '';
+
+  forgeInstaller = fetchurl {
+    url = "https://maven.neoforged.net/releases/net/neoforged/forge/1.20.1-47.1.84/forge-1.20.1-47.1.84-installer.jar";
+    sha256 = "0808v59k6fyrz79qgb5v36wxc606vx278qv0ihb28w49wxq92d40";
+  };
 in {
   users = {
     groups.minecraft = {};
@@ -114,6 +119,9 @@ in {
       UMask = "0077";
     };
     preStart = ''
+      wget https://maven.neoforged.net/releases/net/neoforged/forge/${forgeVersion}/forge-${forgeVersion}-installer.jar
+      ${pkgs.temurin-jre-bin-17}/bin/java -jar forge-${forgeVersion}-installer.jar --installServer
+
       ln -sf ${eulaFile} eula.txt
 
       # Needs to be writable for us to overwrite
