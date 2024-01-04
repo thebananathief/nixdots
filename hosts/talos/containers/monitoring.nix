@@ -73,29 +73,14 @@ in {
       title = Network Latency Grapher
       remark = TALOS SmokePing.
       
-      + services
-      menu = Service latency
-      title = Service latency (DNS, HTTP)
+      + Global
+      menu = Global
+      title = Global services
       
-      ++ DNS
-      probe = DNS
-      menu = DNS latency
-      title = Service latency (DNS)
-      
-      +++ dns1
-      host = 1.1.1.1
-      
-      +++ dns2
-      host = 8.8.8.8
-      
-      ++ HTTP
-      menu = HTTP latency
-      title = Service latency (HTTP)
-      
-      +++ www1
+      ++ CloudFlare
       host = www.cloudflare.com
       
-      +++ www2
+      ++ Google
       host = www.google.com
 
 
