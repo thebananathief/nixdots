@@ -10,7 +10,7 @@
     nixos-hardware.nixosModules.framework-11th-gen-intel
     ./hardware-configuration.nix
     ./packages.nix
-    # ./network-mount.nix
+    ./network-mount.nix
     ../../modules/games.nix
     # ./precommit.nix
     ../../modules/desktop
