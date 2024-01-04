@@ -66,8 +66,7 @@ in {
 
   services.smokeping = {
     enable = true;
-    webService = true;
-    port = 8014;
+    port = 8015;
     targetConfig = ''
       probe = FPing
       menu = Top
@@ -99,5 +98,5 @@ in {
   };
 
   # The smokeping module didn't have an openFirewall option, so here it is
-  networking.firewall.allowedTCPPorts = [ config.services.smokeping.port ];
+  networking.firewall.allowedTCPPorts = [ 8015 ];
 }
