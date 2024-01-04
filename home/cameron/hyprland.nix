@@ -1,27 +1,14 @@
 { pkgs, config, ... }: rec {
-  # home.sessionVariables = {
-  #   XDG_CURRENT_DESKTOP = "Hyprland";
-  #   XDG_SESSION_DESKTOP = "Hyprland";
-  #   XDG_SESSION_TYPE = "wayland";
-  # };
-  #
-  # systemd.user.sessionVariables = home.sessionVariables;
-
-  # Must have the blueman service enabled on the system config to enable blueman-applet through this
-  # Also didn't actually work for me
-  # services.blueman-applet.enable = true;
-
-  # Some electron fixes to run on wayland
-  # BUG: One of these broke mullvad-gui
-  # xdg.configFile."electron25-flags.conf".text = ''
-  #   --enable-features=WaylandWindowDecorations
-  #   --ozone-platform-hint=auto
-  # '';
-  #
-  # xdg.configFile."electron13-flags.conf".text = ''
-  #   --enable-features=UseOzonePlatform
-  #   --ozone-platform=wayland
-  # '';
+  programs.wpaperd = {
+    enable = true;
+    settings = {
+      default = {
+        path = "/home/cameron/Wallpapers/";
+        duration = "30m";
+        apply-shadow = true;
+      };
+    };
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -41,10 +28,6 @@
         # QT uses these
          # "XCURSOR_SIZE,24"
         # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
-
-        # Electron stuff
-        # "NIXOS_OZONE_WL,1"
-        # "ELECTRON_OZONE_PLATFORM_HINT,wayland"
 
         # NVIDIA stuff
         # "WLR_NO_HARDWARE_CURSORS,1"
@@ -207,7 +190,7 @@
         # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         # "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 
-        "hyprpaper"
+        "wpaperd"
         "waybar"
         "blueman-applet"
         # "nm-applet --indicator" # started by nixos module
@@ -216,15 +199,16 @@
         "firefox"
         "~/github/nixdots/scripts/batterynotify"
         "kanshi"
-        # TODO: mullvad connect handled by itself? conflicts with tscale
-        "tailscale-systray"
         "swayidle -w timeout 600 '~/github/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
         # "gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Mocha-Mauve'"
         "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
         "kvantummanager --set Catppuccin-Mocha-Mauve"
+        # BUG: mullvad and tailscale networks conflict
+        # "tailscale-systray"
       ];
 
       # See https://wiki.hyprland.org/Configuring/Monitors/
+      # Handled by Kanshi now
       monitor = [
         # TODO: I need a better way to separate my home config for my laptop and my desktop
         # desktop
@@ -253,12 +237,12 @@
 
         # laptop setup
         "1, monitor:eDP-1, default:true, persistent:true"
-        # "2, monitor:DP-6, default:true, persistent:true"
-        # "3, monitor:DP-5, default:true, persistent:true"
-        # "2, monitor:DP-7, default:true, persistent:true"
-        # "3, monitor:DP-8, default:true, persistent:true"
-        "2, monitor:HP Inc. HP V24 1CR0440LFS, default:true, persistent:true"
-        "3, monitor:HP Inc. HP V214a CNC7160VL4, default:true, persistent:true"
+        "2, monitor:DP-5, default:true, persistent:true"
+        "3, monitor:DP-6, default:true, persistent:true"
+        "2, monitor:DP-7, default:true, persistent:true"
+        "3, monitor:DP-8, default:true, persistent:true"
+        # "2, monitor:HP Inc. HP V24 1CR0440LFS, default:true, persistent:true"
+        # "3, monitor:HP Inc. HP V214a CNC7160VL4, default:true, persistent:true"
       ];
 
       # xwayland = {
@@ -284,7 +268,7 @@
         # kb_rules =
 
         follow_mouse = true;
-        sensitivity = 1; # -1.0 - 1.0, 0 means no modification.
+        sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
         force_no_accel = true;
         touchpad.natural_scroll = true;
       };
@@ -329,6 +313,7 @@
         };
       };
 
+      # Not very documented, but enables blur under these gtk-layer-shell namespaces
       blurls = [
         "waybar"
       ];
@@ -347,6 +332,7 @@
       "device:logitech-m510".sensitivity = 1.0;
       "device:logitech-g203-prodigy-gaming-mouse".sensitivity = -0.2;
       "device:pixa3854:00-093a:0274-touchpad".sensitivity = 1.0;
+      "device:glorious-model-d".sensitivity = -0.5;
 
       animations = {
         enabled = "yes";
@@ -369,22 +355,26 @@
       };
 
       windowrulev2 = [
-        "float, title:notification"
-        "float, title:dialog"
-        "float, title:confirm"
-        "float, title:error"
-        "float, title:download"
-        "float, title:attention"
+        # "float, title:notification"
+        # "float, title:dialog"
+        # "float, title:confirm"
+        # "float, title:error"
+        # "float, title:download"
+        # "float, title:attention"
+        # "float, title:save"
         "float, title:^(Picture-in-Picture)$"
         "float, title:^(File Operation Progress)$"
         "float, title:^(Confirm to replace files)$"
         "float, title:^(Open folder as vault)$"
+        # "forcergbx, title:(Save)"
+        # "noblur, title:(Save)"
 
         # "float, class:^(org.kde.polkit-kde-authentication-agent-1)$"
         # "size 20% 20%, class:^(org.kde.polkit-kde-authentication-agent-1)$"
         # "center, class:^(org.kde.polkit-kde-authentication-agent-1)$"
 
-        "float, class:^(firefox), title:^(Extension: \(Bitwarden (-|—) Free Password Manager\) (-|—) Bitwarden (-|—) Mozilla Firefox)"
+        # "float, class:^(firefox), title:^(Extension: \(Bitwarden (-|—) Free Password Manager\) (-|—) Bitwarden (-|—) Mozilla Firefox)"
+        "float, title:^(Extension: \(Bitwarden)"
         "float, class:(pavucontrol|yad|nm-connection-editor|nm-applet|blueman-manager)"
         "float, class:(qt5ct|qt6ct|kvantummanager|nwg-look)"
 
@@ -404,15 +394,6 @@
       ];
     };
   };
-
-  xdg.configFile."hypr/hyprpaper.conf".text = ''
-    preload = ~/Wallpapers/pexels-felix-mittermeier-1329917.jpg
-
-    wallpaper = eDP-1,~/Wallpapers/pexels-felix-mittermeier-1329917.jpg
-    wallpaper = DP-5,~/Wallpapers/pexels-felix-mittermeier-1329917.jpg
-    wallpaper = DP-6,~/Wallpapers/pexels-felix-mittermeier-1329917.jpg
-    wallpaper = ,~/Wallpapers/pexels-felix-mittermeier-1329917.jpg
-  '';
 }
 
 

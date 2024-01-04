@@ -21,16 +21,13 @@
       intel-media-driver
       linux-firmware
       mesa
-      hyprpaper
       hyprpicker
       dunst
       cliphist
       wl-clipboard
       wtype
       qt6.qtwayland
-      wlogout
       brightnessctl
-      swayidle # idle daemon to trigger sleep, suspend, monitor off, lock
       libinput
       fusuma
       glib
@@ -38,7 +35,11 @@
       handlr
       trashy
       yad # dialog cli
+      kanshi
+
       waylock
+      swayidle # idle daemon to trigger sleep, suspend, monitor off, lock
+      wlogout
 
       wf-recorder # screen recording
       slurp # select region for screenshot

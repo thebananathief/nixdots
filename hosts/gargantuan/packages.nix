@@ -23,6 +23,7 @@ in {
     cmatrix
     go
     pre-commit
+    mcrcon # minecraft rcon client
 
     (python311.withPackages (ps:
       with ps; [
@@ -40,8 +41,11 @@ in {
     localsend
     jetbrains.idea-community
 
-    tailscale-systray
-    kanshi
+    wireguard-tools
+
+    # tailscale-systray
+    # trayscale
+    ktailctl
 
   ## Electron apps
     obsidian
@@ -49,6 +53,9 @@ in {
     bitwarden
     # wrapspotify
     spotify
+    libreoffice-qt
+    hunspell
+    hunspellDicts.en_US
 
     # thunderbird
     # parsec-bin
