@@ -63,4 +63,9 @@ in {
       ];
     };
   };
+
+  services.smokeping = {
+    enable = true;
+    port = 8014;
+  };
 }
