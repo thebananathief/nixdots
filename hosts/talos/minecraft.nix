@@ -11,10 +11,6 @@ let
   jvmOpts = "-Xms4G -Xmx6G";
   # jvmOpts = "-Xms4G -Xmx4G -XX:+UseG1GC -XX:+CMSIncrementalPacing -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=2 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10";
 
-  eulaFile = builtins.toFile "eula.txt" ''
-    # eula.txt managed by NixOS Configuration
-    eula=true
-  '';
   serverProperties = {
     motd = "The UPS Store";
     server-port = serverPort;
@@ -25,6 +21,11 @@ let
     "rcon.port" = rconPort;
     "rcon.password" = "stupidpassword";
   };
+  
+  eulaFile = builtins.toFile "eula.txt" ''
+    # eula.txt managed by NixOS Configuration
+    eula=true
+  '';
 
   cfgToString = v: if builtins.isBool v then boolToString v else toString v;
 
