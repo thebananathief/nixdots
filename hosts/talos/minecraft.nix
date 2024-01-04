@@ -1,7 +1,3 @@
-# This is a way to do a modded minecraft server, you still
-# have to go manually download and install the minecraft forge
-# installer. Then change some paths in here to make it work.
-
 { config, lib, pkgs, ... }:
 with lib;
 let
@@ -21,7 +17,7 @@ let
     "rcon.port" = rconPort;
     "rcon.password" = "stupidpassword";
   };
-  
+
   eulaFile = builtins.toFile "eula.txt" ''
     # eula.txt managed by NixOS Configuration
     eula=true
@@ -69,6 +65,11 @@ in {
     };
   };
 
+  # https://neoforged.net/
+  # wget https://maven.neoforged.net/releases/net/neoforged/forge/1.20.1-47.1.84/forge-1.20.1-47.1.84-installer.jar
+  # java -jar <installer jar> --installServer
+  # ./run.sh
+
   systemd.services.minecraft-ups = {
     enable = true;
     description = "Forge Minecraft Server";
@@ -79,8 +80,8 @@ in {
     after         = [ "network.target" "minecraft-ups.socket" ];
     serviceConfig = {
       WorkingDirectory = "${config.users.extraUsers.minecraft.home}";
-      ExecStart = "${pkgs.temurin-jre-bin-17}/bin/java ${jvmOpts} @libraries/net/minecraftforge/forge/1.20.1-47.2.19/unix_args.txt";
-      # ExecStart = "${pkgs.temurin-jre-bin-17}/bin/java ${jvmOpts}";
+      # ExecStart = "${pkgs.temurin-jre-bin-17}/bin/java ${jvmOpts} @libraries/net/minecraftforge/forge/1.20.1-47.2.19/unix_args.txt";
+      ExecStart = "./run.sh";
       ExecStop = "${stopScript} $MAINPID";
       Restart = "always";
       RestartSec = 60;
