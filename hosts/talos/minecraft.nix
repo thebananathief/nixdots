@@ -121,7 +121,7 @@ in {
       cp -f ${serverPropertiesFile} server.properties
 
       # Replace java in run.sh with the correct path
-      sed -i 's/java/${pkgs.temurin-jre-bin-17}/' run.sh
+      sed -i "s/java/${pkgs.temurin-jre-bin-17}/" run.sh
     '';
   };
 
