@@ -81,7 +81,7 @@ in {
     serviceConfig = {
       WorkingDirectory = "${config.users.extraUsers.minecraft.home}";
       # ExecStart = "${pkgs.temurin-jre-bin-17}/bin/java ${jvmOpts} @libraries/net/minecraftforge/forge/1.20.1-47.2.19/unix_args.txt";
-      ExecStart = "${config.users.extraUsers.minecraft.home}/run.sh";
+      ExecStart = "& ${config.users.extraUsers.minecraft.home}/run.sh";
       ExecStop = "${stopScript} $MAINPID";
       Restart = "always";
       RestartSec = 60;
