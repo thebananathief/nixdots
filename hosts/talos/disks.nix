@@ -102,7 +102,8 @@ in {
   # service that services.snapraid creates.
   # TODO: Here I used an inline read file command to get the secret from the file
   systemd.services.snapraid-sync.postStart = ''
-    ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${secrets.healthcheck_snapraid_uuid.path})
+    # ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${secrets.healthcheck_snapraid_uuid.path})
+    ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/f9152e38-9616-427f-92bc-d5b2a0cca5e3
   '';
 
   # TODO: Need to have disk SMART alerts sent to me over email
