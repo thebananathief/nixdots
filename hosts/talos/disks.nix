@@ -105,6 +105,16 @@ in {
     # ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${secrets.healthcheck_snapraid_uuid.path})
     ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/f9152e38-9616-427f-92bc-d5b2a0cca5e3
   '';
+  systemd.services.snapraid-sync.serviceConfig = {
+      # ProtectProc = "invisible";
+      # DeviceAllow = [ "" ];
+      # PrivateDevices = true;
+      # PrivateUsers = true;
+
+      ProtectSystem = false;
+      RestrictAddressFamilies = [ "AF_INET" "AF_INET6" ];
+      ProtectHome = true;
+  };
 
   # TODO: Need to have disk SMART alerts sent to me over email
   # Also reminders to buy drives
