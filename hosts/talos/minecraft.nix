@@ -4,9 +4,10 @@ let
   serverPort = 25565;
   rconPort = 25575;
 
+  forgeVersion = "1.20.1-47.1.84"; # This is used for downloads and filepaths, very important
+
   jvmOpts = "-Xms4G -Xmx6G";
   # jvmOpts = "-Xms4G -Xmx4G -XX:+UseG1GC -XX:+CMSIncrementalPacing -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=2 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10";
-  forgeVersion = "1.20.1-47.1.84"; # This is used for downloads and filepaths, very important
 
   serverProperties = {
     motd = "The UPS Store";
