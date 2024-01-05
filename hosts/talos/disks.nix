@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, lib, config, ... }:
 let
   inherit (config.sops) secrets;
 in {
@@ -111,9 +111,9 @@ in {
       # PrivateDevices = true;
       # PrivateUsers = true;
 
-      ProtectSystem = false;
-      RestrictAddressFamilies = [ "AF_INET" "AF_INET6" ];
-      ProtectHome = true;
+      ProtectSystem = lib.mkForce false;
+      RestrictAddressFamilies = lib.mkForce [ "AF_INET" "AF_INET6" ];
+      ProtectHome = lib.mkForce true;
   };
 
   # TODO: Need to have disk SMART alerts sent to me over email
