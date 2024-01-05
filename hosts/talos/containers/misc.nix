@@ -49,7 +49,7 @@ in {
         DB_PASSWORD = "${ secrets.mysql_password.path }";
         DB_HOST = "mysql";
         DB_PORT = "3306";
-        DB_NAME = "webtrees"; # TODO: migrate "general" to "webtrees" (db name)
+        DB_NAME = "webtrees";
         WT_ADMIN = "thebananathief";
         WT_ADMINMAIL = "${ secrets.email_address.path }";
         WT_ADMINPW = "${ secrets.webtrees_password.path }";

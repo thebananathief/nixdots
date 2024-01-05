@@ -19,6 +19,11 @@ let
     "rcon.password" = "stupidpassword";
   };
 
+  forgeInstaller = builtins.fetchurl {
+    url = "https://maven.neoforged.net/releases/net/neoforged/forge/${forgeVersion}/forge-${forgeVersion}-installer.jar";
+    sha256 = "14yakg9fdh7h7wwh6m53jw87gnh06fxg4bjsh5c31a8i8agzg73g";
+  };
+
   eulaFile = builtins.toFile "eula.txt" ''
     # eula.txt managed by NixOS Configuration
     eula=true
@@ -40,11 +45,6 @@ let
       sleep 1s
     done
   '';
-
-  forgeInstaller = builtins.fetchurl {
-    url = "https://maven.neoforged.net/releases/net/neoforged/forge/${forgeVersion}/forge-${forgeVersion}-installer.jar";
-    sha256 = "14yakg9fdh7h7wwh6m53jw87gnh06fxg4bjsh5c31a8i8agzg73g";
-  };
 in {
   users = {
     groups.minecraft = {};

@@ -98,9 +98,6 @@ By accessing this system, you agree that your actions may be monitored if unauth
     };
   };
 
-  users.groups.allowssh = {};
-
-  # TODO: Make sure to use passwd to change the password after logon!
   users.users."${username}" = {
     isNormalUser = true;
     hashedPasswordFile = config.sops.secrets.main_user_password.path;
