@@ -78,6 +78,7 @@
       # polkit-qt
       polkit-kde-agent
       qt5.qtwayland
+      dolphin
     ]);
   };
 

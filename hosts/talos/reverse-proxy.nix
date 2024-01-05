@@ -3,7 +3,6 @@ let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
 in {
-  # TODO: Verify SSL / TLS here
   # Allow traffic in through HTTP and HTTPS ports,
   # caddy will handle it afterwards.
   networking.firewall.enable = true;

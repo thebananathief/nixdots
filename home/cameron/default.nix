@@ -113,11 +113,22 @@
       };
     };
 
+    gtk3.extraCss = ''
+      .nautilus-list-view listview row { margin: 0px; padding: 0; }
+      .nautilus-list-view #NautilusViewCell { padding: 0px; }
+    '';
+    gtk4.extraCss = ''
+      .nautilus-list-view listview row { margin: 0px; padding: 0; }
+      .nautilus-list-view #NautilusViewCell { padding: 0px; }
+    '';
+
     # These are referenced by Thunar for the navigation tree
     gtk3.bookmarks = [
       "file:///home/cameron/github"
       "file:///home/cameron/MEGA"
       "file:///home/cameron/Pictures"
+      "file:///home/cameron/Downloads"
+      "file:///mnt/talos"
     ];
   };
 
