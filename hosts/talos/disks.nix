@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, lib, config, ... }:
 let
   inherit (config.sops) secrets;
 in {
@@ -93,17 +93,21 @@ in {
     ];
   };
 
+  # Add a healthcheck to make sure snapraid syncs every night
   sops.secrets.healthcheck_snapraid_uuid = {
     group = "users";
     mode = "0440";
   };
 
-  # This is my attempt to add a healthcheck ping to the snapraid-sync
-  # service that services.snapraid creates.
-  # TODO: Here I used an inline read file command to get the secret from the file
-  systemd.services.snapraid-sync.postStart = ''
-    ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${secrets.healthcheck_snapraid_uuid.path})
-  '';
+  systemd.services.snapraid-sync = {
+    postStart = ''
+      ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${secrets.healthcheck_snapraid_uuid.path})
+    '';
+    serviceConfig = {
+        # snapraid.nix module disables all address families, so we re-enable them here so that we can ping hc-ping.com
+        RestrictAddressFamilies = lib.mkForce [ "AF_INET" "AF_INET6" ];
+    };
+  };
 
   # TODO: Need to have disk SMART alerts sent to me over email
   # Also reminders to buy drives

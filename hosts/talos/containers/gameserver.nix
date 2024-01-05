@@ -43,7 +43,7 @@ in {
     #   volumes = [
     #     "${ cfg.gameserverDir }/pufferpanel/config:/etc/pufferpanel"
     #     "${ cfg.gameserverDir }/pufferpanel/data:/var/lib/pufferpanel"
-    #     "/var/run/docker.sock:/var/run/docker.sock" # TODO: migrate to podman socket
+    #     "/var/run/docker.sock:/var/run/docker.sock"
     #   ];
     #   # ports = [
     #   #   "8080:8080"
