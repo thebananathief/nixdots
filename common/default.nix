@@ -63,6 +63,7 @@
 
   environment.systemPackages = with pkgs; [
     git wget curl unzip killall
+    net-tools
     ethtool lm_sensors pciutils
     tmux neofetch bottom
     tailspin bat dua tree
@@ -71,7 +72,6 @@
 
     # intel-gpu-tools
     # dnsutils
-    # net-tools
     # iftop
     # iotop
     # fio
