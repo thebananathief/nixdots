@@ -63,7 +63,7 @@
 
   environment.systemPackages = with pkgs; [
     git wget curl unzip killall
-    net-tools
+    nettools
     ethtool lm_sensors pciutils
     tmux neofetch bottom
     tailspin bat dua tree
