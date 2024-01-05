@@ -141,7 +141,7 @@ By accessing this system, you agree that your actions may be monitored if unauth
       authKeyFile = config.sops.secrets.tailscale_authkey.path;
       # openFirewall = false; # opens port 41641
       extraUpFlags = [
-        # "--advertise-routes=192.168.0.0/24"
+        "--advertise-routes=192.168.0.0/24"
         # "--advertise-exit-node"
       ];
     };
