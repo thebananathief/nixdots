@@ -74,7 +74,7 @@
           inherit home-manager;
           system = "x86_64-linux";
           specialArgs = x64_specialArgs;
-          nixpkgs = nixpkgs;
+          # nixpkgs = nixpkgs;
         };
       in {
         gargantuan = nixosSystem ({
