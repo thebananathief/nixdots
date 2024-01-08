@@ -42,7 +42,7 @@
     # };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, ... }:
+  outputs = inputs @ { lib, self, nixpkgs, home-manager, sops-nix, ... }:
     let
       username = "cameron";
       useremail = "cameron.salomone@gmail.com";
@@ -61,12 +61,11 @@
 
       x64_specialArgs = {
         inherit username useremail globalFonts;
-        pkgs = import nixpkgs {
+        pkgs = import nixpkgs rec {
           inherit system;
           config.allowUnfree = true;
-          config.permittedInsecurePackages = [
-            "electron-25.9.0"
-          ];
+          config.permittedInsecurePackages =
+            pkgs.lib.optional (pkgs.obsidian.version == "1.4.16") "electron-25.9.0";
         };
       # The // inputs part here is us feeding in the inputs from this flake into the special args, the special args go into the different modules to be used further
       } // inputs;
