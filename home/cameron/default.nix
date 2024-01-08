@@ -14,7 +14,7 @@
     ./kanshi.nix
     ./hyprland.nix
     ./dunst.nix
-    ./vscode.nix
+    # ./vscode.nix
   ];
 
   home.username = "cameron";

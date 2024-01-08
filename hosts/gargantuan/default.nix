@@ -8,13 +8,14 @@
 }: {
   imports = [
     nixos-hardware.nixosModules.framework-11th-gen-intel
+    nixos-hardware.nixosModules.common-hidpi
+    sops-nix.nixosModules.sops
     ./hardware-configuration.nix
     ./packages.nix
     ./network-mount.nix
     ../../modules/games.nix
     # ./precommit.nix
     ../../modules/desktop
-    sops-nix.nixosModules.sops
   ];
 
   networking = {
@@ -101,7 +102,6 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-    extraPackages = with pkgs; [ intel-media-driver ];
   };
 
   system.stateVersion = "23.05";

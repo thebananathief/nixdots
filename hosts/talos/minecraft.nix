@@ -15,9 +15,9 @@ let
     difficulty = 3;
     gamemode = 0;
     max-players = 24;
-    enable-rcon = true;
+    enable-rcon = optional (rconPort != null) true;
     "rcon.port" = rconPort;
-    "rcon.password" = "stupidpassword";
+    "rcon.password" = "stupidpassword"; # TODO: obfuscate this if you care enough
   };
 
   forgeInstaller = builtins.fetchurl {

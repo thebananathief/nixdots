@@ -21,20 +21,21 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    anyrun = {
-      url = "github:Kirottu/anyrun";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    anyrun.url = "github:Kirottu/anyrun";
+    anyrun.inputs.nixpkgs.follows = "nixpkgs";
+
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
     spicetify-nix.url = "github:the-argus/spicetify-nix";
+
+    # Something like this if you want to move secrets to a completely private repo
     # mysecrets = {
     #   url = "git+ssh://git@github.com/thebananathief/nix-secrets.git?shallow=1";
     #   flake = false;
@@ -45,7 +46,7 @@
     let
       username = "cameron";
       useremail = "cameron.salomone@gmail.com";
-      
+
       globalFonts = {
         serif = "Noto Serif";
         monospace = "JetBrainsMono Nerd Font";
