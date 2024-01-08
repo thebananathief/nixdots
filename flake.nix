@@ -59,7 +59,7 @@
 
       system = "x86_64-linux";
 
-      x64_specialArgs = {
+      specialArgs = {
         inherit username useremail globalFonts;
         pkgs = import nixpkgs {
           inherit system;
@@ -71,12 +71,7 @@
       } // inputs;
     in {
       nixosConfigurations = let
-        base_args = {
-          inherit home-manager nixpkgs;
-          system = "x86_64-linux";
-          specialArgs = x64_specialArgs;
-          # nixpkgs = nixpkgs;
-        };
+        base_args = { inherit home-manager nixpkgs system specialArgs; };
       in {
         gargantuan = nixosSystem ({
           nixos-modules = [ ./hosts/gargantuan ];
