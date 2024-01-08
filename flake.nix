@@ -65,7 +65,7 @@
           inherit system;
           config.allowUnfree = true;
           config.permittedInsecurePackages =
-            pkgs.lib.optional (pkgs.obsidian.version == "1.4.16") "electron-25.9.0";
+            optional (pkgs.obsidian.version == "1.4.16") "electron-25.9.0";
         };
       # The // inputs part here is us feeding in the inputs from this flake into the special args, the special args go into the different modules to be used further
       } // inputs;
