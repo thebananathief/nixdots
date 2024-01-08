@@ -72,7 +72,7 @@
     in {
       nixosConfigurations = let
         base_args = {
-          inherit home-manager;
+          inherit home-manager nixpkgs;
           system = "x86_64-linux";
           specialArgs = x64_specialArgs;
           # nixpkgs = nixpkgs;
