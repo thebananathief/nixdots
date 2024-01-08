@@ -24,14 +24,13 @@ in {
     go
     pre-commit
     mcrcon # minecraft rcon client
+    wireguard-tools
 
     (python311.withPackages (ps:
       with ps; [
         ansible
     ]))
 
-
-  ## General desktop
     alacritty
     firefox
     # TODO: setup some flake shit to automatically log in and create the sync
@@ -40,8 +39,6 @@ in {
     spicetify-cli # Needs to be installed even with the flake
     localsend
     jetbrains.idea-community
-
-    wireguard-tools
 
     # tailscale-systray
     # trayscale
