@@ -40,10 +40,6 @@
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages =
-    pkgs.lib.optional (pkgs.obsidian.version == "1.4.16") "electron-25.9.0";
-
   # Set your time zone.
 #  services.ntp.enable = true;
   time.timeZone = "America/New_York";
