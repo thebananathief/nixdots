@@ -55,22 +55,22 @@
         sansSerif = "Noto Sans";
       };
 
-      nixosSystem = import ./lib/nixosSystem.nix;
-
+      pkgs = import <nixpkgs> {};
       system = "x86_64-linux";
-
+      nixosSystem = import ./lib/nixosSystem.nix;
       specialArgs = {
         inherit username useremail globalFonts;
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          config.permittedInsecurePackages = [ "electron-25.9.0" ];
-          # config.permittedInsecurePackages = config.lib.optional (pkgs.obsidian.version == "1.4.16") "electron-25.9.0";
+          # config.permittedInsecurePackages = [ "electron-25.9.0" ];
+          config.permittedInsecurePackages = pkgs.lib.optional (pkgs.obsidian.version == "1.4.16") "electron-25.9.0";
         };
       # The // inputs part here is us feeding in the inputs from this flake into the special args, the special args go into the different modules to be used further
       } // inputs;
     in {
       nixosConfigurations = let
+        # This feeds in everything we need at ./lib/nixosSystem.nix
         base_args = { inherit home-manager nixpkgs system specialArgs; };
       in {
         gargantuan = nixosSystem ({
@@ -81,12 +81,6 @@
         thoth = nixosSystem ({
           nixos-modules = [ ./hosts/thoth ];
           home-module = import ./home/cameron;
-        } // base_args);
-
-        # Testing environment VM
-        zelos = nixosSystem ({
-          nixos-modules = [ ./hosts/zelos ];
-          home-module = import ./home/server;
         } // base_args);
 
         talos = nixosSystem ({
