@@ -42,7 +42,7 @@
     # };
   };
 
-  outputs = inputs @ { self, nixpkgs, pkgs, home-manager, sops-nix, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, ... }:
     let
       username = "cameron";
       useremail = "cameron.salomone@gmail.com";
@@ -61,7 +61,7 @@
 
       x64_specialArgs = {
         inherit username useremail globalFonts;
-        pkgs = import nixpkgs rec {
+        pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
           config.permittedInsecurePackages =
