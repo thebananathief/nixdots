@@ -42,7 +42,7 @@
     # };
   };
 
-  outputs = inputs @ { lib, self, nixpkgs, home-manager, sops-nix, ... }:
+  outputs = inputs @ { self, nixpkgs, pkgs, home-manager, sops-nix, ... }:
     let
       username = "cameron";
       useremail = "cameron.salomone@gmail.com";
