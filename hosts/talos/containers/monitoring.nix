@@ -66,6 +66,7 @@ in {
 
   services.smokeping = {
     enable = true;
+    webService = true;
     port = 8015;
     targetConfig = ''
       probe = FPing
