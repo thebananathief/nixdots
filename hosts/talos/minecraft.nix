@@ -15,7 +15,7 @@ let
     difficulty = 3;
     gamemode = 0;
     max-players = 24;
-    enable-rcon = optional (rconPort != null) true;
+    enable-rcon = if (rconPort != null) then false else true;
     "rcon.port" = rconPort;
     "rcon.password" = "stupidpassword"; # TODO: obfuscate this if you care enough
   };
