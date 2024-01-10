@@ -62,9 +62,11 @@
   # enable location service
   # location.provider = "geoclue2";
 
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  hardware.bluetooth.package = pkgs.bluez;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    package = pkgs.bluez;
+  };
 
   # Enable sound with pipewire.
   sound.enable = true;
