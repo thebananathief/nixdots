@@ -24,10 +24,10 @@ in {
       #   reverse_proxy localhost:8013
       # '';
       # Filebrowser
-      # "files.${ config.networking.fqdn }".extraConfig = ''
-      #   reverse_proxy localhost:8009
-      # '';
-      # Static
+      "speedtest.${ config.networking.fqdn }".extraConfig = ''
+        reverse_proxy localhost:8016
+      '';
+      Static
       "files.${ config.networking.fqdn }".extraConfig = ''
         root * /mnt/storage/filebrowser
         file_server browse
