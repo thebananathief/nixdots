@@ -62,6 +62,16 @@ in {
         "--device=/dev/sdd"
       ];
     };
+    librespeed = {
+      image = "lscr.io/linuxserver/librespeed:latest"; # https://github.com/AnalogJ/scrutiny
+      volumes = [
+        "${ cfg.dataDir }/librespeed/config:/config"
+      ];
+      environment = {
+        PASSWORD = "PASSWORD";
+      } // cfg.common_env;
+      ports = [ "8016:80" ];
+    };
   };
 
   services.smokeping = {
