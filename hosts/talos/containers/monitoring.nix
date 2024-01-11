@@ -65,7 +65,7 @@ in {
     librespeed = {
       image = "lscr.io/linuxserver/librespeed:latest"; # https://github.com/AnalogJ/scrutiny
       volumes = [
-        "${ cfg.dataDir }/librespeed/config:/config"
+        "${ cfg.dataDir }/librespeed:/config"
       ];
       environment = {
         PASSWORD = "PASSWORD";
