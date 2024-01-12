@@ -17,7 +17,7 @@ in {
       openFirewall = true;
       user = "mediaserver";
       group = "mediaserver";
-      dataDir = "${ cfg.dataDir }/plex/Library/Application Support"
+      dataDir = "${ cfg.dataDir }/plex/Library/Application Support";
     };
     jellyfin = {
       enable = true;
