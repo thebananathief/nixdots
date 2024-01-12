@@ -4,7 +4,6 @@
     ./misc.nix
     ./database.nix
     ./gameserver.nix
-    ./mediaserver.nix
     ./monitoring.nix
   ];
 
