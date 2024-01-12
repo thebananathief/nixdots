@@ -9,8 +9,6 @@ in {
     group = "mediaserver";
     isSystemUser = true;
     description = "Mediaserver Service account";
-    # hashedPasswordFile = secrets.main_user_password.path;
-    password = "testpassword"; # TODO: obfuscate
   };
   
   services = {
@@ -19,7 +17,7 @@ in {
       openFirewall = true;
       user = "mediaserver";
       group = "mediaserver";
-      # TODO: Submit PR so that this module has the other's features
+      dataDir = "${ cfg.dataDir }/plex/Library/Application Support"
     };
     jellyfin = {
       enable = true;
@@ -135,17 +133,6 @@ in {
     #   extraOptions = [
     #     "--network=bridge"
     #   ];
-    # };
-    # overseerr = {
-    #   image = "lscr.io/linuxserver/overseerr:latest";
-    #   volumes = [
-    #     "${ cfg.dataDir }/overseerr:/config"
-    #   ];
-    #   ports = [ "8005:5055" ];
-    #   environment = cfg.common_env;
-    #   # extraOptions = [
-    #   #   "--network=public_access";
-    #   # ];
     # };
 
     # Media indexing, metadata and organizing, coordinating
