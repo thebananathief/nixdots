@@ -72,50 +72,50 @@ in {
       } // cfg.common_env;
       ports = [ "8016:80" ];
     };
-    # smokeping = {
-    #   image = "lscr.io/linuxserver/smokeping:latest"; # https://github.com/AnalogJ/scrutiny
-    #   volumes = [
-    #     "${ cfg.dataDir }/smokeping/config:/config"
-    #     "${ cfg.dataDir }/smokeping/data:/data"
-    #   ];
-    #   environment = cfg.common_env;
-    #   ports = [ "8015:80" ];
-    # };
+    smokeping = {
+      image = "lscr.io/linuxserver/smokeping:latest"; # https://github.com/AnalogJ/scrutiny
+      volumes = [
+        "${ cfg.dataDir }/smokeping/config:/config"
+        "${ cfg.dataDir }/smokeping/data:/data"
+      ];
+      environment = cfg.common_env;
+      ports = [ "8015:80" ];
+    };
   };
 
-  services.smokeping = {
-    enable = true;
-    webService = true;
-    port = 8015;
-    targetConfig = ''
-      probe = FPing
-      menu = Top
-      title = Network Latency Grapher
-      remark = TALOS SmokePing.
+  # services.smokeping = {
+  #   enable = true;
+  #   webService = true;
+  #   port = 8015;
+  #   targetConfig = ''
+  #     probe = FPing
+  #     menu = Top
+  #     title = Network Latency Grapher
+  #     remark = TALOS SmokePing.
       
-      + Global
-      menu = Global
-      title = Global services
+  #     + Global
+  #     menu = Global
+  #     title = Global services
 
-      ++ CloudFlare
-      host = www.cloudflare.com
+  #     ++ CloudFlare
+  #     host = www.cloudflare.com
       
-      ++ Google
-      host = www.google.com
+  #     ++ Google
+  #     host = www.google.com
 
-      + Local
-      menu = Local
-      title = Local Network
+  #     + Local
+  #     menu = Local
+  #     title = Local Network
 
-      ++ Styx
-      host = styx
+  #     ++ Styx
+  #     host = styx
 
-      ++ LocalMachine
-      menu = Local Machine
-      title = This host
-      host = localhost
-    '';
-  };
+  #     ++ LocalMachine
+  #     menu = Local Machine
+  #     title = This host
+  #     host = localhost
+  #   '';
+  # };
 
   # The smokeping module didn't have an openFirewall option, so here it is
   # networking.firewall.allowedTCPPorts = [ 8015 ];
