@@ -226,6 +226,8 @@ in {
     enable = true;
     # driSupport = true;
     # driSupport32Bit = true;
+    
+    # Some of these are required for hardware transcoding
     extraPackages = with pkgs; [
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
       vaapiIntel         # LIBVA_DRIVER_NAME=i965

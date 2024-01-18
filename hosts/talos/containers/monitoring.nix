@@ -72,6 +72,15 @@ in {
       } // cfg.common_env;
       ports = [ "8016:80" ];
     };
+    # smokeping = {
+    #   image = "lscr.io/linuxserver/smokeping:latest"; # https://github.com/AnalogJ/scrutiny
+    #   volumes = [
+    #     "${ cfg.dataDir }/smokeping/config:/config"
+    #     "${ cfg.dataDir }/smokeping/data:/data"
+    #   ];
+    #   environment = cfg.common_env;
+    #   ports = [ "8015:80" ];
+    # };
   };
 
   services.smokeping = {
@@ -109,5 +118,5 @@ in {
   };
 
   # The smokeping module didn't have an openFirewall option, so here it is
-  networking.firewall.allowedTCPPorts = [ 8015 ];
+  # networking.firewall.allowedTCPPorts = [ 8015 ];
 }
