@@ -24,9 +24,9 @@ in {
       #   reverse_proxy localhost:8013
       # '';
       # Librespeed
-      "speedtest.${ config.networking.fqdn }".extraConfig = ''
-        reverse_proxy localhost:8016
-      '';
+      # "speedtest.${ config.networking.fqdn }".extraConfig = ''
+      #   reverse_proxy localhost:8016
+      # '';
       # Static fileserver and interactive filebrowser
       "files.${ config.networking.fqdn }".extraConfig = ''
         root * /mnt/storage/filebrowser
@@ -36,6 +36,7 @@ in {
       "rss.${ config.networking.fqdn }".extraConfig = ''
         reverse_proxy localhost:8011
       '';
+      # Mumble?
       # matrix-conduit
       "chat.${ config.networking.fqdn }".extraConfig = ''
         reverse_proxy localhost:6167

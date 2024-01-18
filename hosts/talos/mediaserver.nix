@@ -185,7 +185,6 @@ in {
       environment = {
         VPN_SERVICE_PROVIDER = "mullvad";
         VPN_TYPE = "wireguard";
-        # WIREGUARD_PRIVATE_KEY = "$mullvad_privKey"; # For some reason this doesn't parse right
         WIREGUARD_ADDRESSES = "10.67.197.145/32";
         SERVER_COUNTRIES = "Switzerland";
         # OWNED_ONLY = "yes"; # Use if you want only servers owned by Mullvad
@@ -210,13 +209,8 @@ in {
         "${cfg.downloadDir}:/downloads:rw"
         # "${cfg.downloadDir}/watch:/watch" # TODO: Adjust this to a torrent blackhole
       ];
-      environment =
-        {
-          # WHITELIST = "192.168.0.0/24";
-          # TRANSMISSION_WEB_HOME = "";
-        }
-        // cfg.common_env;
-      # This uses the gluetun network stack so that its behind VPN
+      environment = cfg.common_env;
+      # This uses the gluetun network stack so that its behind mullvad VPN
       extraOptions = ["--network=container:gluetun"];
       dependsOn = ["gluetun"];
     };
