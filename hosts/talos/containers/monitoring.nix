@@ -83,6 +83,7 @@ in {
     };
   };
 
+  # Doesn't work atm
   # services.smokeping = {
   #   enable = true;
   #   webService = true;
@@ -116,6 +117,38 @@ in {
   #     host = localhost
   #   '';
   # };
+  
+  services = {
+    uptime-kuma = {
+      enable = true;
+      settings = {
+        PORT = "8017";
+      };
+    };
+    
+    # Log management services
+    # filebeat = {
+    #   enable = true;
+    #   inputs = {
+    #     journald.id = "everything";
+    #     log = {
+    #       enabled = true;
+    #       paths = [
+    #         "/var/log/*.log"
+    #       ];
+    #     };
+    #   };
+    #   settings.output.elasticsearch = {
+    #     hosts = [ "127.0.0.1:9200" ];
+    #     username = "";
+    #     password = { _secret = "/run/secrets/"; };
+    #   };
+    # };
+    #
+    # elasticsearch = {
+    #   enable = true;
+    # };
+  };
 
   # The smokeping module didn't have an openFirewall option, so here it is
   # networking.firewall.allowedTCPPorts = [ 8015 ];

@@ -119,6 +119,7 @@ By accessing this system, you agree that your actions may be monitored if unauth
   environment.systemPackages = with pkgs; [
     lazydocker
     intel-gpu-tools
+    lynis
   ];
 
   security.pam.enableSSHAgentAuth = true;
