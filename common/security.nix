@@ -44,8 +44,6 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-  networking.firewall.enable = true;
-
   # You are trusting SSH connections TO these hosts
   programs.ssh.knownHosts = {
     talos = {

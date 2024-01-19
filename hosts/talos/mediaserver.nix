@@ -14,23 +14,21 @@ in {
   services = {
     plex = {
       enable = true;
-      openFirewall = true;
+      # openFirewall = true;
       user = "mediaserver";
       group = "mediaserver";
       dataDir = "${ cfg.dataDir }/plex/Library/Application Support";
     };
     jellyfin = {
       enable = true;
-      openFirewall = true;
+      # openFirewall = true;
       user = "mediaserver";
       group = "mediaserver";
-      # TODO: Submit PR so that this module has the other's features
     };
     jellyseerr = {
       enable = true;
-      openFirewall = true;
+      # openFirewall = true;
       port = 8005;
-      # TODO: Submit PR so that this module has the other's features
     };
     # sonarr = {
     #   enable = true;
@@ -38,7 +36,6 @@ in {
     #   user = "mediaserver";
     #   group = "mediaserver";
     #   # dataDir = "/var/lib/sonarr/.config/NzbDrone";
-    #   # TODO: Submit PR so that this module has the other's features
     # };
     # radarr = {
     #   enable = true;
@@ -46,12 +43,10 @@ in {
     #   user = "mediaserver";
     #   group = "mediaserver";
     #   # dataDir = "/var/lib/radarr/.config/Radarr";
-    #   # TODO: Submit PR so that this module has the other's features
     # };
     # prowlarr = {
     #   enable = true;
     #   openFirewall = true;
-    #   # TODO: Submit PR so that this module has the other's features
     # };
   };
   

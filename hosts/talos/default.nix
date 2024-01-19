@@ -26,10 +26,7 @@
     hostName = "talos";
     domain = "host";
     wireless.enable = false; # Enables wireless support via wpa_supplicant.
-
-    firewall = {
-      enable = true;
-    };
+    firewall.enable = true;
   };
 
   boot.loader.systemd-boot = {

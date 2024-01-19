@@ -5,7 +5,6 @@ let
 in {
   # Allow traffic in through HTTP and HTTPS ports,
   # caddy will handle it afterwards.
-  networking.firewall.enable = true;
   networking.firewall.allowedTCPPorts = [ 80 443 ];
   services.caddy = {
     enable = true;
@@ -38,9 +37,9 @@ in {
       '';
       # Mumble?
       # matrix-conduit
-      "chat.${ config.networking.fqdn }".extraConfig = ''
-        reverse_proxy localhost:6167
-      '';
+      # "chat.${ config.networking.fqdn }".extraConfig = ''
+      #   reverse_proxy localhost:6167
+      # '';
     };
   };
 }
