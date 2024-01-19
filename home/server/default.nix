@@ -4,23 +4,30 @@
     ../cameron/git.nix
   ];
 
-  home.username = "cameron";
-  # home.homeDirectory = "/home/cameron";
+  home = {
+    username = "cameron";
+    # home.homeDirectory = "/home/cameron";
 
-  systemd.user.sessionVariables = {
-    # EDITOR = "nvim";
-    SHELL = "zsh";
-  };
+    shellAliases = {
+      dtail = "docker logs -tf --tail='50'";
+      dstop = "docker stop `docker ps -aq`";
+      drm = "docker rm `docker ps -aq`";
+      # dps = "docker ps --format 'table {{ '{{' }}.Names{{ '}}' }}\\t{{ '{{' }}.Ports{{ '}}' }}\\t{{ '{{' }}.Status{{ '}}' }}'";
+      appd = "cd /appdata";
+      stor = "cd /mnt/storage";
+    };
 
-  home.sessionVariables = systemd.user.sessionVariables;
-
-  home.shellAliases = {
-    dtail = "docker logs -tf --tail='50'";
-    dstop = "docker stop `docker ps -aq`";
-    drm = "docker rm `docker ps -aq`";
-    # dps = "docker ps --format 'table {{ '{{' }}.Names{{ '}}' }}\\t{{ '{{' }}.Ports{{ '}}' }}\\t{{ '{{' }}.Status{{ '}}' }}'";
-    appd = "cd /appdata";
-    stor = "cd /mnt/storage";
+    packages = with pkgs; [
+      lynis
+      at
+      lazydocker
+    ];
+    
+    # Think these might already be handled by config.programs.zsh/neovim (common)
+    # sessionVariables = {
+    #   EDITOR = "nvim";
+    #   SHELL = "zsh";
+    # };
   };
 
   # Install dotfiles repo and link configs
