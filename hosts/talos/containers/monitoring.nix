@@ -150,6 +150,7 @@ in {
     # };
   };
 
-  # The smokeping module didn't have an openFirewall option, so here it is
-  # networking.firewall.allowedTCPPorts = [ 8015 ];
+  networking.firewall.allowedTCPPorts = [
+    8017
+  ];
 }
