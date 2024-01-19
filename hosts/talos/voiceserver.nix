@@ -4,7 +4,7 @@ let
 in {
   sops.secrets = {
     "murmur.env" = {
-      user = "murmur";
+      group = "murmur";
       mode = "0400";
     };
   };
