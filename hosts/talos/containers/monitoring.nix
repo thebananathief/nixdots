@@ -130,7 +130,7 @@ in {
   };
 
   # Make the service use the docker group ACL, for the socket access
-  systemd.services.uptime-kuma.serviceConfig.Group = "docker";
+  # systemd.services.uptime-kuma.serviceConfig.Group = "docker";
     
   # networking.firewall.allowedTCPPorts = [
   #   8017
