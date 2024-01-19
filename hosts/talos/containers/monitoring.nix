@@ -121,9 +121,9 @@ in {
   services = {
     uptime-kuma = {
       enable = true;
-      settings = {
-        PORT = "8017";
-      };
+      # settings = {
+      #   PORT = "8017";
+      # };
     };
     
     # Log management services
@@ -151,6 +151,7 @@ in {
   };
 
   networking.firewall.allowedTCPPorts = [
+    3001
     8017
   ];
 }
