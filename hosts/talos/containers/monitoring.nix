@@ -73,7 +73,7 @@ in {
       ports = [ "8016:80" ];
     };
     smokeping = {
-      image = "lscr.io/linuxserver/smokeping:latest"; # https://github.com/AnalogJ/scrutiny
+      image = "lscr.io/linuxserver/smokeping:latest";
       volumes = [
         "${ cfg.dataDir }/smokeping/config:/config"
         "${ cfg.dataDir }/smokeping/data:/data"
@@ -83,10 +83,11 @@ in {
     };
   };
 
-  # Doesn't work atm
   # services.smokeping = {
   #   enable = true;
   #   webService = true;
+  # # By default its only listening from localhost:8081
+  #   host = null;
   #   port = 8015;
   #   targetConfig = ''
   #     probe = FPing
@@ -118,40 +119,43 @@ in {
   #   '';
   # };
   
-  services = {
-    uptime-kuma = {
-      enable = true;
-      settings = {
-        HOST = "0.0.0.0";
-        PORT = "8017";
-      };
+  # TODO: Put in a PR to improve this service config
+  services.uptime-kuma = {
+    enable = true;
+    settings = {
+      # By default its only listening from localhost:3001
+      HOST = "::";
+      PORT = "8017";
     };
-    
-    # Log management services
-    # filebeat = {
-    #   enable = true;
-    #   inputs = {
-    #     journald.id = "everything";
-    #     log = {
-    #       enabled = true;
-    #       paths = [
-    #         "/var/log/*.log"
-    #       ];
-    #     };
-    #   };
-    #   settings.output.elasticsearch = {
-    #     hosts = [ "127.0.0.1:9200" ];
-    #     username = "";
-    #     password = { _secret = "/run/secrets/"; };
-    #   };
-    # };
-    #
-    # elasticsearch = {
-    #   enable = true;
-    # };
   };
 
+  # Make the service use the docker group ACL, for the socket access
+  systemd.services.uptime-kuma.serviceConfig.Group = "docker";
+    
   networking.firewall.allowedTCPPorts = [
     8017
   ];
+  
+  # Log management services
+  # services.filebeat = {
+  #   enable = true;
+  #   inputs = {
+  #     journald.id = "everything";
+  #     log = {
+  #       enabled = true;
+  #       paths = [
+  #         "/var/log/*.log"
+  #       ];
+  #     };
+  #   };
+  #   settings.output.elasticsearch = {
+  #     hosts = [ "127.0.0.1:9200" ];
+  #     username = "";
+  #     password = { _secret = "/run/secrets/"; };
+  #   };
+  # };
+  #
+  # services.elasticsearch = {
+  #   enable = true;
+  # };
 }
