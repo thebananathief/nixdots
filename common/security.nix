@@ -42,6 +42,7 @@
   # };
   # boot.kernelModules = [ "tcp_bbr" ];
 
+  networking.firewall.enable = true;
   security.sudo.wheelNeedsPassword = false;
 
   # You are trusting SSH connections TO these hosts
