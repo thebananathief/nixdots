@@ -14,20 +14,20 @@ in {
   services = {
     plex = {
       enable = true;
-      # openFirewall = true;
+      openFirewall = true;
       user = "mediaserver";
       group = "mediaserver";
       dataDir = "${ cfg.dataDir }/plex/Library/Application Support";
     };
     jellyfin = {
       enable = true;
-      # openFirewall = true;
+      openFirewall = true;
       user = "mediaserver";
       group = "mediaserver";
     };
     jellyseerr = {
       enable = true;
-      # openFirewall = true;
+      openFirewall = true;
       port = 8005;
     };
     # sonarr = {
