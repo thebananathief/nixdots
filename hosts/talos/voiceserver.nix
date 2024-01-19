@@ -37,7 +37,7 @@ in {
       registerName = "The Shire";
       environmentFile = secrets."murmur.env".path;
       registerPassword = "$MURMUR_REGISTER_PASSWORD";
-      openFirewall = false;
+      openFirewall = true;
     };
   };
 }
