@@ -32,21 +32,18 @@ in {
     };
     # sonarr = {
     #   enable = true;
-    #   openFirewall = true;
     #   user = "mediaserver";
     #   group = "mediaserver";
     #   # dataDir = "/var/lib/sonarr/.config/NzbDrone";
     # };
     # radarr = {
     #   enable = true;
-    #   openFirewall = true;
     #   user = "mediaserver";
     #   group = "mediaserver";
     #   # dataDir = "/var/lib/radarr/.config/Radarr";
     # };
     # prowlarr = {
     #   enable = true;
-    #   openFirewall = true;
     # };
   };
   

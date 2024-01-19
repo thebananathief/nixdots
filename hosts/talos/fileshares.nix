@@ -50,20 +50,20 @@
         "inherit permissions" = "yes";
       };
     };
-    openFirewall = true;
+    openFirewall = false;
   };
 
-  networking.firewall = {
-    enable = true;
-    # TODO: Rate limit pings?
-    allowPing = true;
-    allowedTCPPorts = [
-      5357 # wsdd
-    ];
-    allowedUDPPorts = [
-      3702 # wsdd
-    ];
-  };
+  # networking.firewall = {
+  #   enable = true;
+  #   # TODO: Rate limit pings?
+  #   allowPing = true;
+  #   allowedTCPPorts = [
+  #     5357 # wsdd
+  #   ];
+  #   allowedUDPPorts = [
+  #     3702 # wsdd
+  #   ];
+  # };
 
   # Add a samba user with
   # sudo smbpasswd -a <user>
