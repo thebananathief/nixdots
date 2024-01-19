@@ -15,6 +15,9 @@ in {
       environment = {
         KF2_OPTS = "KF-BurningParis?Game=ZedternalReborn.WMGameInfo_Endless?difficulty=1";
       };
+      extraOptions = [
+        "--ip=172.17.0.7"
+      ];
     };
     # gmod = {
     #   volumes = [ "${ cfg.gameserverDir }/gmod-darkrp:/home/gmod/server/garrysmod" ];
