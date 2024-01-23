@@ -2,6 +2,11 @@
 let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
+  mediaserver_env = {
+    PUID = "989"; # mediaserver
+    PGID = "131"; # docker
+    TZ = config.time.timeZone;
+  };
 in {
   users.groups.mediaserver = {};
   users.users.mediaserver = {
@@ -106,7 +111,7 @@ in {
         "${cfg.dataDir}/requestrr:/config"
       ];
       ports = ["8006:4545"];
-      environment = cfg.common_env;
+      environment = mediaserver_env;
       extraOptions = [
         "--network=media"
       ];
@@ -134,7 +139,7 @@ in {
         "${cfg.dataDir}/prowlarr:/config"
       ];
       ports = ["8002:9696"];
-      environment = cfg.common_env;
+      environment = mediaserver_env;
       extraOptions = [
         "--network=media"
       ];
@@ -146,7 +151,7 @@ in {
         "${cfg.storageDir}:/storage"
       ];
       ports = ["8003:7878"];
-      environment = cfg.common_env;
+      environment = mediaserver_env;
       extraOptions = [
         "--network=media"
       ];
@@ -158,7 +163,7 @@ in {
         "${cfg.storageDir}:/storage"
       ];
       ports = ["8004:8989"];
-      environment = cfg.common_env;
+      environment = mediaserver_env;
       extraOptions = [
         "--network=media"
       ];
@@ -201,7 +206,7 @@ in {
         "${cfg.downloadDir}:/downloads:rw"
         # "${cfg.downloadDir}/watch:/watch" # TODO: Adjust this to a torrent blackhole
       ];
-      environment = cfg.common_env;
+      environment = mediaserver_env;
       # This uses the gluetun network stack so that its behind mullvad VPN
       extraOptions = ["--network=container:gluetun"];
       dependsOn = ["gluetun"];
