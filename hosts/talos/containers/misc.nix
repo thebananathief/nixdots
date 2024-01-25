@@ -56,8 +56,10 @@ in {
         GROUP_ID = "${ cfg.common_env.PGID }";
         PORT = "8013";
         DISABLE_SSL = "TRUE";
-        PRETTYURLS = "TRUE";
-        BASE_URL = "https://tree.${ config.networking.fqdn }";
+        # PrettyURLs require filling out Base URL
+        PRETTYURLS = "FALSE";
+        # PRETTYURLS = "TRUE";
+        # BASE_URL = "https://tree.${ config.networking.fqdn }";
       };
       dependsOn = [ "mysql" ];
       extraOptions = [
