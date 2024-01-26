@@ -36,6 +36,10 @@ in {
       "rss.${ config.networking.fqdn }".extraConfig = ''
         reverse_proxy localhost:8011
       '';
+      # Audiobookshelf
+      "books.${ config.networking.fqdn }".extraConfig = ''
+        reverse_proxy localhost:8009
+      '';
       # Mumble?
       # matrix-conduit
       # "chat.${ config.networking.fqdn }".extraConfig = ''

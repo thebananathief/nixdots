@@ -57,7 +57,9 @@ in {
         PORT = "8013";
         DISABLE_SSL = "TRUE";
         # PrettyURLs require filling out Base URL
+        # This container is weird and sets these IF they're in here, so go check the actual configs to ensure values
         PRETTYURLS = "FALSE";
+        BASE_URL = "";
         # PRETTYURLS = "TRUE";
         # BASE_URL = "https://tree.${ config.networking.fqdn }";
       };

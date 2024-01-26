@@ -35,6 +35,13 @@ in {
       openFirewall = true;
       port = 8005;
     };
+    audiobookshelf = {
+      enable = true;
+      host = "0.0.0.0";
+      user = "mediaserver";
+      group = "mediaserver";
+      port = 8009;
+    };
     # sonarr = {
     #   enable = true;
     #   user = "mediaserver";
