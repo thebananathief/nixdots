@@ -18,6 +18,7 @@
     ./containers
     ./minecraft.nix
     ./mediaserver.nix
+    ./gitea.nix
     ./voiceserver.nix
     ./reverse-proxy.nix
   ];
