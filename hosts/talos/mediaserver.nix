@@ -147,7 +147,7 @@ in {
       ];
       ports = ["8002:9696"];
       environment = mediaserver_env;
-      user = "mediaserver:docker";
+      user = "989:131";
       extraOptions = [
         "--network=media"
       ];
@@ -160,7 +160,7 @@ in {
       ];
       ports = ["8003:7878"];
       environment = mediaserver_env;
-      user = "mediaserver:docker";
+      user = "989:131";
       extraOptions = [
         "--network=media"
       ];
@@ -173,7 +173,7 @@ in {
       ];
       ports = ["8004:8989"];
       environment = mediaserver_env;
-      user = "mediaserver:docker";
+      user = "989:131";
       extraOptions = [
         "--network=media"
       ];
@@ -217,7 +217,7 @@ in {
         # "${cfg.downloadDir}/watch:/watch" # TODO: Adjust this to a torrent blackhole
       ];
       environment = mediaserver_env;
-      user = "mediaserver:docker";
+      user = "989:131";
       # This uses the gluetun network stack so that its behind mullvad VPN
       extraOptions = ["--network=container:gluetun"];
       dependsOn = ["gluetun"];
