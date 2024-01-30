@@ -9,9 +9,9 @@
         HTTP_ADDR = "0.0.0.0"; # listen on details
         HTTP_PORT = "3000";
       };
-      user = "gitea";
-      group = "gitea";
-      lfs.enable = true;
      };
+    user = "gitea";
+    group = "gitea";
+    lfs.enable = true;
   };
 }
