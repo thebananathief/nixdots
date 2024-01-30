@@ -140,6 +140,16 @@ in {
     # };
 
     # Media indexing, metadata and organizing, coordinating
+    flaresolverr = {
+      image = "ghcr.io/flaresolverr/flaresolverr:latest";
+      ports = ["8191:8191"];
+      environment = {
+        LOG_LEVEL = "info";
+      };
+      extraOptions = [
+        "--network=media"
+      ];
+    };
     prowlarr = {
       image = "lscr.io/linuxserver/prowlarr:latest";
       volumes = [
