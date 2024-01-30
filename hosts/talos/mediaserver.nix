@@ -163,7 +163,6 @@ in {
         PGID = "131"; # docker
         TZ = config.time.timeZone;
       };
-      user = "989:131";
       extraOptions = [
         "--network=media"
       ];
@@ -180,7 +179,6 @@ in {
         PGID = "131"; # docker
         TZ = config.time.timeZone;
       };
-      user = "989:131";
       extraOptions = [
         "--network=media"
       ];
@@ -228,7 +226,6 @@ in {
         PGID = "131"; # docker
         TZ = config.time.timeZone;
       };
-      user = "989:131";
       # This uses the gluetun network stack so that its behind mullvad VPN
       extraOptions = ["--network=container:gluetun"];
       dependsOn = ["gluetun"];
