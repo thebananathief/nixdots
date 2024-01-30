@@ -115,7 +115,6 @@ By accessing this system, you agree that your actions may be monitored if unauth
 
   environment.systemPackages = with pkgs; [
     intel-gpu-tools
-    sysstat
   ];
 
   security.pam.enableSSHAgentAuth = true;
