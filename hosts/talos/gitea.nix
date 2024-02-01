@@ -16,7 +16,7 @@ in {
   #     };
   #   };
   # };
-  virtualization.oci-containers.containers = {
+  virtualisation.oci-containers.containers = {
     gitea = {
       image = "gitea/gitea:latest-rootless";
       volumes = [
