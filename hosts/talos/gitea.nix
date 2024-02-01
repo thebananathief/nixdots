@@ -1,4 +1,7 @@
-{ ... }:
+{ config, ... }:
+let
+  cfg = config.myOptions.containers;
+in {
 {
   # services.gitea = {
   #   enable = true;
