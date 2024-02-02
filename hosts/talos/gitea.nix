@@ -16,6 +16,8 @@ in {
   #     };
   #   };
   # };
+  
+  # should work with podman too
   virtualisation.oci-containers.containers = {
     gitea = {
       image = "gitea/gitea:latest-rootless";
