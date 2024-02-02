@@ -25,7 +25,7 @@
 
   networking = {
     hostName = "talos";
-    domain = builtins.readFile /run/secrets/domain; # "host";
+    domain = "host";
     wireless.enable = false; # Enables wireless support via wpa_supplicant.
     firewall.enable = true;
   };
