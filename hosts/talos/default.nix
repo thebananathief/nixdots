@@ -25,7 +25,7 @@
 
   networking = {
     hostName = "talos";
-    domain = "host";
+    domain = builtins.readFile /run/secrets/domain; # "host";
     wireless.enable = false; # Enables wireless support via wpa_supplicant.
     firewall.enable = true;
   };
@@ -92,6 +92,7 @@ By accessing this system, you agree that your actions may be monitored if unauth
       discord_webhook_token = {};
       cloudflare_api = {};
       ssh_github = {};
+      domain = {};
     };
   };
 

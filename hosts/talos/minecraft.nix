@@ -16,9 +16,9 @@ let
     difficulty = 3;
     gamemode = 0;
     max-players = 24;
-    enable-rcon = if (rconPort != null) then false else true;
+    enable-rcon = false;
     "rcon.port" = rconPort;
-    "rcon.password" = "stupidpassword"; # TODO: obfuscate this if you care enough
+    "rcon.password" = "stupidpassword";
   };
 
   # https://neoforged.net/
@@ -143,8 +143,8 @@ in {
 
   networking.firewall = {
     allowedUDPPorts = [ serverPort ];
-    allowedTCPPorts = [ serverPort ]
-      ++ optional (rconPort != null) rconPort;
+    allowedTCPPorts = [ serverPort ];
+      # ++ optional (rconPort != null) rconPort;
   };
 
   # services = {
