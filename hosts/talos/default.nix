@@ -116,7 +116,7 @@ By accessing this system, you agree that your actions may be monitored if unauth
 
   environment.systemPackages = with pkgs; [
     intel-gpu-tools # intel_gpu_top
-    nvtop-intel # nvtop
+    nvtop
   ];
 
   security.pam.enableSSHAgentAuth = true;
