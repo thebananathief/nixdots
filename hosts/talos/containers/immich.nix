@@ -12,6 +12,9 @@ let
     REDIS_HOSTNAME = "immich-redis";
   };
 in {
+  systemd.services.docker-immich-server.postStart = ''
+    docker network connect bridge immich-server
+  '';
   virtualisation.oci-containers.containers = {
     immich-server = { 
       image = "ghcr.io/immich-app/immich-server:${immich_env.IMMICH_VERSION}";
