@@ -30,7 +30,7 @@ in {
       extraOptions = [
         "--network=immich"
       ];
-      user = "cameron:docker";
+      user = "1000:131";
     };
     immich-microservices = { 
       image = "ghcr.io/immich-app/immich-server:${immich_env.IMMICH_VERSION}";
@@ -63,7 +63,7 @@ in {
         "--device-cgroup-rule"
         "c 189:* rmw"
       ];
-      user = "cameron:docker";
+      user = "1000:131";
     };
     immich-postgres = {
       image = "tensorchord/pgvecto-rs:pg14-v0.1.11@sha256:0335a1a22f8c5dd1b697f14f079934f5152eaaa216c09b61e293be285491f8ee";
