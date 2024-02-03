@@ -24,10 +24,8 @@ in {
       ports = [ "3001:3001" ];
       dependsOn = [ "immich-postgres" "immich-redis" ];
       extraOptions = [
-        "--network"
-        "immich"
-        "--network"
-        "public"
+        "--network=immich"
+        # MUST run a docker network connect bridge immich-server
       ];
     };
     immich-microservices = { 
