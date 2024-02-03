@@ -51,7 +51,8 @@ in {
       extraOptions = [
         "--network=database_immich"
         "--device=/dev/dri:/dev/dri"
-        "--device-cgroup-rule='c 189:* rmw'"
+        "--device-cgroup-rule"
+        "c 189:* rmw"
       ];
     };
     immich-postgres = {
