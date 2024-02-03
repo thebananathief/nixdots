@@ -13,7 +13,7 @@ in {
         DB_PASSWORD = "${secrets.postgres_password.path}";
         DB_DATABASE_NAME = "immich";
         REDIS_HOSTNAME = "redis";
-        DB_PORT = "5433";
+        DB_PORT = "5432";
         REDIS_PORT = "6379";
         # REDIS_PASSWORD = ;
         # MACHINE_LEARNING_GPU_ACCELERATION = "openvino";
@@ -37,7 +37,7 @@ in {
       volumes = [
         "${ cfg.dataDir }/immich/data/:/var/lib/postgresql/data" 
       ];
-      ports = [ "5433:5432" ]; # running a postgres13 on 5432
+      # ports = [ "5433:5432" ]; # running a postgres13 on 5432
       environment = {
         POSTGRES_USER = "${config.virtualisation.oci-containers.containers.immich.environment.DB_USERNAME}";
         POSTGRES_PASSWORD = "${secrets.postgres_password.path}";
