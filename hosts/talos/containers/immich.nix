@@ -12,9 +12,6 @@ let
     REDIS_HOSTNAME = "immich-redis";
   };
 in {
-  systemd.services.docker-immich-server.postStart = ''
-    docker network connect bridge immich-server
-  '';
   virtualisation.oci-containers.containers = {
     immich-server = { 
       image = "ghcr.io/immich-app/immich-server:${immich_env.IMMICH_VERSION}";
@@ -28,7 +25,6 @@ in {
       dependsOn = [ "immich-postgres" "immich-redis" ];
       extraOptions = [
         "--network=immich"
-        # MUST run a docker network connect bridge immich-server
       ];
     };
     immich-microservices = { 
