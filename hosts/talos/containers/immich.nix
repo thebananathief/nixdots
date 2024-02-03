@@ -21,7 +21,7 @@ in {
         "${immich_env.UPLOAD_LOCATION}:/usr/src/app/upload"
         "/etc/localtime:/etc/localtime:ro"
       ];
-      ports = [ "8014:3001" ];
+      ports = [ "3001:3001" ];
       dependsOn = [ "immich-postgres" "immich-redis" ];
       extraOptions = [
         "--network=database_immich"
