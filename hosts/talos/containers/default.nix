@@ -5,6 +5,7 @@
     ./database.nix
     ./gameserver.nix
     ./monitoring.nix
+    ./immich.nix
   ];
 
   # Set the user and group ID in the environment, some containers will pull it
