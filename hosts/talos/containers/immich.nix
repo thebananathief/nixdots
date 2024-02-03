@@ -19,9 +19,9 @@ in {
       cmd = [ "start.sh" "immich" ];
       environment = immich_env // cfg.common_env;
       volumes = [
-        # "${immich_env.mediaDir}:/usr/src/app/upload"
-        "${immich_env.mediaDir}:/usr/src/app/upload/library"
-        "${immich_env.mediaDir}/thumbs:/usr/src/app/upload/thumbs"
+        "${immich_env.mediaDir}:/usr/src/app/upload"
+        # "${immich_env.mediaDir}:/usr/src/app/upload/library"
+        # "${immich_env.mediaDir}/thumbs:/usr/src/app/upload/thumbs"
         "${cfg.dataDir}/immich/upload:/usr/src/app/upload/upload"
         "/etc/localtime:/etc/localtime:ro"
       ];
@@ -30,16 +30,15 @@ in {
       extraOptions = [
         "--network=immich"
       ];
-      user = "1000:131";
     };
     immich-microservices = { 
       image = "ghcr.io/immich-app/immich-server:${immich_env.IMMICH_VERSION}";
       cmd = [ "start.sh" "microservices" ];
       environment = immich_env // cfg.common_env;
       volumes = [
-        # "${immich_env.mediaDir}:/usr/src/app/upload"
-        "${immich_env.mediaDir}:/usr/src/app/upload/library"
-        "${immich_env.mediaDir}/thumbs:/usr/src/app/upload/thumbs"
+        "${immich_env.mediaDir}:/usr/src/app/upload"
+        # "${immich_env.mediaDir}:/usr/src/app/upload/library"
+        # "${immich_env.mediaDir}/thumbs:/usr/src/app/upload/thumbs"
         "${cfg.dataDir}/immich/upload:/usr/src/app/upload/upload"
         "/etc/localtime:/etc/localtime:ro"
       ];
@@ -48,7 +47,6 @@ in {
         "--network=immich"
         "--device=/dev/dri:/dev/dri"
       ];
-      user = "1000:131";
     };
     immich-ml = { 
       image = "ghcr.io/immich-app/immich-machine-learning:${immich_env.IMMICH_VERSION}-openvino";
@@ -63,7 +61,6 @@ in {
         "--device-cgroup-rule"
         "c 189:* rmw"
       ];
-      user = "1000:131";
     };
     immich-postgres = {
       image = "tensorchord/pgvecto-rs:pg14-v0.1.11@sha256:0335a1a22f8c5dd1b697f14f079934f5152eaaa216c09b61e293be285491f8ee";
