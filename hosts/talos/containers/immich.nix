@@ -9,7 +9,7 @@ let
     DB_PASSWORD = "${secrets.postgres_password.path}";
     DB_DATABASE_NAME = "immich";
     DB_HOSTNAME = "immich-postgres";
-    REDIS_HOSTNAME = "immich-redis"
+    REDIS_HOSTNAME = "immich-redis";
   };
 in {
   virtualisation.oci-containers.containers = {
