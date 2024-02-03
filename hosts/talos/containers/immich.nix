@@ -19,7 +19,7 @@ in {
         MACHINE_LEARNING_GPU_ACCELERATION = "openvino";
         MACHINE_LEARNING_WORKERS = 1;
         MACHINE_LEARNING_WORKER_TIMEOUT = 120;
-      } // mediaserver_env;
+      } // cfg.common_env;
       volumes = [
         "${cfg.dataDir}/immich/config:/config"
         "${cfg.storageDir}/storage/media/pictures+videos:/photos"
