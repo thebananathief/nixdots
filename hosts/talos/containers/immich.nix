@@ -18,7 +18,7 @@ in {
       cmd = [ "start.sh" "immich" ];
       environment = immich_env // cfg.common_env;
       volumes = [
-        "${cfg.UPLOAD_LOCATION}:/usr/src/app/upload"
+        "${immich_env.UPLOAD_LOCATION}:/usr/src/app/upload"
         "/etc/localtime:/etc/localtime:ro"
       ];
       ports = [ "8014:3001" ];
@@ -32,7 +32,7 @@ in {
       cmd = [ "start.sh" "microservices" ];
       environment = immich_env // cfg.common_env;
       volumes = [
-        "${cfg.UPLOAD_LOCATION}:/usr/src/app/upload"
+        "${immich_env.UPLOAD_LOCATION}:/usr/src/app/upload"
         "/etc/localtime:/etc/localtime:ro"
       ];
       dependsOn = [ "immich-postgres" "immich-redis" ];
