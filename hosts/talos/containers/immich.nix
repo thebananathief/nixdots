@@ -23,10 +23,10 @@ in {
       ];
       ports = [ "3001:3001" ];
       dependsOn = [ "immich-postgres" "immich-redis" ];
-      extraOptions = [
-        "--network=database_immich"
-        "--network=public_access"
-      ];
+      # extraOptions = [
+      #   "--network=database_immich"
+      #   "--network=public_access"
+      # ];
     };
     immich-microservices = { 
       image = "ghcr.io/immich-app/immich-server:${immich_env.IMMICH_VERSION}";
@@ -37,10 +37,10 @@ in {
         "/etc/localtime:/etc/localtime:ro"
       ];
       dependsOn = [ "immich-postgres" "immich-redis" ];
-      extraOptions = [
-        "--network=database_immich"
-        "--device=/dev/dri:/dev/dri"
-      ];
+      # extraOptions = [
+      #   "--network=database_immich"
+      #   "--device=/dev/dri:/dev/dri"
+      # ];
     };
     immich-ml = { 
       image = "ghcr.io/immich-app/immich-machine-learning:${immich_env.IMMICH_VERSION}-openvino";
@@ -50,7 +50,7 @@ in {
         "/dev/bus/usb:/dev/bus/usb"
       ];
       extraOptions = [
-        "--network=database_immich"
+        # "--network=database_immich"
         "--device=/dev/dri:/dev/dri"
         "--device-cgroup-rule"
         "c 189:* rmw"
@@ -67,12 +67,12 @@ in {
         POSTGRES_PASSWORD = "${immich_env.DB_PASSWORD}";
         POSTGRES_DB = "${immich_env.DB_DATABASE_NAME}";
       };
-      extraOptions = [ "--network=database_immich" ];
+      # extraOptions = [ "--network=database_immich" ];
     };
     immich-redis = {
       image = "redis:6.2-alpine@sha256:afb290a0a0d0b2bd7537b62ebff1eb84d045c757c1c31ca2ca48c79536c0de82";
       # ports = [ "6379:6379" ];
-      extraOptions = [ "--network=database_immich" ];
+      # extraOptions = [ "--network=database_immich" ];
     };
   };
 }
