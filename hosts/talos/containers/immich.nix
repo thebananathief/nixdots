@@ -2,9 +2,12 @@
 let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
-  immich_env = {
+  immich_env = rec {
     IMMICH_VERSION = "release";
-    UPLOAD_LOCATION = "${cfg.storageDir}/media/family/pictures+videos";
+    mediaDir = "${cfg.storageDir}/media/family/pictures+videos";
+    uploadDir = "${immich_env.mediaDir}/upload";
+    UPLOAD_LOCATION = "./library";
+    IMMICH_MEDIA_LOCATION = "./upload";
     DB_USERNAME = "immich";
     DB_PASSWORD = "${secrets.postgres_password.path}";
     DB_DATABASE_NAME = "immich";
@@ -18,7 +21,7 @@ in {
       cmd = [ "start.sh" "immich" ];
       environment = immich_env // cfg.common_env;
       volumes = [
-        "${immich_env.UPLOAD_LOCATION}:/usr/src/app/upload"
+        "${immich_env.uploadDir}:/usr/src/app/upload"
         "/etc/localtime:/etc/localtime:ro"
       ];
       ports = [ "8014:3001" ];
@@ -32,7 +35,7 @@ in {
       cmd = [ "start.sh" "microservices" ];
       environment = immich_env // cfg.common_env;
       volumes = [
-        "${immich_env.UPLOAD_LOCATION}:/usr/src/app/upload"
+        "${immich_env.uploadDir}:/usr/src/app/upload"
         "/etc/localtime:/etc/localtime:ro"
       ];
       dependsOn = [ "immich-postgres" "immich-redis" ];
