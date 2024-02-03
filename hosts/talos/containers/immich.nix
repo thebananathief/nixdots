@@ -13,12 +13,12 @@ in {
         DB_PASSWORD = "${secrets.postgres_password.path}";
         DB_DATABASE_NAME = "immich";
         REDIS_HOSTNAME = "redis";
-        DB_PORT = 5433;
-        REDIS_PORT = 6379;
+        DB_PORT = "5433";
+        REDIS_PORT = "6379";
         # REDIS_PASSWORD = ;
         MACHINE_LEARNING_GPU_ACCELERATION = "openvino";
-        MACHINE_LEARNING_WORKERS = 1;
-        MACHINE_LEARNING_WORKER_TIMEOUT = 120;
+        MACHINE_LEARNING_WORKERS = "1";
+        MACHINE_LEARNING_WORKER_TIMEOUT = "120";
       } // cfg.common_env;
       volumes = [
         "${cfg.dataDir}/immich/config:/config"
