@@ -48,7 +48,7 @@ in {
         "--network=immich"
         "--device=/dev/dri:/dev/dri"
       ];
-      user = "cameron:docker";
+      user = "1000:131";
     };
     immich-ml = { 
       image = "ghcr.io/immich-app/immich-machine-learning:${immich_env.IMMICH_VERSION}-openvino";
