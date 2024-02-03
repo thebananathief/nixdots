@@ -3,7 +3,7 @@ let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
   immich_env = {
-    IMMICH_VERSION = "what";
+    IMMICH_VERSION = "release";
     UPLOAD_LOCATION = "${cfg.storageDir}/media/family/pictures+videos";
     DB_USERNAME = "immich";
     DB_PASSWORD = "${secrets.postgres_password.path}";
@@ -14,7 +14,7 @@ let
 in {
   virtualisation.oci-containers.containers = {
     immich-server = { 
-      image = "ghcr.io/immich-app/immich-server:${immich_env.IMMICH_VERSION}-release";
+      image = "ghcr.io/immich-app/immich-server:${immich_env.IMMICH_VERSION}";
       cmd = [ "start.sh" "immich" ];
       environment = immich_env // cfg.common_env;
       volumes = [
@@ -28,7 +28,7 @@ in {
       ];
     };
     immich-microservices = { 
-      image = "ghcr.io/immich-app/immich-server:${immich_env.IMMICH_VERSION}-release";
+      image = "ghcr.io/immich-app/immich-server:${immich_env.IMMICH_VERSION}";
       cmd = [ "start.sh" "microservices" ];
       environment = immich_env // cfg.common_env;
       volumes = [
@@ -42,7 +42,7 @@ in {
       ];
     };
     immich-ml = { 
-      image = "ghcr.io/immich-app/immich-machine-learning:${immich_env.IMMICH_VERSION}-release-openvino";
+      image = "ghcr.io/immich-app/immich-machine-learning:${immich_env.IMMICH_VERSION}-openvino";
       environment = immich_env // cfg.common_env;
       volumes = [
         "${cfg.dataDir}/immich/modelcache:/cache"
