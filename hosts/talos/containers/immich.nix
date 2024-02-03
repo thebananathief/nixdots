@@ -37,7 +37,7 @@ in {
       volumes = [
         "${ cfg.dataDir }/immich/data/:/var/lib/postgresql/data" 
       ];
-      # ports = [ "5433:5432" ]; # running a postgres13 on 5432
+      ports = [ "5433:5432" ]; # running a postgres13 on 5432
       environment = {
         POSTGRES_USER = "${config.virtualisation.oci-containers.containers.immich.environment.DB_USERNAME}";
         POSTGRES_PASSWORD = "${secrets.postgres_password.path}";
