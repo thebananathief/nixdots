@@ -25,6 +25,7 @@ in {
       dependsOn = [ "immich-postgres" "immich-redis" ];
       extraOptions = [
         "--network=database_immich"
+        "--network=public_access"
       ];
     };
     immich-microservices = { 
