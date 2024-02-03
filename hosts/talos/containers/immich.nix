@@ -28,7 +28,7 @@ in {
       ports = [ "8014:8080" ];
       extraOptions = [
         "--network=database_immich"
-        "--device-cgroup-rule='c 189:* rmw'"
+        # "--device-cgroup-rule='c 189:* rmw'"
         "--device=/dev/dri:/dev/dri"
       ];
     };
