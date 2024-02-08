@@ -13,6 +13,7 @@ in {
     postgres_password = {};
   };
   
+  # TODO: Migrate to /mnt/storage ? performance considerations?
   virtualisation.oci-containers.containers = {
     # adminer = {
     #   image = "adminer"; # https://hub.docker.com/_/adminer
@@ -22,7 +23,7 @@ in {
     postgres = {
       image = "postgres:13-alpine";
       volumes = [
-        "${ cfg.dataDir }/postgres/data/:/var/lib/postgresql/data" # TODO: Migrate to /mnt/storage ? performance considerations?
+        "${ cfg.dataDir }/postgres/data/:/var/lib/postgresql/data" 
       ];
       ports = [ "5432:5432" ];
       environment = {
@@ -33,7 +34,7 @@ in {
     mysql = {
       image = "mysql";
       volumes = [
-        "${ cfg.dataDir }/mysql:/var/lib/mysql" # TODO: Migrate to /mnt/storage ? performance considerations?
+        "${ cfg.dataDir }/mysql:/var/lib/mysql"
       ];
       ports = [ "3306:3306" ];
       environment = {
@@ -41,6 +42,7 @@ in {
       };
       extraOptions = [ "--network=database_mysql" ];
     };
+    
     # TODO: Need to install telegraf to use this or use the prometheus suite
     # influxdb = {
     #   image = "influxdb:alpine"; # https://hub.docker.com/_/influxdb/
