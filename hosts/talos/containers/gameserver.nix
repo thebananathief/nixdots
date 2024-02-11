@@ -20,7 +20,11 @@ in {
     #   ];
     # };
     gmod = {
-      volumes = [ "${ cfg.gameserverDir }/gmod-darkrp:/home/gmod/server/garrysmod" ];
+      volumes = [
+        "${ cfg.gameserverDir }/gmod/addons:/home/gmod/server/garrysmod/addons"
+        "${ cfg.gameserverDir }/gmod/gamemodes:/home/gmod/server/garrysmod/gamemodes"
+        "${ cfg.gameserverDir }/gmod/data:/home/gmod/server/garrysmod/data"
+      ];
       ports = [
         "27015:27015"
         "27015:27015/udp"
