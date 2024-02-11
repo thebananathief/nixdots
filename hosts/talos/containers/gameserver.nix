@@ -44,7 +44,7 @@ in {
         MAP = "rp_downtown_tits_v2";
         PORT = "27015";
         GSLT = "***REMOVED***";
-        ARGS = "+host_workshop_collection 1173671290 -authkey authkey ***REMOVED***";
+        ARGS = "+host_workshop_collection 1173671290 -authkey ***REMOVED***";
       };
     };
     # pufferpanel = {
