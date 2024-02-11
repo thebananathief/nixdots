@@ -22,9 +22,11 @@ in {
     gmod = {
       volumes = [ "${ cfg.gameserverDir }/gmod-darkrp:/home/gmod/server/garrysmod" ];
       ports = [
+        "27015:27015"
         "27015:27015/udp"
-        "27020:27020/udp"
+        "27005:27005"
         "27005:27005/udp"
+        "27020:27020/udp"
       ];
     # # ---------------------------
     #   image = "gameservermanagers/gameserver:gmod";
