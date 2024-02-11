@@ -19,28 +19,28 @@ in {
         "--ip=172.17.0.7"
       ];
     };
-    # gmod = {
-    #   volumes = [ "${ cfg.gameserverDir }/gmod-darkrp:/home/gmod/server/garrysmod" ];
-    #   ports = [
-    #     "27015:27015/udp"
-    #     "27020:27020/udp"
-    #     "27005:27005/udp"
-    #   ];
+    gmod = {
+      volumes = [ "${ cfg.gameserverDir }/gmod-darkrp:/home/gmod/server/garrysmod" ];
+      ports = [
+        "27015:27015/udp"
+        "27020:27020/udp"
+        "27005:27005/udp"
+      ];
     # # ---------------------------
     #   image = "gameservermanagers/gameserver:gmod";
     # # ---------- OR USE ---------
-    #   image = "ceifa/garrysmod:debian"; # https://hub.docker.com/r/ceifa/garrysmod
-    #   environment = {
-    #     PRODUCTION = 0;
-    #     HOSTNAME = "Test server";
-    #     MAXPLAYERS = 24;
-    #     GAMEMODE = "sandbox";
-    #     MAP = "gm_construct";
-    #     PORT = 27015;
-    #     GSLT = "B61E68BC995F555A5002D822CD66B25A";
-    #     # ARGS = "";
-    #   };
-    # };
+      image = "ceifa/garrysmod:debian"; # https://hub.docker.com/r/ceifa/garrysmod
+      environment = {
+        PRODUCTION = 1;
+        HOSTNAME = "Absolute Roleplay - LAWLESS | FEW DLs | COOL WEPS | NO STAFF";
+        MAXPLAYERS = 24;
+        GAMEMODE = "sandbox";
+        MAP = "gm_construct";
+        PORT = 27015;
+        GSLT = "***REMOVED***";
+        # ARGS = "";
+      };
+    };
     # pufferpanel = {
     #   image = "pufferpanel/pufferpanel:latest";
     #   volumes = [
