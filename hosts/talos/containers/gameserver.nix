@@ -24,6 +24,7 @@ in {
         "${ cfg.gameserverDir }/gmod/addons:/home/gmod/server/garrysmod/addons"
         "${ cfg.gameserverDir }/gmod/gamemodes:/home/gmod/server/garrysmod/gamemodes"
         "${ cfg.gameserverDir }/gmod/data:/home/gmod/server/garrysmod/data"
+        "${ cfg.gameserverDir }/gmod/cfg/server.cfg:/home/gmod/server/garrysmod/cfg/server.cfg"
       ];
       ports = [
         "27015:27015"
