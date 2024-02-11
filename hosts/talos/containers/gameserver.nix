@@ -31,12 +31,12 @@ in {
     # # ---------- OR USE ---------
       image = "ceifa/garrysmod:debian"; # https://hub.docker.com/r/ceifa/garrysmod
       environment = {
-        PRODUCTION = 1;
+        PRODUCTION = "1";
         HOSTNAME = "Absolute Roleplay - LAWLESS | FEW DLs | COOL WEPS | NO STAFF";
-        MAXPLAYERS = 24;
+        MAXPLAYERS = "24";
         GAMEMODE = "sandbox";
         MAP = "gm_construct";
-        PORT = 27015;
+        PORT = "27015";
         GSLT = "***REMOVED***";
         # ARGS = "";
       };
