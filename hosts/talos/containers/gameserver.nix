@@ -40,11 +40,11 @@ in {
         PRODUCTION = "0";
         HOSTNAME = "Absolute Roleplay - LAWLESS | FEW DLs | COOL WEPS | NO STAFF";
         MAXPLAYERS = "24";
-        GAMEMODE = "sandbox";
+        GAMEMODE = "darkrp";
         MAP = "rp_downtown_tits_v2";
         PORT = "27015";
         GSLT = "***REMOVED***";
-        ARGS = "+host_workshop_collection 1173671290";
+        ARGS = "+host_workshop_collection 1173671290 -authkey authkey ***REMOVED***";
       };
     };
     # pufferpanel = {
