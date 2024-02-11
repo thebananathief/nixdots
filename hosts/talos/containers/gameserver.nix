@@ -3,28 +3,27 @@ let
   cfg = config.myOptions.containers;
 in {
   virtualisation.oci-containers.containers = {
-    kf2 = {
-      image = "kr0nus/kf2server:latest";
-      volumes = [ "${ cfg.gameserverDir }/kf2:/data" ];
-      ports = [
-        "27015:27015/udp"
-        "20560:20560/udp"
-        "7777:7777/udp"
-        "8012:8080/tcp"
-      ];
-      environment = {
-        KF2_OPTS = "KF-BurningParis?Game=ZedternalReborn.WMGameInfo_Endless?difficulty=1";
-      };
-      extraOptions = [
-        "--ip=172.17.0.7"
-      ];
-    };
+    # kf2 = {
+    #   image = "kr0nus/kf2server:latest";
+    #   volumes = [ "${ cfg.gameserverDir }/kf2:/data" ];
+    #   ports = [
+    #     "27015:27015/udp"
+    #     "20560:20560/udp"
+    #     "7777:7777/udp"
+    #     "8012:8080/tcp"
+    #   ];
+    #   environment = {
+    #     KF2_OPTS = "KF-BurningParis?Game=ZedternalReborn.WMGameInfo_Endless?difficulty=1";
+    #   };
+    #   extraOptions = [
+    #     "--ip=172.17.0.7"
+    #   ];
+    # };
     gmod = {
       volumes = [ "${ cfg.gameserverDir }/gmod-darkrp:/home/gmod/server/garrysmod" ];
       ports = [
         "27015:27015"
         "27015:27015/udp"
-        "27005:27005"
         "27005:27005/udp"
         "27020:27020/udp"
       ];
@@ -33,14 +32,14 @@ in {
     # # ---------- OR USE ---------
       image = "ceifa/garrysmod:debian"; # https://hub.docker.com/r/ceifa/garrysmod
       environment = {
-        PRODUCTION = "1";
+        PRODUCTION = "0";
         HOSTNAME = "Absolute Roleplay - LAWLESS | FEW DLs | COOL WEPS | NO STAFF";
         MAXPLAYERS = "24";
         GAMEMODE = "sandbox";
         MAP = "gm_construct";
         PORT = "27015";
         GSLT = "***REMOVED***";
-        # ARGS = "";
+        # ARGS = "+host_workshop_collection 1173671290";
       };
     };
     # pufferpanel = {
