@@ -23,7 +23,7 @@ in {
       volumes = [
         "${ cfg.gameserverDir }/gmod/addons:/home/gmod/server/garrysmod/addons"
         "${ cfg.gameserverDir }/gmod/gamemodes:/home/gmod/server/garrysmod/gamemodes"
-        # "${ cfg.gameserverDir }/gmod/data:/home/gmod/server/garrysmod/data"
+        "${ cfg.gameserverDir }/gmod/data:/home/gmod/server/garrysmod/data"
         "${ cfg.gameserverDir }/gmod/cfg/server.cfg:/home/gmod/server/garrysmod/cfg/server.cfg"
       ];
       ports = [
@@ -44,7 +44,8 @@ in {
         MAP = "rp_downtown_tits_v2";
         PORT = "27015";
         GSLT = "***REMOVED***";
-        ARGS = "+host_workshop_collection 1173671290 -authkey ***REMOVED***";
+        AUTHKEY = "***REMOVED***";
+        ARGS = "+host_workshop_collection 1173671290 -console -conlog -conclearlog -condebug -tvdisable -secure";
       };
     };
     # pufferpanel = {
