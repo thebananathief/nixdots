@@ -2,6 +2,14 @@
 let
   cfg = config.myOptions.containers;
 in {
+
+  sops.secrets = {
+    "gmod.env" = {
+      group = config.virtualisation.oci-containers.backend;
+      mode = "0440";
+    };
+  };
+
   virtualisation.oci-containers.containers = {
     # kf2 = {
     #   image = "kr0nus/kf2server:latest";
@@ -36,6 +44,9 @@ in {
     #   image = "gameservermanagers/gameserver:gmod";
     # # ---------- OR USE ---------
       image = "ceifa/garrysmod:debian"; # https://hub.docker.com/r/ceifa/garrysmod
+      environmentFiles = [
+        secrets."gmod.env".path # GSLT, AUTHKEY
+      ];
       environment = {
         PRODUCTION = "0";
         HOSTNAME = "Absolute Roleplay - LAWLESS | FEW DLs | COOL WEPS | NO STAFF";
@@ -43,8 +54,8 @@ in {
         GAMEMODE = "darkrp";
         MAP = "rp_downtown_tits_v2";
         PORT = "27015";
-        GSLT = "***REMOVED***";
-        AUTHKEY = "***REMOVED***";
+        # GSLT = "";
+        # AUTHKEY = "";
         ARGS = "+host_workshop_collection 1173671290 -console -conlog -conclearlog -condebug -tvdisable -secure";
       };
     };
