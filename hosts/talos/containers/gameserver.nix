@@ -30,11 +30,17 @@ in {
     # };
     gmod = {
       volumes = [
+      # Leaving base assets within container, binding the ones we need to be editable
         "${ cfg.gameserverDir }/gmod/addons:/home/gmod/server/garrysmod/addons"
         "${ cfg.gameserverDir }/gmod/gamemodes:/home/gmod/server/garrysmod/gamemodes"
         "${ cfg.gameserverDir }/gmod/data:/home/gmod/server/garrysmod/data"
+        "${ cfg.gameserverDir }/gmod/cache:/home/gmod/server/garrysmod/cache"
+        "${ cfg.gameserverDir }/gmod/maps:/home/gmod/server/garrysmod/maps"
+        "${ cfg.gameserverDir }/gmod/download:/home/gmod/server/garrysmod/download"
+        "${ cfg.gameserverDir }/gmod/downloadlists:/home/gmod/server/garrysmod/downloadlists"
         "${ cfg.gameserverDir }/gmod/cfg/server.cfg:/home/gmod/server/garrysmod/cfg/server.cfg"
         "${ cfg.gameserverDir }/gmod/sv.db:/home/gmod/server/garrysmod/sv.db"
+        # "${ cfg.gameserverDir }/gmod:/home/gmod/server/garrysmod"
       ];
       ports = [
         "27015:27015"
@@ -58,7 +64,7 @@ in {
         PORT = "27015";
         # GSLT = "";
         # AUTHKEY = "";
-        ARGS = "+host_workshop_collection 1173671290";
+        ARGS = "+host_workshop_collection 1173671290 -secure -tvdisable -conclearlog -condebug -console -conlog";
       };
     };
     # pufferpanel = {
