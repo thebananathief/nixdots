@@ -58,7 +58,7 @@ in {
         PORT = "27015";
         # GSLT = "";
         # AUTHKEY = "";
-        ARGS = "+host_workshop_collection 1173671290 -console -conlog -conclearlog -condebug -tvdisable -secure";
+        ARGS = "+host_workshop_collection 1173671290";
       };
     };
     # pufferpanel = {
