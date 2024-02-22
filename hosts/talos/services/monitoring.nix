@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, username, ... }:
 let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
@@ -130,7 +130,8 @@ in {
   };
 
   sops.secrets = {
-    graylogPepper = {};
+    graylog_secret = {};
+    graylog_password = {};
     # "mullvad.env" = {
     #   group = config.virtualisation.oci-containers.backend;
     #   mode = "0440";
@@ -139,7 +140,9 @@ in {
   
   services.graylog = {
     enable = true;
-    passwordSecret = secrets.graylogPepper.path;
+    passwordSecret = secrets.graylog_secret.path;
+    rootUsername = username;
+    rootPasswordSha2 = secrets.graylog_password.path;
     # user = ;
   };
 
