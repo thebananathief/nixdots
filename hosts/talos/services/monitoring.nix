@@ -136,6 +136,10 @@ in {
     #   group = "graylog";
       mode = "0440";
     };
+    "mongo.env" = {
+      group = config.virtualisation.oci-containers.backend;
+      mode = "0440";
+    };
   };
 
   services = {
