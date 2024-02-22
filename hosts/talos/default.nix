@@ -21,6 +21,7 @@
   networking = {
     hostName = "talos";
     domain = "host";
+    # domain = config.sops.secrets.domain.path;
     wireless.enable = false; # Enables wireless support via wpa_supplicant.
     firewall.enable = true;
   };
@@ -113,7 +114,8 @@ By accessing this system, you agree that your actions may be monitored if unauth
     intel-gpu-tools # intel_gpu_top
   ];
 
-  security.pam.enableSSHAgentAuth = true;
+  # I think this is for git?
+  security.pam.sshAgentAuth.enable = true;
 
   sops.secrets.healthcheck_uptime_uuid = {};
   services = {

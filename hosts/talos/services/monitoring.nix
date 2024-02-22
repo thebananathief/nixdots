@@ -81,6 +81,13 @@ in {
       environment = cfg.common_env;
       ports = [ "8015:80" ];
     };
+    mongo = {
+      image = "mongo:latest";
+      environmentFiles = [
+        secrets."mongo.env".path
+      ];
+      ports = [ "27017:27017" ];
+    };
   };
 
   # services.smokeping = {
@@ -146,15 +153,16 @@ in {
       port = 9200;
       tcp_port = 9300;
     };
-    mongodb = {
-      enable = true;
+    # mongodb = {
+    #   enable = true;
       # bind_ip = "127.0.0.1";
       # enableAuth = ;
       # initialRootPassword = ;
-    };
+    # };
     graylog = {
       enable = true;
       elasticsearchHosts = [ "https://127.0.0.1:9200" ];
+      mongodbUri = "mongodb://localhost/graylog";
       passwordSecret = secrets.graylog_secret.path;
       rootUsername = username;
       rootPasswordSha2 = secrets.graylog_password.path;
