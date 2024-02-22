@@ -138,8 +138,16 @@ in {
     # };
   };
   
+  services.elasticsearch = {
+    enable = true;
+    listenAddress = "127.0.0.1";
+    port = 9200;
+    tcp_port = 9300;
+  };
+  
   services.graylog = {
     enable = true;
+    elasticsearchHosts = [ "http://127.0.0.1:9200" ];
     passwordSecret = secrets.graylog_secret.path;
     rootUsername = username;
     rootPasswordSha2 = secrets.graylog_password.path;
