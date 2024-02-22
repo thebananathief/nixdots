@@ -129,6 +129,14 @@ in {
     };
   };
 
+  sops.secrets = {
+    graylogPepper = {};
+    # "mullvad.env" = {
+    #   group = config.virtualisation.oci-containers.backend;
+    #   mode = "0440";
+    # };
+  };
+  
   services.graylog = {
     enable = true;
     passwordSecret = secrets.graylogPepper.path;
