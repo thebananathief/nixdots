@@ -148,7 +148,7 @@ in {
     };
     mongodb = {
       enable = true;
-      bind_ip = "127.0.0.1";
+      # bind_ip = "127.0.0.1";
       # enableAuth = ;
       # initialRootPassword = ;
     };
