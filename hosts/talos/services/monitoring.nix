@@ -83,9 +83,9 @@ in {
     };
     mongo = {
       image = "mongo:latest";
-      environmentFiles = [
-        secrets."mongo.env".path
-      ];
+      # environmentFiles = [
+      #   secrets."mongo.env".path
+      # ];
       extraOptions = [
         "--network=host"
       ];
