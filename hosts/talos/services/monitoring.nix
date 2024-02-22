@@ -120,12 +120,15 @@ in {
   # };
   
   sops.secrets = {
-    graylog_secret = {};
-    graylog_password = {};
-    # "mullvad.env" = {
-    #   group = config.virtualisation.oci-containers.backend;
-    #   mode = "0440";
-    # };
+    graylog_secret = {
+      owner = "graylog";
+      mode = "0440";
+    };
+    graylog_password = {
+      owner = "graylog";
+    #   group = "graylog";
+      mode = "0440";
+    };
   };
 
   services = {
@@ -146,7 +149,6 @@ in {
     mongodb = {
       enable = true;
       bind_ip = "127.0.0.1";
-      # user = ;
       # enableAuth = ;
       # initialRootPassword = ;
     };
@@ -156,7 +158,6 @@ in {
       passwordSecret = secrets.graylog_secret.path;
       rootUsername = username;
       rootPasswordSha2 = secrets.graylog_password.path;
-      # user = ;
     };
   };
 
