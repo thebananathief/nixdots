@@ -86,7 +86,9 @@ in {
       environmentFiles = [
         secrets."mongo.env".path
       ];
-      ports = [ "27017:27017" ];
+      extraOptions = [
+        "--network=host"
+      ];
     };
   };
 
@@ -170,9 +172,6 @@ in {
       passwordSecret = secrets.graylog_secret.path;
       rootUsername = username;
       rootPasswordSha2 = secrets.graylog_password.path;
-      extraConfig = ''
-        http_bind_address = 0.0.0.0:9000
-      '';
     };
   };
 
