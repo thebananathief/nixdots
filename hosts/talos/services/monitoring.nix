@@ -171,8 +171,8 @@ in {
       rootUsername = username;
       rootPasswordSha2 = secrets.graylog_password.path;
       extraConfig = ''
-        http_bind_address = 127.0.0.1:9000
-        http_publish_uri = https://0.0.0.0:9000/
+        http_bind_address = 0.0.0.0:9000
+        http_publish_uri = https://127.0.0.1:9000/
       '';
     };
   };
