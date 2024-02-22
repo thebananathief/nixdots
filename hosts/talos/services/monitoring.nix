@@ -167,7 +167,7 @@ in {
     # };
     graylog = {
       enable = true;
-      elasticsearchHosts = [ "https://127.0.0.1:9200" ];
+      elasticsearchHosts = [ "http://127.0.0.1:9200" ];
       mongodbUri = "mongodb://127.0.0.1/graylog";
       passwordSecret = secrets.graylog_secret.path;
       rootUsername = username;
