@@ -119,16 +119,6 @@ in {
   #   '';
   # };
   
-  # TODO: Put in a PR to improve this service config
-  services.uptime-kuma = {
-    enable = true;
-    settings = {
-      # By default its only listening from localhost:3001
-      HOST = "::";
-      PORT = "8017";
-    };
-  };
-
   sops.secrets = {
     graylog_secret = {};
     graylog_password = {};
@@ -137,24 +127,37 @@ in {
     #   mode = "0440";
     # };
   };
-  
-  services.elasticsearch = {
-    enable = true;
-    listenAddress = "127.0.0.1";
-    port = 9200;
-    tcp_port = 9300;
-  };
-  
-  services.graylog = {
-    enable = true;
-    elasticsearchHosts = [ "https://127.0.0.1:9200" ];
-    passwordSecret = secrets.graylog_secret.path;
-    rootUsername = username;
-    rootPasswordSha2 = secrets.graylog_password.path;
-    extraConfig = ''
-      http_bind_address = 0.0.0.0:9000
-    '';
-    # user = ;
+
+  services = {
+    uptime-kuma = {
+      enable = true;
+      settings = {
+        # By default its only listening from localhost:3001
+        HOST = "::";
+        PORT = "8017";
+      };
+    };
+    elasticsearch = {
+      enable = true;
+      listenAddress = "127.0.0.1";
+      port = 9200;
+      tcp_port = 9300;
+    };
+    mongodb = {
+      enable = true;
+      bind_ip = "127.0.0.1";
+      # user = ;
+      # enableAuth = ;
+      # initialRootPassword = ;
+    };
+    graylog = {
+      enable = true;
+      elasticsearchHosts = [ "https://127.0.0.1:9200" ];
+      passwordSecret = secrets.graylog_secret.path;
+      rootUsername = username;
+      rootPasswordSha2 = secrets.graylog_password.path;
+      # user = ;
+    };
   };
 
   # Make the service use the docker group ACL, for the socket access
