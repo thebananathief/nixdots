@@ -15,12 +15,7 @@
     ./hardware-configuration.nix
     ./fileshares.nix
     ./disks.nix
-    ./containers
-    ./minecraft.nix
-    ./mediaserver.nix
-    ./gitea.nix
-    ./voiceserver.nix
-    ./reverse-proxy.nix
+    ./services
   ];
 
   networking = {

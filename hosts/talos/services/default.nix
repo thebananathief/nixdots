@@ -6,6 +6,11 @@
     ./gameserver.nix
     ./monitoring.nix
     ./immich.nix
+    ./voiceserver.nix
+    ./gitea.nix
+    ./minecraft.nix
+    ./mediaserver.nix
+    ./reverse-proxy.nix
   ];
 
   # Set the user and group ID in the environment, some containers will pull it
