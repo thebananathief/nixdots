@@ -81,15 +81,15 @@ in {
       environment = cfg.common_env;
       ports = [ "8015:80" ];
     };
-    mongo = {
-      image = "mongo:latest";
-      # environmentFiles = [
-      #   secrets."mongo.env".path
-      # ];
-      extraOptions = [
-        "--network=host"
-      ];
-    };
+    # mongo = {
+    #   image = "mongo:latest";
+    #   # environmentFiles = [
+    #   #   secrets."mongo.env".path
+    #   # ];
+    #   extraOptions = [
+    #     "--network=host"
+    #   ];
+    # };
   };
 
   # services.smokeping = {
@@ -153,26 +153,26 @@ in {
         PORT = "8017";
       };
     };
-    elasticsearch = {
-      enable = true;
-      listenAddress = "127.0.0.1";
-      port = 9200;
-      tcp_port = 9300;
-    };
+    # elasticsearch = {
+    #   enable = true;
+    #   listenAddress = "127.0.0.1";
+    #   port = 9200;
+    #   tcp_port = 9300;
+    # };
     # mongodb = {
     #   enable = true;
       # bind_ip = "127.0.0.1";
       # enableAuth = ;
       # initialRootPassword = ;
     # };
-    graylog = {
-      enable = true;
-      elasticsearchHosts = [ "http://127.0.0.1:9200" ];
-      mongodbUri = "mongodb://127.0.0.1/graylog";
-      passwordSecret = secrets.graylog_secret.path;
-      rootUsername = username;
-      rootPasswordSha2 = secrets.graylog_password.path;
-    };
+    # graylog = {
+    #   enable = true;
+    #   elasticsearchHosts = [ "http://127.0.0.1:9200" ];
+    #   mongodbUri = "mongodb://127.0.0.1/graylog";
+    #   passwordSecret = secrets.graylog_secret.path;
+    #   rootUsername = username;
+    #   rootPasswordSha2 = secrets.graylog_password.path;
+    # };
   };
 
   # Make the service use the docker group ACL, for the socket access
