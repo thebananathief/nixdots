@@ -128,21 +128,21 @@ in {
   #   '';
   # };
   
-  sops.secrets = {
-    graylog_secret = {
-      owner = "graylog";
-      mode = "0440";
-    };
-    graylog_password = {
-      owner = "graylog";
-    #   group = "graylog";
-      mode = "0440";
-    };
-    "mongo.env" = {
-      group = config.virtualisation.oci-containers.backend;
-      mode = "0440";
-    };
-  };
+  # sops.secrets = {
+  #   graylog_secret = {
+  #     owner = "graylog";
+  #     mode = "0440";
+  #   };
+  #   graylog_password = {
+  #     owner = "graylog";
+  #   #   group = "graylog";
+  #     mode = "0440";
+  #   };
+  #   "mongo.env" = {
+  #     group = config.virtualisation.oci-containers.backend;
+  #     mode = "0440";
+  #   };
+  # };
 
   services = {
     uptime-kuma = {
