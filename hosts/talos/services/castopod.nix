@@ -31,8 +31,7 @@ in {
         CP_REDIS_HOST = "redis";
       };
       extraOptions = [
-        "--network=castopod-app"
-        "--network=castopod-db"
+        "--network=castopod-app,castopod-db"
       ];
     };
     
