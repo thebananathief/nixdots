@@ -6,41 +6,14 @@ in {
   sops.secrets = {
     # influx_db_token = {};
     # influx_db_pass = {};
-    mysql_password = {
-      group = config.virtualisation.oci-containers.backend;
-      mode = "0440";
-    };
-    postgres_password = {};
   };
   
   # TODO: Migrate to /mnt/storage ? performance considerations?
   virtualisation.oci-containers.containers = {
-    # adminer = {
-    #   image = "adminer"; # https://hub.docker.com/_/adminer
-    #   ports = [ "8085:8080" ];
-    #   extraOptions = [ "--network=database_only" ];
-    # };
-    postgres = {
-      image = "postgres:13-alpine";
-      volumes = [
-        "${ cfg.dataDir }/postgres/data/:/var/lib/postgresql/data" 
-      ];
-      ports = [ "5432:5432" ];
-      environment = {
-        POSTGRES_PASSWORD = "${secrets.postgres_password.path}";
-      };
-      extraOptions = [ "--network=database_postgres" ];
-    };
-    mysql = {
-      image = "mysql";
-      volumes = [
-        "${ cfg.dataDir }/mysql:/var/lib/mysql"
-      ];
-      ports = [ "3306:3306" ];
-      environment = {
-        MYSQL_ROOT_PASSWORD = "${secrets.mysql_password.path}";
-      };
-      extraOptions = [ "--network=database_mysql" ];
+    adminer = {
+      image = "adminer"; # https://hub.docker.com/_/adminer
+      ports = [ "8085:8080" ];
+      extraOptions = [ "--network=database_only" ];
     };
     
     # TODO: Need to install telegraf to use this or use the prometheus suite

@@ -28,6 +28,7 @@ in {
         "--network=immich"
       ];
     };
+    
     immich-microservices = { 
       image = "ghcr.io/immich-app/immich-server:${immich_env.IMMICH_VERSION}";
       cmd = [ "start.sh" "microservices" ];
@@ -43,6 +44,7 @@ in {
         "--device=/dev/dri:/dev/dri"
       ];
     };
+    
     immich-ml = { 
       image = "ghcr.io/immich-app/immich-machine-learning:${immich_env.IMMICH_VERSION}-openvino";
       environment = immich_env // cfg.common_env;
@@ -57,6 +59,7 @@ in {
         "c 189:* rmw"
       ];
     };
+    
     immich-postgres = {
       image = "tensorchord/pgvecto-rs:pg14-v0.1.11@sha256:0335a1a22f8c5dd1b697f14f079934f5152eaaa216c09b61e293be285491f8ee";
       volumes = [
@@ -70,6 +73,7 @@ in {
       };
       extraOptions = [ "--network=immich" ];
     };
+    
     immich-redis = {
       image = "redis:6.2-alpine@sha256:afb290a0a0d0b2bd7537b62ebff1eb84d045c757c1c31ca2ca48c79536c0de82";
       # ports = [ "6379:6379" ];
