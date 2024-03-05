@@ -105,7 +105,7 @@ in {
         # CMD_URL_ADDPORT = false; #optional
         # CMD_PORT = 3000; #optional
         # CMD_ALLOW_ORIGIN = "['localhost']"; #optional
-      } // common_env;
+      } // cfg.common_env;
     };
   };
 }
