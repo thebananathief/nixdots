@@ -28,7 +28,7 @@ in {
         CP_BASEURL = "https://castopod.${ config.networking.fqdn }";
         CP_ANALYTICS_SALT = "${ secrets.castopod_salt.path }";
         CP_CACHE_HANDLER = "redis";
-        CP_REDIS_HOST = "redis";
+        CP_REDIS_HOST = "castopod-redis";
       };
       extraOptions = [
         "--network=castopod"
