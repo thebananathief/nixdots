@@ -31,7 +31,7 @@ in {
         CP_REDIS_HOST = "redis";
       };
       extraOptions = [
-        "--network=castopod-app"
+        "--network=castopod"
       ];
     };
     
@@ -47,7 +47,7 @@ in {
         MYSQL_ROOT_PASSWORD = "${ secrets.mysql_password.path }";
       };
       extraOptions = [
-        "--network=castopod-db"
+        "--network=castopod"
       ];
     };
     
@@ -57,7 +57,7 @@ in {
         "${ cfg.dataDir }/castopod/cache:/data"
       ];
       extraOptions = [
-        "--network=castopod-app"
+        "--network=castopod"
       ];
     };
   };
