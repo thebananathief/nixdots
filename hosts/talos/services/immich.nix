@@ -12,6 +12,10 @@ let
     REDIS_HOSTNAME = "immich-redis";
   };
 in {
+  sops.secrets = {
+    postgres_password = {};
+  };
+  
   virtualisation.oci-containers.containers = {
     immich-server = { 
       image = "ghcr.io/immich-app/immich-server:${immich_env.IMMICH_VERSION}";
