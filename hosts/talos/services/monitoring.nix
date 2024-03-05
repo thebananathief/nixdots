@@ -145,14 +145,14 @@ in {
   # };
 
   services = {
-    uptime-kuma = {
-      enable = true;
-      settings = {
-        # By default its only listening from localhost:3001
-        HOST = "::";
-        PORT = "8017";
-      };
-    };
+    # uptime-kuma = {
+    #   enable = true;
+    #   settings = {
+    #     # By default its only listening from localhost:3001
+    #     HOST = "::";
+    #     PORT = "8017";
+    #   };
+    # };
     # elasticsearch = {
     #   enable = true;
     #   listenAddress = "127.0.0.1";
