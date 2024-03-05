@@ -10,6 +10,7 @@ in {
     };
     castopod_mysql_password = {};
     castopod_salt = {};
+    redis_password = {};
   };
   
   virtualisation.oci-containers.containers = {
@@ -29,6 +30,7 @@ in {
         CP_ANALYTICS_SALT = "${ secrets.castopod_salt.path }";
         CP_CACHE_HANDLER = "redis";
         CP_REDIS_HOST = "castopod-redis";
+        CP_REDIS_PASSWORD = "${ secrets.redis_password.path }";
       };
       extraOptions = [
         "--network=castopod"
@@ -56,6 +58,7 @@ in {
       volumes = [
         "${ cfg.dataDir }/castopod/cache:/data"
       ];
+      cmd = [ "--requirepass ${ secrets.redis_password.path }" ];
       extraOptions = [
         "--network=castopod"
       ];
