@@ -8,7 +8,7 @@ in {
     ./gameserver.nix
     ./monitoring.nix
     ./immich.nix
-    ./castapod.nix
+    ./castopod.nix
     ./voiceserver.nix
     # ./ttrss.nix
     # ./webtrees.nix

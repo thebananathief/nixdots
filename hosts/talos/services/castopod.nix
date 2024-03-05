@@ -9,6 +9,7 @@ in {
       mode = "0440";
     };
     castopod_mysql_password = {};
+    castopod_salt = {};
   };
   
   virtualisation.oci-containers.containers = {
