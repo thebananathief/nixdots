@@ -55,7 +55,7 @@ in {
     castopod-redis = {
       image = "redis:7.0-alpine";
       volumes = [
-        "${ cfg.dataDir }/castopod/cache:data"
+        "${ cfg.dataDir }/castopod/cache:/data"
       ];
       extraOptions = [
         "--network=castopod-app"
