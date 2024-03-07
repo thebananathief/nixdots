@@ -50,7 +50,7 @@
       extraOptions = [
         "--all"
         "--color=always"
-        "--smart-group"
+        "--group"
       ];
     };
 

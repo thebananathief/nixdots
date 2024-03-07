@@ -7,14 +7,14 @@ in {
     ./database.nix
     ./gameserver.nix
     ./monitoring.nix
-    ./immich.nix
     ./castopod.nix
     ./voiceserver.nix
-    # ./ttrss.nix
-    # ./webtrees.nix
     ./gitea.nix
     ./minecraft.nix
     ./mediaserver.nix
+    ./immich.nix
+    # ./ttrss.nix
+    # ./webtrees.nix
     ./reverse-proxy.nix
   ];
 
