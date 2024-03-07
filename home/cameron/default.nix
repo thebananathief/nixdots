@@ -138,7 +138,7 @@
     eza = {
       enable = true;
       enableAliases = true;
-      icons = true;
+      icons = false;
       extraOptions = [
         "--all"
         "--color=always"
