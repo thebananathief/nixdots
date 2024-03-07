@@ -138,10 +138,11 @@
     eza = {
       enable = true;
       enableAliases = true;
-      icons = false;
+      icons = true;
       extraOptions = [
         "--all"
         "--color=always"
+        "--smart-group"
       ];
     };
 
@@ -149,9 +150,9 @@
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
-      # settings = {
-      #   manager.show_hidden = true;
-      # };
+      settings = {
+        manager.show_hidden = true;
+      };
     };
 
     bat = {
