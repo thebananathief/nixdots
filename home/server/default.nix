@@ -46,7 +46,7 @@
     eza = {
       enable = true;
       enableAliases = true;
-      icons = false;
+      icons = true;
       extraOptions = [
         "--all"
         "--color=always"
