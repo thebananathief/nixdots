@@ -101,7 +101,7 @@ in {
         }
         '';
         NODE_ENV = "production";
-        CMD_URL_ADDPORT = true;
+        CMD_URL_ADDPORT = "true";
         # CMD_DOMAIN = "notes.${ config.networking.fqdn }";
         # CMD_PROTOCOL_USESSL = "false"; #optional - use if on a reverse proxy
         # CMD_PORT = 3000; #optional
