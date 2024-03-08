@@ -19,7 +19,7 @@
 
     packages = with pkgs; [
       lynis
-      at
+      # at # nonfunctional
       lazydocker
     ];
     

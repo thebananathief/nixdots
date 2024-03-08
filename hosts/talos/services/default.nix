@@ -100,9 +100,10 @@ in {
           "storage": "/config/hedgedoc.sqlite"
         }
         '';
+        NODE_ENV = "production";
+        CMD_URL_ADDPORT = true;
         # CMD_DOMAIN = "notes.${ config.networking.fqdn }";
         # CMD_PROTOCOL_USESSL = "false"; #optional - use if on a reverse proxy
-        # CMD_URL_ADDPORT = false; #optional
         # CMD_PORT = 3000; #optional
         # CMD_ALLOW_ORIGIN = "['localhost']"; #optional
       } // cfg.common_env;
