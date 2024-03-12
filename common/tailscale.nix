@@ -6,6 +6,7 @@
     # authKeyFile = "/run/secrets/tailscale_key";
     # authKeyFile required for the extraUpFlags attr
     extraUpFlags = [
+      "--ssh"
       "--operator=${username}"
       # "--advertise-routes=192.168.0.0/24"
       # "--advertise-exit-node"
