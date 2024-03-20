@@ -12,7 +12,8 @@
     nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
     ../gargantuan/packages.nix
-    ../../modules/desktop
+    # ../../modules/desktop
+    ../../modules/desktop/plasma.nix
     ../../modules/games.nix
     # sops-nix.nixosModules.sops
   ];
