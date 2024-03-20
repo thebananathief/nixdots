@@ -1,7 +1,7 @@
 {globalFonts, ...}: let
   colors = builtins.fetchurl {
     url = "https://raw.githubusercontent.com/catppuccin/waybar/main/themes/mocha.css";
-    sha256 = "be23160de35635f484dd3701a13821cd262a8b420ac4c410937a9f481d877895";
+    sha256 = "15bqhwfli7vsjc8c9i0a8a5jl9nd44wa209pvn2g8danwc6ic8xy";
   };
 in {
   programs.waybar = {

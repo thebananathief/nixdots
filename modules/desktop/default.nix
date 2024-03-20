@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [
-    # ./plasma.nix
-    ./hyprland.nix
+    ./plasma.nix
+#     ./hyprland.nix
     # ./gnome.nix
     # ./xfce.nix
     ../theme
@@ -9,8 +9,8 @@
 
   services.xserver = {
     enable = true;
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
 
     # excludePackages = [ pkgs.xterm ];
 

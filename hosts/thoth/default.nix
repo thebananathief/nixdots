@@ -12,9 +12,9 @@
     nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
     ../gargantuan/packages.nix
-    # ../../modules/desktop
-    ../../modules/desktop/plasma.nix
-    ../../modules/games.nix
+    ../../modules/desktop
+#     ../../modules/desktop/plasma.nix
+    # ../../modules/games.nix
     # sops-nix.nixosModules.sops
   ];
 
@@ -23,18 +23,6 @@
     networkmanager.enable = true;
     wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   };
-  
-  # boot.loader.grub = {
-    # enable = true;
-    # device = "nodev";
-    # extraEntries = ''
-    #   menuentry "Windows 11" {
-    #     chainloader (hd0,0)
-    #   }
-    # '';
-    # This might find windows
-    # useOSProber = true;
-  # };
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
@@ -76,13 +64,20 @@
     ];
   };
 
+  # Allow unfree packages
+  # nixpkgs.config.allowUnfree = true;
+
   environment.systemPackages = with pkgs; [
     libva
   ];
 
+  # Enable CUPS to print documents.
+  services.printing.enable = false;
+
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -96,6 +91,15 @@
     driSupport = true;
     driSupport32Bit = true;
     extraPackages = with pkgs; [ intel-media-driver ];
+  };
+
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+#     enableSSHSupport = true;
+    enableBrowserSocket = true;
   };
   
   # https://nixos.wiki/wiki/Nvidia

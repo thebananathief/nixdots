@@ -83,7 +83,6 @@
   };
 
   security = {
-    rtkit.enable = true;
     #pam.services.greetd.gnupg.enable = true;
     pam.services.waylock.text = "auth include login";
   };
@@ -102,13 +101,6 @@
 
     # Monitor backlight control
     # light.enable = true;
-
-    gnupg = {
-      agent = {
-        enable = true;
-        enableBrowserSocket = true;
-      };
-    };
   };
 
   # For flatpaks I think?
@@ -122,7 +114,6 @@
 
     udisks2.enable = true;
     blueman.enable = true;
-    printing.enable = false;
 
     # use Ambient Light Sensors for auto brightness adjustment
     # clight = {

@@ -1,8 +1,8 @@
 { ... }: 
 let
   theme = builtins.fetchurl {
-    url = "https://raw.githubusercontent.com/catppuccin/alacritty/main/catppuccin-mocha.yml";
-    sha256 = "dbc4efb5ff00febc78d09f4f2971fa34bde1fce29f9f74d04f52bd1bc8960a43";
+    url = "https://raw.githubusercontent.com/catppuccin/alacritty/main/catppuccin-mocha.toml";
+    sha256 = "061yalrzpqivr67k2f8hsqixr77srgd8y47xvhp5vg0sjmh5lrcy";
   };
 in {
   programs.alacritty = {

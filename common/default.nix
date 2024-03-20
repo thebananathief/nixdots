@@ -61,6 +61,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+  # BASIC utils that should be on every system running this flake
     git wget curl unzip killall
     nettools dig
     ethtool lm_sensors pciutils
@@ -68,6 +69,7 @@
     tailspin bat dua tree
     dos2unix tldr just
     age sops
+    nurl
 
     # intel-gpu-tools
     # dnsutils
