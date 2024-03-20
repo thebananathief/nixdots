@@ -6,6 +6,34 @@
     systemdTarget = "hyprland-session.target";
 
     profiles = {
+      desktop = {
+        outputs = [
+          {
+            criteria = "DP-2";
+            mode = "1920x1080@60.00000";
+            position = "0,0";
+            scale = 1.0;
+            adaptiveSync = false;
+            status = "enable";
+          }
+          {
+            criteria = "DP-1";
+            mode = "1920x1080@60.00000";
+            position = "0,-1080";
+            scale = 1.0;
+            adaptiveSync = false;
+            status = "enable";
+          }
+          {
+            criteria = "DP-3";
+            mode = "1080x1920@60.00000";
+            position = "1920,-200";
+            scale = 1.0;
+            adaptiveSync = false;
+            status = "enable";
+          }
+        ];
+      };
       undocked = {
         outputs = [
           {
