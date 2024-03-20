@@ -83,5 +83,4 @@
     configFile."gtk-4.0/gtk.css".force = true;
     configFile."gtk-4.0/settings.ini".force = true;
   };
-  home.file.".gtkrc-2.0".force = true;
 }
