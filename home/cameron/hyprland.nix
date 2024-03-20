@@ -30,14 +30,14 @@
         # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
 
         # NVIDIA stuff
-        # "WLR_NO_HARDWARE_CURSORS,1"
-        # "LIBVA_DRIVER_NAME,nvidia"
-        # "GBM_BACKEND,nvidia-drm"
-        # "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        # "XDG_SESSION_TYPE,wayland"
+        "WLR_NO_HARDWARE_CURSORS,1"
+        "LIBVA_DRIVER_NAME,nvidia"
+        "GBM_BACKEND,nvidia-drm"
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        "XDG_SESSION_TYPE,wayland"
 
         # Screen tearing
-        # "WLR_DRM_NO_ATOMIC,1"
+        "WLR_DRM_NO_ATOMIC,1"
       ];
 
       # https://wiki.hyprland.org/Configuring/Binds/
@@ -201,8 +201,8 @@
         "kanshi"
         "swayidle -w timeout 600 '~/github/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
         # "gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Mocha-Mauve'"
-        # "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
-        # "kvantummanager --set Catppuccin-Mocha-Mauve"
+        "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
+        "kvantummanager --set Catppuccin-Mocha-Mauve"
         # BUG: mullvad and tailscale networks conflict
         # "tailscale-systray"
       ];
