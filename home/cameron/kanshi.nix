@@ -28,6 +28,7 @@
             criteria = "DP-1";
             mode = "1920x1080@60.00000";
             position = "1920,-200";
+            transform = "90";
             scale = 1.0;
             adaptiveSync = false;
             status = "enable";
