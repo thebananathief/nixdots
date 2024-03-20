@@ -23,6 +23,9 @@
     networkmanager.enable = true;
     wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   };
+  
+  # Was causing errors for me earlier, so I added this line
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
