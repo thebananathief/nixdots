@@ -153,7 +153,7 @@
 
       bindr = [
         # "$mainMod, space, exec, pkill .$runner-wrapped || $runner" # launch desktop applications
-        "$mainMod, R, exec, pkill nwg-drawer || nwg-drawer" # launch desktop applications
+        "$mainMod, R, exec, killall nwg-drawer || nwg-drawer" # launch desktop applications
         # "$mainMod, T, exec, killall $runner; $runner --plugins kidex " # browse system files
         # "$mainMod, V, exec, cliphist list | anyrun --dmenu | cliphist decode | wl-copy" # clipboard chooser
 
