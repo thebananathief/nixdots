@@ -63,6 +63,7 @@
 
   # Generate a host key for this machine
   services.openssh = {
+    enable = true;
     hostKeys = [
       { path = "/etc/ssh/ssh_host_ed25519"; type = "ed25519"; }
     ];
