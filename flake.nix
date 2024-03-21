@@ -63,7 +63,10 @@
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          config.permittedInsecurePackages = [ "electron-25.9.0" "freeimage-unstable-2021-11-01" ];
+          config.permittedInsecurePackages = [ 
+            # "electron-25.9.0"
+            # "freeimage-unstable-2021-11-01" 
+          ];
         };
       # The // inputs part here is us feeding in the inputs from this flake into the special args, the special args go into the different modules to be used further
       } // inputs;
