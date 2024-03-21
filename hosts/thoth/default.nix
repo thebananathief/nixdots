@@ -71,6 +71,9 @@
 
   environment.systemPackages = with pkgs; [
     libva
+    # vulkan-loader
+    # vulkan-validation-layers
+    # vulkan-tools
   ];
 
   # Enable CUPS to print documents.
@@ -86,13 +89,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     # jack.enable = true;
-  };
-
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-    extraPackages = with pkgs; [ intel-media-driver ];
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -123,6 +119,14 @@
 
     prime.offload.enable = false;
   };
+  
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+    extraPackages = with pkgs; [ intel-media-driver ];
+  };
+
 
   system.stateVersion = "23.11";
 }
