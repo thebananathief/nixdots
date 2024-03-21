@@ -36,23 +36,21 @@
   hardware.bluetooth.powerOnBoot = true;
   hardware.bluetooth.package = pkgs.bluez;
   
-  # sops = {
-  #   defaultSopsFile = ../../secrets.yml;
-  #   age = {
-  #     sshKeyPaths = [
-  #       "/etc/ssh/ssh_host_ed25519"
-  #     ];
-      
-  #     keyFile = "/var/lib/sops-nix/key.txt";
-  #     generateKey = true;
-  #   };
-  #   secrets = {
-  #     main_user_password = { neededForUsers = true; };
-  #     email_address = {};
-  #     sshPub_phone = {};
-  #     ssh_github = {};
-  #   };
-  # };
+  sops = {
+    defaultSopsFile = ../../secrets.yml;
+    age = {
+      sshKeyPaths = [
+        "/etc/ssh/ssh_host_ed25519"
+      ];
+      keyFile = "/var/lib/sops-nix/key.txt";
+      generateKey = true;
+    };
+    # secrets = {
+      # main_user_password = { neededForUsers = true; };
+      # email_address = {};
+      # ssh_github = {};
+    # };
+  };
 
   programs.ssh.startAgent = true;
 

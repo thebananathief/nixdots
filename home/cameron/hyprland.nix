@@ -31,10 +31,10 @@
 
         # NVIDIA stuff
         "WLR_NO_HARDWARE_CURSORS,1"
-        "LIBVA_DRIVER_NAME,nvidia"
-        "GBM_BACKEND,nvidia-drm"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        "XDG_SESSION_TYPE,wayland"
+        # "LIBVA_DRIVER_NAME,nvidia"
+        # "GBM_BACKEND,nvidia-drm"
+        # "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        # "XDG_SESSION_TYPE,wayland"
 
         # Screen tearing
         "WLR_DRM_NO_ATOMIC,1"
