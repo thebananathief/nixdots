@@ -4,7 +4,7 @@
   programs = {
     zsh = {
       enable = true;
-      autosuggestions.enable = true;
+      enableAutosuggestions = true;
       enableCompletion = true;
       autocd = true;
       history.ignoreAllDups = true;
