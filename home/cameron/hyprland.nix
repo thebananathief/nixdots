@@ -237,11 +237,11 @@
         # "3, monitor:DP-1, default:true"
 
         # laptop setup
-        "1, monitor:eDP-1, default:true, persistent:true"
-        "2, monitor:DP-5, default:true, persistent:true"
-        "3, monitor:DP-6, default:true, persistent:true"
-        "2, monitor:DP-7, default:true, persistent:true"
-        "3, monitor:DP-8, default:true, persistent:true"
+        # "1, monitor:eDP-1, default:true, persistent:true"
+        # "2, monitor:DP-5, default:true, persistent:true"
+        # "3, monitor:DP-6, default:true, persistent:true"
+        # "2, monitor:DP-7, default:true, persistent:true"
+        # "3, monitor:DP-8, default:true, persistent:true"
         # "2, monitor:HP Inc. HP V24 1CR0440LFS, default:true, persistent:true"
         # "3, monitor:HP Inc. HP V214a CNC7160VL4, default:true, persistent:true"
       ];
@@ -330,10 +330,10 @@
       gestures.workspace_swipe = true;
       gestures.workspace_swipe_fingers = 4;
 
-      "device:logitech-m510".sensitivity = 1.0;
-      "device:logitech-g203-prodigy-gaming-mouse".sensitivity = -0.2;
-      "device:pixa3854:00-093a:0274-touchpad".sensitivity = 1.0;
-      "device:glorious-model-d".sensitivity = -0.5;
+      # "device:logitech-m510".sensitivity = 1.0;
+      # "device:logitech-g203-prodigy-gaming-mouse".sensitivity = -0.2;
+      # "device:pixa3854:00-093a:0274-touchpad".sensitivity = 1.0;
+      # "device:glorious-model-d".sensitivity = -0.5;
 
       animations = {
         enabled = "yes";
