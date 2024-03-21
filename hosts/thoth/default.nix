@@ -15,7 +15,7 @@
     ../gargantuan/network-mount.nix
     ../../modules/desktop
 #     ../../modules/desktop/plasma.nix
-    ../../modules/games.nix
+    # ../../modules/games.nix
     sops-nix.nixosModules.sops
   ];
 
@@ -26,7 +26,7 @@
   };
   
   # Was causing errors for me earlier, so I added this line
-  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
+  # systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
@@ -77,7 +77,7 @@
   ];
 
   # Enable CUPS to print documents.
-  services.printing.enable = false;
+  services.printing.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -93,12 +93,12 @@
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-#     enableSSHSupport = true;
-    enableBrowserSocket = true;
-  };
+#   programs.mtr.enable = true;
+#   programs.gnupg.agent = {
+#     enable = true;
+# #     enableSSHSupport = true;
+#     enableBrowserSocket = true;
+#   };
   
   # https://nixos.wiki/wiki/Nvidia
   # Load nvidia driver for Xorg and Wayland
