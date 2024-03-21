@@ -26,7 +26,7 @@
   };
   
   # Was causing errors for me earlier, so I added this line
-  # systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
