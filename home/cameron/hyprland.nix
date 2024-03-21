@@ -55,6 +55,7 @@
         "$mainMod, Y, exec, killall .waybar-wrapped ; waybar"
         "$mainMod, Y, exec, killall .fusuma-wrapped ; fusuma -d"
         "$mainMod, Y, exec, killall blueman-applet ; blueman-applet"
+        "$mainMod, Z, exec, ~/code/nixdots/scripts/resetxdgportal"
 
         # Media key binds
         ", XF86AudioMute, exec, pamixer -t"
