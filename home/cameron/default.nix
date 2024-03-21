@@ -66,13 +66,6 @@
   # };
 
   fonts.fontconfig.enable = true;
-
-  home.packages = with pkgs; [
-    (catppuccin-kvantum.override {
-      accent = "Mauve";
-      variant = "Mocha";
-    })
-  ];
   
   home.pointerCursor = {
     name = "Bibata-Modern-Ice";

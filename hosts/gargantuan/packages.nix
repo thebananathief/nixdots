@@ -38,7 +38,9 @@ in {
     audacity
     spicetify-cli # Needs to be installed even with the flake
     localsend
-    jetbrains.idea-community
+    # jetbrains.idea-community
+    vscode-fhs
+    obs-studio
 
     # tailscale-systray
     # trayscale
