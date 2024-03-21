@@ -40,6 +40,7 @@ in {
     # jetbrains.idea-community
     vscode-fhs
     obs-studio
+    mumble
 
     # tailscale-systray
     # trayscale
