@@ -42,7 +42,7 @@
       sshKeyPaths = [
         "/etc/ssh/ssh_host_ed25519"
       ];
-      keyFile = "/home/cameron/.config/sops/age/key.txt";
+      keyFile = "/home/cameron/.config/sops/age/keys.txt";
       generateKey = true;
     };
     # secrets = {
