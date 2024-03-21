@@ -33,7 +33,6 @@ in {
       scrolling = {
         history = 10000;
         multiplier = 3;
-        auto_scroll = false;
       };
       hints = {
         alphabet = "jfkdls;ahgurieowpq";
