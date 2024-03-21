@@ -192,7 +192,7 @@
         # "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 
         "wpaperd"
-        "waybar"
+        # "waybar"
         "blueman-applet"
         # "nm-applet --indicator" # started by nixos module
         "mega-cmd"
@@ -316,7 +316,7 @@
 
       # Not very documented, but enables blur under these gtk-layer-shell namespaces
       blurls = [
-        "waybar"
+        # "waybar"
       ];
 
       dwindle = {

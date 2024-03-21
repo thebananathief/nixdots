@@ -31,7 +31,7 @@
       libinput
       fusuma
       glib
-      waybar
+      # waybar
       handlr
       trashy
       yad # dialog cli
