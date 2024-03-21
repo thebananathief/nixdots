@@ -132,7 +132,7 @@
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
 
-        "$mainMod, F1, exec, ~/github/nixdots/scripts/gamemode" # disable hypr effects for gamemode
+        "$mainMod, F1, exec, ~/code/nixdots/scripts/gamemode" # disable hypr effects for gamemode
       ];
 
       binde = [
@@ -184,7 +184,7 @@
         "wl-paste --type image --watch cliphist store" #Stores only image data
 
         # Taken from CTT
-        # "~/github/nixdots/scripts/resetxdgportal"
+        # "~/code/nixdots/scripts/resetxdgportal"
         # For when xdg-desktop-portal-wlr doesn't want to start because these variables are missing
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
@@ -197,9 +197,9 @@
         "mega-cmd"
         "fusuma -d"
         "firefox"
-        "~/github/nixdots/scripts/batterynotify"
+        "~/code/nixdots/scripts/batterynotify"
         "kanshi"
-        "swayidle -w timeout 600 '~/github/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
+        "swayidle -w timeout 600 '~/code/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
         # "gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Mocha-Mauve'"
         "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
         "kvantummanager --set Catppuccin-Mocha-Mauve"
@@ -400,7 +400,7 @@
 
 
 # Window/Session actions
-#bind = ALT, F4, exec, ~/github/nixdots/scripts/dontkillsteam # killactive, kill the window on focus
+#bind = ALT, F4, exec, ~/code/nixdots/scripts/dontkillsteam # killactive, kill the window on focus
 #bind = $mainMod, delete, exit, # kill hyperland session
 #bind = $mainMod, W, togglefloating, # toggle the window on focus to float
 #bind = $mainMod, G, togglegroup, # toggle the window on focus to float

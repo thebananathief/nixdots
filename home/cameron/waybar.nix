@@ -47,7 +47,7 @@ in {
         "custom/power" = {
           format = "{}";
           exec = "echo ; echo  logout";
-          on-click = "~/github/nixdots/scripts/logoutlaunch";
+          on-click = "~/code/nixdots/scripts/logoutlaunch";
           interval = 86400;
           tooltip = true;
         };
@@ -80,7 +80,7 @@ in {
           on-scroll-up = "playerctl next";
           on-scroll-down = "playerctl previous";
           # exec is the tooltip display i think
-          # exec = "~/github/nixdots/scripts/spotifyvolumecontrol";
+          # exec = "~/code/nixdots/scripts/spotifyvolumecontrol";
           return-type = "json";
         };
 
@@ -143,9 +143,9 @@ in {
           format = "{icon} {volume}";
           format-muted = "婢";
           on-click = "pavucontrol -t 3";
-          on-click-middle = "~/github/nixdots/scripts/volumecontrol -o m";
-          on-scroll-up = "~/github/nixdots/scripts/volumecontrol -o i";
-          on-scroll-down = "~/github/nixdots/scripts/volumecontrol -o d";
+          on-click-middle = "~/code/nixdots/scripts/volumecontrol -o m";
+          on-scroll-up = "~/code/nixdots/scripts/volumecontrol -o i";
+          on-scroll-down = "~/code/nixdots/scripts/volumecontrol -o d";
           tooltip-format = "{icon} {desc} // {volume}%";
           scroll-step = 5;
           format-icons = {
@@ -164,9 +164,9 @@ in {
           format-source = "";
           format-source-muted = "";
           on-click = "pavucontrol -t 4";
-          on-click-middle = "~/github/nixdots/scripts/volumecontrol -i m";
-          on-scroll-up = "~/github/nixdots/scripts/volumecontrol -i i";
-          on-scroll-down = "~/github/nixdots/scripts/volumecontrol -i d";
+          on-click-middle = "~/code/nixdots/scripts/volumecontrol -i m";
+          on-scroll-up = "~/code/nixdots/scripts/volumecontrol -i i";
+          on-scroll-down = "~/code/nixdots/scripts/volumecontrol -i d";
           tooltip-format = "{format_source} {source_desc} // {source_volume}%";
           scroll-step = 5;
         };
