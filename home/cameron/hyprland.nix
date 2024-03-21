@@ -330,9 +330,9 @@
       gestures.workspace_swipe = true;
       gestures.workspace_swipe_fingers = 4;
 
-      device = {
-      
-      };
+      # device = {
+      # 
+      # };
       # "device:logitech-m510".sensitivity = 1.0;
       # "device:logitech-g203-prodigy-gaming-mouse".sensitivity = -0.2;
       # "device:pixa3854:00-093a:0274-touchpad".sensitivity = 1.0;
