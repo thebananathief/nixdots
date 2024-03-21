@@ -22,7 +22,6 @@ in {
         bold.style = "Bold";
         bold_italic.family = family;
         bold_italic.style = "Bold Italic";
-        autohint = true;
       };
       window = {
         opacity = 0.8;
