@@ -1,5 +1,5 @@
 keys:
-  - &admin_cameron_desktop age1zy4q5gexm35rey768sxuve8h26zj6uulagqg87vjy8383z0c7vgspk6386
+  - &admin_cameron_desktop age12ayxuscntza45a3j5p2luc0au8gsphlqns49sum2z98dtykhw5lsvw28fg
   - &admin_cameron_laptop age1htjdvcdqvwe8rxx23fz2aw97a6c2zxwwu84m25jugh779vqkfg4sg5c83z
   - &server_talos age15ygfzth73d2q3dm305qg53x6g9u9knau9fytvnrlut4u0usg5cpqeq4s5g
   - &laptop_gargantuan age1408qgh9ekswerw33ae2yzmfu8la4kq2szl2rwvslx6cpujsfr58ss6q9tx
@@ -47,10 +47,11 @@ creation_rules:
 # 1. Install ssh-to-age
   # go install github.com/Mic92/ssh-to-age/cmd/ssh-to-age@latest
   # nix-shell -p 'import (fetchTarball "https://github.com/Mic92/ssh-to-age/archive/main.tar.gz") {}'
-# 2. Create a key from an SSH priv key
+# 2. Create an age key from an SSH priv key
   # ssh-to-age -private-key -i $HOME/.ssh/id_ed25519 -o $HOME\AppData\Roaming\sops\age\keys.txt
   # ssh-to-age -private-key -i $HOME/.ssh/id_ed25519 -o $HOME/.config/sops/age/keys.txt
+  # cat /etc/ssh/ssh_host_ed25519.pub | ssh-to-age
 # 2. Create a key from an SSH host key
   # ssh-keyscan -t ed25519 192.168.0.6 | ssh-to-age
   # ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key -o $HOME\.config\sops\age\keys.txt
-  # other host keys at /etc/ssh
+# other host keys at /etc/ssh
