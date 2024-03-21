@@ -124,7 +124,7 @@
 
     # These are referenced by Thunar for the navigation tree
     gtk3.bookmarks = [
-      "file:///home/cameron/github"
+      "file:///home/cameron/code"
       "file:///home/cameron/MEGA"
       "file:///home/cameron/Pictures"
       "file:///home/cameron/Downloads"

@@ -46,7 +46,7 @@ creation_rules:
 
 # 1. Install ssh-to-age
   # go install github.com/Mic92/ssh-to-age/cmd/ssh-to-age@latest
-  # nix-shell -p 'import (fetchTarball "https://github.com/Mic92/ssh-to-age/archive/main.tar.gz") {}'
+  # nix-shell -p sops-to-age
 # 2. Create an age key from an SSH priv key
   # ssh-to-age -private-key -i $HOME/.ssh/id_ed25519 -o $HOME\AppData\Roaming\sops\age\keys.txt
   # ssh-to-age -private-key -i $HOME/.ssh/id_ed25519 -o $HOME/.config/sops/age/keys.txt

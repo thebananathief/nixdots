@@ -20,7 +20,7 @@ in
           home-manager.extraSpecialArgs = specialArgs;
           home-manager.users."${username}" = home-module;
         }
-        ../common
+        ../hosts/common
       ];
   }
 
