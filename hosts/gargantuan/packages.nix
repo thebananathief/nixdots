@@ -48,7 +48,8 @@ in {
 
   ## Electron apps
     obsidian
-    webcord
+    # webcord
+    discord
     bitwarden
     # wrapspotify
     spotify
@@ -61,7 +62,6 @@ in {
     # krita
     # libreoffice
     # zettlr
-    # discord
     # dbeaver
     # cage
   ];
