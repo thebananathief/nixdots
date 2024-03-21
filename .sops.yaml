@@ -47,11 +47,15 @@ creation_rules:
 # 1. Install ssh-to-age
   # go install github.com/Mic92/ssh-to-age/cmd/ssh-to-age@latest
   # nix-shell -p sops-to-age
-# 2. Create an age key from an SSH priv key
+   
+# 2. Create an private age key from a private SSH key and stow it at .config/sops/age
   # ssh-to-age -private-key -i $HOME/.ssh/id_ed25519 -o $HOME\AppData\Roaming\sops\age\keys.txt
   # ssh-to-age -private-key -i $HOME/.ssh/id_ed25519 -o $HOME/.config/sops/age/keys.txt
-  # cat /etc/ssh/ssh_host_ed25519.pub | ssh-to-age
+  
 # 2. Create a key from an SSH host key
-  # ssh-keyscan -t ed25519 192.168.0.6 | ssh-to-age
   # ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key -o $HOME\.config\sops\age\keys.txt
+  # cat /etc/ssh/ssh_host_ed25519.pub | ssh-to-age
+# Get remote host key (public)
+  # ssh-keyscan -t ed25519 192.168.0.6 | ssh-to-age
+  
 # other host keys at /etc/ssh
