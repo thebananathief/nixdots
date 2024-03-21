@@ -5,7 +5,8 @@ let
       paths = [ pkgs.obsidian ];
       buildInputs = [ pkgs.makeWrapper ];
       postBuild = ''
-        wrapProgram $out/bin/obsidian --disable-gpu
+        wrapProgram $out/bin/obsidian \
+          --add-flags "--disable-gpu"
       '';
     };
 in {
