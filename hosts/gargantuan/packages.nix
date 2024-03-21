@@ -48,8 +48,8 @@ in {
 
   ## Electron apps
     obsidian
-    # webcord
-    discord
+    webcord
+    # discord
     bitwarden
     # wrapspotify
     spotify
