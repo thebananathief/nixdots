@@ -128,7 +128,7 @@
       "file:///home/cameron/MEGA"
       "file:///home/cameron/Pictures"
       "file:///home/cameron/Downloads"
-      "file:///mnt/talos"
+      # "file:///mnt/talos"
     ];
   };
 
