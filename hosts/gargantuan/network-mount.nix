@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
-{
+{ config, 
+  pkgs, 
+  sops-nix,
+  ... 
+}: {
   environment.systemPackages = [ pkgs.cifs-utils ];
 
   sops.secrets = {
