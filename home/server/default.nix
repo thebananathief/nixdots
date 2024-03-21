@@ -45,7 +45,8 @@
 
     eza = {
       enable = true;
-      enableAliases = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
       icons = false;
       extraOptions = [
         "--all"
