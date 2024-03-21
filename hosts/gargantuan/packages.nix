@@ -1,15 +1,13 @@
 { pkgs, ... }:
 let
-    # wrapspotify = pkgs.symlinkJoin {
-    #   name = "spotify";
-    #   paths = [ pkgs.spotify ];
-    #   buildInputs = [ pkgs.makeWrapper ];
-    #   postBuild = ''
-    #     wrapProgram $out/bin/spotify \
-    #       --add-flags "--enable-features=UseOzonePlatform" \
-    #       --add-flags "--ozone-platform=wayland"
-    #   '';
-    # };
+    obsid = pkgs.symlinkJoin {
+      name = "obsid";
+      paths = [ pkgs.obsid ];
+      buildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/obsidian --disable-gpu
+      '';
+    };
 in {
   services.mullvad-vpn.enable = true;
   # pkgs.mullvad for CLI only, pkgs.mullvad-vpn for CLI and GUI
@@ -47,11 +45,10 @@ in {
     ktailctl
 
   ## Electron apps
-    obsidian
+    obsid
     webcord
     # discord
     bitwarden
-    # wrapspotify
     spotify
     libreoffice-qt
     hunspell
