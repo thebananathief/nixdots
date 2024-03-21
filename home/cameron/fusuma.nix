@@ -26,5 +26,5 @@
   };
 
   # Fusuma doesn't detect config.yaml, so we make a .yml link to it)
-  xdg.configFile."fusuma/config.yml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/fusuma/config.yaml";
+  # xdg.configFile."fusuma/config.yml".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/fusuma/config.yaml";
 }
