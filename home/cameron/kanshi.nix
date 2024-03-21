@@ -10,7 +10,7 @@
         outputs = [
           {
             criteria = "DP-2";
-            mode = "1920x1080@60.00000";
+            mode = "1920x1080@180";
             position = "0,0";
             scale = 1.0;
             adaptiveSync = false;
@@ -18,7 +18,7 @@
           }
           {
             criteria = "DP-3";
-            mode = "1920x1080@60.00000";
+            mode = "1920x1080@180";
             position = "0,-1080";
             scale = 1.0;
             adaptiveSync = false;
@@ -26,7 +26,7 @@
           }
           {
             criteria = "DP-1";
-            mode = "1920x1080@60.00000";
+            mode = "1920x1080@75";
             position = "1920,-500";
             transform = "90";
             scale = 1.0;
