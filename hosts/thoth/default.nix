@@ -16,7 +16,7 @@
     ../../modules/desktop
 #     ../../modules/desktop/plasma.nix
     ../../modules/games.nix
-    # sops-nix.nixosModules.sops
+    sops-nix.nixosModules.sops
   ];
 
   networking = {
@@ -42,7 +42,7 @@
       sshKeyPaths = [
         "/etc/ssh/ssh_host_ed25519"
       ];
-      keyFile = "/var/lib/sops-nix/key.txt";
+      keyFile = "/home/cameron/.config/sops/age/key.txt";
       generateKey = true;
     };
     # secrets = {
