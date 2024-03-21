@@ -37,7 +37,7 @@
         # "XDG_SESSION_TYPE,wayland"
 
         # Screen tearing
-        "WLR_DRM_NO_ATOMIC,1"
+        # "WLR_DRM_NO_ATOMIC,1"
       ];
 
       # https://wiki.hyprland.org/Configuring/Binds/
