@@ -1,8 +1,8 @@
 { pkgs, ... }:
 let
     obsid = pkgs.symlinkJoin {
-      name = "obsid";
-      paths = [ pkgs.obsid ];
+      name = "obsidian";
+      paths = [ pkgs.obsidian ];
       buildInputs = [ pkgs.makeWrapper ];
       postBuild = ''
         wrapProgram $out/bin/obsidian --disable-gpu
