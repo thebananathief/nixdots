@@ -41,6 +41,7 @@ in {
     vscode-fhs
     obs-studio
     mumble
+    zbar
 
     # tailscale-systray
     # trayscale
