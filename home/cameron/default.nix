@@ -133,7 +133,7 @@
     ];
   };
 
-  home.packages = with pkgs; = [
+  home.packages = with pkgs; [
     # Yazi previewers
     unar
     ffmpegthumbnailer
