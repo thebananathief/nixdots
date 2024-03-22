@@ -26,7 +26,6 @@
     };
     aliases = {
       a = "add --all";
-      b = "branch";
       c = "commit";
       ca = "commit --amend";
       cm = "commit -m";
