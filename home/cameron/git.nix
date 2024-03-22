@@ -3,6 +3,7 @@
     enable = true;
     userName = "thebananathief";
     userEmail = "cameron.salomone@gmail.com";
+    lfs.enable = true;
     ignores = [ "*~" "*.swp" "*result*" ".direnv" "node_modules" ];
     extraConfig = {
       init.defaultBranch = "main";
