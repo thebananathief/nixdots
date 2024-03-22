@@ -91,7 +91,7 @@
       # font-antialiasing = "rgba";
       # font-hinting = "full";
     };
-    "org/cinnamon/desktop/default-applications".terminal = "exec alacritty";
+    "org/cinnamon/desktop/default-applications".terminal = "exec alacritty --working-directory %f";
   };
 
   gtk = {
