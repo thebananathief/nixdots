@@ -4,16 +4,20 @@
   # This only configures the flake, not the system
   nixConfig = {
     experimental-features = [ "nix-command" "flakes" ];
-
-    substituters = [
+    trusted-users = [ "root" "@wheel" ];
+    auto-optimise-store = true;
+    builders-use-substitutes = true;
+    trusted-substituters = [
       "https://cache.nixos.org/?priority=5"
       "https://nix-community.cachix.org?priority=10"
+      "https://ai.cachix.org"
       "https://anyrun.cachix.org"
       # "https://pre-commit-hooks.cachix.org"
     ];
     extra-trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
       "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
       # "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
     ];
