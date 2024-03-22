@@ -69,6 +69,8 @@
       # mpd # audio player
       # mpc-cli # cli mpd interface
       # ncmpcpp # curses mpd interface
+
+      gnome.nautilus
     ]) ++ (with pkgs.libsForQt5; [
       # elisa
       # okular
@@ -78,7 +80,7 @@
       # polkit-qt
       polkit-kde-agent
       qt5.qtwayland
-      dolphin
+      # dolphin
     ]);
   };
 
