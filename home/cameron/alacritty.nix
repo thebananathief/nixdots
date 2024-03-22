@@ -24,7 +24,7 @@ in {
         bold_italic.style = "Bold Italic";
       };
       window = {
-        opacity = 0.8;
+        opacity = 0.85;
         padding.x = 2;
         padding.y = 2;
       };
