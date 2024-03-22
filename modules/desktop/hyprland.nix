@@ -84,6 +84,10 @@
     ]);
   };
 
+  programs.nautilus-open-any-terminal.enable = true;
+  programs.nautilus-open-any-terminal.terminal = "alacritty";
+  services.gnome.sushi.enable = true;
+
   security = {
     #pam.services.greetd.gnupg.enable = true;
     pam.services.waylock.text = "auth include login";
