@@ -133,6 +133,14 @@
     ];
   };
 
+  home.packages = with pkgs; = [
+    # Yazi previewers
+    unar
+    ffmpegthumbnailer
+    jq
+    poppler
+  ];
+  
   programs = {
     home-manager.enable = true;
 

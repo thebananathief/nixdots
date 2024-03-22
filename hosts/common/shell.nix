@@ -16,10 +16,10 @@
       alejandra # nix format
 
     # Yazi previewers
-      unar
-      ffmpegthumbnailer
-      jq
-      poppler
+      # unar
+      # ffmpegthumbnailer
+      # jq
+      # poppler
 
     ## Neovim
       tree-sitter
@@ -68,7 +68,7 @@
       syntaxHighlighting.enable = true;
     };
 
-    yazi.enable = true;
+    # yazi.enable = true;
 
     neovim = {
       enable = true;
