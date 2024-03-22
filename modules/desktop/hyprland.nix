@@ -71,6 +71,7 @@
       # ncmpcpp # curses mpd interface
 
       gnome.nautilus
+      cinnamon.nemo-with-extensions
     ]) ++ (with pkgs.libsForQt5; [
       # elisa
       # okular
