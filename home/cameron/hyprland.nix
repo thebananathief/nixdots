@@ -15,7 +15,7 @@
     settings = {
       "$mainMod" = "SUPER";
       "$terminal" = "alacritty";
-      "$files" = "thunar";
+      "$files" = "nemo";
       "$browser" = "firefox";
       "$runner" = "anyrun";
       "$volume" = "~/code/nixdots/scripts/volumecontrol";
