@@ -70,7 +70,7 @@
       # mpc-cli # cli mpd interface
       # ncmpcpp # curses mpd interface
 
-      gnome.nautilus
+      # gnome.nautilus
       cinnamon.nemo-with-extensions
     ]) ++ (with pkgs.libsForQt5; [
       # elisa
@@ -100,8 +100,8 @@
     hyprland.xwayland.enable = true;
 
     # GUI file explorer
-    thunar.enable = true;
-    thunar.plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
+    # thunar.enable = true;
+    # thunar.plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
 
     # GNOME network manager tray icon
     nm-applet.enable = true;
@@ -116,8 +116,8 @@
 
   services = {
     # Addons for thunar to detect USB devices and display thumbnails
-    gvfs.enable = true;
-    tumbler.enable = true;
+    # gvfs.enable = true;
+    # tumbler.enable = true;
 
     udisks2.enable = true;
     blueman.enable = true;
