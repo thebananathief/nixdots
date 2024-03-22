@@ -12,7 +12,7 @@
         enable = true;
         theme = "avit";
         plugins = [
-          "git"
+          # "git"
           "git-auto-fetch"
           "sudo"
           "fzf"

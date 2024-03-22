@@ -43,6 +43,10 @@
       forgor = "commit --amend --no-edit";
       graph = "log --all --decorate --graph --oneline";
       oops = "checkout --";
+
+      g = "lazygit";
+      t = "push";
+      b = "pull";
     };
   };
 }
