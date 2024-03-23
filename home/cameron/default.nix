@@ -117,11 +117,11 @@
 
   gtk = {
     enable = true;
-    # font = {
-    #   name = "Lexend";
-    #   package = pkgs.lexend;
-    #   size = 10;
-    # };
+    font = {
+      name = "Lexend";
+      package = pkgs.lexend;
+      size = 10;
+    };
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
@@ -188,17 +188,6 @@
 
     bat = {
       enable = true;
-      # themes = {
-      #   catppuccin = {
-      #     src = pkgs.fetchFromGitHub {
-      #       owner = "catppuccin";
-      #       repo = "bat";
-      #       rev = "ba4d16880d63e656acced2b7d4e034e4a93f74b1";
-      #       sha256 = "8dda4ec4bac3fc29a2a8941a8b0756a8a16623bee1ff5bcfe1433aae74ca3453";
-      #     };
-      #     file = "Catppuccin-mocha.tmTheme";
-      #   };
-      # };
       config = {
         theme = "Catppuccin-mocha";
       };
