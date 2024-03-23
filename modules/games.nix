@@ -14,6 +14,7 @@
   };
   environment.systemPackages = with pkgs; [
     steam-run
+    duckstation
     prismlauncher
     protonup-qt
     protontricks
