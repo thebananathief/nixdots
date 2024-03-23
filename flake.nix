@@ -65,7 +65,7 @@
       system = "x86_64-linux";
       nixosSystem = import ./lib/nixosSystem.nix;
       specialArgs = {
-        inherit username useremail globalFonts;
+        inherit username useremail globalFonts nix-colors;
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;

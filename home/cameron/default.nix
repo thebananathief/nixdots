@@ -1,5 +1,6 @@
-{ pkgs, lib, inputs, globalFonts, ... }: rec {
+{ pkgs, lib, inputs, globalFonts, nix-colors, ... }: rec {
   imports = [
+    nix-colors.homeManagerModules.default
     ./xdg.nix
     ./git.nix
     ./alacritty.nix
