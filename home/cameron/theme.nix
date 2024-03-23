@@ -1,11 +1,12 @@
 { pkgs, globalFonts, nix-colors, ... }: rec {
-  imports = [
-    nix-colors.homeManagerModules.default
-  ];
+  # imports = [
+  #   nix-colors.homeManagerModules.default
+  # ];
 
   # https://www.youtube.com/watch?v=jO2o0IN0LPE for help
-  colorScheme = nix-colors.colorSchemes.brogrammer;
+  # colorScheme = nix-colors.colorSchemes.brogrammer;
 
+  # https://www.youtube.com/watch?v=m_6eqpKrtxk theming help
   fonts.fontconfig.enable = true;
   
   home.pointerCursor = {
@@ -59,7 +60,11 @@
     # GDK_SCALE = "1";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-    # QT_FONT_DPI = "1";
+    QT_FONT_DPI = "128";
+    
+    # handled by fontconfig i think
+    # "XCURSOR_SIZE,24"
+    # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
   };
 
   dconf.settings = {
@@ -73,9 +78,4 @@
   };
 
   programs.bat.config.theme = "Catppuccin-mocha";
-
-#   xdg.configFile."bat/themes/Catppuccin-mocha.tmTheme".source = pkgs.fetchurl {
-#     url = "https://raw.githubusercontent.com/catppuccin/bat/main/themes/Catppuccin%20Mocha.tmTheme";
-#     sha256 = "a8c40d2466489a68ebab3cbb222124639221bcf00c669ab45bab242cbb2783fc";
-#   };
 }
