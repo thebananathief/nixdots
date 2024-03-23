@@ -22,6 +22,7 @@
         "RobotoMono"
       ];})
     ];
+    fontconfig.enable = true;
     fontconfig.defaultFonts = {
       serif = [globalFonts.serif "Noto Color Emoji"];
       sansSerif = [globalFonts.sansSerif "Noto Color Emoji"];
