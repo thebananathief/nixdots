@@ -24,7 +24,7 @@
       "$brightness" = "~/code/nixdots/scripts/brightnesscontrol";
       "$screenshot" = "~/code/nixdots/scripts/screenshot";
 
-      # env = [
+      env = [
         # QT uses these
         # "XCURSOR_SIZE,24"
         # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
@@ -38,7 +38,7 @@
 
         # Screen tearing
         # "WLR_DRM_NO_ATOMIC,1"
-      # ];
+      ];
 
       # https://wiki.hyprland.org/Configuring/Binds/
       bind = [
