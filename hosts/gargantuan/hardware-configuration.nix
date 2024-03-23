@@ -16,13 +16,6 @@
        consoleMode = "max";
       };
       efi.canTouchEfiVariables = true;
-      #efi.efiSysMountPoint = "/boot/efi";
-      # grub = {
-      #   enable = true;
-      #   device = "nodev";
-      #   efiSupport = true;
-      #   fontSize = 48;
-      # };
     };
 
     initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
