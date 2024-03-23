@@ -65,7 +65,7 @@
       system = "x86_64-linux";
       nixosSystem = import ./lib/nixosSystem.nix;
       specialArgs = {
-        inherit username useremail globalFonts nix-colors;
+        inherit username useremail globalFonts;
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
@@ -77,7 +77,7 @@
     in {
       nixosConfigurations = let
         # This feeds in everything we need at ./lib/nixosSystem.nix
-        base_args = { inherit home-manager nixpkgs system specialArgs; };
+        base_args = { inherit home-manager nixpkgs system specialArgs nix-colors; };
       in {
         gargantuan = nixosSystem ({
           nixos-modules = [ ./hosts/gargantuan ];
