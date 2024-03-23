@@ -119,7 +119,7 @@
     enable = true;
     font = {
       name = "${globalFonts.sansSerif}";
-      package = pkgs.lexend;
+      # package = pkgs.lexend;
       size = 10;
     };
     iconTheme = {
