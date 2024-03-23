@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, globalFonts, nix-colors, ... }: rec {
+{ pkgs, globalFonts, nix-colors, ... }: rec {
   imports = [
     nix-colors.homeManagerModules.default
   ];
