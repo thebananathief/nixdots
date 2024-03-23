@@ -23,7 +23,8 @@
         "application/x-7z-compressed" = archive;
 
         "text/html" = browser;
-        "text/xml" = browser;
+        "text/xml" = editTerminal;
+        "text/plain" = editTerminal;
 
         "x-scheme-handler/about" = browser;
         "x-scheme-handler/chrome" = [ "chromium-browser.desktop" ];
@@ -38,7 +39,6 @@
         "application/rss+xml" = browser;
         "application/rdf+xml" = browser;
         "application/xml" = browser;
-        "text/plain" = editTerminal;
 
         "x-scheme-handler/discord" = ["discord.desktop"];
         "x-scheme-handler/tg" = ["telegramdesktop.desktop"];

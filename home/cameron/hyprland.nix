@@ -26,18 +26,18 @@
 
       env = [
         # QT uses these
-         # "XCURSOR_SIZE,24"
+        # "XCURSOR_SIZE,24"
         # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
 
         # NVIDIA stuff
         # "GBM_BACKEND,nvidia-drm"
-        "WLR_NO_HARDWARE_CURSORS,1"
+        # "WLR_NO_HARDWARE_CURSORS,1"
         # "LIBVA_DRIVER_NAME,nvidia"
         # "__GLX_VENDOR_LIBRARY_NAME,nvidia"
         # "XDG_SESSION_TYPE,wayland"
 
         # Screen tearing
-        "WLR_DRM_NO_ATOMIC,1"
+        # "WLR_DRM_NO_ATOMIC,1"
       ];
 
       # https://wiki.hyprland.org/Configuring/Binds/

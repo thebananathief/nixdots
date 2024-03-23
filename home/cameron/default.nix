@@ -20,8 +20,8 @@
   home.username = "cameron";
   # home.homeDirectory = "/home/cameron";
 
-  # home.sessionVariables = {
-  systemd.user.sessionVariables = {
+  home.sessionVariables = {
+  # systemd.user.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
     # SHELL = "zsh";
@@ -46,14 +46,32 @@
     # GDK_SCALE = "1";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-
+    # QT_FONT_DPI = "1";
+    
     # EXPERIMENTAL: breaks some electron apps
     # Also makes a lot of electron apps use wayland
     NIXOS_OZONE_WL = "1";
     # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    
+
+    # FROM HYPRLAND.nix
+  
+    # QT uses these
+    # "XCURSOR_SIZE,24"
+    # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
+
+    # NVIDIA stuff
+    # "GBM_BACKEND,nvidia-drm"
+    "WLR_NO_HARDWARE_CURSORS,1"
+    # "LIBVA_DRIVER_NAME,nvidia"
+    # "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+    # "XDG_SESSION_TYPE,wayland"
+
+    # Screen tearing
+    "WLR_DRM_NO_ATOMIC,1"
   };
 
-  home.sessionVariables = systemd.user.sessionVariables;
+  # home.sessionVariables = systemd.user.sessionVariables;
 
   # Install dotfiles repo and link configs
   # home.file."github/dotfiles" = {
@@ -96,11 +114,11 @@
 
   gtk = {
     enable = true;
-    font = {
-      name = "Lexend";
-      package = pkgs.lexend;
-      size = 10;
-    };
+    # font = {
+    #   name = "Lexend";
+    #   package = pkgs.lexend;
+    #   size = 10;
+    # };
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
