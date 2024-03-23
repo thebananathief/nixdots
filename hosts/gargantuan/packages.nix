@@ -1,5 +1,6 @@
 { pkgs, ... }:
 let
+    # Fixed crashes from EGL something rather
     obsid = pkgs.symlinkJoin {
       name = "obsidian";
       paths = [ pkgs.obsidian ];
