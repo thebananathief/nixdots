@@ -51,16 +51,6 @@
     # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
 
     # FROM HYPRLAND.nix
-    # QT uses these
-    # "XCURSOR_SIZE,24"
-    # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
-
-    # NVIDIA stuff
-    GBM_BACKEND = "nvidia-drm";
-    WLR_NO_HARDWARE_CURSORS = "1";
-    LIBVA_DRIVER_NAME = "nvidia";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    XDG_SESSION_TYPE = "wayland";
 
     # Screen tearing
     WLR_DRM_NO_ATOMIC = "1";
