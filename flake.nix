@@ -39,6 +39,8 @@
 
     spicetify-nix.url = "github:the-argus/spicetify-nix";
 
+    nix-colors.url = "github:misterio77/nix-colors";
+
     # Something like this if you want to move secrets to a completely private repo
     # mysecrets = {
     #   url = "git+ssh://git@github.com/thebananathief/nix-secrets.git?shallow=1";
@@ -63,7 +65,7 @@
       system = "x86_64-linux";
       nixosSystem = import ./lib/nixosSystem.nix;
       specialArgs = {
-        inherit username useremail globalFonts;
+        inherit username useremail globalFonts nix-colors;
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;

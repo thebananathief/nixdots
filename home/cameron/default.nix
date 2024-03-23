@@ -1,5 +1,6 @@
 { pkgs, lib, inputs, globalFonts, ... }: rec {
   imports = [
+    inputs.nix-colors.homeManagerModules.default
     ./xdg.nix
     ./git.nix
     ./alacritty.nix
@@ -16,6 +17,8 @@
     ./dunst.nix
     # ./vscode.nix
   ];
+
+  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
 
   home.username = "cameron";
   # home.homeDirectory = "/home/cameron";
