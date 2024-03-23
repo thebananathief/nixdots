@@ -18,7 +18,7 @@
     # ./vscode.nix
   ];
 
-  # colorScheme = inputs.nix-colors.colorSchemes.brogrammer;
+  colorScheme = nix-colors.colorSchemes.brogrammer;
 
   home.username = "cameron";
   # home.homeDirectory = "/home/cameron";
