@@ -4,11 +4,11 @@
   ];
 
   # make HM-managed GTK stuff work
-  programs.dconf.enable = true;
+  # programs.dconf.enable = true;
 
-  qt.enable = true;
-  qt.platformTheme = "qt5ct";
-  qt.style = "kvantum";
+  # qt.enable = true;
+  # qt.platformTheme = "qt5ct";
+  # qt.style = "kvantum";
 
   environment = {
     systemPackages = with pkgs; [

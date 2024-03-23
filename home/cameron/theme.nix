@@ -20,7 +20,8 @@
 
   qt = {
     enable = true;
-    platformTheme = "qtct";
+    # platformTheme = "qtct";
+    platformTheme = "gtk";
     style.name = "kvantum";
   };
 
