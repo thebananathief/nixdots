@@ -118,7 +118,7 @@
   gtk = {
     enable = true;
     font = {
-      name = "Lexend";
+      name = "${globalFonts.sansSerif}";
       package = pkgs.lexend;
       size = 10;
     };
