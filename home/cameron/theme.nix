@@ -4,7 +4,7 @@
   ];
 
   # https://www.youtube.com/watch?v=jO2o0IN0LPE for help
-  colorScheme = nix-colors.colorSchemes.brogrammer;
+  # colorScheme = nix-colors.colorSchemes.brogrammer;
 
   fonts.fontconfig.enable = true;
   
