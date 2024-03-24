@@ -25,7 +25,6 @@
   # systemd.user.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
-    # SHELL = "zsh";
     TERMINAL = "alacritty";
     BROWSER = "firefox";
 
@@ -35,8 +34,8 @@
     _JAVA_AWT_WM_NONREPARENTING = "1";
 
     # Mozilla wayland support
-    MOZ_ENABLE_WAYLAND = "1";
-    MOZ_WEBRENDER = "1";
+    # MOZ_ENABLE_WAYLAND = "1";
+    # MOZ_WEBRENDER = "1";
 
     SDL_VIDEODRIVER = "wayland";
     CLUTTER_BACKEND = "wayland";
@@ -44,14 +43,14 @@
     # GTK_USE_PORTAL = "1";
     GDK_BACKEND = "wayland";
     # GDK_BACKEND = "wayland,x11";
-    
+  };
+
+  systemd.user.sessionVariables = {
     # EXPERIMENTAL: breaks some electron apps
     # Also makes a lot of electron apps use wayland
     NIXOS_OZONE_WL = "1";
     # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
   };
-
-  # home.sessionVariables = systemd.user.sessionVariables;
 
   # Install dotfiles repo and link configs
   # home.file."github/dotfiles" = {
