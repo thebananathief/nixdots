@@ -43,6 +43,7 @@ in {
     obs-studio
     mumble
     zbar
+    jellyfin-media-player
 
     # tailscale-systray
     # trayscale
