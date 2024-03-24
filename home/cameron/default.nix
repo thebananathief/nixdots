@@ -43,14 +43,14 @@
     # GTK_USE_PORTAL = "1";
     GDK_BACKEND = "wayland";
     # GDK_BACKEND = "wayland,x11";
-  };
-
-  systemd.user.sessionVariables = {
+    
     # EXPERIMENTAL: breaks some electron apps
     # Also makes a lot of electron apps use wayland
     NIXOS_OZONE_WL = "1";
     # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
   };
+
+  systemd.user.sessionVariables = home.sessionVariables;
 
   # Install dotfiles repo and link configs
   # home.file."github/dotfiles" = {
