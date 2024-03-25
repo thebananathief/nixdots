@@ -6,7 +6,7 @@ cd "$(dirname "$0")"
 
 old=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
 echo "---- OLD GENERATION $old ----"
-git add . && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z') gen $old"
+git add . && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z') gen $old" || true
 # sync up
 git pull
 git push
