@@ -44,6 +44,7 @@ in {
     mumble
     zbar
     delfin
+    bottles
 
     # tailscale-systray
     # trayscale
