@@ -20,7 +20,7 @@
     # POLKIT_AUTH_AGENT = "${pkgs.libsForQt5.polkit-qt}/lib/libpolkit-qt5-agent-1.so.1.114.0";
   };
   
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = (with pkgs; [
     kanshi
     dunst
     trashy
