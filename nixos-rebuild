@@ -1,11 +1,15 @@
 #!/usr/bin/env sh
+set -e
 
 # cd $HOME/github/nixdots
 cd "$(dirname "$0")"
-git pull
 
 old=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
 echo "---- OLD GENERATION $old ----"
+git add . && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z') gen $old"
+# sync up
+git pull
+git push
 
 sudo nixos-rebuild --flake '.#' "$@"
 # --show-trace --option eval-cache false --fast
