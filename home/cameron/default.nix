@@ -12,7 +12,8 @@
     # ./waybar.nix
     ./wlogout.nix
     ./kanshi.nix
-    ./hyprland.nix
+    # ./hyprland.nix
+    ./sway.nix
     ./dunst.nix
     # ./vscode.nix
     ./theme.nix
@@ -20,37 +21,6 @@
 
   home.username = "cameron";
   # home.homeDirectory = "/home/cameron";
-
-  home.sessionVariables = {
-  # systemd.user.sessionVariables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim";
-    TERMINAL = "alacritty";
-    BROWSER = "firefox";
-
-    # Wakefield is the java wayland implementation
-    # But OJDK16 can load in GTK3
-    # This var fixes blank screens on launch
-    _JAVA_AWT_WM_NONREPARENTING = "1";
-
-    # Mozilla wayland support
-    # MOZ_ENABLE_WAYLAND = "1";
-    # MOZ_WEBRENDER = "1";
-
-    SDL_VIDEODRIVER = "wayland";
-    CLUTTER_BACKEND = "wayland";
-    WLR_RENDERER = "vulkan";
-    # GTK_USE_PORTAL = "1";
-    GDK_BACKEND = "wayland";
-    # GDK_BACKEND = "wayland,x11";
-    
-    # EXPERIMENTAL: breaks some electron apps
-    # Also makes a lot of electron apps use wayland
-    NIXOS_OZONE_WL = "1";
-    # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
-  };
-
-  systemd.user.sessionVariables = home.sessionVariables;
 
   # Install dotfiles repo and link configs
   # home.file."github/dotfiles" = {
@@ -62,6 +32,12 @@
   #   target = "./github/dotfiles";
   # };
 
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+    TERMINAL = "alacritty";
+    BROWSER = "firefox";
+  };
 
   dconf.settings = {
     "org/cinnamon/desktop/applications/terminal".exec = "alacritty";

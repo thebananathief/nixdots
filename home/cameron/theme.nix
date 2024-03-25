@@ -55,18 +55,7 @@
       .nautilus-list-view #NautilusViewCell { padding: 0px; }
     '';
   };
-
-  home.sessionVariables = {
-    # GDK_SCALE = "1";
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-    # QT_FONT_DPI = "128";
-    
-    # handled by fontconfig i think
-    # "XCURSOR_SIZE,24"
-    # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
-  };
-
+  
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";

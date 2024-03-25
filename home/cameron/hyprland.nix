@@ -1,4 +1,41 @@
 { pkgs, config, ... }: rec {
+  home.sessionVariables = {
+  # systemd.user.sessionVariables = {
+    # Fix for some Java AWT applications (e.g. Android Studio), this var fixes blank screens on launch
+    _JAVA_AWT_WM_NONREPARENTING = "1";
+
+    # Mozilla wayland support
+    # MOZ_ENABLE_WAYLAND = "1";
+    # MOZ_WEBRENDER = "1";
+
+    # For SDL2, NOTE: Steam, most games and other binary apps may not work with "wayland" SDL driver, unset or tweak for specific apps
+    SDL_VIDEODRIVER = "wayland";
+    
+    CLUTTER_BACKEND = "wayland";
+    WLR_RENDERER = "vulkan";
+    # GTK_USE_PORTAL = "1";
+    
+    # GTK3 selects wayland by default, these break some apps if you set them (sway docs)
+    # GDK_BACKEND = "wayland";
+    # GDK_BACKEND = "wayland,x11";
+    
+    # EXPERIMENTAL: breaks some electron apps
+    # Also makes a lot of electron apps use wayland
+    NIXOS_OZONE_WL = "1";
+    # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    
+    # GDK_SCALE = "1";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    # QT_FONT_DPI = "128";
+    
+    # handled by fontconfig i think
+    # "XCURSOR_SIZE,24"
+    # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
+  };
+
+  systemd.user.sessionVariables = home.sessionVariables;
+  
   programs.wpaperd = {
     enable = true;
     settings = {
