@@ -11,6 +11,7 @@
     # For SDL2, NOTE: Steam, most games and other binary apps may not work with "wayland" SDL driver, unset or tweak for specific apps
     SDL_VIDEODRIVER = "wayland";
     
+    XDG_SESSION_TYPE = "wayland";
     CLUTTER_BACKEND = "wayland";
     WLR_RENDERER = "vulkan";
     # GTK_USE_PORTAL = "1";
@@ -23,7 +24,7 @@
     # Also makes a lot of electron apps use wayland
     NIXOS_OZONE_WL = "1";
     # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
-    
+        
     # GDK_SCALE = "1";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
@@ -68,11 +69,9 @@
 
         # NVIDIA stuff
         # "GBM_BACKEND,nvidia-drm"
-        # "GBM_BACKEND,nvidia-drm"
         "WLR_NO_HARDWARE_CURSORS,1"
         "LIBVA_DRIVER_NAME,nvidia"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        "XDG_SESSION_TYPE,wayland"
 
         # Screen tearing
         "WLR_DRM_NO_ATOMIC,1"

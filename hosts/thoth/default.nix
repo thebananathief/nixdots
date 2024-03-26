@@ -14,8 +14,6 @@
     ../gargantuan/packages.nix
     ../gargantuan/network-mount.nix
     ../../modules/desktop
-#     ../../modules/desktop/plasma.nix
-    # ../../modules/games.nix
     sops-nix.nixosModules.sops
   ];
 

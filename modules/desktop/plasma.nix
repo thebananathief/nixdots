@@ -1,7 +1,8 @@
-{ pkgs,
-  ...
-}:
-{
+{ pkgs, ... }: {
+  imports = [
+    ../games.nix
+  ];
+
   services.xserver = {
     displayManager.sddm.enable = true;
 #    displayManager.defaultSession = "plasmawayland";
