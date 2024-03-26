@@ -62,7 +62,7 @@
       grim # screen capture for screenshots
 
       nwg-drawer
-      # nwg-displays # seemed broken last i checked
+      nwg-displays # seemed broken last i checked
       # wlr-randr
 
     # Media
