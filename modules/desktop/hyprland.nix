@@ -2,15 +2,26 @@
 # This module's purpose is to install a full desktop environment with Hyprland
 # as the Window Manager. The scope of this should be as large as GNOME or Plasma.
 
-  # services.xserver.displayManager = {
-  #   defaultSession = "hyprland";
-  #   gdm.enable = true;
-  #   gdm.wayland = true;
-  # };
+  services.xserver.displayManager = {
+    defaultSession = "hyprland";
+    gdm.enable = true;
+    gdm.wayland = true;
+  };
 
-  environment.loginShellInit = ''
-    [[ "$(tty)" == /dev/tty1 ]] && Hyprland
-  '';
+  # systemd.tmpfiles.rules = [
+  #   "L+ /run/gdm/.config/monitors.xml - - - - ${pkgs.writeText "gdm-monitors.xml}" ''
+  #     <!-- this should all be copied from your ~/.config/monitors.xml -->
+  #     <monitors version="2">
+  #       <configuration>
+  #           <!-- REDACTED -->
+  #       </configuration>
+  #     </monitors>
+  #   ''}"
+  # ];
+
+  # environment.loginShellInit = ''
+  #   [[ "$(tty)" == /dev/tty1 ]] && Hyprland
+  # '';
   
   security.polkit.enable = true;
 
