@@ -247,7 +247,7 @@
 
       # See https://wiki.hyprland.org/Configuring/Monitors/
       # Handled by Kanshi now
-      monitor = [
+      # monitor = [
         # TODO: I need a better way to separate my home config for my laptop and my desktop
         # desktop
         # "HDMI-A-1, 1920x1080@144, 0x0, 1"
@@ -265,9 +265,9 @@
 
         # catchall monitor rule
         # ", preferred, auto, 1"
-      ];
+      # ];
 
-      workspace = [
+      # workspace = [
         # desktop setup
         # "1, monitor:HDMI-A-1, default:true"
         # "2, monitor:DP-3, default:true"
@@ -281,7 +281,7 @@
         # "3, monitor:DP-8, default:true, persistent:true"
         # "2, monitor:HP Inc. HP V24 1CR0440LFS, default:true, persistent:true"
         # "3, monitor:HP Inc. HP V214a CNC7160VL4, default:true, persistent:true"
-      ];
+      # ];
 
       # xwayland = {
       #   use_nearest_neighbor = true;
