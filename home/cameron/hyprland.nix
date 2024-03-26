@@ -247,12 +247,16 @@
 
       # See https://wiki.hyprland.org/Configuring/Monitors/
       # Handled by Kanshi now
-      # monitor = [
+      monitor = [
         # TODO: I need a better way to separate my home config for my laptop and my desktop
         # desktop
         # "HDMI-A-1, 1920x1080@144, 0x0, 1"
         # "DP-3, 1920x1080@60, 0x-1080, 1"
         # "DP-1, 1920x1080@75.001, 1920x-500, 1, transform, 1"
+        "DP-1,1920x1080@60.0,0x0,1.0"
+        "DP-2,1920x1080@60.0,0x1080,1.0"
+        "DP-3,1920x1080@60.0,1920x240,1.0"
+        "DP-3,transform,1"
 
         # laptop @ work
         # "eDP-1, highres, 0x0, auto"
@@ -265,7 +269,7 @@
 
         # catchall monitor rule
         # ", preferred, auto, 1"
-      # ];
+      ];
 
       # workspace = [
         # desktop setup

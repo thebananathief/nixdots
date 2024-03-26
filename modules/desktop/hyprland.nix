@@ -63,7 +63,7 @@
 
       nwg-drawer
       nwg-displays # seemed broken last i checked
-      wlr-randr # req'd
+      wlr-randr # req'd by nwg-displays
 
     # Media
       zathura # docs
