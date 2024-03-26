@@ -8,6 +8,10 @@
   #   gdm.wayland = true;
   # };
 
+  environment.loginShellInit = ''
+    [[ "$(tty)" == /dev/tty1 ]] && Hyprland
+  '';
+  
   security.polkit.enable = true;
 
   environment = {
