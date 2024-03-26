@@ -100,29 +100,27 @@
 #     enableBrowserSocket = true;
 #   };
 
-  services.ollama = {
-    enable = true;
-    listenAddress = "127.0.0.1:11434";
-    acceleration = "cuda";
-  };
+  # services.ollama = {
+  #   enable = true;
+  #   listenAddress = "127.0.0.1:11434";
+  #   acceleration = "cuda";
+  # };
   
   # https://nixos.wiki/wiki/Nvidia
   # Load nvidia driver for Xorg and Wayland
   boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia = {
-    # Defaults from article above - all these are experimental
+    # stable or beta should work for most modern cards
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # required
     modesetting.enable = true;
+    # Defaults from article above - all these are experimental
     powerManagement.enable = false;
     powerManagement.finegrained = false;
     open = false;
-
     # Enable the Nvidia settings menu, accessible via `nvidia-settings`.
     nvidiaSettings = true;
-    
-    # stable or beta should work for most modern cards
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-
     prime.offload.enable = false;
   };
   
