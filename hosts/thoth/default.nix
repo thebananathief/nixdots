@@ -108,21 +108,21 @@
   
   # https://nixos.wiki/wiki/Nvidia
   # Load nvidia driver for Xorg and Wayland
-  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
-  services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia = {
-    # stable or beta should work for most modern cards
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    # required
-    modesetting.enable = true;
-    # Defaults from article above - all these are experimental
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = false;
-    # Enable the Nvidia settings menu, accessible via `nvidia-settings`.
-    nvidiaSettings = true;
-    prime.offload.enable = false;
-  };
+  # boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+  # services.xserver.videoDrivers = ["nvidia"];
+  # hardware.nvidia = {
+  #   # stable or beta should work for most modern cards
+  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #   # required
+  #   modesetting.enable = true;
+  #   # Defaults from article above - all these are experimental
+  #   powerManagement.enable = false;
+  #   powerManagement.finegrained = false;
+  #   open = false;
+  #   # Enable the Nvidia settings menu, accessible via `nvidia-settings`.
+  #   nvidiaSettings = true;
+  #   prime.offload.enable = false;
+  # };
   
   hardware.opengl = {
     enable = true;
