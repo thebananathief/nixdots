@@ -12,8 +12,8 @@
     # ./waybar.nix
     ./wlogout.nix
     ./kanshi.nix
-    # ./hyprland.nix
-    ./sway.nix
+    ./hyprland.nix
+    # ./sway.nix
     ./dunst.nix
     # ./vscode.nix
     ./theme.nix

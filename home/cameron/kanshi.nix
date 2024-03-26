@@ -1,9 +1,9 @@
-{ ... }:
+{ config, ... }:
 {
   services.kanshi = {
     enable = true;
     # Required for hyprland (kanshi is originally for sway)
-    # systemdTarget = "hyprland-session.target";
+    systemdTarget = mkIf config.wayland.windowManager.hyprland.enable "hyprland-session.target";
 
     profiles = {
       desktop = {
