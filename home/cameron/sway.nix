@@ -1,6 +1,4 @@
-{ pkgs, config, ... }: rec {
-  
-  
+{ pkgs, config, lib, ... }: rec {
   wayland.windowManager.sway = {
     enable = true;
     config = rec {
@@ -17,7 +15,7 @@
         "${modifier}+c" = "exec alacritty";
       };
 
-      assigns = { };
+      # assigns = { };
       # bars = {};
     };
 
