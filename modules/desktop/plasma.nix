@@ -7,9 +7,9 @@
     displayManager.sddm.enable = true;
     displayManager.sddm.wayland.enable = true;
 #    displayManager.defaultSession = "plasmawayland";
-    # desktopManager.plasma5.enable = true;
+    desktopManager.plasma5.enable = true;
   };
-  services.desktopManager.plasma6.enable = true;
+  # services.desktopManager.plasma6.enable = true;
 
   # environment.systemPackages = (with pkgs; [
   #   

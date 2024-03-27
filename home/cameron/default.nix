@@ -4,18 +4,16 @@
     ./git.nix
     ./alacritty.nix
     ./zsh.nix
-    # ./neovim.nix
     ./spicetify.nix
-    ./zathura.nix
-    ./fusuma.nix
-    ./anyrun.nix
-    ./waybar.nix
-    ./wlogout.nix
-    ./kanshi.nix
-    ./hyprland.nix
+    # ./zathura.nix
+    # ./fusuma.nix
+    # ./anyrun.nix
+    # ./waybar.nix
+    # ./wlogout.nix
+    # ./kanshi.nix
+    # ./hyprland.nix
     # ./sway.nix
-    ./dunst.nix
-    # ./vscode.nix
+    # ./dunst.nix
     ./theme.nix
   ];
 
