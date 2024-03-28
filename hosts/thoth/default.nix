@@ -26,6 +26,10 @@
   # Was causing errors for me earlier, so I added this line
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
+  # Helps with build times (ram filesystem)
+  boot.tmp.useTmpfs = true;
+  # boot.tmp.tmpfsSize = "50%";
+
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

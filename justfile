@@ -64,3 +64,9 @@ rswitch *args:
 [linux]
 update:
   nix flake update
+
+alias syn := syntax
+# syntax-checks the flake
+[linux]
+syntax:
+  nix-instantiate '<nixpkgs/nixos>' -A system

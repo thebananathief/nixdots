@@ -12,7 +12,7 @@ git add . && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z') gen $old" || true
 git pull
 git push
 
-sudo nixos-rebuild --flake '.#' "$@"
+sudo nixos-rebuild --flake '.#' "$@" --accept-flake-config
 # --show-trace --option eval-cache false --fast
 
 current=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
