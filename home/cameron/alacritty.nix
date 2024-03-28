@@ -1,4 +1,4 @@
-{ ... }: 
+{ globalFonts, ... }: 
 let
   theme = builtins.fetchurl {
     url = "https://raw.githubusercontent.com/catppuccin/alacritty/main/catppuccin-mocha.toml";
@@ -11,7 +11,7 @@ in {
       "import" = [
         theme
       ];
-      font = let family = "FiraMono Nerd Font";
+      font = let family = globalFonts.monospace;
       in {
         size = 10;
         normal.family = family;
