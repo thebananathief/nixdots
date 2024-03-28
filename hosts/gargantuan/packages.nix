@@ -47,8 +47,8 @@ in {
     delfin
     bottles
 
-    # tailscale-systray
-    trayscale
+    tailscale-systray
+    # trayscale
     # ktailctl
 
   ## Electron apps

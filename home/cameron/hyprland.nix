@@ -253,7 +253,7 @@
         "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
         "kvantummanager --set Catppuccin-Mocha-Mauve"
         # BUG: mullvad and tailscale networks conflict
-        # "tailscale-systray"
+        "tailscale-systray"
       ];
 
       # See https://wiki.hyprland.org/Configuring/Monitors/
