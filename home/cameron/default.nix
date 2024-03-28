@@ -4,17 +4,9 @@
     ./git.nix
     ./alacritty.nix
     ./zsh.nix
-    ./spicetify.nix
-    # ./zathura.nix
-    # ./fusuma.nix
-    # ./anyrun.nix
-    # ./waybar.nix
-    # ./wlogout.nix
-    # ./kanshi.nix
-    # ./hyprland.nix
-    # ./sway.nix
-    # ./dunst.nix
     ./theme.nix
+    ./hyprland.nix
+    # ./sway.nix
   ];
 
   home.username = "cameron";

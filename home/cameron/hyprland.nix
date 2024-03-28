@@ -1,4 +1,14 @@
 { pkgs, config, ... }: rec {
+  imports = [
+    ./zathura.nix
+    ./fusuma.nix
+    ./anyrun.nix
+    ./waybar.nix
+    ./wlogout.nix
+    ./kanshi.nix
+    ./dunst.nix
+  ];
+  
   home.sessionVariables = {
   # systemd.user.sessionVariables = {
     # Fix for some Java AWT applications (e.g. Android Studio), this var fixes blank screens on launch

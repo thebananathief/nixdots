@@ -1,7 +1,8 @@
 { pkgs, globalFonts, nix-colors, ... }: rec {
-  # imports = [
-  #   nix-colors.homeManagerModules.default
-  # ];
+  imports = [
+    ./spicetify.nix
+    # nix-colors.homeManagerModules.default
+  ];
 
   # https://www.youtube.com/watch?v=jO2o0IN0LPE for help
   # colorScheme = nix-colors.colorSchemes.brogrammer;
@@ -11,10 +12,6 @@
     gsettings-desktop-schemas
     gnome.dconf-editor
     nwg-look
-    (catppuccin-gtk.override {
-      variant = "mocha";
-      accents = ["mauve"];
-    })
   ];
 
   # https://www.youtube.com/watch?v=m_6eqpKrtxk theming help

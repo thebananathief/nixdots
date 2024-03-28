@@ -1,4 +1,14 @@
 { pkgs, config, lib, ... }: rec {
+  imports = [
+    ./zathura.nix
+    ./fusuma.nix
+    ./anyrun.nix
+    ./waybar.nix
+    ./wlogout.nix
+    ./kanshi.nix
+    ./dunst.nix
+  ];
+  
   wayland.windowManager.sway = {
     enable = true;
     config = rec {
