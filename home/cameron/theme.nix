@@ -29,8 +29,8 @@
 
   qt = {
     enable = true;
-    # platformTheme = "qtct";
-    platformTheme = "gtk";
+    platformTheme = "qtct";
+    # platformTheme = "gtk";
     style.name = "breeze-dark"; # breeze-qt5
   };
 
