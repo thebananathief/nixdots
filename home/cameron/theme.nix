@@ -67,4 +67,11 @@
   };
 
   programs.bat.config.theme = "Catppuccin-mocha";
+    
+  xdg = {
+    configFile."gtk-3.0/gtk.css".force = true;
+    configFile."gtk-3.0/settings.ini".force = true;
+    configFile."gtk-4.0/gtk.css".force = true;
+    configFile."gtk-4.0/settings.ini".force = true;
+  };
 }
