@@ -31,7 +31,7 @@
     enable = true;
     platformTheme = "qtct";
     # platformTheme = "gtk";
-    style.name = "breeze-dark"; # breeze-qt5
+    style.name = "breeze"; # breeze-qt5
   };
 
   gtk = {
