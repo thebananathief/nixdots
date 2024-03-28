@@ -13,7 +13,7 @@ in {
       ];
       font = let family = globalFonts.monospace;
       in {
-        size = 10;
+        size = 9;
         normal.family = family;
         normal.style = "Regular";
         italic.family = family;
