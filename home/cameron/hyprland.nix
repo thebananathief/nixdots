@@ -71,6 +71,7 @@
         # "GBM_BACKEND,nvidia-drm"
         "WLR_NO_HARDWARE_CURSORS,1"
         "LIBVA_DRIVER_NAME,nvidia"
+        # if windows don't display or screen share doesnt work, remove this
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
 
         # Screen tearing

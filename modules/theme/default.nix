@@ -4,7 +4,7 @@
   ];
 
   # make HM-managed GTK stuff work
-  # programs.dconf.enable = true;
+  programs.dconf.enable = true;
 
   # qt.enable = true;
   # qt.platformTheme = "qt5ct";
@@ -17,32 +17,28 @@
       #   accent = "mauve";
       #   variant = "mocha";
       # })
-      (catppuccin-kvantum.override {
-        accent = "Mauve";
-        variant = "Mocha";
-      })
+      # (catppuccin-kvantum.override {
+      #   accent = "Mauve";
+      #   variant = "Mocha";
+      # })
       # (catppuccin-gtk.override {
       #   variant = "mocha";
       #   accents = ["mauve"];
       # })
-      (catppuccin-kde.override {
-        flavour = ["mocha"];
-        accents = ["mauve"];
-      })
+      # (catppuccin-kde.override {
+      #   flavour = ["mocha"];
+      #   accents = ["mauve"];
+      # })
       # (catppuccin-papirus-folders.override {
       #   flavor = "mocha";
       #   accent = "mauve";
       # })
       # papirus-icon-theme
-      catppuccin-cursors.mochaMauve
-      bibata-cursors
+      # catppuccin-cursors.mochaMauve
+      # bibata-cursors
       # libsForQt5.breeze-grub
 
-      gsettings-qt
-      gsettings-desktop-schemas
-      gnome.dconf-editor
       # xsettingsd
-      nwg-look
     ];
   };
 }
