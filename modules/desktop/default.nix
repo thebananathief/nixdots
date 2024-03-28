@@ -5,7 +5,7 @@
     # ./sway.nix
     # ./gnome.nix
     # ./xfce.nix
-    # ../theme
+    ../theme
   ];
 
   services.xserver = {

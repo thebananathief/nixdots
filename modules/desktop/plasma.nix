@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   imports = [
     ../games.nix
-    ../theme/fonts.nix
   ];
 
   services.xserver = {
