@@ -38,11 +38,11 @@
     # style.package = pkgs.libsForQt5.breeze-qt5;
   };
 
-  home.sessionVariables = {
-    QT_STYLE_OVERRIDE = lib.mkForce "breeze-dark";
-    # QT_QPA_PLATFORMTHEME = "";
-  };
-  systemd.user.sessionVariables = home.sessionVariables;
+  # home.sessionVariables = {
+  #   QT_STYLE_OVERRIDE = lib.mkForce "breeze-dark";
+  #   QT_QPA_PLATFORMTHEME = "";
+  # };
+  # systemd.user.sessionVariables = home.sessionVariables;
 
   gtk = {
     enable = true;
