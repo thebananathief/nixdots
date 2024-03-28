@@ -32,16 +32,17 @@
   qt = {
     enable = true;
     # platformTheme = "qtct";
-    platformTheme = "gtk";
+    platformTheme = "gtk3";
     # style.name = "gtk2";
     style.name = "breeze";
     # style.package = pkgs.libsForQt5.breeze-qt5;
   };
 
-  # systemd.user.sessionVariables = {
-  #   QT_STYLE_OVERRIDE = "";
-  #   QT_QPA_PLATFORMTHEME = "";
-  # };
+   home.sessionVariables = {
+    QT_STYLE_OVERRIDE = "breeze-dark";
+    # QT_QPA_PLATFORMTHEME = "";
+  };
+  systemd.user.sessionVariables = home.sessionVariables;
 
   gtk = {
     enable = true;
@@ -95,9 +96,15 @@
     configFile."gtk-3.0/settings.ini".force = true;
     configFile."gtk-4.0/gtk.css".force = true;
     configFile."gtk-4.0/settings.ini".force = true;
+    
+    # configFile."Kvantum/GraphiteNord".source = "${pkgs.graphite-kde-theme}/share/Kvantum/GraphiteNord";
+    # configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
+    #   General.theme = "Catppuccin-Mocha-Blue";
+    # };
+    # configFile."Kvantum/kvantum.kvconfig".text = ''
+    #   [General]
+    #   theme=GraphiteNordDark
+    # '';
   };
   
-  # xdg.configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
-  #   General.theme = "Catppuccin-Mocha-Blue";
-  # };
 }

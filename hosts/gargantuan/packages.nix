@@ -1,6 +1,7 @@
 { pkgs, ... }:
 let
     # Fixed crashes from EGL something rather
+    # NVIDIA-wayland related?
     obsid = pkgs.symlinkJoin {
       name = "obsidian";
       paths = [ pkgs.obsidian ];
