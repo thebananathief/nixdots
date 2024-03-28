@@ -12,6 +12,8 @@
     gsettings-desktop-schemas
     gnome.dconf-editor
     nwg-look
+    
+    papirus-icon-theme
   ];
 
   # https://www.youtube.com/watch?v=m_6eqpKrtxk theming help
@@ -31,7 +33,8 @@
     enable = true;
     # platformTheme = "qtct";
     platformTheme = "gtk";
-    style.name = "breeze"; # breeze-qt5
+    style.name = "gtk2";
+    style.package = pkgs.libsForQt5.breeze-qt5;
   };
 
   gtk = {
