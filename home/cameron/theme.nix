@@ -31,8 +31,8 @@
 
   qt = {
     enable = true;
-    # platformTheme = "qtct";
-    platformTheme = "gtk3";
+    platformTheme = "qtct";
+    # platformTheme = "gtk3";
     # style.name = "gtk2";
     style.name = "breeze";
     # style.package = pkgs.libsForQt5.breeze-qt5;
