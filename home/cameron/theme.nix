@@ -30,8 +30,8 @@
   qt = {
     enable = true;
     # platformTheme = "qtct";
-    platformTheme = "gtk";
-    style.name = "kvantum";
+    platformTheme = "gtk3";
+    style.name = "breeze"; # breeze-qt5
   };
 
   gtk = {
@@ -46,12 +46,14 @@
       package = pkgs.papirus-icon-theme;
     };
     theme = {
-      name = "Catppuccin-Mocha-Compact-Mauve-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        variant = "mocha";
-        accents = ["mauve"];
-        size = "compact";
-      };
+      name = "Breeze";
+      package = pkgs.libsForQt5.breeze-gtk;
+      # name = "Catppuccin-Mocha-Compact-Mauve-Dark";
+      # package = pkgs.catppuccin-gtk.override {
+      #   variant = "mocha";
+      #   accents = ["mauve"];
+      #   size = "compact";
+      # };
     };
 
     gtk3.extraCss = ''
