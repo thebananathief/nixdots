@@ -11,6 +11,10 @@
     gsettings-desktop-schemas
     gnome.dconf-editor
     nwg-look
+    (catppuccin-gtk.override {
+      variant = "mocha";
+      accents = ["mauve"];
+    })
   ];
 
   # https://www.youtube.com/watch?v=m_6eqpKrtxk theming help
