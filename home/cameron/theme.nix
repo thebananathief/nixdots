@@ -46,7 +46,7 @@
       package = pkgs.papirus-icon-theme;
     };
     theme = {
-      name = "Breeze";
+      name = "Breeze-Dark";
       package = pkgs.libsForQt5.breeze-gtk;
       # name = "Catppuccin-Mocha-Compact-Mauve-Dark";
       # package = pkgs.catppuccin-gtk.override {
