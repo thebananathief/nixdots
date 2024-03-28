@@ -264,10 +264,10 @@
         # "HDMI-A-1, 1920x1080@144, 0x0, 1"
         # "DP-3, 1920x1080@60, 0x-1080, 1"
         # "DP-1, 1920x1080@75.001, 1920x-500, 1, transform, 1"
-        "DP-1,1920x1080@60.0,0x0,1.0"
-        "DP-2,1920x1080@60.0,0x1080,1.0"
-        "DP-3,1920x1080@60.0,1920x240,1.0"
-        "DP-3,transform,1"
+        "desc:AOC 27G15 AH15332Z02979,1920x1080@60.0,0x0,1.0"
+        "desc:AOC 27G15 AH15332Z02974,1920x1080@60.0,0x1080,1.0"
+        "desc:Lenovo Group Limited D27-30 URHHM364,1920x1080@60.0,1920x240,1.0"
+        "desc:Lenovo Group Limited D27-30 URHHM364,transform,1"
 
         # laptop @ work
         # "eDP-1, highres, 0x0, auto"

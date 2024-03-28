@@ -13,6 +13,7 @@
             criteria = "AOC 27G15 AH15332Z02974";
             mode = "1920x1080@180";
             position = "0,0";
+            transform = "0";
             scale = 1.0;
             adaptiveSync = false;
             status = "enable";
@@ -21,6 +22,7 @@
             criteria = "AOC 27G15 AH15332Z02979";
             mode = "1920x1080@180";
             position = "0,-1080";
+            transform = "0";
             scale = 1.0;
             adaptiveSync = false;
             status = "enable";
