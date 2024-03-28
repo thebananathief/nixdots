@@ -48,8 +48,8 @@ in {
     bottles
 
     # tailscale-systray
-    # trayscale
-    ktailctl
+    trayscale
+    # ktailctl
 
   ## Electron apps
     obsid
