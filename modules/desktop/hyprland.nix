@@ -32,10 +32,9 @@
     };
 
     systemPackages = (with pkgs; [
+      intel-media-driver linux-firmware mesa
+      
       anyrun.packages.${system}.anyrun
-      intel-media-driver
-      linux-firmware
-      mesa
       hyprpicker
       dunst
       cliphist
@@ -56,14 +55,13 @@
       swayidle # idle daemon to trigger sleep, suspend, monitor off, lock
       wlogout
 
-      wf-recorder # screen recording
-      slurp # select region for screenshot
-      swappy # edit screenshots after clipping
-      grim # screen capture for screenshots
-
+      # Screen recording, region selection, screenshot markup UI, and the screencapping tool
+      wf-recorder slurp swappy grim 
+      
       nwg-drawer
-      nwg-displays # seemed broken last i checked
-      wlr-randr # req'd by nwg-displays
+
+      # Kinda broken with Hyprland or NixOS, not sure, but helps with generating configs to console
+      # nwg-displays wlr-randr
 
     # Media
       zathura # docs

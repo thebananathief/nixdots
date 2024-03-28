@@ -111,15 +111,25 @@
   hardware.nvidia = {
     # stable or beta should work for most modern cards
     package = config.boot.kernelPackages.nvidiaPackages.stable;
-    # required
+    
+    # Enable modesetting for Wayland compositors (hyprland)
     modesetting.enable = true;
-    # Defaults from article above - all these are experimental
+    
+    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+    # Enable this if you have graphical corruption issues or application crashes after waking
+    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
+    # of just the bare essentials.
     powerManagement.enable = false;
+    
+    # Fine-grained power management. Turns off GPU when not in use.
+    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
     powerManagement.finegrained = false;
+    
+    # Use the open source version of the kernel module (for driver 515.43.04+)
     open = false;
+    
     # Enable the Nvidia settings menu, accessible via `nvidia-settings`.
     nvidiaSettings = true;
-    prime.offload.enable = false;
   };
   
   hardware.opengl = {
