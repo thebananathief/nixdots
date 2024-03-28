@@ -14,7 +14,7 @@
     # ./hyprland.nix
     # ./sway.nix
     # ./dunst.nix
-    ./theme.nix
+    # ./theme.nix
   ];
 
   home.username = "cameron";
