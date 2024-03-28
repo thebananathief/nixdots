@@ -11,7 +11,7 @@ in {
       "import" = [
         theme
       ];
-      font = let family = "JetBrainsMono Nerd Font";
+      font = let family = "FiraMono Nerd Font";
       in {
         size = 10;
         normal.family = family;
