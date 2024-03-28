@@ -240,7 +240,7 @@
         # "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 
         "wpaperd"
-        # "waybar"
+        "waybar"
         "blueman-applet"
         # "nm-applet --indicator" # started by nixos module
         "mega-cmd"
@@ -368,7 +368,7 @@
 
       # Not very documented, but enables blur under these gtk-layer-shell namespaces
       blurls = [
-        # "waybar"
+        "waybar"
       ];
 
       dwindle = {
@@ -383,12 +383,11 @@
       gestures.workspace_swipe_fingers = 4;
 
       # device = {
-      # 
+      #   "logitech-m510".sensitivity = 1.0;
+      #   "logitech-g203-prodigy-gaming-mouse".sensitivity = -0.2;
+      #   "pixa3854:00-093a:0274-touchpad".sensitivity = 1.0;
+      #   "glorious-model-d".sensitivity = -0.5;
       # };
-      # "device:logitech-m510".sensitivity = 1.0;
-      # "device:logitech-g203-prodigy-gaming-mouse".sensitivity = -0.2;
-      # "device:pixa3854:00-093a:0274-touchpad".sensitivity = 1.0;
-      # "device:glorious-model-d".sensitivity = -0.5;
 
       animations = {
         enabled = "yes";
