@@ -13,7 +13,7 @@ in {
     # uid = 1001;
     group = "mediaserver";
     isSystemUser = true;
-    description = "Mediaserver Service account";
+    description = "Mediaserver service account";
   };
   
   services = {
