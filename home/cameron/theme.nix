@@ -59,6 +59,8 @@
       # };
     };
 
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+
     gtk3.extraCss = ''
       .nautilus-list-view listview row { margin: 0px; padding: 0; }
       .nautilus-list-view #NautilusViewCell { padding: 0px; }
