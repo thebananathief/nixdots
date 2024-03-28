@@ -79,4 +79,5 @@
     configFile."user-dirs.dirs".force = true;
     configFile."gtk-3.0/bookmarks".force = true;
   };
+  home.file.".gtkrc-2.0".force = true;
 }
