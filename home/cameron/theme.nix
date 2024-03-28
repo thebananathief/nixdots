@@ -1,4 +1,4 @@
-{ pkgs, globalFonts, nix-colors, ... }: rec {
+{ pkgs, globalFonts, nix-colors, lib, ... }: rec {
   imports = [
     ./spicetify.nix
     # nix-colors.homeManagerModules.default
@@ -38,8 +38,8 @@
     # style.package = pkgs.libsForQt5.breeze-qt5;
   };
 
-   home.sessionVariables = {
-    QT_STYLE_OVERRIDE = "breeze-dark";
+  home.sessionVariables = {
+    QT_STYLE_OVERRIDE = lib.mkForce "breeze-dark";
     # QT_QPA_PLATFORMTHEME = "";
   };
   systemd.user.sessionVariables = home.sessionVariables;
