@@ -449,6 +449,8 @@
       ];
     };
   };
+
+  xdg.configFile."hypr/hyprland.conf".force = true;
 }
 
 
