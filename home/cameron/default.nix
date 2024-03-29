@@ -5,8 +5,8 @@
     ./alacritty.nix
     ./zsh.nix
     ./theme.nix
-    ./hyprland.nix
-    # ./sway.nix
+    # ./hyprland.nix
+    ./sway.nix
   ];
 
   home.username = "cameron";
