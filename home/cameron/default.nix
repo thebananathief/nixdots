@@ -5,7 +5,7 @@
     ./alacritty.nix
     ./zsh.nix
     ./theme.nix
-    # ./hyprland.nix
+    ./hyprland.nix
     # ./sway.nix
   ];
 
