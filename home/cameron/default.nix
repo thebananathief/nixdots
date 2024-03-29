@@ -4,9 +4,9 @@
     ./git.nix
     ./alacritty.nix
     ./zsh.nix
+    ./hyprland.nix
+    # ./sway.nix
     ./theme.nix
-    # ./hyprland.nix
-    ./sway.nix
   ];
 
   home.username = "cameron";
