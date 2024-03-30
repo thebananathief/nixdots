@@ -20,8 +20,7 @@
           sha256 = "09pmvwvvic6wxrwjlcvwzgk9yf08wzvn9k23i3c7k44rrfyiaaxb";
           url = "https://maven.neoforged.net/releases/net/neoforged/forge/1.20.1-47.1.84/forge-1.20.1-47.1.84-installer.jar";
           version = "1.20.1-47.1.84";
-          getJavaVersion = v: (builtins.getAttr "openjdk${toString v}" javaPackages.compiler).headless;
-          jre_headless = getJavaVersion (17); # versions <= 1.6 will default to 8
+          jre_headless = (builtins.getAttr "openjdk${toString 17}" javaPackages.compiler).headless;
         };
       in neoforgeServer;
       # openFirewall = true;
