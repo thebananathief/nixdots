@@ -40,7 +40,6 @@ in {
     spicetify-cli # Needs to be installed even with the flake
     localsend
     # jetbrains.idea-community
-    vscode-fhs
     obs-studio
     mumble
     zbar

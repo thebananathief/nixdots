@@ -6,6 +6,7 @@
     ./zsh.nix
     ./hyprland.nix
     # ./sway.nix
+    ./packages.nix
     ./theme.nix
   ];
 
