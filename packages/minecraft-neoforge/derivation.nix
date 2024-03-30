@@ -4,7 +4,7 @@ stdenv.mkDerivation {
   pname = "minecraft-neoforge";
   inherit version;
 
-  src = fetchurl { inherit url sha256 };
+  src = fetchurl { inherit url sha256; };
 
   dontUnpack = true;
 
