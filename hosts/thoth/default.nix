@@ -1,4 +1,4 @@
-{ pkgs, lib, sops-nix, config, nixos-hardware, callPackage, javaPackages, ... }: 
+{ pkgs, lib, sops-nix, config, nixos-hardware, ... }: 
 let 
   neoforgeServer = pkgs.callPackage ../../packages/minecraft-neoforge/derivation.nix {
     sha256 = "09pmvwvvic6wxrwjlcvwzgk9yf08wzvn9k23i3c7k44rrfyiaaxb";
@@ -24,6 +24,7 @@ in {
       enable = true;
       eula = true;
       package = neoforgeServer;
+      javaOpts = "-Xmx2028M -Xms2048M";
       # openFirewall = true;
       # declarative = true;
       # serverProperties = {

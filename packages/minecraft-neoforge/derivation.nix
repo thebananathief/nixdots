@@ -12,6 +12,7 @@ stdenv.mkDerivation {
     mkdir -p $out/bin $out/lib/minecraft
     cp -v $src $out/lib/minecraft/neoforge-installer.jar
 
+    # ${jre_headless}/bin/java -jar $src --installServer
     ${jre_headless}/bin/java -jar $out/lib/minecraft/neoforge-installer.jar --installServer
     
     cat > $out/bin/minecraft-server << EOF
