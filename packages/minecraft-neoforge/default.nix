@@ -1,6 +1,6 @@
 { callPackage, lib, javaPackages }:
 let
-  versions = lib.importJson ./versions.json
+  versions = lib.importJson ./versions.json;
   
   latestVersion = lib.last (builtins.sort lib.versionOlder (builtins.attrNames versions));
   escapeVersion = builtins.replaceStrings [ "." ] [ "-" ];
