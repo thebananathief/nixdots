@@ -1,11 +1,11 @@
 { pkgs, lib, sops-nix, config, nixos-hardware, ... }: 
 let 
-  neoforgeServer = pkgs.callPackage ../../packages/minecraft-neoforge/derivation.nix {
-    sha256 = "09pmvwvvic6wxrwjlcvwzgk9yf08wzvn9k23i3c7k44rrfyiaaxb";
-    url = "https://maven.neoforged.net/releases/net/neoforged/forge/1.20.1-47.1.84/forge-1.20.1-47.1.84-installer.jar";
-    version = "1.20.1-47.1.84";
-    jre_headless = (builtins.getAttr "openjdk${toString 17}" pkgs.javaPackages.compiler).headless;
-  };
+  # neoforgeServer = pkgs.callPackage ../../packages/minecraft-neoforge/derivation.nix {
+  #   sha256 = "09pmvwvvic6wxrwjlcvwzgk9yf08wzvn9k23i3c7k44rrfyiaaxb";
+  #   url = "https://maven.neoforged.net/releases/net/neoforged/forge/1.20.1-47.1.84/forge-1.20.1-47.1.84-installer.jar";
+  #   version = "1.20.1-47.1.84";
+  #   jre_headless = (builtins.getAttr "openjdk${toString 17}" pkgs.javaPackages.compiler).headless;
+  # };
 in {
   imports = [ 
     # nixos-hardware.nixosModules.common-pc
@@ -19,26 +19,12 @@ in {
     sops-nix.nixosModules.sops
   ];
   
-  services = {
-    minecraft-server = {
-      enable = true;
-      eula = true;
-      package = neoforgeServer;
-      jvmOpts = "-Xmx2028M -Xms2048M";
-      # openFirewall = true;
-      # declarative = true;
-      # serverProperties = {
-      #   motd = "The UPS Store";
-      #   server-port = 25565;
-      #   difficulty = 3;
-      #   gamemode = 0;
-      #   max-players = 24;
-      #   enable-rcon = true;
-      #   "rcon.port" = 25575;
-      #   "rcon.password" = "stupidpassword";
-      # };
-    };
-  };
+  # services.minecraft-server = {
+  #   enable = true;
+  #   eula = true;
+  #   package = neoforgeServer;
+  #   jvmOpts = "-Xmx2028M -Xms2048M";
+  # };
 
   networking = {
     hostName = "thoth";
