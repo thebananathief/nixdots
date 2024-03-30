@@ -1,6 +1,6 @@
 { pkgs, lib, sops-nix, config, nixos-hardware, callPackage, javaPackages, ... }: 
 let 
-  neoforgeServer = callPackage ../../packages/minecraft-neoforge/derivation.nix {
+  neoforgeServer = pkgs.callPackage ../../packages/minecraft-neoforge/derivation.nix {
     sha256 = "09pmvwvvic6wxrwjlcvwzgk9yf08wzvn9k23i3c7k44rrfyiaaxb";
     url = "https://maven.neoforged.net/releases/net/neoforged/forge/1.20.1-47.1.84/forge-1.20.1-47.1.84-installer.jar";
     version = "1.20.1-47.1.84";
