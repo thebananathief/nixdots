@@ -91,6 +91,7 @@
   programs.bat.config.theme = "Catppuccin-mocha";
     
   # Make home-manager stop nagging about overwriting these files
+  home.file.".gtkrc-2.0".force = true;
   xdg = {
     configFile."gtk-3.0/gtk.css".force = true;
     configFile."gtk-3.0/settings.ini".force = true;
