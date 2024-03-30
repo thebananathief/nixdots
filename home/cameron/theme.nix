@@ -46,6 +46,7 @@
 
   gtk = {
     enable = true;
+    gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
     font = {
       name = "${globalFonts.sansSerif}";
       # package = pkgs.lexend;
@@ -91,8 +92,8 @@
   programs.bat.config.theme = "Catppuccin-mocha";
     
   # Make home-manager stop nagging about overwriting these files
-  home.file.".gtkrc-2.0".force = true;
   xdg = {
+    configFile."gtk-2.0/gtkrc".force = true;
     configFile."gtk-3.0/gtk.css".force = true;
     configFile."gtk-3.0/settings.ini".force = true;
     configFile."gtk-4.0/gtk.css".force = true;
