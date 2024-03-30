@@ -21,7 +21,7 @@
           url = "https://maven.neoforged.net/releases/net/neoforged/forge/1.20.1-47.1.84/forge-1.20.1-47.1.84-installer.jar";
           version = "1.20.1-47.1.84";
           getJavaVersion = v: (builtins.getAttr "openjdk${toString v}" javaPackages.compiler).headless;
-          jre_headless = getJavaVersion 17; # versions <= 1.6 will default to 8
+          jre_headless = getJavaVersion (17); # versions <= 1.6 will default to 8
         };
       in neoforgeServer;
       # openFirewall = true;
