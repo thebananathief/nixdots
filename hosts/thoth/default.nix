@@ -24,7 +24,7 @@
       eula = true;
       package = let
         neoforgeServer = import ../../packages/minecraft-neoforge;
-      in neoforgeServer;
+      in neoforgeServer."neoforge-1.20.1-47.1.84";
       # openFirewall = true;
       # declarative = true;
       # serverProperties = {
