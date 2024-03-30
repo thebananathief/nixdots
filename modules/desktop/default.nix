@@ -5,8 +5,11 @@
     # ./sway.nix
     # ./gnome.nix
     # ./xfce.nix
-    ../theme
+    ../fonts.nix
   ];
+  
+  # make HM-managed GTK stuff work
+  programs.dconf.enable = true;
 
   services.xserver = {
     enable = true;
