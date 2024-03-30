@@ -25,6 +25,7 @@ let
   # wget https://maven.neoforged.net/releases/net/neoforged/forge/1.20.1-47.1.84/forge-1.20.1-47.1.84-installer.jar
   # java -jar <installer jar> --installServer
   # ./run.sh
+  # TODO: check out modules/minecraft-forge.nix for a pkg derivation, not finished yet
   forgeInstaller = builtins.fetchurl {
     url = "https://maven.neoforged.net/releases/net/neoforged/forge/${forgeVersion}/forge-${forgeVersion}-installer.jar";
     sha256 = "09pmvwvvic6wxrwjlcvwzgk9yf08wzvn9k23i3c7k44rrfyiaaxb";
@@ -147,6 +148,8 @@ in {
       # ++ optional (rconPort != null) rconPort;
   };
 
+  # TODO: Ideally i want to be able to just specify the pkgs.minecraftServers.neoforge-<version>
+  # package then the service will do the install for neoforge
   # services = {
   #   minecraft-server = {
   #     enable = true;

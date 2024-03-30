@@ -17,6 +17,29 @@
     sops-nix.nixosModules.sops
   ];
 
+  
+  services = {
+    minecraft-server = {
+      enable = true;
+      eula = true;
+      package = let
+        neoforgeServer = import ../../packages/minecraft-neoforge;
+      in neoforgeServer;
+      # openFirewall = true;
+      # declarative = true;
+      # serverProperties = {
+      #   motd = "The UPS Store";
+      #   server-port = 25565;
+      #   difficulty = 3;
+      #   gamemode = 0;
+      #   max-players = 24;
+      #   enable-rcon = true;
+      #   "rcon.port" = 25575;
+      #   "rcon.password" = "stupidpassword";
+      # };
+    };
+  };
+
   networking = {
     hostName = "thoth";
     networkmanager.enable = true;
