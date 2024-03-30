@@ -1,4 +1,4 @@
-{ pkgs, globalFonts, nix-colors, lib, ... }: rec {
+{ pkgs, globalFonts, nix-colors, lib, config, ... }: rec {
   imports = [
     ./spicetify.nix
     # nix-colors.homeManagerModules.default
