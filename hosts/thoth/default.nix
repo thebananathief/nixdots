@@ -24,7 +24,7 @@ in {
       enable = true;
       eula = true;
       package = neoforgeServer;
-      javaOpts = "-Xmx2028M -Xms2048M";
+      jvmOpts = "-Xmx2028M -Xms2048M";
       # openFirewall = true;
       # declarative = true;
       # serverProperties = {
