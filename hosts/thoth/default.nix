@@ -111,11 +111,11 @@ in {
 #     enableBrowserSocket = true;
 #   };
 
-  # services.ollama = {
-  #   enable = true;
-  #   listenAddress = "127.0.0.1:11434";
-  #   acceleration = "cuda";
-  # };
+  services.ollama = {
+    enable = true;
+    listenAddress = "127.0.0.1:11434";
+    acceleration = "cuda";
+  };
   
   # https://nixos.wiki/wiki/Nvidia
   # Load nvidia driver for Xorg and Wayland
