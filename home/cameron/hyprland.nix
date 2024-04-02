@@ -398,14 +398,14 @@
           "liner, 1, 1, 1, 1"
         ];
         animation = [
-          "windows, 1, 6, wind, slide"
-          "windowsIn, 1, 6, winIn, slide"
-          "windowsOut, 1, 5, winOut, slide"
-          "windowsMove, 1, 5, wind, slide"
+          "windows, 1, 5, wind, slide"
+          "windowsIn, 1, 5, winIn, slide"
+          "windowsOut, 1, 4, winOut, slide"
+          "windowsMove, 1, 4, wind, slide"
           "border, 1, 1, liner"
           "borderangle, 1, 30, liner, loop"
           "fade, 1, 10, default"
-          "workspaces, 1, 5, wind"
+          "workspaces, 1, 4, wind"
         ];
       };
 
