@@ -120,10 +120,10 @@
         # Window actions
         "$mainMod, W, killactive,"
         "ALT, return, fullscreen,"
-        # "$mainMod, P, pseudo," # dwindle
-        # "$mainMod, mouse:276, pseudo," # dwindle
-        "$mainMod, I, togglegroup"
-        "$mainMod, mouse:276, togglegroup"
+        "$mainMod, P, pseudo," # dwindle
+        "$mainMod, mouse:276, pseudo," # dwindle
+        # "$mainMod, I, togglegroup"
+        # "$mainMod, mouse:276, togglegroup"
         "$mainMod, M, togglesplit," # dwindle
         "$mainMod, mouse:275, togglesplit," # dwindle
         "$mainMod, O, togglefloating,"
@@ -372,7 +372,7 @@
       ];
 
       dwindle = {
-        pseudotile = false;
+        pseudotile = true;
         preserve_split = true;
         no_gaps_when_only = true;
       };

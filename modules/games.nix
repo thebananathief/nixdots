@@ -18,6 +18,7 @@
     prismlauncher
     protonup-qt
     protontricks
+    bottles
     #gamescope
     (lutris.override {
       extraLibraries = pkgs: [
