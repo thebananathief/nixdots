@@ -28,7 +28,7 @@ let
   # TODO: check out modules/minecraft-forge.nix for a pkg derivation, not finished yet
   forgeInstaller = builtins.fetchurl {
     url = "https://maven.neoforged.net/releases/net/neoforged/forge/${forgeVersion}/forge-${forgeVersion}-installer.jar";
-    sha256 = "09pmvwvvic6wxrwjlcvwzgk9yf08wzvn9k23i3c7k44rrfyiaaxb";
+    sha256 = "14yakg9fdh7h7wwh6m53jw87gnh06fxg4bjsh5c31a8i8agzg73g";
   };
 
   eulaFile = builtins.toFile "eula.txt" ''
