@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   imports = [
-    # ../games.nix
+    ../games.nix
   ];
 
   services.xserver = {

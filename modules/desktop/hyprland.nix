@@ -2,6 +2,10 @@
 # This module's purpose is to install a full desktop environment with Hyprland
 # as the Window Manager. The scope of this should be as large as GNOME or Plasma.
 
+  imports = [
+    ../games.nix
+  ];
+  
   services.xserver.displayManager = {
     defaultSession = "hyprland";
     gdm.enable = true;
