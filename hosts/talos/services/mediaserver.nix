@@ -194,12 +194,11 @@ in {
         "${cfg.dataDir}/gluetun:/gluetun"
       ];
       environmentFiles = [
-        secrets."mullvad.env".path # WIREGUARD_PRIVATE_KEY
+        secrets."mullvad.env".path # WIREGUARD_PRIVATE_KEY WIREGUARD_ADDRESSES
       ];
       environment = {
         VPN_SERVICE_PROVIDER = "mullvad";
         VPN_TYPE = "wireguard";
-        WIREGUARD_ADDRESSES = "10.67.197.145/32";
         SERVER_COUNTRIES = "Switzerland";
         # OWNED_ONLY = "yes"; # Use if you want only servers owned by Mullvad
       };
