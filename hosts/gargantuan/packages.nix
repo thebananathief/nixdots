@@ -23,9 +23,6 @@ in {
     cava # audio visualizer
     cmatrix
     go
-    pre-commit
-    mcrcon # minecraft rcon client
-    wireguard-tools
 
     (python311.withPackages (ps:
       with ps; [
@@ -38,13 +35,11 @@ in {
     megacmd
     audacity
     spicetify-cli # Needs to be installed even with the flake
-    localsend
     # jetbrains.idea-community
     obs-studio
     mumble
     zbar
     delfin
-    lmstudio
 
     tailscale-systray
     # trayscale
@@ -52,13 +47,6 @@ in {
 
   ## Electron apps
     obsid
-    webcord
-    # discord
-    bitwarden
-    spotify
-    libreoffice-qt
-    hunspell
-    hunspellDicts.en_US
 
     # thunderbird
     # parsec-bin
