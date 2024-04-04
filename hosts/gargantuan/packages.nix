@@ -47,6 +47,15 @@ in {
 
   ## Electron apps
     obsid
+    localsend
+    wireguard-tools
+    webcord
+    # discord
+    bitwarden
+    spotify
+    libreoffice-qt
+    hunspell
+    hunspellDicts.en_US
 
     # thunderbird
     # parsec-bin
