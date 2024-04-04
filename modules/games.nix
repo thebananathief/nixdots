@@ -12,13 +12,16 @@
     #   extraPkgs = pkgs; [ bumblebee glxinfo ];
     # };
   };
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = let 
+    mforge = import ../packages/mtg-forge
+  in with pkgs; [
     steam-run
     duckstation
     prismlauncher
     protonup-qt
     protontricks
     bottles
+    mforge
     #gamescope
     (lutris.override {
       extraLibraries = pkgs: [
