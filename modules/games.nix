@@ -1,9 +1,4 @@
-{
-  pkgs,
-  ...
-}:
-# games
-{
+{ pkgs, ... }: {
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;
@@ -12,10 +7,8 @@
     #   extraPkgs = pkgs; [ bumblebee glxinfo ];
     # };
   };
-  environment.systemPackages = 
-  with pkgs;
-  let 
-    mforge = ../packages/mtg-forge/default.nix;
+  environment.systemPackages = with pkgs; let 
+    mforge = pkgs.callPackage ../packages/mtg-forge/default.nix;
   in [
     steam-run
     duckstation
