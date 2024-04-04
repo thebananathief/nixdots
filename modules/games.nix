@@ -14,8 +14,8 @@
     protonup-qt
     protontricks
     bottles
-    (callPackage ../packages/mtg-forge/default.nix {})
-    # forge-mtg
+    # (callPackage ../packages/mtg-forge/default.nix {})
+    forge-mtg
     #gamescope
     (lutris.override {
       extraLibraries = pkgs: [
