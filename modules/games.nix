@@ -15,7 +15,7 @@
   environment.systemPackages = 
   with pkgs;
   let 
-    mforge = import ../packages/mtg-forge/default.nix;
+    mforge = ../packages/mtg-forge/default.nix;
   in [
     steam-run
     duckstation
