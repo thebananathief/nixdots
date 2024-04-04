@@ -8,20 +8,20 @@
 }:
 
 let
-  version = "1.6.60";
+  version = "1.6.58";
 
-  # src = fetchFromGitHub {
-  #   owner = "Card-Forge";
-  #   repo = "forge";
-  #   rev = "forge-${version}";
-  #   hash = "sha256-pxnnqLfyblbIgIRZZrx8Y8K43zUv9mu7PzZ7zltpEUQ=";
-  # };
   src = fetchFromGitHub {
     owner = "Card-Forge";
     repo = "forge";
     rev = "forge-${version}";
-    hash = "sha256-XF4Yhp2PtChHozBa0Bbh0PkaUY5yaqZh5M3XyjNVjyY=";
+    hash = "sha256-pxnnqLfyblbIgIRZZrx8Y8K43zUv9mu7PzZ7zltpEUQ=";
   };
+  # src = fetchFromGitHub {
+  #   owner = "Card-Forge";
+  #   repo = "forge";
+  #   rev = "forge-${version}";
+  #   hash = "sha256-XF4Yhp2PtChHozBa0Bbh0PkaUY5yaqZh5M3XyjNVjyY=";
+  # };
 
   # launch4j downloads and runs a native binary during the package phase.
   patches = [ ./no-launch4j.patch ];
@@ -32,7 +32,7 @@ maven.buildMavenPackage {
   inherit version src patches;
 
   # Tests need a running Xorg.
-  mvnParameters = "-DskipTests -e -X";
+  mvnParameters = "-DskipTests";
   mvnHash = "sha256-QK9g0tG75lIhEtf4jW03N32YbD9Fe5iI0JTuqmCTtnE=";
 
   nativeBuildInputs = [ makeWrapper ];
