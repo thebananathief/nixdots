@@ -14,7 +14,7 @@
   };
   environment.systemPackages = let 
     mforge = import ../packages/mtg-forge
-  in with pkgs; [
+  in { with pkgs; [
     steam-run
     duckstation
     prismlauncher
@@ -31,6 +31,6 @@
         # p.libnghttp2
       ];
     })
-  ];
+  ];};
 }
 
