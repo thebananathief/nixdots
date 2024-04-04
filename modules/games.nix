@@ -12,9 +12,11 @@
     #   extraPkgs = pkgs; [ bumblebee glxinfo ];
     # };
   };
-  environment.systemPackages = let 
-    mforge = import ../packages/mtg-forge
-  in { with pkgs; [
+  environment.systemPackages = 
+  with pkgs;
+  let 
+    mforge = import ../packages/mtg-forge;
+  in [
     steam-run
     duckstation
     prismlauncher
@@ -31,6 +33,6 @@
         # p.libnghttp2
       ];
     })
-  ];};
+  ];
 }
 
