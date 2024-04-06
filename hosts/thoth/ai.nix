@@ -5,6 +5,7 @@
     gnumake
     pyenv
     gcc_multi
+    libstdcxx5
     # libgccjit
     # binutils_nogold
   ];
