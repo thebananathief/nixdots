@@ -2,6 +2,8 @@
   environment.systemPackages = with pkgs; [
     python3
     poetry
+    make
+    pyenv
   ];
 
   services.ollama = {
