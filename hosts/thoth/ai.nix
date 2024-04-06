@@ -4,8 +4,9 @@
     poetry
     gnumake
     pyenv
-    libgccjit
-    binutils_nogold
+    gcc_multi
+    # libgccjit
+    # binutils_nogold
   ];
 
   services.ollama = {
