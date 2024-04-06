@@ -4,7 +4,7 @@
     poetry
     gnumake
     pyenv
-    libgcc
+    libgccjit
   ];
 
   services.ollama = {
