@@ -5,7 +5,7 @@
     gnumake
     pyenv
     libgccjit
-    binutils
+    binutils_nogold
   ];
 
   services.ollama = {
