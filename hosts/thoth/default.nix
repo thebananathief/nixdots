@@ -13,6 +13,7 @@ in {
     # nixos-hardware.nixosModules.common-gpu-nvidia
     nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
+    ./ai.nix
     ../gargantuan/packages.nix
     # ../gargantuan/network-mount.nix
     ../../modules/desktop
@@ -110,12 +111,6 @@ in {
 # #     enableSSHSupport = true;
 #     enableBrowserSocket = true;
 #   };
-
-  services.ollama = {
-    enable = true;
-    listenAddress = "127.0.0.1:11434";
-    acceleration = "cuda";
-  };
   
   # https://nixos.wiki/wiki/Nvidia
   # Load nvidia driver for Xorg and Wayland
