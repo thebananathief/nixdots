@@ -2,7 +2,7 @@
   environment.systemPackages = with pkgs; [
     python3
     poetry
-    make
+    gnumake
     pyenv
   ];
 
