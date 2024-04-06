@@ -3,7 +3,7 @@
     python3
     poetry
     gnumake
-    pyenv
+    # pyenv
     gcc_multi
     libstdcxx5
     # libgccjit
