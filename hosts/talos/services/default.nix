@@ -75,12 +75,7 @@ in {
     #     "${ cfg.dataDir }/filebrowser/database.db:/database/filebrowser.db"
     #     "${ cfg.dataDir }/filebrowser/.filebrowser.json:/.filebrowser.json"
     #   ];
-    #   ports = [ "8009:80" ];
-    #   # extraOptions = [
-    #   #   "--network=public_access";
-    #   # ];
-    #   # user = "${ cfg.common_env.PUID }:${ cfg.common_env.PGID}";
-    #   # user = "cameron:docker";
+    #   ports = [ "8011:80" ];
     # };
     # hedgedoc = {
     #   image = "lscr.io/linuxserver/hedgedoc:latest";
