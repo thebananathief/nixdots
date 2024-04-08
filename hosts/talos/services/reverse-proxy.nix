@@ -28,10 +28,10 @@ in {
       #   reverse_proxy localhost:8016
       # '';
       # Static fileserver and interactive filebrowser
-      # "files.${ config.networking.fqdn }".extraConfig = ''
-      #   root * /mnt/storage/filebrowser
-      #   file_server browse
-      # '';
+      "files.${ config.networking.fqdn }".extraConfig = ''
+        root * /mnt/storage/filebrowser
+        file_server browse
+      '';
       # TTRSS
       "rss.${ config.networking.fqdn }".extraConfig = ''
         reverse_proxy localhost:8011
