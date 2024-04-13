@@ -429,7 +429,7 @@
         # "center, class:^(org.kde.polkit-kde-authentication-agent-1)$"
 
         # "float, class:^(firefox), title:^(Extension: \(Bitwarden (-|—) Free Password Manager\) (-|—) Bitwarden (-|—) Mozilla Firefox)"
-        "float, title:(Extension: \(Bitwarden))"
+        "float, title:(Extension: \(Bitwarden)"
         "float, class:(pavucontrol|yad|nm-connection-editor|nm-applet|blueman-manager)"
         "float, class:(qt5ct|qt6ct|kvantummanager|nwg-look)"
 
