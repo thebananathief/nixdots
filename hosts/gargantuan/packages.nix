@@ -49,8 +49,8 @@ in {
     obsid
     localsend
     wireguard-tools
-    # webcord
-    discord
+    webcord
+    # discord
     bitwarden
     spotify
     libreoffice-qt
