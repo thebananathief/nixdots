@@ -4,7 +4,7 @@
   programs = {
     zsh = {
       enable = true;
-      enableAutosuggestions = true;
+      autosuggestion.enable = true;
       enableCompletion = true;
       autocd = true;
       history.ignoreAllDups = true;
@@ -12,7 +12,7 @@
         enable = true;
         theme = "avit";
         plugins = [
-          "git"
+          # "git"
           "git-auto-fetch"
           "sudo"
           "fzf"

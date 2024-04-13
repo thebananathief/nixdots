@@ -3,6 +3,7 @@
     enable = true;
     userName = "thebananathief";
     userEmail = "cameron.salomone@gmail.com";
+    lfs.enable = true;
     ignores = [ "*~" "*.swp" "*result*" ".direnv" "node_modules" ];
     extraConfig = {
       init.defaultBranch = "main";
@@ -26,7 +27,6 @@
     };
     aliases = {
       a = "add --all";
-      b = "branch";
       c = "commit";
       ca = "commit --amend";
       cm = "commit -m";
@@ -43,6 +43,10 @@
       forgor = "commit --amend --no-edit";
       graph = "log --all --decorate --graph --oneline";
       oops = "checkout --";
+
+      g = "lazygit";
+      t = "push";
+      b = "pull";
     };
   };
 }

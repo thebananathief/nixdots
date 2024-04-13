@@ -15,17 +15,13 @@
     ./hardware-configuration.nix
     ./fileshares.nix
     ./disks.nix
-    ./containers
-    ./minecraft.nix
-    ./mediaserver.nix
-    ./gitea.nix
-    ./voiceserver.nix
-    ./reverse-proxy.nix
+    ./services
   ];
 
   networking = {
     hostName = "talos";
     domain = "host";
+    # domain = config.sops.secrets.domain.path;
     wireless.enable = false; # Enables wireless support via wpa_supplicant.
     firewall.enable = true;
   };
@@ -108,7 +104,7 @@ By accessing this system, you agree that your actions may be monitored if unauth
     ];
     # Public keys that are authorized for SSH access
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII9BZbMAtMIr0ZZKPwxIDTq7qZMjNVDI1ktg3r+DSCdv desktop"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDoXOoZ0fEhTxXcscD8nz3V6xW/nrJtu8oKdbOtaZQbw desktop"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFagsyJw/RCCgkgXtOYKeNF0NH8VABZ0WP+14yeq1/5k laptop"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFfIygbp1DdDJUCAlUHbrdzu7cnb7T/JTDexJtpMXCIz cameron@phone"
     ];
@@ -118,7 +114,8 @@ By accessing this system, you agree that your actions may be monitored if unauth
     intel-gpu-tools # intel_gpu_top
   ];
 
-  security.pam.enableSSHAgentAuth = true;
+  # I think this is for git?
+  security.pam.sshAgentAuth.enable = true;
 
   sops.secrets.healthcheck_uptime_uuid = {};
   services = {

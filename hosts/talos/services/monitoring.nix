@@ -1,17 +1,17 @@
-{ config, ... }:
+{ config, username, ... }:
 let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
 in {
   virtualisation.oci-containers.containers = {
-    dozzle = {
-      image = "amir20/dozzle:latest"; # https://github.com/amir20/dozzle
-      volumes = [
-        "/var/run/docker.sock:/var/run/docker.sock"
-        # "/run/podman/podman.sock:/var/run/docker.sock"
-      ];
-      ports = [ "8008:8080" ];
-    };
+    # dozzle = {
+    #   image = "amir20/dozzle:latest"; # https://github.com/amir20/dozzle
+    #   volumes = [
+    #     "/var/run/docker.sock:/var/run/docker.sock"
+    #     # "/run/podman/podman.sock:/var/run/docker.sock"
+    #   ];
+    #   ports = [ "8008:8080" ];
+    # };
     # grafana = {
     #   image = "grafana/grafana-oss:latest"; # https://hub.docker.com/r/grafana/grafana/
     #   # TODO: Grafana needs to be configured for mysql (/etc/grafana/grafana.ini) - Do this with nixos
@@ -46,41 +46,50 @@ in {
     #   };
     #   cmd = [ "serve" ];
     # };
-    scrutiny = {
-      image = "ghcr.io/analogj/scrutiny:master-omnibus"; # https://github.com/AnalogJ/scrutiny
-      volumes = [
-        "/run/udev:/run/udev:ro"
-        "${ cfg.dataDir }/scrutiny/config:/opt/scrutiny/config"
-        "${ cfg.dataDir }/scrutiny/influxdb:/opt/scrutiny/influxdb"
-      ];
-      ports = [ "8007:8080" ];
-      extraOptions = [
-        "--cap-add=SYS_RAWIO"
-        "--device=/dev/sda"
-        "--device=/dev/sdb"
-        "--device=/dev/sdc"
-        "--device=/dev/sdd"
-      ];
-    };
-    librespeed = {
-      image = "lscr.io/linuxserver/librespeed:latest"; # https://github.com/AnalogJ/scrutiny
-      volumes = [
-        "${ cfg.dataDir }/librespeed:/config"
-      ];
-      environment = {
-        PASSWORD = "PASSWORD";
-      } // cfg.common_env;
-      ports = [ "8016:80" ];
-    };
-    smokeping = {
-      image = "lscr.io/linuxserver/smokeping:latest";
-      volumes = [
-        "${ cfg.dataDir }/smokeping/config:/config"
-        "${ cfg.dataDir }/smokeping/data:/data"
-      ];
-      environment = cfg.common_env;
-      ports = [ "8015:80" ];
-    };
+    # scrutiny = {
+    #   image = "ghcr.io/analogj/scrutiny:master-omnibus"; # https://github.com/AnalogJ/scrutiny
+    #   volumes = [
+    #     "/run/udev:/run/udev:ro"
+    #     "${ cfg.dataDir }/scrutiny/config:/opt/scrutiny/config"
+    #     "${ cfg.dataDir }/scrutiny/influxdb:/opt/scrutiny/influxdb"
+    #   ];
+    #   ports = [ "8007:8080" ];
+    #   extraOptions = [
+    #     "--cap-add=SYS_RAWIO"
+    #     "--device=/dev/sda"
+    #     "--device=/dev/sdb"
+    #     "--device=/dev/sdc"
+    #     "--device=/dev/sdd"
+    #   ];
+    # };
+    # librespeed = {
+    #   image = "lscr.io/linuxserver/librespeed:latest"; # https://github.com/AnalogJ/scrutiny
+    #   volumes = [
+    #     "${ cfg.dataDir }/librespeed:/config"
+    #   ];
+    #   environment = {
+    #     PASSWORD = "PASSWORD";
+    #   } // cfg.common_env;
+    #   ports = [ "8016:80" ];
+    # };
+    # smokeping = {
+    #   image = "lscr.io/linuxserver/smokeping:latest";
+    #   volumes = [
+    #     "${ cfg.dataDir }/smokeping/config:/config"
+    #     "${ cfg.dataDir }/smokeping/data:/data"
+    #   ];
+    #   environment = cfg.common_env;
+    #   ports = [ "8015:80" ];
+    # };
+    # mongo = {
+    #   image = "mongo:latest";
+    #   # environmentFiles = [
+    #   #   secrets."mongo.env".path
+    #   # ];
+    #   extraOptions = [
+    #     "--network=host"
+    #   ];
+    # };
   };
 
   # services.smokeping = {
@@ -119,14 +128,51 @@ in {
   #   '';
   # };
   
-  # TODO: Put in a PR to improve this service config
-  services.uptime-kuma = {
-    enable = true;
-    settings = {
-      # By default its only listening from localhost:3001
-      HOST = "::";
-      PORT = "8017";
-    };
+  # sops.secrets = {
+  #   graylog_secret = {
+  #     owner = "graylog";
+  #     mode = "0440";
+  #   };
+  #   graylog_password = {
+  #     owner = "graylog";
+  #   #   group = "graylog";
+  #     mode = "0440";
+  #   };
+  #   "mongo.env" = {
+  #     group = config.virtualisation.oci-containers.backend;
+  #     mode = "0440";
+  #   };
+  # };
+
+  services = {
+    # uptime-kuma = {
+    #   enable = true;
+    #   settings = {
+    #     # By default its only listening from localhost:3001
+    #     HOST = "::";
+    #     PORT = "8017";
+    #   };
+    # };
+    # elasticsearch = {
+    #   enable = true;
+    #   listenAddress = "127.0.0.1";
+    #   port = 9200;
+    #   tcp_port = 9300;
+    # };
+    # mongodb = {
+    #   enable = true;
+      # bind_ip = "127.0.0.1";
+      # enableAuth = ;
+      # initialRootPassword = ;
+    # };
+    # graylog = {
+    #   enable = true;
+    #   elasticsearchHosts = [ "http://127.0.0.1:9200" ];
+    #   mongodbUri = "mongodb://127.0.0.1/graylog";
+    #   passwordSecret = secrets.graylog_secret.path;
+    #   rootUsername = username;
+    #   rootPasswordSha2 = secrets.graylog_password.path;
+    # };
   };
 
   # Make the service use the docker group ACL, for the socket access

@@ -1,7 +1,14 @@
-{ config, pkgs, ... }:
-{
+{ config, 
+  pkgs, 
+  sops-nix,
+  ... 
+}: {
   environment.systemPackages = [ pkgs.cifs-utils ];
 
+  sops.secrets = {
+    smb-secrets = {};
+  };
+    
   fileSystems = {
     "/mnt/talos/storage" = {
       device = "//talos/storage";

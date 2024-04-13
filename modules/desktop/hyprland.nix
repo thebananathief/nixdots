@@ -2,12 +2,31 @@
 # This module's purpose is to install a full desktop environment with Hyprland
 # as the Window Manager. The scope of this should be as large as GNOME or Plasma.
 
+  imports = [
+    ../games.nix
+  ];
+  
   services.xserver.displayManager = {
     defaultSession = "hyprland";
     gdm.enable = true;
     gdm.wayland = true;
   };
 
+  # systemd.tmpfiles.rules = [
+  #   "L+ /run/gdm/.config/monitors.xml - - - - ${pkgs.writeText "gdm-monitors.xml}" ''
+  #     <!-- this should all be copied from your ~/.config/monitors.xml -->
+  #     <monitors version="2">
+  #       <configuration>
+  #           <!-- REDACTED -->
+  #       </configuration>
+  #     </monitors>
+  #   ''}"
+  # ];
+
+  # environment.loginShellInit = ''
+  #   [[ "$(tty)" == /dev/tty1 ]] && Hyprland
+  # '';
+  
   security.polkit.enable = true;
 
   environment = {
@@ -17,10 +36,9 @@
     };
 
     systemPackages = (with pkgs; [
+      intel-media-driver linux-firmware mesa
+      
       anyrun.packages.${system}.anyrun
-      intel-media-driver
-      linux-firmware
-      mesa
       hyprpicker
       dunst
       cliphist
@@ -31,7 +49,7 @@
       libinput
       fusuma
       glib
-      waybar
+      # waybar
       handlr
       trashy
       yad # dialog cli
@@ -41,14 +59,13 @@
       swayidle # idle daemon to trigger sleep, suspend, monitor off, lock
       wlogout
 
-      wf-recorder # screen recording
-      slurp # select region for screenshot
-      swappy # edit screenshots after clipping
-      grim # screen capture for screenshots
-
+      # Screen recording, region selection, screenshot markup UI, and the screencapping tool
+      wf-recorder slurp swappy grim 
+      
       nwg-drawer
-      # nwg-displays # seemed broken last i checked
-      # wlr-randr
+
+      # Kinda broken with Hyprland or NixOS, not sure, but helps with generating configs to console
+      # nwg-displays wlr-randr
 
     # Media
       zathura # docs
@@ -69,6 +86,9 @@
       # mpd # audio player
       # mpc-cli # cli mpd interface
       # ncmpcpp # curses mpd interface
+
+      # gnome.nautilus
+      cinnamon.nemo-with-extensions
     ]) ++ (with pkgs.libsForQt5; [
       # elisa
       # okular
@@ -78,12 +98,15 @@
       # polkit-qt
       polkit-kde-agent
       qt5.qtwayland
-      dolphin
+      # dolphin
     ]);
   };
 
+  programs.nautilus-open-any-terminal.enable = true;
+  programs.nautilus-open-any-terminal.terminal = "alacritty";
+  services.gnome.sushi.enable = true;
+
   security = {
-    rtkit.enable = true;
     #pam.services.greetd.gnupg.enable = true;
     pam.services.waylock.text = "auth include login";
   };
@@ -102,13 +125,6 @@
 
     # Monitor backlight control
     # light.enable = true;
-
-    gnupg = {
-      agent = {
-        enable = true;
-        enableBrowserSocket = true;
-      };
-    };
   };
 
   # For flatpaks I think?
@@ -122,7 +138,6 @@
 
     udisks2.enable = true;
     blueman.enable = true;
-    printing.enable = false;
 
     # use Ambient Light Sensors for auto brightness adjustment
     # clight = {

@@ -1,15 +1,16 @@
 { pkgs, ... }:
 let
-    # wrapspotify = pkgs.symlinkJoin {
-    #   name = "spotify";
-    #   paths = [ pkgs.spotify ];
-    #   buildInputs = [ pkgs.makeWrapper ];
-    #   postBuild = ''
-    #     wrapProgram $out/bin/spotify \
-    #       --add-flags "--enable-features=UseOzonePlatform" \
-    #       --add-flags "--ozone-platform=wayland"
-    #   '';
-    # };
+    # Fixed crashes from EGL something rather
+    # NVIDIA-wayland related?
+    obsid = pkgs.symlinkJoin {
+      name = "obsidian";
+      paths = [ pkgs.obsidian ];
+      buildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/obsidian \
+          --add-flags "--disable-gpu"
+      '';
+    };
 in {
   services.mullvad-vpn.enable = true;
   # pkgs.mullvad for CLI only, pkgs.mullvad-vpn for CLI and GUI
@@ -22,9 +23,6 @@ in {
     cava # audio visualizer
     cmatrix
     go
-    pre-commit
-    mcrcon # minecraft rcon client
-    wireguard-tools
 
     (python311.withPackages (ps:
       with ps; [
@@ -37,18 +35,23 @@ in {
     megacmd
     audacity
     spicetify-cli # Needs to be installed even with the flake
-    localsend
-    jetbrains.idea-community
+    # jetbrains.idea-community
+    obs-studio
+    mumble
+    zbar
+    delfin
 
-    # tailscale-systray
+    tailscale-systray
     # trayscale
-    ktailctl
+    # ktailctl
 
   ## Electron apps
-    obsidian
-    webcord
+    obsid
+    localsend
+    wireguard-tools
+    # webcord
+    discord
     bitwarden
-    # wrapspotify
     spotify
     libreoffice-qt
     hunspell
@@ -59,7 +62,6 @@ in {
     # krita
     # libreoffice
     # zettlr
-    # discord
     # dbeaver
     # cage
   ];

@@ -1,11 +1,43 @@
-{ ... }:
+{ lib, config, ... }:
 {
   services.kanshi = {
     enable = true;
     # Required for hyprland (kanshi is originally for sway)
+    # systemdTarget = lib.mkIf config.wayland.windowManager.hyprland.enable "hyprland-session.target";
     systemdTarget = "hyprland-session.target";
 
     profiles = {
+      desktop = {
+        outputs = [
+          {
+            criteria = "AOC 27G15 AH15332Z02974";
+            mode = "1920x1080@180";
+            position = "0,0";
+            transform = "normal";
+            scale = 1.0;
+            adaptiveSync = false;
+            status = "enable";
+          }
+          {
+            criteria = "AOC 27G15 AH15332Z02979";
+            mode = "1920x1080@180";
+            position = "0,-1080";
+            transform = "normal";
+            scale = 1.0;
+            adaptiveSync = false;
+            status = "enable";
+          }
+          {
+            criteria = "Lenovo Group Limited D27-30 URHHM364";
+            mode = "1920x1080@75";
+            position = "1920,-500";
+            transform = "90";
+            scale = 1.0;
+            adaptiveSync = false;
+            status = "enable";
+          }
+        ];
+      };
       undocked = {
         outputs = [
           {

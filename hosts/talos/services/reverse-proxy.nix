@@ -40,6 +40,9 @@ in {
       "books.${ config.networking.fqdn }".extraConfig = ''
         reverse_proxy localhost:8009
       '';
+      "castopod.${ config.networking.fqdn }".extraConfig = ''
+        reverse_proxy localhost:8015
+      '';
       # Mumble?
       # matrix-conduit
       # "chat.${ config.networking.fqdn }".extraConfig = ''

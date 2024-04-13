@@ -19,7 +19,7 @@
 
     packages = with pkgs; [
       lynis
-      at
+      # at # nonfunctional
       lazydocker
     ];
     
@@ -45,11 +45,13 @@
 
     eza = {
       enable = true;
-      enableAliases = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
       icons = false;
       extraOptions = [
         "--all"
         "--color=always"
+        "--group"
       ];
     };
 

@@ -1,16 +1,20 @@
 { pkgs, ... }: {
   imports = [
-    # ./plasma.nix
-    ./hyprland.nix
+    ./plasma.nix # includes games
+    # ./hyprland.nix
+    # ./sway.nix
     # ./gnome.nix
     # ./xfce.nix
-    ../theme
+    ../fonts.nix
   ];
+  
+  # make HM-managed GTK stuff work
+  programs.dconf.enable = true;
 
   services.xserver = {
     enable = true;
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
 
     # excludePackages = [ pkgs.xterm ];
 

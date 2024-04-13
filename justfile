@@ -16,6 +16,12 @@ install:
   sudo ln -sv '/home/cameron/github/nixdots/flake.nix' '/etc/nixos/flake.nix'
   ./nixos-rebuild switch
 
+[linux]
+up:
+  -git add --all
+  -git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')"
+  -git push
+  
 # remotely links the flake.nix to one in /etc/nixos, then rebuild switches | MUST SPECIFY HOSTNAME TO SSH TO
 [windows]
 rinstall host:
@@ -58,3 +64,9 @@ rswitch *args:
 [linux]
 update:
   nix flake update
+
+alias syn := syntax
+# syntax-checks the flake
+[linux]
+syntax:
+  nix-instantiate '<nixpkgs/nixos>' -A system

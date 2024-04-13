@@ -1,8 +1,8 @@
-{ ... }: 
+{ globalFonts, ... }: 
 let
   theme = builtins.fetchurl {
-    url = "https://raw.githubusercontent.com/catppuccin/alacritty/main/catppuccin-mocha.yml";
-    sha256 = "dbc4efb5ff00febc78d09f4f2971fa34bde1fce29f9f74d04f52bd1bc8960a43";
+    url = "https://raw.githubusercontent.com/catppuccin/alacritty/main/catppuccin-mocha.toml";
+    sha256 = "061yalrzpqivr67k2f8hsqixr77srgd8y47xvhp5vg0sjmh5lrcy";
   };
 in {
   programs.alacritty = {
@@ -11,9 +11,9 @@ in {
       "import" = [
         theme
       ];
-      font = let family = "JetBrainsMono Nerd Font";
+      font = let family = globalFonts.monospace;
       in {
-        size = 10;
+        size = 9;
         normal.family = family;
         normal.style = "Regular";
         italic.family = family;
@@ -22,11 +22,9 @@ in {
         bold.style = "Bold";
         bold_italic.family = family;
         bold_italic.style = "Bold Italic";
-        antialias = true;
-        autohint = true;
       };
       window = {
-        opacity = 0.8;
+        opacity = 0.85;
         padding.x = 2;
         padding.y = 2;
       };
@@ -35,7 +33,6 @@ in {
       scrolling = {
         history = 10000;
         multiplier = 3;
-        auto_scroll = false;
       };
       hints = {
         alphabet = "jfkdls;ahgurieowpq";

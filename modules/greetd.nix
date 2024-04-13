@@ -15,7 +15,7 @@ in {
     greetd.enable = true;
     greetd.settings = {
       default_session = {
-        command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.regreet}/bin/regreet";
+        command = "${pkgs.sway}/bin/cage -s -- ${pkgs.greetd.regreet}/bin/regreet";
         user = "greeter";
       };
     };

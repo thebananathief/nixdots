@@ -28,6 +28,7 @@
           PGID = "131"; # docker, required for the containers to access folders
           # PGID = "989"; # podman
           # PGID = "100"; # users
+          # PGID = "33"; # www-data
           TZ = config.time.timeZone;
         };
         description = "Environment variables used in many containers.";

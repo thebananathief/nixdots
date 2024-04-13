@@ -1,4 +1,52 @@
 { pkgs, config, ... }: rec {
+  imports = [
+    ./zathura.nix
+    ./fusuma.nix
+    ./anyrun.nix
+    ./waybar.nix
+    ./wlogout.nix
+    ./kanshi.nix
+    ./dunst.nix
+  ];
+  
+  home.sessionVariables = {
+  # systemd.user.sessionVariables = {
+    # Fix for some Java AWT applications (e.g. Android Studio), this var fixes blank screens on launch
+    _JAVA_AWT_WM_NONREPARENTING = "1";
+
+    # Mozilla wayland support
+    # MOZ_ENABLE_WAYLAND = "1";
+    # MOZ_WEBRENDER = "1";
+
+    # For SDL2, NOTE: Steam, most games and other binary apps may not work with "wayland" SDL driver, unset or tweak for specific apps
+    SDL_VIDEODRIVER = "wayland";
+    
+    XDG_SESSION_TYPE = "wayland";
+    CLUTTER_BACKEND = "wayland";
+    WLR_RENDERER = "vulkan";
+    # GTK_USE_PORTAL = "1";
+    
+    # GTK3 selects wayland by default, these break some apps if you set them (sway docs)
+    # GDK_BACKEND = "wayland";
+    # GDK_BACKEND = "wayland,x11";
+    
+    # EXPERIMENTAL: breaks some electron apps
+    # Also makes a lot of electron apps use wayland
+    NIXOS_OZONE_WL = "1";
+    # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+        
+    # GDK_SCALE = "1";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    # QT_FONT_DPI = "128";
+    
+    # handled by fontconfig i think
+    # "XCURSOR_SIZE,24"
+    # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
+  };
+
+  systemd.user.sessionVariables = home.sessionVariables;
+  
   programs.wpaperd = {
     enable = true;
     settings = {
@@ -18,26 +66,26 @@
       "$files" = "thunar";
       "$browser" = "firefox";
       "$runner" = "anyrun";
-      "$volume" = "~/github/nixdots/scripts/volumecontrol";
+      "$volume" = "~/code/nixdots/scripts/volumecontrol";
       "$lockscreen" = "waylock -init-color 0x101010 -input-color 0x353535 -fail-color 0x150505";
       "$lockmenu" = "wlogout";
-      "$brightness" = "~/github/nixdots/scripts/brightnesscontrol";
-      "$screenshot" = "~/github/nixdots/scripts/screenshot";
+      "$brightness" = "~/code/nixdots/scripts/brightnesscontrol";
+      "$screenshot" = "~/code/nixdots/scripts/screenshot";
 
       env = [
         # QT uses these
-         # "XCURSOR_SIZE,24"
+        # "XCURSOR_SIZE,24"
         # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
 
         # NVIDIA stuff
-        # "WLR_NO_HARDWARE_CURSORS,1"
-        # "LIBVA_DRIVER_NAME,nvidia"
         # "GBM_BACKEND,nvidia-drm"
-        # "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        # "XDG_SESSION_TYPE,wayland"
+        "WLR_NO_HARDWARE_CURSORS,1"
+        "LIBVA_DRIVER_NAME,nvidia"
+        # if windows don't display or screen share doesnt work, remove this
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
 
         # Screen tearing
-        # "WLR_DRM_NO_ATOMIC,1"
+        "WLR_DRM_NO_ATOMIC,1"
       ];
 
       # https://wiki.hyprland.org/Configuring/Binds/
@@ -55,6 +103,7 @@
         "$mainMod, Y, exec, killall .waybar-wrapped ; waybar"
         "$mainMod, Y, exec, killall .fusuma-wrapped ; fusuma -d"
         "$mainMod, Y, exec, killall blueman-applet ; blueman-applet"
+        "$mainMod, Z, exec, ~/code/nixdots/scripts/resetxdgportal"
 
         # Media key binds
         ", XF86AudioMute, exec, pamixer -t"
@@ -71,10 +120,10 @@
         # Window actions
         "$mainMod, W, killactive,"
         "ALT, return, fullscreen,"
-        # "$mainMod, P, pseudo," # dwindle
-        # "$mainMod, mouse:276, pseudo," # dwindle
-        "$mainMod, I, togglegroup"
-        "$mainMod, mouse:276, togglegroup"
+        "$mainMod, P, pseudo," # dwindle
+        "$mainMod, mouse:276, pseudo," # dwindle
+        # "$mainMod, I, togglegroup"
+        # "$mainMod, mouse:276, togglegroup"
         "$mainMod, M, togglesplit," # dwindle
         "$mainMod, mouse:275, togglesplit," # dwindle
         "$mainMod, O, togglefloating,"
@@ -132,7 +181,7 @@
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
 
-        "$mainMod, F1, exec, ~/github/nixdots/scripts/gamemode" # disable hypr effects for gamemode
+        "$mainMod, F1, exec, ~/code/nixdots/scripts/gamemode" # disable hypr effects for gamemode
       ];
 
       binde = [
@@ -152,8 +201,8 @@
       ];
 
       bindr = [
-        # "$mainMod, space, exec, pkill .$runner-wrapped || $runner" # launch desktop applications
-        "$mainMod, R, exec, pkill nwg-drawer || nwg-drawer" # launch desktop applications
+        "$mainMod, space, exec, pkill .$runner-wrapped || $runner" # launch desktop applications
+        "$mainMod, R, exec, killall nwg-drawer || nwg-drawer" # launch desktop applications
         # "$mainMod, T, exec, killall $runner; $runner --plugins kidex " # browse system files
         # "$mainMod, V, exec, cliphist list | anyrun --dmenu | cliphist decode | wl-copy" # clipboard chooser
 
@@ -184,7 +233,7 @@
         "wl-paste --type image --watch cliphist store" #Stores only image data
 
         # Taken from CTT
-        # "~/github/nixdots/scripts/resetxdgportal"
+        # "~/code/nixdots/scripts/resetxdgportal"
         # For when xdg-desktop-portal-wlr doesn't want to start because these variables are missing
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
@@ -197,14 +246,14 @@
         "mega-cmd"
         "fusuma -d"
         "firefox"
-        "~/github/nixdots/scripts/batterynotify"
+        "~/code/nixdots/scripts/batterynotify"
         "kanshi"
-        "swayidle -w timeout 600 '~/github/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
+        "swayidle -w timeout 600 '~/code/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
         # "gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Mocha-Mauve'"
         "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
         "kvantummanager --set Catppuccin-Mocha-Mauve"
         # BUG: mullvad and tailscale networks conflict
-        # "tailscale-systray"
+        "tailscale-systray"
       ];
 
       # See https://wiki.hyprland.org/Configuring/Monitors/
@@ -215,6 +264,10 @@
         # "HDMI-A-1, 1920x1080@144, 0x0, 1"
         # "DP-3, 1920x1080@60, 0x-1080, 1"
         # "DP-1, 1920x1080@75.001, 1920x-500, 1, transform, 1"
+        "desc:AOC 27G15 AH15332Z02979,1920x1080@180.003006,0x0,1.0"
+        "desc:AOC 27G15 AH15332Z02974,1920x1080@180.003006,0x1080,1.0"
+        "desc:Lenovo Group Limited D27-30 URHHM364,1920x1080@75.000999,1920x240,1.0"
+        "desc:Lenovo Group Limited D27-30 URHHM364,transform,1"
 
         # laptop @ work
         # "eDP-1, highres, 0x0, auto"
@@ -229,21 +282,21 @@
         # ", preferred, auto, 1"
       ];
 
-      workspace = [
+      # workspace = [
         # desktop setup
         # "1, monitor:HDMI-A-1, default:true"
         # "2, monitor:DP-3, default:true"
         # "3, monitor:DP-1, default:true"
 
         # laptop setup
-        "1, monitor:eDP-1, default:true, persistent:true"
-        "2, monitor:DP-5, default:true, persistent:true"
-        "3, monitor:DP-6, default:true, persistent:true"
-        "2, monitor:DP-7, default:true, persistent:true"
-        "3, monitor:DP-8, default:true, persistent:true"
+        # "1, monitor:eDP-1, default:true, persistent:true"
+        # "2, monitor:DP-5, default:true, persistent:true"
+        # "3, monitor:DP-6, default:true, persistent:true"
+        # "2, monitor:DP-7, default:true, persistent:true"
+        # "3, monitor:DP-8, default:true, persistent:true"
         # "2, monitor:HP Inc. HP V24 1CR0440LFS, default:true, persistent:true"
         # "3, monitor:HP Inc. HP V214a CNC7160VL4, default:true, persistent:true"
-      ];
+      # ];
 
       # xwayland = {
       #   use_nearest_neighbor = true;
@@ -319,7 +372,7 @@
       ];
 
       dwindle = {
-        pseudotile = false;
+        pseudotile = true;
         preserve_split = true;
         no_gaps_when_only = true;
       };
@@ -329,10 +382,12 @@
       gestures.workspace_swipe = true;
       gestures.workspace_swipe_fingers = 4;
 
-      "device:logitech-m510".sensitivity = 1.0;
-      "device:logitech-g203-prodigy-gaming-mouse".sensitivity = -0.2;
-      "device:pixa3854:00-093a:0274-touchpad".sensitivity = 1.0;
-      "device:glorious-model-d".sensitivity = -0.5;
+      # device = {
+      #   "logitech-m510".sensitivity = 1.0;
+      #   "logitech-g203-prodigy-gaming-mouse".sensitivity = -0.2;
+      #   "pixa3854:00-093a:0274-touchpad".sensitivity = 1.0;
+      #   "glorious-model-d".sensitivity = -0.5;
+      # };
 
       animations = {
         enabled = "yes";
@@ -343,14 +398,14 @@
           "liner, 1, 1, 1, 1"
         ];
         animation = [
-          "windows, 1, 6, wind, slide"
-          "windowsIn, 1, 6, winIn, slide"
-          "windowsOut, 1, 5, winOut, slide"
-          "windowsMove, 1, 5, wind, slide"
+          "windows, 1, 5, wind, slide"
+          "windowsIn, 1, 5, winIn, slide"
+          "windowsOut, 1, 4, winOut, slide"
+          "windowsMove, 1, 4, wind, slide"
           "border, 1, 1, liner"
           "borderangle, 1, 30, liner, loop"
           "fade, 1, 10, default"
-          "workspaces, 1, 5, wind"
+          "workspaces, 1, 4, wind"
         ];
       };
 
@@ -374,7 +429,7 @@
         # "center, class:^(org.kde.polkit-kde-authentication-agent-1)$"
 
         # "float, class:^(firefox), title:^(Extension: \(Bitwarden (-|—) Free Password Manager\) (-|—) Bitwarden (-|—) Mozilla Firefox)"
-        "float, title:^(Extension: \(Bitwarden)"
+        "float, title:(Extension: \(Bitwarden))"
         "float, class:(pavucontrol|yad|nm-connection-editor|nm-applet|blueman-manager)"
         "float, class:(qt5ct|qt6ct|kvantummanager|nwg-look)"
 
@@ -394,16 +449,16 @@
       ];
     };
   };
+
+  xdg.configFile."hypr/hyprland.conf".force = true;
 }
 
 
 
 
 # Window/Session actions
-#bind = ALT, F4, exec, ~/github/nixdots/scripts/dontkillsteam # killactive, kill the window on focus
+#bind = ALT, F4, exec, ~/code/nixdots/scripts/dontkillsteam # killactive, kill the window on focus
 #bind = $mainMod, delete, exit, # kill hyperland session
 #bind = $mainMod, W, togglefloating, # toggle the window on focus to float
 #bind = $mainMod, G, togglegroup, # toggle the window on focus to float
 
-## Exec custom scripts
-#bind = $mainMod, V, exec, pkill rofi || ~/github/nixdots/scripts/cliphist c  # open Pasteboard in screen center
