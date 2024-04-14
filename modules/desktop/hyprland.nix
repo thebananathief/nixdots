@@ -3,7 +3,7 @@
 # as the Window Manager. The scope of this should be as large as GNOME or Plasma.
 
   imports = [
-    # ../games.nix
+    ../games.nix
   ];
   
   services.xserver.displayManager = {
