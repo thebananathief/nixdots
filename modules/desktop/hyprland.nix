@@ -27,6 +27,7 @@
   #   [[ "$(tty)" == /dev/tty1 ]] && Hyprland
   # '';
   
+  # systemd.user.services.polkit-kde-authentication-agent-1
   security.polkit.enable = true;
 
   environment = {
