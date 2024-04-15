@@ -13,7 +13,7 @@ in {
     # nixos-hardware.nixosModules.common-gpu-nvidia
     nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
-    ./ai.nix
+    # ./ai.nix
     ../gargantuan/packages.nix
     # ../gargantuan/network-mount.nix
     ../../modules/desktop
