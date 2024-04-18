@@ -28,8 +28,8 @@
       autosave = true;
       cpu = true;
       opencl = false;
-      cuda = false;
-      randomx.igb-pages = true;
+      cuda = true;
+      # randomx.igb-pages = true;
       pools = {
         # algo = "null";
         # coin = "null";
@@ -39,7 +39,7 @@
         # rig-id = "null";
         # nicehash = false;
         keepalive = true;
-        enabled = true;
+        # enabled = true;
         tls = true;
         # tls-fingerprint = "null";
         # daemon = false;
