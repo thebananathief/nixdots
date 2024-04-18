@@ -40,6 +40,7 @@ in {
     mumble
     zbar
     delfin
+    monero-gui
 
     tailscale-systray
     # trayscale
