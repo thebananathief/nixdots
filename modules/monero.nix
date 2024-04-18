@@ -1,5 +1,5 @@
 { pkgs, lib, ... }: let
-  xmrigSettings = {
+  configFile = toJSON {
     autosave = true;
     cpu = true;
     opencl = false;
@@ -23,7 +23,6 @@
       # submit-to-origin = false;
     }; 
   };
-  configFile = lib.toJSON xmrigSettings;
 in {
   # services.monero = {
   #   enable = true;
