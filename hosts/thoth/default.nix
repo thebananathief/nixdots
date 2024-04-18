@@ -17,6 +17,7 @@ in {
     ../gargantuan/packages.nix
     # ../gargantuan/network-mount.nix
     ../../modules/desktop
+    ../../modules/monero.nix
     sops-nix.nixosModules.sops
   ];
   
