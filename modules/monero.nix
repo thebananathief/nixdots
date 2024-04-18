@@ -1,5 +1,5 @@
 { pkgs, lib, ... }: let
-  configFile = builtins.toJSON {
+  configFile = builtins.toFile "config.json" builtins.toJSON {
     autosave = true;
     cpu = true;
     opencl = false;
