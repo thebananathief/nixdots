@@ -1,6 +1,6 @@
 { pkgs, lib, ... }: let
   json = pkgs.formats.json {};
-  configFile = json.generate "config.json" {
+  configFile = builtins.toFile "config.json" (builtins.toJSON {
     autosave = true;
     cpu = true;
     opencl = false;
@@ -23,7 +23,7 @@
       # self-select = null;
       # submit-to-origin = false;
     }; 
-  };
+  };)
 in {
   # services.monero = {
   #   enable = true;
