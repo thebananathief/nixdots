@@ -23,7 +23,7 @@
       # self-select = null;
       # submit-to-origin = false;
     }; 
-  };)
+  });
 in {
   # services.monero = {
   #   enable = true;
