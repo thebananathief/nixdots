@@ -21,7 +21,7 @@
     # For SDL2, NOTE: Steam, most games and other binary apps may not work with "wayland" SDL driver, unset or tweak for specific apps
     # Noita definitely needs this unset in its launch opts: env --unset=SDL_VIDEODRIVER %command%
     # https://wiki.libsdl.org/SDL2/FAQUsingSDL
-    SDL_VIDEODRIVER = "wayland";
+    # SDL_VIDEODRIVER = "wayland";
     
     XDG_SESSION_TYPE = "wayland";
     CLUTTER_BACKEND = "wayland";
