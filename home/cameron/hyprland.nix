@@ -31,11 +31,6 @@
     # GTK3 selects wayland by default, these break some apps if you set them (sway docs)
     # GDK_BACKEND = "wayland";
     # GDK_BACKEND = "wayland,x11";
-    
-    # EXPERIMENTAL: breaks some electron apps
-    # Also makes a lot of electron apps use wayland
-    NIXOS_OZONE_WL = "1";
-    # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
         
     # GDK_SCALE = "1";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";

@@ -28,6 +28,12 @@
     VISUAL = "nvim";
     TERMINAL = "alacritty";
     BROWSER = "firefox";
+    
+    # EXPERIMENTAL: breaks some electron apps
+    # Also probably breaks on X11
+    # Also makes a lot of electron apps use wayland
+    NIXOS_OZONE_WL = "1";
+    # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
   };
 
   dconf.settings = {
