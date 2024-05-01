@@ -33,7 +33,7 @@
           {
             criteria = "Lenovo Group Limited D27-30 URHHM364";
             mode = "1920x1080@60";
-            position = "1920,-500";
+            position = "1920,240";
             transform = "90";
             scale = 1.0;
             adaptiveSync = false;
