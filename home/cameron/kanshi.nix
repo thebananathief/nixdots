@@ -34,7 +34,7 @@
           # vertical
           {
             criteria = "Lenovo Group Limited D27-30 URHHM364";
-            mode = "1920x1080@60";
+            mode = "1920x1080@75";
             position = "1920,-500";
             transform = "90";
             scale = 1.0;
