@@ -9,38 +9,32 @@
     ./dunst.nix
   ];
   
-  home.sessionVariables = {
-  # systemd.user.sessionVariables = {
-
-    # Mozilla wayland support
-    # MOZ_ENABLE_WAYLAND = "1";
-    # MOZ_WEBRENDER = "1";
-
-    # For SDL2, NOTE: Steam, most games and other binary apps may not work with "wayland" SDL driver, unset or tweak for specific apps
-    # Noita definitely needs this unset in its launch opts: env --unset=SDL_VIDEODRIVER %command%
-    # https://wiki.libsdl.org/SDL2/FAQUsingSDL
-    # SDL_VIDEODRIVER = "wayland";
-    
-    XDG_SESSION_TYPE = "wayland";
-    CLUTTER_BACKEND = "wayland";
-    WLR_RENDERER = "vulkan";
-    # GTK_USE_PORTAL = "1";
-    
-    # GTK3 selects wayland by default, these break some apps if you set them (sway docs)
-    # GDK_BACKEND = "wayland";
-    # GDK_BACKEND = "wayland,x11";
-        
-    # GDK_SCALE = "1";
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-    # QT_FONT_DPI = "128";
-    
-    # handled by fontconfig i think
-    # "XCURSOR_SIZE,24"
-    # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
-  };
+  # home.sessionVariables = {
+  # # systemd.user.sessionVariables = {
+  #   # For SDL2, NOTE: Steam, most games and other binary apps may not work with "wayland" SDL driver, unset or tweak for specific apps
+  #   # Noita definitely needs this unset in its launch opts: env --unset=SDL_VIDEODRIVER %command%
+  #   # https://wiki.libsdl.org/SDL2/FAQUsingSDL
+  #   # SDL_VIDEODRIVER = "wayland";
+  #   
+  #   XDG_SESSION_TYPE = "wayland";
+  #   CLUTTER_BACKEND = "wayland";
+  #   WLR_RENDERER = "vulkan";
+  #   # GTK_USE_PORTAL = "1";
+  #   
+  #   # GTK3 selects wayland by default, these break some apps if you set them (sway docs)
+  #   # GDK_BACKEND = "wayland";
+  #   # GDK_BACKEND = "wayland,x11";
+  #       
+  #   # GDK_SCALE = "1";
+  #   QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+  #   # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+  #   # QT_FONT_DPI = "128";
+  # };
 
   # systemd.user.sessionVariables = home.sessionVariables;
+  # systemd.user.sessionVariables = {
+  #   
+  # };
   
   programs.wpaperd = {
     enable = true;
@@ -68,19 +62,44 @@
       "$screenshot" = "~/code/nixdots/scripts/screenshot";
 
       env = [
-        # QT uses these
-        # "XCURSOR_SIZE,24"
-        # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
-
         # NVIDIA stuff
-        # "GBM_BACKEND,nvidia-drm"
-        "WLR_NO_HARDWARE_CURSORS,1"
-        "LIBVA_DRIVER_NAME,nvidia"
+        "WLR_NO_HARDWARE_CURSORS,1" # Fixes disappeared cursor on NVIDIA
+        "LIBVA_DRIVER_NAME,nvidia" # Hardware Accel for GPU
+        "WLR_DRM_NO_ATOMIC,1" # Might fix flickering
+
+        # To force GBM as a backend
+        # "GBM_BACKEND,nvidia-drm" # works fine when commented?
         # if windows don't display or screen share doesnt work, remove this
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-
-        # Screen tearing
-        "WLR_DRM_NO_ATOMIC,1"
+        
+        "XDG_SESSION_TYPE,wayland"
+        "CLUTTER_BACKEND,wayland"
+        "WLR_RENDERER,vulkan"
+        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+        
+        # For games to launch without configuring them (i think these may be defaults)
+        # "SDL_VIDEODRIVER,x11"
+        # "GDK_BACKEND,x11"
+        
+        # Breaks some games (can't launch)
+        # "SDL_VIDEODRIVER,wayland"
+        
+        # Breaks some apps if set (sway docs)
+        # "GDK_BACKEND,\"wayland,x11\""
+    
+        "__GL_VRR_ALLOWED,0" # If adaptive sync should be used, recommended 0 to avoid problems with games
+        "__GL_GSYNC_ALLOWED,0" # If G-Sync monitors should use VRR
+        
+        # Fix for some Java AWT applications (e.g. Android Studio), this var fixes blank screens on launch
+        # "_JAVA_AWT_WM_NONREPARENTING,1"
+        "__NV_PRIME_RENDER_OFFLOAD,1"
+        "__VK_LAYER_NV_optimus,NVIDIA_only"
+        "PROTON_ENABLE_NGX_UPDATER,1"
+        "NVD_BACKEND,direct"
+        "WLR_USE_LIBINPUT,1"
+        "XWAYLAND_NO_GLAMOR,1"
+        "__GL_MaxFramesAllowed,1"
+        "WLR_RENDERER_ALLOW_SOFTWARE,1"
       ];
 
       # https://wiki.hyprland.org/Configuring/Binds/
