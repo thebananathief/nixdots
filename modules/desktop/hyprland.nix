@@ -66,7 +66,7 @@
       nwg-drawer
 
       # Kinda broken with Hyprland or NixOS, not sure, but helps with generating configs to console
-      # nwg-displays wlr-randr
+      nwg-displays wlr-randr
 
     # Media
       zathura # docs
