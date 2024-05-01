@@ -87,8 +87,8 @@
         # Breaks some apps if set (sway docs)
         # "GDK_BACKEND,\"wayland,x11\""
     
-        "__GL_VRR_ALLOWED,0" # If adaptive sync should be used, recommended 0 to avoid problems with games
-        "__GL_GSYNC_ALLOWED,0" # If G-Sync monitors should use VRR
+        "__GL_VRR_ALLOWED,1" # If adaptive sync should be used, recommended 0 to avoid problems with games
+        "__GL_GSYNC_ALLOWED,1" # If G-Sync monitors should use VRR, recommended 0
         
         # Fix for some Java AWT applications (e.g. Android Studio), this var fixes blank screens on launch
         # "_JAVA_AWT_WM_NONREPARENTING,1"
