@@ -31,7 +31,7 @@
     open = false;
     
     # Enable the Nvidia settings menu, accessible via `nvidia-settings`.
-    nvidiaSettings = false;
+    nvidiaSettings = true;
   };
   
   hardware.opengl = {
