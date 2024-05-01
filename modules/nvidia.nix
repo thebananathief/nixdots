@@ -12,7 +12,7 @@
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia = {
     # stable or beta should work for most modern cards
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
     
     # Enable modesetting for Wayland compositors (hyprland)
     modesetting.enable = true;
