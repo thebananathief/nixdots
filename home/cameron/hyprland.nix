@@ -244,7 +244,7 @@
         "fusuma -d"
         "firefox"
         "~/code/nixdots/scripts/batterynotify"
-        "kanshi"
+        # "kanshi"
         "swayidle -w timeout 600 '~/code/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
         # "gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Mocha-Mauve'"
         "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
