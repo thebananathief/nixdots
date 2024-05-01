@@ -18,7 +18,7 @@
             position = "0,0";
             transform = "normal";
             scale = 1.0;
-            adaptiveSync = false;
+            adaptiveSync = true;
             status = "enable";
           }
           # main top
@@ -28,7 +28,7 @@
             position = "0,-1080";
             transform = "normal";
             scale = 1.0;
-            adaptiveSync = false;
+            adaptiveSync = true;
             status = "enable";
           }
           # vertical
@@ -38,7 +38,7 @@
             position = "1920,-500";
             transform = "90";
             scale = 1.0;
-            adaptiveSync = false;
+            adaptiveSync = true;
             status = "enable";
           }
         ];
