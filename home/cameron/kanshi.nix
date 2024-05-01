@@ -38,7 +38,7 @@
             position = "1920,-500";
             transform = "90";
             scale = 1.0;
-            adaptiveSync = true;
+            adaptiveSync = false;
             status = "enable";
           }
         ];
