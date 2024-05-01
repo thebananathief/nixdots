@@ -11,10 +11,10 @@
     nixos-hardware.nixosModules.common-hidpi
     sops-nix.nixosModules.sops
     ./hardware-configuration.nix
-    ./packages.nix
-    ./network-mount.nix
-    ../../modules/games.nix
     # ./precommit.nix
+    ../../modules/packages.nix
+    ../../modules/network-mount.nix
+    ../../modules/games.nix
     ../../modules/desktop
   ];
 

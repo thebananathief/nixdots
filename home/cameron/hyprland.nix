@@ -115,6 +115,9 @@
         "$mainMod SHIFT, W, exec, $screenshot p" # print current screen
 
         # Window actions
+        # mouse 274 = middle
+        # mouse 275 = mouse button 4 (back)
+        # mouse 276 = mouse button 5 (forward)
         "$mainMod, W, killactive,"
         "ALT, return, fullscreen,"
         "$mainMod, P, pseudo," # dwindle

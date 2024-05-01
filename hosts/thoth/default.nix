@@ -12,14 +12,14 @@ in {
     # nixos-hardware.nixosModules.common-pc-ssd
     # nixos-hardware.nixosModules.common-gpu-nvidia
     nixos-hardware.nixosModules.common-cpu-intel
-    ./hardware-configuration.nix
-    ./gpu.nix
-    # ./ai.nix
-    ../gargantuan/packages.nix
-    # ../gargantuan/network-mount.nix
-    ../../modules/desktop
-    # ../../modules/monero.nix
     sops-nix.nixosModules.sops
+    ./hardware-configuration.nix
+    ../../modules/nvidia.nix
+    ../../modules/packages.nix
+    ../../modules/network-mount.nix
+    ../../modules/desktop
+    # ../../modules/ai.nix
+    # ../../modules/monero.nix
   ];
   
   # services.minecraft-server = {
