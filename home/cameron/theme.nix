@@ -31,7 +31,7 @@
 
   qt = {
     enable = true;
-    platformTheme = "qtct";
+    platformTheme.name = "qtct";
     # platformTheme = "gtk3";
     # style.name = "gtk2";
     style.name = "breeze";

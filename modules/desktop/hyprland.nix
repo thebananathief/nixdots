@@ -6,8 +6,8 @@
     ../games.nix
   ];
   
+  services.displayManager.defaultSession = "hyprland";
   services.xserver.displayManager = {
-    defaultSession = "hyprland";
     gdm.enable = true;
     gdm.wayland = true;
   };
@@ -23,6 +23,7 @@
   #   ''}"
   # ];
 
+  # Hyprland is already launched through other means
   # environment.loginShellInit = ''
   #   [[ "$(tty)" == /dev/tty1 ]] && Hyprland
   # '';
