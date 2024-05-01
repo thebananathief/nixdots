@@ -241,29 +241,28 @@
         "blueman-applet"
         # "nm-applet --indicator" # started by nixos module
         "mega-cmd"
-        "fusuma -d"
         "firefox"
         "~/code/nixdots/scripts/batterynotify"
-        # "kanshi"
+        "kanshi"
         "swayidle -w timeout 600 '~/code/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
         # "gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Mocha-Mauve'"
         "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
         "kvantummanager --set Catppuccin-Mocha-Mauve"
+        
         # BUG: mullvad and tailscale networks conflict
         "tailscale-systray"
+        
+        # For touchpad gestures, only needed on laptop
+        "fusuma -d"
       ];
 
       # See https://wiki.hyprland.org/Configuring/Monitors/
       # Handled by Kanshi now
-      # monitor = [
-        # TODO: I need a better way to separate my home config for my laptop and my desktop
+      monitor = [
         # desktop
-        # "HDMI-A-1, 1920x1080@144, 0x0, 1"
-        # "DP-3, 1920x1080@60, 0x-1080, 1"
-        # "DP-1, 1920x1080@75.001, 1920x-500, 1, transform, 1"
-        # "desc:AOC 27G15 AH15332Z02979,1920x1080@180.003006,0x0,1.0"
-        # "desc:AOC 27G15 AH15332Z02974,1920x1080@180.003006,0x1080,1.0"
-        # "desc:Lenovo Group Limited D27-30 URHHM364,1920x1080@75.000999,1920x240,1.0"
+        # "desc:AOC 27G15 AH15332Z02979,1920x1080@180.003006,0x-1080,1.0"
+        # "desc:AOC 27G15 AH15332Z02974,1920x1080@180.003006,0x0,1.0"
+        # "desc:Lenovo Group Limited D27-30 URHHM364,1920x1080@75.000999,1920x-500,1.0" # 240
         # "desc:Lenovo Group Limited D27-30 URHHM364,transform,1"
 
         # laptop @ work
@@ -277,7 +276,7 @@
 
         # catchall monitor rule
         # ", preferred, auto, 1"
-      # ];
+      ];
 
       # workspace = [
         # desktop setup
