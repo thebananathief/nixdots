@@ -1,4 +1,11 @@
 { pkgs, lib, config, ... }: {
+  environment.systemPackages = with pkgs; [
+    libva
+    # vulkan-loader
+    # vulkan-validation-layers
+    # vulkan-tools
+  ];
+  
   # https://nixos.wiki/wiki/Nvidia
   # Load nvidia driver for Xorg and Wayland
   boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];

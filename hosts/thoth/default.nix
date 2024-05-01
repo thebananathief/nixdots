@@ -83,13 +83,6 @@ in {
   # Allow unfree packages
   # nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [
-    libva
-    # vulkan-loader
-    # vulkan-validation-layers
-    # vulkan-tools
-  ];
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
