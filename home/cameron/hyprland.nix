@@ -37,6 +37,12 @@
     # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
     # QT_FONT_DPI = "128";
     
+    # EXPERIMENTAL: breaks some electron apps
+    # Also probably breaks on X11
+    # Also makes a lot of electron apps use wayland
+    NIXOS_OZONE_WL = "1";
+    # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    
     # handled by fontconfig i think
     # "XCURSOR_SIZE,24"
     # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
