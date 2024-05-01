@@ -16,8 +16,8 @@ in {
     ./hardware-configuration.nix
     ../../modules/nvidia.nix
     ../../modules/packages.nix
-    ../../modules/network-mount.nix
     ../../modules/desktop
+    # ../../modules/network-mount.nix
     # ../../modules/ai.nix
     # ../../modules/monero.nix
   ];
