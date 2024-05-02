@@ -81,7 +81,7 @@
         # "SDL_VIDEODRIVER,x11"
         # "GDK_BACKEND,x11"
         
-        "SDL_VIDEODRIVER,wayland" # Breaks some games (can't launch)
+        # "SDL_VIDEODRIVER,wayland" # Breaks some games (can't launch)
         "GDK_BACKEND,wayland,x11" # Breaks some apps if set (sway docs)
     
         "__GL_VRR_ALLOWED,1" # If adaptive sync should be used, recommended 0 to avoid problems with games
