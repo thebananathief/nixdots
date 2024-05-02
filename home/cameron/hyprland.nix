@@ -77,29 +77,26 @@
         "WLR_RENDERER,vulkan"
         "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
         
-        # For games to launch without configuring them (i think these may be defaults)
+        # May break launching games (i think these may be defaults)
         # "SDL_VIDEODRIVER,x11"
         # "GDK_BACKEND,x11"
         
-        # Breaks some games (can't launch)
-        # "SDL_VIDEODRIVER,wayland"
-        
-        # Breaks some apps if set (sway docs)
-        # "GDK_BACKEND,\"wayland,x11\""
+        # "SDL_VIDEODRIVER,wayland" # Breaks some games (can't launch)
+        # "GDK_BACKEND,\"wayland,x11\"" # Breaks some apps if set (sway docs)
     
-        # "__GL_VRR_ALLOWED,1" # If adaptive sync should be used, recommended 0 to avoid problems with games
-        # "__GL_GSYNC_ALLOWED,1" # If G-Sync monitors should use VRR, recommended 0
-        # 
-        # # Fix for some Java AWT applications (e.g. Android Studio), this var fixes blank screens on launch
-        # # "_JAVA_AWT_WM_NONREPARENTING,1"
-        # "__NV_PRIME_RENDER_OFFLOAD,1"
-        # "__VK_LAYER_NV_optimus,NVIDIA_only"
-        # "PROTON_ENABLE_NGX_UPDATER,1"
-        # "NVD_BACKEND,direct"
-        # "WLR_USE_LIBINPUT,1"
-        # "XWAYLAND_NO_GLAMOR,1"
-        # "__GL_MaxFramesAllowed,1"
-        # "WLR_RENDERER_ALLOW_SOFTWARE,1"
+        "__GL_VRR_ALLOWED,1" # If adaptive sync should be used, recommended 0 to avoid problems with games
+        "__GL_GSYNC_ALLOWED,1" # If G-Sync monitors should use VRR, recommended 0
+
+        # Fix for some Java AWT applications (e.g. Android Studio), this var fixes blank screens on launch
+        # "_JAVA_AWT_WM_NONREPARENTING,1"
+        "__NV_PRIME_RENDER_OFFLOAD,1"
+        "__VK_LAYER_NV_optimus,NVIDIA_only"
+        "PROTON_ENABLE_NGX_UPDATER,1"
+        "NVD_BACKEND,direct"
+        "WLR_USE_LIBINPUT,1"
+        "XWAYLAND_NO_GLAMOR,1"
+        "__GL_MaxFramesAllowed,1"
+        "WLR_RENDERER_ALLOW_SOFTWARE,1"
       ];
 
       # These are ran every reload of hyprland
