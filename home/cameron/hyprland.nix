@@ -31,7 +31,7 @@
     # QT_FONT_DPI = "128";
   };
 
-  # systemd.user.sessionVariables = home.sessionVariables;
+  systemd.user.sessionVariables = home.sessionVariables;
   # systemd.user.sessionVariables = {
   #   
   # };
@@ -101,6 +101,83 @@
         # "__GL_MaxFramesAllowed,1"
         # "WLR_RENDERER_ALLOW_SOFTWARE,1"
       ];
+
+      # These are ran every reload of hyprland
+      exec = [
+      ];
+
+      exec-once = [
+        "wl-paste --type text --watch cliphist store" #Stores only text data
+        "wl-paste --type image --watch cliphist store" #Stores only image data
+
+        # Taken from CTT
+        # "~/code/nixdots/scripts/resetxdgportal"
+        # For when xdg-desktop-portal-wlr doesn't want to start because these variables are missing
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        # "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+
+        "wpaperd"
+        "waybar"
+        "blueman-applet"
+        # "nm-applet --indicator" # started by nixos module
+        "mega-cmd"
+        "firefox"
+        "~/code/nixdots/scripts/batterynotify"
+        "kanshi"
+        "swayidle -w timeout 600 '~/code/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
+        "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
+        "kvantummanager --set Catppuccin-Mocha-Mauve"
+        
+        # BUG: mullvad and tailscale networks conflict
+        "tailscale-systray"
+        
+        # For touchpad gestures, only needed on laptop
+        # "fusuma -d"
+      ];
+
+      # See https://wiki.hyprland.org/Configuring/Monitors/
+      # Handled by Kanshi now
+      monitor = [
+        # desktop
+        # "desc:AOC 27G15 AH15332Z02979,1920x1080@180.003006,0x-1080,1.0"
+        # "desc:AOC 27G15 AH15332Z02974,1920x1080@180.003006,0x0,1.0"
+        # "desc:Lenovo Group Limited D27-30 URHHM364,1920x1080@75.000999,1920x-500,1.0" # 240
+        # "desc:Lenovo Group Limited D27-30 URHHM364,transform,1"
+
+        # laptop @ work
+        # "eDP-1, highres, 0x0, auto"
+        # "DP-1, highres, 0x0, auto"
+        # "DP-5, highres, 1128x0, auto"
+        # "DP-6, highres, 3048x0, auto"
+
+        # laptop alone
+        # "eDP-1, highres, auto, auto"
+
+        # catchall monitor rule
+        # ", preferred, auto, 1"
+      ];
+
+      # workspace = [
+        # desktop setup
+        # "1, monitor:HDMI-A-1, default:true"
+        # "2, monitor:DP-3, default:true"
+        # "3, monitor:DP-1, default:true"
+
+        # laptop setup
+        # "1, monitor:eDP-1, default:true, persistent:true"
+        # "2, monitor:DP-5, default:true, persistent:true"
+        # "3, monitor:DP-6, default:true, persistent:true"
+        # "2, monitor:DP-7, default:true, persistent:true"
+        # "3, monitor:DP-8, default:true, persistent:true"
+        # "2, monitor:HP Inc. HP V24 1CR0440LFS, default:true, persistent:true"
+        # "3, monitor:HP Inc. HP V214a CNC7160VL4, default:true, persistent:true"
+      # ];
+
+      # xwayland = {
+      #   use_nearest_neighbor = true;
+      #   force_zero_scaling = true;
+      # };
 
       # https://wiki.hyprland.org/Configuring/Binds/
       bind = [
@@ -240,84 +317,6 @@
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
       ];
-
-      # These are ran every reload of hyprland
-      exec = [
-      ];
-
-      exec-once = [
-        "wl-paste --type text --watch cliphist store" #Stores only text data
-        "wl-paste --type image --watch cliphist store" #Stores only image data
-
-        # Taken from CTT
-        # "~/code/nixdots/scripts/resetxdgportal"
-        # For when xdg-desktop-portal-wlr doesn't want to start because these variables are missing
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        # "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-
-        "wpaperd"
-        "waybar"
-        "blueman-applet"
-        # "nm-applet --indicator" # started by nixos module
-        "mega-cmd"
-        "firefox"
-        "~/code/nixdots/scripts/batterynotify"
-        "kanshi"
-        "swayidle -w timeout 600 '~/code/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
-        # "gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Mocha-Mauve'"
-        "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
-        "kvantummanager --set Catppuccin-Mocha-Mauve"
-        
-        # BUG: mullvad and tailscale networks conflict
-        "tailscale-systray"
-        
-        # For touchpad gestures, only needed on laptop
-        "fusuma -d"
-      ];
-
-      # See https://wiki.hyprland.org/Configuring/Monitors/
-      # Handled by Kanshi now
-      monitor = [
-        # desktop
-        # "desc:AOC 27G15 AH15332Z02979,1920x1080@180.003006,0x-1080,1.0"
-        # "desc:AOC 27G15 AH15332Z02974,1920x1080@180.003006,0x0,1.0"
-        # "desc:Lenovo Group Limited D27-30 URHHM364,1920x1080@75.000999,1920x-500,1.0" # 240
-        # "desc:Lenovo Group Limited D27-30 URHHM364,transform,1"
-
-        # laptop @ work
-        # "eDP-1, highres, 0x0, auto"
-        # "DP-1, highres, 0x0, auto"
-        # "DP-5, highres, 1128x0, auto"
-        # "DP-6, highres, 3048x0, auto"
-
-        # laptop alone
-        # "eDP-1, highres, auto, auto"
-
-        # catchall monitor rule
-        # ", preferred, auto, 1"
-      ];
-
-      # workspace = [
-        # desktop setup
-        # "1, monitor:HDMI-A-1, default:true"
-        # "2, monitor:DP-3, default:true"
-        # "3, monitor:DP-1, default:true"
-
-        # laptop setup
-        # "1, monitor:eDP-1, default:true, persistent:true"
-        # "2, monitor:DP-5, default:true, persistent:true"
-        # "3, monitor:DP-6, default:true, persistent:true"
-        # "2, monitor:DP-7, default:true, persistent:true"
-        # "3, monitor:DP-8, default:true, persistent:true"
-        # "2, monitor:HP Inc. HP V24 1CR0440LFS, default:true, persistent:true"
-        # "3, monitor:HP Inc. HP V214a CNC7160VL4, default:true, persistent:true"
-      # ];
-
-      # xwayland = {
-      #   use_nearest_neighbor = true;
-      #   force_zero_scaling = true;
-      # };
 
       misc = {
         vrr = 0;
