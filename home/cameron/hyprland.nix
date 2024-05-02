@@ -140,9 +140,9 @@
       # Handled by Kanshi now
       monitor = [
         # desktop
-        "desc:AOC 27G15 AH15332Z02979,1920x1080@180.003006,0x-1080,1.0"
-        "desc:AOC 27G15 AH15332Z02974,1920x1080@180.003006,0x0,1.0"
-        "desc:Lenovo Group Limited D27-30 URHHM364,1920x1080@75.000999,1920x-500,1.0"
+        "desc:AOC 27G15 AH15332Z02979,1920x1080@180,0x-1080,1.0"
+        "desc:AOC 27G15 AH15332Z02974,1920x1080@180,0x0,1.0"
+        "desc:Lenovo Group Limited D27-30 URHHM364,1920x1080@75,1920x-500,1.0"
         "desc:Lenovo Group Limited D27-30 URHHM364,transform,1"
 
         # laptop @ work
