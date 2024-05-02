@@ -5,7 +5,7 @@
     ./anyrun.nix
     ./waybar.nix
     ./wlogout.nix
-    ./kanshi.nix
+    # ./kanshi.nix
     ./dunst.nix
   ];
   
@@ -124,7 +124,7 @@
         "mega-cmd"
         "firefox"
         "~/code/nixdots/scripts/batterynotify"
-        "kanshi"
+        # "kanshi"
         "swayidle -w timeout 600 '~/code/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
         "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
         "kvantummanager --set Catppuccin-Mocha-Mauve"
@@ -140,10 +140,10 @@
       # Handled by Kanshi now
       monitor = [
         # desktop
-        # "desc:AOC 27G15 AH15332Z02979,1920x1080@180.003006,0x-1080,1.0"
-        # "desc:AOC 27G15 AH15332Z02974,1920x1080@180.003006,0x0,1.0"
-        # "desc:Lenovo Group Limited D27-30 URHHM364,1920x1080@75.000999,1920x-500,1.0" # 240
-        # "desc:Lenovo Group Limited D27-30 URHHM364,transform,1"
+        "desc:AOC 27G15 AH15332Z02979,1920x1080@180.003006,0x-1080,1.0"
+        "desc:AOC 27G15 AH15332Z02974,1920x1080@180.003006,0x0,1.0"
+        "desc:Lenovo Group Limited D27-30 URHHM364,1920x1080@75.000999,1920x-500,1.0"
+        "desc:Lenovo Group Limited D27-30 URHHM364,transform,1"
 
         # laptop @ work
         # "eDP-1, highres, 0x0, auto"
