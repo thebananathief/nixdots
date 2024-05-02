@@ -9,29 +9,29 @@
     ./dunst.nix
   ];
   
-  home.sessionVariables = {
-  # systemd.user.sessionVariables = {
-    # For SDL2, NOTE: Steam, most games and other binary apps may not work with "wayland" SDL driver, unset or tweak for specific apps
-    # Noita definitely needs this unset in its launch opts: env --unset=SDL_VIDEODRIVER %command%
-    # https://wiki.libsdl.org/SDL2/FAQUsingSDL
-    # SDL_VIDEODRIVER = "wayland";
-    
-    XDG_SESSION_TYPE = "wayland";
-    CLUTTER_BACKEND = "wayland";
-    WLR_RENDERER = "vulkan";
-    # GTK_USE_PORTAL = "1";
-    
-    # GTK3 selects wayland by default, these break some apps if you set them (sway docs)
-    # GDK_BACKEND = "wayland";
-    # GDK_BACKEND = "wayland,x11";
-        
-    # GDK_SCALE = "1";
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-    # QT_FONT_DPI = "128";
-  };
+  # home.sessionVariables = {
+  # # systemd.user.sessionVariables = {
+  #   # For SDL2, NOTE: Steam, most games and other binary apps may not work with "wayland" SDL driver, unset or tweak for specific apps
+  #   # Noita definitely needs this unset in its launch opts: env --unset=SDL_VIDEODRIVER %command%
+  #   # https://wiki.libsdl.org/SDL2/FAQUsingSDL
+  #   # SDL_VIDEODRIVER = "wayland";
+  #   
+  #   XDG_SESSION_TYPE = "wayland";
+  #   CLUTTER_BACKEND = "wayland";
+  #   WLR_RENDERER = "vulkan";
+  #   # GTK_USE_PORTAL = "1";
+  #   
+  #   # GTK3 selects wayland by default, these break some apps if you set them (sway docs)
+  #   # GDK_BACKEND = "wayland";
+  #   # GDK_BACKEND = "wayland,x11";
+  #       
+  #   # GDK_SCALE = "1";
+  #   QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+  #   # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+  #   # QT_FONT_DPI = "128";
+  # };
 
-  systemd.user.sessionVariables = home.sessionVariables;
+  # systemd.user.sessionVariables = home.sessionVariables;
   # systemd.user.sessionVariables = {
   #   
   # };
@@ -72,10 +72,10 @@
         # if windows don't display or screen share doesnt work, remove this
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
         
-        # "XDG_SESSION_TYPE,wayland"
-        # "CLUTTER_BACKEND,wayland"
-        # "WLR_RENDERER,vulkan"
-        # "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+        "XDG_SESSION_TYPE,wayland"
+        "CLUTTER_BACKEND,wayland"
+        "WLR_RENDERER,vulkan"
+        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
         
         # For games to launch without configuring them (i think these may be defaults)
         # "SDL_VIDEODRIVER,x11"
@@ -137,7 +137,6 @@
       ];
 
       # See https://wiki.hyprland.org/Configuring/Monitors/
-      # Handled by Kanshi now
       monitor = [
         # desktop
         "desc:AOC 27G15 AH15332Z02979,1920x1080@180,0x-1080,1.0"
