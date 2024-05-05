@@ -50,7 +50,8 @@ in {
     obsid
     localsend
     wireguard-tools
-    webcord
+    # webcord
+    armcord
     # discord
     bitwarden
     spotify

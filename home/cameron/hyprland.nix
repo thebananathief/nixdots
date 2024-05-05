@@ -72,9 +72,9 @@
         # if windows don't display or screen share doesnt work, remove this
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
         
-        "XDG_SESSION_TYPE,wayland"
+        # "XDG_SESSION_TYPE,wayland" # apparently Hyprland sets this by default, but their docs do recommend setting it and other xdg specs
         "CLUTTER_BACKEND,wayland"
-        "WLR_RENDERER,vulkan"
+        # "WLR_RENDERER,vulkan" # commenter on reddit said Hyprland doesn't have a Vulkan backend, so this doesn't do anything
         "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
         
         # May break launching games (i think these may be defaults)
