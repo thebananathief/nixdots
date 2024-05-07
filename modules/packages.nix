@@ -59,6 +59,8 @@ in {
     hunspell
     hunspellDicts.en_US
 
+    nifi
+
     # thunderbird
     # parsec-bin
     # krita
