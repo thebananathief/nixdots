@@ -20,6 +20,7 @@ in {
     # ../../modules/network-mount.nix
     # ../../modules/ai.nix
     # ../../modules/monero.nix
+    ../../modules/nifi.nix
   ];
   
   # services.minecraft-server = {
