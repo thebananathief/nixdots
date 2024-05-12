@@ -1,5 +1,5 @@
 keys:
-  - &admin_cameron_desktop age12ayxuscntza45a3j5p2luc0au8gsphlqns49sum2z98dtykhw5lsvw28fg
+  - &admin_cameron_desktop age17zj03m39druezfu6le0ycvasr9thv4y06hdwzegh6rajgwrdhpgqsnwzes
   - &admin_cameron_laptop age1htjdvcdqvwe8rxx23fz2aw97a6c2zxwwu84m25jugh779vqkfg4sg5c83z
   - &server_talos age15ygfzth73d2q3dm305qg53x6g9u9knau9fytvnrlut4u0usg5cpqeq4s5g
   - &laptop_gargantuan age1408qgh9ekswerw33ae2yzmfu8la4kq2szl2rwvslx6cpujsfr58ss6q9tx
@@ -52,9 +52,9 @@ creation_rules:
   # ssh-to-age -private-key -i $HOME/.ssh/id_ed25519 -o $HOME\AppData\Roaming\sops\age\keys.txt
   # ssh-to-age -private-key -i $HOME/.ssh/id_ed25519 -o $HOME/.config/sops/age/keys.txt
   
-# 2. Create a key from an SSH host key
-  # ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key -o $HOME\.config\sops\age\keys.txt
+# 2. Create a public age key from an SSH public key
   # cat /etc/ssh/ssh_host_ed25519.pub | ssh-to-age
+  # ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key -o $HOME\.config\sops\age\keys.txt
 # Get remote host key (public)
   # ssh-keyscan -t ed25519 192.168.0.6 | ssh-to-age
   
