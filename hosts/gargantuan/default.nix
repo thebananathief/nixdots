@@ -13,7 +13,7 @@
     ./hardware-configuration.nix
     # ./precommit.nix
     ../../modules/packages.nix
-    ../../modules/network-mount.nix
+    # ../../modules/network-mount.nix
     ../../modules/games.nix
     ../../modules/desktop
   ];
@@ -85,8 +85,7 @@
   security.pam.services.login.unixAuth = true;
 
   # Power saving profile
-  # Consider:
-  # upower
+  # Consider upower instead
   services.tlp = {
     enable = true;
     settings = {
