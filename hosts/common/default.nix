@@ -1,6 +1,6 @@
 { lib, pkgs, ... }: {
   imports = [
-    ./myOptions
+    ./myOptions.nix
     ./shell.nix
     ./security.nix
     ./tailscale.nix

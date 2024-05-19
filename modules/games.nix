@@ -14,6 +14,8 @@
     protonup-qt
     protontricks
     bottles
+    wine
+    gamemode
     # (callPackage ../packages/mtg-forge/default.nix {})
     forge-mtg
     #gamescope

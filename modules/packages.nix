@@ -2,15 +2,15 @@
 let
     # Fixed crashes from EGL something rather
     # NVIDIA-wayland related?
-    obsid = pkgs.symlinkJoin {
-      name = "obsidian";
-      paths = [ pkgs.obsidian ];
-      buildInputs = [ pkgs.makeWrapper ];
-      postBuild = ''
-        wrapProgram $out/bin/obsidian \
-          --add-flags "--disable-gpu"
-      '';
-    };
+    # obsid = pkgs.symlinkJoin {
+    #   name = "obsidian";
+    #   paths = [ pkgs.obsidian ];
+    #   buildInputs = [ pkgs.makeWrapper ];
+    #   postBuild = ''
+    #     wrapProgram $out/bin/obsidian \
+    #       --add-flags "--disable-gpu"
+    #   '';
+    # };
 in {
   services.mullvad-vpn.enable = true;
   # pkgs.mullvad for CLI only, pkgs.mullvad-vpn for CLI and GUI
@@ -40,17 +40,19 @@ in {
     mumble
     zbar
     delfin
+    monero-gui
 
     tailscale-systray
     # trayscale
     # ktailctl
 
   ## Electron apps
-    obsid
+    obsidian
     localsend
     wireguard-tools
     # webcord
-    discord
+    armcord
+    # discord
     bitwarden
     spotify
     libreoffice-qt

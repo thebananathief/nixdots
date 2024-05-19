@@ -2,31 +2,36 @@
 {
   services.kanshi = {
     enable = true;
-    # Required for hyprland (kanshi is originally for sway)
+    
+    # Supposedly required for hyprland (kanshi is originally for sway), BUT, I found that it gave errors
+    # when you run kanshictl reload, unless you leave this as sway and start kanshi through the hyprland config instead!
     # systemdTarget = lib.mkIf config.wayland.windowManager.hyprland.enable "hyprland-session.target";
-    systemdTarget = "hyprland-session.target";
+    # systemdTarget = "hyprland-session.target";
 
     profiles = {
       desktop = {
         outputs = [
+          # main bottom
           {
             criteria = "AOC 27G15 AH15332Z02974";
             mode = "1920x1080@180";
             position = "0,0";
             transform = "normal";
             scale = 1.0;
-            adaptiveSync = false;
+            adaptiveSync = true;
             status = "enable";
           }
+          # main top
           {
             criteria = "AOC 27G15 AH15332Z02979";
             mode = "1920x1080@180";
             position = "0,-1080";
             transform = "normal";
             scale = 1.0;
-            adaptiveSync = false;
+            adaptiveSync = true;
             status = "enable";
           }
+          # vertical
           {
             criteria = "Lenovo Group Limited D27-30 URHHM364";
             mode = "1920x1080@75";

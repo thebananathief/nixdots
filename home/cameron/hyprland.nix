@@ -5,47 +5,36 @@
     ./anyrun.nix
     ./waybar.nix
     ./wlogout.nix
-    ./kanshi.nix
+    # ./kanshi.nix
     ./dunst.nix
   ];
   
-  home.sessionVariables = {
+  # home.sessionVariables = {
+  # # systemd.user.sessionVariables = {
+  #   # For SDL2, NOTE: Steam, most games and other binary apps may not work with "wayland" SDL driver, unset or tweak for specific apps
+  #   # Noita definitely needs this unset in its launch opts: env --unset=SDL_VIDEODRIVER %command%
+  #   # https://wiki.libsdl.org/SDL2/FAQUsingSDL
+  #   # SDL_VIDEODRIVER = "wayland";
+  #   
+  #   XDG_SESSION_TYPE = "wayland";
+  #   CLUTTER_BACKEND = "wayland";
+  #   WLR_RENDERER = "vulkan";
+  #   # GTK_USE_PORTAL = "1";
+  #   
+  #   # GTK3 selects wayland by default, these break some apps if you set them (sway docs)
+  #   # GDK_BACKEND = "wayland";
+  #   # GDK_BACKEND = "wayland,x11";
+  #       
+  #   # GDK_SCALE = "1";
+  #   QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+  #   # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+  #   # QT_FONT_DPI = "128";
+  # };
+
+  # systemd.user.sessionVariables = home.sessionVariables;
   # systemd.user.sessionVariables = {
-    # Fix for some Java AWT applications (e.g. Android Studio), this var fixes blank screens on launch
-    _JAVA_AWT_WM_NONREPARENTING = "1";
-
-    # Mozilla wayland support
-    # MOZ_ENABLE_WAYLAND = "1";
-    # MOZ_WEBRENDER = "1";
-
-    # For SDL2, NOTE: Steam, most games and other binary apps may not work with "wayland" SDL driver, unset or tweak for specific apps
-    SDL_VIDEODRIVER = "wayland";
-    
-    XDG_SESSION_TYPE = "wayland";
-    CLUTTER_BACKEND = "wayland";
-    WLR_RENDERER = "vulkan";
-    # GTK_USE_PORTAL = "1";
-    
-    # GTK3 selects wayland by default, these break some apps if you set them (sway docs)
-    # GDK_BACKEND = "wayland";
-    # GDK_BACKEND = "wayland,x11";
-    
-    # EXPERIMENTAL: breaks some electron apps
-    # Also makes a lot of electron apps use wayland
-    NIXOS_OZONE_WL = "1";
-    # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
-        
-    # GDK_SCALE = "1";
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-    # QT_FONT_DPI = "128";
-    
-    # handled by fontconfig i think
-    # "XCURSOR_SIZE,24"
-    # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
-  };
-
-  systemd.user.sessionVariables = home.sessionVariables;
+  #   
+  # };
   
   programs.wpaperd = {
     enable = true;
@@ -73,20 +62,118 @@
       "$screenshot" = "~/code/nixdots/scripts/screenshot";
 
       env = [
-        # QT uses these
-        # "XCURSOR_SIZE,24"
-        # "XCURSOR_THEME,\"Catppuccin-Mocha-Mauve\""
-
         # NVIDIA stuff
-        # "GBM_BACKEND,nvidia-drm"
-        "WLR_NO_HARDWARE_CURSORS,1"
-        "LIBVA_DRIVER_NAME,nvidia"
+        "WLR_NO_HARDWARE_CURSORS,1" # Fixes disappeared cursor on NVIDIA
+        "LIBVA_DRIVER_NAME,nvidia" # Hardware Accel for GPU
+        "WLR_DRM_NO_ATOMIC,1" # Might fix flickering
+
+        # To force GBM as a backend
+        # "GBM_BACKEND,nvidia-drm" # works fine when commented?
         # if windows don't display or screen share doesnt work, remove this
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        
+        # "XDG_SESSION_TYPE,wayland" # apparently Hyprland sets this by default, but their docs do recommend setting it and other xdg specs
+        "CLUTTER_BACKEND,wayland"
+        # "WLR_RENDERER,vulkan" # commenter on reddit said Hyprland doesn't have a Vulkan backend, so this doesn't do anything
+        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+        
+        # May break launching games (i think these may be defaults)
+        # "SDL_VIDEODRIVER,x11"
+        # "GDK_BACKEND,x11"
+        
+        # "SDL_VIDEODRIVER,wayland" # Breaks some games (can't launch)
+        "GDK_BACKEND,wayland,x11" # Breaks some apps if set (sway docs)
+    
+        "__GL_VRR_ALLOWED,1" # If adaptive sync should be used, recommended 0 to avoid problems with games
+        "__GL_GSYNC_ALLOWED,1" # If G-Sync monitors should use VRR, recommended 0
 
-        # Screen tearing
-        "WLR_DRM_NO_ATOMIC,1"
+        # Fix for some Java AWT applications (e.g. Android Studio), this var fixes blank screens on launch
+        "_JAVA_AWT_WM_NONREPARENTING,1"
+        "__NV_PRIME_RENDER_OFFLOAD,1"
+        "__VK_LAYER_NV_optimus,NVIDIA_only"
+        "PROTON_ENABLE_NGX_UPDATER,1"
+        "NVD_BACKEND,direct"
+        "WLR_USE_LIBINPUT,1"
+        # "XWAYLAND_NO_GLAMOR,1"
+        "__GL_MaxFramesAllowed,1"
+        "WLR_RENDERER_ALLOW_SOFTWARE,1"
       ];
+
+      # These are ran every reload of hyprland
+      exec = [
+      ];
+
+      exec-once = [
+        "wl-paste --type text --watch cliphist store" #Stores only text data
+        "wl-paste --type image --watch cliphist store" #Stores only image data
+
+        # Taken from CTT
+        # "~/code/nixdots/scripts/resetxdgportal"
+        # For when xdg-desktop-portal-wlr doesn't want to start because these variables are missing
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        # "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+
+        "wpaperd"
+        "waybar"
+        "blueman-applet"
+        # "nm-applet --indicator" # started by nixos module
+        "mega-cmd"
+        "firefox"
+        "~/code/nixdots/scripts/batterynotify"
+        # "kanshi"
+        "swayidle -w timeout 600 '~/code/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
+        "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
+        "kvantummanager --set Catppuccin-Mocha-Mauve"
+        
+        # BUG: mullvad and tailscale networks conflict
+        "tailscale-systray"
+        
+        # For touchpad gestures, only needed on laptop
+        # "fusuma -d"
+      ];
+
+      # See https://wiki.hyprland.org/Configuring/Monitors/
+      monitor = [
+        # desktop
+        "desc:AOC 27G15 AH15332Z02979,1920x1080@180,0x-1080,1.0"
+        "desc:AOC 27G15 AH15332Z02974,1920x1080@180,0x0,1.0"
+        "desc:Lenovo Group Limited D27-30 URHHM364,1920x1080@75,1920x-500,1.0"
+        "desc:Lenovo Group Limited D27-30 URHHM364,transform,1"
+
+        # laptop @ work
+        # "eDP-1, highres, 0x0, auto"
+        # "DP-1, highres, 0x0, auto"
+        # "DP-5, highres, 1128x0, auto"
+        # "DP-6, highres, 3048x0, auto"
+
+        # laptop alone
+        # "eDP-1, highres, auto, auto"
+
+        # catchall monitor rule
+        # ", preferred, auto, 1"
+      ];
+
+      # workspace = [
+        # desktop setup
+        # "1, monitor:HDMI-A-1, default:true"
+        # "2, monitor:DP-3, default:true"
+        # "3, monitor:DP-1, default:true"
+
+        # laptop setup
+        # "1, monitor:eDP-1, default:true, persistent:true"
+        # "2, monitor:DP-5, default:true, persistent:true"
+        # "3, monitor:DP-6, default:true, persistent:true"
+        # "2, monitor:DP-7, default:true, persistent:true"
+        # "3, monitor:DP-8, default:true, persistent:true"
+        # "2, monitor:HP Inc. HP V24 1CR0440LFS, default:true, persistent:true"
+        # "3, monitor:HP Inc. HP V214a CNC7160VL4, default:true, persistent:true"
+      # ];
+
+      # xwayland = {
+      #   use_nearest_neighbor = true;
+      #   force_zero_scaling = true;
+      # };
 
       # https://wiki.hyprland.org/Configuring/Binds/
       bind = [
@@ -118,6 +205,9 @@
         "$mainMod SHIFT, W, exec, $screenshot p" # print current screen
 
         # Window actions
+        # mouse 274 = middle
+        # mouse 275 = mouse button 4 (back)
+        # mouse 276 = mouse button 5 (forward)
         "$mainMod, W, killactive,"
         "ALT, return, fullscreen,"
         "$mainMod, P, pseudo," # dwindle
@@ -223,85 +313,6 @@
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
       ];
-
-      # These are ran every reload of hyprland
-      exec = [
-      ];
-
-      exec-once = [
-        "wl-paste --type text --watch cliphist store" #Stores only text data
-        "wl-paste --type image --watch cliphist store" #Stores only image data
-
-        # Taken from CTT
-        # "~/code/nixdots/scripts/resetxdgportal"
-        # For when xdg-desktop-portal-wlr doesn't want to start because these variables are missing
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        # "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        # "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-
-        "wpaperd"
-        "waybar"
-        "blueman-applet"
-        # "nm-applet --indicator" # started by nixos module
-        "mega-cmd"
-        "fusuma -d"
-        "firefox"
-        "~/code/nixdots/scripts/batterynotify"
-        "kanshi"
-        "swayidle -w timeout 600 '~/code/nixdots/scripts/lock' timeout 615 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on'"
-        # "gsettings set org.gnome.desktop.interface cursor-theme 'Catppuccin-Mocha-Mauve'"
-        "hyprctl setcursor \"${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}\""
-        "kvantummanager --set Catppuccin-Mocha-Mauve"
-        # BUG: mullvad and tailscale networks conflict
-        "tailscale-systray"
-      ];
-
-      # See https://wiki.hyprland.org/Configuring/Monitors/
-      # Handled by Kanshi now
-      monitor = [
-        # TODO: I need a better way to separate my home config for my laptop and my desktop
-        # desktop
-        # "HDMI-A-1, 1920x1080@144, 0x0, 1"
-        # "DP-3, 1920x1080@60, 0x-1080, 1"
-        # "DP-1, 1920x1080@75.001, 1920x-500, 1, transform, 1"
-        "desc:AOC 27G15 AH15332Z02979,1920x1080@180.003006,0x0,1.0"
-        "desc:AOC 27G15 AH15332Z02974,1920x1080@180.003006,0x1080,1.0"
-        "desc:Lenovo Group Limited D27-30 URHHM364,1920x1080@75.000999,1920x240,1.0"
-        "desc:Lenovo Group Limited D27-30 URHHM364,transform,1"
-
-        # laptop @ work
-        # "eDP-1, highres, 0x0, auto"
-        # "DP-1, highres, 0x0, auto"
-        # "DP-5, highres, 1128x0, auto"
-        # "DP-6, highres, 3048x0, auto"
-
-        # laptop alone
-        # "eDP-1, highres, auto, auto"
-
-        # catchall monitor rule
-        # ", preferred, auto, 1"
-      ];
-
-      # workspace = [
-        # desktop setup
-        # "1, monitor:HDMI-A-1, default:true"
-        # "2, monitor:DP-3, default:true"
-        # "3, monitor:DP-1, default:true"
-
-        # laptop setup
-        # "1, monitor:eDP-1, default:true, persistent:true"
-        # "2, monitor:DP-5, default:true, persistent:true"
-        # "3, monitor:DP-6, default:true, persistent:true"
-        # "2, monitor:DP-7, default:true, persistent:true"
-        # "3, monitor:DP-8, default:true, persistent:true"
-        # "2, monitor:HP Inc. HP V24 1CR0440LFS, default:true, persistent:true"
-        # "3, monitor:HP Inc. HP V214a CNC7160VL4, default:true, persistent:true"
-      # ];
-
-      # xwayland = {
-      #   use_nearest_neighbor = true;
-      #   force_zero_scaling = true;
-      # };
 
       misc = {
         vrr = 0;
@@ -429,12 +440,13 @@
         # "center, class:^(org.kde.polkit-kde-authentication-agent-1)$"
 
         # "float, class:^(firefox), title:^(Extension: \(Bitwarden (-|—) Free Password Manager\) (-|—) Bitwarden (-|—) Mozilla Firefox)"
-        "float, title:(Extension: \(Bitwarden))"
+        "float, title:^(Extension:)"
         "float, class:(pavucontrol|yad|nm-connection-editor|nm-applet|blueman-manager)"
         "float, class:(qt5ct|qt6ct|kvantummanager|nwg-look)"
 
         # fix xwayland apps
         "rounding 0, xwayland:1, floating:1"
+        
         "center, class:^(.*jetbrains.*)$, title:^(Confirm Exit|Open Project|win424|win201|splash)$"
         "size 640 400, class:^(.*jetbrains.*)$, title:^(splash)$"
 

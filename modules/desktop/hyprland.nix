@@ -6,8 +6,8 @@
     ../games.nix
   ];
   
+  services.displayManager.defaultSession = "hyprland";
   services.xserver.displayManager = {
-    defaultSession = "hyprland";
     gdm.enable = true;
     gdm.wayland = true;
   };
@@ -23,10 +23,12 @@
   #   ''}"
   # ];
 
+  # Hyprland is already launched through other means
   # environment.loginShellInit = ''
   #   [[ "$(tty)" == /dev/tty1 ]] && Hyprland
   # '';
   
+  # systemd.user.services.polkit-kde-authentication-agent-1
   security.polkit.enable = true;
 
   environment = {
@@ -65,7 +67,7 @@
       nwg-drawer
 
       # Kinda broken with Hyprland or NixOS, not sure, but helps with generating configs to console
-      # nwg-displays wlr-randr
+      nwg-displays wlr-randr
 
     # Media
       zathura # docs

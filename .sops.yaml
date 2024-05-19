@@ -1,5 +1,5 @@
 keys:
-  - &admin_cameron_desktop age12ayxuscntza45a3j5p2luc0au8gsphlqns49sum2z98dtykhw5lsvw28fg
+  - &admin_cameron_desktop age17zj03m39druezfu6le0ycvasr9thv4y06hdwzegh6rajgwrdhpgqsnwzes
   - &admin_cameron_laptop age1htjdvcdqvwe8rxx23fz2aw97a6c2zxwwu84m25jugh779vqkfg4sg5c83z
   - &server_talos age15ygfzth73d2q3dm305qg53x6g9u9knau9fytvnrlut4u0usg5cpqeq4s5g
   - &laptop_gargantuan age1408qgh9ekswerw33ae2yzmfu8la4kq2szl2rwvslx6cpujsfr58ss6q9tx
@@ -25,24 +25,12 @@ creation_rules:
   #     - *admin_cameron_desktop
   #     - *admin_cameron_laptop
 
+# sops only deals in GPG or AGE keys, it won't automatically convert your 
+# SSH keys for you. So you're manually mimicking your SSH key setup but
+# converted into AGE keys for sops.
 
-
-# Call these "master keys", they can access the secrets
-# specified below (authorized users/hosts)
-
-# Note that this only applies on creation of new secrets, so if
-# you add a key here and try to access a past secret without that
-# new key it might error.
-# Use 'sops updatekeys <file>' to manually fix this using
-# a master that was already on the list
-
-# Remember that sops only deals in GPG or AGE keys, it won't
-# automatically convert your SSH keys for you. So you're basically
-# mimicking your SSH key setup but converted into AGE keys for sops.
-
-# Keep in mind that sometimes your keys will need to be at $HOME\.config\sops\age\keys.txt
-# TALOS = Converted its SSH host key at /etc/ssh to an age key at .config/sops/age/keys.txt
-# Also used that same SSH host key (or its public key) to generate the public age key to put in this file
+# TALOS = Converted its SSH host keys at /etc/ssh
+# THOTH = Converted its SSH keys created in $HOME/.ssh
 
 # 1. Install ssh-to-age
   # go install github.com/Mic92/ssh-to-age/cmd/ssh-to-age@latest
@@ -52,10 +40,14 @@ creation_rules:
   # ssh-to-age -private-key -i $HOME/.ssh/id_ed25519 -o $HOME\AppData\Roaming\sops\age\keys.txt
   # ssh-to-age -private-key -i $HOME/.ssh/id_ed25519 -o $HOME/.config/sops/age/keys.txt
   
-# 2. Create a key from an SSH host key
-  # ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key -o $HOME\.config\sops\age\keys.txt
+# 2. Create a public age key from an SSH public key
   # cat /etc/ssh/ssh_host_ed25519.pub | ssh-to-age
+  # ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key -o $HOME\.config\sops\age\keys.txt
 # Get remote host key (public)
   # ssh-keyscan -t ed25519 192.168.0.6 | ssh-to-age
-  
-# other host keys at /etc/ssh
+
+# Once you set up a private key in .config\sops\age, and 
+# put a public key at the top of this file, you can run
+# sops updatekeys <file>
+# to update the encryption for the secrets using the new public keys.
+# HOWEVER, this needs to be ran from an already authorized master...

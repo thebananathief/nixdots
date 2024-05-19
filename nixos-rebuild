@@ -4,6 +4,12 @@ set -e
 # cd $HOME/github/nixdots
 cd "$(dirname "$0")"
 
+if [ $# -eq 0 ]; then
+  args="switch"
+else
+  args="$@"
+fi
+
 old=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
 echo "---- OLD GENERATION $old ----"
 # autocommit, ignore errors
@@ -12,7 +18,7 @@ git add . && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z') gen $old" || true
 git pull
 git push
 
-sudo nixos-rebuild --flake '.#' "$@" --accept-flake-config
+sudo nixos-rebuild --flake '.#' "$args" --accept-flake-config
 # --show-trace --option eval-cache false --fast
 
 current=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
