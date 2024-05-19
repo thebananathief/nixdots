@@ -1,11 +1,4 @@
-{
-  pkgs,
-  lib,
-  sops-nix,
-  config,
-  nixos-hardware,
-  ...
-}: {
+{ pkgs, lib, sops-nix, config, nixos-hardware, ... }: {
   imports = [
     nixos-hardware.nixosModules.framework-11th-gen-intel
     nixos-hardware.nixosModules.common-hidpi
