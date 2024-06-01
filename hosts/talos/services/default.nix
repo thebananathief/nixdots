@@ -4,7 +4,7 @@ let
   inherit (config.sops) secrets;
 in {
   imports = [
-    # ./database.nix
+    ./database.nix
     # ./gameserver.nix
     # ./monitoring.nix
     # ./castopod.nix
