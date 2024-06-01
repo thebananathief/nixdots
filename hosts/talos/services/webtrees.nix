@@ -7,7 +7,7 @@ in {
   sops.secrets = {
     webtrees_password = {};
     email_address = {};
-    mysql_password = {
+    webtrees_mysql_password = {
       group = config.virtualisation.oci-containers.backend;
       mode = "0440";
     };
@@ -24,7 +24,7 @@ in {
       ports = [ "8013:8013" ];
       environment = {
         DB_USER = "root";
-        DB_PASSWORD = "${ secrets.mysql_password.path }";
+        DB_PASSWORD = "${ secrets.webtrees_mysql_password.path }";
         DB_HOST = "webtrees-mysql";
         DB_PORT = "3306";
         DB_NAME = "webtrees";
@@ -54,7 +54,7 @@ in {
       ];
       ports = [ "3306:3306" ];
       environment = {
-        MYSQL_ROOT_PASSWORD = "${secrets.mysql_password.path}";
+        MYSQL_ROOT_PASSWORD = "${secrets.webtrees_mysql_password.path}";
       };
       # extraOptions = [ "--network=webtrees" ];
     };

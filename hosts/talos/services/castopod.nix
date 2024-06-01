@@ -4,7 +4,7 @@ let
   inherit (config.sops) secrets;
 in {
   sops.secrets = {
-    mysql_password = {
+    webtrees_mysql_password = {
       group = config.virtualisation.oci-containers.backend;
       mode = "0440";
     };
@@ -12,10 +12,10 @@ in {
     castopod_salt = {};
     redis_password = {};
   };
-  
+
   virtualisation.oci-containers.containers = {
     # Ensure the castopod user is within this db
-  
+
     castopod = {
       image = "castopod/castopod:latest";
       volumes = [
@@ -37,7 +37,7 @@ in {
         "--network=castopod"
       ];
     };
-    
+
     castopod-mariadb = {
       image = "mariadb:10.5";
       volumes = [
@@ -47,13 +47,13 @@ in {
         MYSQL_DATABASE = "castopod";
         MYSQL_USER = "castopod";
         MYSQL_PASSWORD = "${ secrets.castopod_mysql_password.path }";
-        MYSQL_ROOT_PASSWORD = "${ secrets.mysql_password.path }";
+        MYSQL_ROOT_PASSWORD = "${ secrets.webtrees_mysql_password.path }";
       };
       extraOptions = [
         "--network=castopod"
       ];
     };
-    
+
     castopod-redis = {
       image = "redis:7.0-alpine";
       volumes = [
