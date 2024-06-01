@@ -4,17 +4,17 @@ let
   inherit (config.sops) secrets;
 in {
   imports = [
-    ./database.nix
-    ./gameserver.nix
-    ./monitoring.nix
-    ./castopod.nix
+    # ./database.nix
+    # ./gameserver.nix
+    # ./monitoring.nix
+    # ./castopod.nix
     ./voiceserver.nix
     ./gitea.nix
     ./minecraft.nix
     ./mediaserver.nix
     # ./immich.nix
     # ./ttrss.nix
-    # ./webtrees.nix
+    ./webtrees.nix
     ./reverse-proxy.nix
   ];
 
@@ -45,7 +45,7 @@ in {
     #   ];
     # };
   };
-  
+
   virtualisation.oci-containers.containers = {
     # whoami = {
     #   image = "traefik/whoami:latest";

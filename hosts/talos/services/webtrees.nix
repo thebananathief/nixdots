@@ -3,7 +3,7 @@ let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
 in {
-  
+
   sops.secrets = {
     webtrees_password = {};
     email_address = {};
@@ -12,7 +12,7 @@ in {
       mode = "0440";
     };
   };
-  
+
   virtualisation.oci-containers.containers = {
     webtrees = {
       image = "dtjs48jkt/webtrees:latest"; # https://hub.docker.com/r/dtjs48jkt/webtrees/
@@ -25,7 +25,7 @@ in {
       environment = {
         DB_USER = "root";
         DB_PASSWORD = "${ secrets.mysql_password.path }";
-        DB_HOST = "mysql";
+        DB_HOST = "webtrees-mysql";
         DB_PORT = "3306";
         DB_NAME = "webtrees";
         WT_ADMIN = "thebananathief";
@@ -41,13 +41,13 @@ in {
         # PRETTYURLS = "TRUE";
         # BASE_URL = "https://tree.${ config.networking.fqdn }";
       };
-      dependsOn = [ "mysql" ];
-      extraOptions = [
-        "--network=webtrees"
-      ];
+      dependsOn = [ "webtrees-mysql" ];
+      # extraOptions = [
+      #   "--network=webtrees"
+      # ];
     };
-    
-    mysql = {
+
+    webtrees-mysql = {
       image = "mysql";
       volumes = [
         "${ cfg.dataDir }/mysql:/var/lib/mysql"
@@ -56,7 +56,7 @@ in {
       environment = {
         MYSQL_ROOT_PASSWORD = "${secrets.mysql_password.path}";
       };
-      extraOptions = [ "--network=webtrees" ];
+      # extraOptions = [ "--network=webtrees" ];
     };
   };
 }
