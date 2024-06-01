@@ -7,20 +7,20 @@ in {
     # influx_db_token = {};
     # influx_db_pass = {};
   };
-  
+
   # TODO: Migrate to /mnt/storage ? performance considerations?
   virtualisation.oci-containers.containers = {
-    # adminer = {
-    #   image = "adminer"; # https://hub.docker.com/_/adminer
-    #   ports = [ "8085:8080" ];
-    #   extraOptions = [ 
-    #     "--network=immich"
-    #     "--network=ttrss"
-    #     "--network=webtrees"
-    #     "--network=castopod"
-    #   ];
-    # };
-    
+    adminer = {
+      image = "adminer"; # https://hub.docker.com/_/adminer
+      ports = [ "8085:8080" ];
+      # extraOptions = [
+      #   "--network=immich"
+      #   "--network=ttrss"
+      #   "--network=webtrees"
+      #   "--network=castopod"
+      # ];
+    };
+
     # TODO: Need to install telegraf to use this or use the prometheus suite
     # influxdb = {
     #   image = "influxdb:alpine"; # https://hub.docker.com/_/influxdb/
