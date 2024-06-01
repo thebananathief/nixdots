@@ -42,9 +42,9 @@ in {
         # BASE_URL = "https://tree.${ config.networking.fqdn }";
       };
       dependsOn = [ "webtrees-mysql" ];
-      # extraOptions = [
-      #   "--network=webtrees"
-      # ];
+      extraOptions = [
+        "--network=webtrees"
+      ];
     };
 
     webtrees-mysql = {
@@ -57,7 +57,7 @@ in {
         MYSQL_ROOT_PASSWORD = "${secrets.webtrees_mysql_password.path}";
         MYSQL_DATABASE = "webtrees";
       };
-      # extraOptions = [ "--network=webtrees" ];
+      extraOptions = [ "--network=webtrees" ];
     };
   };
 }
