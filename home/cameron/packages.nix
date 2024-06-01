@@ -4,6 +4,5 @@
     vscode-fhs
     pre-commit
     mcrcon # minecraft rcon client
-    arc-browser
   ];
 }
