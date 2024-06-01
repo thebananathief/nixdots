@@ -55,6 +55,7 @@ in {
       ports = [ "3306:3306" ];
       environment = {
         MYSQL_ROOT_PASSWORD = "${secrets.webtrees_mysql_password.path}";
+        MYSQL_DATABASE = "webtrees";
       };
       # extraOptions = [ "--network=webtrees" ];
     };
