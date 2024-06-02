@@ -6,5 +6,6 @@
     mcrcon # minecraft rcon client
     moonlight-qt
     gramps
+    tesseract
   ];
 }
