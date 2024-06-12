@@ -5,12 +5,12 @@ let
 in {
   imports = [
     ./database.nix
-    ./gameserver.nix
     ./monitoring.nix
     ./castopod.nix
     ./voiceserver.nix
     ./gitea.nix
     ./minecraft.nix
+    # ./gameserver.nix
     ./mediaserver.nix
     # ./immich.nix
     # ./ttrss.nix
