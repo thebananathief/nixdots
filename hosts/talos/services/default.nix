@@ -6,14 +6,14 @@ in {
   imports = [
     ./database.nix
     # ./monitoring.nix
-    ./castopod.nix
+    # ./castopod.nix
     ./voiceserver.nix
     ./gitea.nix
     ./minecraft.nix
     # ./gameserver.nix
     ./mediaserver.nix
     # ./immich.nix
-    # ./ttrss.nix
+    ./ttrss.nix
     # ./webtrees.nix
     ./reverse-proxy.nix
   ];
