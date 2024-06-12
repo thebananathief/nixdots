@@ -7,7 +7,7 @@ in {
     # influx_db_token = {};
     # influx_db_pass = {};
   };
-  
+
   # TODO: Migrate to /mnt/storage ? performance considerations?
   virtualisation.oci-containers.containers = {
     adminer = {

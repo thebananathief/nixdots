@@ -15,7 +15,7 @@ in {
     isSystemUser = true;
     description = "Mediaserver service account";
   };
-  
+
   services = {
     plex = {
       enable = true;
@@ -58,7 +58,7 @@ in {
     #   enable = true;
     # };
   };
-  
+
   sops.secrets = {
     "mullvad.env" = {
       group = config.virtualisation.oci-containers.backend;
@@ -228,12 +228,12 @@ in {
       dependsOn = ["gluetun"];
     };
   };
-  
+
   hardware.opengl = {
     enable = true;
     # driSupport = true;
     # driSupport32Bit = true;
-    
+
     # Some of these are required for hardware transcoding
     extraPackages = with pkgs; [
       intel-media-driver # LIBVA_DRIVER_NAME=iHD

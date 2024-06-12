@@ -1,11 +1,4 @@
-{
-  pkgs,
-  lib,
-  sops-nix,
-  config,
-  nixos-hardware,
-  ...
-}: {
+{ pkgs, lib, sops-nix, config, nixos-hardware, ... }: {
   imports = [
     nixos-hardware.nixosModules.framework-11th-gen-intel
     nixos-hardware.nixosModules.common-hidpi
@@ -13,7 +6,7 @@
     ./hardware-configuration.nix
     # ./precommit.nix
     ../../modules/packages.nix
-    ../../modules/network-mount.nix
+    # ../../modules/network-mount.nix
     ../../modules/games.nix
     ../../modules/desktop
   ];
@@ -85,8 +78,7 @@
   security.pam.services.login.unixAuth = true;
 
   # Power saving profile
-  # Consider:
-  # upower
+  # Consider upower instead
   services.tlp = {
     enable = true;
     settings = {

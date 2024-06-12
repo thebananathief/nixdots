@@ -1,8 +1,8 @@
-{ globalFonts, ... }: 
+{ globalFonts, ... }:
 let
   theme = builtins.fetchurl {
     url = "https://raw.githubusercontent.com/catppuccin/alacritty/main/catppuccin-mocha.toml";
-    sha256 = "061yalrzpqivr67k2f8hsqixr77srgd8y47xvhp5vg0sjmh5lrcy";
+    sha256 = "1rnc6gsqjdvkb6xbv1pnawrp6f0j5770dqml2di90j3lhv0fppgw";
   };
 in {
   programs.alacritty = {

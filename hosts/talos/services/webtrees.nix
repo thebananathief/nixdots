@@ -3,16 +3,16 @@ let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
 in {
-  
+
   sops.secrets = {
     webtrees_password = {};
     email_address = {};
-    mysql_password = {
+    webtrees_mysql_password = {
       group = config.virtualisation.oci-containers.backend;
       mode = "0440";
     };
   };
-  
+
   virtualisation.oci-containers.containers = {
     webtrees = {
       image = "dtjs48jkt/webtrees:latest"; # https://hub.docker.com/r/dtjs48jkt/webtrees/
@@ -24,7 +24,7 @@ in {
       ports = [ "8013:8013" ];
       environment = {
         DB_USER = "root";
-        DB_PASSWORD = "${ secrets.mysql_password.path }";
+        DB_PASSWORD = "${ secrets.webtrees_mysql_password.path }";
         DB_HOST = "mysql";
         DB_PORT = "3306";
         DB_NAME = "webtrees";
@@ -46,7 +46,7 @@ in {
         "--network=webtrees"
       ];
     };
-    
+
     mysql = {
       image = "mysql";
       volumes = [
@@ -54,7 +54,8 @@ in {
       ];
       ports = [ "3306:3306" ];
       environment = {
-        MYSQL_ROOT_PASSWORD = "${secrets.mysql_password.path}";
+        MYSQL_ROOT_PASSWORD = "${secrets.webtrees_mysql_password.path}";
+        MYSQL_DATABASE = "webtrees";
       };
       extraOptions = [ "--network=webtrees" ];
     };
