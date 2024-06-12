@@ -8,18 +8,6 @@ in {
       mode = "0400";
     };
   };
-
-    # mumble = {
-    #   image = "mumblevoip/mumble-server:latest"; # https://github.com/Theofilos-Chamalis/mumble-web
-    #   volumes = [
-    #     "${ cfg.dataDir }/mumble:/data"
-    #   ];
-    #   ports = [ "64738:64738" ];
-    #   environment = {
-    #     MUMBLE_CONFIG_WELCOMETEXT = "Welcome to the Shire! Have a grand time and don't disturb the hobbits!";
-    #     MUMBLE_SUPERUSER_PASSWORD = "${ mumble_superpassword }";
-    #   };
-    # };
     
   services = {
     # matrix-conduit = {
@@ -51,5 +39,12 @@ in {
       registerPassword = "$MURMUR_REGISTER_PASSWORD";
       openFirewall = true;
     };
+    
+    # Mumble = TCP + UDP | Caddy = only does TCP (HTTPS)
+    # caddy.virtualHosts = {
+    #   "voice.${ config.networking.fqdn }".extraConfig = ''
+    #     reverse_proxy localhost:64738
+    #   '';
+    # };
   };
 }

@@ -65,4 +65,11 @@ in {
       ];
     };
   };
+  
+  services.caddy.virtualHosts = {
+    # TIP: use /cp-admin to login to the admin panel
+    "castopod.${ config.networking.fqdn }".extraConfig = ''
+      reverse_proxy localhost:8015
+    '';
+  };
 }

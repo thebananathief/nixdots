@@ -60,4 +60,10 @@ in {
       extraOptions = [ "--network=webtrees" ];
     };
   };
+  
+  services.caddy.virtualHosts = {
+    "tree.${ config.networking.fqdn }".extraConfig = ''
+      reverse_proxy localhost:8013
+    '';
+  };
 }

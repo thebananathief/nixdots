@@ -228,6 +228,21 @@ in {
       dependsOn = ["gluetun"];
     };
   };
+  
+  services.caddy.virtualHosts = {
+    # Jellyseerr
+    "request.${ config.networking.fqdn }".extraConfig = ''
+      reverse_proxy localhost:8005
+    '';
+    # Jellyfin
+    "watch.${ config.networking.fqdn }".extraConfig = ''
+      reverse_proxy localhost:8096
+    '';
+    # Audiobookshelf
+    "books.${ config.networking.fqdn }".extraConfig = ''
+      reverse_proxy localhost:8009
+    '';
+  };
 
   hardware.opengl = {
     enable = true;
