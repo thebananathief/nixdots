@@ -55,7 +55,7 @@ in {
       environment = {
         MYSQL_ROOT_PASSWORD = "testPassword";
         # MYSQL_RANDOM_ROOT_PASSWORD = "yes";
-        MYSQL_DATABASE = "webtrees";
+        MYSQL_DATABASE = "misc";
         MYSQL_USER = "webtrees"; # this user is allowed superuser access to the above database
       };
       extraOptions = [ "--network=webtrees" ];
