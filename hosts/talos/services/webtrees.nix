@@ -3,11 +3,9 @@ let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
 in {
-
   sops.secrets = {
-    webtrees_password = {};
     email_address = {};
-    webtrees_mysql_password = {
+    "mysql-webtrees.env" = {
       group = config.virtualisation.oci-containers.backend;
       mode = "0440";
     };
@@ -22,15 +20,15 @@ in {
         "${ cfg.dataDir }/webtrees/modules:/var/www/html/modules_v4"
       ];
       ports = [ "8013:8013" ];
+      environmentFiles = [
+        secrets."mysql-webtrees.env".path # DB_PASSWORD, WT_ADMINMAIL, WT_ADMINPW
+      ];
       environment = {
         DB_USER = "root";
-        DB_PASSWORD = "${ secrets.webtrees_mysql_password.path }";
         DB_HOST = "mysql";
         DB_PORT = "3306";
         DB_NAME = "webtrees";
         WT_ADMIN = "thebananathief";
-        WT_ADMINMAIL = "${ secrets.email_address.path }";
-        WT_ADMINPW = "${ secrets.webtrees_password.path }";
         GROUP_ID = "${ cfg.common_env.PGID }";
         PORT = "8013";
         DISABLE_SSL = "TRUE";
@@ -51,8 +49,10 @@ in {
         "${ cfg.dataDir }/mysql:/var/lib/mysql"
       ];
       ports = [ "3306:3306" ];
+      environmentFiles = [
+        secrets."mysql-webtrees.env".path # MYSQL_ROOT_PASSWORD
+      ];
       environment = {
-        MYSQL_ROOT_PASSWORD = "${secrets.webtrees_mysql_password.path}";
         MYSQL_DATABASE = "webtrees";
       };
       extraOptions = [ "--network=webtrees" ];
