@@ -53,7 +53,7 @@ in {
         secrets."mysql-webtrees.env".path # MYSQL_PASSWORD
       ];
       environment = {
-        MYSQL_RANDOM_ROOT_PASSWORD = "yes";
+        MYSQL_ROOT_PASSWORD = "testPassword";
         MYSQL_DATABASE = "webtrees";
         MYSQL_USER = "webtrees"; # this user is allowed superuser access to the above database
       };
