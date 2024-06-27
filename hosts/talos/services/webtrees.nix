@@ -54,7 +54,7 @@ in {
       ];
       environment = {
         MYSQL_DATABASE = "webtrees";
-        MYSQL_ROOT_HOST = "%"; # should allow connections into the db as root from any interface
+        MYSQL_ROOT_HOST = "\"%\""; # should allow connections into the db as root from any interface
       };
       extraOptions = [ "--network=webtrees" ];
     };
