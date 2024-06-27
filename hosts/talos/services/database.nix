@@ -16,7 +16,7 @@ in {
       extraOptions = [ 
         # "--network=immich"
         "--network=ttrss"
-        # "--network=webtrees"
+        "--network=webtrees"
         # "--network=castopod"
       ];
     };

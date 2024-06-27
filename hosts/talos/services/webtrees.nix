@@ -42,9 +42,7 @@ in {
         # BASE_URL = "https://tree.${ config.networking.fqdn }";
       };
       dependsOn = [ "mysql" ];
-      extraOptions = [
-        "--network=webtrees"
-      ];
+      extraOptions = [ "--network=webtrees" ];
     };
 
     mysql = {
