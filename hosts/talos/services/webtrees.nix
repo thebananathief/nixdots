@@ -24,10 +24,11 @@ in {
         secrets."mysql-webtrees.env".path # DB_PASSWORD, WT_ADMINMAIL, WT_ADMINPW
       ];
       environment = {
-        DB_USER = "root";
         DB_HOST = "webtrees-mysql";
         DB_PORT = "3306";
         DB_NAME = "webtrees";
+        DB_USER = "webtrees";
+        DB_PASSWORD = "testPassword";
         WT_ADMIN = "thebananathief";
         GROUP_ID = "${ cfg.common_env.PGID }";
         PORT = "8013";
@@ -50,11 +51,13 @@ in {
       ];
       ports = [ "3306:3306" ];
       environmentFiles = [
-        secrets."mysql-webtrees.env".path # MYSQL_ROOT_PASSWORD
+        secrets."mysql-webtrees.env".path # MYSQL_PASSWORD
       ];
       environment = {
+        MYSQL_RANDOM_ROOT_PASSWORD = "yes";
         MYSQL_DATABASE = "webtrees";
-        MYSQL_ROOT_HOST = "%"; # should allow connections into the db as root from any interface
+        MYSQL_USER = "webtrees"; # this user is allowed superuser access to the above database
+        MYSQL_PASSWORD = "testPassword";
       };
       extraOptions = [ "--network=webtrees" ];
     };
