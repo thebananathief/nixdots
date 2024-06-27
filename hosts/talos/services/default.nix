@@ -13,8 +13,8 @@ in {
     # ./gameserver.nix
     ./mediaserver.nix
     # ./immich.nix
-    ./ttrss.nix
-    # ./webtrees.nix
+    # ./ttrss.nix
+    ./webtrees.nix
     ./reverse-proxy.nix
   ];
 
