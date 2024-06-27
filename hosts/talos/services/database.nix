@@ -15,7 +15,7 @@ in {
       ports = [ "8085:8080" ];
       extraOptions = [ 
         # "--network=immich"
-        "--network=ttrss"
+        # "--network=ttrss"
         "--network=webtrees"
         # "--network=castopod"
       ];
