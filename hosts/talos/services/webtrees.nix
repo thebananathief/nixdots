@@ -46,7 +46,7 @@ in {
     webtrees-mysql = {
       image = "mysql";
       volumes = [
-        "${ cfg.dataDir }/webtrees-mysql.old:/var/lib/mysql"
+        "${ cfg.dataDir }/webtrees-mysql:/var/lib/mysql"
       ];
       ports = [ "3306:3306" ];
       environmentFiles = [
