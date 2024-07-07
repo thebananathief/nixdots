@@ -62,14 +62,14 @@ in {
       "/var/snapraid.content"
       "/mnt/parity1/snapraid.content"
       "/mnt/disk1/snapraid.content"
-      "/mnt/disk2/snapraid.content"
+      # "/mnt/disk2/snapraid.content"
     ];
     parityFiles = [
       "/mnt/parity1/snapraid.parity"
     ];
     dataDisks = {
       d1 = "/mnt/disk1";
-      d2 = "/mnt/disk2";
+      d2 = "/mnt/disk1"; # TODO: TEMPORARY for recovery
       d3 = "/mnt/disk3";
     };
     exclude = [

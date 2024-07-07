@@ -67,7 +67,7 @@
     git wget curl unzip killall
     nettools dig
     ethtool lm_sensors pciutils
-    tmux neofetch bottom
+    zellij neofetch bottom
     tailspin bat dua tree
     dos2unix tldr just
     age sops

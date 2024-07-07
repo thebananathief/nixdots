@@ -21,7 +21,7 @@ up:
   -git add --all
   -git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')"
   -git push
-  
+
 # remotely links the flake.nix to one in /etc/nixos, then rebuild switches | MUST SPECIFY HOSTNAME TO SSH TO
 [windows]
 rinstall host:
@@ -39,9 +39,6 @@ switch *args:
 # git commit all and push, then rebuild switch
 [linux]
 switch *args:
-  -git add --all
-  -git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')"
-  -git push
   ./nixos-rebuild switch {{args}}
 
 alias rs := rswitch
