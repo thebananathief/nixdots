@@ -5,16 +5,16 @@ let
 in {
   imports = [
     ./database.nix
-    # ./gameserver.nix
     # ./monitoring.nix
     # ./castopod.nix
     ./voiceserver.nix
     ./gitea.nix
     ./minecraft.nix
+    # ./gameserver.nix
     ./mediaserver.nix
     # ./immich.nix
     # ./ttrss.nix
-    ./webtrees.nix
+    # ./webtrees.nix
     ./reverse-proxy.nix
   ];
 
@@ -102,6 +102,13 @@ in {
     #     # CMD_PORT = 3000; #optional
     #     # CMD_ALLOW_ORIGIN = "['localhost']"; #optional
     #   } // cfg.common_env;
+    # };
+    # grist = {
+    #   image = "gristlabs/grist:latest";
+    #   volumes = [
+    #     "${ cfg.dataDir }/grist/persist:/persist"
+    #   ];
+    #   ports = [ "8484:8484" ];
     # };
   };
 }

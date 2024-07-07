@@ -13,14 +13,14 @@ in {
     adminer = {
       image = "adminer"; # https://hub.docker.com/_/adminer
       ports = [ "8085:8080" ];
-      extraOptions = [
-        # "--network=immich"
-        # "--network=ttrss"
+      extraOptions = [ 
+      #   "--network=immich"
+      #   "--network=ttrss"
         "--network=webtrees"
-        # "--network=castopod"
+      #   "--network=castopod"
       ];
     };
-
+    
     # TODO: Need to install telegraf to use this or use the prometheus suite
     # influxdb = {
     #   image = "influxdb:alpine"; # https://hub.docker.com/_/influxdb/

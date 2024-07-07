@@ -223,13 +223,28 @@ in {
         # "${cfg.downloadDir}/watch:/watch" # TODO: Adjust this to a torrent blackhole
       ];
       environment = mediaserver_env;
-      # This uses the gluetun network stack so that its behind mullvad VPN
+      # This uses the gluetun network stack so that its behind VPN
       extraOptions = ["--network=container:gluetun"];
       dependsOn = ["gluetun"];
     };
   };
+  
+  services.caddy.virtualHosts = {
+    # Jellyseerr
+    "request.${ config.networking.fqdn }".extraConfig = ''
+      reverse_proxy localhost:8005
+    '';
+    # Jellyfin
+    "watch.${ config.networking.fqdn }".extraConfig = ''
+      reverse_proxy localhost:8096
+    '';
+    # Audiobookshelf
+    "books.${ config.networking.fqdn }".extraConfig = ''
+      reverse_proxy localhost:8009
+    '';
+  };
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     # driSupport = true;
     # driSupport32Bit = true;

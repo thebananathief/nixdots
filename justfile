@@ -65,7 +65,6 @@ rswitch *args:
 update:
   nix flake update
 
-alias syn := syntax
 # syntax-checks the flake
 [linux]
 syntax:

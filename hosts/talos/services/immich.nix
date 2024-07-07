@@ -6,20 +6,25 @@ let
     IMMICH_VERSION = "release";
     familyDir = "${cfg.storageDir}/media/family";
     DB_USERNAME = "immich";
-    DB_PASSWORD = "${secrets.postgres_password.path}";
     DB_DATABASE_NAME = "immich";
     DB_HOSTNAME = "immich-postgres";
     REDIS_HOSTNAME = "immich-redis";
   };
 in {
   sops.secrets = {
-    postgres_password = {};
+    "postgres-immich.env" = {
+      group = config.virtualisation.oci-containers.backend;
+      mode = "0440";
+    };
   };
   
   virtualisation.oci-containers.containers = {
     immich-server = { 
       image = "ghcr.io/immich-app/immich-server:${immich_env.IMMICH_VERSION}";
       cmd = [ "start.sh" "immich" ];
+      environmentFiles = [
+        secrets."postgres-immich.env".path # DB_PASSWORD
+      ];
       environment = immich_env // cfg.common_env;
       volumes = [
         "${immich_env.familyDir}/user-uploads:/usr/src/app/upload"
@@ -36,6 +41,9 @@ in {
     immich-microservices = { 
       image = "ghcr.io/immich-app/immich-server:${immich_env.IMMICH_VERSION}";
       cmd = [ "start.sh" "microservices" ];
+      environmentFiles = [
+        secrets."postgres-immich.env".path # DB_PASSWORD
+      ];
       environment = immich_env // cfg.common_env;
       volumes = [
         "${immich_env.familyDir}/user-uploads:/usr/src/app/upload"
@@ -51,6 +59,9 @@ in {
     
     immich-ml = { 
       image = "ghcr.io/immich-app/immich-machine-learning:${immich_env.IMMICH_VERSION}-openvino";
+      environmentFiles = [
+        secrets."postgres-immich.env".path # DB_PASSWORD
+      ];
       environment = immich_env // cfg.common_env;
       volumes = [
         "${cfg.dataDir}/immich/modelcache:/cache"
@@ -70,9 +81,11 @@ in {
         "${ cfg.dataDir }/immich/data/:/var/lib/postgresql/data" 
       ];
       # ports = [ "5433:5432" ]; # running a postgres13 on 5432
+      environmentFiles = [
+        secrets."postgres-immich.env".path # POSTGRES_PASSWORD
+      ];
       environment = {
         POSTGRES_USER = "${immich_env.DB_USERNAME}";
-        POSTGRES_PASSWORD = "${immich_env.DB_PASSWORD}";
         POSTGRES_DB = "${immich_env.DB_DATABASE_NAME}";
       };
       extraOptions = [ "--network=immich" ];
