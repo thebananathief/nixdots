@@ -53,8 +53,8 @@ in {
 
   services.snapraid = {
     enable = true;
-    sync.interval = "02:00";
-    scrub.interval = "Mon *-*-* 03:00:00";
+    sync.interval = "08:00";
+    scrub.interval = "Mon *-*-* 09:00:00";
     scrub.olderThan = 10; # Number of days since data was last scrubbed before it can be scrubbed again
     scrub.plan = 8; # Percent of the array that should be checked
     # Where to keep indexes? Ideally at least 2 drives
