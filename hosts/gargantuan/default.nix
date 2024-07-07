@@ -7,7 +7,7 @@
     # ./precommit.nix
     ../../modules/packages.nix
     # ../../modules/network-mount.nix
-    ../../modules/games.nix
+    # ../../modules/games.nix
     ../../modules/desktop
   ];
 
