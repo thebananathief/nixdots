@@ -9,6 +9,9 @@ in {
     smartmontools
   ];
 
+  # Prevents a filesystem mount failure from putting us into emergency mode on bootup
+  systemd.enableEmergencyMode = false;
+
   # Storage/Parity drives
   fileSystems."/mnt/disk1" = {
     device = "/dev/disk/by-uuid/16165a4b-d650-4a84-a55d-9db8f83d0271";
@@ -53,7 +56,7 @@ in {
 
   services.snapraid = {
     enable = true;
-    sync.interval = "08:00";
+    sync.interval = "23:00";
     scrub.interval = "Mon *-*-* 09:00:00";
     scrub.olderThan = 10; # Number of days since data was last scrubbed before it can be scrubbed again
     scrub.plan = 8; # Percent of the array that should be checked
