@@ -72,7 +72,7 @@ in {
     ];
     dataDisks = {
       d1 = "/mnt/disk1";
-      d2 = "/mnt/disk3"; # TODO: TEMPORARY for recovery
+      # d2 = "/mnt/disk3"; # TODO: TEMPORARY for recovery
       d3 = "/mnt/disk3";
     };
     exclude = [
