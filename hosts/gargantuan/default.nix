@@ -11,6 +11,17 @@
     ../../modules/desktop
   ];
 
+  boot.supportedFilesystems = [
+    "ext4"
+    # "btrfs"
+    "xfs"
+    "ntfs"
+    "fat"
+    # "vfat"
+    "exfat"
+    "cifs" # mount windows share
+  ];
+
   networking = {
     hostName = "gargantuan";
     networkmanager.enable = true;

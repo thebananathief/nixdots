@@ -81,16 +81,4 @@
     # hddtemp
     # nmap
   ];
-
-  boot.supportedFilesystems = [
-    "ext4"
-    # "btrfs"
-    "xfs"
-    #"zfs"
-    "ntfs"
-    "fat"
-    # "vfat"
-    "exfat"
-    "cifs" # mount windows share
-  ];
 }

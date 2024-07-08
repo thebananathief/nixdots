@@ -23,6 +23,17 @@ in {
     ../../modules/nifi.nix
   ];
   
+  boot.supportedFilesystems = [
+    "ext4"
+    # "btrfs"
+    "xfs"
+    "ntfs"
+    "fat"
+    # "vfat"
+    "exfat"
+    "cifs" # mount windows share
+  ];
+  
   # services.minecraft-server = {
   #   enable = true;
   #   eula = true;
