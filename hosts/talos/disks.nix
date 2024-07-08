@@ -72,10 +72,13 @@ in {
     ];
   };
 
+  systemd.services.snapraid-sync.enable = false; # TODO: TEMPORARY for recovery
+  systemd.services.snapraid-scrub.enable = false;
+  
   services.snapraid = {
     enable = true;
-    sync.interval = "23:00";
-    scrub.interval = "Mon *-*-* 09:00:00";
+    sync.interval = "05:00";
+    scrub.interval = "Mon *-*-* 06:00:00";
     scrub.olderThan = 10; # Number of days since data was last scrubbed before it can be scrubbed again
     scrub.plan = 8; # Percent of the array that should be checked
     # Where to keep indexes? Ideally at least 2 drives
