@@ -15,7 +15,6 @@
     ./hardware-configuration.nix
     ./fileshares.nix
     ./disks.nix
-    ./zfs.nix
     ./services
   ];
 
