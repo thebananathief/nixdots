@@ -3,6 +3,17 @@ let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
 in {
+
+  services.scrutiny = {
+    enable = true;
+    # collector = {
+    #
+    # };
+    # settings = {
+    #
+    # };
+  };
+
   virtualisation.oci-containers.containers = {
     # dozzle = {
     #   image = "amir20/dozzle:latest"; # https://github.com/amir20/dozzle
@@ -103,14 +114,14 @@ in {
   #     menu = Top
   #     title = Network Latency Grapher
   #     remark = TALOS SmokePing.
-      
+
   #     + Global
   #     menu = Global
   #     title = Global services
 
   #     ++ CloudFlare
   #     host = www.cloudflare.com
-      
+
   #     ++ Google
   #     host = www.google.com
 
@@ -127,7 +138,7 @@ in {
   #     host = localhost
   #   '';
   # };
-  
+
   # sops.secrets = {
   #   graylog_secret = {
   #     owner = "graylog";
@@ -177,12 +188,12 @@ in {
 
   # Make the service use the docker group ACL, for the socket access
   # systemd.services.uptime-kuma.serviceConfig.Group = "docker";
-    
+
   # If needing to access externally
   # networking.firewall.allowedTCPPorts = [
   #   8017
   # ];
-  
+
   # Log management services
   # services.filebeat = {
   #   enable = true;
