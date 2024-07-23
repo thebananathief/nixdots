@@ -35,10 +35,10 @@ in {
     device = "/dev/disk/by-uuid/16165a4b-d650-4a84-a55d-9db8f83d0271";
     fsType = "ext4";
   };
-  # fileSystems."/mnt/disk2" = {
-  #   device = "/dev/disk/by-uuid/cec3736e-cfa9-40e4-8143-02b338cd75e9";
-  #   fsType = "xfs";
-  # };
+  fileSystems."/mnt/disk2" = {
+    device = "/dev/disk/by-uuid/cec3736e-cfa9-40e4-8143-02b338cd75e9";
+    fsType = "xfs";
+  };
   fileSystems."/mnt/disk3" = {
     device = "/dev/disk/by-uuid/bb0b2728-3662-4fef-b862-5f1be6d54172";
     fsType = "ext4";
