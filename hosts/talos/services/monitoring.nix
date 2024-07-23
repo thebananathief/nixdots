@@ -153,10 +153,10 @@ in {
       collector = {
         enable = true;
       };
-      settings = {
-        web.listen.host = "127.0.0.1";
-        web.listen.port = 8080;
-      };
+      # settings = {
+      #   web.listen.host = "127.0.0.1";
+      #   web.listen.port = 8080;
+      # };
     };
 
     # uptime-kuma = {
