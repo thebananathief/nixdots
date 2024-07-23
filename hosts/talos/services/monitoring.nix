@@ -4,19 +4,6 @@ let
   inherit (config.sops) secrets;
 in {
 
-  services.scrutiny = {
-    enable = true;
-    openFirewall = true;
-    influxdb.enable = true;
-    collector = {
-      enable = true;
-    };
-    settings = {
-      web.listen.host = "127.0.0.1";
-      web.listen.port = 8080;
-    };
-  };
-
   virtualisation.oci-containers.containers = {
     # dozzle = {
     #   image = "amir20/dozzle:latest"; # https://github.com/amir20/dozzle
@@ -159,6 +146,19 @@ in {
   # };
 
   services = {
+    scrutiny = {
+      enable = true;
+      openFirewall = true;
+      influxdb.enable = true;
+      collector = {
+        enable = true;
+      };
+      settings = {
+        web.listen.host = "127.0.0.1";
+        web.listen.port = 8080;
+      };
+    };
+
     # uptime-kuma = {
     #   enable = true;
     #   settings = {
