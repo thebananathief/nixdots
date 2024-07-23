@@ -146,8 +146,14 @@ in {
   # };
 
   sops.secrets = {
-    scrutiny_influx_password = {};
-    scrutiny_influx_token = {};
+    scrutiny_influx_password = {
+      group = "influxdb2";
+      mode = "0440";
+    };
+    scrutiny_influx_token = {
+      group = "influxdb2";
+      mode = "0440";
+    };
   };
 
   services = {
