@@ -145,11 +145,15 @@ in {
   #   };
   # };
 
+  sops.secrets = {
+    scrutiny_influx_password = {};
+    scrutiny_influx_token = {};
+  };
+
   services = {
     scrutiny = {
       enable = true;
       openFirewall = true;
-      influxdb.enable = true;
       collector = {
         enable = true;
       };
@@ -157,6 +161,20 @@ in {
       #   web.listen.host = "127.0.0.1";
       #   web.listen.port = 8080;
       # };
+    };
+
+    influxdb2 = {
+      enable = true;
+      provision = {
+        initialSetup = {
+          username = "cameron";
+          passwordFile = secrets.scrutiny_influx_password.path;
+          tokenFile = secrets.scrutiny_influx_token.path;
+          bucket = "scrutiny";
+          organization = "main";
+          retention = 15778476; # 6 months, in seconds
+        }
+      };
     };
 
     # uptime-kuma = {
