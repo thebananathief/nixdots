@@ -157,15 +157,22 @@ in {
       collector = {
         enable = true;
       };
-      # settings = {
-      #   web.listen.host = "127.0.0.1";
-      #   web.listen.port = 8080;
-      # };
+      settings = {
+        web = {
+          listen.host = "127.0.0.1";
+          listen.port = 8080;
+
+          influxdb = {
+
+          };
+        };
+      };
     };
 
     influxdb2 = {
       enable = true;
       provision = {
+        enable = true;
         initialSetup = {
           username = "cameron";
           passwordFile = secrets.scrutiny_influx_password.path;
