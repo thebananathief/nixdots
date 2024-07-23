@@ -39,7 +39,7 @@ in {
     device = "/dev/disk/by-uuid/cec3736e-cfa9-40e4-8143-02b338cd75e9";
     fsType = "xfs";
   };
-  fileSystems."/mnt/disk3" = {
+  fileSystems."/mnt/used1" = {
     device = "/dev/disk/by-uuid/bb0b2728-3662-4fef-b862-5f1be6d54172";
     fsType = "ext4";
   };
@@ -72,7 +72,7 @@ in {
     ];
   };
 
-  systemd.services.snapraid-sync.enable = false; # TODO: TEMPORARY for recovery
+  systemd.services.snapraid-sync.enable = false; # TODO: TEMPORARY for ZFS swap
   systemd.services.snapraid-scrub.enable = false;
   
   services.snapraid = {
@@ -86,15 +86,15 @@ in {
       "/var/snapraid.content"
       "/mnt/parity1/snapraid.content"
       "/mnt/disk1/snapraid.content"
-      # "/mnt/disk2/snapraid.content"
+      "/mnt/disk2/snapraid.content"
     ];
     parityFiles = [
       "/mnt/parity1/snapraid.parity"
     ];
     dataDisks = {
       d1 = "/mnt/disk1";
-      d2 = "/mnt/ssd/recov"; # TODO: TEMPORARY for recovery
-      d3 = "/mnt/disk3";
+      d2 = "/mnt/disk2";
+      # d3 = "/mnt/disk3";
     };
     exclude = [
       "*.unrecoverable"
