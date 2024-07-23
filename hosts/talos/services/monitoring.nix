@@ -6,12 +6,14 @@ in {
 
   services.scrutiny = {
     enable = true;
+    openFirewall = true;
     # collector = {
     #
     # };
-    # settings = {
-    #
-    # };
+    settings = {
+      web.listen.host = "127.0.0.1";
+      web.listen.port = 8080;
+    };
   };
 
   virtualisation.oci-containers.containers = {
