@@ -53,6 +53,10 @@ let
     done
   '';
 in {
+  environment.systemPackages = [
+    pkgs.mcrcon
+  ];
+
   users = {
     groups.minecraft = {};
     extraUsers.minecraft = {

@@ -76,7 +76,7 @@ in {
   systemd.services.snapraid-scrub.enable = false;
   
   services.snapraid = {
-    enable = true;
+    enable = false;
     sync.interval = "05:00";
     scrub.interval = "Mon *-*-* 06:00:00";
     scrub.olderThan = 10; # Number of days since data was last scrubbed before it can be scrubbed again
