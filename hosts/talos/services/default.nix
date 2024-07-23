@@ -5,7 +5,7 @@ let
 in {
   imports = [
     ./database.nix
-    ./monitoring.nix
+    # ./monitoring.nix
     # ./castopod.nix
     ./voiceserver.nix
     ./gitea.nix
