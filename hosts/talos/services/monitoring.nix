@@ -173,7 +173,7 @@ in {
           bucket = "scrutiny";
           organization = "main";
           retention = 15778476; # 6 months, in seconds
-        }
+        };
       };
     };
 
