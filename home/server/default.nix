@@ -21,6 +21,7 @@
       lynis
       # at # nonfunctional
       lazydocker
+      multitail
     ];
     
     # Think these might already be handled by config.programs.zsh/neovim (common)
