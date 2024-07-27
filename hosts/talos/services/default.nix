@@ -9,7 +9,7 @@ in {
     # ./castopod.nix
     ./voiceserver.nix
     ./gitea.nix
-    ./minecraft.nix
+    # ./minecraft.nix
     # ./gameserver.nix
     ./mediaserver.nix
     # ./immich.nix
