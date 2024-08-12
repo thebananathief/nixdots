@@ -4,7 +4,6 @@ let
   inherit (config.sops) secrets;
 in {
   imports = [
-    ./database.nix
     # ./monitoring.nix
     # ./castopod.nix
     ./voiceserver.nix
@@ -50,6 +49,16 @@ in {
     # whoami = {
     #   image = "traefik/whoami:latest";
     #   ports = [ "7008:80" ];
+    # };
+    # adminer = {
+    #   image = "adminer"; # https://hub.docker.com/_/adminer
+    #   ports = [ "8085:8080" ];
+    #   extraOptions = [ 
+    #   #   "--network=immich"
+    #   #   "--network=ttrss"
+    #     "--network=webtrees"
+    #   #   "--network=castopod"
+    #   ];
     # };
     dashy = {
       image = "lissy93/dashy:latest";
