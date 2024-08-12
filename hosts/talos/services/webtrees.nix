@@ -30,11 +30,14 @@ in {
         DB_TYPE = "pgsql";
         DB_PORT = "5432";
         DB_HOST = "webtrees-postgres";
-        WT_ADMIN = "thebananathief";
-        GROUP_ID = "${ cfg.common_env.PGID }";
+        DB_NAME = "webtrees";
+        DB_USER = "webtrees";
+        WT_NAME= "Cameron Salomone";
+        WT_USER= "thebananathief";
+        PGID = "${ cfg.common_env.PGID }";
         # PrettyURLs require filling out Base URL
         # PRETTYURLS = "TRUE";
-        # BASE_URL = "https://tree.${ config.networking.fqdn }";
+        BASE_URL = "https://tree.${ config.networking.fqdn }";
         # HTTPS = "True";
       };
       dependsOn = [ "webtrees-postgres" ];
@@ -48,7 +51,7 @@ in {
       ];
       ports = [ "5432:5432" ];
       environmentFiles = [
-        secrets."postgres-webtrees.env".path # MYSQL_PASSWORD POSTGRES_PASSWORD
+        secrets."postgres-webtrees.env".path 
       ];
       extraOptions = [ "--network=webtrees" ];
     };
