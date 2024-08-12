@@ -22,7 +22,6 @@ in {
       openFirewall = true;
       user = "mediaserver";
       group = "mediaserver";
-      dataDir = "${ cfg.dataDir }/plex/Library/Application Support";
     };
     jellyfin = {
       enable = true;
@@ -37,7 +36,7 @@ in {
     };
     audiobookshelf = {
       enable = true;
-      host = "0.0.0.0";
+      host = "0.0.0.0"; # Required to allow external clients to connect to this webserver
       user = "mediaserver";
       group = "mediaserver";
       port = 8009;
@@ -46,13 +45,11 @@ in {
     #   enable = true;
     #   user = "mediaserver";
     #   group = "mediaserver";
-    #   # dataDir = "/var/lib/sonarr/.config/NzbDrone";
     # };
     # radarr = {
     #   enable = true;
     #   user = "mediaserver";
     #   group = "mediaserver";
-    #   # dataDir = "/var/lib/radarr/.config/Radarr";
     # };
     # prowlarr = {
     #   enable = true;

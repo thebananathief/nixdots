@@ -6,15 +6,15 @@ in {
   imports = [
     # ./monitoring.nix
     # ./castopod.nix
-    ./voiceserver.nix
+    # ./voiceserver.nix
     ./gitea.nix
     # ./minecraft.nix
     # ./gameserver.nix
-    ./mediaserver.nix
+    # ./mediaserver.nix
     # ./immich.nix
     # ./ttrss.nix
     # ./webtrees.nix
-    ./reverse-proxy.nix
+    # ./reverse-proxy.nix
   ];
 
   # Set the user and group ID in the environment, some containers will pull it
