@@ -24,7 +24,8 @@ in {
         secrets."mysql-webtrees.env".path # DB_PASSWORD, WT_ADMINMAIL, WT_ADMINPW
       ];
       environment = {
-        DB_HOST = "webtrees-mysql";
+        # DB_HOST = "webtrees-mysql";
+        DB_HOST = "mysql";
         DB_PORT = "3306";
         DB_NAME = "webtrees";
         DB_USER = "webtrees";
@@ -39,11 +40,13 @@ in {
         # PRETTYURLS = "TRUE";
         # BASE_URL = "https://tree.${ config.networking.fqdn }";
       };
-      dependsOn = [ "webtrees-mysql" ];
+      dependsOn = [ "mysql" ];
+      # dependsOn = [ "webtrees-mysql" ];
       extraOptions = [ "--network=webtrees" ];
     };
 
-    webtrees-mysql = {
+    # webtrees-mysql = {
+    mysql = {
       image = "mysql";
       volumes = [
         "${ cfg.dataDir }/webtrees-mysql:/var/lib/mysql"
