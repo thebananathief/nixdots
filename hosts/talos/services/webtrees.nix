@@ -37,7 +37,8 @@ in {
         PGID = "${ cfg.common_env.PGID }";
         # PrettyURLs require filling out Base URL
         # PRETTYURLS = "TRUE";
-        BASE_URL = "https://tree.${ config.networking.fqdn }";
+        BASE_URL = "http://talos:8013";
+        # BASE_URL = "https://tree.${ config.networking.fqdn }";
         # HTTPS = "True";
       };
       dependsOn = [ "webtrees-postgres" ];
