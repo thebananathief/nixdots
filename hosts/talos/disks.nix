@@ -14,7 +14,7 @@ in {
     "ext4"
     # "btrfs"
     "xfs"
-    "zfs"
+    # "zfs"
     "ntfs"
     "fat"
     # "vfat"
@@ -23,8 +23,8 @@ in {
   ];
   
   # boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-  boot.zfs.forceImportRoot = false;
-  networking.hostId = "605959e6";
+  # boot.zfs.forceImportRoot = false;
+  # networking.hostId = "605959e6";
   
 
   # Prevents a filesystem mount failure from putting us into emergency mode on bootup
@@ -72,11 +72,11 @@ in {
     ];
   };
 
-  systemd.services.snapraid-sync.enable = false; # TODO: TEMPORARY for ZFS swap
-  systemd.services.snapraid-scrub.enable = false;
+  # systemd.services.snapraid-sync.enable = false;
+  # systemd.services.snapraid-scrub.enable = false;
   
   services.snapraid = {
-    enable = false;
+    enable = true;
     sync.interval = "05:00";
     scrub.interval = "Mon *-*-* 06:00:00";
     scrub.olderThan = 10; # Number of days since data was last scrubbed before it can be scrubbed again
@@ -85,7 +85,6 @@ in {
     contentFiles = [
       "/var/snapraid.content"
       "/mnt/parity1/snapraid.content"
-      "/mnt/disk1/snapraid.content"
       "/mnt/disk2/snapraid.content"
     ];
     parityFiles = [
