@@ -21,7 +21,7 @@ in {
       ];
       ports = [ 
         "8013:80" 
-        "8023:443"
+        # "8023:443"
       ];
       environmentFiles = [
         secrets."postgres-webtrees.env".path 
@@ -30,8 +30,6 @@ in {
         DB_TYPE = "pgsql";
         DB_PORT = "5432";
         DB_HOST = "webtrees-postgres";
-        DB_NAME = "webtrees";
-        DB_USER = "webtrees";
         WT_ADMIN = "thebananathief";
         GROUP_ID = "${ cfg.common_env.PGID }";
         # PrettyURLs require filling out Base URL
