@@ -30,10 +30,10 @@ in {
         DB_TYPE = "pgsql";
         DB_PORT = "5432";
         DB_HOST = "webtrees-postgres";
-        DB_NAME = "webtrees";
-        DB_USER = "webtrees";
-        WT_NAME= "Cameron Salomone";
-        WT_USER= "thebananathief";
+        # DB_NAME = "webtrees";
+        # DB_USER = "webtrees";
+        # WT_NAME= "Cameron Salomone";
+        # WT_USER= "thebananathief";
         PGID = "${ cfg.common_env.PGID }";
         # PrettyURLs require filling out Base URL
         PRETTYURLS = "TRUE";
