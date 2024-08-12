@@ -54,6 +54,9 @@ in {
       environmentFiles = [
         secrets."postgres-webtrees.env".path 
       ];
+      environment = {
+        PGDATA = "/var/lib/postgresql/data/pgdata";
+      };
       extraOptions = [ "--network=webtrees" ];
     };
   };
