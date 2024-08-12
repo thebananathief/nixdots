@@ -48,7 +48,7 @@ in {
     webtrees-postgres = {
       image = "postgres:alpine";
       volumes = [
-        "${ cfg.dataDir }/webtrees-postgres:/var/lib/postgres/data"
+        "${ cfg.dataDir }/webtrees-postgres:/var/lib/postgresql/data"
       ];
       ports = [ "5432:5432" ];
       environmentFiles = [
