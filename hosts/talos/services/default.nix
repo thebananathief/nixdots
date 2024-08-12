@@ -13,7 +13,7 @@ in {
     ./mediaserver.nix
     # ./immich.nix
     # ./ttrss.nix
-    # ./webtrees.nix
+    ./webtrees.nix
     ./reverse-proxy.nix
   ];
 
