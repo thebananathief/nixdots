@@ -225,7 +225,7 @@ in {
       dependsOn = ["gluetun"];
     };
   };
-  
+
   services.caddy.virtualHosts = {
     # Jellyseerr
     "request.${ config.networking.fqdn }".extraConfig = ''
@@ -243,8 +243,7 @@ in {
 
   hardware.graphics = {
     enable = true;
-    # driSupport = true;
-    # driSupport32Bit = true;
+    # enable32Bit = true;
 
     # Some of these are required for hardware transcoding
     extraPackages = with pkgs; [

@@ -10,15 +10,15 @@
   home.packages = with pkgs; [
     gsettings-qt
     gsettings-desktop-schemas
-    gnome.dconf-editor
+    dconf-editor
     nwg-look
-    
+
     papirus-icon-theme
   ];
 
   # https://www.youtube.com/watch?v=m_6eqpKrtxk theming help
   fonts.fontconfig.enable = true;
-  
+
   home.pointerCursor = {
     name = "Bibata-Modern-Ice";
     package = pkgs.bibata-cursors;
@@ -78,7 +78,7 @@
       .nautilus-list-view #NautilusViewCell { padding: 0px; }
     '';
   };
-  
+
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
@@ -90,7 +90,7 @@
   };
 
   programs.bat.config.theme = "Catppuccin-mocha";
-    
+
   # Make home-manager stop nagging about overwriting these files
   home.file.${config.gtk.gtk2.configLocation}.force = true;
   xdg = {
@@ -98,7 +98,7 @@
     configFile."gtk-3.0/settings.ini".force = true;
     configFile."gtk-4.0/gtk.css".force = true;
     configFile."gtk-4.0/settings.ini".force = true;
-    
+
     # configFile."Kvantum/GraphiteNord".source = "${pkgs.graphite-kde-theme}/share/Kvantum/GraphiteNord";
     # configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
     #   General.theme = "Catppuccin-Mocha-Blue";
@@ -108,5 +108,5 @@
     #   theme=GraphiteNordDark
     # '';
   };
-  
+
 }
