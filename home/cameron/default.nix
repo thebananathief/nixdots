@@ -1,6 +1,6 @@
 { pkgs, lib, inputs, globalFonts, ... }: rec {
   imports = [
-    ./xdg.nix
+    # ./xdg.nix
     ./git.nix
     ./alacritty.nix
     ./zsh.nix
