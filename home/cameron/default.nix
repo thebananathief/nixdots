@@ -7,7 +7,7 @@
     ./hyprland.nix
     # ./sway.nix
     ./packages.nix
-    ./theme.nix
+    # ./theme.nix
   ];
 
   home.username = "cameron";
@@ -29,7 +29,7 @@
     TERMINAL = "alacritty";
     BROWSER = "firefox";
   };
-  
+
   systemd.user.sessionVariables = {
     # EXPERIMENTAL: breaks some electron apps
     # Also probably breaks on X11
@@ -61,7 +61,7 @@
     jq
     poppler
   ];
-  
+
   programs = {
     home-manager.enable = true;
 
