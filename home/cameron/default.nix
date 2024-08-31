@@ -4,7 +4,7 @@
     ./git.nix
     ./alacritty.nix
     ./zsh.nix
-    ./hyprland.nix
+    # ./hyprland.nix
     # ./sway.nix
     ./packages.nix
     # ./theme.nix
