@@ -1,7 +1,7 @@
 { pkgs, ... }: {
-  imports = [
-    ../games.nix
-  ];
+  # imports = [
+  #   ../games.nix
+  # ];
 
   services = {
     displayManager.sddm.enable = true;
