@@ -3,9 +3,9 @@
     # forge-mtg
     vscode-fhs
     pre-commit
-    mcrcon # minecraft rcon client
-    moonlight-qt
-    gramps
-    tesseract
+    # mcrcon # minecraft rcon client
+    # moonlight-qt
+    # gramps
+    # tesseract
   ];
 }

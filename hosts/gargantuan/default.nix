@@ -101,9 +101,9 @@
   # Intel should use TLP, AMD should use power-profiles-daemon
   services.power-profiles-daemon.enable = lib.mkForce false;
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   system.stateVersion = "23.05";
