@@ -22,7 +22,14 @@ in {
     jsonfmt
     # cava # audio visualizer
     # cmatrix
+
     go
+    (callPackage ../packages/cursor.nix {
+      # inherit pkgs;
+      homeDir = "${pkgs.lib.getHome}";
+    })
+    # jetbrains.idea-community
+    jetbrains.goland
 
     # (python311.withPackages (ps:
     #   with ps; [
@@ -35,8 +42,6 @@ in {
     megacmd
     audacity
     spicetify-cli # Needs to be installed even with the flake
-    # jetbrains.idea-community
-    jetbrains.goland
     # obs-studio
     mumble
     # zbar
