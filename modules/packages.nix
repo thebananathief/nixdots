@@ -26,7 +26,7 @@ in {
     go
     (callPackage ../packages/cursor.nix {
       # inherit pkgs;
-      homeDir = "${pkgs.lib.getHome}";
+      homeDir = "/home/cameron";
     })
     # jetbrains.idea-community
     jetbrains.goland
