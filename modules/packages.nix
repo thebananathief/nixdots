@@ -24,10 +24,10 @@ in {
     # cmatrix
 
     go
-    (callPackage ../packages/cursor.nix {
-      # inherit pkgs;
-      homeDir = "/home/cameron";
-    })
+    # (callPackage ../packages/cursor.nix {
+    #   # inherit pkgs;
+    #   homeDir = "/home/cameron";
+    # })
     # jetbrains.idea-community
     jetbrains.goland
 
@@ -38,6 +38,7 @@ in {
 
     alacritty
     firefox
+    mpv
     # TODO: setup some flake shit to automatically log in and create the sync
     megacmd
     audacity
