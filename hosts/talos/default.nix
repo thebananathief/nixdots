@@ -15,7 +15,7 @@
     ./hardware-configuration.nix
     ./fileshares.nix
     ./disks.nix
-    # ./services
+    ./services
   ];
 
   networking = {
