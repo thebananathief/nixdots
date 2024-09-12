@@ -7,12 +7,12 @@ in {
     # ./monitoring.nix
     # ./castopod.nix
     # ./voiceserver.nix
-    ./gitea.nix
     # ./minecraft.nix
     # ./gameserver.nix
     # ./immich.nix
     # ./ttrss.nix
 
+    ./gitea.nix
     # ./mediaserver.nix
     # ./webtrees.nix
     # ./reverse-proxy.nix
