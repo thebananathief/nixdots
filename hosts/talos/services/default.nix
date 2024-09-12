@@ -10,11 +10,12 @@ in {
     ./gitea.nix
     # ./minecraft.nix
     # ./gameserver.nix
-    ./mediaserver.nix
     # ./immich.nix
     # ./ttrss.nix
-    ./webtrees.nix
-    ./reverse-proxy.nix
+
+    # ./mediaserver.nix
+    # ./webtrees.nix
+    # ./reverse-proxy.nix
   ];
 
   # Set the user and group ID in the environment, some containers will pull it
