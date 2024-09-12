@@ -18,8 +18,8 @@ git add . && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z') gen $old" || true
 git pull
 git push
 
-sudo nixos-rebuild --flake '.#' "$args" --accept-flake-config
-# --show-trace --option eval-cache false --fast
+sudo nixos-rebuild --flake '.#' "$args" --accept-flake-config --show-trace
+# --show-trace --option eval-cache false
 
 current=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
 echo
