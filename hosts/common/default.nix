@@ -65,7 +65,7 @@
   environment.systemPackages = with pkgs; [
   # BASIC utils that should be on every system running this flake
     git wget curl unzip killall
-    nettools dig
+    nettools dig lsof
     ethtool lm_sensors pciutils
     zellij neofetch bottom
     tailspin bat dua tree
