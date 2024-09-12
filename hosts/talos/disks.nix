@@ -39,6 +39,10 @@ in {
     device = "/dev/disk/by-uuid/cec3736e-cfa9-40e4-8143-02b338cd75e9";
     fsType = "xfs";
   };
+  fileSystems."/mnt/disk3" = {
+    device = "/dev/disk/by-uuid/1236c154-8c20-4e12-8e28-da62db223074";
+    fsType = "xfs";
+  };
   fileSystems."/mnt/used1" = {
     device = "/dev/disk/by-uuid/bb0b2728-3662-4fef-b862-5f1be6d54172";
     fsType = "ext4";
@@ -93,7 +97,7 @@ in {
     dataDisks = {
       d1 = "/mnt/disk1";
       d2 = "/mnt/disk2";
-      # d3 = "/mnt/disk3";
+      d3 = "/mnt/disk3";
     };
     exclude = [
       "*.unrecoverable"
