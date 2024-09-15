@@ -13,4 +13,10 @@ in {
       } // cfg.common_env;
     };
   };
+
+  services.caddy.virtualHosts = {
+    "search.${ config.networking.fqdn }".extraConfig = ''
+      reverse_proxy localhost:8050
+    '';
+  };
 }
