@@ -11,8 +11,8 @@ in {
     # ./gameserver.nix
     # ./immich.nix
     # ./ttrss.nix
+    # ./whoogle.nix
 
-    ./whoogle.nix
     ./gitea.nix
     ./mediaserver.nix
     ./webtrees.nix
