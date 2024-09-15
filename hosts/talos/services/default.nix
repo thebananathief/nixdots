@@ -12,6 +12,7 @@ in {
     # ./immich.nix
     # ./ttrss.nix
 
+    ./whoogle.nix
     ./gitea.nix
     ./mediaserver.nix
     ./webtrees.nix
@@ -54,7 +55,7 @@ in {
     # adminer = {
     #   image = "adminer"; # https://hub.docker.com/_/adminer
     #   ports = [ "8085:8080" ];
-    #   extraOptions = [ 
+    #   extraOptions = [
     #   #   "--network=immich"
     #   #   "--network=ttrss"
     #     "--network=webtrees"
