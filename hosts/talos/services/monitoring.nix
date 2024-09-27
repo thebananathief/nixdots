@@ -63,16 +63,16 @@ in {
     #     "--device=/dev/sdd"
     #   ];
     # };
-    # librespeed = {
-    #   image = "lscr.io/linuxserver/librespeed:latest"; # https://github.com/AnalogJ/scrutiny
-    #   volumes = [
-    #     "${ cfg.dataDir }/librespeed:/config"
-    #   ];
-    #   environment = {
-    #     PASSWORD = "PASSWORD";
-    #   } // cfg.common_env;
-    #   ports = [ "8016:80" ];
-    # };
+    librespeed = {
+      image = "lscr.io/linuxserver/librespeed:latest";
+      volumes = [
+        "${ cfg.dataDir }/librespeed:/config"
+      ];
+      environment = {
+        PASSWORD = "PASSWORD";
+      } // cfg.common_env;
+      ports = [ "8016:80" ];
+    };
     # smokeping = {
     #   image = "lscr.io/linuxserver/smokeping:latest";
     #   volumes = [
@@ -145,50 +145,50 @@ in {
   #   };
   # };
 
-  sops.secrets = {
-    scrutiny_influx_password = {
-      group = "influxdb2";
-      mode = "0440";
-    };
-    scrutiny_influx_token = {
-      group = "influxdb2";
-      mode = "0440";
-    };
-  };
+  # sops.secrets = {
+  #   scrutiny_influx_password = {
+  #     group = "influxdb2";
+  #     mode = "0440";
+  #   };
+  #   scrutiny_influx_token = {
+  #     group = "influxdb2";
+  #     mode = "0440";
+  #   };
+  # };
 
   services = {
-    scrutiny = {
-      enable = true;
-      openFirewall = true;
-      collector = {
-        enable = true;
-      };
-      settings = {
-        web = {
-          listen.host = "127.0.0.1";
-          listen.port = 8080;
+  #   scrutiny = {
+  #     enable = true;
+  #     openFirewall = true;
+  #     collector = {
+  #       enable = true;
+  #     };
+  #     settings = {
+  #       web = {
+  #         listen.host = "127.0.0.1";
+  #         listen.port = 8080;
 
-          influxdb = {
+  #         influxdb = {
 
-          };
-        };
-      };
-    };
+  #         };
+  #       };
+  #     };
+  #   };
 
-    influxdb2 = {
-      enable = true;
-      provision = {
-        enable = true;
-        initialSetup = {
-          username = "cameron";
-          passwordFile = secrets.scrutiny_influx_password.path;
-          tokenFile = secrets.scrutiny_influx_token.path;
-          bucket = "scrutiny";
-          organization = "main";
-          retention = 15778476; # 6 months, in seconds
-        };
-      };
-    };
+  #   influxdb2 = {
+  #     enable = true;
+  #     provision = {
+  #       enable = true;
+  #       initialSetup = {
+  #         username = "cameron";
+  #         passwordFile = secrets.scrutiny_influx_password.path;
+  #         tokenFile = secrets.scrutiny_influx_token.path;
+  #         bucket = "scrutiny";
+  #         organization = "main";
+  #         retention = 15778476; # 6 months, in seconds
+  #       };
+  #     };
+  #   };
 
     # uptime-kuma = {
     #   enable = true;

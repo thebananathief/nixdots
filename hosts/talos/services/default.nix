@@ -4,7 +4,6 @@ let
   inherit (config.sops) secrets;
 in {
   imports = [
-    # ./monitoring.nix
     # ./castopod.nix
     # ./voiceserver.nix
     # ./minecraft.nix
@@ -13,6 +12,7 @@ in {
     # ./ttrss.nix
     # ./whoogle.nix
 
+    ./monitoring.nix
     ./gitea.nix
     ./mediaserver.nix
     ./webtrees.nix
