@@ -1,8 +1,8 @@
 { pkgs, ... }: {
   services.xserver = {
     enable = true;
-    xkb.layout = "us";
-    xkb.variant = "";
+    # xkb.layout = "us";
+    # xkb.variant = "";
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
     # excludePackages = [ pkgs.xterm ];
@@ -12,7 +12,7 @@
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   environment.systemPackages = (with pkgs; [
-
+    # gnome.adwaita-icon-theme
   ]) ++ (with pkgs.gnomeExtensions; [
     appindicator # For systray icons
 #     gsconnect

@@ -6,7 +6,7 @@
     # ./cinnamon.nix
     # ./sway.nix
     # ./xfce.nix
-    ../fonts.nix
+    # ../fonts.nix
   ];
 
   # make HM-managed GTK stuff work

@@ -29,7 +29,7 @@ in {
     #   homeDir = "/home/cameron";
     # })
     # jetbrains.idea-community
-    jetbrains.goland
+    # jetbrains.goland
 
     # (python311.withPackages (ps:
     #   with ps; [
