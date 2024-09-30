@@ -12,6 +12,7 @@
       "https://nix-community.cachix.org?priority=10"
       "https://ai.cachix.org"
       "https://anyrun.cachix.org"
+      "https://cosmic.cachix.org"
       # "https://pre-commit-hooks.cachix.org"
     ];
     extra-trusted-public-keys = [
@@ -19,6 +20,7 @@
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
       "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
+      "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
       # "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
     ];
   };
@@ -40,6 +42,8 @@
     spicetify-nix.url = "github:the-argus/spicetify-nix";
 
     nix-colors.url = "github:misterio77/nix-colors";
+
+    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
     # Something like this if you want to move secrets to a completely private repo
     # mysecrets = {

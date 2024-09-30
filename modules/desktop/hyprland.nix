@@ -74,6 +74,7 @@
 
       # Kinda broken with Hyprland or NixOS, not sure, but helps with generating configs to console
       nwg-displays wlr-randr
+    # wev # useful for debugging mouse events / keyboard events
 
     # Media
       zathura # docs
@@ -102,7 +103,7 @@
       # okular
       kcalc
       ark
-      kclock
+      # kclock
       # polkit-qt
       polkit-kde-agent
       qt5.qtwayland

@@ -1,7 +1,6 @@
 { pkgs, ... }:
 let
     # Fixed crashes from EGL something rather
-    # NVIDIA-wayland related?
     # obsid = pkgs.symlinkJoin {
     #   name = "obsidian";
     #   paths = [ pkgs.obsidian ];
@@ -17,7 +16,6 @@ in {
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
   environment.systemPackages = with pkgs; [
-    # wev
     efibootmgr
     jsonfmt
     # cava # audio visualizer
@@ -38,13 +36,12 @@ in {
 
     alacritty
     firefox
-    mpv
     # TODO: setup some flake shit to automatically log in and create the sync
     megacmd
     audacity
     spicetify-cli # Needs to be installed even with the flake
     # obs-studio
-    mumble
+    # mumble
     # zbar
     # delfin
     # monero-gui
@@ -63,14 +60,13 @@ in {
     bitwarden
     spotify
 
-    libreoffice-qt
-    hunspell
-    hunspellDicts.en_US
+    # libreoffice-qt
+    # hunspell
+    # hunspellDicts.en_US
 
     # thunderbird
     # parsec-bin
     # krita
-    # libreoffice
     # zettlr
     # dbeaver
     # cage
