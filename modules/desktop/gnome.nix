@@ -11,7 +11,7 @@
 #   services.gnome.games.enable = true;
 
   services.udev.packages = with pkgs; [ 
-    gnome.gnome-settings-daemon
+    gnome-settings-daemon
   ];
   environment.systemPackages = (with pkgs; [
     # gnome.adwaita-icon-theme
