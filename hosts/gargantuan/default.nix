@@ -81,12 +81,6 @@
     # jack.enable = true;
   };
 
-  # Allow pam login via fingerprint reader
-  security.pam.services.login.fprintAuth = true;
-  security.pam.services.login.nodelay = true; # may be unsafe because of no delays for brute-force attacks
-  # and unix
-  security.pam.services.login.unixAuth = true;
-
   # Power saving profile
   # Consider upower instead
   services.tlp = {

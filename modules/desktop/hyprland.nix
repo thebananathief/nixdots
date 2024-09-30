@@ -5,7 +5,13 @@
   imports = [
     ../games.nix
   ];
-  
+
+  # Allow pam login via fingerprint reader
+  security.pam.services.login.fprintAuth = true;
+  security.pam.services.login.nodelay = true; # may be unsafe because of no delays for brute-force attacks
+  # and unix
+  security.pam.services.login.unixAuth = true;
+
   services.displayManager.defaultSession = "hyprland";
   services.xserver.displayManager = {
     gdm.enable = true;
@@ -27,7 +33,7 @@
   # environment.loginShellInit = ''
   #   [[ "$(tty)" == /dev/tty1 ]] && Hyprland
   # '';
-  
+
   # systemd.user.services.polkit-kde-authentication-agent-1
   security.polkit.enable = true;
 
@@ -39,7 +45,7 @@
 
     systemPackages = (with pkgs; [
       intel-media-driver linux-firmware mesa
-      
+
       anyrun.packages.${system}.anyrun
       hyprpicker
       dunst
@@ -62,8 +68,8 @@
       wlogout
 
       # Screen recording, region selection, screenshot markup UI, and the screencapping tool
-      wf-recorder slurp swappy grim 
-      
+      wf-recorder slurp swappy grim
+
       nwg-drawer
 
       # Kinda broken with Hyprland or NixOS, not sure, but helps with generating configs to console

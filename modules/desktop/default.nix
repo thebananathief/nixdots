@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [
-    ./plasma.nix # includes games
-    # ./gnome.nix
+    # ./plasma.nix # includes games
+    ./gnome.nix
     # ./hyprland.nix
     # ./cinnamon.nix
     # ./sway.nix
@@ -24,11 +24,5 @@
       accelSpeed = "0.0";
       naturalScrolling = false;
     };
-  };
-  services.xserver = {
-    enable = true;
-    xkb.layout = "us";
-    xkb.variant = "";
-    # excludePackages = [ pkgs.xterm ];
   };
 }

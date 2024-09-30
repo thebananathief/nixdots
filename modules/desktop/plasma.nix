@@ -4,10 +4,16 @@
   # ];
 
   services = {
+    xserver = {
+      enable = true;
+      xkb.layout = "us";
+      xkb.variant = "";
+      desktopManager.plasma5.enable = true;
+    # excludePackages = [ pkgs.xterm ];
+    };
     displayManager.sddm.enable = true;
     displayManager.sddm.wayland.enable = true;
 #    displayManager.defaultSession = "plasmawayland";
-    xserver.desktopManager.plasma5.enable = true;
   };
   # services.desktopManager.plasma6.enable = true;
 
