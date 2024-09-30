@@ -26,7 +26,7 @@
   };
 
   inputs = {
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
@@ -43,7 +43,7 @@
 
     nix-colors.url = "github:misterio77/nix-colors";
 
-    nixpkgs.follows = "nixos-cosmic/nixpkgs";
+    # nixpkgs.follows = "nixos-cosmic/nixpkgs";
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
     # Something like this if you want to move secrets to a completely private repo

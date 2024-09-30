@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [
-    # ./plasma.nix # includes games
-    ./gnome.nix
+    ./plasma.nix # includes games
+    # ./gnome.nix
     # ./cinnamon.nix
     # ./sway.nix
     # ./xfce.nix
