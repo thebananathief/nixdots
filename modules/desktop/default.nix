@@ -5,8 +5,8 @@
     # ./cinnamon.nix
     # ./sway.nix
     # ./xfce.nix
-    # ./cosmic.nix
-    ./hyprland.nix
+    ./cosmic.nix
+    # ./hyprland.nix
 
     ../fonts.nix
   ];

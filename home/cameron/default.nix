@@ -7,8 +7,8 @@
     # ./sway.nix
     ./packages.nix
 
-    ./hyprland.nix
-    ./theme.nix
+    # ./hyprland.nix
+    # ./theme.nix
     # ./gnome-theme.nix
   ];
 
