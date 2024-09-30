@@ -14,7 +14,6 @@
     gnome.gnome-settings-daemon
   ];
   environment.systemPackages = (with pkgs; [
-    wlr-randr
     # gnome.adwaita-icon-theme
   ]) ++ (with pkgs.gnomeExtensions; [
     appindicator # For systray icons
