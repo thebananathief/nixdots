@@ -4,11 +4,12 @@
     ./git.nix
     ./alacritty.nix
     ./zsh.nix
-    # ./hyprland.nix
     # ./sway.nix
     ./packages.nix
-    # ./theme.nix
-    ./gnome-theme.nix
+
+    ./hyprland.nix
+    ./theme.nix
+    # ./gnome-theme.nix
   ];
 
   home.username = "cameron";

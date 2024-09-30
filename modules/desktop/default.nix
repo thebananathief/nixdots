@@ -1,12 +1,13 @@
 { pkgs, ... }: {
   imports = [
     # ./plasma.nix # includes games
-    ./gnome.nix
-    # ./hyprland.nix
+    # ./gnome.nix
     # ./cinnamon.nix
     # ./sway.nix
     # ./xfce.nix
-    # ../fonts.nix
+    ./hyprland.nix
+    
+    ../fonts.nix
   ];
 
   # make HM-managed GTK stuff work
