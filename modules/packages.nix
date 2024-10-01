@@ -68,7 +68,7 @@ in {
     # parsec-bin
     # krita
     # zettlr
-    # dbeaver
+    dbeaver
     mysql-workbench
     # cage
   ];
