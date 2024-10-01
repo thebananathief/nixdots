@@ -27,22 +27,22 @@
     podman-tui
   ];
 
-  systemd.services.podman-create-pod-testdb = {
-    serviceConfig.Type = "oneshot";
-    wantedBy = [ 
-      "${config.virtualisation.oci-containers.backend}-mysql_source.service"
-      "${config.virtualisation.oci-containers.backend}-mysql_target.service"
-     ];
-    script = ''
-      ${pkgs.podman}/bin/podman pod exists testdb || ${pkgs.podman}/bin/podman pod create -p "127.0.0.1:3306:3307" testdb
-    '';
-  };
+  # systemd.services.podman-create-pod-testdb = {
+  #   serviceConfig.Type = "oneshot";
+  #   wantedBy = [ 
+  #     "${config.virtualisation.oci-containers.backend}-mysql_source.service"
+  #     "${config.virtualisation.oci-containers.backend}-mysql_target.service"
+  #    ];
+  #   script = ''
+  #     ${pkgs.podman}/bin/podman pod exists testdb || ${pkgs.podman}/bin/podman pod create -p "127.0.0.1:3306:3307" testdb
+  #   '';
+  # };
 
   virtualisation.oci-containers.containers = {
     mysql_source = {
       image = "docker.io/library/mysql:latest";
       ports = [ "3306:3306" ];
-      extraOptions = [ "--pod=testdb" ];
+      # extraOptions = [ "--pod=testdb" ];
       environment = {
         MYSQL_RANDOM_ROOT_PASSWORD = "yes";
         MYSQL_DATABASE = "skynet";
@@ -53,7 +53,7 @@
     mysql_target = {
       image = "docker.io/library/mysql:latest";
       ports = [ "3307:3306" ];
-      extraOptions = [ "--pod=testdb" ];
+      # extraOptions = [ "--pod=testdb" ];
       environment = {
         MYSQL_RANDOM_ROOT_PASSWORD = "yes";
         MYSQL_DATABASE = "skynet";
