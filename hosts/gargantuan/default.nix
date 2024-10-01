@@ -14,7 +14,7 @@
   boot.supportedFilesystems = [
     "ext4"
     # "btrfs"
-    "xfs"
+    # "xfs"
     "ntfs"
     "fat"
     # "vfat"
