@@ -27,6 +27,17 @@
     podman-tui
   ];
 
+  systemd.services.podman-create-pod-testdb = {
+    serviceConfig.Type = "oneshot";
+    wantedBy = [ 
+      "${config.virtualisation.oci-containers.backend}-mysql_source.service"
+      "${config.virtualisation.oci-containers.backend}-mysql_target.service"
+     ];
+    script = ''
+      ${pkgs.podman}/bin/podman pod exists testdb || ${pkgs.podman}/bin/podman pod create --name testdb
+    '';
+  };
+
   virtualisation.oci-containers.containers = {
     mysql_source = {
       image = "docker.io/library/mysql:latest";
