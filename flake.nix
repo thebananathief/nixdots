@@ -1,5 +1,5 @@
 {
-  description = "NixOS configuration";
+  description = "TheBananaThief NixOS Configuration";
 
   # This only configures the flake, not the system
   nixConfig = {
