@@ -69,6 +69,7 @@ in {
     # krita
     # zettlr
     # dbeaver
+    mysql-workbench
     # cage
   ];
 }
