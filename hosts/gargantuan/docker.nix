@@ -31,7 +31,7 @@
     mysql_source = {
       image = "mysql:latest";
       ports = [ "3306:3306" ];
-      extraOptions = [ "--network=testdb" ];
+      extraOptions = [ "--pod=testdb" ];
       environment = {
         MYSQL_RANDOM_ROOT_PASSWORD = "yes";
         MYSQL_DATABASE = "skynet";
@@ -42,7 +42,7 @@
     mysql_target = {
       image = "mysql:latest";
       ports = [ "3307:3306" ];
-      extraOptions = [ "--network=testdb" ];
+      extraOptions = [ "--pod=testdb" ];
       environment = {
         MYSQL_RANDOM_ROOT_PASSWORD = "yes";
         MYSQL_DATABASE = "skynet";
