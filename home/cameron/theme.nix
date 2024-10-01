@@ -93,6 +93,7 @@
 
   # Make home-manager stop nagging about overwriting these files
   # home.file.${config.gtk.gtk2.configLocation}.force = true;
+  home.file.".gtkrc-2.0".force = true;
   xdg = {
     configFile."gtk-2.0/gtkrc".force = true;
     configFile."gtk-3.0/gtk.css".force = true;
