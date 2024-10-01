@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   virtualisation = {
     # oci-containers.backend = "docker";
     # docker = {
