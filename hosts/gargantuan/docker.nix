@@ -34,7 +34,7 @@
       "${config.virtualisation.oci-containers.backend}-mysql_target.service"
      ];
     script = ''
-      ${pkgs.podman}/bin/podman pod exists testdb || ${pkgs.podman}/bin/podman pod create testdb -p "127.0.0.1:3306:3307"
+      ${pkgs.podman}/bin/podman pod exists testdb || ${pkgs.podman}/bin/podman pod create -p "127.0.0.1:3306:3307" testdb
     '';
   };
 
