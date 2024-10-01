@@ -29,7 +29,7 @@
 
   virtualisation.oci-containers.containers = {
     mysql_source = {
-      image = "mysql:latest";
+      image = "docker.io/library/mysql:latest";
       ports = [ "3306:3306" ];
       extraOptions = [ "--pod=testdb" ];
       environment = {
@@ -40,7 +40,7 @@
       };
     };
     mysql_target = {
-      image = "mysql:latest";
+      image = "docker.io/library/mysql:latest";
       ports = [ "3307:3306" ];
       extraOptions = [ "--pod=testdb" ];
       environment = {
