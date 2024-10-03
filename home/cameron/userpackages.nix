@@ -7,7 +7,7 @@
     # moonlight-qt
     # gramps
     # tesseract
-    dbeaver
+    dbeaver-bin
     mysql-workbench
     spicetify-cli
 
