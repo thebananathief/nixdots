@@ -63,8 +63,8 @@
   #   };
   # };
 
-  environment.variables = {
-    MYSQL_ROOT_PASSWORD = "dumbpassword";
+  environment.sessionVariables = {
+    MYSQL_RANDOM_ROOT_PASSWORD = "yes";
   };
 
   services.mysql = {
@@ -95,5 +95,12 @@
     settings = {
 
     };
+  };
+
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "*/5 * * * *    mysql   /var/backups/backup-db"
+    ];
   };
 }
