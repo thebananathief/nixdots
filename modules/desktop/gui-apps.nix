@@ -37,7 +37,7 @@
     ];
     environment = {
       DISPLAY = ":0";
-      XAUTHORITY = "/home/cameron/.Xauthority"
+      XAUTHORITY = "/home/cameron/.Xauthority";
     };
     startLimitBurst = 5;
     startLimitIntervalSec = 20;
