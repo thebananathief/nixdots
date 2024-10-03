@@ -29,7 +29,7 @@
 
   systemd.services.tailscale-systray = {
     description = "Tailscale system tray icon";
-    wantedBy = [ "multi-user.target" ];
+    wantedBy = [ "graphical.target" ];
     after = [ "tailscaled.service" ];
     wants = [ "tailscaled.service" ];
     path = [
