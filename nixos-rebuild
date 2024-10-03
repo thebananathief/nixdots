@@ -12,7 +12,7 @@ fi
 
 old=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
 echo "---- OLD GENERATION $old ----"
-./git-sync sync $old
+./git-sync sync "changes from $(uname -n)-gen$old on $(date '+%Y-%m-%d %H:%M:%S %Z')"
 # autocommit, ignore errors
 # git add . && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z') gen $old" || true
 # sync up

@@ -40,7 +40,7 @@ DEFAULT_AUTOCOMMIT_CMD="git add -u ; git commit -m \"%message\";"
 ALL_AUTOCOMMIT_CMD="git add -A ; git commit -m \"%message\";"
 
 # default commit message substituted into autocommit commands
-DEFAULT_AUTOCOMMIT_MSG="changes from $(uname -n) on $(date '+%Y-%m-%d %H:%M:%S %Z') gen $2"
+DEFAULT_AUTOCOMMIT_MSG="changes from $(uname -n) on $(date '+%Y-%m-%d %H:%M:%S %Z')"
 
 
 # AUTOCOMMIT_CMD="echo \"Please commit or stash pending changes\"; exit 1;"
@@ -315,9 +315,11 @@ if [ ! -z "$(local_changes)" ]; then
     fi
 
     commit_msg="$(git config --get branch.$branch_name.syncCommitMsg)"
-    if [ "" == "$commit_msg" ]; then
+    if [ ! -z "$2" ]; then
+	  commit_msg="$2"
+    elif [ "" == "$commit_msg" ]; then
       commit_msg=${DEFAULT_AUTOCOMMIT_MSG}
-    fi
+	fi
     autocommit_cmd=$(echo "$autocommit_cmd" | sed "s/%message/$commit_msg/")
 
     __log_msg "Committing local changes using ${autocommit_cmd}"
