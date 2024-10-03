@@ -25,5 +25,6 @@ in {
     # TODO: setup some flake shit to automatically log in and create the sync
     megacmd
     wireguard-tools
+    librespeed-cli
   ];
 }
