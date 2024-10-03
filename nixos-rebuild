@@ -10,6 +10,9 @@ else
   args="$@"
 fi
 
+# Will error early if our nix code is bad
+nix flake check
+
 old=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
 echo "---- OLD GENERATION $old ----"
 ./git-sync sync "changes from $(uname -n)-gen$old on $(date '+%Y-%m-%d %H:%M:%S %Z')"

@@ -5,25 +5,27 @@
   services.samba = {
     enable = true;
     securityType = "user";
-    extraConfig = ''
-      workgroup = WORKGROUP
-      server role = standalone server
-      map to guest = bad user
+    settings = {
+      global = {
+        workgroup = "WORKGROUP";
+        "server role" = "standalone server";
+        "map to guest" = "bad user";
 
-      # log file = /var/log/samba/%m.log
-      # log level = 1
-      # max log size = 50
+        # log file = /var/log/samba/%m.log
+        # log level = 1
+        # max log size = 50
 
-      # server string = smbnix
-      # netbios name = smbnix
-      # security = user
-      # use sendfile = yes
-      # max protocol = smb2
-      # note: localhost is the ipv6 localhost ::1
-      # hosts allow = 192.168.0. 127.0.0.1 localhost
-      # hosts deny = 0.0.0.0/0
-      # guest account = nobody
-    '';
+        # server string = smbnix
+        # netbios name = smbnix
+        # security = user
+        # use sendfile = yes
+        # max protocol = smb2
+        # note: localhost is the ipv6 localhost ::1
+        # hosts allow = 192.168.0. 127.0.0.1 localhost
+        # hosts deny = 0.0.0.0/0
+        # guest account = nobody
+      };
+    };
     shares = {
       home = {
         path = "/home/cameron";

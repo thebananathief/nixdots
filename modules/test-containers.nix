@@ -66,16 +66,28 @@
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
-    initialDatabases = {
-      skynet.name = "skynet";
-      skynet.schema = /skynet_pkg;
-    };
-    ensureUsers = {
-      cameron.name = "cameron";
-      cameron.ensurePermissions = {
-        "*.*" = "ALL PRIVILEGES";
-      };
-    };
+    # initialDatabases = [
+    #   {
+    #     name = "skynet";
+    #     schema = "skynet_pkg";
+    #   }
+    #   {
+    #     name = "skynet";
+    #     schema = "skynet_ogi";
+    #   }
+    # ];
+    ensureDatabases = [
+      "skynet_pkg"
+      "skynet_ogi"
+    ];
+    ensureUsers = [
+      {
+        name = "cameron";
+        ensurePermissions = {
+          "*.*" = "ALL PRIVILEGES";
+        };
+      }
+    ];
     settings = {
 
     };
