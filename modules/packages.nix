@@ -15,6 +15,7 @@ in {
     efibootmgr
     jsonfmt
     go
+    logdy
 
     # (python311.withPackages (ps:
     #   with ps; [
