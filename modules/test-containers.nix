@@ -68,7 +68,7 @@
     package = pkgs.mariadb;
     initialDatabases = {
       skynet.name = "skynet";
-      skynet.schema = "skynet_pkg";
+      skynet.schema = /skynet_pkg;
     };
     ensureUsers = {
       cameron.name = "cameron";
