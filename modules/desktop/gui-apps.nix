@@ -26,4 +26,22 @@
     # jetbrains.idea-community
     # jetbrains.goland
   ];
+
+  systemd.services.tailscale-systray = {
+    description = "Tailscale system tray icon";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "tailscaled.service" ];
+    wants = [ "tailscaled.service" ];
+    path = [
+      pkgs.tailscale-systray
+    ];
+    startLimitBurst = 5;
+    startLimitIntervalSec = 20;
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.tailscale-systray}/bin/tailscale-systray";
+      Restart = "always";
+      RestartSec = 1;
+    };
+  };
 }
