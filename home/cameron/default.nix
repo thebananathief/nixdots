@@ -1,13 +1,10 @@
 { pkgs, lib, inputs, globalFonts, ... }: rec {
   imports = [
-    ./xdg.nix
-    ./git.nix
-    ./alacritty.nix
-    ./zsh.nix
+    ./shell
     # ./sway.nix
-    ./packages.nix
+    ./userpackages.nix
 
-    # ./hyprland.nix
+    # ./hyprland
     # ./theme.nix
     # ./gnome-theme.nix
   ];

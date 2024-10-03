@@ -7,5 +7,17 @@
     # moonlight-qt
     # gramps
     # tesseract
+    dbeaver
+    mysql-workbench
+    spicetify-cli
+
+    audacity
+    obsidian
+    localsend
+    # webcord
+    armcord
+    # discord
+    bitwarden
+    spotify
   ];
 }

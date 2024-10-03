@@ -7,7 +7,7 @@
     ../../modules/packages.nix
     # ../../modules/network-mount.nix
     # ../../modules/games.nix
-    ./docker.nix
+    ../../modules/test-containers.nix
     ../../modules/desktop
   ];
 
