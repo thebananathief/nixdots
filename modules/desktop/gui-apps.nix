@@ -36,8 +36,7 @@
       pkgs.tailscale-systray
     ];
     environment = {
-      DISPLAY = ":0";
-      XAUTHORITY = "/home/cameron/.Xauthority";
+      DISPLAY = "0";
     };
     startLimitBurst = 5;
     startLimitIntervalSec = 20;
