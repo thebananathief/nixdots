@@ -39,6 +39,7 @@
     startLimitIntervalSec = 20;
     serviceConfig = {
       Type = "simple";
+      User = "cameron";
       ExecStart = "${pkgs.tailscale-systray}/bin/tailscale-systray";
       Restart = "always";
       RestartSec = 1;
