@@ -4,10 +4,10 @@
   services.samba-wsdd.enable = true; # make shares visible for windows 10 clients
   services.samba = {
     enable = true;
-    securityType = "user";
     settings = {
       global = {
         workgroup = "WORKGROUP";
+        security = "user";
         "server role" = "standalone server";
         "map to guest" = "bad user";
 
@@ -25,8 +25,6 @@
         # hosts deny = 0.0.0.0/0
         # guest account = nobody
       };
-    };
-    shares = {
       home = {
         path = "/home/cameron";
         browseable = "yes";
@@ -70,7 +68,7 @@
 
 
   # ----- CLIENT SIDE CIFS CONFIG -----
-  # This is a mount for the client-side (if you wanted to connect a server's fileshare to this machine)
+  # This is a mount for the client-side (if you wanted to connect a client to these fileshares)
   # environment.systemPackages = [ pkgs.cifs-utils ];
 
   # fileSystems."/mnt/storage" = {

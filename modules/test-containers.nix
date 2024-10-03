@@ -63,6 +63,10 @@
   #   };
   # };
 
+  environment.variables = {
+    MYSQL_ROOT_PASSWORD = "dumbpassword";
+  };
+
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
