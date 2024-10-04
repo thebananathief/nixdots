@@ -100,7 +100,7 @@
   services.cron = {
     enable = true;
     systemCronJobs = [
-      "*/5 * * * *    mysql   /var/backups/backup-db"
+      "*/5 * * * *    mysql   /var/backup-db"
     ];
   };
 }
