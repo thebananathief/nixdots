@@ -37,6 +37,7 @@
     # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
   };
 
+  # home.file.".gtkrc-2.0".force = true;
   gtk = {
     enable = true;
     # These are referenced by Thunar for the navigation tree
