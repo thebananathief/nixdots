@@ -1,13 +1,13 @@
 {pkgs, config, ...}: {
-  virtualisation = {
-    oci-containers.backend = "docker";
-    docker = {
-      enable = true;
-      autoPrune.enable = true;
-      autoPrune.flags = [
-        "--all"
-      ];
-    };
+  # virtualisation = {
+    # oci-containers.backend = "docker";
+    # docker = {
+    #   enable = true;
+    #   autoPrune.enable = true;
+    #   autoPrune.flags = [
+    #     "--all"
+    #   ];
+    # };
   #   oci-containers.backend = "podman";
   #   podman = {
   #     enable = true;
@@ -19,14 +19,14 @@
   #       "--all"
   #     ];
   #   };
-  };
+  # };
 
-  environment.systemPackages = with pkgs; [
+  # environment.systemPackages = with pkgs; [
     # podman-compose
     # dive
     # podman-tui
-    mailutils
-  ];
+    # mailutils
+  # ];
 
   # systemd.services.podman-create-pod-testdb = {
   #   serviceConfig.Type = "oneshot";
@@ -39,19 +39,19 @@
   #   '';
   # };
 
-  virtualisation.oci-containers.containers = {
-    slave_db = {
-      image = "mariadb:latest";
-      ports = [ "3307:3306" ];
-      cmd = [ "--server-id=2" ];
-      # extraOptions = [ "--pod=testdb" ];
-      environment = {
-        MARIADB_RANDOM_ROOT_PASSWORD = "yes";
-        MARIADB_DATABASE = "skynet";
-        MARIADB_USER = "replication";
-        MARIADB_PASSWORD = "dumbpassword";
-      };
-    };
+  # virtualisation.oci-containers.containers = {
+    # slave_db = {
+    #   image = "mariadb:latest";
+    #   ports = [ "3307:3306" ];
+    #   cmd = [ "--server-id=2" ];
+    #   # extraOptions = [ "--pod=testdb" ];
+    #   environment = {
+    #     MARIADB_RANDOM_ROOT_PASSWORD = "yes";
+    #     MARIADB_DATABASE = "skynet";
+    #     MARIADB_USER = "replication";
+    #     MARIADB_PASSWORD = "dumbpassword";
+    #   };
+    # };
   #   mysql_target = {
   #     image = "mysql:latest";
   #     ports = [ "3307:3306" ];
@@ -63,25 +63,65 @@
   #       MYSQL_PASSWORD = "dumbpassword";
   #     };
   #   };
+  # };
+
+  networking.nat = {
+    enable = true;
+    internalInterfaces = ["ve-+"];
+    externalInterface = "wlp170s0";
+    # Lazy IPv6 connectivity for the container
+    enableIPv6 = true;
   };
 
-  environment.sessionVariables = {
-    MYSQL_RANDOM_ROOT_PASSWORD = "yes";
+  containers.mysql-slave = {
+    autoStart = true;
+    privateNetwork = true;
+    hostAddress = "192.168.100.10";
+    localAddress = "192.168.100.11";
+    hostAddress6 = "fc00::1";
+    localAddress6 = "fc00::2";
+    config = { pkgs, lib, ... }: {
+      services.mysql = {
+        enable = true;
+        package = pkgs.mariadb;
+        ensureDatabases = [
+          "skynet_pkg"
+          "skynet_ogi"
+        ];
+        ensureUsers = [
+          {
+            name = "replication";
+            ensurePermissions = {
+              "*.*" = "ALL PRIVILEGES";
+            };
+          }
+        ];
+        settings = {
+          mariadb = {
+            server-id = 2;
+          };
+        };
+      };
+
+      system.stateVersion = "23.05";
+
+      networking = {
+        firewall = {
+          enable = true;
+          allowedTCPPorts = [ 80 ];
+        };
+        # Use systemd-resolved inside the container
+        # Workaround for bug https://github.com/NixOS/nixpkgs/issues/162686
+        useHostResolvConf = lib.mkForce false;
+      };
+      
+      services.resolved.enable = true;
+    };
   };
 
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
-    # initialDatabases = [
-    #   {
-    #     name = "skynet";
-    #     schema = "skynet_pkg";
-    #   }
-    #   {
-    #     name = "skynet";
-    #     schema = "skynet_ogi";
-    #   }
-    # ];
     ensureDatabases = [
       "skynet_pkg"
       "skynet_ogi"
