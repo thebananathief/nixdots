@@ -100,10 +100,10 @@
   services.cron = {
     enable = true;
     systemCronJobs = [
-      # "0 4 * * SUN        mysql   /var/backups/backup-db.sh backup --full"  # Weekly full backup on sunday
-      # "0 4 * * MON-SAT    mysql   /var/backups/backup-db.sh backup --incr"  # Daily incremental backups on other days
-      "0 * * * *            mysql   /var/backups/backup-db.sh backup --full"  # Hourly full backup
-      "15,30,45 * * * *     mysql   /var/backups/backup-db.sh backup --incr"  # Incremental backups every 15 minutes
+      "0 4 * * SUN        mysql   /var/backups/backup-db.sh backup --full"  # Weekly full backup on sunday
+      "0 4 * * MON-SAT    mysql   /var/backups/backup-db.sh backup --incr"  # Daily incremental backups on other days
+      # "0 * * * *            mysql   /var/backups/backup-db.sh backup --full"  # Hourly full backup
+      # "15,30,45 * * * *     mysql   /var/backups/backup-db.sh backup --incr"  # Incremental backups every 15 minutes
     ];
   };
 }
