@@ -1,4 +1,10 @@
-{pkgs, config, ...}: {
+{pkgs, config, ...}: 
+let
+  mariaInit = pkgs.writeText "mariaInit.sql" ''
+      CREATE USER 'replication'@'%' IDENTIFIED BY 'dumbpassword';
+      GRANT REPLICATION SLAVE ON *.* TO 'replication'@'%';
+      '';
+in {
   # virtualisation = {
     # oci-containers.backend = "docker";
     # docker = {
@@ -140,10 +146,7 @@
         binlog-format = "mixed";
       };
     };
-    initialScript = pkgs.writeText "mariaInit.sql" ''
-    CREATE USER 'replication'@'%' IDENTIFIED BY 'dumbpassword';
-    GRANT REPLICATION SLAVE ON *.* TO 'replication'@'%';
-    '';
+    initialScript = mariaInit;
   };
 
   services.cron = {
