@@ -101,7 +101,9 @@
       }
     ];
     settings = {
-
+      mariadb = {
+        server-id = 1;
+      };
     };
   };
 
