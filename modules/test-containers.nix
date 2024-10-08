@@ -84,18 +84,6 @@
       services.mysql = {
         enable = true;
         package = pkgs.mariadb;
-        ensureDatabases = [
-          "skynet_pkg"
-          "skynet_ogi"
-        ];
-        ensureUsers = [
-          {
-            name = "replication";
-            ensurePermissions = {
-              "*.*" = "ALL PRIVILEGES";
-            };
-          }
-        ];
         settings = {
           mariadb = {
             server-id = 2;
@@ -118,6 +106,10 @@
       services.resolved.enable = true;
     };
   };
+  # machinectl list
+  # nixos-container root-login nextcloud
+  # nixos-container start nextcloud
+  # nixos-container stop nextcloud
 
   services.mysql = {
     enable = true;
@@ -128,9 +120,9 @@
     ];
     ensureUsers = [
       {
-        name = "cameron";
+        name = "backup";
         ensurePermissions = {
-          "*.*" = "ALL PRIVILEGES";
+          "*.*" = "SELECT, LOCK TABLES";
         };
       }
       {
@@ -142,9 +134,16 @@
     ];
     settings = {
       mariadb = {
+        log-bin = "binlog";
         server-id = 1;
+        log-basename = "primary1";
+        binlog-format = "mixed";
       };
     };
+    initialScript = pkgs.writeText "mariaInit.sql" ''
+    CREATE USER 'replication'@'%' IDENTIFIED BY 'dumbpassword';
+    GRANT REPLICATION SLAVE ON *.* TO 'replication'@'%';
+    '';
   };
 
   services.cron = {
