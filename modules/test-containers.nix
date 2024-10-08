@@ -1,13 +1,13 @@
 {pkgs, config, ...}: {
-  # virtualisation = {
-  #   # oci-containers.backend = "docker";
-  #   # docker = {
-  #   #   enable = true;
-  #   #   autoPrune.enable = true;
-  #   #   autoPrune.flags = [
-  #   #     "--all"
-  #   #   ];
-  #   # };
+  virtualisation = {
+    oci-containers.backend = "docker";
+    docker = {
+      enable = true;
+      autoPrune.enable = true;
+      autoPrune.flags = [
+        "--all"
+      ];
+    };
   #   oci-containers.backend = "podman";
   #   podman = {
   #     enable = true;
@@ -19,7 +19,7 @@
   #       "--all"
   #     ];
   #   };
-  # };
+  };
 
   environment.systemPackages = with pkgs; [
     # podman-compose
@@ -39,18 +39,19 @@
   #   '';
   # };
 
-  # virtualisation.oci-containers.containers = {
-  #   mysql_source = {
-  #     image = "mysql:latest";
-  #     ports = [ "3306:3306" ];
-  #     # extraOptions = [ "--pod=testdb" ];
-  #     environment = {
-  #       MYSQL_RANDOM_ROOT_PASSWORD = "yes";
-  #       MYSQL_DATABASE = "skynet";
-  #       MYSQL_USER = "cameron";
-  #       MYSQL_PASSWORD = "dumbpassword";
-  #     };
-  #   };
+  virtualisation.oci-containers.containers = {
+    slave_db = {
+      image = "mariadb:latest";
+      ports = [ "3307:3306" ];
+      cmd = [ "--server-id=2" ];
+      # extraOptions = [ "--pod=testdb" ];
+      environment = {
+        MARIADB_RANDOM_ROOT_PASSWORD = "yes";
+        MARIADB_DATABASE = "skynet";
+        MARIADB_USER = "replication";
+        MARIADB_PASSWORD = "dumbpassword";
+      };
+    };
   #   mysql_target = {
   #     image = "mysql:latest";
   #     ports = [ "3307:3306" ];
@@ -62,7 +63,7 @@
   #       MYSQL_PASSWORD = "dumbpassword";
   #     };
   #   };
-  # };
+  };
 
   environment.sessionVariables = {
     MYSQL_RANDOM_ROOT_PASSWORD = "yes";
@@ -88,6 +89,12 @@
     ensureUsers = [
       {
         name = "cameron";
+        ensurePermissions = {
+          "*.*" = "ALL PRIVILEGES";
+        };
+      }
+      {
+        name = "replication";
         ensurePermissions = {
           "*.*" = "ALL PRIVILEGES";
         };
