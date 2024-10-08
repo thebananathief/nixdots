@@ -25,6 +25,7 @@
     # podman-compose
     # dive
     # podman-tui
+    mailutils
   ];
 
   # systemd.services.podman-create-pod-testdb = {
