@@ -11,11 +11,11 @@
     steam-run
     # duckstation
     prismlauncher
-    protonup-qt
-    protontricks
+    # protonup-qt
+    # protontricks
     bottles
-    wine
-    gamemode
+    # wine
+    # gamemode
     # (callPackage ../packages/mtg-forge/default.nix {})
     forge-mtg
     #gamescope
