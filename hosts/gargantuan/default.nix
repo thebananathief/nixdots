@@ -6,8 +6,8 @@
     ./hardware-configuration.nix
     ../../modules/packages.nix
     # ../../modules/network-mount.nix
-    # ../../modules/games.nix
-    ../../modules/test-containers.nix
+    ../../modules/games.nix
+    # ../../modules/test-containers.nix
     ../../modules/desktop
   ];
 

@@ -1,9 +1,9 @@
 {pkgs, config, ...}: 
 let
   mariaInit = pkgs.writeText "mariaInit.sql" ''
-      CREATE USER 'replication'@'%' IDENTIFIED BY 'dumbpassword';
-      GRANT REPLICATION SLAVE ON *.* TO 'replication'@'%';
-      '';
+    CREATE USER 'replication'@'%' IDENTIFIED BY 'dumbpassword';
+    GRANT REPLICATION SLAVE ON *.* TO 'replication'@'%';
+  '';
 in {
   # virtualisation = {
     # oci-containers.backend = "docker";
