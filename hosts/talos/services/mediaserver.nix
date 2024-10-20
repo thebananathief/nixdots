@@ -18,12 +18,12 @@ in {
   };
 
   services = {
-    plex = {
-      enable = true;
-      openFirewall = true;
-      user = "mediaserver";
-      group = "mediaserver";
-    };
+    # plex = {
+    #   enable = true;
+    #   openFirewall = true;
+    #   user = "mediaserver";
+    #   group = "mediaserver";
+    # };
     jellyfin = {
       enable = true;
       openFirewall = true;
