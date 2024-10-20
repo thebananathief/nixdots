@@ -3,8 +3,8 @@ set -e
 
 __skip_git_sync=0
 
-# cd $HOME/github/nixdots
-cd "$(dirname "$0")"
+cd $HOME/github/nixdots
+# cd "$(dirname "$0")"
 
 function do_rebuild() {
   # Will error early if our nix code is bad
