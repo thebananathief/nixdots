@@ -4,27 +4,27 @@
   services.samba-wsdd.enable = true; # make shares visible for windows 10 clients
   services.samba = {
     enable = true;
-    securityType = "user";
-    extraConfig = ''
-      workgroup = WORKGROUP
-      server role = standalone server
-      map to guest = bad user
+    settings = {
+      global = {
+        workgroup = "WORKGROUP";
+        security = "user";
+        "server role" = "standalone server";
+        "map to guest" = "bad user";
 
-      # log file = /var/log/samba/%m.log
-      # log level = 1
-      # max log size = 50
+        # log file = /var/log/samba/%m.log
+        # log level = 1
+        # max log size = 50
 
-      # server string = smbnix
-      # netbios name = smbnix
-      # security = user
-      # use sendfile = yes
-      # max protocol = smb2
-      # note: localhost is the ipv6 localhost ::1
-      # hosts allow = 192.168.0. 127.0.0.1 localhost
-      # hosts deny = 0.0.0.0/0
-      # guest account = nobody
-    '';
-    shares = {
+        # server string = smbnix
+        # netbios name = smbnix
+        # security = user
+        # use sendfile = yes
+        # max protocol = smb2
+        # note: localhost is the ipv6 localhost ::1
+        # hosts allow = 192.168.0. 127.0.0.1 localhost
+        # hosts deny = 0.0.0.0/0
+        # guest account = nobody
+      };
       home = {
         path = "/home/cameron";
         browseable = "yes";
@@ -68,7 +68,7 @@
 
 
   # ----- CLIENT SIDE CIFS CONFIG -----
-  # This is a mount for the client-side (if you wanted to connect a server's fileshare to this machine)
+  # This is a mount for the client-side (if you wanted to connect a client to these fileshares)
   # environment.systemPackages = [ pkgs.cifs-utils ];
 
   # fileSystems."/mnt/storage" = {

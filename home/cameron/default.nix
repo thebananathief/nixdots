@@ -1,13 +1,12 @@
 { pkgs, lib, inputs, globalFonts, ... }: rec {
   imports = [
-    ./xdg.nix
-    ./git.nix
-    ./alacritty.nix
-    ./zsh.nix
-    # ./hyprland.nix
+    ./shell
     # ./sway.nix
-    ./packages.nix
+    ./userpackages.nix
+
+    # ./hyprland
     # ./theme.nix
+    # ./gnome-theme.nix
   ];
 
   home.username = "cameron";
@@ -36,10 +35,6 @@
     # Also makes a lot of electron apps use wayland
     NIXOS_OZONE_WL = "1";
     # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
-  };
-
-  dconf.settings = {
-    "org/cinnamon/desktop/applications/terminal".exec = "alacritty";
   };
 
   gtk = {

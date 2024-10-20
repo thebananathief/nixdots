@@ -4,17 +4,17 @@
     nixos-hardware.nixosModules.common-hidpi
     sops-nix.nixosModules.sops
     ./hardware-configuration.nix
-    # ./precommit.nix
     ../../modules/packages.nix
     # ../../modules/network-mount.nix
-    # ../../modules/games.nix
+    ../../modules/games.nix
+    # ../../modules/test-containers.nix
     ../../modules/desktop
   ];
 
   boot.supportedFilesystems = [
     "ext4"
     # "btrfs"
-    "xfs"
+    # "xfs"
     "ntfs"
     "fat"
     # "vfat"
@@ -80,12 +80,6 @@
     pulse.enable = true;
     # jack.enable = true;
   };
-
-  # Allow pam login via fingerprint reader
-  security.pam.services.login.fprintAuth = true;
-  security.pam.services.login.nodelay = true; # may be unsafe because of no delays for brute-force attacks
-  # and unix
-  security.pam.services.login.unixAuth = true;
 
   # Power saving profile
   # Consider upower instead

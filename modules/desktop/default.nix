@@ -1,11 +1,14 @@
 { pkgs, ... }: {
   imports = [
     ./plasma.nix # includes games
+    ./gui-apps.nix
     # ./gnome.nix
-    # ./hyprland.nix
     # ./cinnamon.nix
     # ./sway.nix
     # ./xfce.nix
+    # ./cosmic.nix
+    # ./hyprland.nix
+
     ../fonts.nix
   ];
 
@@ -24,11 +27,5 @@
       accelSpeed = "0.0";
       naturalScrolling = false;
     };
-  };
-  services.xserver = {
-    enable = true;
-    xkb.layout = "us";
-    xkb.variant = "";
-    # excludePackages = [ pkgs.xterm ];
   };
 }

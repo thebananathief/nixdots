@@ -1,26 +1,45 @@
 #!/usr/bin/env sh
 set -e
 
+__skip_git_sync=0
+
 # cd $HOME/github/nixdots
-cd "$(dirname "$0")"
+# cd "$(dirname "$0")"
 
-if [ $# -eq 0 ]; then
-  args="switch"
-else
-  args="$@"
+function do_rebuild() {
+  # Will error early if our nix code is bad
+  nix flake check
+
+  old=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
+
+  if [[ $__skip_git_sync -eq 0 ]]; then
+    ./git-sync sync "changes from $(uname -n)-gen$old on $(date '+%Y-%m-%d %H:%M:%S %Z')"
+  fi
+
+  sudo nixos-rebuild --flake '.#' "$1" --accept-flake-config --show-trace
+  # --show-trace --option eval-cache false
+
+  current=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
+  echo
+  echo "--- Generation $old -> $current ---"
+}
+
+while [[ $# -gt 0 ]]; do
+    key="$1"
+    
+    case $key in
+        -s | --skip-git-sync)
+            __skip_git_sync=1
+            shift
+        ;;
+        *)
+            "do_rebuild" "$@"
+            exit $?
+        ;;
+    esac
+done
+
+# If no arguments, default to switch
+if [[ $# -eq 0 ]]; then
+  "do_rebuild" "switch"
 fi
-
-old=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
-echo "---- OLD GENERATION $old ----"
-# autocommit, ignore errors
-git add . && git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z') gen $old" || true
-# sync up
-git pull
-git push
-
-sudo nixos-rebuild --flake '.#' "$args" --accept-flake-config --show-trace
-# --show-trace --option eval-cache false
-
-current=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
-echo
-echo "Generation $old -> $current"

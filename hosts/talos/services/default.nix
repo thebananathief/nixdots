@@ -4,14 +4,15 @@ let
   inherit (config.sops) secrets;
 in {
   imports = [
-    # ./monitoring.nix
     # ./castopod.nix
     # ./voiceserver.nix
     # ./minecraft.nix
     # ./gameserver.nix
     # ./immich.nix
     # ./ttrss.nix
+    # ./whoogle.nix
 
+    ./monitoring.nix
     ./gitea.nix
     ./mediaserver.nix
     ./webtrees.nix
@@ -54,7 +55,7 @@ in {
     # adminer = {
     #   image = "adminer"; # https://hub.docker.com/_/adminer
     #   ports = [ "8085:8080" ];
-    #   extraOptions = [ 
+    #   extraOptions = [
     #   #   "--network=immich"
     #   #   "--network=ttrss"
     #     "--network=webtrees"

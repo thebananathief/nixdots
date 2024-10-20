@@ -2,10 +2,21 @@
   home.packages = with pkgs; [
     # forge-mtg
     vscode-fhs
-    pre-commit
+    mysql-shell
     # mcrcon # minecraft rcon client
     # moonlight-qt
     # gramps
     # tesseract
+    dbeaver-bin
+    spicetify-cli
+
+    audacity
+    obsidian
+    localsend
+    # webcord
+    armcord
+    # discord
+    bitwarden
+    spotify
   ];
 }

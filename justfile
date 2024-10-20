@@ -18,7 +18,7 @@ install:
 
 [linux]
 up:
-  -git add --all
+  -git add .
   -git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')"
   -git push
 
@@ -45,14 +45,14 @@ alias rs := rswitch
 # git commit all and push, then remotely rebuild switch talos
 [windows]
 rswitch *args:
-  -git add --all
+  -git add .
   -git commit -m "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') EST"
   -git push
   ssh talos -- ~/github/nixdots/nixos-rebuild switch {{args}}
 # git commit all and push, then remotely rebuild switch talos
 [linux]
 rswitch *args:
-  -git add --all
+  -git add .
   -git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')"
   -git push
   ssh talos -- ~/github/nixdots/nixos-rebuild switch {{args}}
@@ -61,18 +61,18 @@ alias rb := rboot
 # git commit all and push, then remotely rebuild switch talos
 [windows]
 rboot *args:
-  -git add --all
+  -git add .
   -git commit -m "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') EST"
   -git push
   ssh talos -- ~/github/nixdots/nixos-rebuild boot {{args}}
 # git commit all and push, then remotely rebuild switch talos
 [linux]
 rboot *args:
-  -git add --all
+  -git add .
   -git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')"
   -git push
   ssh talos -- ~/github/nixdots/nixos-rebuild boot {{args}}
-  
+
 # updates the flake's package versions, so that we pull new package updates (is that wrong?)
 [linux]
 update:

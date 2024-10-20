@@ -9,24 +9,24 @@
   };
   environment.systemPackages = with pkgs; [
     steam-run
-    duckstation
+    # duckstation
     prismlauncher
-    protonup-qt
-    protontricks
+    # protonup-qt
+    # protontricks
     bottles
-    wine
-    gamemode
+    # wine
+    # gamemode
     # (callPackage ../packages/mtg-forge/default.nix {})
     forge-mtg
     #gamescope
-    (lutris.override {
-      extraLibraries = pkgs: [
+    # (lutris.override {
+    #   extraLibraries = pkgs: [
       
-      ];
-      extraPkgs = pkgs: [
-        # p.libnghttp2
-      ];
-    })
+    #   ];
+    #   extraPkgs = pkgs: [
+    #     # p.libnghttp2
+    #   ];
+    # })
   ];
 }
 

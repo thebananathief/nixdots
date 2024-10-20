@@ -1,7 +1,7 @@
 { pkgs, lib, inputs, ... }: rec {
   imports = [
-    ../cameron/zsh.nix
-    ../cameron/git.nix
+    ../cameron/shell/zsh.nix
+    ../cameron/shell/git.nix
   ];
 
   home = {
