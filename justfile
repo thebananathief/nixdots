@@ -10,6 +10,13 @@ alias run2 := rswitch
 @default:
   just --list
 
+[windows]
+sync:
+  -git add .
+  -git commit -m "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') EST"
+  -git pull
+  -git push
+
 # links the flake.nix to one in /etc/nixos, then rebuild switches
 [linux]
 install:

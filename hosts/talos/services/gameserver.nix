@@ -15,7 +15,7 @@ in {
   virtualisation.oci-containers.containers = {
     kf2 = {
       image = "kr0nus/kf2server:latest";
-      volumes = [ "${ cfg.gameserverDir }/kf2:/data" ];
+      volumes = [ "${ gameserverDir }/kf2:/data" ];
       ports = [
         "27015:27015/udp"
         "20560:20560/udp"
@@ -38,16 +38,16 @@ in {
       # image = "ceifa/garrysmod:debian"; # https://hub.docker.com/r/ceifa/garrysmod
       # volumes = [
       # Leaving base assets within container, binding the ones we need to be editable
-        # "${ cfg.gameserverDir }/gmod/addons:/home/gmod/server/garrysmod/addons"
-        # "${ cfg.gameserverDir }/gmod/gamemodes:/home/gmod/server/garrysmod/gamemodes"
-        # "${ cfg.gameserverDir }/gmod/data:/home/gmod/server/garrysmod/data"
-        # "${ cfg.gameserverDir }/gmod/cache:/home/gmod/server/garrysmod/cache"
-        # "${ cfg.gameserverDir }/gmod/maps:/home/gmod/server/garrysmod/maps"
-        # "${ cfg.gameserverDir }/gmod/download:/home/gmod/server/garrysmod/download"
-        # "${ cfg.gameserverDir }/gmod/downloadlists:/home/gmod/server/garrysmod/downloadlists"
-        # "${ cfg.gameserverDir }/gmod/cfg/server.cfg:/home/gmod/server/garrysmod/cfg/server.cfg"
-        # "${ cfg.gameserverDir }/gmod/sv.db:/home/gmod/server/garrysmod/sv.db"
-        # "${ cfg.gameserverDir }/gmod:/home/gmod/server/garrysmod"
+        # "${ gameserverDir }/gmod/addons:/home/gmod/server/garrysmod/addons"
+        # "${ gameserverDir }/gmod/gamemodes:/home/gmod/server/garrysmod/gamemodes"
+        # "${ gameserverDir }/gmod/data:/home/gmod/server/garrysmod/data"
+        # "${ gameserverDir }/gmod/cache:/home/gmod/server/garrysmod/cache"
+        # "${ gameserverDir }/gmod/maps:/home/gmod/server/garrysmod/maps"
+        # "${ gameserverDir }/gmod/download:/home/gmod/server/garrysmod/download"
+        # "${ gameserverDir }/gmod/downloadlists:/home/gmod/server/garrysmod/downloadlists"
+        # "${ gameserverDir }/gmod/cfg/server.cfg:/home/gmod/server/garrysmod/cfg/server.cfg"
+        # "${ gameserverDir }/gmod/sv.db:/home/gmod/server/garrysmod/sv.db"
+        # "${ gameserverDir }/gmod:/home/gmod/server/garrysmod"
       # ];
       # ports = [
       #   "27015:27015"
@@ -73,8 +73,8 @@ in {
     # pufferpanel = {
     #   image = "pufferpanel/pufferpanel:latest";
     #   volumes = [
-    #     "${ cfg.gameserverDir }/pufferpanel/config:/etc/pufferpanel"
-    #     "${ cfg.gameserverDir }/pufferpanel/data:/var/lib/pufferpanel"
+    #     "${ gameserverDir }/pufferpanel/config:/etc/pufferpanel"
+    #     "${ gameserverDir }/pufferpanel/data:/var/lib/pufferpanel"
     #     "/var/run/docker.sock:/var/run/docker.sock"
     #   ];
     #   # ports = [
