@@ -7,14 +7,15 @@ cd $HOME/github/nixdots
 # cd "$(dirname "$0")"
 
 function do_rebuild() {
+  if [[ $__skip_git_sync -eq 0 ]]; then
+    ./git-sync sync "changes from $(uname -n)-gen$old on $(date '+%Y-%m-%d %H:%M:%S %Z')"
+  fi
+  
   # Will error early if our nix code is bad
   nix flake check
 
   old=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
 
-  if [[ $__skip_git_sync -eq 0 ]]; then
-    ./git-sync sync "changes from $(uname -n)-gen$old on $(date '+%Y-%m-%d %H:%M:%S %Z')"
-  fi
 
   sudo nixos-rebuild --flake '.#' "$1" --accept-flake-config --show-trace
   # --show-trace --option eval-cache false
