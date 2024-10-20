@@ -23,8 +23,8 @@ in {
         "8012:8080/tcp"
       ];
       environment = {
-        # KF2_OPTS = "KF-BurningParis?Game=ZedternalReborn.WMGameInfo_Endless?difficulty=1";
-        KF2_OPTS = "KF-BurningParis?Game=KFGameContent.KFGameInfo_Endless?difficulty=1";
+        KF2_OPTS = "KF-BurningParis?Game=ZedternalReborn.WMGameInfo_Endless?difficulty=1";
+        # KF2_OPTS = "KF-BurningParis?Game=KFGameContent.KFGameInfo_Endless?difficulty=1";
       };
       # extraOptions = [
       #   "--ip=172.17.0.7"
