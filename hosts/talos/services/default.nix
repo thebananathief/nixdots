@@ -7,12 +7,12 @@ in {
     # ./castopod.nix
     # ./voiceserver.nix
     # ./minecraft.nix
-    # ./gameserver.nix
     # ./immich.nix
     # ./ttrss.nix
     # ./whoogle.nix
 
     ./monitoring.nix
+    ./gameserver.nix
     ./gitea.nix
     ./mediaserver.nix
     ./webtrees.nix
