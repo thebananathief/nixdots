@@ -2,6 +2,7 @@
 let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
+  gameserverDir = "/mnt/ssd/gameservers";
 in {
 
   sops.secrets = {

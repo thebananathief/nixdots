@@ -7,6 +7,7 @@ let
     PGID = "131"; # docker
     TZ = config.time.timeZone;
   };
+  downloadDir = "/mnt/disk3/downloads";
 in {
   users.groups.mediaserver = {};
   users.users.mediaserver = {
@@ -216,8 +217,8 @@ in {
       image = "lscr.io/linuxserver/transmission:latest";
       volumes = [
         "${cfg.dataDir}/transmission:/config"
-        "${cfg.downloadDir}:/downloads:rw"
-        # "${cfg.downloadDir}/watch:/watch" # TODO: Adjust this to a torrent blackhole
+        "${downloadDir}:/downloads:rw"
+        # "${downloadDir}/watch:/watch" # TODO: Adjust this to a torrent blackhole
       ];
       environment = mediaserver_env;
       # This uses the gluetun network stack so that its behind VPN
