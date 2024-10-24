@@ -13,23 +13,23 @@ in {
   };
 
   virtualisation.oci-containers.containers = {
-    # kf2 = {
-    #   image = "kr0nus/kf2server:latest";
-    #   volumes = [ "${ gameserverDir }/kf2:/data" ];
-    #   ports = [
-    #     "27015:27015/udp"
-    #     "20560:20560/udp"
-    #     "7777:7777/udp"
-    #     "8012:8080/tcp"
-    #   ];
-    #   environment = {
-    #     KF2_OPTS = "KF-BurningParis?Game=ZedternalReborn.WMGameInfo_Endless?difficulty=1";
-    #     # KF2_OPTS = "KF-BurningParis?Game=KFGameContent.KFGameInfo_Endless?difficulty=1";
-    #   };
-    #   # extraOptions = [
-    #   #   "--ip=172.17.0.7"
-    #   # ];
-    # };
+    kf2 = {
+      image = "kr0nus/kf2server:latest";
+      volumes = [ "${ gameserverDir }/kf2:/data" ];
+      ports = [
+        "27015:27015/udp"
+        "20560:20560/udp"
+        "7777:7777/udp"
+        "8012:8080/tcp"
+      ];
+      environment = {
+        KF2_OPTS = "KF-BurningParis?Game=ZedternalReborn.WMGameInfo_Endless?difficulty=1?Multihome=192.168.0.12";
+        # KF2_OPTS = "KF-BurningParis?Game=KFGameContent.KFGameInfo_Endless?difficulty=1";
+      };
+      # extraOptions = [
+      #   "--ip=172.17.0.7"
+      # ];
+    };
     
     # gmod = {
     #   image = "gameservermanagers/gameserver:gmod";
