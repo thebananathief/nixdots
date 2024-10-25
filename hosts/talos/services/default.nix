@@ -15,7 +15,8 @@ in {
     ./gameserver.nix
     ./gitea.nix
     ./mediaserver.nix
-    ./webtrees.nix
+    # ./webtrees.nix
+    ./syncthing.nix
     ./reverse-proxy.nix
   ];
 
