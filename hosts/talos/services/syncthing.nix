@@ -12,6 +12,10 @@ in {
   # Don't create default ~/Sync folder
   systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true";
 
+  users.groups.users.members = [
+    "syncthing"
+  ]
+
   services.syncthing = {
     enable = true;
     openDefaultPorts = true;
