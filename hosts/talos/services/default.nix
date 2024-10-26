@@ -16,7 +16,7 @@ in {
     ./gitea.nix
     ./mediaserver.nix
     # ./webtrees.nix
-    ./syncthing.nix
+    # ./syncthing.nix
     ./reverse-proxy.nix
   ];
 

@@ -12,20 +12,23 @@ in {
   # Don't create default ~/Sync folder
   systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true";
 
-  users.groups.users.members = [
-    "syncthing"
-  ];
+  # users.users.syncthing.extraGroups = [ "users" ];
+  # users.users.cameron.extraGroups = [ "syncthing" ];
+  # systemd.services.syncthing.serviceConfig.UMask = "0007";
+  # systemd.tmpfiles.rules = [
+  #   "d /home/cameron 0750 cameron syncthing"
+  # ];
 
   services.syncthing = {
     enable = true;
     openDefaultPorts = true;
     settings = {
-      gui = {
+      # gui = {
         # enabled = true;
       #   user = "myuser";
       #   password = "mypassword";
-        theme = "black";
-      };
+      #   theme = "black";
+      # };
       listenAddresses = [
         # "default"
         "tcp4://100.64.252.67:22000"
@@ -53,7 +56,7 @@ in {
           path = "/home/cameron/Syncthing";
           devices = [ "thoth" ];
           # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
-          # ignorePerms = false;
+          ignorePerms = false;
           # Tries to copy file/folder ownership from the parent directory
           # copyOwnershipFromParent = true;
           order = "random";
