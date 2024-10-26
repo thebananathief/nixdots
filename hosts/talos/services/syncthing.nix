@@ -51,7 +51,7 @@ in {
           # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           # ignorePerms = false;
           # Tries to copy file/folder ownership from the parent directory
-          copyOwnershipFromParent = true;
+          # copyOwnershipFromParent = true;
           order = "random";
           versioning = {
             type = "trashcan";
