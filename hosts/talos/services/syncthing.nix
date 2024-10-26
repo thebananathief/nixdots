@@ -14,7 +14,7 @@ in {
 
   users.groups.users.members = [
     "syncthing"
-  ]
+  ];
 
   services.syncthing = {
     enable = true;
