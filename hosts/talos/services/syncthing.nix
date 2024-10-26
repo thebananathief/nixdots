@@ -16,10 +16,23 @@ in {
     enable = true;
     openDefaultPorts = true;
     settings = {
-      # gui = {
+      gui = {
+        # enabled = true;
       #   user = "myuser";
       #   password = "mypassword";
-      # };
+        theme = "black";
+      };
+      listenAddresses = [
+        # "default"
+        "tcp4://100.64.252.67:22000"
+        "quic4://100.64.252.67:22000"
+        "tcp6://[fd7a:115c:a1e0::9f40:fc43]:22000"
+        "quic6://[fd7a:115c:a1e0::9f40:fc43]:22000"
+      ];
+      minHomeDiskFree = {
+        unit = "%";
+        value = 1;
+      };
       devices = {
         "thoth" = { 
           id = "FL4PA2C-TU7WRKX-3CWOYAX-XCL3H7R-B56JGRM-6QRUG5S-DS45SX5-MXB5NA3"; 
@@ -39,6 +52,7 @@ in {
           # ignorePerms = false;
           # Tries to copy file/folder ownership from the parent directory
           copyOwnershipFromParent = true;
+          order = "random";
           versioning = {
             type = "trashcan";
             params = {
