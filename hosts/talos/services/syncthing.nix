@@ -66,7 +66,7 @@ in {
         };
       };
     };
-    key = "${/appdata/certs/syncthing/key.pem}";
-    cert = "${/appdata/certs/syncthing/cert.pem}";
+    key = "/appdata/certs/syncthing/key.pem";
+    cert = "/appdata/certs/syncthing/cert.pem";
   };
 }
