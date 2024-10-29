@@ -242,6 +242,7 @@ in {
     '';
   };
 
+  # For quicksync transcoding
   hardware.graphics = {
     enable = true;
     # enable32Bit = true;

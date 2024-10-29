@@ -1,6 +1,10 @@
 { config, lib, ... }: {
   options = with lib; {
     myOptions = {
+      graphics.enable = mkEnableOption "Enable graphics";
+      gestures.enable = mkEnableOption "Enable gestures";
+      networkShares.enable = mkEnableOption "enable network shares";
+
       containers = {
         dataDir = mkOption {
           type = types.str;
