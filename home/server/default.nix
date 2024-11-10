@@ -48,7 +48,7 @@
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
-      icons = false;
+      icons = null;
       extraOptions = [
         "--all"
         "--color=always"

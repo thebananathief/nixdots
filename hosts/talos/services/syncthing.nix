@@ -18,6 +18,9 @@ in {
   # systemd.tmpfiles.rules = [
   #   "d /home/cameron 0750 cameron syncthing"
   # ];
+  users.groups.users.members = [
+    "syncthing"
+  ];
 
   services.syncthing = {
     enable = true;

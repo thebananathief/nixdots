@@ -1,16 +1,16 @@
 { globalFonts, ... }:
 let
-  theme = builtins.fetchurl {
-    url = "https://raw.githubusercontent.com/catppuccin/alacritty/main/catppuccin-mocha.toml";
-    sha256 = "1rnc6gsqjdvkb6xbv1pnawrp6f0j5770dqml2di90j3lhv0fppgw";
-  };
+#  theme = builtins.fetchurl {
+#    url = "https://raw.githubusercontent.com/catppuccin/alacritty/main/catppuccin-mocha.toml";
+#    sha256 = "1rnc6gsqjdvkb6xbv1pnawrp6f0j5770dqml2di90j3lhv0fppgw";
+#  };
 in {
   programs.alacritty = {
     enable = true;
     settings = {
-      "import" = [
-        theme
-      ];
+#      "import" = [
+#        theme
+#      ];
       font = let family = globalFonts.monospace;
       in {
         size = 9;

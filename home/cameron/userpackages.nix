@@ -14,7 +14,7 @@
     obsidian
     localsend
     # webcord
-    armcord
+    # legcord
     # discord
     bitwarden
     spotify
