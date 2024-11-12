@@ -53,7 +53,6 @@
     # Yazi previewers
     unar
     ffmpegthumbnailer
-    jq
     poppler
   ];
 

@@ -70,7 +70,7 @@
     nettools dig lsof
     ethtool lm_sensors pciutils
     zellij neofetch bottom
-    bat dua tree
+    bat dua tree jq duf
     dos2unix tldr just
     age sops
     nurl

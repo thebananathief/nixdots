@@ -17,6 +17,9 @@ in {
   services.caddy = {
     enable = true;
     email = useremail;
+    globalConfig = ''
+      acme_dns cloudflare {env.CLOUDFLARE_DNS_API_TOKEN}
+    '';
     # virtualHosts = {
     #   # Static fileserver and interactive filebrowser
     #   "files.${ config.networking.fqdn }".extraConfig = ''
