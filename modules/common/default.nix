@@ -70,10 +70,12 @@
     nettools dig lsof
     ethtool lm_sensors pciutils
     zellij neofetch bottom
-    tailspin bat dua tree
+    bat dua tree
     dos2unix tldr just
     age sops
     nurl
+
+    # tailspin
 
     # intel-gpu-tools
     # dnsutils
