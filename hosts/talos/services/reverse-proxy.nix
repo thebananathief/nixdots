@@ -3,6 +3,13 @@ let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
 in {
+  sops.secrets = {
+    "cloudflare.env" = {
+      group = config.services.caddy.group;
+      mode = "0440";
+    };
+  };
+
   # Allow traffic in through HTTP and HTTPS ports,
   # caddy will handle it afterwards.
   networking.firewall.enable = true;
@@ -18,4 +25,20 @@ in {
     #   '';
     # };
   };
+  
+  # security.acme = {
+  #   acceptTerms = true;
+  #   defaults.email = useremail;
+
+  #   certs."talos.host" = {
+  #     group = config.services.caddy.group;
+
+  #     domain = "talos.host";
+  #     extraDomainNames = [ "*.talos.host" ];
+  #     dnsProvider = "cloudflare";
+  #     dnsResolver = "1.1.1.1:53";
+  #     dnsPropagationCheck = true;
+  #     environmentFile = secrets."cloudflare.env".path;
+  #   };
+  # };
 }

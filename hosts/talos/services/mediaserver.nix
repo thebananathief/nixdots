@@ -229,15 +229,15 @@ in {
 
   services.caddy.virtualHosts = {
     # Jellyseerr
-    "request.talos.host".extraConfig = ''
+    "request.${ config.networking.fqdn }".extraConfig = ''
       reverse_proxy localhost:8005
     '';
     # Jellyfin
-    "watch.talos.host".extraConfig = ''
+    "watch.${ config.networking.fqdn }".extraConfig = ''
       reverse_proxy localhost:8096
     '';
     # Audiobookshelf
-    "books.talos.host".extraConfig = ''
+    "books.${ config.networking.fqdn }".extraConfig = ''
       reverse_proxy localhost:8009
     '';
   };
