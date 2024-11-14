@@ -21,7 +21,7 @@ in {
   services.caddy = {
     enable = true;
     email = useremail;
-    package = (pkgs.callPackage ../../packages/custom-caddy.nix {
+    package = (pkgs.callPackage ../../../packages/custom-caddy.nix {
       plugins = [ "github.com/caddy-dns/cloudflare" ];
     });
     globalConfig = ''
