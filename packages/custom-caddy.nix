@@ -5,7 +5,7 @@
 stdenv.mkDerivation rec {
   pname = "caddy";
   # https://github.com/NixOS/nixpkgs/issues/113520
-  version = "latest";
+  version = "2.8.4";
   dontUnpack = true;
 
   nativeBuildInputs = [ pkgs.git pkgs.go pkgs.xcaddy ];
@@ -20,10 +20,9 @@ stdenv.mkDerivation rec {
       pluginArgs =
         lib.concatMapStringsSep " " (plugin: "--with ${plugin}") plugins;
     in
-      # ${pkgs.xcaddy}/bin/xcaddy build "v${version}" ${pluginArgs}
     ''
       runHook preBuild
-      ${pkgs.xcaddy}/bin/xcaddy build latest ${pluginArgs}
+      ${pkgs.xcaddy}/bin/xcaddy build "v${version}" ${pluginArgs}
       runHook postBuild
     '';
 
