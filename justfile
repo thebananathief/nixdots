@@ -52,9 +52,7 @@ alias rs := rswitch
 # git commit all and push, then remotely rebuild switch talos
 [windows]
 rswitch *args:
-  -git add .
-  -git commit -m "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') EST"
-  -git push
+  ./git-sync.ps1
   ssh talos -- ~/github/nixdots/nixos-rebuild switch {{args}}
 # git commit all and push, then remotely rebuild switch talos
 [linux]
