@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
     in
     ''
       runHook preBuild
-      ${pkgs.xcaddy}/bin/xcaddy build "v${version}" ${pluginArgs}
+      ${pkgs.xcaddy}/bin/xcaddy build latest ${pluginArgs}
       runHook postBuild
     '';
 
