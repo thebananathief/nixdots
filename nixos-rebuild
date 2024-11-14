@@ -8,6 +8,7 @@ cd $HOME/github/nixdots
 function do_rebuild() {
   old=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
 
+  # We need to sync git before the flake check - a nix error could prevent git sync from running
   if [[ $__skip_git_sync -eq 0 ]]; then
     ./git-sync sync "changes from $(uname -n)-gen$old on $(date '+%Y-%m-%d %H:%M:%S %Z')"
   fi
