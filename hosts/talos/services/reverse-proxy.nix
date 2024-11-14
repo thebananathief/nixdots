@@ -21,9 +21,12 @@ in {
   services.caddy = {
     enable = true;
     email = useremail;
-    # globalConfig = ''
-    #   acme_dns cloudflare /run/secrets/cloudflare_api
-    # '';
+    package = (pkgs.callPackage ../../packages/custom-caddy.nix {
+      plugins = [ "github.com/caddy-dns/cloudflare" ];
+    });
+    globalConfig = ''
+      acme_dns cloudflare /run/secrets/cloudflare_api
+    '';
       # acme_dns cloudflare {env.CLOUDFLARE_DNS_API_TOKEN}
     # virtualHosts = {
     #   # Static fileserver and interactive filebrowser
