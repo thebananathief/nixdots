@@ -1,4 +1,4 @@
-{ config, useremail, ... }:
+{ config, useremail, pkgs, ... }:
 let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
