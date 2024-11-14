@@ -20,9 +20,10 @@ stdenv.mkDerivation rec {
       pluginArgs =
         lib.concatMapStringsSep " " (plugin: "--with ${plugin}") plugins;
     in
+      # ${pkgs.xcaddy}/bin/xcaddy build "v${version}" ${pluginArgs}
     ''
       runHook preBuild
-      ${pkgs.xcaddy}/bin/xcaddy build "v${version}" ${pluginArgs}
+      ${pkgs.xcaddy}/bin/xcaddy build latest ${pluginArgs}
       runHook postBuild
     '';
 
