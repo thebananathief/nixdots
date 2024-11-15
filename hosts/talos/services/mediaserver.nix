@@ -231,14 +231,17 @@ in {
     # Jellyseerr
     "request.${ config.networking.fqdn }".extraConfig = ''
       reverse_proxy localhost:8005
+      tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';
     # Jellyfin
     "watch.${ config.networking.fqdn }".extraConfig = ''
       reverse_proxy localhost:8096
+      tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';
     # Audiobookshelf
     "books.${ config.networking.fqdn }".extraConfig = ''
       reverse_proxy localhost:8009
+      tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';
   };
 
