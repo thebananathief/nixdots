@@ -18,12 +18,6 @@ in {
   };
 
   services = {
-    # plex = {
-    #   enable = true;
-    #   openFirewall = true;
-    #   user = "mediaserver";
-    #   group = "mediaserver";
-    # };
     jellyfin = {
       enable = true;
       openFirewall = true;
@@ -66,24 +60,6 @@ in {
 
   virtualisation.oci-containers.containers = {
     # Media players
-    # plex = {
-    #   image = "lscro.io/linuxserver/plex:latest"; # https://hub.docker.com/r/linuxserver/plex/
-    #   volumes = [
-    #     "${cfg.dataDir}/plex:/config"
-    #     "${cfg.storageDir}/media:/media"
-    #     "/etc/localtime:/etc/localtime:ro"
-    #   ];
-    #   environment =
-    #     {
-    #       PLEX_CLAIM = "nope";
-    #       VERSION = "docker";
-    #     }
-    #     // cfg.common_env;
-    #   extraOptions = [
-    #     "--network=host"
-    #     "--device=/dev/dri:/dev/dri"
-    #   ];
-    # };
     # jellyfin = {
     #   image = "jellyfin/jellyfin";
     #   volumes = [
@@ -110,17 +86,6 @@ in {
     # };
 
     # Media requesters
-    # requestrr = {
-    #   image = "lscr.io/linuxserver/requestrr:latest"; # https://hub.docker.com/r/linuxserver/requestrr
-    #   volumes = [
-    #     "${cfg.dataDir}/requestrr:/config"
-    #   ];
-    #   ports = ["8006:4545"];
-    #   environment = mediaserver_env;
-    #   extraOptions = [
-    #     "--network=media"
-    #   ];
-    # };
     # jellyseerr = {
     #   image = "fallenbagel/jellyseerr:latest";
     #   volumes = [
