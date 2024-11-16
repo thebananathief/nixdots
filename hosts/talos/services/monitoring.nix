@@ -63,16 +63,6 @@ in {
     #     "--device=/dev/sdd"
     #   ];
     # };
-    librespeed = {
-      image = "lscr.io/linuxserver/librespeed:latest";
-      volumes = [
-        "${ cfg.dataDir }/librespeed:/config"
-      ];
-      environment = {
-        PASSWORD = "PASSWORD";
-      } // cfg.common_env;
-      ports = [ "8016:80" ];
-    };
     # smokeping = {
     #   image = "lscr.io/linuxserver/smokeping:latest";
     #   volumes = [

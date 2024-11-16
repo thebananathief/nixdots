@@ -11,12 +11,14 @@ in {
     # ./ttrss.nix
     # ./whoogle.nix
 
-    ./monitoring.nix
-    ./gameserver.nix
-    ./gitea.nix
-    ./mediaserver.nix
+    # ./monitoring.nix
+    # ./gameserver.nix
     # ./webtrees.nix
     # ./syncthing.nix
+    ./librespeed.nix
+    ./gitea.nix
+    ./mediaserver.nix
+    ./etherpad.nix
     ./reverse-proxy.nix
   ];
 
