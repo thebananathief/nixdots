@@ -1,14 +1,14 @@
 { config, ... }:
 let
   cfg = config.myOptions.containers;
-  inherit (config.sops) secrets;
+  # inherit (config.sops) secrets;
 in {
-  sops.secrets = {
-    "postgres-etherpad.env" = {
-      group = config.virtualisation.oci-containers.backend;
-      mode = "0440";
-    };
-  };
+  # sops.secrets = {
+  #   "postgres-etherpad.env" = {
+  #     group = config.virtualisation.oci-containers.backend;
+  #     mode = "0440";
+  #   };
+  # };
 
   virtualisation.oci-containers.containers = {
     etherpad = {
@@ -21,9 +21,9 @@ in {
       ports = [
         "9001:9001"
       ];
-      environmentFiles = [
-        secrets."postgres-etherpad.env".path # DB_PASS
-      ];
+      # environmentFiles = [
+      #   secrets."postgres-etherpad.env".path # DB_PASS
+      # ];
       environment = {
         NODE_ENV = "production";
         ADMIN_PASSWORD = "admin";
@@ -54,9 +54,9 @@ in {
         "${ cfg.dataDir }/etherpad-postgres/data/:/var/lib/postgresql/data" 
       ];
       # ports = [ "5432:5432" ];
-      environmentFiles = [
-        secrets."postgres-etherpad.env".path # POSTGRES_PASSWORD
-      ];
+      # environmentFiles = [
+      #   secrets."postgres-etherpad.env".path # POSTGRES_PASSWORD
+      # ];
       environment = {
         POSTGRES_DB = "etherpad";
         POSTGRES_PASSWORD = "admin";
