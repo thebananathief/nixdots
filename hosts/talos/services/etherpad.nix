@@ -42,7 +42,7 @@ in {
       } // cfg.common_env;
       extraOptions = [
         "--network=etherpad"
-        "--tty"
+        # "--tty"
         "--interactive"
       ];
       dependsOn = [ "etherpad-postgres" ];

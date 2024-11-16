@@ -110,17 +110,17 @@ in {
     # };
 
     # Media requesters
-    requestrr = {
-      image = "lscr.io/linuxserver/requestrr:latest"; # https://hub.docker.com/r/linuxserver/requestrr
-      volumes = [
-        "${cfg.dataDir}/requestrr:/config"
-      ];
-      ports = ["8006:4545"];
-      environment = mediaserver_env;
-      extraOptions = [
-        "--network=media"
-      ];
-    };
+    # requestrr = {
+    #   image = "lscr.io/linuxserver/requestrr:latest"; # https://hub.docker.com/r/linuxserver/requestrr
+    #   volumes = [
+    #     "${cfg.dataDir}/requestrr:/config"
+    #   ];
+    #   ports = ["8006:4545"];
+    #   environment = mediaserver_env;
+    #   extraOptions = [
+    #     "--network=media"
+    #   ];
+    # };
     # jellyseerr = {
     #   image = "fallenbagel/jellyseerr:latest";
     #   volumes = [
