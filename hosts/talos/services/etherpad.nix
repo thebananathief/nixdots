@@ -26,7 +26,7 @@ in {
       ];
       environment = {
         NODE_ENV = "production";
-        ADMIN_PASSWORD = "admin"
+        ADMIN_PASSWORD = "admin";
         DB_CHARSET = "utf8mb4";
         DB_HOST = "etherpad-postgres";
         DB_NAME = "etherpad";
