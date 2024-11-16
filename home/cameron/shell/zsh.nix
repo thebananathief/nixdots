@@ -17,7 +17,6 @@
           "sudo"
           "fzf"
           "zoxide"
-          "fast-syntax-highlighting"
         ];
       };
       syntaxHighlighting.enable = true;
