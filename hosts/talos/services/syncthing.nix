@@ -10,7 +10,12 @@ in {
   # };
 
   # Don't create default ~/Sync folder
-  systemd.services.syncthing.environment.STNODEFAULTFOLDER = "true";
+  systemd.services.syncthing = {
+    environment.STNODEFAULTFOLDER = "true";
+    serviceConfig = {
+      AmbientCapabilities = "CAP_CHOWN";
+    };
+  };
 
   # users.users.syncthing.extraGroups = [ "users" ];
   # users.users.cameron.extraGroups = [ "syncthing" ];
@@ -29,14 +34,13 @@ in {
       #   password = "mypassword";
       #   theme = "black";
       # };
-      listenAddresses = [
-        # "default"
-      # To restrict syncthing to listen on talos' tailscale address only
-        "tcp4://100.64.252.67:22000"
-        "quic4://100.64.252.67:22000"
-        "tcp6://[fd7a:115c:a1e0::9f40:fc43]:22000"
-        "quic6://[fd7a:115c:a1e0::9f40:fc43]:22000"
-      ];
+      # listenAddresses = [
+      #   # "default"
+      #   "tcp4://100.64.252.67:22000"
+      #   "quic4://100.64.252.67:22000"
+      #   "tcp6://[fd7a:115c:a1e0::9f40:fc43]:22000"
+      #   "quic6://[fd7a:115c:a1e0::9f40:fc43]:22000"
+      # ];
       minHomeDiskFree = {
         unit = "%";
         value = 1;
@@ -54,12 +58,13 @@ in {
       folders = {
         "Syncthing" = {
           id = "hzrjk-u4j2p";
-          path = "/var/lib/syncthing/cameron";
+          # path = "/var/lib/syncthing/cameron";
+          path = "/home/cameron/syncthing";
           devices = [ "thoth" ];
           # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
-          ignorePerms = false;
+          # ignorePerms = false;
           # Tries to copy file/folder ownership from the parent directory
-          # copyOwnershipFromParent = true;
+          copyOwnershipFromParent = true;
           order = "random";
           versioning = {
             type = "trashcan";
