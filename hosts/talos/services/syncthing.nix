@@ -12,9 +12,9 @@ in {
   # Don't create default ~/Sync folder
   systemd.services.syncthing = {
     environment.STNODEFAULTFOLDER = "true";
-    serviceConfig = {
-      AmbientCapabilities = "CAP_CHOWN";
-    };
+    # serviceConfig = {
+    #   AmbientCapabilities = "CAP_CHOWN";
+    # };
   };
 
   # users.users.syncthing.extraGroups = [ "users" ];
@@ -58,13 +58,13 @@ in {
       folders = {
         "Syncthing" = {
           id = "hzrjk-u4j2p";
-          # path = "/var/lib/syncthing/cameron";
-          path = "/home/cameron/syncthing";
+          path = "/var/lib/syncthing/cameron";
+          # path = "/home/cameron/syncthing";
           devices = [ "thoth" ];
           # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           # ignorePerms = false;
           # Tries to copy file/folder ownership from the parent directory
-          copyOwnershipFromParent = true;
+          # copyOwnershipFromParent = true;
           order = "random";
           versioning = {
             type = "trashcan";
