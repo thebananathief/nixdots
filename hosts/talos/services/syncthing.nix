@@ -32,13 +32,13 @@ in {
       #   password = "mypassword";
       #   theme = "black";
       # };
-      listenAddresses = [
-        # "default"
-        "tcp4://100.64.252.67:22000"
-        "quic4://100.64.252.67:22000"
-        "tcp6://[fd7a:115c:a1e0::9f40:fc43]:22000"
-        "quic6://[fd7a:115c:a1e0::9f40:fc43]:22000"
-      ];
+      # listenAddresses = [
+      #   # "default"
+      #   "tcp4://100.64.252.67:22000"
+      #   "quic4://100.64.252.67:22000"
+      #   "tcp6://[fd7a:115c:a1e0::9f40:fc43]:22000"
+      #   "quic6://[fd7a:115c:a1e0::9f40:fc43]:22000"
+      # ];
       minHomeDiskFree = {
         unit = "%";
         value = 1;

@@ -14,7 +14,7 @@ in {
     # ./monitoring.nix
     # ./gameserver.nix
     # ./webtrees.nix
-    # ./syncthing.nix
+    ./syncthing.nix
     ./librespeed.nix
     ./gitea.nix
     ./mediaserver.nix
