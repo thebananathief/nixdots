@@ -56,7 +56,7 @@ in {
       folders = {
         "Syncthing" = {
           id = "hzrjk-u4j2p";
-          path = "/home/cameron/Syncthing";
+          path = "/var/lib/syncthing/cameron";
           devices = [ "thoth" ];
           # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           ignorePerms = false;
