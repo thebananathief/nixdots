@@ -18,9 +18,6 @@ in {
   # systemd.tmpfiles.rules = [
   #   "d /home/cameron 0750 cameron syncthing"
   # ];
-  users.groups.users.members = [
-    "syncthing"
-  ];
 
   services.syncthing = {
     enable = true;
@@ -32,13 +29,14 @@ in {
       #   password = "mypassword";
       #   theme = "black";
       # };
-      # listenAddresses = [
-      #   # "default"
-      #   "tcp4://100.64.252.67:22000"
-      #   "quic4://100.64.252.67:22000"
-      #   "tcp6://[fd7a:115c:a1e0::9f40:fc43]:22000"
-      #   "quic6://[fd7a:115c:a1e0::9f40:fc43]:22000"
-      # ];
+      listenAddresses = [
+        # "default"
+      # To restrict syncthing to listen on talos' tailscale address only
+        "tcp4://100.64.252.67:22000"
+        "quic4://100.64.252.67:22000"
+        "tcp6://[fd7a:115c:a1e0::9f40:fc43]:22000"
+        "quic6://[fd7a:115c:a1e0::9f40:fc43]:22000"
+      ];
       minHomeDiskFree = {
         unit = "%";
         value = 1;
