@@ -13,12 +13,12 @@ function do_rebuild() {
     ./git-sync sync "changes from $(uname -n)-gen$old on $(date '+%Y-%m-%d %H:%M:%S %Z')"
   fi
 
-  nix flake check --extra-experimental-features nix-command
+  nix flake check --extra-experimental-features nix-command --extra-experimental-features flakes
   if [[ $? -ne 0 ]]; then
     exit 1
   fi
 
-  sudo nixos-rebuild --flake '.#' "$1" --accept-flake-config --show-trace
+  sudo nixos-rebuild --flake '.#' "$1" --accept-flake-config --show-trace --extra-experimental-features flakes
   # --show-trace --option eval-cache false
   if [[ $? -ne 0 ]]; then
     exit 1
