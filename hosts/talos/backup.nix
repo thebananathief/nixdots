@@ -8,6 +8,7 @@ in {
 
   users.users.restic = {
     isNormalUser = true;
+    description = "System user for transferring backups to icebox via SSH/SFTP";
     # isSystemUser = true;
   };
 
@@ -22,13 +23,13 @@ in {
   sops.secrets.restic_talos_backup = {};
 
   services.restic.backups = {
-    cloud-backup = {
+    icebox-backup = {
       timerConfig = {
         OnCalendar = "Mon..Sat *-*-* 05:00:00";
         Persistent = true;
       };
       user = "restic";
-      repository = "sftp://user@[::1]:2222//srv/restic-repo";
+      repository = "sftp://user@icebox:2222//srv/restic-repo";
       initialize = false;
       passwordFile = secrets.restic_talos_backup.path;
       paths = [ "/mnt/storage/media/family" ];
