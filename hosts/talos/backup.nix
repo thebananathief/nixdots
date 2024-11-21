@@ -20,7 +20,7 @@ in {
     capabilities = "cap_dac_read_search=+ep";
   };
 
-  secrets.restic_talos_backup = {};
+  sops.secrets.restic_talos_backup = {};
 
   services.restic.backups = {
     icebox-backup = {
