@@ -82,6 +82,7 @@ By accessing this system, you agree that your actions may be monitored if unauth
     tailscale = {
       useRoutingFeatures = "server";
       # authKeyFile = config.sops.secrets.tailscale_authkey.path;
+      openFirewall = true; # opens port 41641
     };
   };
 
