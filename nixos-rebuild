@@ -13,7 +13,7 @@ function do_rebuild() {
     ./git-sync sync "changes from $(uname -n)-gen$old on $(date '+%Y-%m-%d %H:%M:%S %Z')"
   fi
 
-  nix flake check
+  nix flake check --extra-experimental-features nix-command
   if [[ $? -ne 0 ]]; then
     exit 1
   fi
