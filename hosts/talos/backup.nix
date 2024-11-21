@@ -29,7 +29,7 @@ in {
       };
       user = "restic";
       repository = "sftp://user@[::1]:2222//srv/restic-repo";
-      initialize = true;
+      initialize = false;
       passwordFile = secrets.restic_talos_backup.path;
       paths = [ "/mnt/storage/media/family" ];
       exclude = [
