@@ -12,5 +12,5 @@ function Invoke-Nixos-Rebuild {
       "talos" {"/home/cameron/github/nixdots"}
       "icebox" {"/etc/nixos/nixdots"}
   }
-  ssh $ComputerName -- "$NixdotsPath/nixos-rebuild" switch
+  ssh $ComputerName -- sudo "$NixdotsPath/nixos-rebuild" switch
 }
