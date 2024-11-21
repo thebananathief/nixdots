@@ -1,7 +1,12 @@
 
 # Obviously we aren't running nixos on windows, but we can initiate rebuilds on remote nixos systems!
 
-function Invoke-Nixos-Rebuild() {
+function Invoke-Nixos-Rebuild($ComputerName) {
   ./git-sync.ps1
-  ssh talos -- ~/github/nixdots/nixos-rebuild switch
+  $NixdotsPath = Switch ($ComputerName)
+  {
+      "talos" {"/home/cameron/github/nixdots"}
+      "icebox" {"/etc/nixos/nixdots"}
+  }
+  ssh $ComputerName -- "$NixdotsPath/nixos-rebuild" switch
 }

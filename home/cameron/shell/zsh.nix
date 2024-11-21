@@ -16,7 +16,7 @@
           "git-auto-fetch"
           "sudo"
           "fzf"
-          "zoxide"
+          "z"
         ];
       };
       syntaxHighlighting.enable = true;
@@ -39,12 +39,6 @@
         # source ~/.config/zsh/fzf/fzf-tab.plugin.zsh
         source ~/.bash_aliases
       '';
-    };
-
-    zoxide = {
-      enable = true;
-      enableBashIntegration = true;
-      enableZshIntegration = true; # i think this is the same as declaring it in ohmyzsh plugins
     };
 
     fzf = {

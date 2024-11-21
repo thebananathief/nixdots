@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }: {
   environment = {
     systemPackages = with pkgs; [
+      helix
+
       fzf
       zsh-fzf-tab
       ripgrep
@@ -51,7 +53,6 @@
           "git-auto-fetch"
           "sudo"
           "fzf"
-          "zoxide"
         ];
       };
       autosuggestions.enable = true;

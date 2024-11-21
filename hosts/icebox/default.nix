@@ -3,6 +3,7 @@
     nixos-hardware.nixosModules.common-cpu-intel
     sops-nix.nixosModules.sops
     ./hardware-configuration.nix
+    ./restic.nix
   ];
 
   networking = {
@@ -41,17 +42,8 @@ By accessing this system, you agree that your actions may be monitored if unauth
 
   sops = {
     defaultSopsFile = ../../secrets.yml;
-    age = {
-      # These should be the paths from (config.services.openssh.hostKeys)
-      sshKeyPaths = [
-        "/etc/ssh/ssh_host_ed25519"
-      ];
-
-      # keyFile technically not used because we're currently
-      # using talos's host key to decrypt secrets
-      # keyFile = "/home/cameron/.config/sops/age/keys.txt";
-      # generateKey = true;
-    };
+    # These should be the paths from (config.services.openssh.hostKeys)
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519" ];
     secrets = {
       # main_user_password = { neededForUsers = true; };
       # ssh_github = {};
@@ -88,6 +80,9 @@ By accessing this system, you agree that your actions may be monitored if unauth
       # authKeyFile = config.sops.secrets.tailscale_authkey.path;
     };
   };
+
+
+
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
