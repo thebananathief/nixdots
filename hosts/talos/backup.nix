@@ -29,7 +29,7 @@ in {
         Persistent = true;
       };
       user = "restic";
-      repository = "sftp://restic@icebox:22//srv/restic-repo";
+      repository = "sftp://restic@icebox.localdomain:22//backups/talos";
       initialize = false;
       passwordFile = secrets.restic_talos_backup.path;
       paths = [ "/mnt/storage/media/family" ];
