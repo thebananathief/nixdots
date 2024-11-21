@@ -1,5 +1,4 @@
-{ pkgs, nixos-hardware, lib, sops-nix, config, username, ... }:
-{
+{ pkgs, nixos-hardware, lib, sops-nix, config, username, ... }: {
   imports = [
     nixos-hardware.nixosModules.common-cpu-intel
     # sops-nix.nixosModules.sops
@@ -109,6 +108,5 @@ By accessing this system, you agree that your actions may be monitored if unauth
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }
 
