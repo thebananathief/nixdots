@@ -3,7 +3,7 @@
 __skip_git_sync=0
 
 # cd $HOME/github/nixdots
-cd "$(dirname "$0")"
+pushd "$(dirname "$0")"
 
 function do_rebuild() {
   old=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
@@ -39,6 +39,7 @@ while [[ $# -gt 0 ]]; do
         ;;
         *)
             "do_rebuild" "$@"
+            popd
             exit $?
         ;;
     esac
@@ -47,4 +48,6 @@ done
 # If no arguments, default to switch
 if [[ $# -eq 0 ]]; then
   "do_rebuild" "switch"
+  popd
+  exit $?
 fi

@@ -49,8 +49,8 @@ By accessing this system, you agree that your actions may be monitored if unauth
 
       # keyFile technically not used because we're currently
       # using talos's host key to decrypt secrets
-      keyFile = "/home/cameron/.config/sops/age/keys.txt";
-      generateKey = true;
+      # keyFile = "/home/cameron/.config/sops/age/keys.txt";
+      # generateKey = true;
     };
     secrets = {
       # main_user_password = { neededForUsers = true; };
