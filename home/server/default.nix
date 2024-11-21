@@ -8,6 +8,10 @@
     username = "cameron";
     # home.homeDirectory = "/home/cameron";
 
+    sessionVariables = {
+      PAGER = "bat -pl man --pager='less -KRF'";
+    };
+
     shellAliases = {
       dtail = "docker logs -tf --tail='50'";
       dstop = "docker stop `docker ps -aq`";

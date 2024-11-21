@@ -10,73 +10,63 @@ alias run2 := rswitch
 @default:
   just --list
 
+
+
+alias s := sync
 [windows]
 sync:
-  -git add .
-  -git commit -m "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') EST"
-  -git pull
-  -git push
-
-# links the flake.nix to one in /etc/nixos, then rebuild switches
+  ./git-sync.ps1
 [linux]
-install:
-  sudo ln -sv '/home/cameron/github/nixdots/flake.nix' '/etc/nixos/flake.nix'
-  ./nixos-rebuild switch
+sync:
+  ./git-sync
 
-[linux]
-up:
-  -git add .
-  -git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')"
-  -git push
+
 
 # remotely links the flake.nix to one in /etc/nixos, then rebuild switches | MUST SPECIFY HOSTNAME TO SSH TO
 [windows]
 rinstall host:
   ssh {{host}} -- ~/github/nixdots/nixos-rebuild switch
-# remotely links the flake.nix to one in /etc/nixos, then rebuild switches | MUST SPECIFY HOSTNAME TO SSH TO
 [linux]
 rinstall host:
   ssh {{host}} -- ~/github/nixdots/nixos-rebuild switch
 
-alias s := switch
+
+
+alias sw := switch
 # git commit all and push, then remotely rebuild switch talos
 [windows]
 switch *args:
   just rswitch {{args}}
-# git commit all and push, then rebuild switch
 [linux]
 switch *args:
   ./nixos-rebuild switch {{args}}
 
+
+
 alias rs := rswitch
 # git commit all and push, then remotely rebuild switch talos
 [windows]
-rswitch *args:
+rswitch host *args:
   ./git-sync.ps1
-  ssh talos -- ~/github/nixdots/nixos-rebuild switch {{args}}
-# git commit all and push, then remotely rebuild switch talos
+  ssh {{host}} -- ~/github/nixdots/nixos-rebuild switch {{args}}
 [linux]
 rswitch *args:
-  -git add .
-  -git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')"
-  -git push
+  ./git-sync
   ssh talos -- ~/github/nixdots/nixos-rebuild switch {{args}}
 
-alias rb := rboot
-# git commit all and push, then remotely rebuild switch talos
+
+
+# links the flake.nix to one in /etc/nixos, then rebuild switches
 [windows]
-rboot *args:
-  -git add .
-  -git commit -m "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') EST"
-  -git push
-  ssh talos -- ~/github/nixdots/nixos-rebuild boot {{args}}
-# git commit all and push, then remotely rebuild switch talos
+install host:
+  ssh {{host}} -- sudo ln -sv '/etc/nixos/nixdots/flake.nix' '/etc/nixos/flake.nix'
+  ssh {{host}} -- ./nixos-rebuild switch
 [linux]
-rboot *args:
-  -git add .
-  -git commit -m "$(date '+%Y-%m-%d %H:%M:%S %Z')"
-  -git push
-  ssh talos -- ~/github/nixdots/nixos-rebuild boot {{args}}
+install:
+  sudo ln -sv '/etc/nixos/nixdots/flake.nix' '/etc/nixos/flake.nix'
+  ./nixos-rebuild switch
+
+
 
 # updates the flake's package versions, so that we pull new package updates (is that wrong?)
 [linux]
