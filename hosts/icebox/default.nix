@@ -89,7 +89,7 @@ By accessing this system, you agree that your actions may be monitored if unauth
       # authKeyFile = config.sops.secrets.tailscale_authkey.path;
     };
   };
--
+
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #
@@ -109,4 +109,3 @@ By accessing this system, you agree that your actions may be monitored if unauth
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05"; # Did you read the comment?
 }
-
