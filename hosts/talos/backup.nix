@@ -6,19 +6,19 @@ in {
     restic
   ];
 
-  users.users.restic = {
-    isNormalUser = true;
-    description = "System user for transferring backups to icebox via SSH/SFTP";
-    # isSystemUser = true;
-  };
+  # users.users.restic = {
+  #   isNormalUser = true;
+  #   description = "System user for transferring backups to icebox via SSH/SFTP";
+  #   # isSystemUser = true;
+  # };
 
-  security.wrappers.restic = {
-    source = "${pkgs.restic.out}/bin/restic";
-    owner = "restic";
-    group = "users";
-    permissions = "u=rwx,g=,o=";
-    capabilities = "cap_dac_read_search=+ep";
-  };
+  # security.wrappers.restic = {
+  #   source = "${pkgs.restic.out}/bin/restic";
+  #   owner = "restic";
+  #   group = "users";
+  #   permissions = "u=rwx,g=,o=";
+  #   capabilities = "cap_dac_read_search=+ep";
+  # };
 
   sops.secrets.restic_talos_backup = {};
 
@@ -28,7 +28,7 @@ in {
         OnCalendar = "Mon..Sat *-*-* 05:00:00";
         Persistent = true;
       };
-      user = "restic";
+      # user = "restic";
       repository = "sftp://restic@icebox:22//backups/talos";
       initialize = false;
       passwordFile = secrets.restic_talos_backup.path;
