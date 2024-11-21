@@ -10,7 +10,7 @@ in {
     # openssh.authorizedKeys.keys = [
     #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII9r6CO/Xi+wMD65MUBmumv2x9Gi89zj/oD6oD5fD6ai cameron@desktop-jammin"
     # ];
-  }
+  };
 
   # services.restic = {
   #   server = {
