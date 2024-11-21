@@ -18,7 +18,7 @@ function do_rebuild() {
     exit 1
   fi
 
-  sudo nixos-rebuild --flake '.#' "$1" --accept-flake-config --show-trace --extra-experimental-features flakes
+  sudo nixos-rebuild --flake '.#' "$1" --accept-flake-config --show-trace
   # --show-trace --option eval-cache false
   if [[ $? -ne 0 ]]; then
     exit 1
