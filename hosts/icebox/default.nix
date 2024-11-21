@@ -1,7 +1,7 @@
 { pkgs, nixos-hardware, lib, sops-nix, config, username, ... }: {
   imports = [
     nixos-hardware.nixosModules.common-cpu-intel
-    # sops-nix.nixosModules.sops
+    sops-nix.nixosModules.sops
     ./hardware-configuration.nix
   ];
 
@@ -39,24 +39,25 @@ By accessing this system, you agree that your actions may be monitored if unauth
     '';
   };
 
-  # sops = {
-  #   defaultSopsFile = ../../secrets.yml;
-  #   age = {
-  #     # These should be the paths from (config.services.openssh.hostKeys)
-  #     sshKeyPaths = [
-  #       "/etc/ssh/ssh_host_ed25519"
-  #     ];
+  sops = {
+    defaultSopsFile = ../../secrets.yml;
+    age = {
+      # These should be the paths from (config.services.openssh.hostKeys)
+      sshKeyPaths = [
+        "/etc/ssh/ssh_host_ed25519"
+      ];
 
-  #     # keyFile technically not used because we're currently
-  #     # using talos's host key to decrypt secrets
-  #     keyFile = "/home/cameron/.config/sops/age/keys.txt";
-  #     generateKey = true;
-  #   };
-  #   secrets = {
-  #     main_user_password = { neededForUsers = true; };
-  #     ssh_github = {};
-  #   };
-  # };
+      # keyFile technically not used because we're currently
+      # using talos's host key to decrypt secrets
+      keyFile = "/home/cameron/.config/sops/age/keys.txt";
+      generateKey = true;
+    };
+    secrets = {
+      # main_user_password = { neededForUsers = true; };
+      # ssh_github = {};
+      healthcheck_icebox_uptime = {};
+    };
+  };
 
   users.users."${username}" = {
     isNormalUser = true;
@@ -70,16 +71,14 @@ By accessing this system, you agree that your actions may be monitored if unauth
     ];
   };
   
-  # sops.secrets.healthcheck_uptime_uuid = {};
   services = {
-    # TODO: Implement healthcheck for icebox
-    # cron = {
-    #   enable = true;
-    #   systemCronJobs = [
-    #     "@reboot root ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${config.sops.secrets.healthcheck_uptime_uuid.path})"
-    #     "*/15 * * * * root ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${config.sops.secrets.healthcheck_uptime_uuid.path})"
-    #   ];
-    # };
+    cron = {
+      enable = true;
+      systemCronJobs = [
+        "@reboot root ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${config.sops.secrets.healthcheck_icebox_uptime.path})"
+        "*/15 * * * * root ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${config.sops.secrets.healthcheck_icebox_uptime.path})"
+      ];
+    };
     fail2ban = {
       enable = true;
       # TODO: Consider more config https://mynixos.com/nixpkgs/options/services.fail2ban
