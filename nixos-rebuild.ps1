@@ -1,7 +1,11 @@
 
 # Obviously we aren't running nixos on windows, but we can initiate rebuilds on remote nixos systems!
 
-function Invoke-Nixos-Rebuild($ComputerName) {
+function Invoke-Nixos-Rebuild {
+  param (
+    [string]$ComputerName
+  )
+
   ./git-sync.ps1
   $NixdotsPath = Switch ($ComputerName)
   {
