@@ -98,6 +98,11 @@
           nixos-modules = [ ./hosts/talos ];
           home-module = import ./home/server;
         } // base_args);
+        
+        icebox = nixosSystem ({
+          nixos-modules = [ ./hosts/icebox ];
+          home-module = import ./home/server;
+        } // base_args);
       };
     };
 }
