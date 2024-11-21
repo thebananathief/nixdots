@@ -75,8 +75,6 @@
     age sops
     nurl
 
-    # tailspin
-
     # intel-gpu-tools
     # dnsutils
     # iftop
