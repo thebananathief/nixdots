@@ -21,7 +21,7 @@
 
   # Other nix code I want to import or "input" into my flake
   inputs = {
-    # This lets us use all the libs and pkgs in nixpkgs itself - flakes don't use NixOS's native concept of channels for getting pkgs
+    # This lets us use all the libs and pkgs in nixpkgs itself - flakes don't use Nix's concept of channels for getting pkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";

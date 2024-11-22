@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, globalFonts, ... }: rec {
+{ pkgs, lib, inputs, ... }: rec {
   imports = [
     ./shell
     # ./sway.nix
