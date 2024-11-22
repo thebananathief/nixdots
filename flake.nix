@@ -1,5 +1,5 @@
 {
-  description = "TheBananaThief NixOS Configuration";
+  description = "TheBananaThief NixOS Infrastructure";
 
   # This only configures the flake, not the system
   nixConfig = {
@@ -10,41 +10,33 @@
     trusted-substituters = [
       "https://cache.nixos.org/?priority=5"
       "https://nix-community.cachix.org?priority=10"
-      "https://ai.cachix.org"
-      "https://anyrun.cachix.org"
       "https://cosmic.cachix.org"
-      # "https://pre-commit-hooks.cachix.org"
     ];
     extra-trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "ai.cachix.org-1:N9dzRK+alWwoKXQlnn0H6aUx0lU/mspIoz8hMvGvbbc="
-      "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
       "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
-      # "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
     ];
   };
 
+  # Other nix code I want to import or "input" into my flake
   inputs = {
+    # This lets us use all the libs and pkgs in nixpkgs itself - flakes don't use NixOS's native concept of channels for getting pkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    anyrun.url = "github:Kirottu/anyrun";
-    anyrun.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     spicetify-nix.url = "github:the-argus/spicetify-nix";
 
-    nix-colors.url = "github:misterio77/nix-colors";
+    # nix-colors.url = "github:misterio77/nix-colors";
 
-    # nixpkgs.follows = "nixos-cosmic/nixpkgs";
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
+    # nixpkgs.follows = "nixos-cosmic/nixpkgs";
 
     # Something like this if you want to move secrets to a completely private repo
     # mysecrets = {
@@ -77,7 +69,8 @@
           # config.permittedInsecurePackages = [ 
           # ];
         };
-      # The // inputs part here is us feeding in the inputs from this flake into the special args, the special args go into the different modules to be used further
+      # // inputs basically means "merge this left side attrset with the right side (inputs)"
+      # This line enables you to import the inputs (flakes/modules from github) into modules, aka: ( nixos-cosmic, sops-nix, ... ): {}
       } // inputs;
     in {
       nixosConfigurations = let
