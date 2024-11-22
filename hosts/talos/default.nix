@@ -16,7 +16,7 @@
     ./fileshares.nix
     ./disks.nix
     ./services
-    ./backup.nix
+    # ./backup.nix
   ];
 
   networking = {
