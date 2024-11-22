@@ -12,16 +12,6 @@
   home.username = "cameron";
   # home.homeDirectory = "/home/cameron";
 
-  # Install dotfiles repo and link configs
-  # home.file."github/dotfiles" = {
-  #   recursive = true;
-  #   source = builtins.fetchGit {
-  #     url = "https://github.com/thebananathief/dotfiles.git";
-  #     ref = "main";
-  #   };
-  #   target = "./github/dotfiles";
-  # };
-
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";

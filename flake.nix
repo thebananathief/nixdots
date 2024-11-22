@@ -38,6 +38,11 @@
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
     # nixpkgs.follows = "nixos-cosmic/nixpkgs";
 
+    dotfiles = {
+      url = "git+ssh://git@github.com/thebananathief/dotfiles.git";
+      flake = false;
+    }
+
     # Something like this if you want to move secrets to a completely private repo
     # mysecrets = {
     #   url = "git+ssh://git@github.com/thebananathief/nix-secrets.git?shallow=1";
