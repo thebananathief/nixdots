@@ -87,7 +87,6 @@ By accessing this system, you agree that your actions may be monitored if unauth
       tailscale_authkey = {};
       discord_webhook_id = {}; # used in jellyseerr's notification config, but not declarative yet
       discord_webhook_token = {};
-      ssh_github = {};
       domain = {};
     };
   };

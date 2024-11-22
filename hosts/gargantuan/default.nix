@@ -44,7 +44,6 @@
     secrets = {
       main_user_password = { neededForUsers = true; };
       email_address = {};
-      ssh_github = {};
     };
   };
 

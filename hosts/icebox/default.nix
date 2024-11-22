@@ -50,7 +50,6 @@ By accessing this system, you agree that your actions may be monitored if unauth
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519" ];
     secrets = {
       # main_user_password = { neededForUsers = true; };
-      # ssh_github = {};
       healthcheck_icebox_uptime = {};
     };
   };
