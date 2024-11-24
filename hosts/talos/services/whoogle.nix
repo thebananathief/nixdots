@@ -16,8 +16,15 @@ in {
 
   services.caddy.virtualHosts = {
     "search.${ config.networking.fqdn }".extraConfig = ''
-      reverse_proxy localhost:8050
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+
+      @authorized remote_ip 192.168.0.0/24
+      handle @authorized {
+        reverse_proxy localhost:8050
+      }
+      handle {
+        respond "Unauthorized" 403
+      }
     '';
   };
 }

@@ -69,8 +69,15 @@ in {
   services.caddy.virtualHosts = {
     # TIP: use /cp-admin to login to the admin panel
     "castopod.${ config.networking.fqdn }".extraConfig = ''
-      reverse_proxy localhost:8015
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+
+      @authorized remote_ip 192.168.0.0/24
+      handle @authorized {
+        reverse_proxy localhost:8015
+      }
+      handle {
+        respond "Unauthorized" 403
+      }
     '';
   };
 }
