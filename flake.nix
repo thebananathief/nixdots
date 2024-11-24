@@ -56,7 +56,7 @@
       useremail = "cameron.salomone@gmail.com";
 
       # globalFonts = import ./modules/globalFonts.nix;
-      globalFonts = import ./modules/globalFonts.nix
+      globalFonts = import ./modules/globalFonts.nix;
 
       # pkgs = import <nixpkgs> {};
       system = "x86_64-linux";

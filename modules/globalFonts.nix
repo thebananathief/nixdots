@@ -1,4 +1,4 @@
-{ ... }: {
+{
   serif = "Noto Serif";
   monospace = "JetBrainsMono Nerd Font";
   # was M+2 (for waybar)
