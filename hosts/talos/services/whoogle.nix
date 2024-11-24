@@ -15,8 +15,13 @@ in {
   };
 
   services.caddy.virtualHosts = {
-    "search.${ config.networking.fqdn }".extraConfig = ''
+    "search.${ config.localFqdn }".extraConfig = ''
       reverse_proxy localhost:8050
+      tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';
+    # "search.${ config.networking.fqdn }".extraConfig = ''
+    #   reverse_proxy localhost:8050
+    #   tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+    # '';
   };
 }

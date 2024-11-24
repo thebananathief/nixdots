@@ -61,9 +61,14 @@ in {
     };
   };
   
-  # services.caddy.virtualHosts = {
-  #   "tree.${ config.networking.fqdn }".extraConfig = ''
-  #     reverse_proxy localhost:8013
-  #   '';
-  # };
+  services.caddy.virtualHosts = {
+    "tree.${ config.localFqdn }".extraConfig = ''
+      reverse_proxy localhost:8013
+      tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+    '';
+    # "tree.${ config.networking.fqdn }".extraConfig = ''
+    #   reverse_proxy localhost:8013
+    #   tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+    # '';
+  };
 }
