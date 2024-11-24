@@ -72,6 +72,7 @@ in {
     # Etherpad
     "notes.${ config.localFqdn }".extraConfig = ''
       reverse_proxy localhost:9001
+      tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';
     "notes.${ config.networking.fqdn }".extraConfig = ''
       reverse_proxy localhost:9001
