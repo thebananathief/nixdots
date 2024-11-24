@@ -19,7 +19,7 @@
     # ./backup.nix
   ];
   
-  localFqdn = "talos.home";
+  localFqdn = "talos.host";
   networking = {
     hostName = "talos";
     domain = "host";
