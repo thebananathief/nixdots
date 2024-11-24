@@ -12,6 +12,12 @@ alias run2 := rswitch
 
 
 
+check:
+  nix flake check --show-trace --extra-experimental-features nix-command --extra-experimental-features flakes --offline
+  ./git-sync
+
+
+
 alias s := sync
 [windows]
 sync:

@@ -2,22 +2,22 @@
   description = "TheBananaThief NixOS Infrastructure";
 
   # This only configures the flake, not the system
-  nixConfig = {
-    experimental-features = [ "nix-command" "flakes" ];
-    trusted-users = [ "root" "@wheel" ];
-    auto-optimise-store = true;
-    builders-use-substitutes = true;
-    trusted-substituters = [
-      "https://cache.nixos.org/?priority=5"
-      "https://nix-community.cachix.org?priority=10"
-      "https://cosmic.cachix.org"
-    ];
-    extra-trusted-public-keys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
-    ];
-  };
+  # nixConfig = {
+  #   experimental-features = [ "nix-command" "flakes" ];
+  #   trusted-users = [ "root" "@wheel" ];
+  #   auto-optimise-store = true;
+  #   builders-use-substitutes = true;
+  #   trusted-substituters = [
+  #     "https://cache.nixos.org/?priority=5"
+  #     "https://nix-community.cachix.org?priority=10"
+  #     "https://cosmic.cachix.org"
+  #   ];
+  #   extra-trusted-public-keys = [
+  #     "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+  #     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+  #     "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
+  #   ];
+  # };
 
   # Other nix code I want to import or "input" into my flake
   inputs = {
@@ -41,7 +41,7 @@
     dotfiles = {
       url = "git+ssh://git@github.com/thebananathief/dotfiles.git";
       flake = false;
-    }
+    };
 
     # Something like this if you want to move secrets to a completely private repo
     # mysecrets = {
@@ -55,13 +55,8 @@
       username = "cameron";
       useremail = "cameron.salomone@gmail.com";
 
-      globalFonts = {
-        serif = "Noto Serif";
-        monospace = "JetBrainsMono Nerd Font";
-        # was M+2 (for waybar)
-        prettyNerd = "M+2 Nerd Font";
-        sansSerif = "Lexend";
-      };
+      # globalFonts = import ./modules/globalFonts.nix;
+      globalFonts = import ./modules/globalFonts.nix
 
       # pkgs = import <nixpkgs> {};
       system = "x86_64-linux";
