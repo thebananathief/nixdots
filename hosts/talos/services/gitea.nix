@@ -35,6 +35,17 @@ in {
   };
 
   services.caddy.virtualHosts = {
+    ts_code = {
+      listenAddresses = [
+        "100.64.252.67"
+        "fd7a:115c:a1e0::9f40:fc43"
+      ];
+      hostName = "code.${ config.networking.fqdn }";
+      extraConfig = ''
+        tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+        reverse_proxy localhost:8010
+      '';
+    };
     "code.${ config.networking.fqdn }".extraConfig = ''
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
 
