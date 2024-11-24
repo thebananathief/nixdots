@@ -18,7 +18,11 @@
     ./services
     # ./backup.nix
   ];
-  
+
+  tailscaleInterfaces = [
+    "100.64.252.67"
+    "fd7a:115c:a1e0::9f40:fc43"
+  ];
   networking = {
     hostName = "talos";
     domain = "host";

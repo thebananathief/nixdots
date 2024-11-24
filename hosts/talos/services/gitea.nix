@@ -35,11 +35,9 @@ in {
   };
 
   services.caddy.virtualHosts = {
+    # Extra host entry so that we can bind it to tailscale's interface
     ts_code = {
-      listenAddresses = [
-        "100.64.252.67"
-        "fd7a:115c:a1e0::9f40:fc43"
-      ];
+      listenAddresses = config.tailscaleInterfaces;
       hostName = "code.${ config.networking.fqdn }";
       extraConfig = ''
         tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
