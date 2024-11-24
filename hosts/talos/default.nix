@@ -18,8 +18,8 @@
     ./services
     # ./backup.nix
   ];
-
-  options.networking.localFqdn = "talos.localdomain";
+  
+  localFqdn = "talos.localdomain";
   networking = {
     hostName = "talos";
     domain = "host";

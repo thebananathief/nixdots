@@ -70,7 +70,7 @@ in {
   
   services.caddy.virtualHosts = {
     # Etherpad
-    "notes.${ config.networking.localFqdn }".extraConfig = ''
+    "notes.${ config.localFqdn }".extraConfig = ''
       reverse_proxy localhost:9001
     '';
     "notes.${ config.networking.fqdn }".extraConfig = ''
