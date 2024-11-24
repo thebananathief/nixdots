@@ -195,23 +195,51 @@ in {
   services.caddy.virtualHosts = {
     # Prowlarr
     "prowlarr.${ config.networking.fqdn }".extraConfig = ''
-      reverse_proxy localhost:8002
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+
+      @authorized remote_ip 192.168.0.0/24
+      handle @authorized {
+        reverse_proxy localhost:8002
+      }
+      handle {
+        respond "Unauthorized" 403
+      }
     '';
     # Sonarr
     "sonarr.${ config.networking.fqdn }".extraConfig = ''
-      reverse_proxy localhost:8004
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+
+      @authorized remote_ip 192.168.0.0/24
+      handle @authorized {
+        reverse_proxy localhost:8004
+      }
+      handle {
+        respond "Unauthorized" 403
+      }
     '';
     # Radarr
     "radarr.${ config.networking.fqdn }".extraConfig = ''
-      reverse_proxy localhost:8003
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+
+      @authorized remote_ip 192.168.0.0/24
+      handle @authorized {
+        reverse_proxy localhost:8003
+      }
+      handle {
+        respond "Unauthorized" 403
+      }
     '';
     # Transmission
     "transmission.${ config.networking.fqdn }".extraConfig = ''
-      reverse_proxy localhost:8001
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+
+      @authorized remote_ip 192.168.0.0/24
+      handle @authorized {
+        reverse_proxy localhost:8001
+      }
+      handle {
+        respond "Unauthorized" 403
+      }
     '';
     # Jellyseerr
     "request.${ config.networking.fqdn }".extraConfig = ''
