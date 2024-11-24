@@ -24,7 +24,7 @@
     zones = {
       "talos.host" = {
         master = true;
-        extraConfig = ''
+        file = pkgs.writeText "talos.host" ''
         $TTL 86400
         @       IN      SOA     ns.talos.host. admin.talos.host. (
                                 2024112401      ; Serial
@@ -42,6 +42,8 @@
         ; Other A records
         code    IN      A       100.64.252.67
         '';
+        # extraConfig = ''
+        # '';
       };
     };
   };
