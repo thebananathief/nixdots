@@ -194,22 +194,22 @@ in {
 
   services.caddy.virtualHosts = {
     # Prowlarr
-    "prowlarr.${ config.localFqdn }".extraConfig = ''
+    "prowlarr.${ config.fqdn }".extraConfig = ''
       reverse_proxy localhost:8002
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';
     # Sonarr
-    "sonarr.${ config.localFqdn }".extraConfig = ''
+    "sonarr.${ config.fqdn }".extraConfig = ''
       reverse_proxy localhost:8004
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';
     # Radarr
-    "radarr.${ config.localFqdn }".extraConfig = ''
+    "radarr.${ config.fqdn }".extraConfig = ''
       reverse_proxy localhost:8003
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';
     # Transmission
-    "transmission.${ config.localFqdn }".extraConfig = ''
+    "transmission.${ config.fqdn }".extraConfig = ''
       reverse_proxy localhost:8001
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';

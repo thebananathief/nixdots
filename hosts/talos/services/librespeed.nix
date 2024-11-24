@@ -16,13 +16,13 @@ in {
   };
   
   services.caddy.virtualHosts = {
-    "speedtest.${ config.localFqdn }".extraConfig = ''
-      reverse_proxy localhost:8016
-      tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
-    '';
-    # "speedtest.${ config.networking.fqdn }".extraConfig = ''
+    # "speedtest.${ config.localFqdn }".extraConfig = ''
     #   reverse_proxy localhost:8016
     #   tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     # '';
+    "speedtest.${ config.networking.fqdn }".extraConfig = ''
+      reverse_proxy localhost:8016
+      tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+    '';
   };
 }
