@@ -38,17 +38,10 @@ in {
     "code.${ config.networking.fqdn }".extraConfig = ''
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
 
-      @authorized {
-        remote_ip 192.168.0.0/24
-      }
-
-      handle @authorized {
+      handle {remote_ip 192.168.0.0/24} {
         reverse_proxy localhost:8010
       }
-
-      handle {
-          respond "Unauthorized" 403
-      }
+      handle respond "Unauthorized" 403
     '';
   };
 }
