@@ -19,10 +19,11 @@
     # ./backup.nix
   ];
 
+  options.networking.localFqdn = "talos.localdomain";
   networking = {
     hostName = "talos";
     domain = "host";
-    # domain = config.sops.secrets.domain.path;
+    # fqdn = "talos.host";
     wireless.enable = false; # Enables wireless support via wpa_supplicant.
     firewall.enable = true;
   };
