@@ -194,48 +194,48 @@ in {
 
   services.caddy.virtualHosts = {
     # Prowlarr
-    "prowlarr.${ config.fqdn }".extraConfig = ''
+    "prowlarr.${ config.networking.fqdn }".extraConfig = ''
       reverse_proxy localhost:8002
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';
     # Sonarr
-    "sonarr.${ config.fqdn }".extraConfig = ''
+    "sonarr.${ config.networking.fqdn }".extraConfig = ''
       reverse_proxy localhost:8004
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';
     # Radarr
-    "radarr.${ config.fqdn }".extraConfig = ''
+    "radarr.${ config.networking.fqdn }".extraConfig = ''
       reverse_proxy localhost:8003
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';
     # Transmission
-    "transmission.${ config.fqdn }".extraConfig = ''
+    "transmission.${ config.networking.fqdn }".extraConfig = ''
       reverse_proxy localhost:8001
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';
     # Jellyseerr
-    "request.${ config.localFqdn }".extraConfig = ''
-      reverse_proxy localhost:8005
-      tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
-    '';
+    # "request.${ config.localFqdn }".extraConfig = ''
+    #   reverse_proxy localhost:8005
+    #   tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+    # '';
     "request.${ config.networking.fqdn }".extraConfig = ''
       reverse_proxy localhost:8005
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';
     # Jellyfin
-    "watch.${ config.localFqdn }".extraConfig = ''
-      reverse_proxy localhost:8096
-      tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
-    '';
+    # "watch.${ config.localFqdn }".extraConfig = ''
+    #   reverse_proxy localhost:8096
+    #   tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+    # '';
     "watch.${ config.networking.fqdn }".extraConfig = ''
       reverse_proxy localhost:8096
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';
     # Audiobookshelf
-    "books.${ config.localFqdn }".extraConfig = ''
-      reverse_proxy localhost:8009
-      tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
-    '';
+    # "books.${ config.localFqdn }".extraConfig = ''
+    #   reverse_proxy localhost:8009
+    #   tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+    # '';
     "books.${ config.networking.fqdn }".extraConfig = ''
       reverse_proxy localhost:8009
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
