@@ -53,7 +53,9 @@ in {
       handle @authorized {
         reverse_proxy localhost:8010
       }
-      handle respond "Unauthorized" 403
+      handle {
+        respond "Unauthorized" 403
+      }
     '';
   };
 }
