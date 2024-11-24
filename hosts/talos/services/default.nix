@@ -19,6 +19,7 @@ in {
     ./gitea.nix
     ./mediaserver.nix
     ./etherpad.nix
+    ./dns.nix
     ./reverse-proxy.nix
   ];
 
