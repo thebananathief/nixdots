@@ -4,7 +4,7 @@
     enable = true;
     
     # Listen on all interfaces
-    listenOn = [ "tailscale0" ];
+    listenOn = [ "100.64.252.67" ];
     
     # Nameservers to forward requests to (upstream DNS servers)
     # By default, it'll forward to this server's nameservers
