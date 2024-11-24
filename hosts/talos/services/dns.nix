@@ -40,10 +40,8 @@
         ns      IN      A       100.64.252.67
 
         ; Other A records
-        code    IN      A       100.64.252.67
+        *       IN      A       100.64.252.67
         '';
-        # extraConfig = ''
-        # '';
       };
     };
   };
