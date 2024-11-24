@@ -1,10 +1,5 @@
 { config, lib, ... }: {
   options = with lib; {
-    localFqdn = mkOption {
-      type = types.str;
-      default = "${config.networking.host}.localdomain";
-      description = "Local fully qualified domain name";
-    };
     myOptions = {
       graphics.enable = mkEnableOption "Enable graphics";
       gestures.enable = mkEnableOption "Enable gestures";

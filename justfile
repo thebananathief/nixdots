@@ -56,9 +56,10 @@ rswitch host *args:
   ./git-sync.ps1
   ssh {{host}} -- ~/github/nixdots/nixos-rebuild switch {{args}}
 [linux]
-rswitch *args:
+rswitch host *args:
+  nix flake check --show-trace --extra-experimental-features nix-command --extra-experimental-features flakes --offline
   ./git-sync
-  ssh talos -- ~/github/nixdots/nixos-rebuild switch {{args}}
+  ssh {{host}} -- ~/github/nixdots/nixos-rebuild switch {{args}}
 
 
 
