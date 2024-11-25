@@ -8,9 +8,9 @@
     
     # Nameservers to forward requests to (upstream DNS servers)
     # By default, it'll forward to this server's nameservers
-    # forwarding = [
-    #   "8.8.8.8"
-    # ];
+    forwarding = [
+      "8.8.8.8"
+    ];
 
     # Enable recursive DNS for private network
     # extraConfig = ''
@@ -47,10 +47,10 @@
   };
 
   # Open DNS ports in firewall
-  networking.nameservers = [
-    "192.168.0.1"
-    "8.8.8.8"
-  ];
+  # networking.nameservers = [
+  #   "192.168.0.1"
+  #   "8.8.8.8"
+  # ];
   networking.firewall = {
     allowedTCPPorts = [ 53 ];
     allowedUDPPorts = [ 53 ];

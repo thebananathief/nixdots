@@ -25,7 +25,7 @@ in {
   services.restic.backups = {
     icebox-backup = {
       timerConfig = {
-        OnCalendar = "Mon..Sat *-*-* 05:00:00";
+        OnCalendar = "Mon,Wed,Fri,Sun 05:00:00";
         Persistent = true;
       };
       # user = "restic";
@@ -48,8 +48,9 @@ in {
     #   # backupPrepareCommand = ''
     #   # '';
     #   # # TODO: Curl healthcheck to indicate successful backup?
-    #   # backupCleanupCommand = ''
-    #   # '';
+      backupCleanupCommand = ''
+        curl
+      '';
     };
   };
 }
