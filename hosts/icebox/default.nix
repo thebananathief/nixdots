@@ -85,6 +85,16 @@ By accessing this system, you agree that your actions may be monitored if unauth
     };
   };
 
+  boot.supportedFilesystems = [
+    "ext4"
+    "btrfs"
+    "fat"
+    "exfat"
+  ];
+
+  environment.systemPackages = with pkgs; [
+    btrfs-progs
+  ];
 
 
 
