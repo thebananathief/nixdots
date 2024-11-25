@@ -85,19 +85,6 @@ By accessing this system, you agree that your actions may be monitored if unauth
     };
   };
 
-  boot.supportedFilesystems = [
-    "ext4"
-    "btrfs"
-    "fat"
-    "exfat"
-  ];
-
-  environment.systemPackages = with pkgs; [
-    btrfs-progs
-  ];
-
-
-
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   #
