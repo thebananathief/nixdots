@@ -21,6 +21,7 @@ in {
   # };
 
   sops.secrets.restic_talos_backup = {};
+  sops.secrets.restic_talos_healthcheck = {};
 
   services.restic.backups = {
     icebox-backup = {
@@ -47,9 +48,8 @@ in {
     #   ];
     #   # backupPrepareCommand = ''
     #   # '';
-    #   # # TODO: Curl healthcheck to indicate successful backup?
       backupCleanupCommand = ''
-        curl
+        curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${restic_talos_healthcheck})
       '';
     };
   };
