@@ -57,7 +57,6 @@ rswitch host *args:
   ssh {{host}} -- ~/github/nixdots/nixos-rebuild switch {{args}}
 [linux]
 rswitch host *args:
-  nix flake check --show-trace --extra-experimental-features nix-command --extra-experimental-features flakes --offline
   ./git-sync
   ssh {{host}} -- ~/github/nixdots/nixos-rebuild switch {{args}}
 
