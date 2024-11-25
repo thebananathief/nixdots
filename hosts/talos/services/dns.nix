@@ -47,6 +47,10 @@
   };
 
   # Open DNS ports in firewall
+  networking.nameservers = [
+    "192.168.0.1"
+    "8.8.8.8"
+  ];
   networking.firewall = {
     allowedTCPPorts = [ 53 ];
     allowedUDPPorts = [ 53 ];
