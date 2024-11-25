@@ -49,7 +49,7 @@ in {
     #   # backupPrepareCommand = ''
     #   # '';
       backupCleanupCommand = ''
-        curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${restic_talos_healthcheck})
+        curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${secrets.restic_talos_healthcheck.path})
       '';
     };
   };
