@@ -26,12 +26,12 @@ in {
   services.restic.backups = {
     icebox-backup = {
       timerConfig = {
-        OnCalendar = "Mon,Wed,Fri,Sun 05:00:00";
+        OnCalendar = "05:00:00";
         Persistent = true;
       };
       # user = "restic";
       repository = "sftp://restic@icebox:22//mnt/backup/talos";
-      initialize = false;
+      initialize = true;
       passwordFile = secrets.restic_talos_backup.path;
       paths = [ "/mnt/storage/media/family" ];
       exclude = [
