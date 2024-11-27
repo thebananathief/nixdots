@@ -70,8 +70,6 @@
     } // inputs;
 
     nixosSystem = {
-      nixpkgs,
-      home-manager,
       system,
       specialArgs,
       nixos-modules,
