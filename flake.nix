@@ -111,10 +111,10 @@
       #   home-module = import ./home/cameron;
       # };
 
-      # icebox = nixosSystem {
-      #   nixos-modules = [ ./hosts/icebox ];
-      #   home-module = import ./home/server;
-      # };
+      icebox = nixosSystem {
+        nixos-modules = [ ./hosts/icebox ];
+        home-module = import ./home/server;
+      };
     };
   };
 }
