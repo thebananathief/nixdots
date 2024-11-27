@@ -47,11 +47,11 @@
     dotfiles.flake = false;
   };
 
-  outputs = inputs: with inputs; let
-  # outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, ... }: let
+  # outputs = inputs: with inputs; let
+  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, ... }: let
     username = "cameron";
     useremail = "cameron.salomone@gmail.com";
-    globalFonts = import ./modules/globalFonts.nix;
+    # globalFonts = import ./modules/globalFonts.nix;
 
     nixpkgsCustom = system: (import nixpkgs rec {
         inherit system;
@@ -61,7 +61,7 @@
     });
 
     argDefaults = {
-      inherit username useremail globalFonts;
+      inherit username useremail;
     } // inputs;
 
     # Function to declare NixOS systems with home manager configs
