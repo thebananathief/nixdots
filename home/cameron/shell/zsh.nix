@@ -45,9 +45,9 @@
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true; # i think this is the same as declaring it in ohmyzsh plugins
-      defaultOptions = [
-        "--preview 'pistol {}'"
-      ];
+      # defaultOptions = [
+      #   "--preview 'pistol {}'"
+      # ];
     };
   };
 }
