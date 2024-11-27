@@ -60,6 +60,7 @@ in {
 
   wsl = {
     enable = true;
+    wslConf.automount.enable = true;
     wslConf.automount.root = "/mnt";
     wslConf.interop.enable = true;
     wslConf.interop.appendWindowsPath = true;
