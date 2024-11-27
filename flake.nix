@@ -54,19 +54,19 @@
     useremail = "cameron.salomone@gmail.com";
     globalFonts = import ./modules/globalFonts.nix;
 
-    system = "x86_64-linux";
-    nixpkgsCustom = system: (import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-      # config.permittedInsecurePackages = [ 
-      # ];
-    });
     defaultArgs = {
       inherit username useremail globalFonts;
     # // inputs basically means "merge this left side attrset with the right side (inputs)"
     # This line enables you to import the inputs (flakes/modules from github) into modules, aka: ( nixos-cosmic, sops-nix, ... ): {}
     } // inputs;
 
+    nixpkgsCustom = system: (import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+      # config.permittedInsecurePackages = [ 
+      # ];
+    });
+    
     # Function to make NixOS systems with common modules & home manager configs
     mkNixosSystem = {
       system ? "x86_64-linux",
