@@ -96,10 +96,10 @@
       };
   in {
     nixosConfigurations = {
-      talos = nixosSystem {
-        nixos-modules = [ ./hosts/talos ];
-        home-module = import ./home/server;
-      };
+      # talos = nixosSystem {
+      #   nixos-modules = [ ./hosts/talos ];
+      #   home-module = import ./home/server;
+      # };
 
       # gargantuan = nixosSystem {
       #   nixos-modules = [ ./hosts/gargantuan ];

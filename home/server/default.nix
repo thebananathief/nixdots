@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, ... }: rec {
+{ pkgs, lib, ... }: rec {
   imports = [
     ../cameron/shell/zsh.nix
     ../cameron/shell/git.nix
