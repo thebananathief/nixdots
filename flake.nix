@@ -55,20 +55,20 @@
     globalFonts = import ./modules/globalFonts.nix;
 
     system = "x86_64-linux";
+    nixpkgsCustom = system: (import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+      # config.permittedInsecurePackages = [ 
+      # ];
+    });
     defaultArgs = {
       inherit username useremail globalFonts;
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        # config.permittedInsecurePackages = [ 
-        # ];
-      };
     # // inputs basically means "merge this left side attrset with the right side (inputs)"
     # This line enables you to import the inputs (flakes/modules from github) into modules, aka: ( nixos-cosmic, sops-nix, ... ): {}
     } // inputs;
 
     # Function to make NixOS systems with common modules & home manager configs
-    nixosSystem = {
+    mkNixosSystem = {
       system ? "x86_64-linux",
       nixos-modules,
       home-module,
@@ -76,6 +76,7 @@
       specialArgs = defaultArgs;
     in nixpkgs.lib.nixosSystem {
       inherit system specialArgs;
+      pkgs = nixpkgsCustom system;
       modules = nixos-modules ++ [
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
@@ -90,22 +91,22 @@
     };
   in {
     nixosConfigurations = {
-      talos = nixosSystem {
+      talos = mkNixosSystem {
         nixos-modules = [ ./hosts/talos ];
         home-module = import ./home/server;
       };
 
-      gargantuan = nixosSystem {
+      gargantuan = mkNixosSystem {
         nixos-modules = [ ./hosts/gargantuan ];
         home-module = import ./home/cameron;
       };
 
-      thoth = nixosSystem {
+      thoth = mkNixosSystem {
         nixos-modules = [ ./hosts/thoth ];
         home-module = import ./home/cameron;
       };
 
-      icebox = nixosSystem {
+      icebox = mkNixosSystem {
         nixos-modules = [ ./hosts/icebox ];
         home-module = import ./home/server;
       };
