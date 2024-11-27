@@ -69,7 +69,7 @@
     # This line enables you to import the inputs (flakes/modules from github) into modules, aka: ( nixos-cosmic, sops-nix, ... ): {}
     } // inputs;
 
-    nixosSystem = {
+    nixosSystem = import {
       system ? "x86_64-linux",
       nixos-modules,
       home-module,
