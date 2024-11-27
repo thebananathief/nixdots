@@ -2,7 +2,6 @@
   imports = [
     ./shell.nix
     ./security.nix
-    ./tailscale.nix
   ];
 
   # These nix configs are only for the system, not the flake
