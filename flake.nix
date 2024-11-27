@@ -70,6 +70,13 @@
     argDefaults = {
       inherit inputs username useremail globalFonts;
     };
+    
+    configurationDefaults = args: {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.backupFileExtension = "hm-backup";
+      home-manager.extraSpecialArgs = args;
+    };
 
     # Function to declare NixOS systems with home manager configs
     nixosSystem = {
@@ -82,15 +89,11 @@
         inherit system specialArgs;
         pkgs = nixpkgsCustom system;
         modules = nixos-modules ++ [
+          ../modules/common
+          (configurationDefaults specialArgs)
           home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "hm-backup";
-            
-            home-manager.extraSpecialArgs = specialArgs;
             home-manager.users."${specialArgs.username}" = home-module;
           }
-          ../modules/common
         ];
       };
   in {
