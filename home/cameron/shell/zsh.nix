@@ -19,9 +19,7 @@
           # "git"
           "git-auto-fetch"
           "sudo"
-          "fzf"
           "z"
-          "zsh-autocomplete"
         ];
       };
       syntaxHighlighting.enable = true;
@@ -31,18 +29,11 @@
         # export XDG_DATA_DIRS=/home/cameron/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:$XDG_DATA_DIRS
       # '';
       initExtra = ''
-        # case insensitive tab completion
-        # zstyle ':completion:*' completer _complete _ignored _approximate
-        # zstyle ':completion:*' list-colors '\'
-        # zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-        # zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-        # zstyle ':completion:*' menu select
-        # zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-        # zstyle ':completion:*' verbose true
-        # _comp_options+=(globdots)
+        zstyle ':autocomplete:*' ignored-input '..##'
 
         # source ~/.config/zsh/fzf/fzf-tab.plugin.zsh
-        source ~/.bash_aliases
+        source ${dotfiles}/.bash_aliases
+        # source ~/.bash_aliases
       '';
       plugins = [
         {

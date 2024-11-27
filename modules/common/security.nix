@@ -60,12 +60,4 @@
       publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII9BZbMAtMIr0ZZKPwxIDTq7qZMjNVDI1ktg3r+DSCdv desktop";
     };
   };
-
-  # Generate a host key for this machine
-  services.openssh = {
-    enable = true;
-    hostKeys = [
-      { path = "/etc/ssh/ssh_host_ed25519"; type = "ed25519"; }
-    ];
-  };
 }
