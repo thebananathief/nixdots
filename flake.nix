@@ -43,12 +43,12 @@
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
     # nixpkgs.follows = "nixos-cosmic/nixpkgs";
 
-    # dotfiles.url = "git+ssh://git@github.com/thebananathief/dotfiles.git";
-    # dotfiles.flake = false;
+    dotfiles.url = "git+ssh://git@github.com/thebananathief/dotfiles.git";
+    dotfiles.flake = false;
   };
 
-  # outputs = inputs: with inputs; let
-  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, ... }: let
+  outputs = inputs: with inputs; let
+  # outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, ... }: let
     username = "cameron";
     useremail = "cameron.salomone@gmail.com";
     globalFonts = import ./modules/globalFonts.nix;
