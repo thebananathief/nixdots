@@ -55,7 +55,7 @@
     globalFonts = import ./modules/globalFonts.nix;
 
     system = "x86_64-linux";
-    argDefaults = {
+    specialArgs = {
       inherit username useremail globalFonts;
       pkgs = import nixpkgs {
         inherit system;
@@ -93,7 +93,7 @@
     # };
   in {
     nixosConfigurations = let
-      specialArgs = { inherit argDefaults; };
+      # specialArgs = { inherit argDefaults; };
       base_args = { inherit home-manager nixpkgs system specialArgs; };
     in {
       talos = nixosSystem ({
