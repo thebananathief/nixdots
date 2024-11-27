@@ -17,6 +17,7 @@
         theme = "ys";
         plugins = [
           # "git"
+          "ssh"
           "git-auto-fetch"
           "sudo"
           "z"
