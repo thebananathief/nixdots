@@ -56,6 +56,7 @@
   };
 
   outputs = inputs: with inputs; let
+  # outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, ... }: let
     username = "cameron";
     useremail = "cameron.salomone@gmail.com";
     globalFonts = import ./modules/globalFonts.nix;
@@ -68,14 +69,7 @@
     });
 
     argDefaults = {
-      inherit inputs username useremail globalFonts self;
-    };
-    
-    configurationDefaults = args: {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.backupFileExtension = "hm-backup";
-      home-manager.extraSpecialArgs = args;
+      inherit username useremail globalFonts;
     };
 
     # Function to declare NixOS systems with home manager configs
@@ -83,7 +77,7 @@
       system ? "x86_64-linux",
       args ? {},
       nixos-modules,
-      home-module,
+      home-module
     }: let
       specialArgs = argDefaults // args;
     in nixpkgs.lib.nixosSystem {
@@ -91,33 +85,36 @@
         pkgs = nixpkgsCustom system;
         modules = nixos-modules ++ [
           ../modules/common
-          (configurationDefaults specialArgs)
           home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "hm-backup";
+            home-manager.extraSpecialArgs = specialArgs;
             home-manager.users."${specialArgs.username}" = home-module;
           }
         ];
       };
   in {
     nixosConfigurations = {
-      gargantuan = nixosSystem {
+      gargantuan = nixosSystem ({
         nixos-modules = [ ./hosts/gargantuan ];
         home-module = import ./home/cameron;
-      };
+      } // base_args);
 
-      thoth = nixosSystem {
+      thoth = nixosSystem ({
         nixos-modules = [ ./hosts/thoth ];
         home-module = import ./home/cameron;
-      };
+      } // base_args);
 
-      talos = nixosSystem {
+      talos = nixosSystem ({
         nixos-modules = [ ./hosts/talos ];
         home-module = import ./home/server;
-      };
+      } // base_args);
       
-      icebox = nixosSystem {
+      icebox = nixosSystem ({
         nixos-modules = [ ./hosts/icebox ];
         home-module = import ./home/server;
-      };
+      } // base_args);
     };
   };
 }
