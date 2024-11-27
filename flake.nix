@@ -48,12 +48,13 @@
   };
 
   # outputs = inputs: with inputs; let
-  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, ... }: let
+  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, ... }: 
+  let
     username = "cameron";
     useremail = "cameron.salomone@gmail.com";
-    # globalFonts = import ./modules/globalFonts.nix;
+    globalFonts = import ./modules/globalFonts.nix;
 
-    nixpkgsCustom = system: (import nixpkgs rec {
+    nixpkgsCustom = system: (import nixpkgs {
         inherit system;
         config.allowUnfree = true;
         # config.permittedInsecurePackages = [ 
@@ -61,7 +62,10 @@
     });
 
     argDefaults = {
-      inherit username useremail;
+      inherit username useremail globalFonts;
+      pkgs = nixpkgsCustom "x86_64-linux";
+    # // inputs basically means "merge this left side attrset with the right side (inputs)"
+    # This line enables you to import the inputs (flakes/modules from github) into modules, aka: ( nixos-cosmic, sops-nix, ... ): {}
     } // inputs;
 
     # Function to declare NixOS systems with home manager configs
@@ -69,13 +73,14 @@
     nixosSystem = {
       system ? "x86_64-linux",
       args ? {},
+      argDefaults,
       nixos-modules,
       home-module
     }: let
       specialArgs = argDefaults // args;
     in nixpkgs.lib.nixosSystem {
       inherit system specialArgs;
-      pkgs = nixpkgsCustom system;
+      # pkgs = nixpkgsCustom system;
       modules = nixos-modules ++ [
         ../modules/common
         home-manager.nixosModules.home-manager {
@@ -88,26 +93,28 @@
       ];
     };
   in {
-    nixosConfigurations = {
-      # talos = nixosSystem {
-      #   nixos-modules = [ ./hosts/talos ];
-      #   home-module = import ./home/server;
-      # };
+    nixosConfigurations = let
+      base_args = { inherit argDefaults; };
+    in {
+      talos = nixosSystem ({
+        nixos-modules = [ ./hosts/talos ];
+        home-module = import ./home/server;
+      } // base_args);
 
-      # gargantuan = nixosSystem {
-      #   nixos-modules = [ ./hosts/gargantuan ];
-      #   home-module = import ./home/cameron;
-      # };
+      gargantuan = nixosSystem ({
+        nixos-modules = [ ./hosts/gargantuan ];
+        home-module = import ./home/cameron;
+      } // base_args);
 
-      # thoth = nixosSystem {
-      #   nixos-modules = [ ./hosts/thoth ];
-      #   home-module = import ./home/cameron;
-      # };
+      thoth = nixosSystem ({
+        nixos-modules = [ ./hosts/thoth ];
+        home-module = import ./home/cameron;
+      } // base_args);
 
-      icebox = nixosSystem {
+      icebox = nixosSystem ({
         nixos-modules = [ ./hosts/icebox ];
         home-module = import ./home/server;
-      };
+      } // base_args);
     };
   };
 }
