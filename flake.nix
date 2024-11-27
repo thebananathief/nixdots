@@ -75,8 +75,9 @@
       home-module,
     }: nixpkgs.lib.nixosSystem {
       inherit system specialArgs;
-      modules = nixos-modules ++ [
-        ../modules/common
+      modules = 
+        nixos-modules
+        ++ [
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
@@ -84,6 +85,7 @@
           home-manager.extraSpecialArgs = specialArgs;
           home-manager.users."${username}" = home-module;
         }
+        ../modules/common
       ];
     };
 
