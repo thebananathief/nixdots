@@ -1,4 +1,4 @@
-{ pkgs, lib, sops-nix, config, nixos-hardware, ... }: {
+{ pkgs, lib, config, nixos-hardware, ... }: {
   imports = [
     nixos-hardware.nixosModules.framework-11th-gen-intel
     nixos-hardware.nixosModules.common-hidpi
@@ -69,6 +69,10 @@
       "wheel"
       "input"
     ];
+  };
+  
+  home-manager.users.${username} = {
+    imports = [ ../../home/cameron ];
   };
 
   # enable location service

@@ -47,7 +47,7 @@ in {
   };
 
   home-manager.users.${username} = {
-    imports = [ ../../home/server ];
+    imports = [ ../../home/cameron ];
   };
 
   wsl = {

@@ -1,5 +1,6 @@
-{ pkgs, lib, sops-nix, config, nixos-hardware, ... }: 
+{ pkgs, lib, config, nixos-hardware, ... }: 
 let 
+  inherit (config.sops) secrets;
 in {
   imports = [ 
     # nixos-hardware.nixosModules.common-pc
@@ -65,20 +66,17 @@ in {
       sshKeyPaths = [
         "/etc/ssh/ssh_host_ed25519"
       ];
-      keyFile = "/home/cameron/.config/sops/age/keys.txt";
-      generateKey = true;
     };
-    # secrets = {
-      # main_user_password = { neededForUsers = true; };
-      # email_address = {};
-    # };
+    secrets = {
+      main_user_password = { neededForUsers = true; };
+    };
   };
 
   programs.ssh.startAgent = true;
 
   users.users.cameron = {
     isNormalUser = true;
-    # hashedPasswordFile = config.sops.secrets.main_user_password.path;
+    hashedPasswordFile = secrets.main_user_password.path;
     description = "Cameron";
     extraGroups = [
       "networkmanager"
@@ -86,6 +84,10 @@ in {
       "wheel"
       "input"
     ];
+  };
+  
+  home-manager.users.${username} = {
+    imports = [ ../../home/cameron ];
   };
 
   # Allow unfree packages

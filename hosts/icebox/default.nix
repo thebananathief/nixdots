@@ -1,4 +1,4 @@
-{ pkgs, nixos-hardware, lib, sops-nix, nixpkgs, config, username, ... }: {
+{ pkgs, nixos-hardware, lib, nixpkgs, config, username, ... }: {
   imports = [
     nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
@@ -74,6 +74,10 @@ By accessing this system, you agree that your actions may be monitored if unauth
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFfIygbp1DdDJUCAlUHbrdzu7cnb7T/JTDexJtpMXCIz cameron@phone"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDNVv4iCWxWG2PQlzWAzWqgl7eazAv91EqaYGUmpsyOU deck@UNKNOWN-GALE"
     ];
+  };
+  
+  home-manager.users.${username} = {
+    imports = [ ../../home/server ];
   };
   
   services = {
