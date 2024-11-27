@@ -8,7 +8,7 @@
     
     # Nameservers to forward requests to (upstream DNS servers)
     # By default, it'll forward to this server's nameservers
-    forwarding = [
+    forwarders = [
       "8.8.8.8"
       "1.1.1.1"
     ];
