@@ -59,13 +59,6 @@
       inherit username useremail globalFonts;
     } // inputs;
 
-    # homeDefaultArgs = specialArgs: {
-    #   home-manager.useGlobalPkgs = true;
-    #   home-manager.useUserPackages = true;
-    #   home-manager.backupFileExtension = "hm-backup";
-    #   home-manager.extraSpecialArgs = specialArgs;
-    # };
-
     nixpkgsCustom = system: (import nixpkgs {
       inherit system;
       config.allowUnfree = true;
@@ -77,7 +70,6 @@
     mkNixosSystem = {
       system ? "x86_64-linux",
       nixos-modules,
-      # home-module,
     }: let
       specialArgs = defaultArgs;
     in nixpkgs.lib.nixosSystem {
@@ -88,9 +80,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "hm-backup";
-
           home-manager.extraSpecialArgs = specialArgs;
-          # home-manager.users."${username}" = home-module;
         }
         ./modules/common
         sops-nix.nixosModules.sops
@@ -100,23 +90,18 @@
     nixosConfigurations = {
       talos = mkNixosSystem {
         nixos-modules = [ ./hosts/talos ];
-        # home-module = import ./home/server;
       };
       gargantuan = mkNixosSystem {
         nixos-modules = [ ./hosts/gargantuan ];
-        # home-module = import ./home/cameron;
       };
       thoth = mkNixosSystem {
         nixos-modules = [ ./hosts/thoth ];
-        # home-module = import ./home/cameron;
       };
       thoth-wsl = mkNixosSystem {
         nixos-modules = [ ./hosts/thoth/wsl-default.nix ];
-        # home-module = import ./home/server;
       };
       icebox = mkNixosSystem {
         nixos-modules = [ ./hosts/icebox ];
-        # home-module = import ./home/server;
       };
     };
   };
