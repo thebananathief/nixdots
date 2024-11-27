@@ -33,7 +33,7 @@ in {
   sops = {
     defaultSopsFile = ../../secrets.yml;
     # This should be the private key(s) you want to use to decrypt secrets.yml
-    age.sshKeyPaths = [ "/root/.ssh/id_ed25519" ];
+    age.sshKeyPaths = [ "/home/cameron/.ssh/id_ed25519" ];
     secrets.main_user_password = { neededForUsers = true; };
   };
   

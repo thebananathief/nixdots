@@ -58,20 +58,12 @@
   environment.systemPackages = with pkgs; [
   # BASIC utils that should be on every system running this flake
     git wget curl unzip killall
-    nettools dig lsof
-    ethtool lm_sensors pciutils
+    dnsutils bat dua tree jq duf
     zellij neofetch bottom
-    bat dua tree jq duf
     dos2unix tldr just
-    age sops
-    nurl
+    age sops nurl
 
-    # intel-gpu-tools
-    # dnsutils
-    # iftop
-    # iotop
-    # fio
-    # hddtemp
-    # nmap
+    # iftop nmap fio hddtemp intel-gpu-tools
+    # iotop lsof ethtool lm_sensors pciutils nettools
   ];
 }

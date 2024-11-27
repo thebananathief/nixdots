@@ -26,9 +26,7 @@
       initExtra = ''
         zstyle ':autocomplete:*' ignored-input '..##'
 
-        # source ~/.config/zsh/fzf/fzf-tab.plugin.zsh
         source ${dotfiles}/.shell_aliases
-        # source ~/.bash_aliases
       '';
       plugins = [
         {

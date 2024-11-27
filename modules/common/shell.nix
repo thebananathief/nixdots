@@ -6,19 +6,20 @@
   users.defaultUserShell = pkgs.zsh;
   programs.zsh = {
     enable = true;
-    # ohMyZsh = {
-    #   enable = true;
-    #   theme = "avit";
-    #   plugins = [
-    #     # "git"
-    #     "git-auto-fetch"
-    #     "sudo"
-    #     "fzf"
-    #   ];
-    # };
-    # autosuggestions.enable = true;
+    ohMyZsh = {
+      enable = true;
+      theme = "ys";
+      plugins = [
+        # "git"
+        "ssh"
+        "git-auto-fetch"
+        "sudo"
+        "z"
+      ];
+    };
+    autosuggestions.enable = true;
     # zsh-autoenv.enable = true;
-    # syntaxHighlighting.enable = true;
+    syntaxHighlighting.enable = true;
   };
 
 
