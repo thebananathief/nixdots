@@ -91,7 +91,7 @@
     specialArgs = {
       inherit username useremail globalFonts;
       pkgs = import nixpkgs {
-        inherit system;
+        # inherit system;
         config.allowUnfree = true;
         # config.permittedInsecurePackages = [ 
         # ];
