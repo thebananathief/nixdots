@@ -1,10 +1,4 @@
 { pkgs, config, dotfiles, ... }: {
-  # home.packages = with pkgs; [ zsh fzf zsh-fzf-tab ];
-
-  home.packages = with pkgs; [
-    zsh-autocomplete
-  ];
-
   programs = {
     zsh = {
       enable = true;
