@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, dotfiles, ... }: {
   # home.packages = with pkgs; [ zsh fzf zsh-fzf-tab ];
 
   home.packages = with pkgs; [
