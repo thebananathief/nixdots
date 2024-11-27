@@ -1,9 +1,13 @@
 { pkgs, lib, inputs, ... }: rec {
   imports = [
-    ./shell
-    # ./sway.nix
+    ./shell/xdg.nix
+    ./shell/alacritty.nix
+    ../git.nix
+    ../zsh.nix
+
     ./userpackages.nix
 
+    # ./sway.nix
     # ./hyprland
     # ./theme.nix
     # ./gnome-theme.nix

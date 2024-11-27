@@ -123,7 +123,11 @@ By accessing this system, you agree that your actions may be monitored if unauth
   };
   
   home-manager.users.${username} = {
-    imports = [ ../../home/server ];
+    imports = [ 
+      ../../home/server.nix
+      ../../home/zsh.nix
+      ../../home/git.nix
+    ];
   };
 
   environment.systemPackages = with pkgs; [

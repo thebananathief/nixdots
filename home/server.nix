@@ -1,9 +1,4 @@
 { pkgs, lib, ... }: rec {
-  imports = [
-    ../cameron/shell/zsh.nix
-    ../cameron/shell/git.nix
-  ];
-
   home = {
     username = "cameron";
     # home.homeDirectory = "/home/cameron";

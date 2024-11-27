@@ -47,16 +47,20 @@ in {
   };
 
   home-manager.users.${username} = {
-    imports = [ ../../home/cameron ];
+    imports = [ 
+      ../../home/server.nix
+      ../../home/zsh.nix
+      ../../home/git.nix
+    ];
   };
 
   wsl = {
     enable = true;
-    wslConf.automount.root = "/mnt";
-    wslConf.interop.appendWindowsPath = true;
-    wslConf.network.generateHosts = true;
-    wslConf.network.generateResolvConf = true;
-    wslConf.user = "${username}";
+    # wslConf.automount.root = "/mnt";
+    # wslConf.interop.appendWindowsPath = true;
+    # wslConf.network.generateHosts = true;
+    # wslConf.network.generateResolvConf = true;
+    # wslConf.user = "${username}";
     defaultUser = username;
     startMenuLaunchers = true;
 
