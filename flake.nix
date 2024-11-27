@@ -73,7 +73,7 @@
     } // inputs;
 
     # Function to declare NixOS systems with home manager configs
-    nixosSystem = {
+    asd = {
       system ? "x86_64-linux",
       args ? {},
       nixos-modules,
@@ -96,22 +96,22 @@
       };
   in {
     nixosConfigurations = {
-      gargantuan = nixosSystem {
+      gargantuan = asd {
         nixos-modules = [ ./hosts/gargantuan ];
         home-module = import ./home/cameron;
       };
 
-      thoth = nixosSystem {
+      thoth = asd {
         nixos-modules = [ ./hosts/thoth ];
         home-module = import ./home/cameron;
       };
 
-      talos = nixosSystem {
+      talos = asd {
         nixos-modules = [ ./hosts/talos ];
         home-module = import ./home/server;
       };
       
-      icebox = nixosSystem {
+      icebox = asd {
         nixos-modules = [ ./hosts/icebox ];
         home-module = import ./home/server;
       };
