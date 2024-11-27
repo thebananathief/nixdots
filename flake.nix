@@ -54,6 +54,7 @@
     useremail = "cameron.salomone@gmail.com";
     globalFonts = import ./modules/globalFonts.nix;
 
+    system = "x86_64-linux";
     nixpkgsCustom = system: (import nixpkgs {
         inherit system;
         config.allowUnfree = true;
