@@ -56,7 +56,7 @@
 
     system = "x86_64-linux";
     # Function to declare NixOS systems with home manager configs
-    nixosSystem = import ./modules/nixosSystem.nix;
+    nixosSystem = import ./nixosSystem.nix;
     specialArgs = {
       inherit username useremail globalFonts;
       pkgs = import nixpkgs {
