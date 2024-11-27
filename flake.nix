@@ -55,7 +55,7 @@
     globalFonts = import ./modules/globalFonts.nix;
 
     system = "x86_64-linux";
-    specialArgs = {
+    defaultArgs = {
       inherit username useremail globalFonts;
       pkgs = import nixpkgs {
         inherit system;
@@ -72,7 +72,9 @@
       system ? "x86_64-linux",
       nixos-modules,
       home-module,
-    }: nixpkgs.lib.nixosSystem {
+    }: let
+      specialArgs = defaultArgs;
+    in nixpkgs.lib.nixosSystem {
       inherit system specialArgs;
       modules = nixos-modules ++ [
         home-manager.nixosModules.home-manager {
@@ -86,29 +88,6 @@
         ./modules/common
       ];
     };
-
-    # nixosSystem = {
-    #   system ? "x86_64-linux",
-    #   args ? {},
-    #   argDefaults,
-    #   nixos-modules,
-    #   home-module
-    # }: let
-    #   specialArgs = argDefaults // args;
-    # in nixpkgs.lib.nixosSystem {
-    #   inherit system specialArgs;
-    #   # pkgs = nixpkgsCustom system;
-    #   modules = nixos-modules ++ [
-    #     ../modules/common
-    #     home-manager.nixosModules.home-manager {
-    #       home-manager.useGlobalPkgs = true;
-    #       home-manager.useUserPackages = true;
-    #       home-manager.backupFileExtension = "hm-backup";
-    #       home-manager.extraSpecialArgs = specialArgs;
-    #       home-manager.users."${username}" = home-module;
-    #     }
-    #   ];
-    # };
   in {
     nixosConfigurations = {
       talos = nixosSystem {
