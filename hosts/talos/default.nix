@@ -15,7 +15,6 @@ in {
     # nixos-hardware.nixosModules.common-pc
     # nixos-hardware.nixosModules.common-pc-ssd
     nixos-hardware.nixosModules.common-cpu-intel
-    sops-nix.nixosModules.sops
     ./hardware-configuration.nix
     ./fileshares.nix
     ./disks.nix

@@ -2,7 +2,6 @@
   imports = [
     nixos-hardware.nixosModules.framework-11th-gen-intel
     nixos-hardware.nixosModules.common-hidpi
-    sops-nix.nixosModules.sops
     ./hardware-configuration.nix
     ../../modules/packages.nix
     # ../../modules/network-mount.nix

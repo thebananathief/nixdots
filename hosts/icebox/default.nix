@@ -1,7 +1,6 @@
 { pkgs, nixos-hardware, lib, sops-nix, nixpkgs, config, username, ... }: {
   imports = [
     nixos-hardware.nixosModules.common-cpu-intel
-    sops-nix.nixosModules.sops
     ./hardware-configuration.nix
     ./restic.nix
     ../../modules/tailscale.nix

@@ -6,7 +6,6 @@ in {
     # nixos-hardware.nixosModules.common-pc-ssd
     # nixos-hardware.nixosModules.common-gpu-nvidia
     nixos-hardware.nixosModules.common-cpu-intel
-    sops-nix.nixosModules.sops
     ./hardware-configuration.nix
     ../../modules/nvidia.nix
     ../../modules/packages.nix

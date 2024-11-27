@@ -93,6 +93,7 @@
           # home-manager.users."${username}" = home-module;
         }
         ./modules/common
+        sops-nix.nixosModules.sops
       ];
     };
   in {
