@@ -90,7 +90,7 @@
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "hm-backup";
             home-manager.extraSpecialArgs = specialArgs;
-            home-manager.users."${specialArgs.username}" = home-module;
+            home-manager.users."${username}" = home-module;
           }
         ];
       };
