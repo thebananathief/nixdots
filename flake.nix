@@ -68,7 +68,7 @@
     });
 
     argDefaults = {
-      inherit inputs username useremail globalFonts self;
+      inherit inputs username useremail globalFonts;
     };
 
     # Function to declare NixOS systems with home manager configs
