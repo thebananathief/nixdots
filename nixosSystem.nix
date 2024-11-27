@@ -18,4 +18,4 @@ in nixpkgs.lib.nixosSystem {
       home-manager.users."${username}" = home-module;
     }
   ];
-};
+}
