@@ -55,16 +55,14 @@
     globalFonts = import ./modules/globalFonts.nix;
 
     system = "x86_64-linux";
-    nixpkgsCustom = system: (import nixpkgs {
+    argDefaults = {
+      inherit username useremail globalFonts;
+      pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
         # config.permittedInsecurePackages = [ 
         # ];
-    });
-
-    argDefaults = {
-      inherit username useremail globalFonts;
-      pkgs = nixpkgsCustom "x86_64-linux";
+      };
     # // inputs basically means "merge this left side attrset with the right side (inputs)"
     # This line enables you to import the inputs (flakes/modules from github) into modules, aka: ( nixos-cosmic, sops-nix, ... ): {}
     } // inputs;
