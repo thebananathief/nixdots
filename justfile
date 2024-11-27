@@ -28,16 +28,6 @@ sync:
 
 
 
-# remotely links the flake.nix to one in /etc/nixos, then rebuild switches | MUST SPECIFY HOSTNAME TO SSH TO
-[windows]
-rinstall host:
-  ssh {{host}} -- ~/github/nixdots/nixos-rebuild switch
-[linux]
-rinstall host:
-  ssh {{host}} -- ~/github/nixdots/nixos-rebuild switch
-
-
-
 alias sw := switch
 # git commit all and push, then remotely rebuild switch talos
 [windows]

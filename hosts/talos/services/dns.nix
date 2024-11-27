@@ -10,6 +10,7 @@
     # By default, it'll forward to this server's nameservers
     forwarding = [
       "8.8.8.8"
+      "1.1.1.1"
     ];
 
     # Enable recursive DNS for private network
@@ -35,12 +36,11 @@
 
         ; Name servers
         @       IN      NS      ns.talos.host.
-
-        ; A records for the name servers themselves
         ns      IN      A       100.64.252.67
 
         ; Other A records
         *       IN      A       100.64.252.67
+        ; Also represents *.talos.host
         '';
       };
     };
