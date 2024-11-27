@@ -70,14 +70,15 @@
     } // inputs;
 
     nixosSystem = {
+      nixpkgs,
+      home-manager,
       system ? "x86_64-linux",
+      specialArgs,
       nixos-modules,
       home-module,
-    }: (nixpkgs.lib.nixosSystem {
+    }: nixpkgs.lib.nixosSystem {
       inherit system specialArgs;
-      modules = 
-        nixos-modules
-        ++ [
+      modules = nixos-modules ++ [
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
@@ -87,7 +88,7 @@
         }
         ../modules/common
       ];
-    });
+    };
 
     # nixosSystem = {
     #   system ? "x86_64-linux",
@@ -114,27 +115,27 @@
   in {
     nixosConfigurations = let
       # specialArgs = { inherit argDefaults; };
-      base_args = { inherit specialArgs; };
+      base_args = { inherit home-manager nixpkgs system specialArgs; };
     in {
-      talos = nixosSystem {
+      talos = nixosSystem ({
         nixos-modules = [ ./hosts/talos ];
         home-module = import ./home/server;
-      };
+      } // base_args);
 
-      gargantuan = nixosSystem {
+      gargantuan = nixosSystem ({
         nixos-modules = [ ./hosts/gargantuan ];
         home-module = import ./home/cameron;
-      };
+      } // base_args);
 
-      thoth = nixosSystem {
+      thoth = nixosSystem ({
         nixos-modules = [ ./hosts/thoth ];
         home-module = import ./home/cameron;
-      };
+      } // base_args);
 
-      icebox = nixosSystem {
+      icebox = nixosSystem ({
         nixos-modules = [ ./hosts/icebox ];
         home-module = import ./home/server;
-      };
+      } // base_args);
     };
   };
 }
