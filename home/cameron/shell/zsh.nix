@@ -42,7 +42,7 @@
           src = pkgs.fetchFromGitHub {
             owner = "marlonrichert";
             repo = "zsh-autocomplete";
-            rev = "762afacbf227ecd173e899d10a28a478b4c84a3f";
+            rev = "2024-09-04";
             hash = "sha256-o8IQszQ4/PLX1FlUvJpowR2Tev59N8lI20VymZ+Hp4w=";
           };
         }
