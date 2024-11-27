@@ -43,8 +43,8 @@
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
     # nixpkgs.follows = "nixos-cosmic/nixpkgs";
 
-    dotfiles.url = "git+ssh://git@github.com/thebananathief/dotfiles.git";
-    dotfiles.flake = false;
+    # dotfiles.url = "git+ssh://git@github.com/thebananathief/dotfiles.git";
+    # dotfiles.flake = false;
   };
 
   # outputs = inputs: with inputs; let
