@@ -96,22 +96,22 @@
       };
   in {
     nixosConfigurations = {
-      gargantuan = inputs: nixosSystem {
+      gargantuan = inputs: let in nixosSystem {
         nixos-modules = [ ./hosts/gargantuan ];
         home-module = import ./home/cameron;
       };
 
-      thoth = inputs: nixosSystem {
+      thoth = inputs: let in nixosSystem {
         nixos-modules = [ ./hosts/thoth ];
         home-module = import ./home/cameron;
       };
 
-      talos = inputs: nixosSystem {
+      talos = inputs: let in nixosSystem {
         nixos-modules = [ ./hosts/talos ];
         home-module = import ./home/server;
       };
       
-      icebox = inputs: nixosSystem {
+      icebox = inputs: let in nixosSystem {
         nixos-modules = [ ./hosts/icebox ];
         home-module = import ./home/server;
       };
