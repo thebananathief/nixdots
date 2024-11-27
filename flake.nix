@@ -102,7 +102,7 @@
   in {
     nixosConfigurations = let
       # This feeds in everything we need at ./lib/nixosSystem.nix
-      base_args = { inherit home-manager nixpkgs system specialArgs; };
+      base_args = { inherit specialArgs; };
     in {
       gargantuan = nixosSystem ({
         nixos-modules = [ ./hosts/gargantuan ];
