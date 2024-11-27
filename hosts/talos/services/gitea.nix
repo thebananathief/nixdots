@@ -36,14 +36,14 @@ in {
 
   services.caddy.virtualHosts = {
     # Extra host entry so that we can bind it to tailscale's interface
-    ts_code = {
-      listenAddresses = config.tailscaleInterfaces;
-      hostName = "code.${ config.networking.fqdn }";
-      extraConfig = ''
-        tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
-        reverse_proxy localhost:8010
-      '';
-    };
+    # ts_code = {
+    #   listenAddresses = config.tailscaleInterfaces;
+    #   hostName = "code.${ config.networking.fqdn }";
+    #   extraConfig = ''
+    #     tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+    #     reverse_proxy localhost:8010
+    #   '';
+    # };
     "code.${ config.networking.fqdn }".extraConfig = ''
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
 
