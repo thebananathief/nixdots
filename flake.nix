@@ -95,25 +95,25 @@
       };
   in {
     nixosConfigurations = {
-      gargantuan = nixosSystem ({
+      gargantuan = nixosSystem {
         nixos-modules = [ ./hosts/gargantuan ];
         home-module = import ./home/cameron;
-      });
+      };
 
-      thoth = nixosSystem ({
+      thoth = nixosSystem {
         nixos-modules = [ ./hosts/thoth ];
         home-module = import ./home/cameron;
-      });
+      };
 
-      talos = nixosSystem ({
+      talos = nixosSystem {
         nixos-modules = [ ./hosts/talos ];
         home-module = import ./home/server;
-      });
+      };
       
-      icebox = nixosSystem ({
+      icebox = nixosSystem {
         nixos-modules = [ ./hosts/icebox ];
         home-module = import ./home/server;
-      });
+      };
     };
   };
 }
