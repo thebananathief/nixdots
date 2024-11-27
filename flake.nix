@@ -70,7 +70,6 @@
     # Function to make NixOS systems with common modules & home manager configs
     nixosSystem = {
       system ? "x86_64-linux",
-      specialArgs,
       nixos-modules,
       home-module,
     }: nixpkgs.lib.nixosSystem {
@@ -79,6 +78,7 @@
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+          home-manager.backupFileExtension = "hm-backup";
 
           home-manager.extraSpecialArgs = specialArgs;
           home-manager.users."${username}" = home-module;
