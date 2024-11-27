@@ -86,7 +86,7 @@
           home-manager.extraSpecialArgs = specialArgs;
           home-manager.users."${username}" = home-module;
         }
-        ../modules/common
+        ./modules/common
       ];
     };
 
