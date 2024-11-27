@@ -44,6 +44,18 @@
         # source ~/.config/zsh/fzf/fzf-tab.plugin.zsh
         source ~/.bash_aliases
       '';
+      plugins = [
+        {
+          # will source zsh-autosuggestions.plugin.zsh
+          name = "zsh-autocomplete";
+          src = pkgs.fetchFromGitHub {
+            owner = "marlonrichert";
+            repo = "zsh-autocomplete";
+            rev = "762afacbf227ecd173e899d10a28a478b4c84a3f";
+            hash = "sha256-o8IQszQ4/PLX1FlUvJpowR2Tev59N8lI20VymZ+Hp4w=";
+          };
+        }
+      ];
     };
 
     fzf = {
