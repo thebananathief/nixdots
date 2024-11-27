@@ -41,9 +41,9 @@ in {
     isNormalUser = true;
     hashedPasswordFile = secrets.main_user_password.path;
     description = "Cameron";
-    # extraGroups = [
-    #   "wheel"
-    # ];
+    extraGroups = [
+      "wheel"
+    ];
   };
 
   home-manager.users.${username} = {
@@ -66,7 +66,7 @@ in {
     wslConf.interop.appendWindowsPath = true;
     wslConf.network.generateHosts = true;
     wslConf.network.generateResolvConf = true;
-    wslConf.user = config.users.users.${username};
+    wslConf.user = "root";
     defaultUser = username;
     startMenuLaunchers = true;
 
