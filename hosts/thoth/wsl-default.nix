@@ -55,7 +55,7 @@ in {
   };
 
   # Keep LF line endings on WSL, CRLF when checked out on Windows
-  programs.git.extraConfig.core.autocrlf = "input";
+  # programs.git.extraConfig.core.autocrlf = "input";
   wsl = {
     enable = true;
     wslConf.automount.root = "/mnt";
