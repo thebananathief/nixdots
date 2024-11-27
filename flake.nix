@@ -77,7 +77,7 @@
     mkNixosSystem = {
       system ? "x86_64-linux",
       nixos-modules,
-      home-module,
+      # home-module,
     }: let
       specialArgs = defaultArgs;
     in nixpkgs.lib.nixosSystem {
@@ -90,7 +90,7 @@
           home-manager.backupFileExtension = "hm-backup";
 
           home-manager.extraSpecialArgs = specialArgs;
-          home-manager.users."${username}" = home-module;
+          # home-manager.users."${username}" = home-module;
         }
         ./modules/common
       ];
@@ -99,23 +99,23 @@
     nixosConfigurations = {
       talos = mkNixosSystem {
         nixos-modules = [ ./hosts/talos ];
-        home-module = import ./home/server;
+        # home-module = import ./home/server;
       };
       gargantuan = mkNixosSystem {
         nixos-modules = [ ./hosts/gargantuan ];
-        home-module = import ./home/cameron;
+        # home-module = import ./home/cameron;
       };
       thoth = mkNixosSystem {
         nixos-modules = [ ./hosts/thoth ];
-        home-module = import ./home/cameron;
+        # home-module = import ./home/cameron;
       };
       thoth-wsl = mkNixosSystem {
         nixos-modules = [ ./hosts/thoth/wsl-default.nix ];
-        home-module = import ./home/server;
+        # home-module = import ./home/server;
       };
       icebox = mkNixosSystem {
         nixos-modules = [ ./hosts/icebox ];
-        home-module = import ./home/server;
+        # home-module = import ./home/server;
       };
     };
   };

@@ -34,23 +34,21 @@ in {
     defaultSopsFile = ../../secrets.yml;
     # This should be the private key(s) you want to use to decrypt secrets.yml
     age.sshKeyPaths = [ "/home/cameron/.ssh/id_ed25519" ];
-    secrets.wsl_user_password = { neededForUsers = true; };
+    secrets.main_user_password = { neededForUsers = true; };
   };
   
   users.users.${username} = {
     isNormalUser = true;
-    hashedPasswordFile = secrets.wsl_user_password.path;
+    hashedPasswordFile = secrets.main_user_password.path;
     description = "Cameron";
     extraGroups = [
       "wheel"
     ];
   };
 
-  # home-manager.users.${username} = {
-  #   imports = [
-  #     ./home.nix
-  #   ];
-  # };
+  home-manager.users.${username} = {
+    imports = [ ../../home/server ];
+  };
 
   wsl = {
     enable = true;
