@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
 __skip_git_sync=0
+HOSTNAME=${HOSTNAME:=}
 
 # cd $HOME/github/nixdots
 pushd "$(dirname "$0")"
@@ -18,7 +19,7 @@ function do_rebuild() {
   #   exit 1
   # fi
 
-  sudo nixos-rebuild --flake '.#' "$1" --accept-flake-config --show-trace
+  sudo nixos-rebuild --flake ".#$HOSTNAME" "$1" --accept-flake-config --show-trace
   # --show-trace --option eval-cache false
   if [[ $? -ne 0 ]]; then
     exit 1
@@ -35,6 +36,10 @@ while [[ $# -gt 0 ]]; do
     case $key in
         -s | --skip-git-sync)
             __skip_git_sync=1
+            shift
+        ;;
+        -h | --host)
+            HOSTNAME=$2
             shift
         ;;
         *)
