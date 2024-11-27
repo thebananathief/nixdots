@@ -1,4 +1,4 @@
-{ config, lib, pkgs, nixos-wsl, username, nixpkgs, sops-nix, ... }:
+{ config, lib, pkgs, nixos-wsl, username, nixpkgs, ... }:
 let
   inherit (config.sops) secrets;
 in {
@@ -18,16 +18,16 @@ in {
       "/nix/var/nix/profiles/per-user/root/channels"
     ];
 
-    registry = {
-      nixpkgs = {
-        flake = nixpkgs;
-      };
-    };
+    # registry = {
+    #   nixpkgs = {
+    #     flake = nixpkgs;
+    #   };
+    # };
 
-    package = pkgs.nixFlakes;
+    # package = pkgs.nixFlakes;
   };
 
-  environment.enableAllTerminfo = true;
+  # environment.enableAllTerminfo = true;
 
   security.sudo.wheelNeedsPassword = false;
   sops = {
