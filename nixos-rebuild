@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
 
-set -xe
-
 __skip_git_sync=0
 HOSTNAME=${HOSTNAME:=}
 
