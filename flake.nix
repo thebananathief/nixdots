@@ -47,17 +47,16 @@
     dotfiles.flake = false;
   };
 
-  outputs = inputs: with inputs; let
-  # outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, ... }: let
+  outputs = inputs: with inputs;
+  let
     username = "cameron";
     useremail = "cameron.salomone@gmail.com";
     globalFonts = import ./modules/globalFonts.nix;
 
-    defaultArgs = {
-      inherit username useremail globalFonts;
+    defaultArgs = { inherit username useremail globalFonts inputs; };
     # // inputs basically means "merge this left side attrset with the right side (inputs)"
     # This line enables you to import the inputs (flakes/modules from github) into modules, aka: ( nixos-cosmic, sops-nix, ... ): {}
-    } // inputs;
+    
 
     nixpkgsCustom = system: (import nixpkgs {
       inherit system;
@@ -94,17 +93,14 @@
         nixos-modules = [ ./hosts/talos ];
         home-module = import ./home/server;
       };
-
       gargantuan = mkNixosSystem {
         nixos-modules = [ ./hosts/gargantuan ];
         home-module = import ./home/cameron;
       };
-
       thoth = mkNixosSystem {
         nixos-modules = [ ./hosts/thoth ];
         home-module = import ./home/cameron;
       };
-
       icebox = mkNixosSystem {
         nixos-modules = [ ./hosts/icebox ];
         home-module = import ./home/server;
