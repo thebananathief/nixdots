@@ -1,4 +1,4 @@
-{ pkgs, lib, config, nixos-hardware, ... }: {
+{ pkgs, lib, config, username, nixos-hardware, ... }: {
   imports = [
     nixos-hardware.nixosModules.framework-11th-gen-intel
     nixos-hardware.nixosModules.common-hidpi
@@ -59,7 +59,7 @@
 
   programs.ssh.startAgent = true;
 
-  users.users.cameron = {
+  users.users.${username} = {
     isNormalUser = true;
     hashedPasswordFile = config.sops.secrets.main_user_password.path;
     description = "Cameron";

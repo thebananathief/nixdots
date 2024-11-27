@@ -1,4 +1,4 @@
-{ pkgs, lib, config, nixos-hardware, ... }: 
+{ pkgs, lib, username, config, nixos-hardware, ... }: 
 let 
   inherit (config.sops) secrets;
 in {
@@ -74,7 +74,7 @@ in {
 
   programs.ssh.startAgent = true;
 
-  users.users.cameron = {
+  users.users.${username} = {
     isNormalUser = true;
     hashedPasswordFile = secrets.main_user_password.path;
     description = "Cameron";
