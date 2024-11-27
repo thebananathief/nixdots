@@ -66,7 +66,7 @@
         config.allowUnfree = true;
         # config.permittedInsecurePackages = [ 
         # ];
-    })
+    });
 
     argDefaults = {
       inherit username useremail globalFonts;
