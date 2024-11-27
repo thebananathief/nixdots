@@ -61,17 +61,26 @@
     useremail = "cameron.salomone@gmail.com";
     globalFonts = import ./modules/globalFonts.nix;
 
-    # Here we're declaring a function called "nixosSystem"
-    # It first takes in all our variables, then runs the "nixpkgs.lib.nixosSystem"
-    # function, piping the variables in where they need to go
+    nixpkgsCustom = system: (import nixpkgs rec {
+        inherit system;
+        config.allowUnfree = true;
+        # config.permittedInsecurePackages = [ 
+        # ];
+    })
+
+    argDefaults = {
+      inherit username useremail globalFonts;
+      pkgs = nixpkgsCustom
+    } // inputs;
+
+    # Function to declare NixOS systems with home manager configs
     nixosSystem = {
-      nixpkgs,
-      home-manager,
       system ? "x86_64-linux",
-      specialArgs,
       nixos-modules,
       home-module,
-    }: nixpkgs.lib.nixosSystem {
+    }: let
+      specialArgs = argDefaults;
+    in nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
         modules =
           nixos-modules
@@ -87,22 +96,10 @@
             ../modules/common
           ];
       };
-
-    specialArgs = {
-      inherit username useremail globalFonts;
-      pkgs = import nixpkgs {
-        # inherit system;
-        config.allowUnfree = true;
-        # config.permittedInsecurePackages = [ 
-        # ];
-      };
-    # // inputs basically means "merge this left side attrset with the right side (inputs)"
-    # This line enables you to import the inputs (flakes/modules from github) into modules, aka: ( nixos-cosmic, sops-nix, ... ): {}
-    } // inputs;
   in {
     nixosConfigurations = let
       # This feeds in everything we need at ./lib/nixosSystem.nix
-      base_args = { inherit home-manager nixpkgs specialArgs; };
+      base_args = { inherit home-manager nixpkgs system specialArgs; };
     in {
       gargantuan = nixosSystem ({
         nixos-modules = [ ./hosts/gargantuan ];
