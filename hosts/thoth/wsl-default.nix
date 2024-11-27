@@ -41,9 +41,9 @@ in {
     isNormalUser = true;
     hashedPasswordFile = secrets.main_user_password.path;
     description = "Cameron";
-    extraGroups = [
-      "wheel"
-    ];
+    # extraGroups = [
+    #   "wheel"
+    # ];
   };
 
   home-manager.users.${username} = {
