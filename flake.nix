@@ -55,8 +55,8 @@
     # };
   };
 
-  outputs = inputs: with inputs; let
-  # outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, ... }: let
+  # outputs = inputs: with inputs; let
+  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, ... }: let
     username = "cameron";
     useremail = "cameron.salomone@gmail.com";
     globalFonts = import ./modules/globalFonts.nix;
