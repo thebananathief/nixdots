@@ -79,7 +79,7 @@
       nixos-modules,
       home-module
     }: let
-      specialArgs = { inherit argDefaults; } // args;
+      specialArgs = argDefaults // args;
     in nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
         pkgs = nixpkgsCustom system;
