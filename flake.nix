@@ -95,7 +95,7 @@
         ];
       };
   in {
-    nixosConfigurations = with inputs; {
+    nixosConfigurations = {
       gargantuan = nixosSystem {
         nixos-modules = [ ./hosts/gargantuan ];
         home-module = import ./home/cameron;
