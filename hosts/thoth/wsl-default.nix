@@ -1,4 +1,4 @@
-{ nixos-wsl, username, nixpkgs, config, lib, pkgs, ... }:
+{ config, lib, pkgs, nixos-wsl, username, nixpkgs, sops-nix, ... }:
 let
   inherit (config.sops) secrets;
 in {
