@@ -14,7 +14,7 @@ in {
   nix = {
     nixPath = [
       "nixpkgs=${nixpkgs.outPath}"
-      "nixos-config=/etc/nixos/configuration.nix"
+      "nixos-config=/etc/nixos/flake.nix"
       "/nix/var/nix/profiles/per-user/root/channels"
     ];
 
