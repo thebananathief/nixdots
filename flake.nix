@@ -68,7 +68,7 @@
     });
 
     argDefaults = {
-      inherit inputs username useremail globalFonts;
+      inherit inputs username useremail globalFonts self;
     };
     
     configurationDefaults = args: {
