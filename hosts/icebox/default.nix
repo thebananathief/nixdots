@@ -1,4 +1,4 @@
-{ pkgs, nixos-hardware, lib, sops-nix, config, username, ... }: {
+{ pkgs, nixos-hardware, lib, sops-nix, nixpkgs, config, username, ... }: {
   imports = [
     nixos-hardware.nixosModules.common-cpu-intel
     sops-nix.nixosModules.sops
@@ -12,6 +12,14 @@
     wireless.enable = false; # Enables wireless support via wpa_supplicant.
     firewall.enable = true;
   };
+
+  nix.nixPath = [
+    "nixos-config=/etc/nixos/nixdots/flake.nix"
+    "/nix/var/nix/profiles/per-user/root/channels"
+    "nixpkgs=${nixpkgs.outPath}"
+    # "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    # "/home/cameron/.nix-defexpr/channels"
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader = {

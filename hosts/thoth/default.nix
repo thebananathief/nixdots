@@ -34,6 +34,13 @@ in {
     networkmanager.enable = true;
     wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   };
+
+  nix.nixPath = [
+    "nixos-config=/home/cameron/github/nixdots/flake.nix"
+    "/nix/var/nix/profiles/per-user/root/channels"
+    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    # "/home/cameron/.nix-defexpr/channels"
+  ];
   
   # Was causing errors for me earlier, so I added this line
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;

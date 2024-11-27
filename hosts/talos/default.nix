@@ -36,6 +36,13 @@ in {
     firewall.enable = true;
   };
 
+  nix.nixPath = [
+    "nixos-config=/home/cameron/github/nixdots/flake.nix"
+    "/nix/var/nix/profiles/per-user/root/channels"
+    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    # "/home/cameron/.nix-defexpr/channels"
+  ];
+
   boot.loader.systemd-boot = {
     enable = true;
     configurationLimit = 30; # Helpful to prevent running out of space on /boot (gc handles it already tho)

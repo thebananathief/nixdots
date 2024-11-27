@@ -55,7 +55,16 @@
 
     # The `// inputs` bit means "merge this left side attrset with the right side (inputs)"
     # It lets you use the flake inputs in the modules (sops-nix, nixos-hardware)
-    defaultArgs = { inherit username useremail globalFonts; } // inputs;
+    defaultArgs = { 
+      inherit username useremail globalFonts;
+    } // inputs;
+
+    # homeDefaultArgs = specialArgs: {
+    #   home-manager.useGlobalPkgs = true;
+    #   home-manager.useUserPackages = true;
+    #   home-manager.backupFileExtension = "hm-backup";
+    #   home-manager.extraSpecialArgs = specialArgs;
+    # };
 
     nixpkgsCustom = system: (import nixpkgs {
       inherit system;
@@ -99,6 +108,10 @@
       thoth = mkNixosSystem {
         nixos-modules = [ ./hosts/thoth ];
         home-module = import ./home/cameron;
+      };
+      thoth-wsl = mkNixosSystem {
+        nixos-modules = [ ./hosts/thoth/wsl-default.nix ];
+        home-module = import ./home/server;
       };
       icebox = mkNixosSystem {
         nixos-modules = [ ./hosts/icebox ];
