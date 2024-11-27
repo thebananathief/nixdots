@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "dotfiles": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1732688387,
+        "narHash": "sha256-MUEJPVZhjk0LtKnN8iVLcsHSwnKkU4KHmkEODkIqNKA=",
+        "ref": "refs/heads/main",
+        "rev": "53fe747e80020091a938a88f09efa8042f11c944",
+        "revCount": 246,
+        "type": "git",
+        "url": "ssh://git@github.com/thebananathief/dotfiles.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/thebananathief/dotfiles.git"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -213,6 +229,7 @@
     },
     "root": {
       "inputs": {
+        "dotfiles": "dotfiles",
         "home-manager": "home-manager",
         "nixos-cosmic": "nixos-cosmic",
         "nixos-hardware": "nixos-hardware",
