@@ -73,7 +73,7 @@
       system ? "x86_64-linux",
       nixos-modules,
       home-module,
-    }: nixpkgs.lib.nixosSystem {
+    }: (nixpkgs.lib.nixosSystem {
       inherit system specialArgs;
       modules = 
         nixos-modules
@@ -87,7 +87,7 @@
         }
         ../modules/common
       ];
-    };
+    });
 
     # nixosSystem = {
     #   system ? "x86_64-linux",
