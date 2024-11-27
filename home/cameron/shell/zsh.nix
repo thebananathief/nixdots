@@ -1,22 +1,27 @@
 { pkgs, config, ... }: {
   # home.packages = with pkgs; [ zsh fzf zsh-fzf-tab ];
 
+  home.packages = with pkgs; [
+    zsh-autocomplete
+  ];
+
   programs = {
     zsh = {
       enable = true;
       autosuggestion.enable = true;
-      enableCompletion = true;
+      enableCompletion = false;
       autocd = true;
       history.ignoreAllDups = true;
       oh-my-zsh = {
         enable = true;
-        theme = "avit";
+        theme = "ys";
         plugins = [
           # "git"
           "git-auto-fetch"
           "sudo"
           "fzf"
           "z"
+          "zsh-autocomplete"
         ];
       };
       syntaxHighlighting.enable = true;
@@ -27,14 +32,14 @@
       # '';
       initExtra = ''
         # case insensitive tab completion
-        zstyle ':completion:*' completer _complete _ignored _approximate
+        # zstyle ':completion:*' completer _complete _ignored _approximate
         # zstyle ':completion:*' list-colors '\'
         # zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
         # zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-        zstyle ':completion:*' menu select
+        # zstyle ':completion:*' menu select
         # zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
         # zstyle ':completion:*' verbose true
-        _comp_options+=(globdots)
+        # _comp_options+=(globdots)
 
         # source ~/.config/zsh/fzf/fzf-tab.plugin.zsh
         source ~/.bash_aliases
