@@ -69,7 +69,7 @@
 
     argDefaults = {
       inherit inputs username useremail globalFonts;
-      pkgs = nixpkgsCustom
+      pkgs = nixpkgsCustom;
     };
 
     # Function to declare NixOS systems with home manager configs
