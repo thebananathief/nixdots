@@ -56,10 +56,10 @@ in {
 
   wsl = {
     enable = true;
-    # wslConf.automount.root = "/mnt";
-    # wslConf.interop.appendWindowsPath = true;
-    # wslConf.network.generateHosts = true;
-    # wslConf.network.generateResolvConf = true;
+    wslConf.automount.root = "/mnt";
+    wslConf.interop.appendWindowsPath = true;
+    wslConf.network.generateHosts = true;
+    wslConf.network.generateResolvConf = true;
     # wslConf.user = "${username}";
     defaultUser = username;
     startMenuLaunchers = true;
