@@ -55,8 +55,7 @@
     # };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, ... }: let
-  # inputs: with inputs; let # avoids merging the namespaces manually like above
+  outputs = inputs: with inputs; let
     username = "cameron";
     useremail = "cameron.salomone@gmail.com";
     globalFonts = import ./modules/globalFonts.nix;
@@ -69,9 +68,9 @@
     });
 
     argDefaults = {
-      inherit username useremail globalFonts;
+      inherit inputs username useremail globalFonts;
       pkgs = nixpkgsCustom
-    } // inputs;
+    };
 
     # Function to declare NixOS systems with home manager configs
     nixosSystem = {
@@ -82,19 +81,17 @@
       specialArgs = argDefaults;
     in nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
-        modules =
-          nixos-modules
-          ++ [
-            home-manager.nixosModules.home-manager {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "hm-backup";
-              
-              home-manager.extraSpecialArgs = specialArgs;
-              home-manager.users."${specialArgs.username}" = home-module;
-            }
-            ../modules/common
-          ];
+        modules = nixos-modules ++ [
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "hm-backup";
+            
+            home-manager.extraSpecialArgs = specialArgs;
+            home-manager.users."${specialArgs.username}" = home-module;
+          }
+          ../modules/common
+        ];
       };
   in {
     nixosConfigurations = let
