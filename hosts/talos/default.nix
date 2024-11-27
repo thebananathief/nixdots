@@ -5,6 +5,7 @@
   username,
   nixos-hardware,
   sops-nix,
+  nixpkgs,
   ...
 }: 
 let
