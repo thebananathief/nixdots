@@ -55,8 +55,6 @@
     globalFonts = import ./modules/globalFonts.nix;
 
     system = "x86_64-linux";
-    # Function to declare NixOS systems with home manager configs
-    # nixosSystem = import ./lib/nixosSystem.nix;
     specialArgs = {
       inherit username useremail globalFonts;
       pkgs = import nixpkgs {
@@ -69,9 +67,8 @@
     # This line enables you to import the inputs (flakes/modules from github) into modules, aka: ( nixos-cosmic, sops-nix, ... ): {}
     } // inputs;
 
+    # Function to make NixOS systems with common modules & home manager configs
     nixosSystem = {
-      nixpkgs,
-      home-manager,
       system ? "x86_64-linux",
       specialArgs,
       nixos-modules,
@@ -115,7 +112,7 @@
   in {
     nixosConfigurations = let
       # specialArgs = { inherit argDefaults; };
-      base_args = { inherit home-manager nixpkgs system specialArgs; };
+      base_args = { inherit specialArgs; };
     in {
       talos = nixosSystem ({
         nixos-modules = [ ./hosts/talos ];
