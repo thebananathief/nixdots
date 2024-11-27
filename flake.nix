@@ -53,10 +53,9 @@
     useremail = "cameron.salomone@gmail.com";
     globalFonts = import ./modules/globalFonts.nix;
 
+    # The `// inputs` bit means "merge this left side attrset with the right side (inputs)"
+    # It lets you use the flake inputs in the modules (sops-nix, nixos-hardware)
     defaultArgs = { inherit username useremail globalFonts; } // inputs;
-    # // inputs basically means "merge this left side attrset with the right side (inputs)"
-    # This line enables you to import the inputs (flakes/modules from github) into modules, aka: ( nixos-cosmic, sops-nix, ... ): {}
-    
 
     nixpkgsCustom = system: (import nixpkgs {
       inherit system;

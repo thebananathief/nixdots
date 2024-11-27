@@ -15,6 +15,7 @@ in {
     # ../../modules/ai.nix
     # ../../modules/monero.nix
     ../../modules/nifi.nix
+    ../../modules/tailscale.nix
   ];
   
   boot.supportedFilesystems = [

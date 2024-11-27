@@ -9,6 +9,7 @@
     ../../modules/games.nix
     # ../../modules/test-containers.nix
     ../../modules/desktop
+    ../../modules/tailscale.nix
   ];
 
   boot.supportedFilesystems = [

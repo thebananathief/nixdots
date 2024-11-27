@@ -4,6 +4,7 @@
     sops-nix.nixosModules.sops
     ./hardware-configuration.nix
     ./restic.nix
+    ../../modules/tailscale.nix
   ];
 
   networking = {

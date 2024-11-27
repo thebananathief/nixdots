@@ -20,6 +20,8 @@ in {
     ./disks.nix
     ./services
     ./backup.nix
+    ./myOptions.nix
+    ../../modules/tailscale.nix
   ];
 
   tailscaleInterfaces = [
