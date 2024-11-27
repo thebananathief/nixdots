@@ -42,7 +42,7 @@ while [[ $# -gt 0 ]]; do
         ;;
         -h | --host)
             HOSTNAME=$2
-            shift
+            shift 2
         ;;
         *)
             "do_rebuild" "$@"
