@@ -43,16 +43,8 @@
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
     # nixpkgs.follows = "nixos-cosmic/nixpkgs";
 
-    dotfiles = {
-      url = "git+ssh://git@github.com/thebananathief/dotfiles.git";
-      flake = false;
-    };
-
-    # Something like this if you want to move secrets to a completely private repo
-    # mysecrets = {
-    #   url = "git+ssh://git@github.com/thebananathief/nix-secrets.git?shallow=1";
-    #   flake = false;
-    # };
+    dotfiles.url = "git+ssh://git@github.com/thebananathief/dotfiles.git";
+    dotfiles.flake = false;
   };
 
   # outputs = inputs: with inputs; let
@@ -73,28 +65,28 @@
     } // inputs;
 
     # Function to declare NixOS systems with home manager configs
-    nixosSystem = import ./nixosSystem.nix;
-    # nixosSystem = {
-    #   system ? "x86_64-linux",
-    #   args ? {},
-    #   nixos-modules,
-    #   home-module
-    # }: let
-    #   specialArgs = argDefaults // args;
-    # in nixpkgs.lib.nixosSystem {
-    #   inherit system specialArgs;
-    #   pkgs = nixpkgsCustom system;
-    #   modules = nixos-modules ++ [
-    #     ../modules/common
-    #     home-manager.nixosModules.home-manager {
-    #       home-manager.useGlobalPkgs = true;
-    #       home-manager.useUserPackages = true;
-    #       home-manager.backupFileExtension = "hm-backup";
-    #       home-manager.extraSpecialArgs = specialArgs;
-    #       home-manager.users."${username}" = home-module;
-    #     }
-    #   ];
-    # };
+    # nixosSystem = import ./nixosSystem.nix;
+    nixosSystem = {
+      system ? "x86_64-linux",
+      args ? {},
+      nixos-modules,
+      home-module
+    }: let
+      specialArgs = argDefaults // args;
+    in nixpkgs.lib.nixosSystem {
+      inherit system specialArgs;
+      pkgs = nixpkgsCustom system;
+      modules = nixos-modules ++ [
+        ../modules/common
+        home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.backupFileExtension = "hm-backup";
+          home-manager.extraSpecialArgs = specialArgs;
+          home-manager.users."${username}" = home-module;
+        }
+      ];
+    };
   in {
     nixosConfigurations = {
       # talos = nixosSystem {
