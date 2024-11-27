@@ -22,6 +22,7 @@ in {
     ./backup.nix
     ./dir-options.nix
     ../../modules/tailscale.nix
+    ../../modules/security.nix
   ];
 
   tailscaleInterfaces = [
@@ -39,7 +40,8 @@ in {
   nix.nixPath = [
     "nixos-config=/home/cameron/github/nixdots/flake.nix"
     "/nix/var/nix/profiles/per-user/root/channels"
-    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    # "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    "nixpkgs=${nixpkgs.outPath}"
     # "/home/cameron/.nix-defexpr/channels"
   ];
 

@@ -16,6 +16,7 @@ in {
     # ../../modules/monero.nix
     ../../modules/nifi.nix
     ../../modules/tailscale.nix
+    ../../modules/security.nix
   ];
   
   boot.supportedFilesystems = [
@@ -29,17 +30,19 @@ in {
     "cifs" # mount windows share
   ];
   
+  security.sudo.wheelNeedsPassword = true;
+  
   networking = {
     hostName = "thoth";
     networkmanager.enable = true;
     wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+    firewall.enable = true;
   };
 
   nix.nixPath = [
     "nixos-config=/home/cameron/github/nixdots/flake.nix"
     "/nix/var/nix/profiles/per-user/root/channels"
     "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-    # "/home/cameron/.nix-defexpr/channels"
   ];
   
   # Was causing errors for me earlier, so I added this line

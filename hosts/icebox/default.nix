@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./restic.nix
     ../../modules/tailscale.nix
+    ../../modules/security.nix
   ];
 
   networking = {
@@ -16,9 +17,7 @@
   nix.nixPath = [
     "nixos-config=/etc/nixos/nixdots/flake.nix"
     "/nix/var/nix/profiles/per-user/root/channels"
-    "nixpkgs=${nixpkgs.outPath}"
-    # "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-    # "/home/cameron/.nix-defexpr/channels"
+    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
   ];
 
   # Use the systemd-boot EFI boot loader.

@@ -42,22 +42,5 @@
   };
   boot.kernelModules = [ "tcp_bbr" ];
 
-  networking.firewall.enable = true;
-  security.sudo.wheelNeedsPassword = false;
-
-  # You are trusting SSH connections TO these hosts
-  programs.ssh.knownHosts = {
-    talos = {
-      hostNames = [ "talos" ];
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBMxPc2k6F4SGaXPNE2r0Uj3lglIx60/NCQIpVaI7hrO";
-    };
-    gargantuan = {
-      # hostNames = [ "gargantuan" ];
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFagsyJw/RCCgkgXtOYKeNF0NH8VABZ0WP+14yeq1/5k laptop";
-    };
-    thoth = {
-      # hostNames = [ "thoth" ];
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII9BZbMAtMIr0ZZKPwxIDTq7qZMjNVDI1ktg3r+DSCdv desktop";
-    };
-  };
+  security.sudo.wheelNeedsPassword = true;
 }

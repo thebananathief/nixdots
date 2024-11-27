@@ -1,7 +1,6 @@
 { lib, pkgs, ... }: {
   imports = [
     ./shell.nix
-    ./security.nix
   ];
 
   # These nix configs are only for the system, not the flake
