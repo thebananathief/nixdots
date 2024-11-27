@@ -70,13 +70,10 @@
     } // inputs;
 
     nixosSystem = {
-      system,
-      specialArgs,
+      system ? "x86_64-linux",
       nixos-modules,
       home-module,
-    }: let
-      username = specialArgs.username;
-    in nixpkgs.lib.nixosSystem {
+    }: nixpkgs.lib.nixosSystem {
       inherit system specialArgs;
       modules = nixos-modules ++ [
         ../modules/common
@@ -115,27 +112,27 @@
   in {
     nixosConfigurations = let
       # specialArgs = { inherit argDefaults; };
-      base_args = { inherit system specialArgs; };
+      base_args = { inherit specialArgs; };
     in {
-      talos = nixosSystem ({
+      talos = nixosSystem {
         nixos-modules = [ ./hosts/talos ];
         home-module = import ./home/server;
-      } // base_args);
+      };
 
-      gargantuan = nixosSystem ({
+      gargantuan = nixosSystem {
         nixos-modules = [ ./hosts/gargantuan ];
         home-module = import ./home/cameron;
-      } // base_args);
+      };
 
-      thoth = nixosSystem ({
+      thoth = nixosSystem {
         nixos-modules = [ ./hosts/thoth ];
         home-module = import ./home/cameron;
-      } // base_args);
+      };
 
-      icebox = nixosSystem ({
+      icebox = nixosSystem {
         nixos-modules = [ ./hosts/icebox ];
         home-module = import ./home/server;
-      } // base_args);
+      };
     };
   };
 }
