@@ -9,6 +9,13 @@
     ./dunst.nix
   ];
   
+  home.shellAliases = {
+    dup = "alacritty --working-directory '$(pwd)' &";
+    fonts = "yad --font | wl-copy";
+    lf = "yazi";
+    ii = "thunar";
+  };
+
   # home.sessionVariables = {
   # # systemd.user.sessionVariables = {
   #   # For SDL2, NOTE: Steam, most games and other binary apps may not work with "wayland" SDL driver, unset or tweak for specific apps
