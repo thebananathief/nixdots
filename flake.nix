@@ -115,7 +115,7 @@
   in {
     nixosConfigurations = let
       # specialArgs = { inherit argDefaults; };
-      base_args = { inherit home-manager nixpkgs system specialArgs; };
+      base_args = { inherit system specialArgs; };
     in {
       talos = nixosSystem ({
         nixos-modules = [ ./hosts/talos ];
