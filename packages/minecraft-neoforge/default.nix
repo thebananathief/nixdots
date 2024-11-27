@@ -22,3 +22,12 @@ lib.recurseIntoAttrs (
     neoforge = builtins.getAttr "neoforge-${escapeVersion latestVersion}" packages;
   }
 )
+
+
+  # neoforgeServer = pkgs.callPackage ../../packages/minecraft-neoforge/derivation.nix {
+  #   sha256 = "09pmvwvvic6wxrwjlcvwzgk9yf08wzvn9k23i3c7k44rrfyiaaxb";
+  #   url = "https://maven.neoforged.net/releases/net/neoforged/forge/1.20.1-47.1.84/forge-1.20.1-47.1.84-installer.jar";
+  #   version = "1.20.1-47.1.84";
+  #   jre_headless = (builtins.getAttr "openjdk${toString 17}" pkgs.javaPackages.compiler).headless;
+  # };
+  # environment.systemPackages = neoforgeServer;

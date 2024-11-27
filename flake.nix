@@ -22,14 +22,19 @@
   # Other nix code I want to import or "input" into my flake
   inputs = {
     # This lets us use all the libs and pkgs in nixpkgs itself - flakes don't use Nix's concept of channels for getting pkgs
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
+    
+    inputs.nixos-wsl.url = "github:nix-community/NixOS-WSL";
+    inputs.nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
+    
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     spicetify-nix.url = "github:the-argus/spicetify-nix";
 
@@ -50,52 +55,74 @@
     # };
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, ... }:
-    let
-      username = "cameron";
-      useremail = "cameron.salomone@gmail.com";
+  outputs = inputs @ { self, nixpkgs, home-manager, sops-nix, ... }: let
+  # inputs: with inputs; let # avoids merging the namespaces manually like above
+    username = "cameron";
+    useremail = "cameron.salomone@gmail.com";
+    globalFonts = import ./modules/globalFonts.nix;
 
-      # globalFonts = import ./modules/globalFonts.nix;
-      globalFonts = import ./modules/globalFonts.nix;
-
-      # pkgs = import <nixpkgs> {};
-      system = "x86_64-linux";
-      nixosSystem = import ./lib/nixosSystem.nix;
-      specialArgs = {
-        inherit username useremail globalFonts;
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-          # config.permittedInsecurePackages = [ 
-          # ];
-        };
-      # // inputs basically means "merge this left side attrset with the right side (inputs)"
-      # This line enables you to import the inputs (flakes/modules from github) into modules, aka: ( nixos-cosmic, sops-nix, ... ): {}
-      } // inputs;
-    in {
-      nixosConfigurations = let
-        # This feeds in everything we need at ./lib/nixosSystem.nix
-        base_args = { inherit home-manager nixpkgs system specialArgs; };
-      in {
-        gargantuan = nixosSystem ({
-          nixos-modules = [ ./hosts/gargantuan ];
-          home-module = import ./home/cameron;
-        } // base_args);
-
-        thoth = nixosSystem ({
-          nixos-modules = [ ./hosts/thoth ];
-          home-module = import ./home/cameron;
-        } // base_args);
-
-        talos = nixosSystem ({
-          nixos-modules = [ ./hosts/talos ];
-          home-module = import ./home/server;
-        } // base_args);
-        
-        icebox = nixosSystem ({
-          nixos-modules = [ ./hosts/icebox ];
-          home-module = import ./home/server;
-        } // base_args);
+    # Here we're declaring a function called "nixosSystem"
+    # It first takes in all our variables, then runs the "nixpkgs.lib.nixosSystem"
+    # function, piping the variables in where they need to go
+    nixosSystem = {
+      nixpkgs,
+      home-manager,
+      system ? "x86_64-linux",
+      specialArgs,
+      nixos-modules,
+      home-module,
+    }: nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
+        modules =
+          nixos-modules
+          ++ [
+            home-manager.nixosModules.home-manager {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "hm-backup";
+              
+              home-manager.extraSpecialArgs = specialArgs;
+              home-manager.users."${specialArgs.username}" = home-module;
+            }
+            ../modules/common
+          ];
       };
+
+    specialArgs = {
+      inherit username useremail globalFonts;
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+        # config.permittedInsecurePackages = [ 
+        # ];
+      };
+    # // inputs basically means "merge this left side attrset with the right side (inputs)"
+    # This line enables you to import the inputs (flakes/modules from github) into modules, aka: ( nixos-cosmic, sops-nix, ... ): {}
+    } // inputs;
+  in {
+    nixosConfigurations = let
+      # This feeds in everything we need at ./lib/nixosSystem.nix
+      base_args = { inherit home-manager nixpkgs system specialArgs; };
+    in {
+      gargantuan = nixosSystem ({
+        nixos-modules = [ ./hosts/gargantuan ];
+        home-module = import ./home/cameron;
+      } // base_args);
+
+      thoth = nixosSystem ({
+        nixos-modules = [ ./hosts/thoth ];
+        home-module = import ./home/cameron;
+      } // base_args);
+
+      talos = nixosSystem ({
+        nixos-modules = [ ./hosts/talos ];
+        home-module = import ./home/server;
+      } // base_args);
+      
+      icebox = nixosSystem ({
+        nixos-modules = [ ./hosts/icebox ];
+        home-module = import ./home/server;
+      } // base_args);
     };
+  };
 }
