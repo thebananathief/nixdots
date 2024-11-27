@@ -18,9 +18,7 @@
 
     packages = with pkgs; [
       lynis
-      # at # nonfunctional
       lazydocker
-      # multitail
     ];
     
     # Think these might already be handled by config.programs.zsh/neovim (common)
@@ -29,16 +27,6 @@
     #   SHELL = "zsh";
     # };
   };
-
-  # Install dotfiles repo and link configs
-  # home.file."github/dotfiles" = {
-  #   recursive = true;
-  #   source = builtins.fetchGit {
-  #     url = "https://github.com/thebananathief/dotfiles.git";
-  #     ref = "main";
-  #   };
-  #   target = "./github/dotfiles";
-  # };
 
   programs = {
     home-manager.enable = true;
