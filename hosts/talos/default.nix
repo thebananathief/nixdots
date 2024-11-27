@@ -20,7 +20,7 @@ in {
     ./disks.nix
     ./services
     ./backup.nix
-    ./myOptions.nix
+    ./dir-options.nix
     ../../modules/tailscale.nix
   ];
 
