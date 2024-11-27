@@ -56,7 +56,7 @@
 
     system = "x86_64-linux";
     # Function to declare NixOS systems with home manager configs
-    nixosSystem = import ./nixosSystem.nix;
+    # nixosSystem = import ./lib/nixosSystem.nix;
     specialArgs = {
       inherit username useremail globalFonts;
       pkgs = import nixpkgs {
@@ -68,6 +68,29 @@
     # // inputs basically means "merge this left side attrset with the right side (inputs)"
     # This line enables you to import the inputs (flakes/modules from github) into modules, aka: ( nixos-cosmic, sops-nix, ... ): {}
     } // inputs;
+
+    nixosSystem = {
+      nixpkgs,
+      home-manager,
+      system,
+      specialArgs,
+      nixos-modules,
+      home-module,
+    }: let
+      username = specialArgs.username;
+    in nixpkgs.lib.nixosSystem {
+      inherit system specialArgs;
+      modules = nixos-modules ++ [
+        ../modules/common
+        home-manager.nixosModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+
+          home-manager.extraSpecialArgs = specialArgs;
+          home-manager.users."${username}" = home-module;
+        }
+      ];
+    };
 
     # nixosSystem = {
     #   system ? "x86_64-linux",
