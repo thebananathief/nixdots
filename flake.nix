@@ -56,7 +56,7 @@
 
     system = "x86_64-linux";
     # Function to declare NixOS systems with home manager configs
-    nixosSystem = import ./nixosSystem.nix;
+    nixosSystem = import ./lib/nixosSystem.nix;
     specialArgs = {
       inherit username useremail globalFonts;
       pkgs = import nixpkgs {
@@ -96,20 +96,20 @@
       # specialArgs = { inherit argDefaults; };
       base_args = { inherit home-manager nixpkgs system specialArgs; };
     in {
-      # talos = nixosSystem ({
-      #   nixos-modules = [ ./hosts/talos ];
-      #   home-module = import ./home/server;
-      # } // base_args);
+      talos = nixosSystem ({
+        nixos-modules = [ ./hosts/talos ];
+        home-module = import ./home/server;
+      } // base_args);
 
-      # gargantuan = nixosSystem ({
-      #   nixos-modules = [ ./hosts/gargantuan ];
-      #   home-module = import ./home/cameron;
-      # } // base_args);
+      gargantuan = nixosSystem ({
+        nixos-modules = [ ./hosts/gargantuan ];
+        home-module = import ./home/cameron;
+      } // base_args);
 
-      # thoth = nixosSystem ({
-      #   nixos-modules = [ ./hosts/thoth ];
-      #   home-module = import ./home/cameron;
-      # } // base_args);
+      thoth = nixosSystem ({
+        nixos-modules = [ ./hosts/thoth ];
+        home-module = import ./home/cameron;
+      } // base_args);
 
       icebox = nixosSystem ({
         nixos-modules = [ ./hosts/icebox ];
