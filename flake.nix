@@ -81,10 +81,11 @@
     # Function to declare NixOS systems with home manager configs
     nixosSystem = {
       system ? "x86_64-linux",
+      args ? {},
       nixos-modules,
       home-module,
     }: let
-      specialArgs = argDefaults;
+      specialArgs = argDefaults // args;
     in nixpkgs.lib.nixosSystem {
         inherit system specialArgs;
         pkgs = nixpkgsCustom system;
