@@ -1,37 +1,26 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 pushd "$(dirname '$0')" >/dev/null
 
 __skip_git_sync=0
 HOSTNAME=${HOSTNAME:=}
-#!/bin/bash
 
-# ANSI madness
-# Reset
+# ANSI codes
 RESET="\e[0m"
-# Regular Colors
 RED="\e[31m"
 GREEN="\e[32m"
 YELLOW="\e[33m"
 BLUE="\e[34m"
 MAGENTA="\e[35m"
-CYAN="\e[36m"
-WHITE="\e[37m"
-# Bright Colors
-BRIGHT_BLACK="\e[90m"
 BRIGHT_RED="\e[91m"
 BRIGHT_GREEN="\e[92m"
 BRIGHT_YELLOW="\e[93m"
-BRIGHT_BLUE="\e[94m"
-BRIGHT_MAGENTA="\e[95m"
-BRIGHT_CYAN="\e[96m"
-BRIGHT_WHITE="\e[97m"
-# Text Formatting
-BOLD="\e[1m"
 ITALIC="\e[3m"
-REVERSE="\e[7m"
 
 
+function log_msg() {
+  echo -e "${ITALIC}${BLUE}nixd${RESET}: $1"
+}
 
 function install_flake() {
   sudo ln -svf "$(realpath flake.nix)" "/etc/nixos/flake.nix"
@@ -56,6 +45,7 @@ function check_flake_and_sync() {
   if [[ $? -ne 0 ]]; then
     exit 1
   fi
+  log_msg "${BRIGHT_GREEN}Nix flake evaluated OK${RESET}"
 
   if [[ $__skip_git_sync -eq 0 ]]; then
     ./git-sync sync "changes from $(uname -n)-gen$old on $(date '+%Y-%m-%d %H:%M:%S %Z')"
@@ -74,7 +64,7 @@ function rebuild() {
         shift 2
       ;;
       -*)
-        echo -e "${BRIGHT_YELLOW}Unknown option: $1${RESET}"
+        log_msg "${BRIGHT_YELLOW}Unknown option: $1${RESET}"
         usage 
       ;;
       *) break ;;
@@ -94,7 +84,7 @@ function rebuild() {
 
   # Make sure the command for nixos-rebuild was provided
   if [[ $# -eq 0 ]]; then
-    echo -e "${BRIGHT_YELLOW}Must provide a command for nixos-rebuild: $1${RESET}"
+    log_msg "${BRIGHT_YELLOW}Must provide a command for nixos-rebuild: $1${RESET}"
     usage
     exit 1
   fi
@@ -107,7 +97,7 @@ function rebuild() {
 
   current=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
   echo
-  echo -e "${BRIGHT_GREEN} --- Generation $old -> $current --- ${RESET}"
+  log_msg "${BRIGHT_GREEN} --- Generation $old -> $current --- ${RESET}"
 }
 
 
@@ -138,7 +128,7 @@ function main() {
       --skip-gitsync) __skip_git_sync=1 ;;
       --help) usage ;;
       -*)
-        echo -e "${BRIGHT_YELLOW}Unknown option: $1${RESET}"
+        log_msg "${BRIGHT_YELLOW}Unknown option: $1${RESET}"
         usage 
       ;;
       *) break ;;
@@ -165,7 +155,7 @@ function main() {
       "install_flake"
     ;;
     *)
-      echo -e "${BRIGHT_YELLOW}Must provide an action${RESET}"
+      log_msg "${BRIGHT_YELLOW}Must provide an action${RESET}"
       usage
     ;;
   esac
