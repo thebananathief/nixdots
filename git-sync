@@ -242,11 +242,11 @@ sync_state()
 # exit, issue warning if not in sync
 exit_assuming_sync() {
     if [ "equal" == "$(sync_state)" ] ; then
-	__log_msg "In sync, all fine."
+	__log_msg "${BRIGHT_GREEN}In sync, all fine.${RESET}"
 	exit 0;
     else
-	__log_msg "Synchronization FAILED! You should definitely check your repository carefully!"
-	__log_msg "(Possibly a transient network problem? Please try again in that case.)"
+	__log_msg "${BRIGHT_YELLOW}Synchronization FAILED! You should definitely check your repository carefully!${RESET}"
+	__log_msg "${BRIGHT_YELLOW}(Possibly a transient network problem? Please try again in that case.)${RESET}"
 	exit 3
     fi
 }
