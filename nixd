@@ -44,6 +44,7 @@ function update_flake_and_sync() {
   if [[ $? -ne 0 ]]; then
     exit 1
   fi
+  log_msg "${BRIGHT_GREEN}Nix flake inputs updated OK${RESET}"
   
   if [[ $__skip_git_sync -eq 0 ]]; then
     ./git-sync sync "changes from $(uname -n)-gen$old on $(date '+%Y-%m-%d %H:%M:%S %Z')"
