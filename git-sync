@@ -126,7 +126,7 @@ shift $((OPTIND-1))
 
 __log_msg()
 {
-    echo -e "${UNDERLINE}${BRIGHT_MAGENTA}git-sync${RESET}: $1"
+    echo -e "${ITALIC}${BRIGHT_MAGENTA}git-sync${RESET}: $1"
 }
 
 # echo the git dir
