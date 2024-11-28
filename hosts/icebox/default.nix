@@ -25,6 +25,8 @@
     systemd-boot.configurationLimit = 30;
     efi.canTouchEfiVariables = true;
   };
+  # Prevents a filesystem mount failure from putting us into emergency mode on bootup
+  systemd.enableEmergencyMode = false;
 
   services.openssh = {
     enable = true;

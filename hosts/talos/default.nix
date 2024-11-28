@@ -8,7 +8,6 @@ in {
     nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
     ./fileshares.nix
-    ./disks.nix
     ./services
     ./backup.nix
     ./dir-options.nix
@@ -42,6 +41,8 @@ in {
     # consoleMode = "max";
   };
   boot.loader.efi.canTouchEfiVariables = true;
+  # Prevents a filesystem mount failure from putting us into emergency mode on bootup
+  systemd.enableEmergencyMode = false;
 
   services.openssh = {
     enable = true;
@@ -96,7 +97,6 @@ By accessing this system, you agree that your actions may be monitored if unauth
       main_user_password = { neededForUsers = true; };
       email_address = {};
       gmail_password = {};
-      tailscale_authkey = {};
       discord_webhook_id = {}; # used in jellyseerr's notification config, but not declarative yet
       discord_webhook_token = {};
       domain = {};
@@ -151,12 +151,11 @@ By accessing this system, you agree that your actions may be monitored if unauth
     };
     tailscale = {
       useRoutingFeatures = "server";
-      authKeyFile = secrets.tailscale_authkey.path;
-      openFirewall = true; # opens port 41641
-      extraUpFlags = [
-        "--advertise-routes=192.168.0.0/24"
-        # "--advertise-exit-node"
-      ];
+      openFirewall = false; # opens port 41641
+      # extraUpFlags = [
+      #   # "--advertise-routes=192.168.0.0/24"
+      #   # "--advertise-exit-node"
+      # ];
     };
   };
 

@@ -25,10 +25,6 @@ in {
   # boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   # boot.zfs.forceImportRoot = false;
   # networking.hostId = "605959e6";
-  
-
-  # Prevents a filesystem mount failure from putting us into emergency mode on bootup
-  systemd.enableEmergencyMode = false;
 
   # Storage/Parity drives
   fileSystems."/mnt/disk1" = {
