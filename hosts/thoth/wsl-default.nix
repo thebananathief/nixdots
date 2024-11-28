@@ -58,6 +58,7 @@ in {
     ];
   };
 
+  # This is needed for VSCode-Server to work
   programs.nix-ld = {
     enable = true;
     package = pkgs.nix-ld-rs; # only for NixOS 24.05
