@@ -40,7 +40,7 @@ function update_flake_and_sync() {
     ;;
   esac
 
-  nix flake update "$flake_input"
+  nix flake update $flake_input
   if [[ $? -ne 0 ]]; then
     exit 1
   fi
