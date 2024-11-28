@@ -21,7 +21,7 @@ in {
   # };
 
   environment.shellAliases = {
-    checkbackups = "sudo restic -r sftp:restic@icebox://mnt/backup/talos -p /run/secrets/restic_talos_backup snapshots";
+    checkbackups = "sudo restic -r sftp:restic@icebox://mnt/backup/talos -p ${secrets.restic_talos_backup.path} snapshots";
   };
 
   sops.secrets.restic_talos_backup = {};
