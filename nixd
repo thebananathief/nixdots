@@ -131,5 +131,5 @@ function main() {
   exit $?
 }
 
-# set -x
+set -x
 main "$@"
