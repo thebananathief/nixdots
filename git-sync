@@ -126,7 +126,7 @@ shift $((OPTIND-1))
 
 __log_msg()
 {
-    echo -e "${REVERSE}${BRIGHT_BLACK}git-sync:${RESET} $1"
+    echo -e "${REVERSE}${MAGENTA}git-sync:${RESET} $1"
 }
 
 # echo the git dir
