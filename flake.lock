@@ -3,17 +3,17 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1732688387,
-        "narHash": "sha256-MUEJPVZhjk0LtKnN8iVLcsHSwnKkU4KHmkEODkIqNKA=",
+        "lastModified": 1732752857,
+        "narHash": "sha256-mDQcvhSOp0L74lbPGcaJeXGOVDyKeF/9YTcFvaTkYo8=",
         "ref": "refs/heads/main",
-        "rev": "53fe747e80020091a938a88f09efa8042f11c944",
-        "revCount": 246,
+        "rev": "0eaa0479ec80e5cbc9b1e93a4ed7703f16a259fb",
+        "revCount": 247,
         "type": "git",
-        "url": "ssh://git@github.com/thebananathief/dotfiles.git"
+        "url": "ssh://git@talos:2222/cameron/dotfiles.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@github.com/thebananathief/dotfiles.git"
+        "url": "ssh://git@talos:2222/cameron/dotfiles.git"
       }
     },
     "flake-compat": {
