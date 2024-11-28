@@ -32,11 +32,11 @@
     firewall.enable = true;
   };
 
-  nix.nixPath = [
-    "nixos-config=/home/cameron/github/nixdots/flake.nix"
-    "/nix/var/nix/profiles/per-user/root/channels"
-    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-  ];
+  # nix.nixPath = [
+  #   "nixos-config=/home/cameron/github/nixdots/flake.nix"
+  #   "/nix/var/nix/profiles/per-user/root/channels"
+  #   "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+  # ];
 
   # Was causing errors for me earlier, so I added this line
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;

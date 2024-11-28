@@ -13,11 +13,11 @@
     firewall.enable = true;
   };
 
-  nix.nixPath = [
-    "nixos-config=/etc/nixos/nixdots/flake.nix"
-    "/nix/var/nix/profiles/per-user/root/channels"
-    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-  ];
+  # nix.nixPath = [
+  #   "nixos-config=/etc/nixos/nixdots/flake.nix"
+  #   "/nix/var/nix/profiles/per-user/root/channels"
+  #   "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+  # ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader = {
