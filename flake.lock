@@ -9,11 +9,11 @@
         "rev": "8fe90a48f96b9ef0813993bd9a4349569e2d1204",
         "revCount": 251,
         "type": "git",
-        "url": "http://talos:8010/cameron/dotfiles.git"
+        "url": "ssh://git@talos:2222/cameron/dotfiles.git"
       },
       "original": {
         "type": "git",
-        "url": "http://talos:8010/cameron/dotfiles.git"
+        "url": "ssh://git@talos:2222/cameron/dotfiles.git"
       }
     },
     "flake-compat": {
