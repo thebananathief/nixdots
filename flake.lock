@@ -3,11 +3,11 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1732814401,
-        "narHash": "sha256-ZYoIJUeL3ts11GGhGOj94zZQzMUnGTtas3le2ef2/2E=",
+        "lastModified": 1732825826,
+        "narHash": "sha256-D3Bqq+QzggSrGc+gvTauBtgvUvyUbVfOP4aku01b474=",
         "ref": "refs/heads/main",
-        "rev": "fe7d49a0c7efa092ae95b6b111a5fd4adb340ff5",
-        "revCount": 252,
+        "rev": "3dbb89630850456f1d4ead43e438168903606419",
+        "revCount": 253,
         "type": "git",
         "url": "ssh://git@talos:2222/cameron/dotfiles.git"
       },

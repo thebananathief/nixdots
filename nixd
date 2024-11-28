@@ -77,15 +77,15 @@ function rebuild() {
 function usage() {
    cat << EOF
 Usage: $(basename "$0") [options] <action> [action_options]
-  --help             Display this help message
-  -s, --skip-gitsync Skip the git sync step in any action
+  --help        Display this help message
+  -s, --skip-gitsync  Skip the git sync step in any action
 
   Actions:
-    rebuild, rb      Performs a git sync, then nixos-rebuild
-      -h, --host     Manually specify a hostname for nixos-rebuild (if blank, use current hostname)
-    update, up       Performs a nix flake update (pins new revs for flake inputs), then git sync
-    check, ch        Performs a nix flake check, then git sync
-    install          Creates a link at /etc/nixos/flake.nix to refer to this flake
+    rebuild, rb <command>  Performs a git sync, then nixos-rebuild
+      [-h name, --host name]  Manually specify a hostname for nixos-rebuild (if blank, use current hostname)
+    update, up    Performs a nix flake update (pins new revs for flake inputs), then git sync
+    check, ch     Performs a nix flake check, then git sync
+    install       Creates a link at /etc/nixos/flake.nix to refer to this flake
 EOF
    exit 1
 }
@@ -131,5 +131,5 @@ function main() {
   exit $?
 }
 
-set -x
+# set -x
 main "$@"
