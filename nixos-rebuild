@@ -19,7 +19,7 @@ function do_rebuild() {
   #   exit 1
   # fi
 
-  sudo nixos-rebuild --flake ".#$HOSTNAME" "$1" --accept-flake-config --show-trace
+  sudo nixos-rebuild --flake ".#$HOSTNAME" "$1" --accept-flake-config
   # --show-trace --option eval-cache false
   if [[ $? -ne 0 ]]; then
     exit 1

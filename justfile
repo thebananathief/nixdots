@@ -12,12 +12,6 @@ alias run2 := rswitch
 
 
 
-check:
-  nix flake check --show-trace --extra-experimental-features nix-command --extra-experimental-features flakes --offline
-  ./git-sync
-
-
-
 alias s := sync
 [windows]
 sync:
@@ -64,12 +58,13 @@ install:
 
 
 
+# Check all the flake's outputs for valid Nix expressions, then sync git
+alias c := check
+check:
+  nix flake check --extra-experimental-features nix-command --extra-experimental-features flakes --offline
+  ./git-sync
+
 # updates the flake's package versions, so that we pull new package updates (is that wrong?)
 [linux]
 update:
   nix flake update
-
-# syntax-checks the flake
-[linux]
-syntax:
-  nix-instantiate '<nixpkgs/nixos>' -A system
