@@ -14,6 +14,13 @@ function update_flake() {
   if [[ $? -ne 0 ]]; then
     exit 1
   fi
+  
+  if [[ $__skip_git_sync -eq 0 ]]; then
+    ./git-sync sync "changes from $(uname -n)-gen$old on $(date '+%Y-%m-%d %H:%M:%S %Z')"
+    if [[ $? -ne 0 ]]; then
+      exit 1
+    fi
+  fi
 }
 
 function check_flake_and_sync() {
@@ -22,9 +29,11 @@ function check_flake_and_sync() {
     exit 1
   fi
 
-  ./git-sync sync "changes from $(uname -n)-gen$old on $(date '+%Y-%m-%d %H:%M:%S %Z')"
-  if [[ $? -ne 0 ]]; then
-    exit 1
+  if [[ $__skip_git_sync -eq 0 ]]; then
+    ./git-sync sync "changes from $(uname -n)-gen$old on $(date '+%Y-%m-%d %H:%M:%S %Z')"
+    if [[ $? -ne 0 ]]; then
+      exit 1
+    fi
   fi
 }
 
@@ -46,9 +55,12 @@ function rebuild() {
   # We need to sync git before the flake check - a nix error could prevent git sync from running
   if [[ $__skip_git_sync -eq 0 ]]; then
     ./git-sync sync "changes from $(uname -n)-gen$old on $(date '+%Y-%m-%d %H:%M:%S %Z')"
+    if [[ $? -ne 0 ]]; then
+      exit 1
+    fi
   fi
 
-  sudo nixos-rebuild --flake "$flake_uri" --accept-flake-config "$1"
+  sudo nixos-rebuild --flake "$flake_uri" --accept-flake-config "$@"
   # --show-trace --option eval-cache false
   if [[ $? -ne 0 ]]; then
     exit 1
@@ -65,18 +77,15 @@ function rebuild() {
 function usage() {
    cat << EOF
 Usage: $(basename "$0") [options] <action> [action_options]
-  --help               Display this help message
-  -s, --skip-git-sync  Skip git sync before a rebuild or after a check
+  --help             Display this help message
+  -s, --skip-gitsync Skip the git sync step in any action
 
-  <action>             Actions this script handles
-    rebuild, rb        Performs a nixos-rebuild after syncing git
-      -h, --host           Manually specify a hostname for nixos-rebuild (if blank, use current hostname)
-
-    update, up         Performs a nix flake update (pinning new versions for the flake's inputs)
-
-    check, ch          Performs a nix flake check, if successful git sync afterwards
-
-    install            Creates a link at /etc/nixos/flake.nix to refer to this flake
+  Actions:
+    rebuild, rb      Performs a git sync, then nixos-rebuild
+      -h, --host     Manually specify a hostname for nixos-rebuild (if blank, use current hostname)
+    update, up       Performs a nix flake update (pins new revs for flake inputs), then git sync
+    check, ch        Performs a nix flake check, then git sync
+    install          Creates a link at /etc/nixos/flake.nix to refer to this flake
 EOF
    exit 1
 }
@@ -85,7 +94,7 @@ function main() {
   # Parse -* arguments
   while [[ $# -gt 0 ]]; do
     case $1 in
-      -s | --skip-git-sync) __skip_git_sync=1 ;;
+      -s | --skip-gitsync) __skip_git_sync=1 ;;
       --help) usage ;;
       -*)
         echo "Unknown option: $1"

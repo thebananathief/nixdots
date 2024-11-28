@@ -60,7 +60,7 @@
     git wget curl unzip killall
     dnsutils bat dua tree jq duf
     zellij neofetch bottom
-    dos2unix tldr just
+    dos2unix tldr
     age sops nurl
 
     # iftop nmap fio hddtemp intel-gpu-tools
