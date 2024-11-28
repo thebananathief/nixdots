@@ -46,10 +46,6 @@ in {
     ];
   };
 
-  environment.systemPackages = with pkgs; [
-    zed-editor
-  ];
-
   # This is needed for VSCode-Server to work
   programs.nix-ld = {
     enable = true;

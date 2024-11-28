@@ -3,9 +3,9 @@
     username = "cameron";
     # home.homeDirectory = "/home/cameron";
 
-    sessionVariables = {
-      PAGER = "bat -pl man --pager='less -KRF'";
-    };
+    # sessionVariables = {
+    #   PAGER = "bat -pl man --pager='less -KRF'";
+    # };
 
     shellAliases = {
       dtail = "docker logs -tf --tail='50'";
