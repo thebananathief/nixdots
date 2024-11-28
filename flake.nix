@@ -43,7 +43,8 @@
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
     # nixpkgs.follows = "nixos-cosmic/nixpkgs";
 
-    dotfiles.url = "git+http://talos:8010/cameron/dotfiles.git";
+    # dotfiles.url = "git+http://talos:8010/cameron/dotfiles.git";
+    dotfiles.url = "git+ssh://git@talos:2222/cameron/dotfiles.git";
     dotfiles.flake = false;
   };
 
