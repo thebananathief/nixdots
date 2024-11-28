@@ -26,7 +26,9 @@ function install_flake() {
   sudo ln -svf "$(realpath flake.nix)" "/etc/nixos/flake.nix"
 }
 
-function update_flake() {
+function update_flake_and_sync() {
+# TODO: Prompt user for "Do you really want to update all?" or just update dotfiles
+
   nix flake update
   if [[ $? -ne 0 ]]; then
     exit 1
@@ -55,7 +57,7 @@ function check_flake_and_sync() {
   fi
 }
 
-function rebuild() {
+function sync_and_rebuild() {
   # Parse arguments scoped to rebuild()
   while [[ $# -gt 0 ]]; do
     case $1 in
@@ -140,11 +142,11 @@ function main() {
   case $1 in
     rebuild | rb) 
       shift
-      "rebuild" "$@"
+      "sync_and_rebuild" "$@"
     ;;
     update | up)
       shift
-      "update_flake"
+      "update_flake_and_sync"
     ;;
     check | ch)
       shift
