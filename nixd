@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-pushd "$(dirname '$0')"
+pushd "$(dirname '$0')" >/dev/null
 
 __skip_git_sync=0
 HOSTNAME=${HOSTNAME:=}
@@ -10,7 +10,6 @@ HOSTNAME=${HOSTNAME:=}
 # Reset
 RESET="\e[0m"
 # Regular Colors
-BLACK="\e[30m"
 RED="\e[31m"
 GREEN="\e[32m"
 YELLOW="\e[33m"
@@ -18,15 +17,6 @@ BLUE="\e[34m"
 MAGENTA="\e[35m"
 CYAN="\e[36m"
 WHITE="\e[37m"
-# Bold Colors
-BOLD_BLACK="\e[1;30m"
-BOLD_RED="\e[1;31m"
-BOLD_GREEN="\e[1;32m"
-BOLD_YELLOW="\e[1;33m"
-BOLD_BLUE="\e[1;34m"
-BOLD_MAGENTA="\e[1;35m"
-BOLD_CYAN="\e[1;36m"
-BOLD_WHITE="\e[1;37m"
 # Bright Colors
 BRIGHT_BLACK="\e[90m"
 BRIGHT_RED="\e[91m"
@@ -38,12 +28,8 @@ BRIGHT_CYAN="\e[96m"
 BRIGHT_WHITE="\e[97m"
 # Text Formatting
 BOLD="\e[1m"
-DIM="\e[2m"
 ITALIC="\e[3m"
-UNDERLINE="\e[4m"
-BLINK="\e[5m"
 REVERSE="\e[7m"
-HIDDEN="\e[8m"
 
 
 
@@ -88,7 +74,7 @@ function rebuild() {
         shift 2
       ;;
       -*)
-        echo -e "${BRIGHT_YELLOWYELLOW}Unknown option: $1${RESET}"
+        echo -e "${BRIGHT_YELLOW}Unknown option: $1${RESET}"
         usage 
       ;;
       *) break ;;
@@ -104,6 +90,13 @@ function rebuild() {
     if [[ $? -ne 0 ]]; then
       exit 1
     fi
+  fi
+
+  # Make sure the command for nixos-rebuild was provided
+  if [[ $# -eq 0 ]]; then
+    echo -e "${BRIGHT_YELLOW}Must provide a command for nixos-rebuild: $1${RESET}"
+    usage
+    exit 1
   fi
 
   sudo nixos-rebuild --flake "$flake_uri" --accept-flake-config "$@"
@@ -145,7 +138,7 @@ function main() {
       --skip-gitsync) __skip_git_sync=1 ;;
       --help) usage ;;
       -*)
-        echo "Unknown option: $1"
+        echo -e "${BRIGHT_YELLOW}Unknown option: $1${RESET}"
         usage 
       ;;
       *) break ;;
@@ -172,7 +165,7 @@ function main() {
       "install_flake"
     ;;
     *)
-      echo "Unknown action: $1"
+      echo -e "${BRIGHT_YELLOW}Must provide an action${RESET}"
       usage
     ;;
   esac
