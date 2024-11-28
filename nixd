@@ -32,10 +32,10 @@ function update_flake_and_sync() {
   echo
   case ${answer:0:1} in
     [Aa]*)
-      echo "Updating all inputs..."
+      log_msg "Updating all inputs..."
     ;;
     *)
-      echo "Updating dotfiles input..."
+      log_msg "Updating dotfiles input..."
       flake_input="dotfiles"
     ;;
   esac
