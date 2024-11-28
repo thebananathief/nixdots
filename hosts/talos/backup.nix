@@ -20,6 +20,10 @@ in {
   #   capabilities = "cap_dac_read_search=+ep";
   # };
 
+  environment.shellAliases = {
+    checkbackups = "sudo restic -r sftp:restic@icebox://mnt/backup/talos -p /run/secrets/restic_talos_backup snapshots";
+  };
+
   sops.secrets.restic_talos_backup = {};
   sops.secrets.restic_talos_healthcheck = {};
 

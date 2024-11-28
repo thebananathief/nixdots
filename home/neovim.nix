@@ -1,5 +1,9 @@
 # UNUSED AT THE MOMENT
 { pkgs, config, ... }: {
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;

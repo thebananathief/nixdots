@@ -1,4 +1,39 @@
 { config, pkgs, ... }: {
+  imports = [
+    # ./hyprland
+    ./userpackages.nix
+    ./spotify.nix
+    # ./theme.nix
+    # ./gnome-theme.nix
+  ];
+  
+  systemd.user.sessionVariables = {
+    # EXPERIMENTAL: breaks some electron apps
+    # Also probably breaks on X11
+    # Also makes a lot of electron apps use wayland
+    NIXOS_OZONE_WL = "1";
+    # ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+  };
+  home.sessionVariables = {
+    VISUAL = "nvim";
+    BROWSER = "firefox";
+  };
+
+  gtk = {
+    enable = true;
+    # These are referenced by Thunar for the navigation tree
+    gtk3.bookmarks = [
+      "file:///home/cameron/code"
+      "file:///home/cameron/MEGA"
+      "file:///home/cameron/Pictures"
+      "file:///home/cameron/Downloads"
+      "file:///mnt/talos" # refer to network-mounts
+    ];
+  };
+
+  # Auto-mounting removeable drives
+  services.udiskie.enable = true;
+  
   xdg = {
     enable = true;
 

@@ -42,6 +42,12 @@
       ];
     };
 
+
+
+    # Other essentials to work with ZSH
+    bat = {
+      enable = true;
+    };
     fzf = {
       enable = true;
       enableBashIntegration = true;
@@ -50,5 +56,31 @@
       #   "--preview 'pistol {}'"
       # ];
     };
+    eza = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      icons = null;
+      extraOptions = [
+        "--all"
+        "--color=always"
+        "--group"
+      ];
+    };
+    yazi = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      settings = {
+        manager.show_hidden = true;
+      };
+    };
   };
+
+  home.packages = with pkgs; [
+    # Yazi previewers
+    unar
+    ffmpegthumbnailer
+    poppler
+  ];
 }

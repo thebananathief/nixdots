@@ -36,9 +36,7 @@ in {
 
   home-manager.users.${username} = {
     imports = [ 
-      ../../home/server.nix
-      ../../home/zsh.nix
-      ../../home/git.nix
+      ../../home/cameron.nix
       {
         # Keep LF line endings on WSL, CRLF when checked out on Windows
         programs.git.extraConfig.core.autocrlf = "input";

@@ -5,6 +5,10 @@ let
 #    sha256 = "1rnc6gsqjdvkb6xbv1pnawrp6f0j5770dqml2di90j3lhv0fppgw";
 #  };
 in {
+  home.sessionVariables = {
+    TERMINAL = "alacritty";
+  };
+
   programs.alacritty = {
     enable = true;
     settings = {

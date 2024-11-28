@@ -72,7 +72,10 @@
   };
   
   home-manager.users.${username} = {
-    imports = [ ../../home/cameron ];
+    imports = [ 
+      ../../home/cameron.nix
+      ../../home/desktop
+    ];
   };
 
   # enable location service

@@ -14,7 +14,7 @@ in {
     # ../../modules/network-mount.nix
     # ../../modules/ai.nix
     # ../../modules/monero.nix
-    ../../modules/nifi.nix
+    # ../../modules/nifi.nix
     ../../modules/tailscale.nix
     ../../modules/security.nix
   ];
@@ -87,14 +87,11 @@ in {
   };
   
   home-manager.users.${username} = {
-    imports = [ ../../home/cameron ];
+    imports = [ 
+      ../../home/cameron.nix
+      ../../home/desktop
+    ];
   };
-
-  # Allow unfree packages
-  # nixpkgs.config.allowUnfree = true;
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;

@@ -8,7 +8,6 @@
     # gramps
     # tesseract
     dbeaver-bin
-    spicetify-cli
 
     audacity
     obsidian
@@ -17,6 +16,5 @@
     # legcord
     # discord
     bitwarden
-    spotify
   ];
 }
