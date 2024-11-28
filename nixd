@@ -43,10 +43,10 @@ function rebuild() {
     case $1 in
       -h | --host)
         HOSTNAME=$2
-        shift
+        shift 2
       ;;
+      *) break ;;
     esac
-    shift
   done
   flake_uri=".#$HOSTNAME"
 
