@@ -58,7 +58,7 @@ function check_flake_and_sync() {
 }
 
 function sync_and_rebuild() {
-  # Parse arguments scoped to rebuild()
+  # Parse arguments scoped to sync_and_rebuild()
   while [[ $# -gt 0 ]]; do
     case $1 in
       -h | --host)
@@ -73,6 +73,13 @@ function sync_and_rebuild() {
     esac
   done
   flake_uri=".#$HOSTNAME"
+  
+  # Ensure a command for nixos-rebuild was provided
+  if [[ $# -eq 0 ]]; then
+    log_msg "${BRIGHT_YELLOW}Must provide a command for nixos-rebuild!${RESET}"
+    usage
+    exit 1
+  fi
 
   old=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
 
@@ -82,13 +89,6 @@ function sync_and_rebuild() {
     if [[ $? -ne 0 ]]; then
       exit 1
     fi
-  fi
-
-  # Make sure the command for nixos-rebuild was provided
-  if [[ $# -eq 0 ]]; then
-    log_msg "${BRIGHT_YELLOW}Must provide a command for nixos-rebuild: $1${RESET}"
-    usage
-    exit 1
   fi
 
   sudo nixos-rebuild --flake "$flake_uri" --accept-flake-config "$@"
@@ -157,7 +157,7 @@ function main() {
       "install_flake"
     ;;
     *)
-      log_msg "${BRIGHT_YELLOW}Must provide an action${RESET}"
+      log_msg "${BRIGHT_YELLOW}Must provide an action!${RESET}"
       usage
     ;;
   esac
