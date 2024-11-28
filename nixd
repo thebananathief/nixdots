@@ -88,7 +88,7 @@ function rebuild() {
         shift 2
       ;;
       -*)
-        echo "Unknown option: $1"
+        echo -e "${BRIGHT_YELLOWYELLOW}Unknown option: $1${RESET}"
         usage 
       ;;
       *) break ;;
@@ -114,7 +114,7 @@ function rebuild() {
 
   current=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
   echo
-  echo -e "${BOLD_GREEN} --- Generation $old -> $current --- ${RESET}"
+  echo -e "${BRIGHT_GREEN} --- Generation $old -> $current --- ${RESET}"
 }
 
 
