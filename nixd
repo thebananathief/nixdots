@@ -27,9 +27,20 @@ function install_flake() {
 }
 
 function update_flake_and_sync() {
-# TODO: Prompt user for "Do you really want to update all?" or just update dotfiles
+  local flake_input=""
+  read -n 1 -p "Update all flake inputs? A = All / N = Just update dotfiles" answer
+  echo
+  case ${answer:0:1} in
+    [Aa]*)
+      echo "Updating all inputs..."
+    ;;
+    *)
+      echo "Updating dotfiles input..."
+      flake_input="dotfiles"
+    ;;
+  esac
 
-  nix flake update
+  nix flake update "$flake_input"
   if [[ $? -ne 0 ]]; then
     exit 1
   fi
@@ -43,7 +54,8 @@ function update_flake_and_sync() {
 }
 
 function check_flake_and_sync() {
-  nix flake check --show-trace --extra-experimental-features nix-command --extra-experimental-features flakes --offline
+  log_msg "Checking nix flake..."
+  nix flake check --extra-experimental-features nix-command --extra-experimental-features flakes --offline
   if [[ $? -ne 0 ]]; then
     exit 1
   fi
@@ -164,5 +176,5 @@ function main() {
   exit $?
 }
 
-# set -x
+set -x
 main "$@"
