@@ -1,0 +1,126 @@
+#!/usr/bin/env sh
+
+pushd "$(dirname '$0')"
+
+__skip_git_sync=0
+HOSTNAME=${HOSTNAME:=}
+
+function install_flake() {
+  sudo ln -svf "$(realpath flake.nix)" "/etc/nixos/flake.nix"
+}
+
+function update_flake() {
+  nix flake update
+  if [[ $? -ne 0 ]]; then
+    exit 1
+  fi
+}
+
+function check_flake_and_sync() {
+  nix flake check --show-trace --extra-experimental-features nix-command --extra-experimental-features flakes --offline
+  if [[ $? -ne 0 ]]; then
+    exit 1
+  fi
+
+  ./git-sync sync "changes from $(uname -n)-gen$old on $(date '+%Y-%m-%d %H:%M:%S %Z')"
+  if [[ $? -ne 0 ]]; then
+    exit 1
+  fi
+}
+
+function rebuild() {
+  # Parse arguments scoped to rebuild()
+  while [[ $# -gt 0 ]]; do
+    case $1 in
+      -h | --host)
+        HOSTNAME=$2
+        shift
+      ;;
+    esac
+    shift
+  done
+  flake_uri=".#$HOSTNAME"
+
+  old=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
+
+  # We need to sync git before the flake check - a nix error could prevent git sync from running
+  if [[ $__skip_git_sync -eq 0 ]]; then
+    ./git-sync sync "changes from $(uname -n)-gen$old on $(date '+%Y-%m-%d %H:%M:%S %Z')"
+  fi
+
+  sudo nixos-rebuild --flake "$flake_uri" --accept-flake-config "$1"
+  # --show-trace --option eval-cache false
+  if [[ $? -ne 0 ]]; then
+    exit 1
+  fi
+
+  current=$(readlink /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
+  echo
+  echo "--- Generation $old -> $current ---"
+}
+
+
+
+
+function usage() {
+   cat << EOF
+Usage: $(basename "$0") [options] <action> [action_options]
+  --help               Display this help message
+  -s, --skip-git-sync  Skip git sync before a rebuild or after a check
+
+  <action>             Actions this script handles
+    rebuild, rb        Performs a nixos-rebuild after syncing git
+      -h, --host           Manually specify a hostname for nixos-rebuild (if blank, use current hostname)
+
+    update, up         Performs a nix flake update (pinning new versions for the flake's inputs)
+
+    check, ch          Performs a nix flake check, if successful git sync afterwards
+
+    install            Creates a link at /etc/nixos/flake.nix to refer to this flake
+EOF
+   exit 1
+}
+
+function main() {
+  # Parse -* arguments
+  while [[ $# -gt 0 ]]; do
+    case $1 in
+      -s | --skip-git-sync) __skip_git_sync=1 ;;
+      --help) usage ;;
+      -*)
+        echo "Unknown option: $1"
+        usage 
+      ;;
+      *) break ;;
+    esac
+    shift
+  done
+
+  # Main logic
+  case $1 in
+    rebuild | rb) 
+      shift
+      "rebuild" "$@"
+    ;;
+    update | up)
+      shift
+      "update_flake"
+    ;;
+    check | ch)
+      shift
+      "check_flake_and_sync"
+    ;;
+    install)
+      shift
+      "install_flake"
+    ;;
+    *)
+      echo "Unknown action: $1"
+      usage
+    ;;
+  esac
+  exit $?
+}
+
+set -x
+main "$@"
