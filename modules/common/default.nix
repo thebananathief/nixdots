@@ -55,13 +55,16 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  # These packages are installed to all hosts
   environment.systemPackages = with pkgs; [
-  # BASIC utils that should be on every system running this flake
     git wget curl unzip killall
-    dnsutils bat dua tree jq duf
-    zellij neofetch bottom
+    dnsutils bat dua tree jq
+    zellij bottom
     dos2unix tldr
     age sops nurl
+
+  # System monitoring
+    smartmontools duf neofetch
 
     # iftop nmap fio hddtemp intel-gpu-tools
     # iotop lsof ethtool lm_sensors pciutils nettools
