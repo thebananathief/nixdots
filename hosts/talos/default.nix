@@ -9,6 +9,7 @@ in {
     ./hardware-configuration.nix
     ./fileshares.nix
     ./services
+    ./monitoring.nix
     ./backup.nix
     ./dir-options.nix
     ../../modules/tailscale.nix
