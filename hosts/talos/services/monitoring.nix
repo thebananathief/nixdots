@@ -28,12 +28,12 @@ in {
     exporters.node = {
       enable = true;
       enabledCollectors = [
-        "smartctl"
-        "textfile"
+        # "smartctl"
+        # "textfile"
       ];
-      extraFlags = [
-        "--collector.textfile.directory=/var/lib/node_exporter/textfile_collector"
-      ];
+      # extraFlags = [
+      #   "--collector.textfile.directory=/var/lib/node_exporter/textfile_collector"
+      # ];
     };
   };
 

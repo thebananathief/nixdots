@@ -11,7 +11,7 @@ in {
     # ./ttrss.nix
     # ./whoogle.nix
 
-    ./monitoring.nix
+    # ./monitoring.nix
     # ./gameserver.nix
     # ./webtrees.nix
     ./syncthing.nix
