@@ -2,7 +2,7 @@
 {
   fonts = {
     enableDefaultPackages = true;
-    packages = with pkgs; [
+    packages = (with pkgs; [
       material-symbols
       noto-fonts
       noto-fonts-emoji
@@ -13,15 +13,22 @@
       garamond-libre
       gelasio
       libre-caslon
-      (nerdfonts.override { fonts = [ 
-        "JetBrainsMono"
-        "FiraCode"
-        "FiraMono"
-        "Meslo"
-        "MPlus"
-        "RobotoMono"
-      ];})
-    ];
+      # (nerdfonts.override { fonts = [ 
+      #   "JetBrainsMono"
+      #   "FiraCode"
+      #   "FiraMono"
+      #   "Meslo"
+      #   "MPlus"
+      #   "RobotoMono"
+      # ];})
+    ]) ++ (with pkgs.nerd-fonts; [
+      jetbrains-mono
+      fira-code
+      fira-mono
+      meslo-lg
+      mplus
+      roboto-mono
+    ]);
     fontconfig.enable = true;
     fontconfig.defaultFonts = {
       serif = [globalFonts.serif "Noto Color Emoji"];
