@@ -133,16 +133,16 @@ By accessing this system, you agree that your actions may be monitored if unauth
     librespeed-cli
   ];
 
-  # I think this is for git?
-  security.pam.sshAgentAuth.enable = true;
-
   sops.secrets.healthcheck_uptime_uuid = {};
+  sops.secrets.healthcheck_external_access_uuid = {};
   services = {
     cron = {
       enable = true;
       systemCronJobs = [
         "@reboot root ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${secrets.healthcheck_uptime_uuid.path})"
         "*/15 * * * * root ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${secrets.healthcheck_uptime_uuid.path})"
+        # Healthcheck to make sure TALOS is externally accessible
+        # "*/15 * * * * root ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${secrets.healthcheck_external_access_uuid.path})"
       ];
     };
     fail2ban = {

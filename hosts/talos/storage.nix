@@ -131,7 +131,4 @@ in {
         RestrictAddressFamilies = lib.mkForce [ "AF_INET" "AF_INET6" ];
     };
   };
-
-  # TODO: Need to have disk SMART alerts sent to me over email
-  # Also reminders to buy drives
 }

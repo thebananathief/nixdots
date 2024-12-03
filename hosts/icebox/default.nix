@@ -3,6 +3,7 @@
     nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
     ./restic.nix
+    ./monitoring.nix
     ../../modules/tailscale.nix
     ../../modules/security.nix
   ];
