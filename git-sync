@@ -58,7 +58,7 @@ sync_new_files_anyway="true"
 sync_anyway="true"
 
 # Changes to the script's directory before doing anything
-pushd "$(dirname '$0')" >/dev/null
+pushd "$(dirname '$0')"
 
 while getopts "hns" opt ; do
     case $opt in
