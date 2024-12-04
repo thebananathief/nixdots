@@ -72,7 +72,7 @@ function sync_and_rebuild() {
   while [[ $# -gt 0 ]]; do
     case $1 in
       -h | --host)
-        HOSTNAME=$2
+        FLAKE_HOST=$2
         shift 2
       ;;
       -*)
@@ -82,7 +82,7 @@ function sync_and_rebuild() {
       *) break ;;
     esac
   done
-  flake_uri=".#$HOSTNAME"
+  flake_uri=".#$FLAKE_HOST"
   
   # Ensure a command for nixos-rebuild was provided
   if [[ $# -eq 0 ]]; then
@@ -117,7 +117,7 @@ function remote_rebuild() {
   while [[ $# -gt 0 ]]; do
     case $1 in
       -h | --host)
-        HOSTNAME=$2
+        REMOTE_HOST=$2
         shift 2
       ;;
       -*)
@@ -125,18 +125,31 @@ function remote_rebuild() {
         usage 
       ;;
       *)
-        if [[ ! -z "$HOSTNAME" ]]; then
+        if [[ ! -z "$REMOTE_HOST" ]]; then
           echo "hostname already set, breaking early!"
           break
         fi
-        HOSTNAME=$1
+        REMOTE_HOST=$1
         shift
       ;;
     esac
   done
 
+  # Ensure a hostname was provided
+  if [[ -z "$REMOTE_HOST" ]]; then
+    log_msg "${BRIGHT_YELLOW}Must provide an ssh host to execute nixd remotely on!${RESET}"
+    usage
+    exit 1
+  fi
+  # Ensure arguments for the recursive run of this script were provided
+  if [[ $# -eq 0 ]]; then
+    log_msg "${BRIGHT_YELLOW}Must provide a command for the remote nixd script!${RESET}"
+    usage
+    exit 1
+  fi
+
   check_flake_and_sync
-  ssh $HOSTNAME ~/github/nixdots/nixd "$@"
+  ssh $REMOTE_HOST ~/github/nixdots/nixd "$@"
 }
 
 
@@ -153,7 +166,7 @@ Options:
 Actions:
   rebuild | rb  <command>  Performs a git sync, then nixos-rebuild with command passed to it
     -h | --host <name>  Manually specify a hostname for nixos-rebuild (if blank, use current hostname)
-  remote-rebuild | rr  <ssh-host> <command>
+  remote-rebuild | rr  <ssh-host> <remote nixd execution>
   update | up     Performs a nix flake update (pins new revs for flake inputs), then git sync
   check | ch      Performs a nix flake check, then git sync
   install         Creates a link at /etc/nixos/flake.nix to refer to this flake
