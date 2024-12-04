@@ -15,6 +15,8 @@ in {
     scrapeConfigs = [
       {
         job_name = "node";
+        scrape_interval = "1m";
+        scrape_timeout = "10s";
         static_configs = [
           {
             targets = [
@@ -25,6 +27,10 @@ in {
         ];
       }
     ];
+    exporters.smartctl = {
+      enable = true;
+      maxInterval = "60s";
+    };
     exporters.node = {
       enable = true;
       enabledCollectors = [
