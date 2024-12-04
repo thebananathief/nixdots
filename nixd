@@ -135,9 +135,8 @@ function remote_rebuild() {
     esac
   done
 
-
   check_flake_and_sync
-  ssh $HOSTNAME ~/github/nixdots/nixd rb switch
+  ssh $HOSTNAME ~/github/nixdots/nixd "$@"
 }
 
 
