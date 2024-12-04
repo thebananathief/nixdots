@@ -21,6 +21,7 @@ in {
           {
             targets = [
               "localhost:9100"
+              "localhost:9633"
               "icebox:9100"
               "icebox:9633"
             ];
@@ -28,12 +29,12 @@ in {
         ];
       }
     ];
+    exporters.node = {
+      enable = true;
+    };
     exporters.smartctl = {
       enable = true;
       maxInterval = "60s";
-    };
-    exporters.node = {
-      enable = true;
     };
   };
 }
