@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-pushd "$(dirname '$0')" >/dev/null
-
 __skip_git_sync=0
 
 # ANSI codes
@@ -165,6 +163,9 @@ EOF
 }
 
 function main() {
+  # Changes to the script's directory before doing anything
+  pushd "$(readlink -f "$0")" >/dev/null
+  
   # Parse -* arguments
   while [[ $# -gt 0 ]]; do
     case $1 in
