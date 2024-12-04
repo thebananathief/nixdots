@@ -154,9 +154,8 @@ function remote_rebuild() {
 
   check_flake_and_sync
   remote_args="$@"
-  echo "$remote_args"
   log_msg "SSH'ing into ${GREEN}${REMOTE_HOST}${RESET} to execute ${GREEN}./nixd $remote_args${RESET}"
-  ssh $REMOTE_HOST ~/github/nixdots/nixd "$@"
+  ssh $REMOTE_HOST -t 'bash -l' ~/github/nixdots/nixd "$@"
 }
 
 
@@ -172,7 +171,9 @@ Options:
 Actions:
   rebuild | rb  <command>  Performs a git sync, then nixos-rebuild with command passed to it
     -h | --host <name>  Manually specify a hostname for nixos-rebuild (if blank, use current hostname)
-  remote-rebuild | rr [-h|--hpst] <ssh-host> <remote nixd execution>
+  remote-rebuild | rr <ssh-host> <remote nixd execution>
+    -h | --host <ssh-host>  Required - The host that ssh will connect to and run this script
+    <remote nixd execution> A remotely ran instance of this script will use these remaining arguments
   update | up     Performs a nix flake update (pins new revs for flake inputs), then git sync
   check | ch      Performs a nix flake check, then git sync
   install         Creates a link at /etc/nixos/flake.nix to refer to this flake
