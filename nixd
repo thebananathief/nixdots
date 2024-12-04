@@ -125,10 +125,11 @@ function remote_rebuild() {
         usage 
       ;;
       *)
+        # hostname already set, break early
         if [[ ! -z "$REMOTE_HOST" ]]; then
-          echo "hostname already set, breaking early!"
           break
         fi
+        # not set, so it must be the next argument
         REMOTE_HOST=$1
         shift
       ;;
@@ -148,7 +149,8 @@ function remote_rebuild() {
     exit 1
   fi
 
-  check_flake_and_sync
+  check_flake_and_sync;
+  log_msg "${MAGENTA}SSH'ing into ${YELLOW}${REMOTE_HOST}${RESET}${MAGENTA} to execute ./nixd $@ ${RESET}"
   ssh $REMOTE_HOST ~/github/nixdots/nixd "$@"
 }
 
@@ -222,5 +224,5 @@ function main() {
   exit $?
 }
 
-set -x
+# set -x
 main "$@"
