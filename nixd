@@ -152,8 +152,10 @@ function remote_rebuild() {
     exit 1
   fi
 
-  check_flake_and_sync;
-  log_msg "SSH'ing into ${GREEN}${REMOTE_HOST}${RESET} to execute ${GREEN}./nixd $@${RESET}"
+  check_flake_and_sync
+  remote_args="$@"
+  echo "$remote_args"
+  log_msg "SSH'ing into ${GREEN}${REMOTE_HOST}${RESET} to execute ${GREEN}./nixd $remote_args${RESET}"
   ssh $REMOTE_HOST ~/github/nixdots/nixd "$@"
 }
 
