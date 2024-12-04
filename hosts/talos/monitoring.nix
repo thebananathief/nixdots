@@ -14,7 +14,7 @@ in {
     enable = true;
     scrapeConfigs = [
       {
-        job_name = "node";
+        job_name = "talos";
         scrape_interval = "1m";
         scrape_timeout = "10s";
         static_configs = [
@@ -22,6 +22,17 @@ in {
             targets = [
               "localhost:9100"
               "localhost:9633"
+            ];
+          }
+        ];
+      }
+      {
+        job_name = "icebox";
+        scrape_interval = "1m";
+        scrape_timeout = "10s";
+        static_configs = [
+          {
+            targets = [
               "icebox:9100"
               "icebox:9633"
             ];
