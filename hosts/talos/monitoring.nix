@@ -22,6 +22,7 @@ in {
             targets = [
               "localhost:9100"
               "icebox:9100"
+              "icebox:9633"
             ];
           }
         ];
