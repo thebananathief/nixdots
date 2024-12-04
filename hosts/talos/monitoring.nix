@@ -6,6 +6,8 @@ in {
   
   services.grafana = {
     enable = true;
+    settings.server.http_addr = "0.0.0.0";
+    settings.server.http_port = 3000;
   };
 
   # SMART
