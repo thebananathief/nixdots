@@ -3,7 +3,6 @@
 pushd "$(dirname '$0')" >/dev/null
 
 __skip_git_sync=0
-HOSTNAME=${HOSTNAME:=}
 
 # ANSI codes
 RESET="\e[0m"
@@ -115,20 +114,49 @@ function sync_and_rebuild() {
   log_msg "${BRIGHT_GREEN} --- Generation $old -> $current --- ${RESET}"
 }
 
+function remote_rebuild() {
+  # Parse arguments scoped to remote_rebuild()
+  while [[ $# -gt 0 ]]; do
+    case $1 in
+      -h | --host)
+        HOSTNAME=$2
+        shift 2
+      ;;
+      -*)
+        log_msg "${BRIGHT_YELLOW}Unknown option: $1${RESET}"
+        usage 
+      ;;
+      *)
+        if [[ ! -z "$HOSTNAME" ]]; then
+          echo "hostname already set, breaking early!"
+          break
+        fi
+        HOSTNAME=$1
+        shift
+      ;;
+    esac
+  done
+
+
+  check_flake_and_sync
+  ssh $HOSTNAME ~/github/nixdots/nixd rb switch
+}
+
 
 
 
 function usage() {
    cat << EOF
-Usage: $(basename "$0") [options] action [action_options]
+Usage: $(basename "$0") [options] <action> [action_options]
 
 Options:
   --help          Display this help message
   --skip-gitsync  Skip the git sync step in any action
 
 Actions:
-  rebuild | rb  command  Performs a git sync, then nixos-rebuild with command passed to it
-    -h | --host name  Manually specify a hostname for nixos-rebuild (if blank, use current hostname)
+  rebuild | rb  <command>  Performs a git sync, then nixos-rebuild with command passed to it
+    -h | --host <name>  Manually specify a hostname for nixos-rebuild (if blank, use current hostname)
+  remote-rebuild | rr  <ssh-host> <command>
   update | up     Performs a nix flake update (pins new revs for flake inputs), then git sync
   check | ch      Performs a nix flake check, then git sync
   install         Creates a link at /etc/nixos/flake.nix to refer to this flake
@@ -157,6 +185,10 @@ function main() {
       shift
       "sync_and_rebuild" "$@"
     ;;
+    remote-rebuild | rr) 
+      shift
+      "remote_rebuild" "$@"
+    ;;
     update | up)
       shift
       "update_flake_and_sync"
@@ -177,5 +209,5 @@ function main() {
   exit $?
 }
 
-# set -x
+set -x
 main "$@"

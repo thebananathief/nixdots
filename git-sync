@@ -1,20 +1,9 @@
 #!/usr/bin/env bash
 
 # git-sync
-#
 # synchronize tracking repositories
-#
-# 2012-20 by Simon Thum and contributors
-# Licensed as: CC0
-#
-# This script intends to sync via git near-automatically
-# in "tracking" repositories where a nice history is not
-# crucial, but having one at all is.
-#
-# Unlike the myriad of scripts to do just that already available,
-# it follows the KISS principle: It is small, requires nothing but
-# git and bash, but does not even try to shield you from git.
-#
+# modified for Cameron's nixdots from https://github.com/simonthum/git-sync
+
 # Mode sync (default)
 #
 # Sync will likely get from you from a dull normal git repo with trivial
@@ -67,6 +56,9 @@ EOF
 }
 sync_new_files_anyway="true"
 sync_anyway="true"
+
+# Changes to the script's directory before doing anything
+pushd "$(dirname '$0')" >/dev/null6
 
 while getopts "hns" opt ; do
     case $opt in
