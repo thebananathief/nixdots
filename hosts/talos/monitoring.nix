@@ -4,6 +4,10 @@ let
   inherit (config.sops) secrets;
 in {
   
+  services.grafana = {
+    enable = true;
+  };
+
   # SMART
   services.smartd = {
     enable = true;
