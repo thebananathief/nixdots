@@ -6,15 +6,17 @@
     # devices = [
     # ];
   };
-  services.prometheus.exporters.node = {
-    enable = true;
-    # openFirewall = true;
-    enabledCollectors = [
-      "smartd"
-      # "textfile"
-    ];
-    # extraFlags = [
-    #   "--collector.textfile.directory=/var/lib/node_exporter/textfile_collector"
-    # ];
+  services.prometheus.exporters = {
+    node = {
+      enable = true;
+      # openFirewall = true;
+      # port 9100
+    };
+    smartctl = {
+      enable = true;
+      maxInterval = "60s";
+      # openFirewall = true;
+      # port 9633
+    };
   };
 }

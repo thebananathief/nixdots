@@ -33,16 +33,6 @@ in {
     };
     exporters.node = {
       enable = true;
-      enabledCollectors = [
-        # "smartctl"
-        # "textfile"
-      ];
-      # extraFlags = [
-      #   "--collector.textfile.directory=/var/lib/node_exporter/textfile_collector"
-      # ];
     };
   };
-
-  # Open firewall port for node_exporter
-  networking.firewall.allowedTCPPorts = [ 9100 ];
 }
