@@ -4,15 +4,27 @@ __skip_git_sync=0
 
 # ANSI codes
 RESET="\e[0m"
+ITALIC="\e[3m"
+# Regular
 RED="\e[31m"
 GREEN="\e[32m"
 YELLOW="\e[33m"
 BLUE="\e[34m"
 MAGENTA="\e[35m"
+CYAN="\e[36m"
+# Bright
 BRIGHT_RED="\e[91m"
 BRIGHT_GREEN="\e[92m"
 BRIGHT_YELLOW="\e[93m"
-ITALIC="\e[3m"
+# Background Colors
+BG_BLACK="\e[40m"
+BG_RED="\e[41m"
+BG_GREEN="\e[42m"
+BG_YELLOW="\e[43m"
+BG_BLUE="\e[44m"
+BG_MAGENTA="\e[45m"
+BG_CYAN="\e[46m"
+BG_WHITE="\e[47m"
 
 
 function log_msg() {
@@ -150,7 +162,7 @@ function remote_rebuild() {
   fi
 
   check_flake_and_sync;
-  log_msg "${MAGENTA}SSH'ing into ${YELLOW}${REMOTE_HOST}${RESET}${MAGENTA} to execute ./nixd $@ ${RESET}"
+  log_msg "SSH'ing into ${BG_YELLOW}${REMOTE_HOST}${RESET} to execute \"./nixd $@\""
   ssh $REMOTE_HOST ~/github/nixdots/nixd "$@"
 }
 
@@ -168,7 +180,7 @@ Options:
 Actions:
   rebuild | rb  <command>  Performs a git sync, then nixos-rebuild with command passed to it
     -h | --host <name>  Manually specify a hostname for nixos-rebuild (if blank, use current hostname)
-  remote-rebuild | rr  <ssh-host> <remote nixd execution>
+  remote-rebuild | rr [-h|--hpst] <ssh-host> <remote nixd execution>
   update | up     Performs a nix flake update (pins new revs for flake inputs), then git sync
   check | ch      Performs a nix flake check, then git sync
   install         Creates a link at /etc/nixos/flake.nix to refer to this flake
