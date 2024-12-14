@@ -2,14 +2,6 @@
 let
   inherit (config.sops) secrets;
 in {
-  options = with lib; {
-    tailscaleInterfaces = mkOption {
-      type = with types; listOf str;
-      default = [];
-      description = "Tailscale interfaces for Caddy to bind to.";
-    };
-  };
-  
   imports = [
     # nixos-hardware.nixosModules.common-pc
     # nixos-hardware.nixosModules.common-pc-ssd
