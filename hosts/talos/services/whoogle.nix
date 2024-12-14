@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  cfg = config.myOptions.containers;
+  cfg = config.mediaServer;
   inherit (config.sops) secrets;
 in {
   virtualisation.oci-containers.containers = {
@@ -10,7 +10,7 @@ in {
       environment = {
         WHOOGLE_USER = "cameron";
         WHOOGLE_PASS = "dumbpassword";
-      } // cfg.common_env;
+      };
     };
   };
 

@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  cfg = config.myOptions.containers;
+  cfg = config.mediaServer;
   # inherit (config.sops) secrets;
 in {
   # sops.secrets = {

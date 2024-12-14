@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  cfg = config.myOptions.containers;
+  cfg = config.mediaServer;
 in {
   # users.users.gitea = { 
   #   isSystemUser = true; 
@@ -32,10 +32,10 @@ in {
         "/etc/timezone:/etc/timezone:ro"
         "/etc/localtime:/etc/localtime:ro"
       ];
-      # environment = {
-      #   PUID = common_env.PUID; # cameron
-      #   PGID = common_env.PGID; # docker
-      # };
+      environment = {
+        PUID = "1000"; # cameron
+        PGID = "131"; # docker
+      };
       ports = [
         "8010:3000"
         "2222:2222"

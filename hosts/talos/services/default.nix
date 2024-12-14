@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  cfg = config.myOptions.containers;
+  cfg = config.mediaServer;
   inherit (config.sops) secrets;
 in {
   imports = [
@@ -13,20 +13,21 @@ in {
 
     # ./gameserver.nix
     # ./webtrees.nix
+    ./dashy
     ./syncthing.nix
     ./librespeed.nix
     ./gitea.nix
     ./mediaserver
-    ./etherpad.nix
+    # ./etherpad.nix
     # ./dns.nix
     ./reverse-proxy.nix
   ];
 
   # Set the user and group ID in the environment, some containers will pull it
-  environment.variables = {
-    PUID = config.myOptions.containers.common_env.PUID;
-    PGID = config.myOptions.containers.common_env.PGID;
-  };
+  # environment.variables = {
+  #   PUID = "1000"; # cameron
+  #   PGID = "131"; # docker
+  # };
 
   virtualisation = {
     oci-containers.backend = "docker";
@@ -65,19 +66,6 @@ in {
     #   #   "--network=castopod"
     #   ];
     # };
-    dashy = {
-      image = "lissy93/dashy:latest";
-      volumes = [
-        "${ cfg.dataDir }/dashy/config.yml:/app/public/conf.yml"
-        "${ cfg.dataDir }/dashy/logos:/app/public/item-icons"
-      ];
-      ports = [ "8000:80" ];
-      environment = {
-        NODE_ENV = "production";
-        UID = cfg.common_env.PUID;
-        GID = cfg.common_env.PGID;
-      };
-    };
     # focalboard = {
     #   image = "mattermost/focalboard";
     #   ports = [ "8014:8000" ];

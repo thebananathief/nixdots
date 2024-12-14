@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  cfg = config.myOptions.containers;
+  cfg = config.mediaServer;
 in {
   virtualisation.oci-containers.containers = {
     librespeed = {
@@ -10,7 +10,7 @@ in {
       ];
       environment = {
         PASSWORD = "PASSWORD";
-      } // cfg.common_env;
+      } ++ cfg.common_env;
       ports = [ "8016:80" ];
     };
   };

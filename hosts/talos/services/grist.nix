@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  cfg = config.myOptions.containers;
+  cfg = config.mediaServer;
 in {
   virtualisation.oci-containers.containers = {
     grist = {
