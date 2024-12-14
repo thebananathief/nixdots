@@ -3,11 +3,6 @@ let
   cfg = config.myOptions.containers;
   mediaGroup = config.myOptions.mediaGroup;
   inherit (config.sops) secrets;
-  mediaserver_env = {
-    PUID = "989"; # mediaserver
-    PGID = "131"; # docker
-    TZ = config.time.timeZone;
-  };
 in {
   systemd.tmpfiles.rules = [
     "d /var/lib/sonarr 0775 sonarr media -"
@@ -103,7 +98,7 @@ in {
 
       @authorized remote_ip 192.168.0.0/24
       handle @authorized {
-        reverse_proxy localhost:8002
+        reverse_proxy localhost:9696
       }
       handle {
         respond "Unauthorized" 403
