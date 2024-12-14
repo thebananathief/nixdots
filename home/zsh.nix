@@ -82,5 +82,6 @@
     unar
     ffmpegthumbnailer
     poppler
+    python312Packages.lnkparse3
   ];
 }
