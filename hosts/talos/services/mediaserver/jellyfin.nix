@@ -9,7 +9,7 @@ in {
       members = [
         "sonarr"
         "radarr"
-        "prowlarr"
+        # "prowlarr"
         "streamer"
         "torrenter"
       ];
@@ -39,28 +39,35 @@ in {
   # Always prioritise Jellyfin IO
   systemd.services.jellyfin.serviceConfig.IOSchedulingPriority = 0;
 
-  systemd.tmpfiles.settings.jellyfinMediaDirs = {
-    "${cfg.storageDir}/media"."d" = {
-      mode = "775";
-      inherit (config.services.jellyfin) user group;
-    };
-    "${cfg.storageDir}/media/books"."d" = {
-      mode = "775";
-      inherit (config.services.jellyfin) user group;
-    };
-    "${cfg.storageDir}/media/family"."d" = {
-      mode = "775";
-      inherit (config.services.jellyfin) user group;
-    };
-    "${cfg.storageDir}/media/movies"."d" = {
-      mode = "775";
-      inherit (config.services.jellyfin) user group;
-    };
-    "${cfg.storageDir}/media/tv"."d" = {
-      mode = "775";
-      inherit (config.services.jellyfin) user group;
-    };
-  };
+  systemd.tmpfiles.rules = [
+    "d '${cfg.storageDir}/media'         0775 streamer  media - -"
+    "d '${cfg.storageDir}/media/tv'      0775 streamer  media - -"
+    "d '${cfg.storageDir}/media/movies'  0775 streamer  media - -"
+    "d '${cfg.storageDir}/media/family'  0775 streamer  media - -"
+    "d '${cfg.storageDir}/media/books'   0775 streamer  media - -"
+  ];
+  # systemd.tmpfiles.settings.jellyfinMediaDirs = {
+  #   "${cfg.storageDir}/media"."d" = {
+  #     mode = "775";
+  #     inherit (config.services.jellyfin) user group;
+  #   };
+  #   "${cfg.storageDir}/media/books"."d" = {
+  #     mode = "775";
+  #     inherit (config.services.jellyfin) user group;
+  #   };
+  #   "${cfg.storageDir}/media/family"."d" = {
+  #     mode = "775";
+  #     inherit (config.services.jellyfin) user group;
+  #   };
+  #   "${cfg.storageDir}/media/movies"."d" = {
+  #     mode = "775";
+  #     inherit (config.services.jellyfin) user group;
+  #   };
+  #   "${cfg.storageDir}/media/tv"."d" = {
+  #     mode = "775";
+  #     inherit (config.services.jellyfin) user group;
+  #   };
+  # };
 
   services.caddy.virtualHosts = {
     # Jellyseerr

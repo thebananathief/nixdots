@@ -107,15 +107,15 @@ in {
   };
 
   systemd.tmpfiles.rules = [
-    "d /var/lib/sonarr 0775 sonarr media -"
-    "d /var/lib/sonarr/.config 0775 sonarr media -"
-    "d ${config.services.sonarr.dataDir} 0775 sonarr media -"
-    "d ${cfg.storageDir}/media/tv 0775 sonarr media -"
+    "d /var/lib/sonarr 0755 sonarr sonarr - -"
+    "d /var/lib/sonarr/.config 0755 sonarr sonarr - -"
+    "d ${config.services.sonarr.dataDir} 0755 sonarr sonarr - -"
+    "d ${cfg.storageDir}/media/tv 0775 sonarr media - -"
 
-    "d /var/lib/radarr 0775 radarr media -"
-    "d /var/lib/radarr/.config 0775 radarr media -"
-    "d ${config.services.radarr.dataDir} 0775 radarr media -"
-    "d ${cfg.storageDir}/media/movies 0775 radarr media -"
+    "d /var/lib/radarr 0755 radarr radarr - -"
+    "d /var/lib/radarr/.config 0755 radarr radarr - -"
+    "d ${config.services.radarr.dataDir} 0755 radarr radarr - -"
+    "d ${cfg.storageDir}/media/movies 0775 radarr media - -"
   ];
   
   services.caddy.virtualHosts = {
