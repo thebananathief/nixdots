@@ -2,13 +2,6 @@
 let
   inherit (config.sops) secrets;
 in {
-  # sops.secrets = {
-  #   "mullvad.env" = {
-  #   group = config.virtualisation.oci-containers.backend;
-  #   mode = "0440";
-  #   };
-  # };
-
   systemd.services.syncthing = {
     # Don't create default ~/Sync folder
     environment.STNODEFAULTFOLDER = "true";

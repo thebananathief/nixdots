@@ -1,13 +1,7 @@
 { config, pkgs, ... }:
 let
-  cfg = config.myOptions.containers;
+  cfg = config.mediaServer;
   inherit (config.sops) secrets;
-  mediaserver_env = {
-    PUID = "989"; # mediaserver
-    PGID = "131"; # docker
-    TZ = config.time.timeZone;
-  };
-  downloadDir = "/mnt/disk3/downloads";
 in {
   services = {
     audiobookshelf = {

@@ -67,8 +67,8 @@ in {
       ];
       ports = ["9696:9696"];
       environment = {
-        PUID = "${config.users.prowlarr.uid}"; # prowlarr
-        PGID = "${config.users.${cfg.mediaGroup}.gid}"; # media
+        PUID = "985"; # prowlarr
+        PGID = "987"; # media
       } // cfg.common_env;
       extraOptions = [
         "--network=media"
@@ -82,8 +82,8 @@ in {
       ];
       ports = ["7878:7878"];
       environment = {
-        PUID = "${config.users.radarr.uid}"; # radarr
-        PGID = "${config.users.${cfg.mediaGroup}.gid}"; # media
+        PUID = "983"; # radarr
+        PGID = "987"; # media
       } // cfg.common_env;
       extraOptions = [
         "--network=media"
@@ -97,8 +97,8 @@ in {
       ];
       ports = ["8989:8989"];
       environment = {
-        PUID = "${config.users.sonarr.uid}"; # sonarr
-        PGID = "${config.users.${cfg.mediaGroup}.gid}"; # media
+        PUID = "984"; # sonarr
+        PGID = "987"; # media
       } // cfg.common_env;
       extraOptions = [
         "--network=media"
