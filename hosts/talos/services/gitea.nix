@@ -2,6 +2,12 @@
 let
   cfg = config.myOptions.containers;
 in {
+  # users.users.gitea = { 
+  #   isSystemUser = true; 
+  #   group = "gitea"; 
+  # };
+  # users.groups.gitea = {};
+
   # services.gitea = {
   #   enable = true;
   #   user = "gitea";
@@ -16,8 +22,7 @@ in {
   #     };
   #   };
   # };
-  
-  # should work with podman too
+
   virtualisation.oci-containers.containers = {
     gitea = {
       image = "gitea/gitea:latest-rootless";
@@ -27,6 +32,10 @@ in {
         "/etc/timezone:/etc/timezone:ro"
         "/etc/localtime:/etc/localtime:ro"
       ];
+      # environment = {
+      #   PUID = common_env.PUID; # cameron
+      #   PGID = common_env.PGID; # docker
+      # };
       ports = [
         "8010:3000"
         "2222:2222"
