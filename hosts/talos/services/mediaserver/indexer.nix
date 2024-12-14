@@ -13,13 +13,13 @@ in {
     sonarr = {
       enable = true;
       openFirewall = false;
-      # user = "mediaserver";
+      user = "sonarr";
       group = mediaGroup;
     };
     radarr = {
       enable = true;
       openFirewall = false;
-      # user = "mediaserver";
+      user = "radarr";
       group = mediaGroup;
     };
     prowlarr = {
