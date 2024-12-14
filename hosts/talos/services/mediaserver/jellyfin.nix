@@ -35,16 +35,38 @@ in {
   # Always prioritise Jellyfin IO
   systemd.services.jellyfin.serviceConfig.IOSchedulingPriority = 0;
 
-  systemd.tmpfiles.rules = [
-    "d '${config.services.jellyfin.dataDir}' 0700 streamer root - -"
+  # systemd.tmpfiles.rules = [
+  #   "d '${config.services.jellyfin.dataDir}' 0700 streamer root - -"
 
-    # Media Dirs
-    "d '${cfg.storageDir}/media'          0775 streamer  media - -"
-    "d '${cfg.storageDir}/media/books'    0775 streamer  media - -"
-    "d '${cfg.storageDir}/media/family'   0775 streamer  media - -"
-    "d '${cfg.storageDir}/media/movies'   0775 streamer  media - -"
-    "d '${cfg.storageDir}/media/tv'       0775 streamer  media - -"
-  ];
+  #   # Media Dirs - These rules set the ACLs on newly-created files/dirs in these dirs
+  #   "d '${cfg.storageDir}/media'          0775 streamer  media - -"
+  #   "d '${cfg.storageDir}/media/books'    0775 streamer  media - -"
+  #   "d '${cfg.storageDir}/media/family'   0775 streamer  media - -"
+  #   "d '${cfg.storageDir}/media/movies'   0775 streamer  media - -"
+  #   "d '${cfg.storageDir}/media/tv'       0775 streamer  media - -"
+  # ];
+  systemd.tmpfiles.settings.jellyfinDirs = {
+    "${cfg.storageDir}/media"."d" = {
+      mode = "755";
+      inherit (config.services.jellyfin) user group;
+    };
+    "${cfg.storageDir}/media/books"."d" = {
+      mode = "755";
+      inherit (config.services.jellyfin) user group;
+    };
+    "${cfg.storageDir}/media/family"."d" = {
+      mode = "755";
+      inherit (config.services.jellyfin) user group;
+    };
+    "${cfg.storageDir}/media/movies"."d" = {
+      mode = "755";
+      inherit (config.services.jellyfin) user group;
+    };
+    "${cfg.storageDir}/media/tv"."d" = {
+      mode = "755";
+      inherit (config.services.jellyfin) user group;
+    };
+  };
 
   services.caddy.virtualHosts = {
     # Jellyseerr
