@@ -9,12 +9,13 @@ let
     TZ = config.time.timeZone;
   };
 in {
-  users.groups.${mediaGroup} = {};
-  
-  users.groups.streamer = {};
-  users.users.streamer = {
-    group = "streamer";
-    isSystemUser = true;
+  users = {
+    groups.${mediaGroup} = { gid = 987; };
+    groups.streamer = {};
+    users.streamer = {
+      group = "streamer";
+      isSystemUser = true;
+    };
   };
 
   services = {

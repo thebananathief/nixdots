@@ -63,8 +63,12 @@
     nixpkgsCustom = system: (import nixpkgs {
       inherit system;
       config.allowUnfree = true;
-      # config.permittedInsecurePackages = [ 
-      # ];
+      config.permittedInsecurePackages = [ 
+        "aspnetcore-runtime-wrapped-6.0.36"
+        "aspnetcore-runtime-6.0.36"
+        "dotnet-sdk-wrapped-6.0.428"
+        "dotnet-sdk-6.0.428"
+      ];
     });
 
     # Function to make NixOS systems with common modules & home manager configs

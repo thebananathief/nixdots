@@ -34,12 +34,12 @@
       downloadDir = mkOption {
         type = types.str;
         default = "/mnt/disk3/downloads";
-        default = "Directory for downloads to be placed";
+        description = "Directory for downloads to be placed";
       };
       mediaGroup = mkOption {
         type = types.str;
         default = "media";
-        default = "Name for the ACL group that can access media files";
+        description = "Name for the ACL group that can access media files";
       };
     };
   };

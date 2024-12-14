@@ -3,12 +3,16 @@ let
   cfg = config.myOptions.containers;
   downloadDir = config.myOptions.downloadDir;
   inherit (config.sops) secrets;
-  mediaserver_env = {
-    PUID = "989"; # mediaserver
-    PGID = "131"; # docker
-    TZ = config.time.timeZone;
-  };
 in {
+  users = {
+    groups.torrenter = {};
+    users.torrenter = {
+      uid = 986;
+      group = "torrenter";
+      isSystemUser = true;
+    };
+  };
+
   sops.secrets = {
     "mullvad.env" = {
       group = config.virtualisation.oci-containers.backend;
@@ -53,7 +57,11 @@ in {
         "${downloadDir}:/downloads:rw"
         # "${downloadDir}/watch:/watch" # TODO: Adjust this to a torrent blackhole
       ];
-      environment = mediaserver_env;
+      environment = {
+        PUID = "986"; # torrenter
+        PGID = "987"; # media
+        TZ = config.time.timeZone;
+      };
       # This uses the gluetun network stack so that its behind VPN
       extraOptions = ["--network=container:gluetun"];
       dependsOn = ["gluetun"];

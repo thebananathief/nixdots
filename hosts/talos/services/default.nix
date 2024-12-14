@@ -16,7 +16,7 @@ in {
     ./syncthing.nix
     ./librespeed.nix
     ./gitea.nix
-    ./mediaserver.nix
+    ./mediaserver
     ./etherpad.nix
     # ./dns.nix
     ./reverse-proxy.nix
