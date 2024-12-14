@@ -54,15 +54,14 @@ in {
   };
 
   # MergerFS pool
-  # Make sure the device defines the mountpoints you want to merge
-  # (anything starting with "disk" in /mnt/)
+  # This globs all mounts at /mnt/disk* into a single mountpoint: /mnt/storage
   fileSystems."/mnt/storage" = {
     device = "/mnt/disk*:/mnt/tank/fuse";
     fsType = "fuse.mergerfs";
     options = [
-      # "defaults"
+      "defaults"
       "nonempty"
-      # "allow_other"
+      "allow_other"
       "cache.files=auto-full"
       "category.create=mspmfs"
       "moveonenospc=true"
