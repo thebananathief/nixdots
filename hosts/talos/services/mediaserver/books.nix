@@ -7,8 +7,8 @@ in {
     audiobookshelf = {
       enable = true;
       host = "0.0.0.0"; # Required to allow external clients to connect to this webserver
-      user = "mediaserver";
-      group = "mediaserver";
+      user = "streamer";
+      group = "${cfg.mediaGroup}";
       port = 8009;
     };
   };
