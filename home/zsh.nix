@@ -82,6 +82,7 @@
     unar
     ffmpegthumbnailer
     poppler
+    # Useful for viewing malicious .lnk files
     python312Packages.lnkparse3
   ];
 }

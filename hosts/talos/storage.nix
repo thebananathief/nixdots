@@ -60,14 +60,11 @@ in {
     device = "/mnt/disk*:/mnt/tank/fuse";
     fsType = "fuse.mergerfs";
     options = [
-      "defaults"
-      "nonempty"
-      "allow_other"
-      "category.create=epmfs"
-      "use_ino"
+      "cache.files=auto-full"
+      "category.create=mspmfs"
       "moveonenospc=true"
       "dropcacheonclose=true"
-      "minfreespace=50G"
+      "minfreespace=30G"
       "fsname=mergerfs"
     ];
   };
