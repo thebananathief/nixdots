@@ -4,7 +4,16 @@ let
   inherit (config.sops) secrets;
 in {
   users = {
-    groups.${cfg.mediaGroup} = { gid = 987; };
+    groups.${cfg.mediaGroup} = { 
+      gid = 987; 
+      members = [
+        "sonarr"
+        "radarr"
+        "prowlarr"
+        "streamer"
+        "torrenter"
+      ];
+    };
 
     groups.streamer = {};
     users.streamer = {
