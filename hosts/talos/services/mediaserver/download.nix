@@ -16,6 +16,9 @@ in {
     "d ${cfg.storageDir}/downloads 0775 torrenter media -"
     "d ${cfg.storageDir}/downloads/complete 0775 torrenter media -"
     "d ${cfg.storageDir}/downloads/incomplete 0775 torrenter media -"
+    "d ${cfg.storageDir}/downloads/incomplete 0775 torrenter media -"
+    "d ${cfg.dataDir}/transmission 0775 torrenter media -"
+    "d ${cfg.dataDir}/gluetun 0775 torrenter media -"
   ];
 
   sops.secrets = {
@@ -41,7 +44,9 @@ in {
         VPN_TYPE = "wireguard";
         SERVER_COUNTRIES = "Switzerland";
         # OWNED_ONLY = "yes"; # Use if you want only servers owned by Mullvad
-      };
+        PUID = "986"; # torrenter
+        PGID = "987"; # media
+      } // cfg.common_env;
       extraOptions = [
         "--network=media"
         "--cap-add=NET_ADMIN"
