@@ -126,22 +126,6 @@ in {
     #   ];
     #   ports = [ "8008:8080" ];
     # };
-    # grafana = {
-    #   image = "grafana/grafana-oss:latest"; # https://hub.docker.com/r/grafana/grafana/
-    #   # TODO: Grafana needs to be configured for mysql (/etc/grafana/grafana.ini) - Do this with nixos
-    #   # Manually chown its volume to 472:0 (grafana container uses user 472 ?)
-    #   # user = "cameron"; # does this solve it?
-    #   volumes = [
-    #     "${ appdata_path }/grafana/data:/var/lib/grafana:rw"
-    #     "${ appdata_path }/grafana/grafana.ini:/etc/grafana/grafana.ini"
-    #   ];
-    #   ports = [ "3030:3000" ];
-    #   dependsOn = [ "mysql" ];
-    #   # extraOptions = [ "--network=database_only" ];
-    #   # environment = {
-    #   #   GF_INSTALL_PLUGINS = "put plugin names or url to zips here"
-    #   # };
-    # };
     # diun = {
     #   image = "ghcr.io/crazy-max/diun:latest";
     #   volumes = [
