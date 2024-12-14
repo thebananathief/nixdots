@@ -65,7 +65,7 @@ in {
       environment = {
         PUID = "986"; # torrenter
         PGID = "987"; # media
-      } ++ cfg.common_env;
+      } // cfg.common_env;
       # This uses the gluetun network stack so that its behind VPN
       extraOptions = ["--network=container:gluetun"];
       dependsOn = ["gluetun"];

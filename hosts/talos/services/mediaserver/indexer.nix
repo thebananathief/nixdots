@@ -69,7 +69,7 @@ in {
       environment = {
         PUID = "${config.users.prowlarr.uid}"; # prowlarr
         PGID = "${config.users.${cfg.mediaGroup}.gid}"; # media
-      } ++ cfg.common_env;
+      } // cfg.common_env;
       extraOptions = [
         "--network=media"
       ];
@@ -84,7 +84,7 @@ in {
       environment = {
         PUID = "${config.users.radarr.uid}"; # radarr
         PGID = "${config.users.${cfg.mediaGroup}.gid}"; # media
-      } ++ cfg.common_env;
+      } // cfg.common_env;
       extraOptions = [
         "--network=media"
       ];
@@ -99,7 +99,7 @@ in {
       environment = {
         PUID = "${config.users.sonarr.uid}"; # sonarr
         PGID = "${config.users.${cfg.mediaGroup}.gid}"; # media
-      } ++ cfg.common_env;
+      } // cfg.common_env;
       extraOptions = [
         "--network=media"
       ];
