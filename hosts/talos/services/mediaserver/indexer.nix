@@ -36,13 +36,13 @@ in {
     };
     groups.sonarr = {};
     users.sonarr = {
-      uid = 984;
+      uid = 274;
       group = "sonarr";
       isSystemUser = true;
     };
     groups.radarr = {};
     users.radarr = {
-      uid = 983;
+      uid = 275;
       group = "radarr";
       isSystemUser = true;
     };
@@ -82,7 +82,7 @@ in {
       ];
       ports = ["7878:7878"];
       environment = {
-        PUID = "983"; # radarr
+        PUID = "275"; # radarr
         PGID = "987"; # media
       } // cfg.common_env;
       extraOptions = [
@@ -97,7 +97,7 @@ in {
       ];
       ports = ["8989:8989"];
       environment = {
-        PUID = "984"; # sonarr
+        PUID = "274"; # sonarr
         PGID = "987"; # media
       } // cfg.common_env;
       extraOptions = [
