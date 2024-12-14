@@ -10,7 +10,7 @@ in {
       ];
       environment = {
         PASSWORD = "PASSWORD";
-      } ++ cfg.common_env;
+      } // cfg.common_env;
       ports = [ "8016:80" ];
     };
   };

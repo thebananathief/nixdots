@@ -13,6 +13,7 @@ in {
 
     # ./gameserver.nix
     # ./webtrees.nix
+    ./options.nix
     ./dashy
     ./syncthing.nix
     ./librespeed.nix
