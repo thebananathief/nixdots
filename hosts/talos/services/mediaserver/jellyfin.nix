@@ -45,7 +45,7 @@ in {
   #   "d '${cfg.storageDir}/media/movies'   0775 streamer  media - -"
   #   "d '${cfg.storageDir}/media/tv'       0775 streamer  media - -"
   # ];
-  systemd.tmpfiles.settings.jellyfinDirs = {
+  systemd.tmpfiles.settings.jellyfinMediaDirs = {
     "${cfg.storageDir}/media"."d" = {
       mode = "755";
       inherit (config.services.jellyfin) user group;
