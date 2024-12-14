@@ -41,23 +41,23 @@ in {
 
   systemd.tmpfiles.settings.jellyfinMediaDirs = {
     "${cfg.storageDir}/media"."d" = {
-      mode = "755";
+      mode = "775";
       inherit (config.services.jellyfin) user group;
     };
     "${cfg.storageDir}/media/books"."d" = {
-      mode = "755";
+      mode = "775";
       inherit (config.services.jellyfin) user group;
     };
     "${cfg.storageDir}/media/family"."d" = {
-      mode = "755";
+      mode = "775";
       inherit (config.services.jellyfin) user group;
     };
     "${cfg.storageDir}/media/movies"."d" = {
-      mode = "755";
+      mode = "775";
       inherit (config.services.jellyfin) user group;
     };
     "${cfg.storageDir}/media/tv"."d" = {
-      mode = "755";
+      mode = "775";
       inherit (config.services.jellyfin) user group;
     };
   };
