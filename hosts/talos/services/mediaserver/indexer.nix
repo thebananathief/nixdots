@@ -10,8 +10,14 @@ let
   };
 in {
   systemd.tmpfiles.rules = [
+    "d /var/lib/sonarr 0775 sonarr media -"
+    "d /var/lib/sonarr/.config 0775 sonarr media -"
     "d ${config.services.sonarr.dataDir} 0775 sonarr media -"
+
+    "d /var/lib/radarr 0775 radarr media -"
+    "d /var/lib/radarr/.config 0775 radarr media -"
     "d ${config.services.radarr.dataDir} 0775 radarr media -"
+
     "d ${cfg.storageDir}/downloads 0775 torrenter media -"
     "d ${cfg.storageDir}/downloads/complete 0775 torrenter media -"
     "d ${cfg.storageDir}/downloads/incomplete 0775 torrenter media -"
