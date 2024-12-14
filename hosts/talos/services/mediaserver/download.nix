@@ -16,7 +16,8 @@ in {
     "d ${cfg.storageDir}/downloads 0775 torrenter media -"
     "d ${cfg.storageDir}/downloads/complete 0775 torrenter media -"
     "d ${cfg.storageDir}/downloads/incomplete 0775 torrenter media -"
-    "d ${cfg.storageDir}/downloads/incomplete 0775 torrenter media -"
+    "d ${cfg.storageDir}/downloads/incomplete/sonarr 0775 torrenter media -"
+    "d ${cfg.storageDir}/downloads/incomplete/radarr 0775 torrenter media -"
     "d ${cfg.dataDir}/transmission 0775 torrenter media -"
     "d ${cfg.dataDir}/gluetun 0775 torrenter media -"
   ];
