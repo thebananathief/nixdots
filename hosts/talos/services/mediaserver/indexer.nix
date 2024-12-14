@@ -9,6 +9,14 @@ let
     TZ = config.time.timeZone;
   };
 in {
+  systemd.tmpfiles.rules = [
+    "d ${config.services.sonarr.dataDir} 0775 sonarr media -"
+    "d ${config.services.radarr.dataDir} 0775 radarr media -"
+    "d ${cfg.storageDir}/downloads 0775 torrenter media -"
+    "d ${cfg.storageDir}/downloads/complete 0775 torrenter media -"
+    "d ${cfg.storageDir}/downloads/incomplete 0775 torrenter media -"
+  ];
+
   services = {
     sonarr = {
       enable = true;
