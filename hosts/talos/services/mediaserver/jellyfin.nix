@@ -1,16 +1,11 @@
 { config, pkgs, ... }:
 let
-  cfg = config.myOptions.containers;
-  mediaGroup = config.myOptions.mediaGroup;
+  cfg = config.mediaServer;
   inherit (config.sops) secrets;
-  mediaserver_env = {
-    PUID = "989"; # mediaserver
-    PGID = "131"; # docker
-    TZ = config.time.timeZone;
-  };
 in {
   users = {
-    groups.${mediaGroup} = { gid = 987; };
+    groups.${cfg.mediaGroup} = { gid = 987; };
+
     groups.streamer = {};
     users.streamer = {
       group = "streamer";
@@ -23,7 +18,7 @@ in {
       enable = true;
       openFirewall = true;
       user = "streamer";
-      group = mediaGroup;
+      group = cfg.mediaGroup;
     };
     jellyseerr = {
       enable = true;
@@ -35,16 +30,6 @@ in {
   # Always prioritise Jellyfin IO
   systemd.services.jellyfin.serviceConfig.IOSchedulingPriority = 0;
 
-  # systemd.tmpfiles.rules = [
-  #   "d '${config.services.jellyfin.dataDir}' 0700 streamer root - -"
-
-  #   # Media Dirs - These rules set the ACLs on newly-created files/dirs in these dirs
-  #   "d '${cfg.storageDir}/media'          0775 streamer  media - -"
-  #   "d '${cfg.storageDir}/media/books'    0775 streamer  media - -"
-  #   "d '${cfg.storageDir}/media/family'   0775 streamer  media - -"
-  #   "d '${cfg.storageDir}/media/movies'   0775 streamer  media - -"
-  #   "d '${cfg.storageDir}/media/tv'       0775 streamer  media - -"
-  # ];
   systemd.tmpfiles.settings.jellyfinMediaDirs = {
     "${cfg.storageDir}/media"."d" = {
       mode = "755";

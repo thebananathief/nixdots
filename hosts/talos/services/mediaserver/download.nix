@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 let
-  cfg = config.myOptions.containers;
-  downloadDir = config.myOptions.downloadDir;
+  cfg = config.mediaServer;
   inherit (config.sops) secrets;
 in {
   users = {
@@ -13,9 +12,15 @@ in {
     };
   };
 
+  systemd.tmpfiles.rules = [
+    "d ${cfg.storageDir}/downloads 0775 torrenter media -"
+    "d ${cfg.storageDir}/downloads/complete 0775 torrenter media -"
+    "d ${cfg.storageDir}/downloads/incomplete 0775 torrenter media -"
+  ];
+
   sops.secrets = {
     "mullvad.env" = {
-      group = config.virtualisation.oci-containers.backend;
+      group = cfg.mediaGroup;
       mode = "0440";
     };
   };
@@ -54,14 +59,13 @@ in {
       image = "lscr.io/linuxserver/transmission:latest";
       volumes = [
         "${cfg.dataDir}/transmission:/config"
-        "${downloadDir}:/downloads:rw"
+        "${cfg.downloadDir}:/downloads:rw"
         # "${downloadDir}/watch:/watch" # TODO: Adjust this to a torrent blackhole
       ];
       environment = {
         PUID = "986"; # torrenter
         PGID = "987"; # media
-        TZ = config.time.timeZone;
-      };
+      } ++ cfg.common_env;
       # This uses the gluetun network stack so that its behind VPN
       extraOptions = ["--network=container:gluetun"];
       dependsOn = ["gluetun"];
