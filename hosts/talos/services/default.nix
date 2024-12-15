@@ -15,6 +15,7 @@ in {
     # ./webtrees.nix
     ./options.nix
     ./dashy
+    ./starbase
     ./syncthing.nix
     ./librespeed.nix
     ./gitea.nix
