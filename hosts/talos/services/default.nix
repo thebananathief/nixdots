@@ -14,7 +14,7 @@ in {
     # ./gameserver.nix
     # ./webtrees.nix
     ./options.nix
-    ./dashy
+    # ./dashy
     ./starbase
     ./syncthing.nix
     ./librespeed.nix

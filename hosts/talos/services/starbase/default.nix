@@ -117,7 +117,6 @@ let
     }
     {
       category = "Devices";
-      bubble = true;
       services = [
         {
           name = "Router";
@@ -130,7 +129,7 @@ let
           name = "Styx - piKVM";
           uri = "https://styx/login/";
           description = "KVM server";
-          icon = "/icons/pikvm.png";
+          icon = "icons/pikvm.png";
         }
         # {
         #   name = "Home Assistant";
@@ -143,23 +142,31 @@ let
     }
     {
       category = "External Services";
+      bubble = true;
       services = [
         {
           name = "Cloudflare";
           uri = "https://dash.cloudflare.com/";
           description = "Cloudflare dashboard";
           icon = "cloudflare";
+          iconBubble = true;
         }
         {
           name = "Namecheap";
           uri = "https://ap.www.namecheap.com/dashboard";
           description = "Domain registrar";
-          icon = "/icons/namecheap-logo.png";
+          icon = "icons/namecheap-logo.png";
         }
         {
           name = "Healthchecks.io";
           uri = "https://healthchecks.io/projects/c5e9aa12-7ba8-4c6b-877c-6324ef44c349/checks/";
           description = "Job / Uptime checking and notifications";
+          icon = "healthchecks";
+        }
+        {
+          name = "Github";
+          uri = "https://github.com/thebananathief?tab=repositories/";
+          description = "Personal github";
           icon = "healthchecks";
         }
       ];
@@ -184,12 +191,13 @@ in {
         "${ cfg.dataDir }/starbase/public/logo.png:/app/public/logo.png"
         "${ cfg.dataDir }/starbase/public/icons:/app/public/icons"
       ];
-      ports = [ "8002:4173" ];
+      ports = [ "8000:4173" ];
       # user = "980:970";
       environment = {
         TITLE = "Talos Home";
         # LOGO = "/icons/logo.png";
         LOGO = "";
+        HOVER = "underline";
       };
     };
   };
@@ -207,12 +215,12 @@ in {
   # ];
   
   services.caddy.virtualHosts = {
-    "base.${ config.networking.fqdn }".extraConfig = ''
+    "home.${ config.networking.fqdn }".extraConfig = ''
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
 
       @authorized remote_ip 192.168.0.0/24
       handle @authorized {
-        reverse_proxy localhost:8002
+        reverse_proxy localhost:8000
       }
       handle {
         respond "Unauthorized" 403
