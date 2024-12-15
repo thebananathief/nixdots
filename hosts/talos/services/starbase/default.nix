@@ -72,7 +72,7 @@ in {
         "${ cfg.dataDir }/starbase/public/icons:/app/public/icons"
       ];
       ports = [ "8002:4173" ];
-      user = "980:970";
+      # user = "980:970";
       environment = {
         TITLE = "Talos Home";
         LOGO = "/starbase80.jpg";
