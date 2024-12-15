@@ -12,14 +12,14 @@ in {
   # ZFS stuff
   boot.supportedFilesystems = [
     "ext4"
-    # "btrfs"
     "xfs"
-    # "zfs"
-    "ntfs"
     "fat"
-    # "vfat"
     "exfat"
-    "cifs" # mount windows share
+    # "btrfs"
+    # "zfs"
+    # "ntfs"
+    # "vfat"
+    # "cifs" # mount windows share
   ];
   
   # boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;

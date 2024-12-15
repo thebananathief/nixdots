@@ -25,4 +25,18 @@ in {
       };
     };
   };
+  
+  services.caddy.virtualHosts = {
+    "home.${ config.networking.fqdn }".extraConfig = ''
+      tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+
+      @authorized remote_ip 192.168.0.0/24
+      handle @authorized {
+        reverse_proxy localhost:8000
+      }
+      handle {
+        respond "Unauthorized" 403
+      }
+    '';
+  };
 }
