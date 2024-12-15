@@ -14,7 +14,7 @@ let
         }
         {
           name = "Radarr";
-          uri = "https://auth.mywebsite.com";
+          uri = "https://radarr.talos.host/";
           description = "Movie fetching manager";
           icon = "radarr-light";
         }
@@ -173,7 +173,7 @@ let
           name = "Github";
           uri = "https://github.com/thebananathief?tab=repositories/";
           description = "Personal github";
-          icon = "github";
+          icon = "github-light";
         }
       ];
     }
