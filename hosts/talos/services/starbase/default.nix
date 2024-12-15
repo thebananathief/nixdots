@@ -29,6 +29,113 @@ in {
       };
     };
   };
+
+  environment.etc."/appdata/starbase/config.json" = {
+    text = builtins.toJSON [
+      {
+        category = "Services";
+        services = [
+          {
+            name = "Archivebox";
+            uri = "https://archivebox.mywebsite.com";
+            description = "Backup webpages";
+            icon = "/icons/archivebox.jpg";
+          }
+          {
+            name = "Authelia";
+            uri = "https://auth.mywebsite.com";
+            description = "Authentication";
+            icon = "/icons/authelia.png";
+          }
+          {
+            name = "Calibre";
+            uri = "https://calibre.mywebsite.com";
+            description = "eBook library";
+            icon = "/icons/calibre.png";
+          }
+        ];
+      }
+      {
+        category = "Devices";
+        bubble = true;
+        services = [
+          {
+            name = "Router";
+            uri = "http://192.168.1.1/";
+            description = "Netgear Orbi";
+            icon = "/icons/router.png";
+          }
+          {
+            name = "Home Assistant";
+            uri = "http://homeassistant.local:8123/";
+            description = "Home automation";
+            icon = "home-assistant";
+            iconBubble = false;
+          }
+          {
+            name = "Synology";
+            uri = "http://synology:5000";
+            description = "Network storage";
+            icon = "/icons/synology.png";
+          }
+        ];
+      }
+    ];
+    mode = "0755";
+  };
+
+#   `/appdata/starbase/config.json` = ''
+# [
+# 	{
+# 		"category": "Services",
+# 		"services": [
+# 			{
+# 				"name": "Archivebox",
+# 				"uri": "https://archivebox.mywebsite.com",
+# 				"description": "Backup webpages",
+# 				"icon": "/icons/archivebox.jpg"
+# 			},
+# 			{
+# 				"name": "Authelia",
+# 				"uri": "https://auth.mywebsite.com",
+# 				"description": "Authentication",
+# 				"icon": "/icons/authelia.png"
+# 			},
+# 			{
+# 				"name": "Calibre",
+# 				"uri": "https://calibre.mywebsite.com",
+# 				"description": "eBook library",
+# 				"icon": "/icons/calibre.png"
+# 			}
+# 		]
+# 	},
+# 	{
+# 		"category": "Devices",
+# 		"bubble": true,
+# 		"services": [
+# 			{
+# 				"name": "Router",
+# 				"uri": "http://192.168.1.1/",
+# 				"description": "Netgear Orbi",
+# 				"icon": "/icons/router.png"
+# 			},
+# 			{
+# 				"name": "Home Assistant",
+# 				"uri": "http://homeassistant.local:8123/",
+# 				"description": "Home automation",
+# 				"icon": "home-assistant",
+# 				"iconBubble": false
+# 			},
+# 			{
+# 				"name": "Synology",
+# 				"uri": "http://synology:5000",
+# 				"description": "Network storage",
+# 				"icon": "/icons/synology.png"
+# 			}
+# 		]
+# 	}
+# ]
+#   '';
   
   systemd.tmpfiles.rules = [
     "d ${ cfg.dataDir }/starbase 0755 starbase starbase - -"
