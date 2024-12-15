@@ -188,8 +188,8 @@ in {
       # user = "980:970";
       environment = {
         TITLE = "Talos Home";
-        LOGO = "/logo.png";
-        # LOGO = "";
+        # LOGO = "/icons/logo.png";
+        LOGO = "";
       };
     };
   };
