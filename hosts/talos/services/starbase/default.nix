@@ -4,8 +4,9 @@ let
   inherit (config.sops) secrets;
 in {
   users = {
-    groups.starbase = {};
+    groups.starbase = { gid = 983; };
     users.starbase = {
+      uid = 984;
       group = "starbase";
       isSystemUser = true;
     };
@@ -21,7 +22,7 @@ in {
         "${ cfg.dataDir }/starbase/public/icons:/app/public/icons"
       ];
       ports = [ "8002:4173" ];
-      user = "starbase:starbase";
+      user = "984:983";
       environment = {
         TITLE = "Talos Home";
         LOGO = "/starbase80.jpg";
