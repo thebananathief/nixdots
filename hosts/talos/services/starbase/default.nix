@@ -28,7 +28,7 @@ let
           name = "Transmission";
           uri = "http://transmission.talos.host/";
           description = "BitTorrent client";
-          icon = "hl-transmission";
+          icon = "transmission";
         }
         {
           name = "Jellyseerr";
@@ -69,13 +69,13 @@ let
           name = "Librespeed";
           uri = "http://speedtest.talos.host/";
           description = "Speedtest against TALOS";
-          icon = "hl-librespeed";
+          icon = "librespeed";
         }
         {
           name = "Gitea";
           uri = "http://code.talos.host/";
           description = "Local source code";
-          icon = "hl-gitea";
+          icon = "gitea";
         }
         # {
         #   name = "Smokeping";
@@ -93,7 +93,7 @@ let
         #   name = "Webtrees";
         #   uri = "http://talos:8013/";
         #   description = "Geneology database";
-        #   icon = "webtrees-logo.png";
+        #   icon = "/icons/webtrees-logo.png";
         # }
         # {
         #   name = "Scrutiny";
@@ -127,10 +127,10 @@ let
           # icon = "/icons/synology.png";
         }
         {
-          name = "Styx";
+          name = "Styx - piKVM";
           uri = "https://styx/login/";
           description = "KVM server";
-          icon = "pikvm";
+          icon = "/icons/pikvm.png";
         }
         # {
         #   name = "Home Assistant";
@@ -154,13 +154,13 @@ let
           name = "Namecheap";
           uri = "https://ap.www.namecheap.com/dashboard";
           description = "Domain registrar";
-          icon = "namecheap";
+          icon = "/icons/namecheap-logo.png";
         }
         {
           name = "Healthchecks.io";
           uri = "https://healthchecks.io/projects/c5e9aa12-7ba8-4c6b-877c-6324ef44c349/checks/";
           description = "Job / Uptime checking and notifications";
-          icon = "healthcheck";
+          icon = "healthchecks";
         }
       ];
     }
@@ -188,7 +188,8 @@ in {
       # user = "980:970";
       environment = {
         TITLE = "Talos Home";
-        LOGO = "/starbase80.jpg";
+        LOGO = "/logo.png";
+        # LOGO = "";
       };
     };
   };
