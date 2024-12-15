@@ -16,7 +16,7 @@ let
           name = "Radarr";
           uri = "https://auth.mywebsite.com";
           description = "Movie fetching manager";
-          icon = "radarr";
+          icon = "radarr-light";
         }
         {
           name = "Prowlarr";
@@ -126,10 +126,17 @@ let
           # icon = "/icons/synology.png";
         }
         {
+          name = "Access Point";
+          uri = "http://192.168.0.50/";
+          description = "AP interface";
+          icon = "router";
+          # icon = "/icons/synology.png";
+        }
+        {
           name = "Styx - piKVM";
           uri = "https://styx/login/";
           description = "KVM server";
-          icon = "icons/pikvm.png";
+          icon = "pikvm-light";
         }
         # {
         #   name = "Home Assistant";
@@ -149,7 +156,6 @@ let
           uri = "https://dash.cloudflare.com/";
           description = "Cloudflare dashboard";
           icon = "cloudflare";
-          iconBubble = true;
         }
         {
           name = "Namecheap";
@@ -167,7 +173,7 @@ let
           name = "Github";
           uri = "https://github.com/thebananathief?tab=repositories/";
           description = "Personal github";
-          icon = "healthchecks";
+          icon = "github";
         }
       ];
     }
@@ -196,7 +202,7 @@ in {
       environment = {
         TITLE = "Talos Home";
         # LOGO = "/icons/logo.png";
-        LOGO = "";
+        LOGO = "xcp-ng";
         HOVER = "underline";
       };
     };
