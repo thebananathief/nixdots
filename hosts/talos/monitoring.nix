@@ -94,6 +94,7 @@ in {
         '';
         repository = "sftp://restic@icebox:22//mnt/backup/talos";
         passwordFile = secrets.restic_talos_backup.path;
+        user = "root";
       };
     };
   };
