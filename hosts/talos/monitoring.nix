@@ -77,25 +77,24 @@ in {
             }
           ];
           features = {
-            bgp = false;
+            bgp = true;
             dhcp = true;
-            dhcpv6 = false;
-            dhcpl = false;
+            dhcpv6 = true;
+            dhcpl = true;
             routes = true;
             pools = true;
             optics = true;
           };
         };
       };
-      restic = {
-        enable = true;
-        environmentFile = pkgs.writeText "restic-exporter.env" ''
-        PATH=${pkgs.openssh}/bin/
-        '';
-        repository = "sftp://restic@icebox:22//mnt/backup/talos";
-        passwordFile = secrets.restic_talos_backup.path;
-        user = "root";
-      };
+      # restic = {
+      #   enable = true;
+      #   environmentFile = pkgs.writeText "restic-exporter.env" ''
+      #   PATH=${pkgs.openssh}/bin/
+      #   '';
+      #   repository = "sftp://restic@icebox:22//mnt/backup/talos";
+      #   passwordFile = secrets.restic_talos_backup.path;
+      # };
     };
   };
 
