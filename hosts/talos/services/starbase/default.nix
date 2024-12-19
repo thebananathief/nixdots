@@ -66,6 +66,12 @@ let
           icon = "grafana";
         }
         {
+          name = "Prometheus";
+          uri = "http://talos:9090/";
+          description = "Sketch prometheus queries";
+          icon = "prometheus";
+        }
+        {
           name = "Librespeed";
           uri = "http://speedtest.talos.host/";
           description = "Speedtest against TALOS";
