@@ -90,7 +90,7 @@ in {
       restic = {
         enable = true;
         environmentFile = pkgs.writeText "restic-exporter.env" ''
-        PATH=$PATH;${pkgs.openssh}/bin/
+        PATH=${pkgs.openssh}/bin/
         '';
         repository = "sftp://restic@icebox:22//mnt/backup/talos";
         passwordFile = secrets.restic_talos_backup.path;
