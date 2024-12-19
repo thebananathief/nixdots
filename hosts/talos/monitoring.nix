@@ -1,4 +1,4 @@
-{ config, username, ... }:
+{ config, username, pkgs, ... }:
 let
   cfg = config.myOptions.containers;
   inherit (config.sops) secrets;
@@ -32,6 +32,7 @@ in {
               "localhost:9100"
               "localhost:9633"
               "localhost:9753"
+              "localhost:9436"
             ];
           }
         ];
@@ -58,8 +59,39 @@ in {
         enable = true;
         maxInterval = "60s";
       };
+      mikrotik = {
+        enable = true;
+        configuration = {
+          devices = [
+            {
+              name = "router";
+              address = "192.168.0.1";
+              user = "prometheus";
+              password = "changeme";
+            }
+            {
+              name = "ap";
+              address = "192.168.0.50";
+              user = "prometheus";
+              password = "changeme";
+            }
+          ];
+          features = {
+            bgp = false;
+            dhcp = true;
+            dhcpv6 = false;
+            dhcpl = false;
+            routes = true;
+            pools = true;
+            optics = true;
+          };
+        };
+      };
       restic = {
         enable = true;
+        environmentFile = pkgs.writeText "restic-exporter.env" ''
+        PATH=$PATH;${pkgs.openssh}/bin/
+        '';
         repository = "sftp://restic@icebox:22//mnt/backup/talos";
         passwordFile = secrets.restic_talos_backup.path;
       };
