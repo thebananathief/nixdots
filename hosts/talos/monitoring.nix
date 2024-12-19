@@ -16,6 +16,9 @@ in {
     # devices = [
     # ];
   };
+
+  sops.secrets.restic_talos_backup = {};
+
   services.prometheus = {
     enable = true;
     scrapeConfigs = [
@@ -28,6 +31,7 @@ in {
             targets = [
               "localhost:9100"
               "localhost:9633"
+              "localhost:9753"
             ];
           }
         ];
@@ -46,12 +50,19 @@ in {
         ];
       }
     ];
-    exporters.node = {
-      enable = true;
-    };
-    exporters.smartctl = {
-      enable = true;
-      maxInterval = "60s";
+    exporters = {
+      node = {
+        enable = true;
+      };
+      smartctl = {
+        enable = true;
+        maxInterval = "60s";
+      };
+      restic = {
+        enable = true;
+        repository = "sftp://restic@icebox:22//mnt/backup/talos";
+        passwordFile = secrets.restic_talos_backup.path;
+      };
     };
   };
 
