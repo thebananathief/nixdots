@@ -78,6 +78,7 @@
   };
 
   home.packages = with pkgs; [
+    mysql-shell
     # Yazi previewers
     unar
     ffmpegthumbnailer
