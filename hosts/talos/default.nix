@@ -12,6 +12,7 @@ in {
     ./monitoring.nix
     ./backup.nix
     ./dir-options.nix
+    ./test-database.nix
     ../../modules/tailscale.nix
     ../../modules/security.nix
   ];
