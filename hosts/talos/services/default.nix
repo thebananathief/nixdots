@@ -12,7 +12,7 @@ in {
     # ./whoogle.nix
 
     # ./gameserver.nix
-    # ./webtrees.nix
+    ./webtrees.nix
     ./options.nix
     # ./dashy
     ./starbase

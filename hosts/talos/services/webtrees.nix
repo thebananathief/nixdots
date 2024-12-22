@@ -34,7 +34,7 @@ in {
         # DB_USER = "webtrees";
         # WT_NAME= "Cameron Salomone";
         # WT_USER= "thebananathief";
-        PGID = "${ cfg.common_env.PGID }";
+        PGID = "131"; # docker
         # PrettyURLs require filling out Base URL
         PRETTYURLS = "TRUE";
         BASE_URL = "http://talos:8013";
