@@ -46,7 +46,7 @@ in {
     };
 
     webtrees-postgres = {
-      image = "postgres:alpine";
+      image = "postgres:16-alpine";
       volumes = [
         "${ cfg.dataDir }/webtrees-postgres:/var/lib/postgresql/data"
       ];
