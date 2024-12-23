@@ -24,7 +24,7 @@ in {
         PENPOT_DATABASE_USERNAME = "penpot";
         PENPOT_DATABASE_PASSWORD = "penpot";
         PENPOT_REDIS_URI = "redis://penpot-redis/0";
-        PENPOT_ASSETS_STORAGE_BACKEND = "fs";
+        PENPOT_ASSETS_STORAGE_BACKEND = "assets-fs";
         PENPOT_STORAGE_ASSETS_FS_DIRECTORY = "/opt/data/assets";
 
         PENPOT_SMTP_ENABLED = "false";
