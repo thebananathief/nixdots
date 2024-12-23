@@ -98,6 +98,20 @@ in {
   #       { after = [ "docker-network-penpot.service" ]; requires = [ "docker-network-penpot.service" ]; };
   #   in builtins.listToAttrs (map mkDep [ "frontend" "backend" "exporter" "postgres" "redis" ])
   # );
+  
+  services.caddy.virtualHosts = {
+    "penpot.${ config.networking.fqdn }".extraConfig = ''
+      tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+
+      @authorized remote_ip 192.168.0.0/24
+      handle @authorized {
+        reverse_proxy localhost:9001
+      }
+      handle {
+        respond "Unauthorized" 403
+      }
+    '';
+  };
 }
 # https://raw.githubusercontent.com/penpot/penpot/main/docker/images/docker-compose.yaml
   
