@@ -20,7 +20,7 @@ in {
     ./librespeed.nix
     ./gitea.nix
     ./mediaserver
-    ./penpot
+    # ./penpot
     # ./etherpad.nix
     # ./dns.nix
     ./reverse-proxy.nix
