@@ -1,4 +1,4 @@
-{ ... }:
+{ config, pkgs, lib, ... }:
 let 
   cfg = config.mediaServer;
   inherit (config.sops) secrets;
@@ -76,13 +76,28 @@ in {
         ${pkgs.docker}/bin/docker network create penpot-network
     '';
   };
+  
+  
+  # Add network dependencies to the container services
+  systemd.services."docker-penpot-frontend".after = [ "docker-network-penpot.service" ];
+  systemd.services."docker-penpot-frontend".requires = [ "docker-network-penpot.service" ];
+  systemd.services."docker-penpot-backend".after = [ "docker-network-penpot.service" ];
+  systemd.services."docker-penpot-backend".requires = [ "docker-network-penpot.service" ];
+  systemd.services."docker-penpot-exporter".after = [ "docker-network-penpot.service" ];
+  systemd.services."docker-penpot-exporter".requires = [ "docker-network-penpot.service" ];
+  systemd.services."docker-penpot-postgres".after = [ "docker-network-penpot.service" ];
+  systemd.services."docker-penpot-postgres".requires = [ "docker-network-penpot.service" ];
+  systemd.services."docker-penpot-redis".after = [ "docker-network-penpot.service" ];
+  systemd.services."docker-penpot-redis".requires = [ "docker-network-penpot.service" ];
 
-  # Ensure the services depend on the network
-  systemd.services = let
-    mkDep = name: lib.nameValuePair
-      "docker-penpot-${name}"
-      { after = [ "docker-network-penpot.service" ]; requires = [ "docker-network-penpot.service" ]; };
-  in builtins.listToAttrs (map mkDep [ "frontend" "backend" "exporter" "postgres" "redis" ]);
+  # Ensure the services depend on the network by merging with existing services
+  # systemd.services = lib.recursiveUpdate config.systemd.services (
+  #   let
+  #     mkDep = name: lib.nameValuePair
+  #       "docker-penpot-${name}"
+  #       { after = [ "docker-network-penpot.service" ]; requires = [ "docker-network-penpot.service" ]; };
+  #   in builtins.listToAttrs (map mkDep [ "frontend" "backend" "exporter" "postgres" "redis" ])
+  # );
 }
 # https://raw.githubusercontent.com/penpot/penpot/main/docker/images/docker-compose.yaml
   
