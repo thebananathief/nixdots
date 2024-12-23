@@ -8,8 +8,13 @@ in {
       image = "penpotapp/frontend:latest";
       ports = [ "9001:8080" ];
       environment = {
-        PENPOT_FLAGS = "disable-email-verification disable-registration enable-prepl-server disable-secure-session-cookies";
+        PENPOT_FLAGS = "disable-email-verification disable-registration enable-prepl-server disable-secure-session-cookies disable-onboarding";
+        PENPOT_BACKEND_URI = "http://penpot-backend:6060";
+        PENPOT_EXPORTER_URI = "http://penpot-exporter:";
       };
+      volumes = [
+        "${ cfg.dataDir }/penpot/backend:/opt/data/assets"
+      ];
       dependsOn = [ "penpot-backend" "penpot-exporter" ];
       extraOptions = [ "--network=penpot-network" ];
     };
@@ -17,8 +22,8 @@ in {
     penpot-backend = {
       image = "penpotapp/backend:latest";
       environment = {
-        PENPOT_PUBLIC_URI = "http://localhost:9001";
-        PENPOT_FLAGS = "disable-email-verification disable-registration enable-prepl-server disable-secure-session-cookies";
+        PENPOT_PUBLIC_URI = "https://penpot.talos.host";
+        PENPOT_FLAGS = "disable-email-verification disable-registration enable-prepl-server disable-secure-session-cookies disable-onboarding";
         PENPOT_TELEMETRY_ENABLED = "false";
         PENPOT_DATABASE_URI = "postgresql://penpot-postgres/penpot";
         PENPOT_DATABASE_USERNAME = "penpot";
@@ -39,7 +44,7 @@ in {
     penpot-exporter = {
       image = "penpotapp/exporter:latest";
       environment = {
-        PENPOT_PUBLIC_URI = "http://localhost:9001";
+        PENPOT_PUBLIC_URI = "https://penpot.talos.host";
         PENPOT_REDIS_URI = "redis://penpot-redis/0";
       };
       extraOptions = [ "--network=penpot-network" ];
