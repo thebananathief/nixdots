@@ -102,65 +102,74 @@ in {
   # Docker container for mikrotik exporter
   virtualisation.oci-containers.containers = {
     mktxp = let
-      mktxpConfig = pkgs.writeText "mktxp.conf" (pkgs.lib.generators.toINI {} {
-        "Router" = {
-          hostname = "192.168.0.1";
-        };
-        "Access Point" = {
-          hostname = "192.168.0.50"; 
-        };
-        default = {
-          enabled = true;
-          hostname = "localhost";
-          port = 8728;
-          username = "prometheus";
-          password = "changeme";
-          use_ssl = false;
-          no_ssl_certificate = false;
-          ssl_certificate_verify = false;
-          plaintext_login = true;
-          installed_packages = true;
-          dhcp = true;
-          dhcp_lease = true;
-          connections = true;
-          connection_stats = false;
-          interface = true;
-          route = true;
-          pool = true;
-          firewall = true;
-          neighbor = true;
-          dns = false;
-          ipv6_route = false;
-          ipv6_pool = false;
-          ipv6_firewall = false;
-          ipv6_neighbor = false;
-          poe = true;
-          monitor = true;
-          netwatch = true;
-          public_ip = true;
-          wireless = true;
-          wireless_clients = true;
-          capsman = true;
-          capsman_clients = true;
-          eoip = false;
-          gre = false;
-          ipip = false;
-          lte = false;
-          ipsec = false;
-          switch_port = false;
-          kid_control_assigned = false;
-          kid_control_dynamic = false;
-          user = true;
-          queue = true;
-          bgp = false;
-          routing_stats = false;
-          certificate = false;
-          remote_dhcp_entry = null;
-          remote_capsman_entry = null;
-          use_comments_over_names = true;
-          check_for_updates = false;
-        };
-      });
+      mktxpConfig = pkgs.runCommand "mktxp.conf" {} ''
+        echo '${pkgs.lib.generators.toINI {} {
+          "Router" = {
+            hostname = "192.168.0.1";
+          };
+          "Access Point" = {
+            hostname = "192.168.0.50"; 
+          };
+          default = {
+            enabled = true;
+            hostname = "localhost";
+            port = 8728;
+            username = "prometheus";
+            password = "changeme";
+            use_ssl = false;
+            no_ssl_certificate = false;
+            ssl_certificate_verify = false;
+            plaintext_login = true;
+            installed_packages = true;
+            dhcp = true;
+            dhcp_lease = true;
+            connections = true;
+            connection_stats = false;
+            interface = true;
+            route = true;
+            pool = true;
+            firewall = true;
+            neighbor = true;
+            dns = false;
+            ipv6_route = false;
+            ipv6_pool = false;
+            ipv6_firewall = false;
+            ipv6_neighbor = false;
+            poe = true;
+            monitor = true;
+            netwatch = true;
+            public_ip = true;
+            wireless = true;
+            wireless_clients = true;
+            capsman = true;
+            capsman_clients = true;
+            eoip = false;
+            gre = false;
+            ipip = false;
+            lte = false;
+            ipsec = false;
+            switch_port = false;
+            kid_control_assigned = false;
+            kid_control_dynamic = false;
+            user = true;
+            queue = true;
+            bgp = false;
+            routing_stats = false;
+            certificate = false;
+            remote_dhcp_entry = null;
+            remote_capsman_entry = null;
+            use_comments_over_names = true;
+            check_for_updates = false;
+          };
+        }}' > $out
+        chmod 644 $out
+      '';
+      # mktxpConfig = pkgs.writeTextFile {
+      #   name = "mktxp.conf";
+      #   mode = "0644";
+      #   text = (pkgs.lib.generators.toINI {} {
+      #   });
+      # };
     in {
       image = "ghcr.io/akpw/mktxp:latest";
       volumes = [
