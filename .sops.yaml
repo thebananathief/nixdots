@@ -13,6 +13,7 @@ creation_rules:
       - *admin_cameron_laptop
       - *server_talos
       - *server_icebox
+      - *server_icebox2
       - *laptop_gargantuan
 
   # Possible to specify which masters can access which keys, like this
