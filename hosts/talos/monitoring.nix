@@ -116,7 +116,7 @@ in {
 
   # Generate config file
   system.activationScripts.mktxp-config = let
-    mktxpConfigFile = pkgs.lib.generators.toINI {} {
+    mktxpConfig = pkgs.lib.generators.toINI {} {
       "Router" = {
         hostname = "192.168.0.1";
       };
@@ -177,9 +177,10 @@ in {
     };
   in ''
     mkdir -p /var/lib/mktxp
-    cp ${mktxpConfigFile} /var/lib/mktxp/mktxp.conf
+    echo '${mktxpConfig}' > /var/lib/mktxp/mktxp.conf
     chmod 644 /var/lib/mktxp/mktxp.conf
   '';
+    # cp ${mktxpConfigFile} /var/lib/mktxp/mktxp.conf
 
       # mktxpConfig = pkgs.runCommand "mktxp" {} ''
       #   cp ${mktxpConfigFile} $out/mktxp.conf
