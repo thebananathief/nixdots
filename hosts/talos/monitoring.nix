@@ -114,83 +114,89 @@ in {
     };
   };
 
-  # Docker container for mikrotik exporter
-  virtualisation.oci-containers.containers = {
-    mktxp = let
-      mktxpConfigFile = pkgs.lib.generators.toINI {} {
-        "Router" = {
-          hostname = "192.168.0.1";
-        };
-        "Access Point" = {
-          hostname = "192.168.0.50"; 
-        };
-        default = {
-          enabled = true;
-          hostname = "localhost";
-          port = 8728;
-          username = "prometheus";
-          password = "changeme";
-          use_ssl = false;
-          no_ssl_certificate = false;
-          ssl_certificate_verify = false;
-          plaintext_login = true;
-          installed_packages = true;
-          dhcp = true;
-          dhcp_lease = true;
-          connections = true;
-          connection_stats = false;
-          interface = true;
-          route = true;
-          pool = true;
-          firewall = true;
-          neighbor = true;
-          dns = false;
-          ipv6_route = false;
-          ipv6_pool = false;
-          ipv6_firewall = false;
-          ipv6_neighbor = false;
-          poe = true;
-          monitor = true;
-          netwatch = true;
-          public_ip = true;
-          wireless = true;
-          wireless_clients = true;
-          capsman = true;
-          capsman_clients = true;
-          eoip = false;
-          gre = false;
-          ipip = false;
-          lte = false;
-          ipsec = false;
-          switch_port = false;
-          kid_control_assigned = false;
-          kid_control_dynamic = false;
-          user = true;
-          queue = true;
-          bgp = false;
-          routing_stats = false;
-          certificate = false;
-          remote_dhcp_entry = null;
-          remote_capsman_entry = null;
-          use_comments_over_names = true;
-          check_for_updates = false;
-        };
+  # Generate config file
+  system.activationScripts.mktxp-config = let
+    mktxpConfigFile = pkgs.lib.generators.toINI {} {
+      "Router" = {
+        hostname = "192.168.0.1";
       };
-      mktxpConfig = pkgs.runCommand "mktxp" {} ''
-        cp ${mktxpConfigFile} $out/mktxp.conf
-        chmod 644 $out
-      '';
+      "Access Point" = {
+        hostname = "192.168.0.50"; 
+      };
+      default = {
+        enabled = true;
+        hostname = "localhost";
+        port = 8728;
+        username = "prometheus";
+        password = "changeme";
+        use_ssl = false;
+        no_ssl_certificate = false;
+        ssl_certificate_verify = false;
+        plaintext_login = true;
+        installed_packages = true;
+        dhcp = true;
+        dhcp_lease = true;
+        connections = true;
+        connection_stats = false;
+        interface = true;
+        route = true;
+        pool = true;
+        firewall = true;
+        neighbor = true;
+        dns = false;
+        ipv6_route = false;
+        ipv6_pool = false;
+        ipv6_firewall = false;
+        ipv6_neighbor = false;
+        poe = true;
+        monitor = true;
+        netwatch = true;
+        public_ip = true;
+        wireless = true;
+        wireless_clients = true;
+        capsman = true;
+        capsman_clients = true;
+        eoip = false;
+        gre = false;
+        ipip = false;
+        lte = false;
+        ipsec = false;
+        switch_port = false;
+        kid_control_assigned = false;
+        kid_control_dynamic = false;
+        user = true;
+        queue = true;
+        bgp = false;
+        routing_stats = false;
+        certificate = false;
+        remote_dhcp_entry = null;
+        remote_capsman_entry = null;
+        use_comments_over_names = true;
+        check_for_updates = false;
+      };
+    };
+  in ''
+    mkdir -p /var/lib/mktxp
+    cp ${mktxpConfigFile} /var/lib/mktxp/mktxp.conf
+    chmod 644 /var/lib/mktxp/mktxp.conf
+  '';
+
+      # mktxpConfig = pkgs.runCommand "mktxp" {} ''
+      #   cp ${mktxpConfigFile} $out/mktxp.conf
+      #   chmod 644 $out
+      # '';
       # mktxpConfig = pkgs.writeTextFile {
       #   name = "mktxp.conf";
       #   mode = "0644";
       #   text = (pkgs.lib.generators.toINI {} {
       #   });
       # };
-    in {
+
+  # Docker container for mikrotik exporter
+  virtualisation.oci-containers.containers = {
+    mktxp = {
       image = "ghcr.io/akpw/mktxp:latest";
-      volumes = [
-        "${ mktxpConfig }:/home/mktxp/mktxp/"
-      ];
+      volumes = [ "/var/lib/mktxp:/home/mktxp/mktxp/" ];
       ports = [ "49090:49090" ];
     };
   };
