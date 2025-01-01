@@ -119,9 +119,13 @@ in {
     mktxpConfig = pkgs.lib.generators.toINI {} {
       "Router" = {
         hostname = "192.168.0.1";
+        # remote_capsman_entry = "Access Point";
       };
       "Access Point" = {
         hostname = "192.168.0.50"; 
+        remote_dhcp_entry = "Router";
+        wireless = true;
+        wireless_clients = true;
       };
       default = {
         enabled = true;
@@ -133,11 +137,11 @@ in {
         no_ssl_certificate = false;
         ssl_certificate_verify = false;
         plaintext_login = true;
-        installed_packages = true;
+        installed_packages = false;
         dhcp = true;
         dhcp_lease = true;
         connections = true;
-        connection_stats = false;
+        connection_stats = true;
         interface = true;
         route = true;
         pool = true;
@@ -148,14 +152,14 @@ in {
         ipv6_pool = false;
         ipv6_firewall = false;
         ipv6_neighbor = false;
-        poe = true;
+        poe = false;
         monitor = true;
-        netwatch = true;
+        netwatch = false;
         public_ip = true;
-        wireless = true;
-        wireless_clients = true;
-        capsman = true;
-        capsman_clients = true;
+        wireless = false;
+        wireless_clients = false;
+        capsman = false;
+        capsman_clients = false;
         eoip = false;
         gre = false;
         ipip = false;
@@ -199,6 +203,7 @@ in {
       image = "ghcr.io/akpw/mktxp:latest";
       volumes = [ "/var/lib/mktxp:/home/mktxp/mktxp/" ];
       ports = [ "49090:49090" ];
+    # User in the container is mktxp (uid=100,gid=101)
     };
   };
 
