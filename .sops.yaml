@@ -3,6 +3,7 @@ keys:
   - &admin_cameron_laptop age1htjdvcdqvwe8rxx23fz2aw97a6c2zxwwu84m25jugh779vqkfg4sg5c83z
   - &server_talos age15ygfzth73d2q3dm305qg53x6g9u9knau9fytvnrlut4u0usg5cpqeq4s5g
   - &server_icebox age1lh3vlrqgvde043kxlvyvdt6wlj968a0szm3exwwhsvx04xeh0eushpnp75
+  - &server_icebox2 age16kgw5plc7a8dnmu9lfsqd46n6lvfexhz4vekrullwpv95pnz4c8sldv2ah
   - &laptop_gargantuan age1408qgh9ekswerw33ae2yzmfu8la4kq2szl2rwvslx6cpujsfr58ss6q9tx
 creation_rules:
   - path_regex: secrets[^/\\]*\.(yml|yaml|json|env|ini)$
