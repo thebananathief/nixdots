@@ -108,6 +108,9 @@
       icebox = mkNixosSystem {
         nixos-modules = [ ./hosts/icebox ];
       };
+      icebox2 = mkNixosSystem {
+        nixos-modules = [ ./hosts/icebox2 ];
+      };
     };
   };
 }
