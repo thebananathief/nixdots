@@ -1,14 +1,14 @@
 { config, pkgs, ... }:
 let
   cfg = config.mediaServer;
-  inherit (config.sops) secrets;
+  # inherit (config.sops) secrets;
 in {
-  sops.secrets = {
-    webtrees_mysql_password = {
-      group = config.virtualisation.oci-containers.backend;
-      mode = "0440";
-    };
-  };
+  # sops.secrets = {
+  #   webtrees_mysql_password = {
+  #     group = config.virtualisation.oci-containers.backend;
+  #     mode = "0440";
+  #   };
+  # };
 
   # Create the Docker network and volumes
   systemd.services.test-mysql-network = {
