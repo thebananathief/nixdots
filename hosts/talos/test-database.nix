@@ -35,6 +35,9 @@ in {
       extraOptions = [
         "--network=testmysql"
       ];
+      ports = [
+        "3306:3306"
+      ];
     };
     mysql2 = {
       image = "container-registry.oracle.com/mysql/enterprise-server:8.0";
@@ -44,6 +47,9 @@ in {
       };
       extraOptions = [
         "--network=testmysql"
+      ];
+      ports = [
+        "3307:3306"
       ];
     };
     mysql3 = {
@@ -55,6 +61,9 @@ in {
       extraOptions = [
         "--network=testmysql"
       ];
+      ports = [
+        "3308:3306"
+      ];
     };
     mysql4 = {
       image = "container-registry.oracle.com/mysql/enterprise-server:8.0";
@@ -64,6 +73,28 @@ in {
       };
       extraOptions = [
         "--network=testmysql"
+      ];
+      ports = [
+        "3309:3306"
+      ];
+    };
+    mysqlrouter = {
+      image = "container-registry.oracle.com/mysql/enterprise-router:8.0";
+      # volumes = [ "${ cfg.dataDir }/testmysql/router:/var/lib/mysql" ];
+      environment = {
+        MYSQL_HOST = "mysql";
+        MYSQL_PORT = "3306";
+        MYSQL_USER = "mysqlrouter";
+        MYSQL_PASSWORD = "test123";
+        # MYSQL_INNODB_CLUSTER_MEMBERS = "3";
+      };
+      extraOptions = [
+        "--network=testmysql"
+      ];
+      ports = [ 
+        "6446:6446" # R/W connection port (clients will be sent to a PRIMARY)
+        "6447:6447" # R/O connection port (clients will be sent to a SECONDARY)
+        "8443:8443" # https://dev.mysql.com/doc/mysql-router/en/mysql-router-rest-api-reference.html
       ];
     };
   };
