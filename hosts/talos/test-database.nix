@@ -82,9 +82,9 @@ in {
       image = "container-registry.oracle.com/mysql/enterprise-router:8.0";
       # volumes = [ "${ cfg.dataDir }/testmysql/router:/var/lib/mysql" ];
       environment = {
-        MYSQL_HOST = "mysql";
+        MYSQL_HOST = "mysql1";
         MYSQL_PORT = "3306";
-        MYSQL_USER = "mysqlrouter";
+        MYSQL_USER = "cameron";
         MYSQL_PASSWORD = "test123";
         # MYSQL_INNODB_CLUSTER_MEMBERS = "3";
       };
