@@ -84,7 +84,7 @@ in {
       environment = {
         MYSQL_HOST = "mysql1";
         MYSQL_PORT = "3306";
-        MYSQL_USER = "cameron";
+        MYSQL_USER = "mysqlrouter";
         MYSQL_PASSWORD = "test123";
         # MYSQL_INNODB_CLUSTER_MEMBERS = "3";
       };
