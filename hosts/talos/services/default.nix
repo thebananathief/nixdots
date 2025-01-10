@@ -11,7 +11,7 @@ in {
     # ./ttrss.nix
     # ./whoogle.nix
 
-    # ./gameserver.nix
+    ./gameserver.nix
     ./webtrees.nix
     ./options.nix
     # ./dashy
