@@ -23,13 +23,23 @@ in {
         "8012:8080/tcp"
       ];
       environment = {
-        KF2_OPTS = "KF-BurningParis?Game=ZedternalReborn.WMGameInfo_Endless?difficulty=1"; # ?Multihome=192.168.0.12
-        # KF2_OPTS = "KF-BurningParis?Game=KFGameContent.KFGameInfo_Endless?difficulty=1";
+        # Srv discovery thing ?Multihome=<local IP that's being hairpin NAT'd>
+        # Open all traders  ?alltraders
+        # Trade time:       ?tradertime=180
+        # Starting Wave:    ?wave=5
+        # Final Wave:       ?final=5
+        # Start dosh:       ?dosh=2500
+        # difficulty= 0-3 Normal, Hard, Suicidal, Hell on Earth
+        # Game= ZedternalReborn.WMGameInfo_Endless_AllWeapons
+        #       ZedternalReborn.WMGameInfo_Endless
+        #       KFGameContent.KFGameInfo_Endless
+        KF2_OPTS = "KF-BurningParis?Game=ZedternalReborn.WMGameInfo_Endless?difficulty=1?tradertime=180?alltraders?wave=2?dosh=1000";
+        # https://steamcommunity.com/sharedfiles/filedetails/?id=2058869377
       };
-      extraOptions = [
-        # "--ip=172.17.0.7"
-        # "--network=host"
-      ];
+      # extraOptions = [
+      #   "--ip=172.17.0.7"
+      #   "--network=host"
+      # ];
     };
     
     # gmod = {
