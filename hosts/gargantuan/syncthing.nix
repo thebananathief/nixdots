@@ -16,6 +16,8 @@ in {
   services.syncthing = {
     enable = true;
     openDefaultPorts = true;
+    user = "cameron";
+    configDir = "/home/cameron/.config/syncthing";
     settings = {
       gui = {
         enabled = true;
@@ -47,10 +49,10 @@ in {
       folders = {
         "Syncthing" = {
           id = "hzrjk-u4j2p";
-          path = "/var/lib/syncthing/cameron";
+          path = "/home/cameron/Syncthing";
           devices = [ "thoth" ];
           # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
-          ignorePerms = false;
+          ignorePerms = true;
           order = "random";
           versioning = {
             type = "trashcan";
