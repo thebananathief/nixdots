@@ -11,7 +11,6 @@
     firefox
     alacritty
     tailscale-systray
-    bambu-studio
 
     # libreoffice-qt
     # hunspell
