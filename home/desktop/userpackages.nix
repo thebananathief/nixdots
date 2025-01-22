@@ -8,6 +8,7 @@
     # gramps
     # tesseract
     dbeaver-bin
+    bambu-studio
 
     audacity
     obsidian
