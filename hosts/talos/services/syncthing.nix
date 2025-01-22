@@ -40,16 +40,16 @@ in {
           id = "FL4PA2C-TU7WRKX-3CWOYAX-XCL3H7R-B56JGRM-6QRUG5S-DS45SX5-MXB5NA3"; 
           autoAcceptFolders = true;
         };
-        # "gargantuan" = { 
-        #   id = "DEVICE-ID-GOES-HERE";
-        #   autoAcceptFolders = true;
-        # };
+        "gargantuan" = { 
+          id = "TL26MOK-2FG5QAK-N5VCC35-CX6FPZV-OITRZR3-U3HSFJ6-PGY3SIZ-VRZ2VQX";
+          autoAcceptFolders = true;
+        };
       };
       folders = {
         "Syncthing" = {
           id = "hzrjk-u4j2p";
           path = "/var/lib/syncthing/cameron";
-          devices = [ "thoth" ];
+          devices = [ "thoth" "gargantuan" ];
           # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           # ignorePerms = false;
           order = "random";
