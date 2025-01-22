@@ -17,12 +17,12 @@ in {
     enable = true;
     openDefaultPorts = true;
     settings = {
-      # gui = {
-        # enabled = true;
-      #   user = "myuser";
-      #   password = "mypassword";
-      #   theme = "black";
-      # };
+      gui = {
+        enabled = true;
+        user = "cameron";
+        password = "dumbpassword";
+        theme = "black";
+      };
       # listenAddresses = [
       #   # "default"
       #   "tcp4://100.64.252.67:22000"
