@@ -10,6 +10,7 @@
     ../../modules/desktop
     ../../modules/tailscale.nix
     ../../modules/security.nix
+    ./syncthing.nix
   ];
 
   boot.supportedFilesystems = [
