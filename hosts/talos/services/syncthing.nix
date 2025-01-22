@@ -23,6 +23,7 @@ in {
         password = "dumbpassword";
         theme = "black";
       };
+      guiAddress = "0.0.0.0:8384";
       # listenAddresses = [
       #   # "default"
       #   "tcp4://100.64.252.67:22000"
