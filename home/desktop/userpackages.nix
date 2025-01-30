@@ -9,6 +9,7 @@
     # tesseract
     dbeaver-bin
     bambu-studio
+    blender
 
     audacity
     obsidian
