@@ -17,6 +17,7 @@
     # webcord
     # legcord
     # discord
+    ripcord
     bitwarden
   ];
 }
