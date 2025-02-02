@@ -15,9 +15,9 @@
     obsidian
     localsend
     # webcord
-    # legcord
+    legcord
     # discord
-    ripcord
+    # ripcord
     bitwarden
   ];
 }
