@@ -40,11 +40,11 @@
     # QT_FONT_DPI = "128";
   };
 
-  # environment.systemPackages = (with pkgs; [
-  #
-  # ]) ++ (with pkgs.libsForQt5; [
-  #
-  # ]);
+  environment.systemPackages = (with pkgs; [
+  
+  ]) ++ (with pkgs.kdePackages; [
+    kcolorchooser
+  ]);
 
 #  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
 #    elisa
