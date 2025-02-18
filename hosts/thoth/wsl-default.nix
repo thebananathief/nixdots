@@ -57,7 +57,7 @@ in {
     wslConf.interop.enable = true;
     wslConf.interop.appendWindowsPath = true;
     wslConf.network.generateHosts = true;
-    wslConf.network.generateResolvConf = true;
+    wslConf.network.generateResolvConf = false;
     defaultUser = username;
     startMenuLaunchers = true;
 
