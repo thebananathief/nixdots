@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 with lib;
-let {
+let 
   serverPort = 25565;
   rconPort = 25575;
-  
+in {
   services.minecraft-server = {
     enable = true;
     eula = true;
