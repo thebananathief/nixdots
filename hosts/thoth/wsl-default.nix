@@ -64,6 +64,11 @@ in {
     # Enable integration with Docker Desktop (needs to be installed)
     # docker-desktop.enable = false;
   };
+  networking.nameservers = [
+    "192.168.0.1"
+    "1.1.1.1"
+    "8.8.8.8"
+  ];
 
   # virtualisation.docker = {
   #   enable = true;
