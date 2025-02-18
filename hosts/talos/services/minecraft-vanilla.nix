@@ -6,7 +6,7 @@ in {
     enable = true;
     eula = true;
     openFirewall = true;
-    # package = ;
+    package = pkgs.minecraftServers.vanilla-1-21;
     serverProperties = {
       motd = "Kappa";
       difficulty = 3;
