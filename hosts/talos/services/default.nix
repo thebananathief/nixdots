@@ -6,11 +6,11 @@ in {
   imports = [
     # ./castopod.nix
     # ./voiceserver.nix
-    # ./minecraft.nix
     # ./immich.nix
     # ./ttrss.nix
     # ./whoogle.nix
 
+    ./minecraft-vanilla.nix
     ./gameserver.nix
     ./webtrees.nix
     ./options.nix
