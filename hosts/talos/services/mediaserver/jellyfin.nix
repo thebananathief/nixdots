@@ -72,14 +72,8 @@ in {
   services.caddy.virtualHosts = {
     # Jellyseerr
     "request.${ config.networking.fqdn }".extraConfig = ''
-      @authorized remote_ip 192.168.0.0/24
-      handle @authorized {
-        reverse_proxy localhost:8005
-      }
-      handle {
-        tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
-        reverse_proxy localhost:8005
-      }
+      reverse_proxy localhost:8005
+      tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';
     # Jellyfin
     "watch.${ config.networking.fqdn }".extraConfig = ''
