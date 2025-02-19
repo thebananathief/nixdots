@@ -37,7 +37,7 @@ in {
   };
   
   # Always prioritise Jellyfin IO
-  systemd.services.jellyfin.serviceConfig.IOSchedulingPriority = 0;
+  # systemd.services.jellyfin.serviceConfig.IOSchedulingPriority = 0;
 
   systemd.tmpfiles.rules = [
     "d '${cfg.storageDir}/media'         0775 streamer  media - -"
@@ -72,8 +72,14 @@ in {
   services.caddy.virtualHosts = {
     # Jellyseerr
     "request.${ config.networking.fqdn }".extraConfig = ''
-      reverse_proxy localhost:8005
-      tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+      @authorized remote_ip 192.168.0.0/24
+      handle @authorized {
+        reverse_proxy localhost:8005
+      }
+      handle {
+        tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+        reverse_proxy localhost:8005
+      }
     '';
     # Jellyfin
     "watch.${ config.networking.fqdn }".extraConfig = ''
