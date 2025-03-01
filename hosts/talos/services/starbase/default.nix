@@ -8,43 +8,43 @@ let
       services = [
         {
           name = "Sonarr";
-          uri = "https://sonarr.talos.host/";
+          uri = "https://sonarr.${ config.networking.fqdn }/";
           description = "TV Show fetching manager";
           icon = "sonarr";
         }
         {
           name = "Radarr";
-          uri = "https://radarr.talos.host/";
+          uri = "https://radarr.${ config.networking.fqdn }/";
           description = "Movie fetching manager";
           icon = "radarr-light";
         }
         {
           name = "Prowlarr";
-          uri = "https://prowlarr.talos.host/";
+          uri = "https://prowlarr.${ config.networking.fqdn }/";
           description = "Torrent indexer manager/aggregator";
           icon = "prowlarr";
         }
         {
           name = "Transmission";
-          uri = "http://transmission.talos.host/";
+          uri = "http://transmission.${ config.networking.fqdn }/";
           description = "BitTorrent client";
           icon = "transmission";
         }
         {
           name = "Jellyseerr";
-          uri = "http://request.talos.host/";
+          uri = "http://request.${ config.networking.publicDomain }/";
           description = "Request media";
           icon = "jellyseerr";
         }
         {
           name = "Jellyfin";
-          uri = "http://watch.talos.host/";
+          uri = "http://watch.${ config.networking.publicDomain }/";
           description = "Movie/Show player and manager";
           icon = "jellyfin";
         }
         {
           name = "Audiobookshelf";
-          uri = "https://books.talos.host/";
+          uri = "https://books.${ config.networking.publicDomain }/";
           description = "Audiobook/podcast player and manager";
           icon = "audiobookshelf";
         }
@@ -61,7 +61,7 @@ let
       services = [
         {
           name = "Grafana";
-          uri = "https://grafana.talos.host/";
+          uri = "https://grafana.${ config.networking.fqdn }/";
           description = "Monitor system stats";
           icon = "grafana";
         }
@@ -73,13 +73,13 @@ let
         }
         {
           name = "Librespeed";
-          uri = "http://speedtest.talos.host/";
+          uri = "http://speedtest.${ config.networking.fqdn }/";
           description = "Speedtest against TALOS";
           icon = "librespeed";
         }
         {
           name = "Gitea";
-          uri = "http://code.talos.host/";
+          uri = "http://code.${ config.networking.fqdn }/";
           description = "Local source code";
           icon = "gitea";
         }
