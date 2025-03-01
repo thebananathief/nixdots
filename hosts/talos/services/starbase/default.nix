@@ -8,19 +8,19 @@ let
       services = [
         {
           name = "Sonarr";
-          uri = "https://sonarr.${ config.networking.fqdn }/";
+          uri = "http://sonarr.${ config.networking.fqdn }/";
           description = "TV Show fetching manager";
           icon = "sonarr";
         }
         {
           name = "Radarr";
-          uri = "https://radarr.${ config.networking.fqdn }/";
+          uri = "http://radarr.${ config.networking.fqdn }/";
           description = "Movie fetching manager";
-          icon = "radarr-light";
+          icon = "radarr";
         }
         {
           name = "Prowlarr";
-          uri = "https://prowlarr.${ config.networking.fqdn }/";
+          uri = "http://prowlarr.${ config.networking.fqdn }/";
           description = "Torrent indexer manager/aggregator";
           icon = "prowlarr";
         }
@@ -32,13 +32,13 @@ let
         }
         {
           name = "Jellyseerr";
-          uri = "http://request.${ config.networking.publicDomain }/";
+          uri = "https://request.${ config.networking.publicDomain }/";
           description = "Request media";
           icon = "jellyseerr";
         }
         {
           name = "Jellyfin";
-          uri = "http://watch.${ config.networking.publicDomain }/";
+          uri = "https://watch.${ config.networking.publicDomain }/";
           description = "Movie/Show player and manager";
           icon = "jellyfin";
         }
@@ -61,7 +61,7 @@ let
       services = [
         {
           name = "Grafana";
-          uri = "https://grafana.${ config.networking.fqdn }/";
+          uri = "http://grafana.${ config.networking.fqdn }/";
           description = "Monitor system stats";
           icon = "grafana";
         }
