@@ -23,7 +23,8 @@ in {
   ];
   networking = {
     hostName = "talos";
-    domain = "host";
+    publicDomain = "talos.host";
+    domain = "home.arpa";
     # fqdn = "talos.host";
     wireless.enable = false; # Enables wireless support via wpa_supplicant.
     firewall.enable = true;
