@@ -71,12 +71,12 @@ in {
 
   services.caddy.virtualHosts = {
     # Jellyseerr
-    "request.${ config.networking.fqdn }".extraConfig = ''
+    "request.${ config.networking.publicDomain }".extraConfig = ''
       reverse_proxy localhost:8005
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';
     # Jellyfin
-    "watch.${ config.networking.fqdn }".extraConfig = ''
+    "watch.${ config.networking.publicDomain }".extraConfig = ''
       reverse_proxy localhost:8096
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';
