@@ -10,8 +10,8 @@ in {
     # ./ttrss.nix
     # ./whoogle.nix
 
-    ./minecraft-vanilla.nix
-    ./gameserver.nix
+    ./gameserver/minecraft-vanilla.nix
+    # ./gameserver/kf2.nix
     ./webtrees.nix
     ./options.nix
     # ./dashy
@@ -23,7 +23,7 @@ in {
     # ./penpot
     # ./etherpad.nix
     # ./dns.nix
-    ./reverse-proxy.nix
+    ./caddy.nix
   ];
 
   # Set the user and group ID in the environment, some containers will pull it
