@@ -9,21 +9,21 @@ in {
     # ./immich.nix
     # ./ttrss.nix
     # ./whoogle.nix
+    # ./penpot.nix
+    # ./etherpad.nix
+    # ./webtrees.nix
+
+    ./caddy.nix
+    ./starbase.nix
 
     ./gameserver/minecraft-vanilla.nix
     # ./gameserver/kf2.nix
-    ./webtrees.nix
     ./options.nix
-    # ./dashy
-    ./starbase
     ./syncthing.nix
     ./librespeed.nix
     ./gitea.nix
     ./mediaserver
-    # ./penpot
-    # ./etherpad.nix
     # ./dns.nix
-    ./caddy.nix
   ];
 
   # Set the user and group ID in the environment, some containers will pull it
