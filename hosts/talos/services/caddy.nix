@@ -28,14 +28,14 @@ in {
     #   acme_dns cloudflare /run/secrets/cloudflare_api
     # '';
       # acme_dns cloudflare {env.CLOUDFLARE_DNS_API_TOKEN}
-    virtualHosts = {
-      # Static fileserver and interactive filebrowser
-      "caddy.${ config.networking.fqdn }".extraConfig = ''
-        root * /var/lib/caddy/.local/share/caddy/pki/authorities/local
-        file_server
-      '';
-        # root * /mnt/storage/filebrowser
-    };
+    # virtualHosts = {
+    #   # Static fileserver and interactive filebrowser
+    #   "caddy.${ config.networking.fqdn }".extraConfig = ''
+    #     root * /var/lib/caddy/.local/share/caddy/pki/authorities/local
+    #     file_server
+    #   '';
+    #     # root * /mnt/storage/filebrowser
+    # };
   };
   
   # security.acme = {

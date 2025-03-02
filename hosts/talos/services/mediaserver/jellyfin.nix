@@ -79,6 +79,12 @@ in {
     "watch.${ config.networking.publicDomain }".extraConfig = ''
       reverse_proxy localhost:8096
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+      header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+      }
     '';
   };
 
