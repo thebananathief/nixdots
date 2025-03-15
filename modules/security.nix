@@ -1,5 +1,5 @@
 # security tweaks borrowed from @hlissner
-{
+{ lib, ... }: {
   boot.kernel.sysctl = {
     # The Magic SysRq key is a key combo that allows users connected to the
     # system console of a Linux kernel to perform some low-level commands.
@@ -42,5 +42,5 @@
   };
   boot.kernelModules = [ "tcp_bbr" ];
 
-  security.sudo.wheelNeedsPassword = true;
+  security.sudo.wheelNeedsPassword = lib.mkDefault true;
 }
