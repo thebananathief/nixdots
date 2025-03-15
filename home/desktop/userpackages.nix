@@ -1,23 +1,35 @@
-{ pkgs, lib, inputs, globalFonts, ... }: rec {
+{
+  pkgs,
+  lib,
+  inputs,
+  globalFonts,
+  ...
+}: rec {
   home.packages = with pkgs; [
     # forge-mtg
-    vscode-fhs
-    mysql-shell
     # mcrcon # minecraft rcon client
     # moonlight-qt
     # gramps
     # tesseract
-    dbeaver-bin
-    bambu-studio
-    blender
-
-    audacity
+    firefox
+    tailscale-systray
+    spotify
     obsidian
     localsend
+    bitwarden
     # webcord
     legcord
     # discord
     # ripcord
-    bitwarden
+
+    vscode-fhs
+    zed-editor
+    mysql-shell
+    audacity
+    alacritty
+    ghostty
+    dbeaver-bin
+    bambu-studio
+    blender
   ];
 }

@@ -1,9 +1,16 @@
-{ pkgs, lib, config, username, nixos-hardware, ... }: {
+{
+  pkgs,
+  lib,
+  config,
+  username,
+  nixos-hardware,
+  ...
+}: {
   imports = [
     nixos-hardware.nixosModules.framework-11th-gen-intel
     nixos-hardware.nixosModules.common-hidpi
     ./hardware-configuration.nix
-    ../../modules/packages.nix
+    # ../../modules/packages.nix
     # ../../modules/network-mount.nix
     ../../modules/games.nix
     # ../../modules/test-containers.nix
@@ -25,13 +32,17 @@
   ];
 
   security.sudo.wheelNeedsPassword = true;
-  
+
   networking = {
     hostName = "gargantuan";
     networkmanager.enable = true;
-    wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+    wireless.enable = false; # Enables wireless support via wpa_supplicant.
     firewall.enable = true;
   };
+
+  services.mullvad-vpn.enable = true;
+  # pkgs.mullvad for CLI only, pkgs.mullvad-vpn for CLI and GUI
+  services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
   # nix.nixPath = [
   #   "nixos-config=/home/cameron/github/nixdots/flake.nix"
@@ -53,7 +64,7 @@
       generateKey = true;
     };
     secrets = {
-      main_user_password = { neededForUsers = true; };
+      main_user_password = {neededForUsers = true;};
       email_address = {};
     };
   };
@@ -71,9 +82,9 @@
       "input"
     ];
   };
-  
+
   home-manager.users.${username} = {
-    imports = [ 
+    imports = [
       ../../home/cameron.nix
       ../../home/desktop
     ];

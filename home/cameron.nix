@@ -1,4 +1,9 @@
-{ pkgs, lib, inputs, ... }: rec {
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: rec {
   imports = [
     ./git.nix
     ./zsh.nix
