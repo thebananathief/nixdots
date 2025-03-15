@@ -63,6 +63,9 @@
     dos2unix tldr
     age sops nurl
 
+    # Nix LSP
+    nil
+
   # System monitoring
     smartmontools duf neofetch
 
