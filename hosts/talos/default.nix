@@ -18,7 +18,7 @@ in {
     ./services
     ./monitoring.nix
     ./backup.nix
-    ./dir-options.nix
+    ./options.nix
     ../../modules/tailscale.nix
     ../../modules/security.nix
   ];
