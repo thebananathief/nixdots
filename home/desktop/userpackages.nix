@@ -31,5 +31,6 @@
     dbeaver-bin
     bambu-studio
     blender
+    openscad
   ];
 }
