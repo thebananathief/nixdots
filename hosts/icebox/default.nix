@@ -1,4 +1,12 @@
-{ pkgs, nixos-hardware, lib, nixpkgs, config, username, ... }: {
+{
+  pkgs,
+  nixos-hardware,
+  lib,
+  nixpkgs,
+  config,
+  username,
+  ...
+}: {
   imports = [
     nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
@@ -7,6 +15,12 @@
     ../../modules/tailscale.nix
     ../../modules/security.nix
   ];
+
+  home-manager.users.${username} = {
+    imports = [
+      ../../home/cameron.nix
+    ];
+  };
 
   networking = {
     hostName = "icebox";
@@ -31,7 +45,7 @@
 
   services.openssh = {
     enable = true;
-    ports = [ 22 ];
+    ports = [22];
     settings = {
       X11Forwarding = false;
       UseDns = false;
@@ -48,19 +62,22 @@
       PermitEmptyPasswords No
     '';
     banner = ''
--- WARNING --
-Unauthorized access to this system is forbidden and will be prosecuted by law.
-By accessing this system, you agree that your actions may be monitored if unauthorized usage is suspected.
+      -- WARNING --
+      Unauthorized access to this system is forbidden and will be prosecuted by law.
+      By accessing this system, you agree that your actions may be monitored if unauthorized usage is suspected.
     '';
     hostKeys = [
-      { path = "/etc/ssh/ssh_host_ed25519"; type = "ed25519"; }
+      {
+        path = "/etc/ssh/ssh_host_ed25519";
+        type = "ed25519";
+      }
     ];
   };
 
   sops = {
     defaultSopsFile = ../../secrets.yml;
     # These should be the paths from (config.services.openssh.hostKeys)
-    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519" ];
+    age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519"];
     secrets = {
       # main_user_password = { neededForUsers = true; };
       healthcheck_icebox_uptime = {};
@@ -70,7 +87,7 @@ By accessing this system, you agree that your actions may be monitored if unauth
   users.users."${username}" = {
     isNormalUser = true;
     description = "Cameron";
-    extraGroups = [ "wheel" ];
+    extraGroups = ["wheel"];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII9r6CO/Xi+wMD65MUBmumv2x9Gi89zj/oD6oD5fD6ai cameron@desktop-jammin"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFagsyJw/RCCgkgXtOYKeNF0NH8VABZ0WP+14yeq1/5k laptop"
@@ -78,13 +95,7 @@ By accessing this system, you agree that your actions may be monitored if unauth
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDNVv4iCWxWG2PQlzWAzWqgl7eazAv91EqaYGUmpsyOU deck@UNKNOWN-GALE"
     ];
   };
-  
-  home-manager.users.${username} = {
-    imports = [ 
-      ../../home/cameron.nix
-    ];
-  };
-  
+
   services = {
     cron = {
       enable = true;

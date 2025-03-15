@@ -10,15 +10,21 @@
     nixos-hardware.nixosModules.framework-11th-gen-intel
     nixos-hardware.nixosModules.common-hidpi
     ./hardware-configuration.nix
-    # ../../modules/packages.nix
-    # ../../modules/network-mount.nix
     ../../modules/games.nix
-    # ../../modules/test-containers.nix
     ../../modules/desktop
     ../../modules/tailscale.nix
     ../../modules/security.nix
     ./syncthing.nix
   ];
+
+  home-manager.users.${username} = {
+    imports = [
+      ../../home/cameron.nix
+      ../../home/desktop
+    ];
+  };
+
+  security.sudo.wheelNeedsPassword = lib.mkForce false;
 
   boot.supportedFilesystems = [
     "ext4"
@@ -30,8 +36,6 @@
     "exfat"
     "cifs" # mount windows share
   ];
-
-  security.sudo.wheelNeedsPassword = true;
 
   networking = {
     hostName = "gargantuan";
@@ -80,13 +84,6 @@
       "network"
       "wheel"
       "input"
-    ];
-  };
-
-  home-manager.users.${username} = {
-    imports = [
-      ../../home/cameron.nix
-      ../../home/desktop
     ];
   };
 

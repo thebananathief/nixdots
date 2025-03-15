@@ -1,9 +1,16 @@
 # TRYING TO OBSOLETE
-{pkgs, ...}: 
-  services.mullvad-vpn.enable = true;
-  # pkgs.mullvad for CLI only, pkgs.mullvad-vpn for CLI and GUI
-  services.mullvad-vpn.package = pkgs.mullvad-vpn;
-
+{pkgs, ...}: let
+  # Here we add some CLI arguments to the obsidian app
+  # obsid = pkgs.symlinkJoin {
+  #   name = "obsidian";
+  #   paths = [ pkgs.obsidian ];
+  #   buildInputs = [ pkgs.makeWrapper ];
+  #   postBuild = ''
+  #     wrapProgram $out/bin/obsidian \
+  #       --add-flags "--disable-gpu"
+  #   '';
+  # };
+in {
   # Try to use home-manager for GUI packages
   #   environment.systemPackages = with pkgs; [
   #     # obs-studio
