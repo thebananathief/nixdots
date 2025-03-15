@@ -15,15 +15,17 @@ in {
     nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
     ../../modules/nvidia.nix
-    # ../../modules/packages.nix
     ../../modules/desktop
-    # ../../modules/network-mount.nix
-    # ../../modules/ai.nix
-    # ../../modules/monero.nix
-    # ../../modules/nifi.nix
     ../../modules/tailscale.nix
     ../../modules/security.nix
   ];
+
+  home-manager.users.${username} = {
+    imports = [
+      ../../home/cameron.nix
+      ../../home/desktop
+    ];
+  };
 
   boot.supportedFilesystems = [
     "ext4"
@@ -35,8 +37,6 @@ in {
     "exfat"
     "cifs" # mount windows share
   ];
-
-  security.sudo.wheelNeedsPassword = true;
 
   networking = {
     hostName = "thoth";
@@ -93,13 +93,6 @@ in {
       "network"
       "wheel"
       "input"
-    ];
-  };
-
-  home-manager.users.${username} = {
-    imports = [
-      ../../home/cameron.nix
-      ../../home/desktop
     ];
   };
 

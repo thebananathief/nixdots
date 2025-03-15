@@ -1,46 +1,53 @@
-{ config, lib, pkgs, nixos-wsl, username, nixpkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  nixos-wsl,
+  username,
+  nixpkgs,
+  ...
+}: let
   inherit (config.sops) secrets;
 in {
   imports = [
     nixos-wsl.nixosModules.wsl
   ];
 
+  home-manager.users.${username} = {
+    imports = [
+      ../../home/cameron.nix
+      {
+        # Keep LF line endings on WSL, CRLF when checked out on Windows
+        programs.git.extraConfig.core.autocrlf = "input";
+      }
+    ];
+  };
+
   networking = {
     hostName = "thoth-wsl";
     firewall.enable = false;
   };
 
-  nix.nixPath = [
-    "nixpkgs=${nixpkgs.outPath}"
-    "nixos-config=/home/cameron/nixdots/flake.nix"
-    "/nix/var/nix/profiles/per-user/root/channels"
-  ];
+  # nix.nixPath = [
+  #   "nixpkgs=${nixpkgs.outPath}"
+  #   "nixos-config=/home/cameron/nixdots/flake.nix"
+  #   "/nix/var/nix/profiles/per-user/root/channels"
+  # ];
 
   security.sudo.wheelNeedsPassword = false;
   sops = {
     defaultSopsFile = ../../secrets.yml;
     # This should be the private key(s) you want to use to decrypt secrets.yml
-    age.sshKeyPaths = [ "/home/cameron/.ssh/id_ed25519" ];
-    secrets.main_user_password = { neededForUsers = true; };
+    age.sshKeyPaths = ["/home/cameron/.ssh/id_ed25519"];
+    secrets.main_user_password = {neededForUsers = true;};
   };
-  
+
   users.users.${username} = {
     isNormalUser = true;
     hashedPasswordFile = secrets.main_user_password.path;
     description = "Cameron";
     extraGroups = [
       "wheel"
-    ];
-  };
-
-  home-manager.users.${username} = {
-    imports = [ 
-      ../../home/cameron.nix
-      {
-        # Keep LF line endings on WSL, CRLF when checked out on Windows
-        programs.git.extraConfig.core.autocrlf = "input";
-      }
     ];
   };
 
@@ -76,7 +83,6 @@ in {
   #   autoPrune.enable = true;
   # };
 
-  
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It's perfectly fine and recommended to leave

@@ -1,5 +1,12 @@
-{ pkgs, lib, config, username, nixos-hardware, nixpkgs, ... }: 
-let
+{
+  pkgs,
+  lib,
+  config,
+  username,
+  nixos-hardware,
+  nixpkgs,
+  ...
+}: let
   inherit (config.sops) secrets;
 in {
   imports = [
@@ -12,11 +19,17 @@ in {
     ./monitoring.nix
     ./backup.nix
     ./dir-options.nix
-    # ./test-database.nix
     ../../modules/tailscale.nix
     ../../modules/security.nix
   ];
 
+  home-manager.users.${username} = {
+    imports = [
+      ../../home/cameron.nix
+    ];
+  };
+
+  # Used for binding servers to only these interfaces explicitly
   tailscaleInterfaces = [
     "100.64.252.67"
     "fd7a:115c:a1e0::9f40:fc43"
@@ -30,13 +43,13 @@ in {
     firewall.enable = true;
   };
 
-  nix.nixPath = [
-    "nixos-config=/home/cameron/github/nixdots/flake.nix"
-    "/nix/var/nix/profiles/per-user/root/channels"
-    # "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-    "nixpkgs=${nixpkgs.outPath}"
-    # "/home/cameron/.nix-defexpr/channels"
-  ];
+  # nix.nixPath = [
+  #   "nixos-config=/home/cameron/github/nixdots/flake.nix"
+  #   "/nix/var/nix/profiles/per-user/root/channels"
+  #   # "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+  #   "nixpkgs=${nixpkgs.outPath}"
+  #   # "/home/cameron/.nix-defexpr/channels"
+  # ];
 
   boot.loader.systemd-boot = {
     enable = true;
@@ -49,7 +62,7 @@ in {
 
   services.openssh = {
     enable = true;
-    ports = [ 4733 ];
+    ports = [4733];
     settings = {
       X11Forwarding = false;
       UseDns = false;
@@ -57,18 +70,21 @@ in {
       KbdInteractiveAuthentication = false; # None of the authentication methods use this I think, so it should never be enabled, yet it defaults to yes in openssh
       PermitRootLogin = "no";
       LogLevel = "INFO"; # Adjusted so that fail2ban doesn't set it to VERBOSE
-      AllowUsers = [ username ]; # Only the main user is allowed in through SSH
+      AllowUsers = [username]; # Only the main user is allowed in through SSH
     };
     extraConfig = ''
       PermitEmptyPasswords No
     '';
     banner = ''
--- WARNING --
-Unauthorized access to this system is forbidden and will be prosecuted by law.
-By accessing this system, you agree that your actions may be monitored if unauthorized usage is suspected.
+      -- WARNING --
+      Unauthorized access to this system is forbidden and will be prosecuted by law.
+      By accessing this system, you agree that your actions may be monitored if unauthorized usage is suspected.
     '';
     hostKeys = [
-      { path = "/etc/ssh/ssh_host_ed25519"; type = "ed25519"; }
+      {
+        path = "/etc/ssh/ssh_host_ed25519";
+        type = "ed25519";
+      }
     ];
   };
 
@@ -97,7 +113,7 @@ By accessing this system, you agree that your actions may be monitored if unauth
     # 1 - execute only (--x)
     # 0 - none (---)
     secrets = {
-      main_user_password = { neededForUsers = true; };
+      main_user_password = {neededForUsers = true;};
       email_address = {};
       gmail_password = {};
       discord_webhook_id = {}; # used in jellyseerr's notification config, but not declarative yet
@@ -122,12 +138,6 @@ By accessing this system, you agree that your actions may be monitored if unauth
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFagsyJw/RCCgkgXtOYKeNF0NH8VABZ0WP+14yeq1/5k laptop"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFfIygbp1DdDJUCAlUHbrdzu7cnb7T/JTDexJtpMXCIz cameron@phone"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDNVv4iCWxWG2PQlzWAzWqgl7eazAv91EqaYGUmpsyOU deck@UNKNOWN-GALE"
-    ];
-  };
-  
-  home-manager.users.${username} = {
-    imports = [ 
-      ../../home/cameron.nix
     ];
   };
 
