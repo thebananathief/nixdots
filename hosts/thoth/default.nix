@@ -1,15 +1,21 @@
-{ pkgs, lib, username, config, nixos-hardware, ... }: 
-let 
+{
+  pkgs,
+  lib,
+  username,
+  config,
+  nixos-hardware,
+  ...
+}: let
   inherit (config.sops) secrets;
 in {
-  imports = [ 
+  imports = [
     # nixos-hardware.nixosModules.common-pc
     # nixos-hardware.nixosModules.common-pc-ssd
     # nixos-hardware.nixosModules.common-gpu-nvidia
     nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
     ../../modules/nvidia.nix
-    ../../modules/packages.nix
+    # ../../modules/packages.nix
     ../../modules/desktop
     # ../../modules/network-mount.nix
     # ../../modules/ai.nix
@@ -18,7 +24,7 @@ in {
     ../../modules/tailscale.nix
     ../../modules/security.nix
   ];
-  
+
   boot.supportedFilesystems = [
     "ext4"
     # "btrfs"
@@ -29,22 +35,26 @@ in {
     "exfat"
     "cifs" # mount windows share
   ];
-  
+
   security.sudo.wheelNeedsPassword = true;
-  
+
   networking = {
     hostName = "thoth";
     networkmanager.enable = true;
-    wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+    wireless.enable = false; # Enables wireless support via wpa_supplicant.
     firewall.enable = true;
   };
+
+  services.mullvad-vpn.enable = true;
+  # pkgs.mullvad for CLI only, pkgs.mullvad-vpn for CLI and GUI
+  services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
   # nix.nixPath = [
   #   "nixos-config=/home/cameron/github/nixdots/flake.nix"
   #   "/nix/var/nix/profiles/per-user/root/channels"
   #   "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
   # ];
-  
+
   # Was causing errors for me earlier, so I added this line
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
@@ -59,7 +69,7 @@ in {
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   hardware.bluetooth.package = pkgs.bluez;
-  
+
   sops = {
     defaultSopsFile = ../../secrets.yml;
     age = {
@@ -68,7 +78,7 @@ in {
       ];
     };
     secrets = {
-      main_user_password = { neededForUsers = true; };
+      main_user_password = {neededForUsers = true;};
     };
   };
 
@@ -85,9 +95,9 @@ in {
       "input"
     ];
   };
-  
+
   home-manager.users.${username} = {
-    imports = [ 
+    imports = [
       ../../home/cameron.nix
       ../../home/desktop
     ];
@@ -105,13 +115,12 @@ in {
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-#   programs.mtr.enable = true;
-#   programs.gnupg.agent = {
-#     enable = true;
-# #     enableSSHSupport = true;
-#     enableBrowserSocket = true;
-#   };
+  #   programs.mtr.enable = true;
+  #   programs.gnupg.agent = {
+  #     enable = true;
+  # #     enableSSHSupport = true;
+  #     enableBrowserSocket = true;
+  #   };
 
   system.stateVersion = "23.11";
 }
-

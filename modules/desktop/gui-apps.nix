@@ -1,31 +1,31 @@
-{ pkgs, ... }:
-{
+# TRYING TO OBSOLETE
+{pkgs, ...}: 
   services.mullvad-vpn.enable = true;
   # pkgs.mullvad for CLI only, pkgs.mullvad-vpn for CLI and GUI
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
-  environment.systemPackages = with pkgs; [
-    # obs-studio
-    # mumble
-    # delfin
-    firefox
-    alacritty
-    tailscale-systray
+  # Try to use home-manager for GUI packages
+  #   environment.systemPackages = with pkgs; [
+  #     # obs-studio
+  #     # mumble
+  #     # delfin
+  #     firefox
+  #     tailscale-systray
 
-    # libreoffice-qt
-    # hunspell
-    # hunspellDicts.en_US
+  #     # libreoffice-qt
+  #     # hunspell
+  #     # hunspellDicts.en_US
 
-    # thunderbird
-    # krita
-    # zettlr
-    # cage
-    # cava # audio visualizer
+  #     # thunderbird
+  #     # krita
+  #     # zettlr
+  #     # cage
+  #     # cava # audio visualizer
 
-# Development / DBA
-    # jetbrains.idea-community
-    # jetbrains.goland
-  ];
+  # # Development / DBA
+  #     # jetbrains.idea-community
+  #     # jetbrains.goland
+  #   ];
 
   # systemd.services.tailscale-systray = {
   #   description = "Tailscale system tray icon";
