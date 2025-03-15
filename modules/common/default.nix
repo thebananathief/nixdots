@@ -64,7 +64,7 @@
     age sops nurl
 
     # Nix LSP
-    nil
+    nil nixd
 
   # System monitoring
     smartmontools duf neofetch
