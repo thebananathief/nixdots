@@ -26,17 +26,6 @@
 
   security.sudo.wheelNeedsPassword = lib.mkForce false;
 
-  boot.supportedFilesystems = [
-    "ext4"
-    # "btrfs"
-    # "xfs"
-    "ntfs"
-    "fat"
-    # "vfat"
-    "exfat"
-    "cifs" # mount windows share
-  ];
-
   networking = {
     hostName = "gargantuan";
     networkmanager.enable = true;
@@ -47,6 +36,27 @@
   services.mullvad-vpn.enable = true;
   # pkgs.mullvad for CLI only, pkgs.mullvad-vpn for CLI and GUI
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
+
+  boot = {
+    supportedFilesystems = [
+      "ext4"
+      "ntfs"
+      "fat"
+      "exfat"
+      "cifs" # mount windows share
+    ];
+    loader = {
+      systemd-boot = {
+       enable = true;
+       configurationLimit = 20;
+       consoleMode = "max";
+      };
+      efi.canTouchEfiVariables = true;
+    };
+  };
+
+  # Prevents a filesystem mount failure from putting us into emergency mode on bootup
+  systemd.enableEmergencyMode = false;
 
   # nix.nixPath = [
   #   "nixos-config=/home/cameron/github/nixdots/flake.nix"

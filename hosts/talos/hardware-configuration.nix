@@ -4,9 +4,8 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = [ 
+  imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    ./storage.nix
   ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];

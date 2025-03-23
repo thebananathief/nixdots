@@ -28,20 +28,31 @@
     firewall.enable = true;
   };
 
+  boot.supportedFilesystems = [
+    "ext4"
+    "btrfs"
+    "fat"
+    "exfat"
+  ];
+
+  # Use the systemd-boot EFI boot loader.
+  boot.loader = {
+    systemd-boot = {
+     enable = true;
+     configurationLimit = 20;
+     consoleMode = "max";
+    };
+    efi.canTouchEfiVariables = true;
+  };
+
+  # Prevents a filesystem mount failure from putting us into emergency mode on bootup
+  systemd.enableEmergencyMode = false;
+
   # nix.nixPath = [
   #   "nixos-config=/etc/nixos/nixdots/flake.nix"
   #   "/nix/var/nix/profiles/per-user/root/channels"
   #   "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
   # ];
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader = {
-    systemd-boot.enable = true;
-    systemd-boot.configurationLimit = 30;
-    efi.canTouchEfiVariables = true;
-  };
-  # Prevents a filesystem mount failure from putting us into emergency mode on bootup
-  systemd.enableEmergencyMode = false;
 
   services.openssh = {
     enable = true;
@@ -60,11 +71,6 @@
     };
     extraConfig = ''
       PermitEmptyPasswords No
-    '';
-    banner = ''
-      -- WARNING --
-      Unauthorized access to this system is forbidden and will be prosecuted by law.
-      By accessing this system, you agree that your actions may be monitored if unauthorized usage is suspected.
     '';
     hostKeys = [
       {

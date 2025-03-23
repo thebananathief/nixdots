@@ -13,18 +13,11 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  boot.supportedFilesystems = [
-    "ext4"
-    "btrfs"
-    "fat"
-    "exfat"
-  ];
-
   environment.systemPackages = with pkgs; [
     btrfs-progs
   ];
 
-  fileSystems."/" = { 
+  fileSystems."/" = {
     device = "/dev/disk/by-label/NIXROOT";
     fsType = "ext4";
   };
@@ -34,8 +27,8 @@
     fsType = "vfat";
     options = [ "fmask=0022" "dmask=0022" ];
   };
-    
-  fileSystems."/mnt/backup" = { 
+
+  fileSystems."/mnt/backup" = {
     device = "/dev/disk/by-label/BACKUPROOT";
     fsType = "btrfs";
   };

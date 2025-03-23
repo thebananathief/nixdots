@@ -1,15 +1,7 @@
 { config, pkgs, ... }:
 let
   cfg = config.mediaServer;
-  # inherit (config.sops) secrets;
 in {
-  # sops.secrets = {
-  #   webtrees_mysql_password = {
-  #     group = config.virtualisation.oci-containers.backend;
-  #     mode = "0440";
-  #   };
-  # };
-
   # Create the Docker network and volumes
   systemd.services.test-mysql-network = {
     serviceConfig.Type = "oneshot";
@@ -91,7 +83,7 @@ in {
       extraOptions = [
         "--network=testmysql"
       ];
-      ports = [ 
+      ports = [
         "6446:6446" # R/W connection port (clients will be sent to a PRIMARY)
         "6447:6447" # R/O connection port (clients will be sent to a SECONDARY)
         "8443:8443" # https://dev.mysql.com/doc/mysql-router/en/mysql-router-rest-api-reference.html
