@@ -17,7 +17,7 @@ in {
     ./starbase.nix
 
     ./gameserver/minecraft-vanilla.nix
-    ./gameserver/kf2.nix
+    # ./gameserver/kf2.nix
     ./options.nix
     ./syncthing.nix
     ./librespeed.nix
