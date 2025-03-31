@@ -33,8 +33,9 @@ in {
         # Game= ZedternalReborn.WMGameInfo_Endless_AllWeapons
         #       ZedternalReborn.WMGameInfo_Endless
         #       KFGameContent.KFGameInfo_Endless
-        KF2_OPTS = "KF-BurningParis?Game=KFGameContent.KFGameInfo_Endless?difficulty=1";
+        # KF2_OPTS = "KF-BurningParis?Game=KFGameContent.KFGameInfo_Endless?difficulty=1";
         # KF2_OPTS = "KF-BurningParis?Game=ZedternalReborn.WMGameInfo_Endless?difficulty=1?tradertime=60?alltraders?wave=5?dosh=2500";
+        KF2_OPTS = "KF-BurningParis?Game=ZedternalReborn.WMGameInfo_Endless?difficulty=1?tradertime=60";
         # https://steamcommunity.com/sharedfiles/filedetails/?id=2058869377
       };
       # extraOptions = [
