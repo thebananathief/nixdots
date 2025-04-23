@@ -17,6 +17,7 @@
     ./syncthing.nix
   ];
 
+<<<<<<< HEAD
   home-manager.users.${username} = {
     imports = [
       ../../home/cameron.nix
@@ -36,6 +37,27 @@
     "exfat"
     "cifs" # mount windows share
   ];
+||||||| 11499ea
+  boot.supportedFilesystems = [
+    "ext4"
+    # "btrfs"
+    # "xfs"
+    "ntfs"
+    "fat"
+    # "vfat"
+    "exfat"
+    "cifs" # mount windows share
+  ];
+=======
+  home-manager.users.${username} = {
+    imports = [
+      ../../home/cameron.nix
+      ../../home/desktop
+    ];
+  };
+
+  security.sudo.wheelNeedsPassword = lib.mkForce false;
+>>>>>>> 9356c081f850b6791c086553096d53048de8b0cc
 
   networking = {
     hostName = "gargantuan";
@@ -44,10 +66,39 @@
     firewall.enable = true;
   };
 
+<<<<<<< HEAD
   services.mullvad-vpn.enable = true;
   # pkgs.mullvad for CLI only, pkgs.mullvad-vpn for CLI and GUI
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
+||||||| 11499ea
+=======
+  services.mullvad-vpn.enable = true;
+  # pkgs.mullvad for CLI only, pkgs.mullvad-vpn for CLI and GUI
+  services.mullvad-vpn.package = pkgs.mullvad-vpn;
+
+  boot = {
+    supportedFilesystems = [
+      "ext4"
+      "ntfs"
+      "fat"
+      "exfat"
+      "cifs" # mount windows share
+    ];
+    loader = {
+      systemd-boot = {
+       enable = true;
+       configurationLimit = 20;
+       consoleMode = "max";
+      };
+      efi.canTouchEfiVariables = true;
+    };
+  };
+
+  # Prevents a filesystem mount failure from putting us into emergency mode on bootup
+  systemd.enableEmergencyMode = false;
+
+>>>>>>> 9356c081f850b6791c086553096d53048de8b0cc
   # nix.nixPath = [
   #   "nixos-config=/home/cameron/github/nixdots/flake.nix"
   #   "/nix/var/nix/profiles/per-user/root/channels"
