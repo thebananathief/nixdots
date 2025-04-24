@@ -6,20 +6,6 @@ in {
     restic
   ];
 
-  # users.users.restic = {
-  #   isNormalUser = true;
-  #   description = "System user for transferring backups to icebox via SSH/SFTP";
-  #   # isSystemUser = true;
-  # };
-
-  # security.wrappers.restic = {
-  #   source = "${pkgs.restic.out}/bin/restic";
-  #   owner = "restic";
-  #   group = "users";
-  #   permissions = "u=rwx,g=,o=";
-  #   capabilities = "cap_dac_read_search=+ep";
-  # };
-
   environment.shellAliases = {
     checkbackups = "sudo restic -r sftp:restic@icebox://mnt/backup/talos -p ${secrets.restic_talos_backup.path} snapshots";
   };
@@ -33,11 +19,21 @@ in {
         OnCalendar = "05:00:00";
         Persistent = true;
       };
-      # user = "restic";
       repository = "sftp://restic@icebox:22//mnt/backup/talos";
       initialize = true;
       passwordFile = secrets.restic_talos_backup.path;
-      paths = [ "/mnt/storage/media/family" ];
+      paths = [
+        "/mnt/storage/media/family"
+        "/mnt/storage/media/books"
+        "/mnt/storage/media/games"
+        "/mnt/storage/programs"
+        "/mnt/ssd/gameservers/gmod"
+        "/mnt/ssd/gameservers/kf2/KFGame/Config"
+        "/var/lib/minecraft/world"
+        "/var/lib/private/jellyseerr"
+        "/var/lib/jellyfin"
+        "/appdata"
+      ];
       exclude = [
         "*.tmp"
         "*.temp"
@@ -47,11 +43,10 @@ in {
         "*.sb-????????-??????"
         ".git"
       ];
-    #   pruneOpts = [
-    #     "--keep-last 5"
-    #   ];
-    #   # backupPrepareCommand = ''
-    #   # '';
+      pruneOpts = [
+        "--keep-last 10"
+        "--keep-monthly 12"
+      ];
       backupCleanupCommand = ''
         ${pkgs.curl}/bin/curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/$(< ${secrets.restic_talos_healthcheck.path})
       '';

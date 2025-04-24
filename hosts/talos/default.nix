@@ -14,6 +14,7 @@ in {
     # nixos-hardware.nixosModules.common-pc-ssd
     nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
+    ./storage.nix
     ./fileshares.nix
     ./services
     ./monitoring.nix
@@ -51,12 +52,17 @@ in {
   #   # "/home/cameron/.nix-defexpr/channels"
   # ];
 
-  boot.loader.systemd-boot = {
-    enable = true;
-    configurationLimit = 30; # Helpful to prevent running out of space on /boot (gc handles it already tho)
-    # consoleMode = "max";
+  boot = {
+    loader = {
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 20;
+        consoleMode = "max";
+      };
+      efi.canTouchEfiVariables = true;
+    };
   };
-  boot.loader.efi.canTouchEfiVariables = true;
+
   # Prevents a filesystem mount failure from putting us into emergency mode on bootup
   systemd.enableEmergencyMode = false;
 
@@ -74,11 +80,6 @@ in {
     };
     extraConfig = ''
       PermitEmptyPasswords No
-    '';
-    banner = ''
-      -- WARNING --
-      Unauthorized access to this system is forbidden and will be prosecuted by law.
-      By accessing this system, you agree that your actions may be monitored if unauthorized usage is suspected.
     '';
     hostKeys = [
       {
@@ -128,9 +129,9 @@ in {
     description = "Cameron";
     extraGroups = [
       "wheel"
-      "mediaserver" # needed for /tv, /movies, /books
-      "minecraft" # needed for minecraft data dir
-      config.virtualisation.oci-containers.backend
+      # "mediaserver" # needed for /tv, /movies, /books
+      # "minecraft" # needed for minecraft data dir
+      # config.virtualisation.oci-containers.backend
     ];
     # Public keys that are authorized for SSH access
     openssh.authorizedKeys.keys = [

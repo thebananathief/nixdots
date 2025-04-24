@@ -1,10 +1,8 @@
-{ config, ... }:
-let
+{config, ...}: let
   cfg = config.mediaServer;
   inherit (config.sops) secrets;
   gameserverDir = "/mnt/ssd/gameservers";
 in {
-
   sops.secrets = {
     # "gmod.env" = {
     #   group = config.virtualisation.oci-containers.backend;
@@ -15,7 +13,7 @@ in {
   virtualisation.oci-containers.containers = {
     kf2 = {
       image = "kr0nus/kf2server:latest";
-      volumes = [ "${ gameserverDir }/kf2:/data" ];
+      volumes = ["${gameserverDir}/kf2:/data"];
       ports = [
         "27015:27015/udp"
         "20560:20560/udp"
@@ -33,7 +31,9 @@ in {
         # Game= ZedternalReborn.WMGameInfo_Endless_AllWeapons
         #       ZedternalReborn.WMGameInfo_Endless
         #       KFGameContent.KFGameInfo_Endless
-        KF2_OPTS = "KF-BurningParis?Game=ZedternalReborn.WMGameInfo_Endless?difficulty=1?tradertime=60?alltraders?wave=5?dosh=2500";
+        # KF2_OPTS = "KF-BurningParis?Game=KFGameContent.KFGameInfo_Endless?difficulty=1";
+        # KF2_OPTS = "KF-BurningParis?Game=ZedternalReborn.WMGameInfo_Endless?difficulty=1?tradertime=60?alltraders?wave=5?dosh=2500";
+        KF2_OPTS = "KF-BurningParis?Game=ZedternalReborn.WMGameInfo_Endless?difficulty=1?tradertime=60";
         # https://steamcommunity.com/sharedfiles/filedetails/?id=2058869377
       };
       # extraOptions = [
@@ -41,32 +41,32 @@ in {
       #   "--network=host"
       # ];
     };
-    
+
     # gmod = {
     #   image = "gameservermanagers/gameserver:gmod";
-    
+
     # --------------------
-    
-      # image = "ceifa/garrysmod:debian"; # https://hub.docker.com/r/ceifa/garrysmod
-      # volumes = [
-      # Leaving base assets within container, binding the ones we need to be editable
-        # "${ gameserverDir }/gmod/addons:/home/gmod/server/garrysmod/addons"
-        # "${ gameserverDir }/gmod/gamemodes:/home/gmod/server/garrysmod/gamemodes"
-        # "${ gameserverDir }/gmod/data:/home/gmod/server/garrysmod/data"
-        # "${ gameserverDir }/gmod/cache:/home/gmod/server/garrysmod/cache"
-        # "${ gameserverDir }/gmod/maps:/home/gmod/server/garrysmod/maps"
-        # "${ gameserverDir }/gmod/download:/home/gmod/server/garrysmod/download"
-        # "${ gameserverDir }/gmod/downloadlists:/home/gmod/server/garrysmod/downloadlists"
-        # "${ gameserverDir }/gmod/cfg/server.cfg:/home/gmod/server/garrysmod/cfg/server.cfg"
-        # "${ gameserverDir }/gmod/sv.db:/home/gmod/server/garrysmod/sv.db"
-        # "${ gameserverDir }/gmod:/home/gmod/server/garrysmod"
-      # ];
-      # ports = [
-      #   "27015:27015"
-      #   "27015:27015/udp"
-      #   "27005:27005/udp"
-        # "27020:27020/udp"
-      # ];
+
+    # image = "ceifa/garrysmod:debian"; # https://hub.docker.com/r/ceifa/garrysmod
+    # volumes = [
+    # Leaving base assets within container, binding the ones we need to be editable
+    # "${ gameserverDir }/gmod/addons:/home/gmod/server/garrysmod/addons"
+    # "${ gameserverDir }/gmod/gamemodes:/home/gmod/server/garrysmod/gamemodes"
+    # "${ gameserverDir }/gmod/data:/home/gmod/server/garrysmod/data"
+    # "${ gameserverDir }/gmod/cache:/home/gmod/server/garrysmod/cache"
+    # "${ gameserverDir }/gmod/maps:/home/gmod/server/garrysmod/maps"
+    # "${ gameserverDir }/gmod/download:/home/gmod/server/garrysmod/download"
+    # "${ gameserverDir }/gmod/downloadlists:/home/gmod/server/garrysmod/downloadlists"
+    # "${ gameserverDir }/gmod/cfg/server.cfg:/home/gmod/server/garrysmod/cfg/server.cfg"
+    # "${ gameserverDir }/gmod/sv.db:/home/gmod/server/garrysmod/sv.db"
+    # "${ gameserverDir }/gmod:/home/gmod/server/garrysmod"
+    # ];
+    # ports = [
+    #   "27015:27015"
+    #   "27015:27015/udp"
+    #   "27005:27005/udp"
+    # "27020:27020/udp"
+    # ];
     #   environmentFiles = [
     #     secrets."gmod.env".path # GSLT, AUTHKEY
     #   ];

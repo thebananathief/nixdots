@@ -61,11 +61,6 @@
     extraConfig = ''
       PermitEmptyPasswords No
     '';
-    banner = ''
-      -- WARNING --
-      Unauthorized access to this system is forbidden and will be prosecuted by law.
-      By accessing this system, you agree that your actions may be monitored if unauthorized usage is suspected.
-    '';
     hostKeys = [
       {
         path = "/etc/ssh/ssh_host_ed25519";

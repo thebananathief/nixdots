@@ -1,20 +1,15 @@
-{ config, pkgs, ... }:
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   cfg = config.mediaServer;
-  # inherit (config.sops) secrets;
 in {
-  # sops.secrets = {
-  #   webtrees_mysql_password = {
-  #     group = config.virtualisation.oci-containers.backend;
-  #     mode = "0440";
-  #   };
-  # };
-
   # Create the Docker network and volumes
   systemd.services.test-mysql-network = {
     serviceConfig.Type = "oneshot";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "docker.service" "docker.socket" ];
+    wantedBy = ["multi-user.target"];
+    after = ["docker.service" "docker.socket"];
     script = ''
       # Create network if it doesn't exist
       ${pkgs.docker}/bin/docker network inspect testmysql >/dev/null 2>&1 || \
@@ -25,7 +20,7 @@ in {
   virtualisation.oci-containers.containers = {
     mysql1 = {
       image = "container-registry.oracle.com/mysql/enterprise-server:8.0";
-      volumes = [ "${ cfg.dataDir }/testmysql/mysql1:/var/lib/mysql" ];
+      volumes = ["${cfg.dataDir}/testmysql/mysql1:/var/lib/mysql"];
       environment = {
         # MYSQL_DATABASE = "";
         # MYSQL_USER = "";
@@ -41,7 +36,7 @@ in {
     };
     mysql2 = {
       image = "container-registry.oracle.com/mysql/enterprise-server:8.0";
-      volumes = [ "${ cfg.dataDir }/testmysql/mysql2:/var/lib/mysql" ];
+      volumes = ["${cfg.dataDir}/testmysql/mysql2:/var/lib/mysql"];
       environment = {
         MYSQL_ROOT_PASSWORD = "test123";
       };
@@ -54,7 +49,7 @@ in {
     };
     mysql3 = {
       image = "container-registry.oracle.com/mysql/enterprise-server:8.0";
-      volumes = [ "${ cfg.dataDir }/testmysql/mysql3:/var/lib/mysql" ];
+      volumes = ["${cfg.dataDir}/testmysql/mysql3:/var/lib/mysql"];
       environment = {
         MYSQL_ROOT_PASSWORD = "test123";
       };
@@ -67,7 +62,7 @@ in {
     };
     mysql4 = {
       image = "container-registry.oracle.com/mysql/enterprise-server:8.0";
-      volumes = [ "${ cfg.dataDir }/testmysql/mysql4:/var/lib/mysql" ];
+      volumes = ["${cfg.dataDir}/testmysql/mysql4:/var/lib/mysql"];
       environment = {
         MYSQL_ROOT_PASSWORD = "test123";
       };
@@ -91,7 +86,7 @@ in {
       extraOptions = [
         "--network=testmysql"
       ];
-      ports = [ 
+      ports = [
         "6446:6446" # R/W connection port (clients will be sent to a PRIMARY)
         "6447:6447" # R/O connection port (clients will be sent to a SECONDARY)
         "8443:8443" # https://dev.mysql.com/doc/mysql-router/en/mysql-router-rest-api-reference.html
@@ -110,17 +105,17 @@ in {
   #       };
   #     }
   #   ];
-    # settings = {
-    #   mysqld = {
-    #     key_buffer_size = "6G";
-    #     table_cache = 1600;
-    #     log-error = "/var/log/mysql_err.log";
-    #     plugin-load-add = [ "server_audit" "ed25519=auth_ed25519" ];
-    #   };
-    #   mysqldump = {
-    #     quick = true;
-    #     max_allowed_packet = "16M";
-    #   };
-    # };
+  # settings = {
+  #   mysqld = {
+  #     key_buffer_size = "6G";
+  #     table_cache = 1600;
+  #     log-error = "/var/log/mysql_err.log";
+  #     plugin-load-add = [ "server_audit" "ed25519=auth_ed25519" ];
+  #   };
+  #   mysqldump = {
+  #     quick = true;
+  #     max_allowed_packet = "16M";
+  #   };
+  # };
   # };
 }

@@ -1,5 +1,4 @@
-{ config, ... }:
-let
+{config, ...}: let
   cfg = config.mediaServer;
   inherit (config.sops) secrets;
 in {
@@ -17,7 +16,7 @@ in {
     ./starbase.nix
 
     ./gameserver/minecraft-vanilla.nix
-    # ./gameserver/kf2.nix
+    ./gameserver/kf2.nix
     ./options.nix
     ./syncthing.nix
     ./librespeed.nix
@@ -108,7 +107,7 @@ in {
     #     # CMD_ALLOW_ORIGIN = "['localhost']"; #optional
     #   } // cfg.common_env;
     # };
-    
+
     # dozzle = {
     #   image = "amir20/dozzle:latest"; # https://github.com/amir20/dozzle
     #   volumes = [
@@ -235,38 +234,38 @@ in {
   # };
 
   services = {
-  #   scrutiny = {
-  #     enable = true;
-  #     openFirewall = true;
-  #     collector = {
-  #       enable = true;
-  #     };
-  #     settings = {
-  #       web = {
-  #         listen.host = "127.0.0.1";
-  #         listen.port = 8080;
+    #   scrutiny = {
+    #     enable = true;
+    #     openFirewall = true;
+    #     collector = {
+    #       enable = true;
+    #     };
+    #     settings = {
+    #       web = {
+    #         listen.host = "127.0.0.1";
+    #         listen.port = 8080;
 
-  #         influxdb = {
+    #         influxdb = {
 
-  #         };
-  #       };
-  #     };
-  #   };
+    #         };
+    #       };
+    #     };
+    #   };
 
-  #   influxdb2 = {
-  #     enable = true;
-  #     provision = {
-  #       enable = true;
-  #       initialSetup = {
-  #         username = "cameron";
-  #         passwordFile = secrets.scrutiny_influx_password.path;
-  #         tokenFile = secrets.scrutiny_influx_token.path;
-  #         bucket = "scrutiny";
-  #         organization = "main";
-  #         retention = 15778476; # 6 months, in seconds
-  #       };
-  #     };
-  #   };
+    #   influxdb2 = {
+    #     enable = true;
+    #     provision = {
+    #       enable = true;
+    #       initialSetup = {
+    #         username = "cameron";
+    #         passwordFile = secrets.scrutiny_influx_password.path;
+    #         tokenFile = secrets.scrutiny_influx_token.path;
+    #         bucket = "scrutiny";
+    #         organization = "main";
+    #         retention = 15778476; # 6 months, in seconds
+    #       };
+    #     };
+    #   };
 
     # uptime-kuma = {
     #   enable = true;
@@ -284,9 +283,9 @@ in {
     # };
     # mongodb = {
     #   enable = true;
-      # bind_ip = "127.0.0.1";
-      # enableAuth = ;
-      # initialRootPassword = ;
+    # bind_ip = "127.0.0.1";
+    # enableAuth = ;
+    # initialRootPassword = ;
     # };
     # graylog = {
     #   enable = true;
