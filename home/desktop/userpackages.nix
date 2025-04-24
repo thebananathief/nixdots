@@ -23,14 +23,16 @@
     # ripcord
 
     vscode-fhs
-    zed-editor
+    # zed-editor
     mysql-shell
     audacity
     alacritty
     ghostty
     dbeaver-bin
     bambu-studio
-    blender
+    # blender
     openscad
+
+    go
   ];
 }
