@@ -48,69 +48,68 @@
     dotfiles.flake = false;
   };
 
-  outputs = inputs:
-    with inputs; let
-      username = "cameron";
-      useremail = "cameron.salomone@gmail.com";
-      globalFonts = import ./modules/globalFonts.nix;
+  outputs = {nixpkgs, ...} @ inputs: let
+    username = "cameron";
+    useremail = "cameron.salomone@gmail.com";
+    globalFonts = import ./modules/globalFonts.nix;
 
-      nixpkgsCustom = system: (import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        config.permittedInsecurePackages = [
-          # "aspnetcore-runtime-wrapped-6.0.36"
-          # "aspnetcore-runtime-6.0.36"
-          # "dotnet-sdk-wrapped-6.0.428"
-          # "dotnet-sdk-6.0.428"
-        ];
-      });
+    nixpkgsCustom = system: (import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+      config.permittedInsecurePackages = [
+        # "aspnetcore-runtime-wrapped-6.0.36"
+        # "aspnetcore-runtime-6.0.36"
+        # "dotnet-sdk-wrapped-6.0.428"
+        # "dotnet-sdk-6.0.428"
+      ];
+    });
 
-      # Function to make NixOS systems with common modules & home manager configs
-      mkNixosSystem = {
-        system ? "x86_64-linux",
-        nixos-modules,
-      }: let
-        # The `// inputs` bit means "merge this left side attrset with the right side (inputs)"
-        # It lets you use the flake inputs in the modules (sops-nix, nixos-hardware)
-        specialArgs = {inherit username useremail globalFonts inputs;};
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit system specialArgs;
-          pkgs = nixpkgsCustom system;
-          modules =
-            nixos-modules
-            ++ [
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.backupFileExtension = "hm-backup";
-                home-manager.extraSpecialArgs = specialArgs;
-              }
-              ./modules/common
-              sops-nix.nixosModules.sops
-            ];
-        };
-    in {
-      nixosConfigurations = {
-        talos = mkNixosSystem {
-          nixos-modules = [./hosts/talos];
-        };
-        gargantuan = mkNixosSystem {
-          nixos-modules = [./hosts/gargantuan];
-        };
-        thoth = mkNixosSystem {
-          nixos-modules = [./hosts/thoth];
-        };
-        thoth-wsl = mkNixosSystem {
-          nixos-modules = [./hosts/thoth/wsl-default.nix];
-        };
-        icebox = mkNixosSystem {
-          nixos-modules = [./hosts/icebox];
-        };
-        icebox2 = mkNixosSystem {
-          nixos-modules = [./hosts/icebox2];
-        };
+    # Function to make NixOS systems with common modules & home manager configs
+    mkNixosSystem = {
+      system ? "x86_64-linux",
+      nixos-modules,
+    }: let
+      # The `// inputs` bit means "merge this left side attrset with the right side (inputs)"
+      # It lets you use the flake inputs in the modules (sops-nix, nixos-hardware)
+      specialArgs = {inherit username useremail globalFonts;} // inputs;
+    in
+      nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
+        pkgs = nixpkgsCustom system;
+        modules =
+          nixos-modules
+          ++ [
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "hm-backup";
+              home-manager.extraSpecialArgs = specialArgs;
+            }
+            ./modules/common
+            sops-nix.nixosModules.sops
+          ];
+      };
+  in {
+    nixosConfigurations = {
+      talos = mkNixosSystem {
+        nixos-modules = [./hosts/talos];
+      };
+      gargantuan = mkNixosSystem {
+        nixos-modules = [./hosts/gargantuan];
+      };
+      thoth = mkNixosSystem {
+        nixos-modules = [./hosts/thoth];
+      };
+      thoth-wsl = mkNixosSystem {
+        nixos-modules = [./hosts/thoth/wsl-default.nix];
+      };
+      icebox = mkNixosSystem {
+        nixos-modules = [./hosts/icebox];
+      };
+      icebox2 = mkNixosSystem {
+        nixos-modules = [./hosts/icebox2];
       };
     };
+  };
 }
