@@ -11,7 +11,7 @@
     nixos-hardware.nixosModules.common-hidpi
     ./hardware-configuration.nix
     ../../modules/games.nix
-    ../../modules/desktop
+    ../../modules/system-desktop
     ../../modules/tailscale.nix
     ../../modules/security.nix
     ./syncthing.nix

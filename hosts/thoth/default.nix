@@ -15,7 +15,7 @@ in {
     nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
     ../../modules/nvidia.nix
-    ../../modules/desktop
+    ../../modules/system-desktop
     ../../modules/tailscale.nix
     ../../modules/security.nix
   ];
