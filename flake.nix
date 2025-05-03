@@ -27,10 +27,10 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    
+
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
-    
+
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -48,26 +48,27 @@
     dotfiles.flake = false;
   };
 
-  outputs = inputs: with inputs;
-  let
+  outputs = inputs: with inputs; let
     username = "cameron";
     useremail = "cameron.salomone@gmail.com";
     globalFonts = import ./modules/globalFonts.nix;
 
     # The `// inputs` bit means "merge this left side attrset with the right side (inputs)"
     # It lets you use the flake inputs in the modules (sops-nix, nixos-hardware)
-    defaultArgs = { 
-      inherit username useremail globalFonts;
-    } // inputs;
+    defaultArgs =
+      {
+        inherit username useremail globalFonts;
+      }
+      // inputs;
 
     nixpkgsCustom = system: (import nixpkgs {
       inherit system;
       config.allowUnfree = true;
-      config.permittedInsecurePackages = [ 
-        "aspnetcore-runtime-wrapped-6.0.36"
-        "aspnetcore-runtime-6.0.36"
-        "dotnet-sdk-wrapped-6.0.428"
-        "dotnet-sdk-6.0.428"
+      config.permittedInsecurePackages = [
+        # "aspnetcore-runtime-wrapped-6.0.36"
+        # "aspnetcore-runtime-6.0.36"
+        # "dotnet-sdk-wrapped-6.0.428"
+        # "dotnet-sdk-6.0.428"
       ];
     });
 
@@ -77,39 +78,43 @@
       nixos-modules,
     }: let
       specialArgs = defaultArgs;
-    in nixpkgs.lib.nixosSystem {
-      inherit system specialArgs;
-      pkgs = nixpkgsCustom system;
-      modules = nixos-modules ++ [
-        home-manager.nixosModules.home-manager {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.backupFileExtension = "hm-backup";
-          home-manager.extraSpecialArgs = specialArgs;
-        }
-        ./modules/common
-        sops-nix.nixosModules.sops
-      ];
-    };
+    in
+      nixpkgs.lib.nixosSystem {
+        inherit system specialArgs;
+        pkgs = nixpkgsCustom system;
+        modules =
+          nixos-modules
+          ++ [
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "hm-backup";
+              home-manager.extraSpecialArgs = specialArgs;
+            }
+            ./modules/common
+            sops-nix.nixosModules.sops
+          ];
+      };
   in {
     nixosConfigurations = {
       talos = mkNixosSystem {
-        nixos-modules = [ ./hosts/talos ];
+        nixos-modules = [./hosts/talos];
       };
       gargantuan = mkNixosSystem {
-        nixos-modules = [ ./hosts/gargantuan ];
+        nixos-modules = [./hosts/gargantuan];
       };
       thoth = mkNixosSystem {
-        nixos-modules = [ ./hosts/thoth ];
+        nixos-modules = [./hosts/thoth];
       };
       thoth-wsl = mkNixosSystem {
-        nixos-modules = [ ./hosts/thoth/wsl-default.nix ];
+        nixos-modules = [./hosts/thoth/wsl-default.nix];
       };
       icebox = mkNixosSystem {
-        nixos-modules = [ ./hosts/icebox ];
+        nixos-modules = [./hosts/icebox];
       };
       icebox2 = mkNixosSystem {
-        nixos-modules = [ ./hosts/icebox2 ];
+        nixos-modules = [./hosts/icebox2];
       };
     };
   };
