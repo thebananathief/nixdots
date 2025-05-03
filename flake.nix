@@ -72,11 +72,7 @@
       }: let
         # The `// inputs` bit means "merge this left side attrset with the right side (inputs)"
         # It lets you use the flake inputs in the modules (sops-nix, nixos-hardware)
-        specialArgs =
-          {
-            inherit username useremail globalFonts;
-          }
-          // inputs;
+        specialArgs = {inherit username useremail globalFonts inputs;};
       in
         nixpkgs.lib.nixosSystem {
           inherit system specialArgs;
