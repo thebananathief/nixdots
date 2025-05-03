@@ -87,7 +87,7 @@
               home-manager.extraSpecialArgs = specialArgs;
             }
             ./modules/common
-            sops-nix.nixosModules.sops
+            inputs.sops-nix.nixosModules.sops
           ];
       };
   in {
