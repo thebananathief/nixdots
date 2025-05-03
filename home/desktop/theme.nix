@@ -1,4 +1,11 @@
-{ pkgs, globalFonts, nix-colors, lib, config, ... }: rec {
+{
+  pkgs,
+  globalFonts,
+  nix-colors,
+  lib,
+  config,
+  ...
+}: rec {
   imports = [
     ./spicetify.nix
     # nix-colors.homeManagerModules.default
@@ -91,24 +98,14 @@
 
   programs.bat.config.theme = "Catppuccin-mocha";
 
-  # Make home-manager stop nagging about overwriting these files
-  # home.file.${config.gtk.gtk2.configLocation}.force = true;
-  home.file.".gtkrc-2.0".force = true;
-  xdg = {
-    configFile."gtk-2.0/gtkrc".force = true;
-    configFile."gtk-3.0/gtk.css".force = true;
-    configFile."gtk-3.0/settings.ini".force = true;
-    configFile."gtk-4.0/gtk.css".force = true;
-    configFile."gtk-4.0/settings.ini".force = true;
-
-    # configFile."Kvantum/GraphiteNord".source = "${pkgs.graphite-kde-theme}/share/Kvantum/GraphiteNord";
-    # configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
-    #   General.theme = "Catppuccin-Mocha-Blue";
-    # };
-    # configFile."Kvantum/kvantum.kvconfig".text = ''
-    #   [General]
-    #   theme=GraphiteNordDark
-    # '';
-  };
-
+  # xdg = {
+  # configFile."Kvantum/GraphiteNord".source = "${pkgs.graphite-kde-theme}/share/Kvantum/GraphiteNord";
+  # configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
+  #   General.theme = "Catppuccin-Mocha-Blue";
+  # };
+  # configFile."Kvantum/kvantum.kvconfig".text = ''
+  #   [General]
+  #   theme=GraphiteNordDark
+  # '';
+  # };
 }

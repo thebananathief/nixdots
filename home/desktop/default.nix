@@ -114,8 +114,19 @@
     };
 
     # Make home-manager stop nagging about overwriting these files
-    configFile."mimeapps.list".force = true;
-    configFile."user-dirs.dirs".force = true;
-    configFile."gtk-3.0/bookmarks".force = true;
+    configFile = {
+      "mimeapps.list".force = true;
+      "user-dirs.dirs".force = true;
+      "gtk-3.0/bookmarks".force = true;
+      "gtk-2.0/gtkrc".force = true;
+      "gtk-3.0/gtk.css".force = true;
+      "gtk-3.0/settings.ini".force = true;
+      "gtk-4.0/gtk.css".force = true;
+      "gtk-4.0/settings.ini".force = true;
+    };
+  };
+  home.file = {
+    ".gtkrc-2.0".force = true;
+    # ${config.gtk.gtk2.configLocation}.force = true;
   };
 }
