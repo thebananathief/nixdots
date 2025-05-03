@@ -1,4 +1,8 @@
-{ lib, pkgs, ... }: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     ./shell.nix
   ];
@@ -12,8 +16,8 @@
     };
 
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "root" "@wheel" ];
+      experimental-features = ["nix-command" "flakes"];
+      trusted-users = ["root" "@wheel"];
       auto-optimise-store = true;
       builders-use-substitutes = true;
       trusted-substituters = lib.mkBefore [
@@ -36,7 +40,7 @@
   };
 
   # Set your time zone.
-#  services.ntp.enable = true;
+  #  services.ntp.enable = true;
   time.timeZone = "America/New_York";
 
   console.keyMap = "us";
@@ -57,17 +61,33 @@
 
   # These packages are installed to all hosts
   environment.systemPackages = with pkgs; [
-    git wget curl unzip killall
-    dnsutils bat dua tree jq
-    zellij bottom
-    dos2unix tldr
-    age sops nurl
+    git
+    wget
+    curl
+    unzip
+    killall
+    dnsutils
+    bat
+    dua
+    tree
+    jq
+    zellij
+    bottom
+    dos2unix
+    tldr
+    age
+    sops
 
+    nix-search-cli
+    nurl # Generates nix fetch code from a given repo / cli args
     # Nix LSP
-    nil nixd
+    nil
+    nixd
 
-  # System monitoring
-    smartmontools duf neofetch
+    # System monitoring
+    smartmontools
+    duf
+    neofetch
 
     # iftop nmap fio hddtemp intel-gpu-tools
     # iotop lsof ethtool lm_sensors pciutils nettools
