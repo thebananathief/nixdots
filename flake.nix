@@ -40,7 +40,7 @@
 
     # nix-colors.url = "github:misterio77/nix-colors";
 
-    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
+    # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
     # nixpkgs.follows = "nixos-cosmic/nixpkgs";
 
     # dotfiles.url = "git+http://talos:8010/cameron/dotfiles.git";

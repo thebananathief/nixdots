@@ -104,7 +104,7 @@ function sync_and_rebuild() {
     fi
   fi
 
-  sudo nixos-rebuild --flake "$flake_uri" --accept-flake-config "$@"
+  sudo nixos-rebuild --flake "$flake_uri" --accept-flake-config --max-jobs 1 "$@"
   # --show-trace --option eval-cache false
   if [[ $? -ne 0 ]]; then
     exit 1
