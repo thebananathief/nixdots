@@ -3,9 +3,11 @@
   # nixos-cosmic,
   ...
 }: {
-  # imports = [nixos-cosmic.nixosModules.default];
+  imports = [
+    ../games.nix
+  ];
   services = {
     desktopManager.cosmic.enable = true;
-    # displayManager.cosmic-greeter.enable = true;
+    displayManager.cosmic-greeter.enable = true;
   };
 }
