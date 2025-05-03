@@ -1,10 +1,9 @@
-{ config, ... }:
-let
+{config, ...}: let
   cfg = config.mediaServer;
 in {
-  # users.users.gitea = { 
-  #   isSystemUser = true; 
-  #   group = "gitea"; 
+  # users.users.gitea = {
+  #   isSystemUser = true;
+  #   group = "gitea";
   # };
   # users.groups.gitea = {};
 
@@ -27,8 +26,8 @@ in {
     gitea = {
       image = "gitea/gitea:latest-rootless";
       volumes = [
-        "${ cfg.dataDir }/gitea/data:/var/lib/gitea"
-        "${ cfg.dataDir }/gitea/config:/etc/gitea"
+        "${cfg.dataDir}/gitea/data:/var/lib/gitea"
+        "${cfg.dataDir}/gitea/config:/etc/gitea"
         "/etc/timezone:/etc/timezone:ro"
         "/etc/localtime:/etc/localtime:ro"
       ];
@@ -53,7 +52,7 @@ in {
     #     reverse_proxy localhost:8010
     #   '';
     # };
-    "code.${ config.networking.fqdn }".extraConfig = ''
+    "code.${config.networking.fqdn}".extraConfig = ''
       tls internal
       @authorized remote_ip 192.168.0.0/24
       handle @authorized {

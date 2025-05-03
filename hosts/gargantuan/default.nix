@@ -33,6 +33,22 @@
     firewall.enable = true;
   };
 
+  security.pki.certificates = [
+    ''
+      -----BEGIN CERTIFICATE-----
+      MIIBpTCCAUqgAwIBAgIRAJC8o335E8MFXTXEgBdXNOEwCgYIKoZIzj0EAwIwMDEu
+      MCwGA1UEAxMlQ2FkZHkgTG9jYWwgQXV0aG9yaXR5IC0gMjAyNSBFQ0MgUm9vdDAe
+      Fw0yNTAzMDEwMDQwMjhaFw0zNTAxMDgwMDQwMjhaMDAxLjAsBgNVBAMTJUNhZGR5
+      IExvY2FsIEF1dGhvcml0eSAtIDIwMjUgRUNDIFJvb3QwWTATBgcqhkjOPQIBBggq
+      hkjOPQMBBwNCAAQtiJuJKOelFGltNU54EpoRVHwG5mh3tsfb/kvYVBB4PFfU2b6W
+      jCrNZmY/Ki6vL+pWTVK8FoaNYdM4lE662ezPo0UwQzAOBgNVHQ8BAf8EBAMCAQYw
+      EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQU5bCcwUR4sAMV47TPcqyACJaH
+      gpcwCgYIKoZIzj0EAwIDSQAwRgIhAKUa5nSK+LXS2hR0RIaCqmA3LzxBSXGHhlzS
+      CHtznPEOAiEAzgaY2D2fi67ibXNB8t1FyL1g8sIFnlUSeF5QMtd7Lsw=
+      -----END CERTIFICATE-----
+    ''
+  ];
+
   services.mullvad-vpn.enable = true;
   # pkgs.mullvad for CLI only, pkgs.mullvad-vpn for CLI and GUI
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
@@ -47,9 +63,9 @@
     ];
     loader = {
       systemd-boot = {
-       enable = true;
-       configurationLimit = 20;
-       consoleMode = "max";
+        enable = true;
+        configurationLimit = 20;
+        consoleMode = "max";
       };
       efi.canTouchEfiVariables = true;
     };
