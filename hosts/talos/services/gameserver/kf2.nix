@@ -27,13 +27,15 @@ in {
         # Starting Wave:    ?wave=5
         # Final Wave:       ?final=5
         # Start dosh:       ?dosh=2500
+        # Game length:      ?Gamelength=(0,1,2)
         # difficulty= 0-3 Normal, Hard, Suicidal, Hell on Earth
         # Game= ZedternalReborn.WMGameInfo_Endless_AllWeapons
         #       ZedternalReborn.WMGameInfo_Endless
         #       KFGameContent.KFGameInfo_Endless
+        KF2_OPTS = "KF-BioticsLab?Game=KFGameContent.KFGameinfo_Survival?difficulty=1?Gamelength=1";
         # KF2_OPTS = "KF-BurningParis?Game=KFGameContent.KFGameInfo_Endless?difficulty=1";
         # KF2_OPTS = "KF-BurningParis?Game=ZedternalReborn.WMGameInfo_Endless?difficulty=1?tradertime=60?alltraders?wave=5?dosh=2500";
-        KF2_OPTS = "KF-BurningParis?Game=ZedternalReborn.WMGameInfo_Endless?difficulty=1?tradertime=60";
+        # KF2_OPTS = "KF-BurningParis?Game=ZedternalReborn.WMGameInfo_Endless?difficulty=1?tradertime=60";
         # https://steamcommunity.com/sharedfiles/filedetails/?id=2058869377
       };
       # extraOptions = [
