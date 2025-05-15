@@ -1,14 +1,14 @@
 { config, ... }:
 let
   cfg = config.mediaServer;
-  inherit (config.sops) secrets;
+  # inherit (config.sops) secrets;
 in {
-  sops.secrets = {
-    "postgres-immich.env" = {
-      group = config.virtualisation.oci-containers.backend;
-      mode = "0440";
-    };
-  };
+  # sops.secrets = {
+  #   "postgres-immich.env" = {
+  #     group = config.virtualisation.oci-containers.backend;
+  #     mode = "0440";
+  #   };
+  # };
 
   # runs as immich:immich by default
   # redis on unix sock and postgresql at immich@localhost:5432
