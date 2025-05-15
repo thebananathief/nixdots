@@ -26,6 +26,6 @@ in {
     accelerationDevices = [
       "/dev/dri/renderD128"
     ];
-    settings.server.externalDomain = "https://photos.${networking.publicDomain}";
+    settings.server.externalDomain = "https://photos.${config.networking.publicDomain}";
   };
 }
