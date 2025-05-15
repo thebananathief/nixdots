@@ -75,6 +75,10 @@ in {
       reverse_proxy localhost:8005
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
     '';
+    "request.${ config.networking.fqdn }".extraConfig = ''
+      tls internal
+      reverse_proxy localhost:8005
+    '';
     # Jellyfin
     "watch.${ config.networking.publicDomain }".extraConfig = ''
       reverse_proxy localhost:8096
@@ -84,6 +88,22 @@ in {
         X-Content-Type-Options "nosniff"
         X-Frame-Options "DENY"
         Referrer-Policy "strict-origin-when-cross-origin"
+      }
+    '';
+    "watch.${ config.networking.fqdn }".extraConfig = ''
+      tls internal
+      @authorized remote_ip 192.168.0.0/24
+      handle @authorized {
+        reverse_proxy localhost:8096
+        header {
+          Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+          X-Content-Type-Options "nosniff"
+          X-Frame-Options "DENY"
+          Referrer-Policy "strict-origin-when-cross-origin"
+        }
+      }
+      handle {
+        respond "Unauthorized" 403
       }
     '';
   };
