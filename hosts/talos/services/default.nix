@@ -5,7 +5,6 @@ in {
   imports = [
     # ./castopod.nix
     # ./voiceserver.nix
-    # ./immich.nix
     # ./ttrss.nix
     # ./whoogle.nix
     # ./penpot.nix
