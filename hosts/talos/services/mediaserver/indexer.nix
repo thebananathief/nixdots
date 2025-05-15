@@ -118,6 +118,18 @@ in {
     "d ${cfg.storageDir}/media/movies 0775 radarr media - -"
   ];
   
+  # Create the Docker network
+  systemd.services.docker-network-penpot = {
+    serviceConfig.Type = "oneshot";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "docker.service" "docker.socket" ];
+    script = ''
+      # Create network if it doesn't exist
+      ${pkgs.docker}/bin/docker network inspect media >/dev/null 2>&1 || \
+        ${pkgs.docker}/bin/docker network create media
+    '';
+  };
+  
   services.caddy.virtualHosts = {
     # Prowlarr
     "prowlarr.${ config.networking.fqdn }".extraConfig = ''
