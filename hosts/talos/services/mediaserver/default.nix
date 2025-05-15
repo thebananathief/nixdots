@@ -4,6 +4,6 @@
     ./books.nix
     ./jellyfin.nix
     ./download.nix
-    # ./immich.nix
+    ./immich.nix
   ];
 }
