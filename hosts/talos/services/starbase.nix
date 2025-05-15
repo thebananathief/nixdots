@@ -230,15 +230,11 @@ in {
     # Bind to local network interface only
     # bind 192.168.0.0/24
     "${ config.networking.fqdn }".extraConfig = ''
-      tls internal
+      @denied not remote_ip private_ranges
+      abort @denied
 
-      @authorized remote_ip 192.168.0.0/24, fc00::/7
-      handle @authorized {
-        reverse_proxy localhost:8000
-      }
-      handle {
-        respond "Unauthorized" 403
-      }
+      tls internal
+      reverse_proxy localhost:8000
     '';
   };
 }
