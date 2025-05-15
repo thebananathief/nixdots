@@ -28,4 +28,12 @@ in {
     ];
     settings.server.externalDomain = "https://photos.${config.networking.publicDomain}";
   };
+
+  services.caddy.virtualHosts = {
+    # Immich
+    "photos.${ config.networking.publicDomain }".extraConfig = ''
+      reverse_proxy localhost:2283
+      tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+    '';
+  };
 }
