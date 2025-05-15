@@ -232,7 +232,7 @@ in {
     "${ config.networking.fqdn }".extraConfig = ''
       tls internal
 
-      @authorized remote_ip 192.168.0.0/24
+      @authorized remote_ip 192.168.0.0/24, fc00::/7
       handle @authorized {
         reverse_proxy localhost:8000
       }
