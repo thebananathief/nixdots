@@ -41,7 +41,7 @@ in {
 #     host = "localhost";
     # port = 2283;
     # openFirewall = true;
-#     mediaLocation = "${cfg.storageDir}/media/family/immich-media";
+    mediaLocation = "${cfg.storageDir}/media/family/immich-media";
     # secretsFile = secrets."postgres-immich.env".path;
 #     environment = {
       # IMMICH_LOG_LEVEL = "verbose";
