@@ -23,6 +23,12 @@ in {
 #     chown -R starbase:starbase ${ cfg.dataDir }/starbase
 #     chmod -R 750 ${ cfg.dataDir }/starbase
 #   '';
+  systemd.tmpfiles.rules = [
+    "d '${cfg.storageDir}/media/family/archive'  0775 immich    pixmedia - -"
+    "d '${cfg.storageDir}/media/family/pictures+videos'  0775 immich    pixmedia - -"
+    "d '${cfg.storageDir}/media/family/immich-media'  0775 immich    immich - -"
+    "d '${cfg.storageDir}/media/family/uploads'  0775 immich    immich - -"
+  ];
 
   # runs as immich:immich by default
   # redis on unix sock and postgresql at immich@localhost:5432
