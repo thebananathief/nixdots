@@ -15,7 +15,7 @@ in {
       members = [
         "immich"
       ];
-      gid = 969;
+      gid = 986;
     };
   };
 
