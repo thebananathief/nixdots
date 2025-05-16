@@ -10,6 +10,20 @@ in {
   #   };
   # };
 
+  users = {
+    groups.pixmedia = {
+      members = [
+        "immich"
+      ];
+      gid = 969;
+    };
+  };
+
+#   system.activationScripts.starbaseSetup = ''
+#     chown -R starbase:starbase ${ cfg.dataDir }/starbase
+#     chmod -R 750 ${ cfg.dataDir }/starbase
+#   '';
+
   # runs as immich:immich by default
   # redis on unix sock and postgresql at immich@localhost:5432
   services.immich = {
