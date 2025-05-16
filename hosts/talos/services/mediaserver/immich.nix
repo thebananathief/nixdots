@@ -17,11 +17,11 @@ in {
     host = "localhost";
     # port = 2283;
     # openFirewall = true;
-    mediaLocation = "${cfg.storageDir}/media/family/pictures+videos";
+    mediaLocation = "${cfg.storageDir}/media/family/immich-media";
     # secretsFile = secrets."postgres-immich.env".path;
     environment = {
       # IMMICH_LOG_LEVEL = "verbose";
-      UPLOAD_LOCATION = "${cfg.storageDir}/media/family/uploads";
+#       UPLOAD_LOCATION = "${cfg.storageDir}/media/family/uploads";
     };
     accelerationDevices = [
       "/dev/dri/renderD128"
