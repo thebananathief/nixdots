@@ -21,7 +21,7 @@ in {
     # secretsFile = secrets."postgres-immich.env".path;
     environment = {
       # IMMICH_LOG_LEVEL = "verbose";
-#       UPLOAD_LOCATION = "${cfg.storageDir}/media/family/uploads";
+      UPLOAD_LOCATION = "${cfg.storageDir}/media/family/uploads";
     };
     accelerationDevices = [
       "/dev/dri/renderD128"
