@@ -133,36 +133,27 @@ in {
   services.caddy.virtualHosts = {
     # Prowlarr
     "prowlarr.${ config.networking.fqdn }".extraConfig = ''
+      @denied not remote_ip private_ranges
+      abort @denied
+
       tls internal
-      @authorized remote_ip 192.168.0.0/24
-      handle @authorized {
-        reverse_proxy localhost:9696
-      }
-      handle {
-        respond "Unauthorized" 403
-      }
+      reverse_proxy localhost:9696
     '';
     # Sonarr
     "sonarr.${ config.networking.fqdn }".extraConfig = ''
+      @denied not remote_ip private_ranges
+      abort @denied
+
       tls internal
-      @authorized remote_ip 192.168.0.0/24
-      handle @authorized {
-        reverse_proxy localhost:8989
-      }
-      handle {
-        respond "Unauthorized" 403
-      }
+      reverse_proxy localhost:8989
     '';
     # Radarr
     "radarr.${ config.networking.fqdn }".extraConfig = ''
+      @denied not remote_ip private_ranges
+      abort @denied
+
       tls internal
-      @authorized remote_ip 192.168.0.0/24
-      handle @authorized {
-        reverse_proxy localhost:7878
-      }
-      handle {
-        respond "Unauthorized" 403
-      }
+      reverse_proxy localhost:7878
     '';
   };
 }

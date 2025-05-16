@@ -56,8 +56,8 @@ in {
   services.caddy.virtualHosts = {
     # Immich
     "photos.${ config.networking.publicDomain }".extraConfig = ''
-      reverse_proxy localhost:2283
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+      reverse_proxy localhost:2283
     '';
     "photos.${ config.networking.fqdn }".extraConfig = ''
       @denied not remote_ip private_ranges

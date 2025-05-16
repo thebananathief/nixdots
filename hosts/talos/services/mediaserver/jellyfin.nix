@@ -72,8 +72,8 @@ in {
   services.caddy.virtualHosts = {
     # Jellyseerr
     "request.${ config.networking.publicDomain }".extraConfig = ''
-      reverse_proxy localhost:8005
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+      reverse_proxy localhost:8005
     '';
     "request.${ config.networking.fqdn }".extraConfig = ''
       @denied not remote_ip private_ranges
@@ -84,7 +84,6 @@ in {
     '';
     # Jellyfin
     "watch.${ config.networking.publicDomain }".extraConfig = ''
-      reverse_proxy localhost:8096
       tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
       header {
         Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
@@ -92,19 +91,20 @@ in {
         X-Frame-Options "DENY"
         Referrer-Policy "strict-origin-when-cross-origin"
       }
+      reverse_proxy localhost:8096
     '';
     "watch.${ config.networking.fqdn }".extraConfig = ''
       @denied not remote_ip private_ranges
       abort @denied
 
       tls internal
-      reverse_proxy localhost:8096
       header {
         Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
         X-Content-Type-Options "nosniff"
         X-Frame-Options "DENY"
         Referrer-Policy "strict-origin-when-cross-origin"
       }
+      reverse_proxy localhost:8096
     '';
   };
 

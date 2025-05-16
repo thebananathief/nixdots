@@ -67,7 +67,7 @@ let
         }
         {
           name = "Prometheus";
-          uri = "http://talos:9090/";
+          uri = "http://prometheus.${ config.networking.fqdn }/";
           description = "Sketch prometheus queries";
           icon = "prometheus";
         }

@@ -21,6 +21,8 @@ in {
 
   services.prometheus = {
     enable = true;
+    # port = 9090;
+    retentionTime = "4w";
     scrapeConfigs = [
       {
         job_name = "talos";
@@ -208,16 +210,19 @@ in {
   };
 
   services.caddy.virtualHosts = {
-    "grafana.${ config.networking.fqdn }".extraConfig = ''
-      tls /var/lib/caddy/.local/share/caddy/keys/talos.host.pem /var/lib/caddy/.local/share/caddy/keys/talos.host.key
+    "prometheus.${ config.networking.fqdn }".extraConfig = ''
+      @denied not remote_ip private_ranges
+      abort @denied
 
-      @authorized remote_ip 192.168.0.0/24
-      handle @authorized {
-        reverse_proxy localhost:3000
-      }
-      handle {
-        respond "Unauthorized" 403 
-      }
+      tls internal
+      reverse_proxy localhost:9090
+    '';
+    "grafana.${ config.networking.fqdn }".extraConfig = ''
+      @denied not remote_ip private_ranges
+      abort @denied
+
+      tls internal
+      reverse_proxy localhost:3000
     '';
   };
 }
