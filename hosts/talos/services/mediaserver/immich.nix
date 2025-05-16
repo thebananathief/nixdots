@@ -10,14 +10,14 @@ in {
   #   };
   # };
 
-  users = {
-    groups.pixmedia = {
-      members = [
-        "immich"
-      ];
-      gid = 986;
-    };
-  };
+#  users = {
+#    groups.pixmedia = {
+#      members = [
+#        "immich"
+#      ];
+#      gid = 986;
+#    };
+#  };
 
 #   system.activationScripts.starbaseSetup = ''
 #     chown -R starbase:starbase ${ cfg.dataDir }/starbase
