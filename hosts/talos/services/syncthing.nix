@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
   inherit (config.sops) secrets;
   cfg = config.services.syncthing;
@@ -14,7 +14,7 @@ in {
   # users.users.syncthing.extraGroups = [ "users" ];
   # users.users.cameron.extraGroups = [ "syncthing" ];
 
-  networking.firewall = mkIf cfg.openDefaultPorts {
+  networking.firewall = lib.kIf cfg.openDefaultPorts {
     allowedTCPPorts = [ 3484 ];
   };
 
