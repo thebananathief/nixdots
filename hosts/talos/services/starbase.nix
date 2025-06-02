@@ -48,12 +48,12 @@ let
           description = "Audiobook/podcast player and manager";
           icon = "audiobookshelf";
         }
-        # {
-        #   name = "Immich";
-        #   uri = "http://talos:8014/";
-        #   description = "Photos";
-        #   icon = "immich";
-        # }
+        {
+          name = "Immich";
+          uri = "https://photos.${ config.networking.publicDomain }/";
+          description = "Photos";
+          icon = "immich";
+        }
       ];
     }
     {
