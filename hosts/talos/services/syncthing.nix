@@ -1,7 +1,7 @@
 { config, ... }:
 let
   inherit (config.sops) secrets;
-  cfg = config.services.syncthing
+  cfg = config.services.syncthing;
 in {
   systemd.services.syncthing = {
     # Don't create default ~/Sync folder
