@@ -88,4 +88,16 @@ in {
     # key = "/appdata/certs/syncthing/key.pem";
     # cert = "/appdata/certs/syncthing/cert.pem";
   };
+
+  services.caddy.virtualHosts = {
+    # Bind to local network interface only
+    # bind 192.168.0.0/24
+    "syncthing.${ config.networking.fqdn }".extraConfig = ''
+      @denied not remote_ip private_ranges
+      abort @denied
+
+      tls internal
+      reverse_proxy localhost:8384
+    '';
+  };
 }
