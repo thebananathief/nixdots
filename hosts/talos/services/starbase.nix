@@ -54,6 +54,12 @@ let
           description = "Photos";
           icon = "immich";
         }
+        {
+          name = "Syncthing";
+          uri = "https://talos.8384/";
+          description = "Sync folder";
+          icon = "syncthing";
+        }
       ];
     }
     {

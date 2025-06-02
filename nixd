@@ -106,6 +106,7 @@ function sync_and_rebuild() {
 
   sudo nixos-rebuild --flake "$flake_uri" --accept-flake-config "$@"
   # --show-trace --option eval-cache false
+  # --recreate-lock-file --update-input
   if [[ $? -ne 0 ]]; then
     exit 1
   fi
