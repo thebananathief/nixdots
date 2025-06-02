@@ -14,7 +14,7 @@ in {
   # users.users.syncthing.extraGroups = [ "users" ];
   # users.users.cameron.extraGroups = [ "syncthing" ];
 
-  networking.firewall = lib.mkIf cfg.openDefaultPorts {
+  networking.firewall = {
     allowedTCPPorts = [ 3484 ];
   };
 
