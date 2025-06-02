@@ -1,6 +1,7 @@
 { config, ... }:
 let
   inherit (config.sops) secrets;
+  cfg = config.services.syncthing
 in {
   systemd.services.syncthing = {
     # Don't create default ~/Sync folder
@@ -12,6 +13,10 @@ in {
 
   # users.users.syncthing.extraGroups = [ "users" ];
   # users.users.cameron.extraGroups = [ "syncthing" ];
+
+  networking.firewall = mkIf cfg.openDefaultPorts {
+    allowedTCPPorts = [ 3484 ];
+  };
 
   services.syncthing = {
     enable = true;

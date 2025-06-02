@@ -56,7 +56,7 @@ let
         }
         {
           name = "Syncthing";
-          uri = "https://talos.8384/";
+          uri = "http://talos.8384/";
           description = "Sync folder";
           icon = "syncthing";
         }
@@ -225,6 +225,7 @@ in {
     echo '${configFile}' > ${ cfg.dataDir }/starbase/config.json
     chown -R starbase:starbase ${ cfg.dataDir }/starbase
     chmod -R 750 ${ cfg.dataDir }/starbase
+    systemctl restart docker-starbase80.service
   '';
   
   # systemd.tmpfiles.rules = [
