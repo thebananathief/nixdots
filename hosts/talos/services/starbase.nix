@@ -56,7 +56,7 @@ let
         }
         {
           name = "Syncthing";
-          uri = "http://talos.8384/";
+          uri = "http://syncthing.${ config.networking.fqdn }/";
           description = "Sync folder";
           icon = "syncthing";
         }
