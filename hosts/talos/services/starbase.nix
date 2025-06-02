@@ -2,7 +2,7 @@
 let
   cfg = config.mediaServer;
   inherit (config.sops) secrets;
-  configFile = builtins.toJSON [
+  configFileContent = builtins.toJSON [
     {
       category = "Media";
       services = [
@@ -190,6 +190,8 @@ let
       ];
     }
   ];
+
+  starbaseConfigInStore = pkgs.writeText "starbase-config.json" configFileContent;
 in {
   users = {
     groups.starbase = { gid = 970; };
@@ -204,7 +206,7 @@ in {
     starbase80 = {
       image = "jordanroher/starbase-80:latest";
       volumes = [
-        "${ cfg.dataDir }/starbase/config.json:/app/src/config/config.json"
+        "${ starbaseConfigInStore }:/app/src/config/config.json:ro"
         "${ cfg.dataDir }/starbase/public/favicon.ico:/app/public/favicon.ico"
         "${ cfg.dataDir }/starbase/public/logo.png:/app/public/logo.png"
         "${ cfg.dataDir }/starbase/public/icons:/app/public/icons"
@@ -220,12 +222,14 @@ in {
     };
   };
 
+  systemd.services."docker-starbase80".restartTriggers = [
+    starbaseConfigInStore
+  ];
+
   system.activationScripts.starbaseSetup = ''
     mkdir -p ${ cfg.dataDir }/starbase/public/icons
-    echo '${configFile}' > ${ cfg.dataDir }/starbase/config.json
     chown -R starbase:starbase ${ cfg.dataDir }/starbase
     chmod -R 750 ${ cfg.dataDir }/starbase
-    systemctl restart docker-starbase80.service
   '';
   
   # systemd.tmpfiles.rules = [
