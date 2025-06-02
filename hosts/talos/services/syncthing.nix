@@ -15,7 +15,7 @@ in {
   # users.users.cameron.extraGroups = [ "syncthing" ];
 
   networking.firewall = {
-    allowedTCPPorts = [ 3484 ];
+    allowedTCPPorts = [ 8384 ];
   };
 
   services.syncthing = {
