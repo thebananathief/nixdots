@@ -29,7 +29,6 @@
     alacritty
     ghostty
     dbeaver-bin
-    bambu-studio
     # blender
     openscad
 
