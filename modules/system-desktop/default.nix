@@ -11,9 +11,10 @@
     ../fonts.nix
   ];
 
-  environment.systemPackages = with pkgs; [
-    bambu-studio
-  ];
+  services.flatpak.enable = true;
+  # environment.systemPackages = with pkgs; [
+  #   bambu-studio
+  # ];
 
   # make HM-managed GTK stuff work
   programs.dconf.enable = true;
