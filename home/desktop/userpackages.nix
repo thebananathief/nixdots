@@ -5,33 +5,38 @@
   globalFonts,
   ...
 }: rec {
-  home.packages = with pkgs; [
-    # forge-mtg
-    # mcrcon # minecraft rcon client
-    # moonlight-qt
-    # gramps
-    # tesseract
-    firefox
-    tailscale-systray
-    spotify
-    obsidian
-    localsend
-    bitwarden
-    # webcord
-    legcord
-    # discord
-    # ripcord
+  home.packages =
+    (with pkgs; [
+      # forge-mtg
+      # mcrcon # minecraft rcon client
+      # moonlight-qt
+      # gramps
+      # tesseract
+      firefox
+      tailscale-systray
+      spotify
+      obsidian
+      localsend
+      bitwarden
+      # webcord
+      legcord
+      # discord
+      # ripcord
 
-    vscode-fhs
-    # zed-editor
-    mysql-shell
-    audacity
-    alacritty
-    ghostty
-    dbeaver-bin
-    # blender
-    openscad
+      vscode-fhs
+      # zed-editor
+      mysql-shell
+      audacity
+      alacritty
+      ghostty
+      dbeaver-bin
+      # blender
+      openscad
 
-    go
-  ];
+      go
+    ])
+    ++ (with pkgs.python312Packages; [
+      solidpython2
+      lnkparse3
+    ]);
 }
