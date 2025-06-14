@@ -31,7 +31,7 @@ in {
   #   };
   # };
 
-  systemd.services."docker-qubic-client".restartTriggers = [
+  systemd.services."podman-qubic-client".restartTriggers = [
     qubicConfig
   ];
 

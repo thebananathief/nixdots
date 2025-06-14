@@ -215,7 +215,7 @@ in {
       # podman.user = "starbase:starbase";
       # user = "980:970";
       environment = {
-        TITLE = "Talos Home";
+        TITLE = "Talos Home"; 
         # LOGO = "/icons/logo.png";
         LOGO = "xcp-ng";
         HOVER = "underline";
@@ -223,7 +223,7 @@ in {
     };
   };
 
-  systemd.services."docker-starbase80".restartTriggers = [
+  systemd.services."podman-starbase80".restartTriggers = [
     starbaseConfigInStore
   ];
 
