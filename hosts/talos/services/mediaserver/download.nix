@@ -34,6 +34,7 @@ in {
     # https://github.com/qdm12/gluetun-wiki/
     gluetun = {
       image = "docker.io/qmcgaw/gluetun:v3";
+      pull = "newer";
       volumes = [
         "${cfg.dataDir}/gluetun:/gluetun"
       ];
@@ -67,6 +68,7 @@ in {
     };
     transmission = {
       image = "lscr.io/linuxserver/transmission:latest";
+      pull = "newer";
       volumes = [
         "${cfg.dataDir}/transmission:/config"
         "${cfg.downloadDir}:/downloads:rw"

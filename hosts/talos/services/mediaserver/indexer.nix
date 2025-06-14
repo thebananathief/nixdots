@@ -52,6 +52,7 @@ in {
     # Media indexing, metadata and organizing, coordinating
     flaresolverr = {
       image = "ghcr.io/flaresolverr/flaresolverr:latest";
+      pull = "newer";
       ports = ["8191:8191"];
       environment = {
         LOG_LEVEL = "info";
@@ -62,6 +63,7 @@ in {
     };
     prowlarr = {
       image = "lscr.io/linuxserver/prowlarr:latest";
+      pull = "newer";
       volumes = [
         "${cfg.dataDir}/prowlarr:/config"
       ];
@@ -76,6 +78,7 @@ in {
     };
     radarr = {
       image = "lscr.io/linuxserver/radarr:latest";
+      pull = "newer";
       volumes = [
         "${cfg.dataDir}/radarr:/config"
         "${cfg.storageDir}:/storage"
@@ -91,6 +94,7 @@ in {
     };
     sonarr = {
       image = "lscr.io/linuxserver/sonarr:latest";
+      pull = "newer";
       volumes = [
         "${cfg.dataDir}/sonarr:/config"
         "${cfg.storageDir}:/storage"

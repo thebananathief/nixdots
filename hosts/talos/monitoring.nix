@@ -209,6 +209,7 @@ in {
   virtualisation.oci-containers.containers = {
     mktxp = {
       image = "ghcr.io/akpw/mktxp:latest";
+      pull = "newer";
       volumes = [ "/var/lib/mktxp:/home/mktxp/mktxp/" ];
       ports = [ "49090:49090" ];
     # User in the container is mktxp (uid=100,gid=101)

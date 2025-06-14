@@ -42,6 +42,7 @@ in {
   virtualisation.oci-containers.containers = {
     qubic-client = {
       image = "qliplatform/qubic-client:latest";
+      pull = "newer";
       volumes = [
         "${ qubicConfig }:/app/appsettings.json:ro"
       ];
