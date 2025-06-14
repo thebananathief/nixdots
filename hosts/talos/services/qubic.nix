@@ -48,7 +48,10 @@ in {
       ];
       devices = [
         "/dev/dri:/dev/dri"
+        "/dev/hugepages:/dev/hugepages"
       ];
     };
   };
+
+  boot.kernelParams = [ "vm.nr_hugepages=500" ];
 }

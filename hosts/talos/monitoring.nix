@@ -33,8 +33,8 @@ in {
           {
             targets = [
               "localhost:9100" # node exporter
-              "localhost:9256" # process exporter
-              "localhost:9558" # systemd exporter
+              # "localhost:9256" # process exporter
+              # "localhost:9558" # systemd exporter
               "localhost:9633" # smartctl exporter
               "localhost:49090" # docker mktxp exporter
               # "localhost:9436" # crappy mikrotik exporter
@@ -77,12 +77,12 @@ in {
           "systemd"
         ];
       };
-      process = {
-        enable = true;
-      };
-      systemd = {
-        enable = true;
-      };
+      # process = {
+      #   enable = true;
+      # };
+      # systemd = {
+      #   enable = true;
+      # };
       smartctl = {
         enable = true;
         maxInterval = "60s";
