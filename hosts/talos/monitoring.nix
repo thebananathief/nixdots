@@ -32,8 +32,10 @@ in {
         static_configs = [
           {
             targets = [
-              "localhost:9100"
-              "localhost:9633"
+              "localhost:9100" # node exporter
+              "localhost:9256" # process exporter
+              "localhost:9558" # systemd exporter
+              "localhost:9633" # smartctl exporter
               "localhost:49090" # docker mktxp exporter
               # "localhost:9436" # crappy mikrotik exporter
               # "localhost:9753"
@@ -72,10 +74,14 @@ in {
       node = {
         enable = true;
         enabledCollectors = [
-          "processes"
           "systemd"
-          "tcpstat"
         ];
+      };
+      process = {
+        enable = true;
+      };
+      systemd = {
+        enable = true;
       };
       smartctl = {
         enable = true;
