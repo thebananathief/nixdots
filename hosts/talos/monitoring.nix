@@ -23,6 +23,7 @@ in {
     enable = true;
     # port = 9090;
     retentionTime = "4w";
+    webExternalUrl = "https://prometheus.${ config.networking.fqdn }";
     scrapeConfigs = [
       {
         job_name = "talos";
