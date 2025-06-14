@@ -3,25 +3,17 @@
   inherit (config.sops) secrets;
 in {
   imports = [
-    # ./castopod.nix
-    # ./voiceserver.nix
-    # ./ttrss.nix
-    # ./whoogle.nix
-    # ./penpot.nix
-    # ./etherpad.nix
-    # ./webtrees.nix
-
     ./caddy.nix
     ./starbase.nix
 
-    ./gameserver/minecraft-vanilla.nix
-    ./gameserver/kf2.nix
+    # ./gameserver/minecraft-vanilla.nix
+    # ./gameserver/kf2.nix
     ./options.nix
     ./syncthing.nix
     ./librespeed.nix
     ./gitea.nix
+    ./qubic.nix
     ./mediaserver
-    # ./dns.nix
   ];
 
   # Set the user and group ID in the environment, some containers will pull it
