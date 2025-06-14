@@ -45,10 +45,10 @@ in {
       pull = "newer";
       volumes = [
         "${ qubicConfig }:/app/appsettings.json:ro"
+        "/dev/hugepages:/dev/hugepages"
       ];
       devices = [
         "/dev/dri:/dev/dri"
-        # "/dev/hugepages:/dev/hugepages"
       ];
     };
   };
