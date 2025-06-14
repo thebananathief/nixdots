@@ -56,8 +56,8 @@ in {
       environment = {
         LOG_LEVEL = "info";
       };
-      extraOptions = [
-        "--network=media"
+      networks = [
+        "media"
       ];
     };
     prowlarr = {
@@ -70,8 +70,8 @@ in {
         PUID = "985"; # prowlarr
         PGID = "987"; # media
       } // cfg.common_env;
-      extraOptions = [
-        "--network=media"
+      networks = [
+        "media"
       ];
     };
     radarr = {
@@ -85,8 +85,8 @@ in {
         PUID = "275"; # radarr
         PGID = "987"; # media
       } // cfg.common_env;
-      extraOptions = [
-        "--network=media"
+      networks = [
+        "media"
       ];
     };
     sonarr = {
@@ -100,8 +100,8 @@ in {
         PUID = "274"; # sonarr
         PGID = "987"; # media
       } // cfg.common_env;
-      extraOptions = [
-        "--network=media"
+      networks = [
+        "media"
       ];
     };
   };
@@ -119,16 +119,16 @@ in {
   ];
   
   # Create the Docker network
-  systemd.services.docker-network-penpot = {
-    serviceConfig.Type = "oneshot";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "docker.service" "docker.socket" ];
-    script = ''
-      # Create network if it doesn't exist
-      ${pkgs.docker}/bin/docker network inspect media >/dev/null 2>&1 || \
-        ${pkgs.docker}/bin/docker network create media
-    '';
-  };
+  # systemd.services.docker-network-penpot = {
+  #   serviceConfig.Type = "oneshot";
+  #   wantedBy = [ "multi-user.target" ];
+  #   after = [ "docker.service" "docker.socket" ];
+  #   script = ''
+  #     # Create network if it doesn't exist
+  #     ${pkgs.docker}/bin/docker network inspect media >/dev/null 2>&1 || \
+  #       ${pkgs.docker}/bin/docker network create media
+  #   '';
+  # };
   
   services.caddy.virtualHosts = {
     # Prowlarr

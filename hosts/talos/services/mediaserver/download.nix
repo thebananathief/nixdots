@@ -48,11 +48,15 @@ in {
         PUID = "986"; # torrenter
         PGID = "987"; # media
       } // cfg.common_env;
-      extraOptions = [
-        "--network=media"
-        "--cap-add=NET_ADMIN"
-        "--device=/dev/net/tun:/dev/net/tun"
+      networks = [
+        "media"
       ];
+      devices = [
+        "/dev/net/tun:/dev/net/tun" # TUN device for VPN
+      ];
+      capabilities = {
+        NET_ADMIN = true; # Required for TUN device
+      };
       # NOTE: Any containers using the gluetun network stack need to
       # have portforwards set here instead of that container
       ports = [
@@ -72,8 +76,9 @@ in {
         PUID = "986"; # torrenter
         PGID = "987"; # media
       } // cfg.common_env;
-      # This uses the gluetun network stack so that its behind VPN
-      extraOptions = ["--network=container:gluetun"];
+      networks = [
+        "container:gluetun" # Use the gluetun container's network stack
+      ];
       dependsOn = ["gluetun"];
     };
   };
