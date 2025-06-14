@@ -71,6 +71,11 @@ in {
     exporters = {
       node = {
         enable = true;
+        enabledCollectors = [
+          "processes"
+          "systemd"
+          "tcpstat"
+        ];
       };
       smartctl = {
         enable = true;
