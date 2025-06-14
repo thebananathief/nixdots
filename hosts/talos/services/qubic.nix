@@ -48,7 +48,7 @@ in {
       ];
       devices = [
         "/dev/dri:/dev/dri"
-        "/dev/hugepages:/dev/hugepages"
+        # "/dev/hugepages:/dev/hugepages"
       ];
     };
   };
