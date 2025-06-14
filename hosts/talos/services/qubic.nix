@@ -1,7 +1,42 @@
-{config, ...}: let
+{config, pkgs, ...}: let
   cfg = config.mediaServer;
   inherit (config.sops) secrets;
+
+  configFileContent = builtins.toJSON [
+    {
+      ClientSettings = {
+        poolAddress = "wss://wps.qubic.li/ws";
+        alias = "qli Machina man";
+        trainer = {
+          cpu = true;
+          gpu = false;
+          gpuVersion = "CUDA";
+          cpuVersion = "AVX512";
+          cpuThreads = 5;
+        };
+        pps = true;
+        accessToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6Ijk2NDZkOTgzLWQ2OGQtNDBhMS1hMGZjLWE0MTMxM2FkODU1MiIsIk1pbmluZyI6IiIsIm5iZiI6MTc0OTg3Mjk2NywiZXhwIjoxNzgxNDA4OTY3LCJpYXQiOjE3NDk4NzI5NjcsImlzcyI6Imh0dHBzOi8vcXViaWMubGkvIiwiYXVkIjoiaHR0cHM6Ly9xdWJpYy5saS8ifQ.Sop7jqZgpArESaSZSItWcTWvBUEQK-fdVmxk4r64naMPhi1pmyHdWQyF-IHWBYTowEIyH3cZXXaBtZqOS8ZiHQG1SZsalcjHoc_jfNM0fl6uBRsdpTmxEjzPdyuSAKtHP8ycepSt68F1GYpokArJe_YN1XUxOQez2SYbZRwXO4kNobq6Oz96ISnJMdkvo7bjJbiHtNIDya6_oKPSJa8_yHlwzuTWn6vf3WdXP6ZwT_er5BsYBWoTkS9UDLVca68P8fPUHlaRgEFRtNPCNezBXKKgEr2M1Py2k9U2sOBL0pAHuK9XCu472t5UN8USqnQ49UpIl8_bnnbibkkvBKzzcA";
+        qubicAddress = null;
+        idling = null;
+      };
+    }
+  ];
+
+  qubicConfig = pkgs.writeText "appsettings.json" configFileContent;
 in {
+  # users = {
+  #   groups.starbase = { gid = 970; };
+  #   users.starbase = {
+  #     uid = 980;
+  #     group = "starbase";
+  #     isSystemUser = true;
+  #   };
+  # };
+
+  systemd.services."docker-qubic-client".restartTriggers = [
+    qubicConfig
+  ];
+
   # sops.secrets = {
   #   "qubic-client.env" = {};
   # };
@@ -10,17 +45,11 @@ in {
     qubic-client = {
       image = "qliplatform/qubic-client:latest";
       volumes = [
-        "${ cfg.dataDir }/qubic-client/appsettings.json:/app/appsettings.json"
+        "${ qubicConfig }:/app/appsettings.json:ro"
       ];
-      # ports = [ "8015:8000" ];
-      # environmentFiles = [
-      #   secrets."qubic-client.env".path
-      # ];
-      # environment = {
-      #   ClientSettings__Trainer__CpuThreads = 5;
-      #   ClientSettings__AccessToken = "${ secrets.qubic_accesstoken }"; # "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImUxODc5YzQ3LTIwZjUtNDA5Yy05MThkLTRhYzgyNzFiYjYxMSIsIk1pbmluZyI6IiIsIm5iZiI6MTcyNTE5NzA5NSwiZXhwIjoxNzU2NzMzMDk1LCJpYXQiOjE3MjUxOTcwOTUsImlzcyI6Imh0dHBzOi8vcXViaWMubGkvIiwiYXVkIjoiaHR0cHM6Ly9xdWJpYy5saS8ifQ.hBYWpMvvpj8N-t6r6iIdF5y8ayKxtSi0FEb689oOrbPiwBrs76MBvpva7mbOQslzuEFJ8jZSFHlD1QgR6P9YMcTh5fZndI24VBD8lEkNUQPP1wWAOwEUQy-Yk1VTRg7L654ksf0jE4Obj_CDTPyIkK2f5C817--zE7uyngF3-hMRf3Taqus_jR2qqxYSz2D2B2nEYbrRWMDGoMf1tDHq3kFWaFqOr72IjgqkIDV3hs880mhiKcdI0USv54UK-tBon5B_WFJivPr5uo-OUrbILlU24AgTeLYskf1ajIIFnCqJVrAbYxEiaZ0cH1Ey5k6aDfRveb9wqhSQbTMGZuTsOw";
-      #   ClientSettings__Alias = "q-machinaman";
-      # };
+      devices = [
+        "/dev/dri:/dev/dri"
+      ];
     };
   };
 }
