@@ -212,6 +212,7 @@ in {
         "${ cfg.dataDir }/starbase/public/icons:/app/public/icons"
       ];
       ports = [ "8000:4173" ];
+      # podman.user = "starbase:starbase";
       # user = "980:970";
       environment = {
         TITLE = "Talos Home";
