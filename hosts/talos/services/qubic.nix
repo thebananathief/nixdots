@@ -53,5 +53,5 @@ in {
     };
   };
 
-  boot.kernelParams = [ "vm.nr_hugepages=500" ];
+  boot.kernel.sysctl = { "vm.nr_hugepages" = 500; };
 }

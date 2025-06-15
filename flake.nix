@@ -98,18 +98,18 @@
       gargantuan = mkNixosSystem {
         nixos-modules = [./hosts/gargantuan];
       };
-      thoth = mkNixosSystem {
-        nixos-modules = [./hosts/thoth];
-      };
+      # thoth = mkNixosSystem {
+      #   nixos-modules = [./hosts/thoth];
+      # };
       thoth-wsl = mkNixosSystem {
         nixos-modules = [./hosts/thoth/wsl-default.nix];
       };
       icebox = mkNixosSystem {
         nixos-modules = [./hosts/icebox];
       };
-      icebox2 = mkNixosSystem {
-        nixos-modules = [./hosts/icebox2];
-      };
+      # icebox2 = mkNixosSystem {
+      #   nixos-modules = [./hosts/icebox2];
+      # };
     };
   };
 }
