@@ -42,7 +42,7 @@ in {
     qubic-client = {
       image = "qliplatform/qubic-client:latest";
       pull = "newer";
-      user = "qubic:qubic";
+      podman.user = "qubic";
       volumes = [
         "${ qubicConfig }:/app/appsettings.json:ro"
         "/dev/hugepages:/dev/hugepages"
