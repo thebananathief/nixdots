@@ -87,6 +87,8 @@
     # System monitoring
     smartmontools
     duf
+    dua
+    systemctl-tui
     neofetch
 
     # iftop nmap fio hddtemp intel-gpu-tools
