@@ -22,14 +22,13 @@
 
   qubicConfig = pkgs.writeText "appsettings.json" configFileContent;
 in {
-  # users = {
-  #   groups.starbase = { gid = 970; };
-  #   users.starbase = {
-  #     uid = 980;
-  #     group = "starbase";
-  #     isSystemUser = true;
-  #   };
-  # };
+  users = {
+    groups.qubic = {};
+    users.qubic = {
+      group = "qubic";
+      isSystemUser = true;
+    };
+  };
 
   systemd.services."podman-qubic-client".restartTriggers = [
     qubicConfig
@@ -43,6 +42,7 @@ in {
     qubic-client = {
       image = "qliplatform/qubic-client:latest";
       pull = "newer";
+      user = "qubic:qubic";
       volumes = [
         "${ qubicConfig }:/app/appsettings.json:ro"
         "/dev/hugepages:/dev/hugepages"
@@ -53,5 +53,5 @@ in {
     };
   };
 
-  boot.kernel.sysctl = { "vm.nr_hugepages" = 500; };
+  boot.kernel.sysctl = { "vm.nr_hugepages" = 512; };
 }
