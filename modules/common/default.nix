@@ -86,6 +86,7 @@
 
     # System monitoring
     smartmontools
+    gping
     duf
     dua
     systemctl-tui
