@@ -1,4 +1,11 @@
-{ pkgs, globalFonts, nix-colors, lib, config, ... }: rec {
+{
+  pkgs,
+  globalFonts,
+  nix-colors,
+  lib,
+  config,
+  ...
+}: rec {
   home.packages = with pkgs; [
     gsettings-qt
     gsettings-desktop-schemas
@@ -22,7 +29,7 @@
 
   gtk = {
     enable = true;
-    gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
+    # gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
     font = {
       name = "${globalFonts.sansSerif}";
       # package = pkgs.lexend;
@@ -63,7 +70,7 @@
     };
   };
 
-#   programs.bat.config.theme = "Catppuccin-mocha";
+  #   programs.bat.config.theme = "Catppuccin-mocha";
 
   # Make home-manager stop nagging about overwriting these files
   home.file.${config.gtk.gtk2.configLocation}.force = true;
@@ -82,5 +89,4 @@
     #   theme=GraphiteNordDark
     # '';
   };
-
 }

@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   imports = [
@@ -23,17 +24,17 @@
     BROWSER = "firefox";
   };
 
-  gtk = {
-    enable = true;
-    # These are referenced by Thunar for the navigation tree
-    gtk3.bookmarks = [
-      "file:///home/cameron/code"
-      "file:///home/cameron/Syncthing"
-      "file:///home/cameron/Pictures"
-      "file:///home/cameron/Downloads"
-      # "file:///mnt/talos" # refer to network-mounts
-    ];
-  };
+  # gtk = {
+  #   enable = true;
+  #   # These are referenced by Thunar for the navigation tree
+  #   gtk3.bookmarks = [
+  #     "file:///home/cameron/code"
+  #     "file:///home/cameron/Syncthing"
+  #     "file:///home/cameron/Pictures"
+  #     "file:///home/cameron/Downloads"
+  #     # "file:///mnt/talos" # refer to network-mounts
+  #   ];
+  # };
 
   # Auto-mounting removeable drives
   services.udiskie.enable = true;
@@ -127,6 +128,6 @@
   };
   home.file = {
     # ".gtkrc-2.0".force = true;
-    "${config.gtk.gtk2.configLocation}".force = true;
+    "${config.gtk.gtk2.configLocation}".force = lib.mkForce true;
   };
 }
