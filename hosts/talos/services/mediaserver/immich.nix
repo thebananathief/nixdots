@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 let
   cfg = config.mediaServer;
   # inherit (config.sops) secrets;
@@ -33,6 +33,11 @@ in {
 #    "d '${cfg.storageDir}/media/family/uploads'  0775 immich    immich - -"
 #   ""
 #  ];
+
+  environment.systemPackages = with pkgs; [
+    immich-go
+    exiv2
+  ];
 
   # runs as immich:immich by default
   # redis on unix sock and postgresql at immich@localhost:5432
