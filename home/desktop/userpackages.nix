@@ -34,6 +34,7 @@
       openscad
 
       go
+      python312
     ])
     ++ (with pkgs.python312Packages; [
       solidpython2
