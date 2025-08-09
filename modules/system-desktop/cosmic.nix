@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    ../games.nix
+    # ../games.nix
   ];
   services = {
     desktopManager.cosmic.enable = true;
