@@ -28,7 +28,6 @@
       mysql-shell
       audacity
       alacritty
-      ghostty
       dbeaver-bin
       # blender
       openscad

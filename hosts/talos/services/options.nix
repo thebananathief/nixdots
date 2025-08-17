@@ -1,4 +1,8 @@
-{ config, lib, ... }: {
+{
+  config,
+  lib,
+  ...
+}: {
   options = with lib; {
     mediaServer = {
       common_env = mkOption {
@@ -25,7 +29,7 @@
       };
       downloadDir = mkOption {
         type = types.str;
-        default = "/mnt/disk3/downloads";
+        default = "/mnt/disk2/downloads";
         description = "Directory for downloads to be placed";
       };
       mediaGroup = mkOption {
