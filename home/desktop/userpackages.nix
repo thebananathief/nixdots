@@ -25,9 +25,9 @@
 
       vscode-fhs
       # zed-editor
-      mysql-shell
-      audacity
-      alacritty
+      # mysql-shell
+      # audacity
+      # alacritty
       dbeaver-bin
       # blender
       openscad
