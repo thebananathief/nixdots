@@ -29,7 +29,7 @@
       };
       downloadDir = mkOption {
         type = types.str;
-        default = "/mnt/disk2/downloads";
+        default = "/mnt/disk4/downloads";
         description = "Directory for downloads to be placed";
       };
       mediaGroup = mkOption {

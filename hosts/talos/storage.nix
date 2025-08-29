@@ -39,12 +39,12 @@ in {
     device = "/dev/disk/by-uuid/1236c154-8c20-4e12-8e28-da62db223074";
     fsType = "xfs";
   };
-  fileSystems."/mnt/used1" = {
+  fileSystems."/mnt/disk4" = {
     device = "/dev/disk/by-uuid/bb0b2728-3662-4fef-b862-5f1be6d54172";
     fsType = "ext4";
   };
   # Not installed atm
-  # fileSystems."/mnt/disk4" = {
+  # fileSystems."/mnt/newDisk" = {
   #   device = "/dev/disk/by-uuid/db4a98ac-3a13-4a49-a40e-10a06f2db023";
   #   fsType = "";
   # };
@@ -61,12 +61,19 @@ in {
     options = [
       # "defaults"
       # "nonempty"
-      "cache.files=partial"
-      "category.create=mfs"
-      "moveonenospc=true"
-      "dropcacheonclose=true"
-      "minfreespace=30G"
+
       "fsname=mergerfs"
+      "moveonenospc=true"
+      "minfreespace=10G"
+      # "cache.files=partial"
+      # "category.create=mfs"
+      # "dropcacheonclose=true"
+
+      # New quickstart settings from docs
+      "cache.files=off"
+      "category.create=pfrd"
+      "func.getattr=newest"
+      "dropcacheonclose=false"
     ];
   };
 
@@ -92,6 +99,7 @@ in {
       d1 = "/mnt/disk1";
       d2 = "/mnt/disk2";
       d3 = "/mnt/disk3";
+      d4 = "/mnt/disk4";
     };
     exclude = [
       "*.unrecoverable"
