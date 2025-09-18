@@ -14,6 +14,7 @@ in {
     ./gitea.nix
     ./qubic.nix
     ./mediaserver
+    ./homeassistant.nix
   ];
 
   # Set the user and group ID in the environment, some containers will pull it
