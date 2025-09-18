@@ -11,7 +11,7 @@
         temperature_unit = "F";
         time_zone = "America/New_York";
       };
-      feedreader.urls = [ "https://nixos.org/blogs.xml" ];
+      # feedreader.urls = [ "https://nixos.org/blogs.xml" ];
     };
   };
 
