@@ -61,6 +61,8 @@
 
   # These packages are installed to all hosts
   environment.systemPackages = with pkgs; [
+    helix
+
     git
     wget
     curl
