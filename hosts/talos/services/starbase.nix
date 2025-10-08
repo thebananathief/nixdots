@@ -54,17 +54,23 @@ let
           description = "Photos";
           icon = "immich";
         }
+      ];
+    }
+    {
+      category = "Services";
+      services = [
         {
           name = "Syncthing";
           uri = "http://syncthing.${ config.networking.fqdn }/";
           description = "Sync folder";
           icon = "syncthing";
         }
-      ];
-    }
-    {
-      category = "Services";
-      services = [
+        {
+          name = "Home Assistat";
+          uri = "http://homeassistant.local:8123/";
+          description = "Smart home automation";
+          icon = "homeassistant";
+        }
         {
           name = "Grafana";
           uri = "http://grafana.${ config.networking.fqdn }/";
