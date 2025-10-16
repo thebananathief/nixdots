@@ -3,6 +3,8 @@ let
   cfg = config.mediaServer;
   inherit (config.sops) secrets;
   configFileContent = builtins.toJSON [
+    # Icons reference: https://github.com/notclickable-jordan/starbase-80?tab=readme-ov-file#icons
+    # https://dashboardicons.com/
     {
       category = "Media";
       services = [
@@ -66,10 +68,10 @@ let
           icon = "syncthing";
         }
         {
-          name = "Home Assistat";
+          name = "Home Assistant";
           uri = "http://homeassistant.local:8123/";
-          description = "Smart home automation";
-          icon = "homeassistant";
+          description = "Smart home stuff";
+          icon = "home-assistant";
         }
         {
           name = "Grafana";
@@ -221,9 +223,10 @@ in {
       # podman.user = "starbase:starbase";
       # user = "980:970";
       environment = {
-        TITLE = "Talos Home"; 
+        # TITLE = "Talos Home"; 
         # LOGO = "/icons/logo.png";
-        LOGO = "xcp-ng";
+        # LOGO = "xcp-ng";
+        HEADER = "false";
         HOVER = "underline";
       };
     };
