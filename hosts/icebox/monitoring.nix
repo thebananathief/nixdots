@@ -11,6 +11,9 @@
       enable = true;
       openFirewall = true;
       # port 9100
+      enabledCollectors = [
+        "systemd"
+      ];
     };
     smartctl = {
       enable = true;
