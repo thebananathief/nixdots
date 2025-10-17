@@ -110,6 +110,9 @@
       # icebox2 = mkNixosSystem {
       #   nixos-modules = [./hosts/icebox2];
       # };
+      gridur = mkNixosSystem {
+        nixos-modules = [./hosts/gridur];
+      };
     };
   };
 }
