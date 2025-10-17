@@ -16,6 +16,7 @@ in {
     ./hardware-configuration.nix
     ./monitoring.nix
     ./qubic.nix
+    ../../modules/tailscale.nix
     ../../modules/security.nix
   ];
 

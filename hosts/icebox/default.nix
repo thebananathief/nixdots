@@ -12,6 +12,7 @@
     ./hardware-configuration.nix
     ./restic.nix
     ./monitoring.nix
+    ./qubic.nix
     ../../modules/tailscale.nix
     ../../modules/security.nix
   ];

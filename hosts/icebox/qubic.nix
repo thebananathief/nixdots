@@ -5,16 +5,16 @@
   configFileContent = builtins.toJSON {
     ClientSettings = {
       poolAddress = "wss://wps.qubic.li/ws";
-      alias = "qli Gridur";
+      alias = "qli Icebox";
       trainer = {
         cpu = true;
-        gpu = true;
+        gpu = false;
         # gpuVersion = "CUDA";
         cpuVersion = "AVX2";
         cpuThreads = 4;
       };
       pps = true;
-      accessToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6Ijk2NDZkOTgzLWQ2OGQtNDBhMS1hMGZjLWE0MTMxM2FkODU1MiIsIk1pbmluZyI6IiIsIm5iZiI6MTc1MTIxNDQyMiwiZXhwIjoxNzgyNzUwNDIyLCJpYXQiOjE3NTEyMTQ0MjIsImlzcyI6Imh0dHBzOi8vcXViaWMubGkvIiwiYXVkIjoiaHR0cHM6Ly9xdWJpYy5saS8ifQ.oojdKcwCkmqvMif_zVzcD4Ybw9QsLV_nGRWBRrSdzv1q_2c1K1S3WL5dFc4SudJJCErtYkQnjUPQcx95j3L9vyTjIExauIaEU11RMewndzjnw_2BSTv8Qr_r99sDUXWurBbthv5rvqWGaDo3dFrpkyX4ZeZIVHJPQ4s61d0yZ1zheG_AKQs8BfZ1E151iTeIKEU_2v8UDjllWaTQE-t0g1fsKGLlmT7bgJkZBUNmsNVkZzQUMUr1c7eWAift43G-Lrt875rk_sfpglSr7or4nZJO3CHZSPbEu-tngn-neZcBQriQMTxEzEtkII9hOO6sje3oh3_fJR4FRI7sYqqLPw";
+      accessToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6Ijk2NDZkOTgzLWQ2OGQtNDBhMS1hMGZjLWE0MTMxM2FkODU1MiIsIk1pbmluZyI6IiIsIm5iZiI6MTc2MDY3OTg5OSwiZXhwIjoxNzkyMjE1ODk5LCJpYXQiOjE3NjA2Nzk4OTksImlzcyI6Imh0dHBzOi8vcXViaWMubGkvIiwiYXVkIjoiaHR0cHM6Ly9xdWJpYy5saS8ifQ.G9VJVpRXPj2xraZBbIFtUwFQbkQMrYzNOPthHomeUH0VvZljfg5tv_v6ivw5LaTStG4-myUMY7wKSNnyksaf8GssDfw0cUXlmbgJT9aK15wqBVPzuKRHGKbK6HX8MY1RqrhCShV9UeFhUKFd4SCG8M3Kz4k8kfMc_GHvKHz1d4YpzjmKCHdczHwQwiNPyPIisTFNpmxBr3fIGKLJsn17P2nGancGdrcuR6Vb97HfedSactNlf45x3XT67LHqCLtMS1_-rkp9oewN-6Jyfr0sK6P8YTcNhJRrHufGa4OUzVuN8E47edeLu-L9GNongpi0GR5Iwl5fBjNb6Vtbjt451w";
       qubicAddress = null;
       idling = null;
     };
