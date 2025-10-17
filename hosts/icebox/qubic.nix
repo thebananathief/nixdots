@@ -77,96 +77,98 @@ in {
         }
       ];
 
-      inputs = [
-        {
-          name = "systemd";
-          tag = "qubic-client-logs";
-          systemd_filter = {
-            _SYSTEMD_UNIT = "podman-qubic-client.service";
-          };
-          read_from_tail = true;
-        }
-      ];
+      pipeline = {
+        inputs = [
+          {
+            name = "systemd";
+            tag = "qubic-client-logs";
+            systemd_filter = {
+              _SYSTEMD_UNIT = "podman-qubic-client.service";
+            };
+            read_from_tail = true;
+          }
+        ];
 
-      filters = [
-        {
-          name = "parser";
-          match = "qubic-client-logs";
-          key_name = "MESSAGE";
-          parser = "qubic-parser";
-          reserve_data = true;
-        }
-        {
-          name = "log_to_metrics";
-          match = "qubic-client-logs";
-          mode = "gauge";
-          metrics = [
-            {
-              name = "qubic_epoch";
-              description = "Current qubic epoch";
-              value_key = "epoch";
-              labels = {
-                instance = "$HOSTNAME";
-                container = "qubic-client";
-              };
-            }
-            {
-              name = "qubic_shares_accepted";
-              description = "Accepted shares";
-              value_key = "shares_accepted";
-              labels = {
-                instance = "$HOSTNAME";
-                container = "qubic-client";
-              };
-            }
-            {
-              name = "qubic_shares_total";
-              description = "Total shares";
-              value_key = "shares_total";
-              labels = {
-                instance = "$HOSTNAME";
-                container = "qubic-client";
-              };
-            }
-            {
-              name = "qubic_shares_rejected";
-              description = "Rejected shares";
-              value_key = "shares_rejected";
-              labels = {
-                instance = "$HOSTNAME";
-                container = "qubic-client";
-              };
-            }
-            {
-              name = "qubic_iterations_per_sec";
-              description = "Iterations per second";
-              value_key = "its";
-              labels = {
-                instance = "$HOSTNAME";
-                container = "qubic-client";
-              };
-            }
-            {
-              name = "qubic_avg_iterations_per_sec";
-              description = "Average iterations per second";
-              value_key = "avg_its";
-              labels = {
-                instance = "$HOSTNAME";
-                container = "qubic-client";
-              };
-            }
-          ];
-        }
-      ];
+        filters = [
+          {
+            name = "parser";
+            match = "qubic-client-logs";
+            key_name = "MESSAGE";
+            parser = "qubic-parser";
+            reserve_data = true;
+          }
+          {
+            name = "log_to_metrics";
+            match = "qubic-client-logs";
+            mode = "gauge";
+            metrics = [
+              {
+                name = "qubic_epoch";
+                description = "Current qubic epoch";
+                value_key = "epoch";
+                labels = {
+                  instance = "$HOSTNAME";
+                  container = "qubic-client";
+                };
+              }
+              {
+                name = "qubic_shares_accepted";
+                description = "Accepted shares";
+                value_key = "shares_accepted";
+                labels = {
+                  instance = "$HOSTNAME";
+                  container = "qubic-client";
+                };
+              }
+              {
+                name = "qubic_shares_total";
+                description = "Total shares";
+                value_key = "shares_total";
+                labels = {
+                  instance = "$HOSTNAME";
+                  container = "qubic-client";
+                };
+              }
+              {
+                name = "qubic_shares_rejected";
+                description = "Rejected shares";
+                value_key = "shares_rejected";
+                labels = {
+                  instance = "$HOSTNAME";
+                  container = "qubic-client";
+                };
+              }
+              {
+                name = "qubic_iterations_per_sec";
+                description = "Iterations per second";
+                value_key = "its";
+                labels = {
+                  instance = "$HOSTNAME";
+                  container = "qubic-client";
+                };
+              }
+              {
+                name = "qubic_avg_iterations_per_sec";
+                description = "Average iterations per second";
+                value_key = "avg_its";
+                labels = {
+                  instance = "$HOSTNAME";
+                  container = "qubic-client";
+                };
+              }
+            ];
+          }
+        ];
 
-      outputs = [
-        {
-          name = "prometheus_exporter";
-          match = "qubic-client-logs";
-          host = "127.0.0.1";
-          port = 9200;
-        }
-      ];
+        outputs = [
+          {
+            name = "prometheus_exporter";
+            match = "qubic-client-logs";
+            host = "127.0.0.1";
+            port = 9200;
+          }
+        ];
+      };
     };
   };
   networking.firewall.allowedTCPPorts = [ 9200 ];
