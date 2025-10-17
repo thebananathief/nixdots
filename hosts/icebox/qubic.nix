@@ -18,6 +18,80 @@
       qubicAddress = null;
       idling = null;
     };
+    # Fluent Bit configuration for qubic-client metrics
+  fluentBitConf = pkgs.writeText "fluent-bit-qubic.conf" ''
+    [SERVICE]
+        Flush         1
+        Log_Level     info
+        Daemon        off
+        Parsers_File  parsers.conf
+
+    [INPUT]
+        Name          systemd
+        Tag           qubic-client-logs
+        Systemd_Filter _SYSTEMD_UNIT=podman-qubic-client.service
+        Read_From_Tail On
+
+    [FILTER]
+        Name          parser
+        Match         qubic-client-logs
+        Key_Name      MESSAGE
+        Parser        qubic-parser
+        Reserve_Data  On
+
+    [FILTER]
+        Name          log_to_metrics
+        Match         qubic-client-logs
+        Mode          gauge
+
+        # Epoch
+        Metric_Name   qubic_epoch
+        Metric_Description Current qubic epoch
+        Value_Key     epoch
+        Label_Key     instance=$HOSTNAME container=qubic-client
+
+        # Shares (0/0 format)
+        Metric_Name   qubic_shares_accepted
+        Metric_Description Accepted shares
+        Value_Key     shares_accepted
+        Label_Key     instance=$HOSTNAME container=qubic-client
+
+        Metric_Name   qubic_shares_total
+        Metric_Description Total shares
+        Value_Key     shares_total
+        Label_Key     instance=$HOSTNAME container=qubic-client
+
+        Metric_Name   qubic_shares_rejected
+        Metric_Description Rejected shares
+        Value_Key     shares_rejected
+        Label_Key     instance=$HOSTNAME container=qubic-client
+
+        # Performance metrics
+        Metric_Name   qubic_iterations_per_sec
+        Metric_Description Iterations per second
+        Value_Key     its
+        Label_Key     instance=$HOSTNAME container=qubic-client
+
+        Metric_Name   qubic_avg_iterations_per_sec
+        Metric_Description Average iterations per second
+        Value_Key     avg_its
+        Label_Key     instance=$HOSTNAME container=qubic-client
+
+    [OUTPUT]
+        Name          prometheus_exporter
+        Match         qubic-client-logs
+        Host          127.0.0.1
+        Port          9200
+  '';
+
+  fluentBitParsers = pkgs.writeText "parsers.conf" ''
+    [PARSER]
+        Name        qubic-parser
+        Format      regex
+        Regex       ^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} \[INFO\]  E:(?<epoch>\d+) \| SHARES: (?<shares_accepted>\d+)/(?<shares_total>\d+) \(R:(?<shares_rejected>\d+)\) \| (?<its>\d+) it/s \| (?<avg_its>\d+) avg it/s$
+        Time_Key    time
+        Time_Format %Y-%m-%d %H:%M:%S.%L
+  '';
   };
 
   qubicConfig = pkgs.writeText "appsettings.json" configFileContent;
@@ -31,6 +105,9 @@ in {
   };
 
   systemd.services."podman-qubic-client".restartTriggers = [
+    qubicConfig
+  ];
+  systemd.services."fluent-bit".restartTriggers = [
     qubicConfig
   ];
 
@@ -54,4 +131,12 @@ in {
   };
 
   boot.kernel.sysctl = { "vm.nr_hugepages" = 512; };
+  
+  # Fluent Bit service for Prometheus metrics
+  services.fluent-bit = {
+    enable = true;
+    configFile = fluentBitConf;
+    extraConfigFiles = [ fluentBitParsers ];
+  };
+  networking.firewall.allowedTCPPorts = [ 9200 ];
 }

@@ -51,6 +51,7 @@ in {
           {
             targets = [
               "icebox:9100"
+              "icebox:9200" # qubic client metrics
               "icebox:9633"
             ];
           }
