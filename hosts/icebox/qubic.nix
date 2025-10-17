@@ -18,7 +18,11 @@
       qubicAddress = null;
       idling = null;
     };
-    # Fluent Bit configuration for qubic-client metrics
+  };
+
+  qubicConfig = pkgs.writeText "appsettings.json" configFileContent;
+
+  # Fluent Bit configuration for qubic-client metrics
   fluentBitConf = pkgs.writeText "fluent-bit-qubic.conf" ''
     [SERVICE]
         Flush         1
@@ -92,9 +96,6 @@
         Time_Key    time
         Time_Format %Y-%m-%d %H:%M:%S.%L
   '';
-  };
-
-  qubicConfig = pkgs.writeText "appsettings.json" configFileContent;
 in {
   users = {
     groups.qubic = {};
