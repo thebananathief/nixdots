@@ -153,7 +153,14 @@ function remote_rebuild() {
     exit 1
   fi
 
-  check_flake_and_sync
+  # check_flake_and_sync
+  if [[ $__skip_git_sync -eq 0 ]]; then
+    ./git-sync sync "changes from $(uname -n)-gen$old on $(date '+%Y-%m-%d %H:%M:%S %Z')"
+    if [[ $? -ne 0 ]]; then
+      exit 1
+    fi
+  fi
+  
   remote_args="$@"
   log_msg "SSH'ing into ${GREEN}${REMOTE_HOST}${RESET} to execute ${GREEN}./nixd $remote_args${RESET}"
   
