@@ -5,7 +5,7 @@
   configFileContent = builtins.toJSON {
     ClientSettings = {
       poolAddress = "wss://wps.qubic.li/ws";
-      alias = "qli Machina man";
+      alias = "qli Talos";
       trainer = {
         cpu = true;
         gpu = false;

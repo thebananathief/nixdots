@@ -4,7 +4,6 @@
 - add config under hosts/
 - on the host, get nixos running, then:
 ```sh
-# TODO: Pull down and run a static bootstrap script from the repo?
 ssh-keygen
 nix-shell -p git ssh-to-age sops
 { cat $HOME/.ssh/id_ed25519.pub; cat $HOME/.ssh/id_ed25519.pub | ssh-to-age; } | curl --data-binary @- https://0x0.st

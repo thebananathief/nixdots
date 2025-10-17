@@ -14,8 +14,9 @@ in {
     # nixos-hardware.nixosModules.common-pc-ssd
     nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
+    ./monitoring.nix
+    ./qubic.nix
     ../../modules/security.nix
-    # ../../modules/qubic.nix
   ];
 
   home-manager.users.${username} = {
@@ -59,27 +60,24 @@ in {
     extraConfig = ''
       PermitEmptyPasswords No
     '';
-    hostKeys = [
-      {
-        path = "/etc/ssh/ssh_host_ed25519";
-        type = "ed25519";
-      }
-    ];
+    # hostKeys = [
+    #   {
+    #     path = "/etc/ssh/ssh_host_ed25519";
+    #     type = "ed25519";
+    #   }
+    # ];
   };
 
   sops = {
     defaultSopsFile = ../../secrets.yml;
-    age = {
-      # These should be the paths from (config.services.openssh.hostKeys)
-      sshKeyPaths = [
-        "/etc/ssh/ssh_host_ed25519"
-      ];
-
-      # keyFile technically not used because we're currently
-      # using talos's host key to decrypt secrets
-      keyFile = "/home/cameron/.config/sops/age/keys.txt";
-      generateKey = true;
-    };
+    # age = {
+    #   # These should be the paths from (config.services.openssh.hostKeys)
+    #   sshKeyPaths = [
+    #     "/etc/ssh/ssh_host_ed25519"
+    #   ];
+    #   keyFile = "/home/cameron/.config/sops/age/keys.txt";
+    #   generateKey = true;
+    # };
     # https://github.com/Mic92/sops-nix#set-secret-permissionowner-and-allow-services-to-access-it
     # Permission modes are in octal representation (same as chmod),
     # the digits represent: user|group|owner
@@ -116,6 +114,19 @@ in {
     intel-gpu-tools # intel_gpu_top
     librespeed-cli
   ];
+  
+  virtualisation = {
+    podman = {
+      enable = true;
+      # dockerCompat = true; # Creates an alias for "docker" to "podman"
+      # dockerSocket.enable = true; # UNSAFE: This allows anyone in the "podman" group to gain root access - It also allows containers to do a bunch of stuff
+      defaultNetwork.settings.dns_enabled = true;
+      autoPrune.enable = true;
+      autoPrune.flags = [
+        "--all"
+      ];
+    };
+  };
 
   system.stateVersion = "25.05";
 }

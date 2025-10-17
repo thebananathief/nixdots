@@ -46,6 +46,7 @@
     # dotfiles.url = "git+http://talos:8010/cameron/dotfiles.git";
     dotfiles.url = "git+ssh://git@talos:2222/cameron/dotfiles.git";
     dotfiles.flake = false;
+    # dotfiles.allRefs = true;
   };
 
   outputs = {nixpkgs, ...} @ inputs: let

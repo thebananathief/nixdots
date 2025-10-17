@@ -13,7 +13,7 @@ in {
     ./librespeed.nix
     ./gitea.nix
     ./mediaserver
-    ../../modules/qubic.nix
+    ./qubic.nix
     # ./homeassistant.nix
   ];
 

@@ -57,14 +57,14 @@ in {
         ];
       }
       {
-        job_name = "icebox2";
+        job_name = "gridur";
         scrape_interval = "1m";
         scrape_timeout = "10s";
         static_configs = [
           {
             targets = [
-              "icebox2:9100"
-              "icebox2:9633"
+              "gridur:9100"
+              "gridur:9633"
             ];
           }
         ];
