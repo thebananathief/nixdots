@@ -28,7 +28,6 @@
         Flush         1
         Log_Level     info
         Daemon        off
-        Parsers_File  parsers.conf
 
     [INPUT]
         Name          systemd
@@ -86,9 +85,7 @@
         Match         qubic-client-logs
         Host          127.0.0.1
         Port          9200
-  '';
-
-  fluentBitParsers = pkgs.writeText "parsers.conf" ''
+        
     [PARSER]
         Name        qubic-parser
         Format      regex
@@ -137,7 +134,6 @@ in {
   services.fluent-bit = {
     enable = true;
     configurationFile = fluentBitConf;
-    extraConfigFiles = [ fluentBitParsers ];
   };
   networking.firewall.allowedTCPPorts = [ 9200 ];
 }
