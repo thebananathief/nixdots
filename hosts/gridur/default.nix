@@ -15,6 +15,7 @@ in {
     nixos-hardware.nixosModules.common-cpu-intel
     ./hardware-configuration.nix
     ../../modules/security.nix
+    # ../../modules/qubic.nix
   ];
 
   home-manager.users.${username} = {

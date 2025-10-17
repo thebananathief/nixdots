@@ -12,8 +12,8 @@ in {
     ./syncthing.nix
     ./librespeed.nix
     ./gitea.nix
-    ./qubic.nix
     ./mediaserver
+    ../../modules/qubic.nix
     # ./homeassistant.nix
   ];
 
