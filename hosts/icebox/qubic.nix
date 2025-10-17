@@ -23,75 +23,83 @@
   qubicConfig = pkgs.writeText "appsettings.json" configFileContent;
 
   # Fluent Bit configuration for qubic-client metrics
-  fluentBitConf = pkgs.writeText "fluent-bit-qubic.conf" ''
-    [SERVICE]
-        Flush         1
-        Log_Level     info
-        Daemon        off
+  fluentBitConf = pkgs.writeText "fluent-bit-qubic.yaml" ''service:
+      flush: 1
+      log_level: info
+      daemon: off
 
-    [INPUT]
-        Name          systemd
-        Tag           qubic-client-logs
-        Systemd_Filter _SYSTEMD_UNIT=podman-qubic-client.service
-        Read_From_Tail On
+    parsers:
+      - name: qubic-parser
+        format: regex
+        regex: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} \[INFO\]  E:(?<epoch>\d+) \| SHARES: (?<shares_accepted>\d+)/(?<shares_total>\d+) \(R:(?<shares_rejected>\d+)\) \| (?<its>\d+) it/s \| (?<avg_its>\d+) avg it/s$'
+        time_key: time
+        time_format: '%Y-%m-%d %H:%M:%S.%L'
 
-    [FILTER]
-        Name          parser
-        Match         qubic-client-logs
-        Key_Name      MESSAGE
-        Parser        qubic-parser
-        Reserve_Data  On
+    inputs:
+      - name: systemd
+        tag: qubic-client-logs
+        systemd_filter:
+          _SYSTEMD_UNIT: podman-qubic-client.service
+        read_from_tail: true
 
-    [FILTER]
-        Name          log_to_metrics
-        Match         qubic-client-logs
-        Mode          gauge
+    filters:
+      - name: parser
+        match: qubic-client-logs
+        key_name: MESSAGE
+        parser: qubic-parser
+        reserve_data: true
 
-        # Epoch
-        Metric_Name   qubic_epoch
-        Metric_Description Current qubic epoch
-        Value_Key     epoch
-        Label_Key     instance=$HOSTNAME container=qubic-client
+      - name: log_to_metrics
+        match: qubic-client-logs
+        mode: gauge
+        metrics:
+          - name: qubic_epoch
+            description: Current qubic epoch
+            value_key: epoch
+            labels:
+              instance: $HOSTNAME
+              container: qubic-client
 
-        # Shares (0/0 format)
-        Metric_Name   qubic_shares_accepted
-        Metric_Description Accepted shares
-        Value_Key     shares_accepted
-        Label_Key     instance=$HOSTNAME container=qubic-client
+          - name: qubic_shares_accepted
+            description: Accepted shares
+            value_key: shares_accepted
+            labels:
+              instance: $HOSTNAME
+              container: qubic-client
 
-        Metric_Name   qubic_shares_total
-        Metric_Description Total shares
-        Value_Key     shares_total
-        Label_Key     instance=$HOSTNAME container=qubic-client
+          - name: qubic_shares_total
+            description: Total shares
+            value_key: shares_total
+            labels:
+              instance: $HOSTNAME
+              container: qubic-client
 
-        Metric_Name   qubic_shares_rejected
-        Metric_Description Rejected shares
-        Value_Key     shares_rejected
-        Label_Key     instance=$HOSTNAME container=qubic-client
+          - name: qubic_shares_rejected
+            description: Rejected shares
+            value_key: shares_rejected
+            labels:
+              instance: $HOSTNAME
+              container: qubic-client
 
-        # Performance metrics
-        Metric_Name   qubic_iterations_per_sec
-        Metric_Description Iterations per second
-        Value_Key     its
-        Label_Key     instance=$HOSTNAME container=qubic-client
+          - name: qubic_iterations_per_sec
+            description: Iterations per second
+            value_key: its
+            labels:
+              instance: $HOSTNAME
+              container: qubic-client
 
-        Metric_Name   qubic_avg_iterations_per_sec
-        Metric_Description Average iterations per second
-        Value_Key     avg_its
-        Label_Key     instance=$HOSTNAME container=qubic-client
+          - name: qubic_avg_iterations_per_sec
+            description: Average iterations per second
+            value_key: avg_its
+            labels:
+              instance: $HOSTNAME
+              container: qubic-client
 
-    [OUTPUT]
-        Name          prometheus_exporter
-        Match         qubic-client-logs
-        Host          127.0.0.1
-        Port          9200
-        
-    [PARSER]
-        Name        qubic-parser
-        Format      regex
-        Regex       ^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} \[INFO\]  E:(?<epoch>\d+) \| SHARES: (?<shares_accepted>\d+)/(?<shares_total>\d+) \(R:(?<shares_rejected>\d+)\) \| (?<its>\d+) it/s \| (?<avg_its>\d+) avg it/s$
-        Time_Key    time
-        Time_Format %Y-%m-%d %H:%M:%S.%L
+    outputs:
+      - name: prometheus_exporter
+        match: qubic-client-logs
+        host: 127.0.0.1
+        port: 9200
   '';
 in {
   users = {
