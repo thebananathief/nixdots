@@ -156,18 +156,15 @@ function remote_rebuild() {
   check_flake_and_sync
   remote_args="$@"
   log_msg "SSH'ing into ${GREEN}${REMOTE_HOST}${RESET} to execute ${GREEN}./nixd $remote_args${RESET}"
-  ssh "$REMOTE_HOST" -t bash -l -c '
-    if [ -x ~/nixdots/nixd ]; then
-      exec ~/nixdots/nixd "$@"
-    elif [ -x ~/code/nixdots/nixd ]; then
-      exec ~/code/nixdots/nixd "$@"
-    elif [ -x ~/github/nixdots/nixd ]; then
-      exec ~/github/nixdots/nixd "$@"
-    else
-      echo "nixd not found in ~/nixdots, ~/code/nixdots, or ~/github/nixdots"
-      exit 1
-    fi
-  ' -- "$@"
+  # ssh $REMOTE_HOST -t 'bash -l' ~/github/nixdots/nixd "$@"
+  ssh $REMOTE_HOST -t 'bash -l -c "
+    if [ -d ~/nixdots/nixd ]; then cd ~/nixdots/nixd;
+    elif [ -d ~/code/nixdots/nixd ]; then cd ~/code/nixdots/nixd;
+    elif [ -d ~/github/nixdots/nixd ]; then cd ~/github/nixdots/nixd;
+    else echo "nixd not found!"; exit 1;
+    fi;
+    ~/nixdots/nixd/nixd "$@"
+  "'
 }
 
 
