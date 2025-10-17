@@ -156,15 +156,15 @@ function remote_rebuild() {
   check_flake_and_sync
   remote_args="$@"
   log_msg "SSH'ing into ${GREEN}${REMOTE_HOST}${RESET} to execute ${GREEN}./nixd $remote_args${RESET}"
-  # ssh $REMOTE_HOST -t 'bash -l' ~/github/nixdots/nixd "$@"
-  ssh $REMOTE_HOST -t 'bash -l -c "
-    if [ -d ~/nixdots/nixd ]; then cd ~/nixdots/nixd;
-    elif [ -d ~/code/nixdots/nixd ]; then cd ~/code/nixdots/nixd;
-    elif [ -d ~/github/nixdots/nixd ]; then cd ~/github/nixdots/nixd;
-    else echo "nixd not found!"; exit 1;
-    fi;
-    ~/nixdots/nixd/nixd "$@"
-  "'
+  
+  # My dumbass decided to put the nixdots repos in different places
+  nixd_path='~/nixdots/nixd'
+  case $REMOTE_HOST in
+    talos | icebox)
+      nixd_path='~/github/nixdots/nixd'
+    ;;
+  esac
+  ssh $REMOTE_HOST -t 'bash -l' "$nixd_path" "$@"
 }
 
 
