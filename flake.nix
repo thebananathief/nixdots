@@ -91,6 +91,8 @@
           ];
       };
   in {
+    # For new systems: Use this command to export the hardware config
+    # curl -F "file=@hardware-configuration.nix" https://0x0.st
     nixosConfigurations = {
       talos = mkNixosSystem {
         nixos-modules = [./hosts/talos];
