@@ -1,6 +1,7 @@
 keys:
   - &admin_cameron_desktop age17zj03m39druezfu6le0ycvasr9thv4y06hdwzegh6rajgwrdhpgqsnwzes
   - &admin_cameron_laptop age1htjdvcdqvwe8rxx23fz2aw97a6c2zxwwu84m25jugh779vqkfg4sg5c83z
+  - &gridur age1m0wk3gylpmcl74q0yw38wnvae498yq8a8xs2cd2jwuwfycxp8g9spn7zmq
   - &server_talos age15ygfzth73d2q3dm305qg53x6g9u9knau9fytvnrlut4u0usg5cpqeq4s5g
   - &server_icebox age1lh3vlrqgvde043kxlvyvdt6wlj968a0szm3exwwhsvx04xeh0eushpnp75
   - &server_icebox2 age1dfy9sd98v2h5sh0la45pq4rszl7lag3nwvj5j5exgjh3kk30mgpq9s5h49
@@ -11,6 +12,7 @@ creation_rules:
     - age:
       - *admin_cameron_desktop
       - *admin_cameron_laptop
+      - *gridur
       - *server_talos
       - *server_icebox
       - *server_icebox2
@@ -28,30 +30,3 @@ creation_rules:
   #   - age:
   #     - *admin_cameron_desktop
   #     - *admin_cameron_laptop
-
-# sops only deals in GPG or AGE keys, it won't automatically convert your 
-# SSH keys for you. So you're manually mimicking your SSH key setup but
-# converted into AGE keys for sops.
-
-# TALOS = Converted its SSH host keys at /etc/ssh
-# THOTH = Converted its SSH keys created in $HOME/.ssh
-
-# 1. Install ssh-to-age
-  # go install github.com/Mic92/ssh-to-age/cmd/ssh-to-age@latest
-  # nix-shell -p ssh-to-age
-   
-# 2. Create an private age key from a private SSH key and stow it at .config/sops/age
-  # ssh-to-age -private-key -i $HOME/.ssh/id_ed25519 -o $HOME\AppData\Roaming\sops\age\keys.txt
-  # ssh-to-age -private-key -i $HOME/.ssh/id_ed25519 -o $HOME/.config/sops/age/keys.txt
-  
-# 2. Create a public age key from an SSH public key
-  # cat /etc/ssh/ssh_host_ed25519.pub | ssh-to-age
-  # ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key -o $HOME\.config\sops\age\keys.txt
-# Get remote host key (public)
-  # ssh-keyscan -t ed25519 192.168.0.6 | ssh-to-age
-
-# Once you set up a private key in .config\sops\age, and 
-# put a public key at the top of this file, you can run
-# sops updatekeys <file>
-# to update the encryption for the secrets using the new public keys.
-# HOWEVER, this needs to be ran from an already authorized master...
