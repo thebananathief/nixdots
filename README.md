@@ -1,18 +1,26 @@
 
-# New systems
+# New NixOS systems
 
 - add config under hosts/
 - on the host, get nixos running, then:
 ```sh
+# TODO: Pull down and run a static bootstrap script from the repo?
 ssh-keygen
 nix-shell -p git ssh-to-age sops
 { cat $HOME/.ssh/id_ed25519.pub; cat $HOME/.ssh/id_ed25519.pub | ssh-to-age; } | curl --data-binary @- https://0x0.st
+```
+add ssh key to [https://code.talos.home.arpa/user/settings/keys]
+add age key to [.sops.yaml] in this repository
 
-# add ssh key to `https://code.talos.home.arpa/user/settings/keys`
-# add age key to .sops.yaml in this repository
-# This next command will update encryption for the secrets using the new public keys. But it needs to be ran from an already authorized public key holder.
+
+This next block will update encryption for the secrets using the new public keys. But it needs to be ran from an already authorized public key holder.
+```sh
 sops updatekeys secrets.yml
+./git-sync
+```
 
+
+```sh
 mkdir $HOME/code
 git clone ssh://git@talos:2222/cameron/nixdots.git
 
@@ -30,7 +38,6 @@ and export / push a hardware config to the same host config
 
 
 # SOPS
-
 
 sops only deals in GPG or AGE keys, it won't automatically convert your 
 SSH keys for you. So you're manually mimicking your SSH key setup but
