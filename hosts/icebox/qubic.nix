@@ -136,7 +136,7 @@ in {
   # Fluent Bit service for Prometheus metrics
   services.fluent-bit = {
     enable = true;
-    configFile = fluentBitConf;
+    configurationFile = fluentBitConf;
     extraConfigFiles = [ fluentBitParsers ];
   };
   networking.firewall.allowedTCPPorts = [ 9200 ];
