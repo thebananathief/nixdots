@@ -21,86 +21,6 @@
   };
 
   qubicConfig = pkgs.writeText "appsettings.json" configFileContent;
-
-  # Fluent Bit configuration for qubic-client metrics
-  fluentBitConf = pkgs.writeText "fluent-bit-qubic.yaml" ''service:
-      flush: 1
-      log_level: info
-      daemon: off
-
-    parsers:
-      - name: qubic-parser
-        format: regex
-        regex: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} \[INFO\]  E:(?<epoch>\d+) \| SHARES: (?<shares_accepted>\d+)/(?<shares_total>\d+) \(R:(?<shares_rejected>\d+)\) \| (?<its>\d+) it/s \| (?<avg_its>\d+) avg it/s$'
-        time_key: time
-        time_format: '%Y-%m-%d %H:%M:%S.%L'
-
-    inputs:
-      - name: systemd
-        tag: qubic-client-logs
-        systemd_filter:
-          _SYSTEMD_UNIT: podman-qubic-client.service
-        read_from_tail: true
-
-    filters:
-      - name: parser
-        match: qubic-client-logs
-        key_name: MESSAGE
-        parser: qubic-parser
-        reserve_data: true
-
-      - name: log_to_metrics
-        match: qubic-client-logs
-        mode: gauge
-        metrics:
-          - name: qubic_epoch
-            description: Current qubic epoch
-            value_key: epoch
-            labels:
-              instance: $HOSTNAME
-              container: qubic-client
-
-          - name: qubic_shares_accepted
-            description: Accepted shares
-            value_key: shares_accepted
-            labels:
-              instance: $HOSTNAME
-              container: qubic-client
-
-          - name: qubic_shares_total
-            description: Total shares
-            value_key: shares_total
-            labels:
-              instance: $HOSTNAME
-              container: qubic-client
-
-          - name: qubic_shares_rejected
-            description: Rejected shares
-            value_key: shares_rejected
-            labels:
-              instance: $HOSTNAME
-              container: qubic-client
-
-          - name: qubic_iterations_per_sec
-            description: Iterations per second
-            value_key: its
-            labels:
-              instance: $HOSTNAME
-              container: qubic-client
-
-          - name: qubic_avg_iterations_per_sec
-            description: Average iterations per second
-            value_key: avg_its
-            labels:
-              instance: $HOSTNAME
-              container: qubic-client
-
-    outputs:
-      - name: prometheus_exporter
-        match: qubic-client-logs
-        host: 127.0.0.1
-        port: 9200
-  '';
 in {
   users = {
     groups.qubic = {};
@@ -138,10 +58,116 @@ in {
 
   boot.kernel.sysctl = { "vm.nr_hugepages" = 512; };
   
-  # Fluent Bit service for Prometheus metrics
   services.fluent-bit = {
     enable = true;
-    configurationFile = fluentBitConf;
+    settings = {
+      service = {
+        flush = 1;
+        log_level = "info";
+        daemon = false;
+      };
+
+      parsers = [
+        {
+          name = "qubic-parser";
+          format = "regex";
+          regex = ''^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} \[INFO\]  E:(?<epoch>\d+) \| SHARES: (?<shares_accepted>\d+)/(?<shares_total>\d+) \(R:(?<shares_rejected>\d+)\) \| (?<its>\d+) it/s \| (?<avg_its>\d+) avg it/s$'';
+          time_key = "time";
+          time_format = "%Y-%m-%d %H:%M:%S.%L";
+        }
+      ];
+
+      inputs = [
+        {
+          name = "systemd";
+          tag = "qubic-client-logs";
+          systemd_filter = {
+            _SYSTEMD_UNIT = "podman-qubic-client.service";
+          };
+          read_from_tail = true;
+        }
+      ];
+
+      filters = [
+        {
+          name = "parser";
+          match = "qubic-client-logs";
+          key_name = "MESSAGE";
+          parser = "qubic-parser";
+          reserve_data = true;
+        }
+        {
+          name = "log_to_metrics";
+          match = "qubic-client-logs";
+          mode = "gauge";
+          metrics = [
+            {
+              name = "qubic_epoch";
+              description = "Current qubic epoch";
+              value_key = "epoch";
+              labels = {
+                instance = "$HOSTNAME";
+                container = "qubic-client";
+              };
+            }
+            {
+              name = "qubic_shares_accepted";
+              description = "Accepted shares";
+              value_key = "shares_accepted";
+              labels = {
+                instance = "$HOSTNAME";
+                container = "qubic-client";
+              };
+            }
+            {
+              name = "qubic_shares_total";
+              description = "Total shares";
+              value_key = "shares_total";
+              labels = {
+                instance = "$HOSTNAME";
+                container = "qubic-client";
+              };
+            }
+            {
+              name = "qubic_shares_rejected";
+              description = "Rejected shares";
+              value_key = "shares_rejected";
+              labels = {
+                instance = "$HOSTNAME";
+                container = "qubic-client";
+              };
+            }
+            {
+              name = "qubic_iterations_per_sec";
+              description = "Iterations per second";
+              value_key = "its";
+              labels = {
+                instance = "$HOSTNAME";
+                container = "qubic-client";
+              };
+            }
+            {
+              name = "qubic_avg_iterations_per_sec";
+              description = "Average iterations per second";
+              value_key = "avg_its";
+              labels = {
+                instance = "$HOSTNAME";
+                container = "qubic-client";
+              };
+            }
+          ];
+        }
+      ];
+
+      outputs = [
+        {
+          name = "prometheus_exporter";
+          match = "qubic-client-logs";
+          host = "127.0.0.1";
+          port = 9200;
+        }
+      ];
+    };
   };
   networking.firewall.allowedTCPPorts = [ 9200 ];
 }
