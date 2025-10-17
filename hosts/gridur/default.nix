@@ -71,12 +71,11 @@ in {
   sops = {
     defaultSopsFile = ../../secrets.yml;
     age = {
-      # These should be the paths from (config.services.openssh.hostKeys)
       sshKeyPaths = [
         "/etc/ssh/ssh_host_ed25519"
       ];
-      # keyFile = "/home/cameron/.config/sops/age/keys.txt";
-      # generateKey = true;
+      keyFile = "/home/cameron/.config/sops/age/keys.txt";
+      generateKey = true;
     };
     # https://github.com/Mic92/sops-nix#set-secret-permissionowner-and-allow-services-to-access-it
     # Permission modes are in octal representation (same as chmod),
