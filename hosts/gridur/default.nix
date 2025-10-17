@@ -60,24 +60,24 @@ in {
     extraConfig = ''
       PermitEmptyPasswords No
     '';
-    # hostKeys = [
-    #   {
-    #     path = "/etc/ssh/ssh_host_ed25519";
-    #     type = "ed25519";
-    #   }
-    # ];
+    hostKeys = [
+      {
+        path = "/etc/ssh/ssh_host_ed25519";
+        type = "ed25519";
+      }
+    ];
   };
 
   sops = {
     defaultSopsFile = ../../secrets.yml;
-    # age = {
-    #   # These should be the paths from (config.services.openssh.hostKeys)
-    #   sshKeyPaths = [
-    #     "/etc/ssh/ssh_host_ed25519"
-    #   ];
-    #   keyFile = "/home/cameron/.config/sops/age/keys.txt";
-    #   generateKey = true;
-    # };
+    age = {
+      # These should be the paths from (config.services.openssh.hostKeys)
+      sshKeyPaths = [
+        "/etc/ssh/ssh_host_ed25519"
+      ];
+      # keyFile = "/home/cameron/.config/sops/age/keys.txt";
+      # generateKey = true;
+    };
     # https://github.com/Mic92/sops-nix#set-secret-permissionowner-and-allow-services-to-access-it
     # Permission modes are in octal representation (same as chmod),
     # the digits represent: user|group|owner
