@@ -82,7 +82,9 @@ in {
           {
             name = "systemd";
             tag = "qubic-client-logs";
-            systemd_filter = "_SYSTEMD_UNIT=podman-qubic-client.service";
+            systemd_filter = {
+              _SYSTEMD_UNIT = "podman-qubic-client.service";
+            };
             read_from_tail = true;
           }
         ];
