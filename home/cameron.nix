@@ -13,5 +13,7 @@
   home.username = "cameron";
   # home.homeDirectory = "/home/cameron";
 
+  programs.opencode.enable = true;
+
   home.stateVersion = "23.05";
 }
