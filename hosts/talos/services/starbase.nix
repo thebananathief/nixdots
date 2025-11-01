@@ -98,6 +98,12 @@ let
           icon = "librespeed";
         }
         {
+          name = "Smokeping";
+          uri = "http://smokeping.${ config.networking.fqdn }/";
+          description = "Ping over time stats";
+          icon = "smokeping";
+        }
+        {
           name = "Gitea";
           uri = "http://code.${ config.networking.fqdn }/";
           description = "Local source code";

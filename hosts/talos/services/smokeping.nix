@@ -4,9 +4,6 @@
   services.smokeping = {
     enable = true;
     webService = true;
-    # Listen on all interfaces; set to "127.0.0.1" for localhost only
-    host = null;
-    port = 8015;
     targetConfig = ''
       probe = FPing
       menu = Top
@@ -31,6 +28,22 @@
       menu = Local Machine
       title = This host
       host = localhost
+    '';
+  };
+
+  services.nginx.virtualHosts.smokeping.listen = [
+    {
+      addr = "localhost";
+      port = 8017;
+    }
+  ];
+  services.caddy.virtualHosts = {
+    "smokeping.${config.networking.fqdn}".extraConfig = ''
+      @denied not remote_ip private_ranges
+      abort @denied
+
+      tls internal
+      reverse_proxy localhost:8017
     '';
   };
 }
