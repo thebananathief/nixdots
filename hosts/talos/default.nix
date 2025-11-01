@@ -141,6 +141,10 @@ in {
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDNVv4iCWxWG2PQlzWAzWqgl7eazAv91EqaYGUmpsyOU deck@UNKNOWN-GALE"
     ];
   };
+  security.pam = {
+    sshAgentAuth.enable = true;
+    services.sudo.sshAgentAuth = true;
+  };
 
   environment.systemPackages = with pkgs; [
     intel-gpu-tools # intel_gpu_top
