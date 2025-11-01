@@ -64,3 +64,9 @@ put a public key at the top of this file, you can run
 sops updatekeys <file>
 to update the encryption for the secrets using the new public keys.
 HOWEVER, this needs to be ran from an already authorized master...
+
+
+# Deploying new config to remote system
+```
+nixos-rebuild --target-host <sshUser>@<remoteSystem> --flake .#<remoteSystem> --sudo switch
+```
