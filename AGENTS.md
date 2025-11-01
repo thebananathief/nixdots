@@ -6,7 +6,6 @@
 - `nix build .#<hostname>` - Build specific host configuration
 - `nixos-rebuild build --flake .#<hostname>` - Build and test host config without installing
 - `nix flake check` - Validate flake syntax and dependencies
-- Run `./git-sync` to update the git tracking tree before building, as the Nix flake uses git-tracked files and may not see uncommitted changes (especially when adding new files)
 
 ### Lint Commands
 - `alejandra .` - Format Nix files (if alejandra is installed)
