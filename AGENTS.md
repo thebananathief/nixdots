@@ -68,3 +68,7 @@
 - Never commit secrets or keys
 - Use SOPS for encrypted secrets
 - Validate SSH/AGE keys before committing
+
+## Git Workflow
+- Commit changes to the git repository
+- Push changes to the remote repository
