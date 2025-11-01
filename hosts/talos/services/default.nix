@@ -4,6 +4,7 @@
 in {
   imports = [
     ./caddy.nix
+    ./smokeping.nix
     ./starbase.nix
 
     # ./gameserver/minecraft-vanilla.nix
