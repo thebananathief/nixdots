@@ -73,12 +73,12 @@ let
           description = "Smart home stuff";
           icon = "home-assistant";
         }
-        {
-          name = "Music Assistant";
-          uri = "http://homeassistant.local:8095/";
-          description = "Self hosted music frontend";
-          icon = "music-assistant";
-        }
+        # {
+        #   name = "Music Assistant";
+        #   uri = "http://homeassistant.local:8095/";
+        #   description = "Self hosted music frontend";
+        #   icon = "music-assistant";
+        # }
         {
           name = "Grafana";
           uri = "http://grafana.${ config.networking.fqdn }/";
