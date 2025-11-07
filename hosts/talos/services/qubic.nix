@@ -91,8 +91,8 @@ in {
             # Extract numerics
             .epoch = parsed.epoch
             .shares = parsed.shares
-            .hashrate = to_int!(replace(parsed.hashrate, " it/s", "")) ?? 0
-            .avg_hashrate = to_int!(replace(parsed.avg_hashrate, " avg it/s", "")) ?? 0
+            .hashrate = to_int!(replace(parsed.hashrate, " it/s", ""))
+            .avg_hashrate = to_int!(replace(parsed.avg_hashrate, " avg it/s", ""))
             
             # Use log's timestamp if valid, else system time
             log_time = parse_timestamp(parsed.timestamp, "%Y-%m-%d %H:%M:%S.%3f") ?? now()
