@@ -107,21 +107,22 @@ in {
 
       sinks = {
         influxdb_metrics = {
-          type = "influxdb_logs";
+          type = "influxdb_metrics";
           inputs = [ "parse_qubic_logs" ];
           endpoint = "http://localhost:8086";
           bucket = "mybucket";
           org = "myorg";
           measurement = "qubic_stats";
           token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
-          tags = {
+          tags = [
             epoch = "{{ epoch }}";
             shares = "{{ shares }}";
             hashrate = "{{ hashrate }}";
             avg_hashrate = "{{ avg_hashrate }}";
-          };
+          ];
           batch = {
             max_bytes = 1048576;
+            max_events = 10;
           };
           request = {
             retry_attempts = 3;
