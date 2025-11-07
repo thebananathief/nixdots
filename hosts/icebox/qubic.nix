@@ -63,12 +63,6 @@ in {
     journaldAccess = true;
     settings = {
       sources = {
-        # TODO: More sources:
-        # QUBIC Wallet Balance:
-        # https://rpc.qubic.org/v1/balances/QPLAGCFYRISNRGUHSTUDOQJGJLJCLSALDNORGFIBCEISWCGZZZMZIZCAXDBK
-        # QUBIC Price USD:
-        # https://api.coingecko.com/api/v3/simple/price?ids=qubic-network&vs_currencies=usd
-
         journald_qubic = {
           type = "journald";
           include_units = [ "podman-qubic-client.service" ];
@@ -80,7 +74,6 @@ in {
         parse_qubic_logs = {
           type = "remap";
           inputs = [ "journald_qubic" ];
-          # Example log: 2025-11-07 03:09:45.062 [INFO]  E:186 | SHARES: 0/0 (R:0) | 1876 it/s | 1863 avg it/s\n
           source = ''
             .message = string!(.message)
 

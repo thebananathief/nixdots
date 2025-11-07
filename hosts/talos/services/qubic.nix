@@ -60,11 +60,29 @@ in {
     journaldAccess = true;
     settings = {
       sources = {
-        # TODO: More sources:
-        # QUBIC Wallet Balance:
-        # https://rpc.qubic.org/v1/balances/QPLAGCFYRISNRGUHSTUDOQJGJLJCLSALDNORGFIBCEISWCGZZZMZIZCAXDBK
-        # QUBIC Price USD:
-        # https://api.coingecko.com/api/v3/simple/price?ids=qubic-network&vs_currencies=usd
+        qubic_wallet_balance = {
+          type = "http_client";
+          endpoint = "https://rpc.qubic.org/v1/balances/QPLAGCFYRISNRGUHSTUDOQJGJLJCLSALDNORGFIBCEISWCGZZZMZIZCAXDBK";
+          method = "GET";
+          request.headers = {
+            Accept = "application/json";
+          };
+          scrape_timeout_secs = 10;
+          scrape_interval_secs = 300; # Poll every 5 minutes
+          decoding.codec = "json";
+        };
+
+        qubic_price_usd = {
+          type = "http_client";
+          endpoint = "https://api.coingecko.com/api/v3/simple/price?ids=qubic-network&vs_currencies=usd";
+          method = "GET";
+          request.headers = {
+            Accept = "application/json";
+          };
+          scrape_timeout_secs = 10;
+          scrape_interval_secs = 300; # Poll every 5 minutes
+          decoding.codec = "json";
+        };
 
         journald_qubic = {
           type = "journald";
@@ -118,7 +136,7 @@ in {
         };
         debug_console = {
           type = "console";
-          inputs = [ "parse_qubic_logs" ];
+          inputs = [ "qubic_wallet_balance" "qubic_price_usd" ];
           encoding.codec = "json";
           encoding.json.pretty = true;
         };
