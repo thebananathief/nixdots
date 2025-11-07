@@ -54,4 +54,69 @@ in {
   };
 
   boot.kernel.sysctl = { "vm.nr_hugepages" = 512; };
+
+  services.vector = {
+    enable = true;
+    journaldAccess = true;
+    settings = {
+      sources = {
+        journald_qubic = {
+          type = "journald";
+          units = [ "podman-qubic-client.service" ];
+          current_boot_only = true;
+        };
+      };
+
+      transforms = {
+        parse_qubic_logs = {
+          type = "remap";
+          inputs = [ "journald_qubic" ];
+          source = ''
+            # Only process lines matching the pattern (skip non-metric logs)
+            if !match(.message, r'^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} \[\w+\] E:\d+ \| SHARES: \d+/\d+ \(R:\d+\) \| \d+ it/s \| \d+ avg it/s$') {
+              abort
+            }
+            
+            # Parse with regex
+            parsed = parse_regex!(.message, r'^(?P<timestamp>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}) \[(?P<level>\w+)\] (?P<epoch>E:\d+) \| SHARES: (?P<shares>\d+/\d+ \(R:\d+\)) \| (?P<hashrate>\d+ it/s) \| (?P<avg_hashrate>\d+ avg it/s)$')
+            
+            # Extract numerics
+            .epoch = parsed.epoch
+            .shares = parsed.shares
+            .hashrate = to_int!(replace(parsed.hashrate, " it/s", "")) ?? 0
+            .avg_hashrate = to_int!(replace(parsed.avg_hashrate, " avg it/s", "")) ?? 0
+            
+            # Use log's timestamp if valid, else system time
+            log_time = parse_timestamp(parsed.timestamp, "%Y-%m-%d %H:%M:%S.%3f") ?? now()
+            .timestamp = log_time
+          '';
+        };
+      };
+
+      sinks = {
+        influxdb_metrics = {
+          type = "influxdb";
+          inputs = [ "parse_qubic_logs" ];
+          endpoint = "http://localhost:8086";
+          database = "qubic_metrics";
+          measurement = "qubic_stats";
+          namespace = "qubic";
+          tags = {
+            epoch = "{{ epoch }}";
+            shares = "{{ shares }}";
+          };
+          fields = {
+            hashrate = "{{ hashrate }}";
+            avg_hashrate = "{{ avg_hashrate }}";
+          };
+          batch = {
+            max_bytes = 1048576;
+          };
+          request = {
+            retry_attempts = 5;
+          };
+        };
+      };
+    };
+  };
 }
