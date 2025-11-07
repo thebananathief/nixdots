@@ -68,7 +68,7 @@ in {
 
         journald_qubic = {
           type = "journald";
-          include_units = [ "podman-qubic-client" ];
+          include_units = [ "podman-qubic-client.service" ];
           current_boot_only = true;
         };
       };
@@ -77,19 +77,20 @@ in {
         parse_qubic_logs = {
           type = "remap";
           inputs = [ "journald_qubic" ];
-          # Example log: Nov 06 19:44:03 talos qubic-client[2864]: 2025-11-07 00:44:03.129 [INFO] E:186 | SHARES: 0/0 (R:0) | 1864 it/s | 1857 avg it/s
+          # Example log: 2025-11-07 03:09:45.062 [INFO]  E:186 | SHARES: 0/0 (R:0) | 1876 it/s | 1863 avg it/s\n
           source = ''
             .message = string!(.message)
+
             # Only process lines matching the pattern (skip non-metric logs)
-            if !match(.message, r'^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} \[\w+\] E:\d+ \| SHARES: \d+/\d+ \(R:\d+\) \| \d+ it/s \| \d+ avg it/s$') {
+            if !match(.message, r'^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} \[\w+\]\s+E:\d+\s+\|\s+SHARES:\s+\d+/\d+\s+\(R:\d+\)\s+\|\s+\d+ it/s\s+\|\s+\d+ avg it/s\s*$') {
               abort
             }
             
             # Parse with regex
-            parsed = parse_regex!(.message, r'^(?P<timestamp>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}) \[(?P<level>\w+)\] (?P<epoch>E:\d+) \| SHARES: (?P<shares>\d+/\d+ \(R:\d+\)) \| (?P<hashrate>\d+ it/s) \| (?P<avg_hashrate>\d+ avg it/s)$')
+            parsed = parse_regex!(.message, r'^(?P<timestamp>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}) \[(?P<level>\w+)\]\s+E:(?P<epoch>\d+)\s+\|\s+SHARES:\s+(?P<shares>\d+/\d+\s+\(R:\d+\))\s+\|\s+(?P<hashrate>\d+ it/s)\s+\|\s+(?P<avg_hashrate>\d+ avg it/s)\s*$')
             
             # Extract numerics
-            .epoch = parsed.epoch
+            .epoch = to_int!(parsed.epoch)
             .shares = parsed.shares
             .hashrate = to_int!(replace(parsed.hashrate, " it/s", ""))
             .avg_hashrate = to_int!(replace(parsed.avg_hashrate, " avg it/s", ""))
@@ -99,34 +100,27 @@ in {
             .timestamp = log_time
 
             # Clean up unnecessary fields
-            del(.message)
-            del(.level)
+            # del(.message)
+            # del(.level)
           '';
         };
       };
 
       sinks = {
-        influxdb_metrics = {
-          type = "influxdb_metrics";
+        influxdb_logs = {
+          type = "influxdb_logs";
           inputs = [ "parse_qubic_logs" ];
           endpoint = "http://localhost:8086";
+          measurement = "qubic_logs2";
           bucket = "mybucket";
           org = "myorg";
-          measurement = "qubic_stats";
           token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
-          tags = [
-            epoch = "{{ epoch }}";
-            shares = "{{ shares }}";
-            hashrate = "{{ hashrate }}";
-            avg_hashrate = "{{ avg_hashrate }}";
-          ];
-          batch = {
-            max_bytes = 1048576;
-            max_events = 10;
-          };
-          request = {
-            retry_attempts = 3;
-          };
+        };
+        debug_console = {
+          type = "console";
+          inputs = [ "parse_qubic_logs" ];
+          encoding.codec = "json";
+          encoding.json.pretty = true;
         };
       };
     };

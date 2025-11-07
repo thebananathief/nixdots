@@ -58,118 +58,74 @@ in {
 
   boot.kernel.sysctl = { "vm.nr_hugepages" = 512; };
   
-  services.fluent-bit = {
+  services.vector = {
     enable = true;
+    journaldAccess = true;
     settings = {
-      service = {
-        flush = 1;
-        log_level = "info";
-        daemon = false;
+      sources = {
+        # TODO: More sources:
+        # QUBIC Wallet Balance:
+        # https://rpc.qubic.org/v1/balances/QPLAGCFYRISNRGUHSTUDOQJGJLJCLSALDNORGFIBCEISWCGZZZMZIZCAXDBK
+        # QUBIC Price USD:
+        # https://api.coingecko.com/api/v3/simple/price?ids=qubic-network&vs_currencies=usd
+
+        journald_qubic = {
+          type = "journald";
+          include_units = [ "podman-qubic-client.service" ];
+          current_boot_only = true;
+        };
       };
 
-      parsers = [
-        {
-          name = "qubic-parser";
-          format = "regex";
-          regex = ''^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} \[INFO\]  E:(?<epoch>\d+) \| SHARES: (?<shares_accepted>\d+)/(?<shares_total>\d+) \(R:(?<shares_rejected>\d+)\) \| (?<its>\d+) it/s \| (?<avg_its>\d+) avg it/s$'';
-          time_key = "time";
-          time_format = "%Y-%m-%d %H:%M:%S.%L";
-        }
-      ];
+      transforms = {
+        parse_qubic_logs = {
+          type = "remap";
+          inputs = [ "journald_qubic" ];
+          # Example log: 2025-11-07 03:09:45.062 [INFO]  E:186 | SHARES: 0/0 (R:0) | 1876 it/s | 1863 avg it/s\n
+          source = ''
+            .message = string!(.message)
 
-      pipeline = {
-        inputs = [
-          {
-            name = "systemd";
-            tag = "qubic-client-logs";
-            systemd_filter = {
-              _SYSTEMD_UNIT = "podman-qubic-client.service";
-            };
-            read_from_tail = true;
-          }
-        ];
+            # Only process lines matching the pattern (skip non-metric logs)
+            if !match(.message, r'^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} \[\w+\]\s+E:\d+\s+\|\s+SHARES:\s+\d+/\d+\s+\(R:\d+\)\s+\|\s+\d+ it/s\s+\|\s+\d+ avg it/s\s*$') {
+              abort
+            }
+            
+            # Parse with regex
+            parsed = parse_regex!(.message, r'^(?P<timestamp>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3}) \[(?P<level>\w+)\]\s+E:(?P<epoch>\d+)\s+\|\s+SHARES:\s+(?P<shares>\d+/\d+\s+\(R:\d+\))\s+\|\s+(?P<hashrate>\d+ it/s)\s+\|\s+(?P<avg_hashrate>\d+ avg it/s)\s*$')
+            
+            # Extract numerics
+            .epoch = to_int!(parsed.epoch)
+            .shares = parsed.shares
+            .hashrate = to_int!(replace(parsed.hashrate, " it/s", ""))
+            .avg_hashrate = to_int!(replace(parsed.avg_hashrate, " avg it/s", ""))
+            
+            # Use log's timestamp if valid, else system time
+            log_time = parse_timestamp(parsed.timestamp, "%Y-%m-%d %H:%M:%S.%3f") ?? now()
+            .timestamp = log_time
 
-        filters = [
-          {
-            name = "parser";
-            match = "qubic-client-logs";
-            key_name = "MESSAGE";
-            parser = "qubic-parser";
-            reserve_data = true;
-          }
-          {
-            name = "log_to_metrics";
-            match = "qubic-client-logs";
-            mode = "gauge";
-            metrics = [
-              {
-                name = "qubic_epoch";
-                description = "Current qubic epoch";
-                value_key = "epoch";
-                labels = {
-                  instance = "$HOSTNAME";
-                  container = "qubic-client";
-                };
-              }
-              {
-                name = "qubic_shares_accepted";
-                description = "Accepted shares";
-                value_key = "shares_accepted";
-                labels = {
-                  instance = "$HOSTNAME";
-                  container = "qubic-client";
-                };
-              }
-              {
-                name = "qubic_shares_total";
-                description = "Total shares";
-                value_key = "shares_total";
-                labels = {
-                  instance = "$HOSTNAME";
-                  container = "qubic-client";
-                };
-              }
-              {
-                name = "qubic_shares_rejected";
-                description = "Rejected shares";
-                value_key = "shares_rejected";
-                labels = {
-                  instance = "$HOSTNAME";
-                  container = "qubic-client";
-                };
-              }
-              {
-                name = "qubic_iterations_per_sec";
-                description = "Iterations per second";
-                value_key = "its";
-                labels = {
-                  instance = "$HOSTNAME";
-                  container = "qubic-client";
-                };
-              }
-              {
-                name = "qubic_avg_iterations_per_sec";
-                description = "Average iterations per second";
-                value_key = "avg_its";
-                labels = {
-                  instance = "$HOSTNAME";
-                  container = "qubic-client";
-                };
-              }
-            ];
-          }
-        ];
+            # Clean up unnecessary fields
+            # del(.message)
+            # del(.level)
+          '';
+        };
+      };
 
-        outputs = [
-          {
-            name = "prometheus_exporter";
-            match = "qubic-client-logs";
-            host = "127.0.0.1";
-            port = 9200;
-          }
-        ];
+      sinks = {
+        influxdb_logs = {
+          type = "influxdb_logs";
+          inputs = [ "parse_qubic_logs" ];
+          endpoint = "http://talos:8086";
+          measurement = "qubic_logs2";
+          bucket = "mybucket";
+          org = "myorg";
+          token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
+        };
+        debug_console = {
+          type = "console";
+          inputs = [ "parse_qubic_logs" ];
+          encoding.codec = "json";
+          encoding.json.pretty = true;
+        };
       };
     };
   };
-  networking.firewall.allowedTCPPorts = [ 9200 ];
 }
