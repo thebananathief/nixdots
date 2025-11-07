@@ -56,13 +56,19 @@ in {
   boot.kernel.sysctl = { "vm.nr_hugepages" = 512; };
 
   services.vector = {
-    enable = true;
+    enable = false;
     journaldAccess = true;
     settings = {
       sources = {
+        # TODO: More sources:
+        # QUBIC Wallet Balance:
+        # https://rpc.qubic.org/v1/balances/QPLAGCFYRISNRGUHSTUDOQJGJLJCLSALDNORGFIBCEISWCGZZZMZIZCAXDBK
+        # QUBIC Price USD:
+        # https://api.coingecko.com/api/v3/simple/price?ids=qubic-network&vs_currencies=usd
+
         journald_qubic = {
           type = "journald";
-          units = [ "podman-qubic-client.service" ];
+          include_units = [ "podman-qubic-client" ];
           current_boot_only = true;
         };
       };
@@ -95,25 +101,25 @@ in {
 
       sinks = {
         influxdb_metrics = {
-          type = "influxdb";
+          type = "influxdb_logs";
           inputs = [ "parse_qubic_logs" ];
           endpoint = "http://localhost:8086";
+          bucket = "mybucket";
           database = "qubic_metrics";
+          org = "myorg";
           measurement = "qubic_stats";
-          namespace = "qubic";
-          tags = {
-            epoch = "{{ epoch }}";
-            shares = "{{ shares }}";
-          };
-          fields = {
-            hashrate = "{{ hashrate }}";
-            avg_hashrate = "{{ avg_hashrate }}";
-          };
+          token = "myinfluxtoken";
+          # tags = {
+          #   epoch = "{{ epoch }}";
+          #   shares = "{{ shares }}";
+          #   hashrate = "{{ hashrate }}";
+          #   avg_hashrate = "{{ avg_hashrate }}";
+          # };
           batch = {
             max_bytes = 1048576;
           };
           request = {
-            retry_attempts = 5;
+            retry_attempts = 3;
           };
         };
       };

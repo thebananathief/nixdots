@@ -15,6 +15,7 @@ in {
     ./gitea.nix
     ./mediaserver
     ./qubic.nix
+    ./influxdb.nix
     # ./homeassistant.nix
   ];
 
