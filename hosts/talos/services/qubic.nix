@@ -56,7 +56,7 @@ in {
   boot.kernel.sysctl = { "vm.nr_hugepages" = 512; };
 
   services.vector = {
-    enable = false;
+    enable = true;
     journaldAccess = true;
     settings = {
       sources = {
@@ -108,7 +108,7 @@ in {
           database = "qubic_metrics";
           org = "myorg";
           measurement = "qubic_stats";
-          token = "myinfluxtoken";
+          token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
           # tags = {
           #   epoch = "{{ epoch }}";
           #   shares = "{{ shares }}";
