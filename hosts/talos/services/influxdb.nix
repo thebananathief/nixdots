@@ -3,12 +3,12 @@
 in {
   sops.secrets = {
     influx_db_pass = {
-      user = "influxdb2";
+      owner = "influxdb2";
       group = "influxdb2";
       neededForUsers = true;
     };
     influx_db_token = {
-      user = "influxdb2";
+      owner = "influxdb2";
       group = "influxdb2";
       neededForUsers = true;
     };
