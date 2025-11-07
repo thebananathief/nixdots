@@ -92,6 +92,26 @@ in {
       };
 
       transforms = {
+        parse_qubic_wallet_balance = {
+          type = "remap";
+          inputs = [ "qubic_wallet_balance" ];
+          # Example log: 2025-11-07 03:09:45.062 [INFO]  E:186 | SHARES: 0/0 (R:0) | 1876 it/s | 1863 avg it/s\n
+          source = ''
+            .walletId = string!(.balance.id)
+            .balance = to_int!(.balance.balance)
+          '';
+        };
+        
+        parse_qubic_to_usd = {
+          type = "remap";
+          inputs = [ "qubic_price_usd" ];
+          # Example log: 2025-11-07 03:09:45.062 [INFO]  E:186 | SHARES: 0/0 (R:0) | 1876 it/s | 1863 avg it/s\n
+          source = ''
+            .usd = to_int!(.qubic-network.usd)
+            del(.qubic-network)
+          '';
+        };
+
         parse_qubic_logs = {
           type = "remap";
           inputs = [ "journald_qubic" ];
@@ -116,10 +136,6 @@ in {
             # Use log's timestamp if valid, else system time
             log_time = parse_timestamp(parsed.timestamp, "%Y-%m-%d %H:%M:%S.%3f") ?? now()
             .timestamp = log_time
-
-            # Clean up unnecessary fields
-            # del(.message)
-            # del(.level)
           '';
         };
       };
@@ -136,7 +152,7 @@ in {
         };
         debug_console = {
           type = "console";
-          inputs = [ "qubic_wallet_balance" "qubic_price_usd" ];
+          inputs = [ "parse_qubic_wallet_balance" "parse_qubic_to_usd" ];
           encoding.codec = "json";
           encoding.json.pretty = true;
         };
