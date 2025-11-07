@@ -107,8 +107,8 @@ in {
           inputs = [ "qubic_price_usd" ];
           # Example log: 2025-11-07 03:09:45.062 [INFO]  E:186 | SHARES: 0/0 (R:0) | 1876 it/s | 1863 avg it/s\n
           source = ''
-            .usd = to_int!(.qubic-network.usd)
-            del(.qubic-network)
+            .usd = to_int!(.["qubic-network"].usd)
+            del(.["qubic-network"])
           '';
         };
 
