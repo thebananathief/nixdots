@@ -95,7 +95,6 @@ in {
         parse_qubic_wallet_balance = {
           type = "remap";
           inputs = [ "qubic_wallet_balance" ];
-          # Example log: 2025-11-07 03:09:45.062 [INFO]  E:186 | SHARES: 0/0 (R:0) | 1876 it/s | 1863 avg it/s\n
           source = ''
             .walletId = string!(.balance.id)
             .balance = to_int!(.balance.balance)
@@ -105,10 +104,9 @@ in {
         parse_qubic_to_usd = {
           type = "remap";
           inputs = [ "qubic_price_usd" ];
-          # Example log: 2025-11-07 03:09:45.062 [INFO]  E:186 | SHARES: 0/0 (R:0) | 1876 it/s | 1863 avg it/s\n
           source = ''
-            .usd = to_int!(.["qubic-network"].usd)
-            del(.["qubic-network"])
+            .usd = to_float!(."qubic-network".usd)
+            del(."qubic-network")
           '';
         };
 
@@ -141,7 +139,7 @@ in {
       };
 
       sinks = {
-        influxdb_logs = {
+        influxdb_qubic_log = {
           type = "influxdb_logs";
           inputs = [ "parse_qubic_logs" ];
           endpoint = "http://localhost:8086";
@@ -150,12 +148,31 @@ in {
           org = "myorg";
           token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
         };
-        debug_console = {
-          type = "console";
-          inputs = [ "parse_qubic_wallet_balance" "parse_qubic_to_usd" ];
-          encoding.codec = "json";
-          encoding.json.pretty = true;
+        influxdb_qubic_wallet_metrics = {
+          type = "influxdb_logs";
+          inputs = [ "parse_qubic_wallet_balance" ];
+          endpoint = "http://localhost:8086";
+          measurement = "qubic_wallet_balance";
+          tags = [ "walletId" ];
+          bucket = "mybucket";
+          org = "myorg";
+          token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
         };
+        influxdb_qubic_to_usd_metric = {
+          type = "influxdb_logs";
+          inputs = [ "parse_qubic_to_usd" ];
+          endpoint = "http://localhost:8086";
+          measurement = "qubic_to_usd";
+          bucket = "mybucket";
+          org = "myorg";
+          token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
+        };
+        # debug_console = {
+        #   type = "console";
+        #   inputs = [ "parse_qubic_to_usd" ];
+        #   encoding.codec = "json";
+        #   encoding.json.pretty = true;
+        # };
       };
     };
   };

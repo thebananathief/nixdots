@@ -94,10 +94,6 @@ in {
             # Use log's timestamp if valid, else system time
             log_time = parse_timestamp(parsed.timestamp, "%Y-%m-%d %H:%M:%S.%3f") ?? now()
             .timestamp = log_time
-
-            # Clean up unnecessary fields
-            # del(.message)
-            # del(.level)
           '';
         };
       };
