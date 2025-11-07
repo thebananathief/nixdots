@@ -105,7 +105,6 @@ in {
           inputs = [ "parse_qubic_logs" ];
           endpoint = "http://localhost:8086";
           bucket = "mybucket";
-          database = "qubic_metrics";
           org = "myorg";
           measurement = "qubic_stats";
           token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
