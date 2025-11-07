@@ -3,14 +3,14 @@
 in {
   sops.secrets = {
     influx_db_pass = {
-      owner = "influxdb2";
-      group = "influxdb2";
-      neededForUsers = true;
+      owner = config.users.users.influxdb2.name;
+      group = config.users.users.influxdb2.group;
+      mode = "0400";
     };
     influx_db_token = {
-      owner = "influxdb2";
-      group = "influxdb2";
-      neededForUsers = true;
+      owner = config.users.users.influxdb2.name;
+      group = config.users.users.influxdb2.group;
+      mode = "0400";
     };
   };
 
