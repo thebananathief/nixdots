@@ -77,7 +77,9 @@ in {
         parse_qubic_logs = {
           type = "remap";
           inputs = [ "journald_qubic" ];
+          # Example log: Nov 06 19:44:03 talos qubic-client[2864]: 2025-11-07 00:44:03.129 [INFO] E:186 | SHARES: 0/0 (R:0) | 1864 it/s | 1857 avg it/s
           source = ''
+            .message = string!(.message)
             # Only process lines matching the pattern (skip non-metric logs)
             if !match(.message, r'^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{3} \[\w+\] E:\d+ \| SHARES: \d+/\d+ \(R:\d+\) \| \d+ it/s \| \d+ avg it/s$') {
               abort
@@ -95,6 +97,10 @@ in {
             # Use log's timestamp if valid, else system time
             log_time = parse_timestamp(parsed.timestamp, "%Y-%m-%d %H:%M:%S.%3f") ?? now()
             .timestamp = log_time
+
+            # Clean up unnecessary fields
+            del(.message)
+            del(.level)
           '';
         };
       };
