@@ -108,12 +108,12 @@ in {
           org = "myorg";
           token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
         };
-        debug_console = {
-          type = "console";
-          inputs = [ "parse_qubic_logs" ];
-          encoding.codec = "json";
-          encoding.json.pretty = true;
-        };
+        # debug_console = {
+        #   type = "console";
+        #   inputs = [ "parse_qubic_logs" ];
+        #   encoding.codec = "json";
+        #   encoding.json.pretty = true;
+        # };
       };
     };
   };
