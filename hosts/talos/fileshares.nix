@@ -1,6 +1,8 @@
 { ... }: {
   # https://nixos.wiki/wiki/Samba
 
+  # TODO: Switch fileshares to copyparty (service) without SMB
+
   services.samba-wsdd.enable = true; # make shares visible for windows 10 clients
   services.samba = {
     enable = true;

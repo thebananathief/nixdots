@@ -33,9 +33,6 @@ in {
   systemd.services."podman-qubic-client".restartTriggers = [
     qubicConfig
   ];
-  systemd.services."fluent-bit".restartTriggers = [
-    qubicConfig
-  ];
 
   # sops.secrets = {
   #   "qubic-client.env" = {};

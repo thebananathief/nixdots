@@ -22,15 +22,6 @@ in {
       image = "mattermost/focalboard";
       ports = [ "8014:8000" ];
     };
-    filebrowser = {
-      image = "filebrowser/filebrowser:latest";
-      volumes = [
-        "${ cfg.storageDir }/filebrowser:/srv"
-        "${ cfg.dataDir }/filebrowser/database.db:/database/filebrowser.db"
-        "${ cfg.dataDir }/filebrowser/.filebrowser.json:/.filebrowser.json"
-      ];
-      ports = [ "8011:80" ];
-    };
     hedgedoc = {
       image = "lscr.io/linuxserver/hedgedoc:latest";
       volumes = [

@@ -17,7 +17,7 @@ in {
     ./storage.nix
     ./fileshares.nix
     ./services
-    ./monitoring.nix
+    ./monitoring
     ./backup.nix
     ./options.nix
     ../../modules/tailscale.nix
