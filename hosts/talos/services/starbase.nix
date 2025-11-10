@@ -92,6 +92,12 @@ let
           icon = "prometheus";
         }
         {
+          name = "InfluxDB2";
+          uri = "http://${ config.networking.fqdn }:8086/";
+          description = "Time series database web UI";
+          icon = "influxdb";
+        }
+        {
           name = "Librespeed";
           uri = "http://speedtest.${ config.networking.fqdn }/";
           description = "Speedtest against TALOS";
