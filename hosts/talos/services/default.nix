@@ -35,7 +35,7 @@ in {
     # oci-containers.backend = "podman";
     podman = {
       enable = true;
-      # dockerCompat = true; # Creates an alias for "docker" to "podman"
+      dockerCompat = true; # Creates an alias for "docker" to "podman"
       # dockerSocket.enable = true; # UNSAFE: This allows anyone in the "podman" group to gain root access - It also allows containers to do a bunch of stuff
       defaultNetwork.settings.dns_enabled = true;
       autoPrune.enable = true;
