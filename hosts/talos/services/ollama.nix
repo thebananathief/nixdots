@@ -12,8 +12,14 @@
 
   services.ollama = {
     enable = true;
-    listenAddress = "127.0.0.1:11434";
-    acceleration = "cuda";
+    host = "[::]";
+    port = 11434;
+    # acceleration = "cuda";
+    openFirewall = true;
+    loadModels = [ 
+      "llama3.2:3b" 
+      "deepseek-r1:1.5b"
+    ];
   };
   services.qdrant = {
     enable = true;

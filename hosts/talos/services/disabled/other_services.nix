@@ -111,42 +111,6 @@ in {
     };
   };
 
-  services.smokeping = {
-    enable = true;
-    webService = true;
-  # By default its only listening from localhost:8081
-    host = null;
-    port = 8015;
-    targetConfig = ''
-      probe = FPing
-      menu = Top
-      title = Network Latency Grapher
-      remark = TALOS SmokePing.
-
-      + Global
-      menu = Global
-      title = Global services
-
-      ++ CloudFlare
-      host = www.cloudflare.com
-
-      ++ Google
-      host = www.google.com
-
-      + Local
-      menu = Local
-      title = Local Network
-
-      ++ Styx
-      host = styx
-
-      ++ LocalMachine
-      menu = Local Machine
-      title = This host
-      host = localhost
-    '';
-  };
-
   sops.secrets = {
     graylog_secret = {
       owner = "graylog";

@@ -14,6 +14,9 @@
   # home.homeDirectory = "/home/cameron";
 
   programs.opencode.enable = true;
+  home.packages = with pkgs; [
+    plandex
+  ];
 
   home.stateVersion = "23.05";
 }
