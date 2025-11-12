@@ -33,7 +33,7 @@ in {
       ../../home/cameron.nix
       {
         # Keep LF line endings on WSL, CRLF when checked out on Windows
-        programs.git.extraConfig.core.autocrlf = "input";
+        programs.git.settings.core.autocrlf = "input";
       }
     ];
   };
@@ -69,7 +69,6 @@ in {
   # This is needed for VSCode-Server to work
   programs.nix-ld = {
     enable = true;
-    package = pkgs.nix-ld-rs; # only for NixOS 24.05
   };
 
   wsl = {
