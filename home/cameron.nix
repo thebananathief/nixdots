@@ -6,13 +6,13 @@
 }: 
 let
   plandex = pkgs.plandex.overrideAttrs (oldAttrs: rec {
-    inherit (oldAttrs) name;
+    inherit (oldAttrs) pname;
     version = "2.2.1";
     src = pkgs.fetchFromGitHub {
       owner = "plandex-ai";
       repo = "plandex";
       rev = "cli/v${version}";
-      hash = lib.fakeSha256;
+      hash = "sha256-xtK/6eK3Xm7vGgADsVzFOKaFI7E2uYFu/E/NiyeLWhk=";
     };
   });
 in
