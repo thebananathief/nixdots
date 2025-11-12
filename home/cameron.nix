@@ -12,7 +12,7 @@ let
       owner = "plandex-ai";
       repo = "plandex";
       rev = "cli/v${version}";
-      hash = "sha256-xtK/6eK3Xm7vGgADsVzFOKaFI7E2uYFu/E/NiyeLWhk=";
+      hash = lib.fakeSha256;
     };
   });
 in
