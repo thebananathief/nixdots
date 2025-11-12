@@ -3,7 +3,20 @@
   lib,
   inputs,
   ...
-}: rec {
+}: 
+let
+  plandex = pkgs.plandex.overrideAttrs (oldAttrs: rec {
+    inherit (oldAttrs) name;
+    version = "2.2.1";
+    src = pkgs.fetchFromGitHub {
+      owner = "plandex-ai";
+      repo = "plandex";
+      rev = "cli/v${version}";
+      hash = "sha256-xtK/6eK3Xm7vGgADsVzFOKaFI7E2uYFu/E/NiyeLWhk=";
+    };
+  });
+in
+rec {
   imports = [
     ./git.nix
     ./zsh.nix
