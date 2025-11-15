@@ -36,6 +36,21 @@
             .balance = to_int!(.balance.balance)
           '';
         };
+        qubic_wallet_balance_metric = {
+          type = "log_to_metric";
+          inputs = [ "parse_qubic_wallet_balance" ];
+          metrics = [
+            {
+              type = "gauge";
+              kind = "absolute";
+              name = "qubic.wallet_balance";
+              field = ".balance";
+              tags = {
+                walletId = ".walletId";
+              };
+            }
+          ];
+        };
         
         parse_qubic_to_usd = {
           type = "remap";
@@ -44,6 +59,18 @@
             .usd = to_float!(."qubic-network".usd)
             del(."qubic-network")
           '';
+        };
+        qubic_to_usd_metric = {
+          type = "log_to_metric";
+          inputs = [ "parse_qubic_to_usd" ];
+          metrics = [
+            {
+              type = "gauge";
+              kind = "absolute";
+              name = "qubic.usd_price";
+              field = ".usd";
+            }
+          ];
         };
 
         parse_qubic_logs = {
@@ -63,7 +90,6 @@
             
             # Extract numerics
             .epoch = to_int!(parsed.epoch)
-            .shares = parsed.shares
             .hashrate = to_int!(replace(parsed.hashrate, " it/s", ""))
             .avg_hashrate = to_int!(replace(parsed.avg_hashrate, " avg it/s", ""))
             
@@ -72,37 +98,69 @@
             .timestamp = log_time
           '';
         };
+        parse_qubic_logs_metric = {
+          type = "log_to_metric";
+          inputs = [ "parse_qubic_logs" ];
+          metrics = [
+            {
+              type = "gauge";
+              kind = "absolute";
+              name = "qubic.node_hashrate";
+              field = ".hashrate";
+              tags = {
+                epoch = ".epoch";
+              };
+            }
+            {
+              type = "gauge";
+              kind = "absolute";
+              name = "qubic.node_hashrate_avg";
+              field = ".avg_hashrate";
+              tags = {
+                epoch = ".epoch";
+              };
+            }
+          ];
+        };
       };
 
       sinks = {
-        influxdb_qubic_log = {
-          type = "influxdb_logs";
-          inputs = [ "parse_qubic_logs" ];
-          endpoint = "http://localhost:8086";
-          measurement = "qubic_logs2";
-          bucket = "mybucket";
-          org = "myorg";
-          token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
+        prom_qubic_log = {
+          type = "prometheus_exporter";
+          inputs = [ 
+            "qubic_wallet_balance_metric"
+            "qubic_to_usd_metric"
+            "parse_qubic_logs_metric"
+          ];
         };
-        influxdb_qubic_wallet_metrics = {
-          type = "influxdb_logs";
-          inputs = [ "parse_qubic_wallet_balance" ];
-          endpoint = "http://localhost:8086";
-          measurement = "qubic_wallet_balance";
-          tags = [ "walletId" ];
-          bucket = "mybucket";
-          org = "myorg";
-          token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
-        };
-        influxdb_qubic_to_usd_metric = {
-          type = "influxdb_logs";
-          inputs = [ "parse_qubic_to_usd" ];
-          endpoint = "http://localhost:8086";
-          measurement = "qubic_to_usd";
-          bucket = "mybucket";
-          org = "myorg";
-          token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
-        };
+        # influxdb_qubic_log = {
+        #   type = "influxdb_logs";
+        #   inputs = [ "parse_qubic_logs" ];
+        #   endpoint = "http://localhost:8086";
+        #   measurement = "qubic_logs2";
+        #   bucket = "mybucket";
+        #   org = "myorg";
+        #   token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
+        # };
+        # influxdb_qubic_wallet_metrics = {
+        #   type = "influxdb_logs";
+        #   inputs = [ "parse_qubic_wallet_balance" ];
+        #   endpoint = "http://localhost:8086";
+        #   measurement = "qubic_wallet_balance";
+        #   tags = [ "walletId" ];
+        #   bucket = "mybucket";
+        #   org = "myorg";
+        #   token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
+        # };
+        # influxdb_qubic_to_usd_metric = {
+        #   type = "influxdb_logs";
+        #   inputs = [ "parse_qubic_to_usd" ];
+        #   endpoint = "http://localhost:8086";
+        #   measurement = "qubic_to_usd";
+        #   bucket = "mybucket";
+        #   org = "myorg";
+        #   token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
+        # };
         # debug_console = {
         #   type = "console";
         #   inputs = [ "parse_qubic_to_usd" ];

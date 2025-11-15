@@ -71,6 +71,7 @@ in {
         parse_qubic_logs = {
           type = "remap";
           inputs = [ "journald_qubic" ];
+          # Example log: 2025-11-07 03:09:45.062 [INFO]  E:186 | SHARES: 0/0 (R:0) | 1876 it/s | 1863 avg it/s\n
           source = ''
             .message = string!(.message)
 
@@ -84,7 +85,6 @@ in {
             
             # Extract numerics
             .epoch = to_int!(parsed.epoch)
-            .shares = parsed.shares
             .hashrate = to_int!(replace(parsed.hashrate, " it/s", ""))
             .avg_hashrate = to_int!(replace(parsed.avg_hashrate, " avg it/s", ""))
             
@@ -93,18 +93,46 @@ in {
             .timestamp = log_time
           '';
         };
+        parse_qubic_logs_metric = {
+          type = "log_to_metric";
+          inputs = [ "parse_qubic_logs" ];
+          metrics = [
+            {
+              type = "gauge";
+              kind = "absolute";
+              name = "qubic.node_hashrate";
+              field = ".hashrate";
+              tags = {
+                epoch = ".epoch";
+              };
+            }
+            {
+              type = "gauge";
+              kind = "absolute";
+              name = "qubic.node_hashrate_avg";
+              field = ".avg_hashrate";
+              tags = {
+                epoch = ".epoch";
+              };
+            }
+          ];
+        };
       };
 
       sinks = {
-        influxdb_logs = {
-          type = "influxdb_logs";
-          inputs = [ "parse_qubic_logs" ];
-          endpoint = "http://talos:8086";
-          measurement = "qubic_logs2";
-          bucket = "mybucket";
-          org = "myorg";
-          token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
+        prom_qubic_log = {
+          type = "prometheus_exporter";
+          inputs = [ "parse_qubic_logs_metric" ];
         };
+        # influxdb_logs = {
+        #   type = "influxdb_logs";
+        #   inputs = [ "parse_qubic_logs" ];
+        #   endpoint = "http://talos:8086";
+        #   measurement = "qubic_logs2";
+        #   bucket = "mybucket";
+        #   org = "myorg";
+        #   token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
+        # };
         # debug_console = {
         #   type = "console";
         #   inputs = [ "parse_qubic_logs" ];

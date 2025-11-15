@@ -9,24 +9,24 @@
 }: let
   inherit (config.sops) secrets;
   
-  plandex = pkgs.plandex.overrideAttrs (oldAttrs: rec {
-    inherit (oldAttrs) pname;
-    version = "2.2.1";
-    src = pkgs.fetchFromGitHub {
-      owner = "plandex-ai";
-      repo = "plandex";
-      rev = "cli/v${version}";
-      hash = "sha256-xtK/6eK3Xm7vGgADsVzFOKaFI7E2uYFu/E/NiyeLWhk=";
-    };
-  });
+  # plandex = pkgs.plandex.overrideAttrs (oldAttrs: rec {
+  #   inherit (oldAttrs) pname;
+  #   version = "2.2.1";
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "plandex-ai";
+  #     repo = "plandex";
+  #     rev = "cli/v${version}";
+  #     hash = "sha256-xtK/6eK3Xm7vGgADsVzFOKaFI7E2uYFu/E/NiyeLWhk=";
+  #   };
+  # });
 in {
   imports = [
     nixos-wsl.nixosModules.wsl
   ];
 
-  environment.systemPackages = with pkgs; [
-    plandex
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   plandex
+  # ];
 
   home-manager.users.${username} = {
     imports = [
