@@ -116,7 +116,7 @@ in {
     # Some of these are required for hardware transcoding
     extraPackages = with pkgs; [
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      vaapiIntel         # LIBVA_DRIVER_NAME=i965
+      intel-vaapi-driver         # LIBVA_DRIVER_NAME=i965
       vaapiVdpau
       libvdpau-va-gl
       intel-compute-runtime # OpenCL filter support (hardware tonemapping and subtitle burn-in)
