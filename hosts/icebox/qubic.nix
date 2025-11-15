@@ -100,7 +100,7 @@ in {
             {
               type = "gauge";
               kind = "absolute";
-              name = "qubic.node_hashrate";
+              name = "qubic_node_hashrate";
               field = ".hashrate";
               tags = {
                 epoch = ".epoch";
@@ -109,7 +109,7 @@ in {
             {
               type = "gauge";
               kind = "absolute";
-              name = "qubic.node_hashrate_avg";
+              name = "qubic_node_hashrate_avg";
               field = ".avg_hashrate";
               tags = {
                 epoch = ".epoch";

@@ -117,7 +117,7 @@ in {
     extraPackages = with pkgs; [
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
       intel-vaapi-driver         # LIBVA_DRIVER_NAME=i965
-      vaapiVdpau
+      libva-vdpau-driver
       libvdpau-va-gl
       intel-compute-runtime # OpenCL filter support (hardware tonemapping and subtitle burn-in)
     ];

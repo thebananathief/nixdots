@@ -43,7 +43,7 @@
             {
               type = "gauge";
               kind = "absolute";
-              name = "qubic.wallet_balance";
+              name = "qubic_wallet_balance";
               field = ".balance";
               tags = {
                 walletId = ".walletId";
@@ -67,7 +67,7 @@
             {
               type = "gauge";
               kind = "absolute";
-              name = "qubic.usd_price";
+              name = "qubic_usd_price";
               field = ".usd";
             }
           ];
@@ -105,7 +105,7 @@
             {
               type = "gauge";
               kind = "absolute";
-              name = "qubic.node_hashrate";
+              name = "qubic_node_hashrate";
               field = ".hashrate";
               tags = {
                 epoch = ".epoch";
@@ -114,7 +114,7 @@
             {
               type = "gauge";
               kind = "absolute";
-              name = "qubic.node_hashrate_avg";
+              name = "qubic_node_hashrate_avg";
               field = ".avg_hashrate";
               tags = {
                 epoch = ".epoch";
@@ -132,6 +132,7 @@
             "qubic_to_usd_metric"
             "parse_qubic_logs_metric"
           ];
+          address = "0.0.0.0:9598";
         };
         # influxdb_qubic_log = {
         #   type = "influxdb_logs";
@@ -163,7 +164,11 @@
         # };
         # debug_console = {
         #   type = "console";
-        #   inputs = [ "parse_qubic_to_usd" ];
+        #   inputs = [ 
+        #     "qubic_wallet_balance_metric"
+        #     "qubic_to_usd_metric"
+        #     "parse_qubic_logs_metric"
+        #   ];
         #   encoding.codec = "json";
         #   encoding.json.pretty = true;
         # };
