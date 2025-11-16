@@ -46,7 +46,6 @@ in {
       volumes = [
         "${ qubicConfig }:/app/appsettings.json:ro"
         "/dev/hugepages:/dev/hugepages"
-        "/etc/timezone:/etc/timezone:ro"
         "/etc/localtime:/etc/localtime:ro"
       ];
       devices = [
