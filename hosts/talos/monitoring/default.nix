@@ -3,7 +3,8 @@
   inherit (config.sops) secrets;
 in {
   imports = [
-    ./monitor_qubic.nix
+    ../../../modules/monitoring/qubic_logs.nix
+    ./qubic_http.nix
     ./mktxp.nix
     # ./influxdb.nix
     ./smokeping.nix
@@ -18,17 +19,6 @@ in {
   services.vector = {
     enable = true;
     journaldAccess = true;
-    # settings = {
-    #   sources.host_metrics.type = "host_metrics";
-    #   sinks.influxdb_host_metrics = {
-    #     type = "influxdb_metrics";
-    #     inputs = [ "host_metrics" ];
-    #     endpoint = "http://localhost:8086";
-    #     bucket = "mybucket";
-    #     org = "myorg";
-    #     token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
-    #   };
-    # };
   };
 
   # SMART
@@ -56,9 +46,8 @@ in {
               # "localhost:9558" # systemd exporter
               "localhost:9633" # smartctl exporter
               "localhost:49090" # docker mktxp exporter
-              # "localhost:9436" # crappy mikrotik exporter
-              # "localhost:9753"
-              "localhost:9598" # Vector sink
+              "localhost:9598" # Vector qubic_logs
+              "localhost:9599" # Vector qubic_http
             ];
           }
         ];
@@ -72,7 +61,7 @@ in {
             targets = [
               "icebox:9100"
               "icebox:9633"
-              "icebox:9598" # Vector sink
+              "icebox:9598" # Vector qubic_logs
             ];
           }
         ];
@@ -86,7 +75,7 @@ in {
             targets = [
               "gridur:9100"
               "gridur:9633"
-              "gridur:9598" # Vector sink
+              "gridur:9598" # Vector qubic_logs
             ];
           }
         ];
