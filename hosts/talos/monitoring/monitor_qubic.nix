@@ -9,7 +9,8 @@
           method = "GET";
           request.headers.Accept = "application/json";
           decoding.codec = "json";
-          # scrape_interval_secs = 300; # Poll every 5 minutes
+          scrape_interval_secs = 300;
+          scrape_timeout_secs = 15;
         };
 
         qubic_price_usd = {
@@ -18,6 +19,8 @@
           method = "GET";
           request.headers.Accept = "application/json";
           decoding.codec = "json";
+          scrape_interval_secs = 60;
+          scrape_timeout_secs = 15;
         };
 
         journald_qubic = {
@@ -28,50 +31,52 @@
       };
 
       transforms = {
-        parse_qubic_wallet_balance = {
-          type = "remap";
-          inputs = [ "qubic_wallet_balance" ];
-          source = ''
-            .walletId = string!(.balance.id)
-            .balance = to_int!(.balance.balance)
-          '';
-        };
-        qubic_wallet_balance_metric = {
-          type = "log_to_metric";
-          inputs = [ "parse_qubic_wallet_balance" ];
-          metrics = [
-            {
-              type = "gauge";
-              kind = "absolute";
-              name = "qubic_wallet_balance";
-              field = ".balance";
-              tags = {
-                walletId = ".walletId";
-              };
-            }
-          ];
-        };
+        # parse_qubic_wallet_balance = {
+        #   type = "remap";
+        #   inputs = [ "qubic_wallet_balance" ];
+        #   source = ''
+        #     .walletId = string!(.balance.id)
+        #     .balance = to_int!(.balance.balance)
+        #   '';
+        # };
+        # metric_qubic_wallet_balance = {
+        #   type = "log_to_metric";
+        #   inputs = [ "parse_qubic_wallet_balance" ];
+        #   metrics = [
+        #     {
+        #       type = "gauge";
+        #       kind = "absolute";
+        #       namespace = "qubic";
+        #       name = "wallet_balance";
+        #       field = ".balance";
+        #       tags = {
+        #         walletId = ".walletId";
+        #       };
+        #     }
+        #   ];
+        # };
         
-        parse_qubic_to_usd = {
-          type = "remap";
-          inputs = [ "qubic_price_usd" ];
-          source = ''
-            .usd = to_float!(."qubic-network".usd)
-            del(."qubic-network")
-          '';
-        };
-        qubic_to_usd_metric = {
-          type = "log_to_metric";
-          inputs = [ "parse_qubic_to_usd" ];
-          metrics = [
-            {
-              type = "gauge";
-              kind = "absolute";
-              name = "qubic_usd_price";
-              field = ".usd";
-            }
-          ];
-        };
+        # parse_qubic_to_usd = {
+        #   type = "remap";
+        #   inputs = [ "qubic_price_usd" ];
+        #   source = ''
+        #     .usd = to_float!(."qubic-network".usd)
+        #     del(."qubic-network")
+        #   '';
+        # };
+        # metric_qubic_to_usd = {
+        #   type = "log_to_metric";
+        #   inputs = [ "parse_qubic_to_usd" ];
+        #   metrics = [
+        #     {
+        #       type = "gauge";
+        #       kind = "absolute";
+        #       namespace = "qubic";
+        #       name = "usd_price";
+        #       field = ".usd";
+        #     }
+        #   ];
+        # };
 
         parse_qubic_logs = {
           type = "remap";
@@ -98,27 +103,29 @@
             .timestamp = log_time
           '';
         };
-        parse_qubic_logs_metric = {
+        metric_qubic_logs = {
           type = "log_to_metric";
           inputs = [ "parse_qubic_logs" ];
           metrics = [
             {
               type = "gauge";
               kind = "absolute";
-              name = "qubic_node_hashrate";
+              namespace = "qubic";
+              name = "miner_hashrate";
               field = ".hashrate";
-              tags = {
-                epoch = ".epoch";
-              };
+              # tags = {
+              #   epoch = "{{ epoch }}";
+              # };
             }
             {
               type = "gauge";
               kind = "absolute";
-              name = "qubic_node_hashrate_avg";
+              namespace = "qubic";
+              name = "miner_hashrate_avg";
               field = ".avg_hashrate";
-              tags = {
-                epoch = ".epoch";
-              };
+              # tags = {
+              #   epoch = "{{ epoch }}";
+              # };
             }
           ];
         };
@@ -127,10 +134,11 @@
       sinks = {
         prom_qubic_log = {
           type = "prometheus_exporter";
+          acknowledgements.enabled = true;
           inputs = [ 
-            "qubic_wallet_balance_metric"
-            "qubic_to_usd_metric"
-            "parse_qubic_logs_metric"
+            # "metric_qubic_wallet_balance"
+            # "metric_qubic_to_usd"
+            "metric_qubic_logs"
           ];
           address = "0.0.0.0:9598";
         };
@@ -165,9 +173,7 @@
         # debug_console = {
         #   type = "console";
         #   inputs = [ 
-        #     "qubic_wallet_balance_metric"
-        #     "qubic_to_usd_metric"
-        #     "parse_qubic_logs_metric"
+        #     "metric_qubic_logs"
         #   ];
         #   encoding.codec = "json";
         #   encoding.json.pretty = true;

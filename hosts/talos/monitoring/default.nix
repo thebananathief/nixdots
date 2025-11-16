@@ -46,7 +46,7 @@ in {
     scrapeConfigs = [
       {
         job_name = "talos";
-        scrape_interval = "1m";
+        scrape_interval = "45s";
         scrape_timeout = "10s";
         static_configs = [
           {
@@ -65,7 +65,7 @@ in {
       }
       {
         job_name = "icebox";
-        scrape_interval = "1m";
+        scrape_interval = "45s";
         scrape_timeout = "10s";
         static_configs = [
           {
@@ -79,7 +79,7 @@ in {
       }
       {
         job_name = "gridur";
-        scrape_interval = "1m";
+        scrape_interval = "45s";
         scrape_timeout = "10s";
         static_configs = [
           {
