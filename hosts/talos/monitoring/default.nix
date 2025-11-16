@@ -35,47 +35,58 @@ in {
     webExternalUrl = "https://prometheus.${ config.networking.fqdn }";
     scrapeConfigs = [
       {
-        job_name = "talos";
-        scrape_interval = "45s";
+        job_name = "qubic";
+        scrape_interval = "30s";
         scrape_timeout = "10s";
         static_configs = [
           {
             targets = [
-              "localhost:9100" # node exporter
+              "localhost:9599" # Vector qubic_http
+              "localhost:9598" # Vector qubic_logs
+              "icebox:9598" # Vector qubic_logs
+              "gridur:9598" # Vector qubic_logs
+            ];
+          }
+        ];
+      }
+      {
+        job_name = "talos";
+        scrape_interval = "1m";
+        scrape_timeout = "10s";
+        static_configs = [
+          {
+            targets = [
               # "localhost:9256" # process exporter
               # "localhost:9558" # systemd exporter
+              "localhost:9100" # node exporter
               "localhost:9633" # smartctl exporter
               "localhost:49090" # docker mktxp exporter
-              "localhost:9598" # Vector qubic_logs
-              "localhost:9599" # Vector qubic_http
             ];
           }
         ];
       }
       {
         job_name = "icebox";
-        scrape_interval = "45s";
+        scrape_interval = "1m";
         scrape_timeout = "10s";
         static_configs = [
           {
             targets = [
-              "icebox:9100"
-              "icebox:9633"
-              "icebox:9598" # Vector qubic_logs
+              "icebox:9100" # node exporter
+              "icebox:9633" # smartctl exporter
             ];
           }
         ];
       }
       {
         job_name = "gridur";
-        scrape_interval = "45s";
+        scrape_interval = "1m";
         scrape_timeout = "10s";
         static_configs = [
           {
             targets = [
-              "gridur:9100"
-              "gridur:9633"
-              "gridur:9598" # Vector qubic_logs
+              "gridur:9100" # node exporter
+              "gridur:9633" # smartctl exporter
             ];
           }
         ];

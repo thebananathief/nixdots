@@ -218,6 +218,12 @@ function main() {
 
   # Main logic
   case $1 in
+    all)
+      nixos-rebuild --target-host cameron@talos --flake .#talos --sudo switch &&
+      nixos-rebuild --target-host cameron@icebox --flake .#icebox --sudo switch &&
+      nixos-rebuild --target-host cameron@gridur --flake .#gridur --sudo switch &&
+      exit 1
+    ;;
     rebuild | rb) 
       shift
       "sync_and_rebuild" "$@"

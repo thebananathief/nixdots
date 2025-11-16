@@ -65,7 +65,7 @@
           type = "prometheus_exporter";
           acknowledgements.enabled = true;
           inputs = [
-            "parse_qubic_logs"
+            "metric_qubic_logs"
           ];
           address = "0.0.0.0:9598";
         };
