@@ -8,6 +8,7 @@ in {
     ./mktxp.nix
     # ./influxdb.nix
     ./smokeping.nix
+    ./perses.nix
   ];
   
   services.grafana = {
