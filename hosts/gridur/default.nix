@@ -94,6 +94,7 @@ in {
     };
   };
 
+  security.sudo.wheelNeedsPassword = lib.mkForce false;
   users.users."${username}" = {
     isNormalUser = true;
     hashedPasswordFile = secrets.main_user_password.path;

@@ -24,8 +24,6 @@
     ];
   };
 
-  security.sudo.wheelNeedsPassword = lib.mkForce false;
-
   networking = {
     hostName = "gargantuan";
     networkmanager.enable = true;

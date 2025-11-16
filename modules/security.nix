@@ -42,5 +42,5 @@
   };
   boot.kernelModules = [ "tcp_bbr" ];
 
-  security.sudo.wheelNeedsPassword = lib.mkDefault true;
+  security.sudo.wheelNeedsPassword = lib.mkDefault false;
 }

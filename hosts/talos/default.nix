@@ -145,7 +145,6 @@ in {
     sshAgentAuth.enable = true;
     services.sudo.sshAgentAuth = true;
   };
-  security.sudo.wheelNeedsPassword = lib.mkForce false;
 
   environment.systemPackages = with pkgs; [
     intel-gpu-tools # intel_gpu_top
