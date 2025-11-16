@@ -113,9 +113,9 @@
               namespace = "qubic";
               name = "miner_hashrate";
               field = ".hashrate";
-              # tags = {
-              #   epoch = "{{ epoch }}";
-              # };
+              tags = {
+                epoch = "{{ epoch }}";
+              };
             }
             {
               type = "gauge";
@@ -123,9 +123,9 @@
               namespace = "qubic";
               name = "miner_hashrate_avg";
               field = ".avg_hashrate";
-              # tags = {
-              #   epoch = "{{ epoch }}";
-              # };
+              tags = {
+                epoch = "{{ epoch }}";
+              };
             }
           ];
         };
@@ -142,14 +142,14 @@
           ];
           address = "0.0.0.0:9598";
         };
-        # debug_console = {
-        #   type = "console";
-        #   inputs = [ 
-        #     "metric_qubic_logs"
-        #   ];
-        #   encoding.codec = "json";
-        #   encoding.json.pretty = true;
-        # };
+        debug_console = {
+          type = "console";
+          inputs = [ 
+            "metric_qubic_logs"
+          ];
+          encoding.codec = "json";
+          encoding.json.pretty = true;
+        };
       };
     };
   };
