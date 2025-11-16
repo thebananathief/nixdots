@@ -93,26 +93,28 @@ in {
             .timestamp = log_time
           '';
         };
-        parse_qubic_logs_metric = {
+        metric_qubic_logs = {
           type = "log_to_metric";
           inputs = [ "parse_qubic_logs" ];
           metrics = [
             {
               type = "gauge";
               kind = "absolute";
-              name = "qubic_node_hashrate";
+              namespace = "qubic";
+              name = "miner_hashrate";
               field = ".hashrate";
               tags = {
-                epoch = ".epoch";
+                epoch = "{{ epoch }}";
               };
             }
             {
               type = "gauge";
               kind = "absolute";
-              name = "qubic_node_hashrate_avg";
+              namespace = "qubic";
+              name = "miner_hashrate_avg";
               field = ".avg_hashrate";
               tags = {
-                epoch = ".epoch";
+                epoch = "{{ epoch }}";
               };
             }
           ];
@@ -122,17 +124,8 @@ in {
       sinks = {
         prom_qubic_log = {
           type = "prometheus_exporter";
-          inputs = [ "parse_qubic_logs_metric" ];
+          inputs = [ "metric_qubic_logs" ];
         };
-        # influxdb_logs = {
-        #   type = "influxdb_logs";
-        #   inputs = [ "parse_qubic_logs" ];
-        #   endpoint = "http://talos:8086";
-        #   measurement = "qubic_logs2";
-        #   bucket = "mybucket";
-        #   org = "myorg";
-        #   token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
-        # };
         # debug_console = {
         #   type = "console";
         #   inputs = [ "parse_qubic_logs" ];

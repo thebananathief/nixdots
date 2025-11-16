@@ -142,34 +142,6 @@
           ];
           address = "0.0.0.0:9598";
         };
-        # influxdb_qubic_log = {
-        #   type = "influxdb_logs";
-        #   inputs = [ "parse_qubic_logs" ];
-        #   endpoint = "http://localhost:8086";
-        #   measurement = "qubic_logs2";
-        #   bucket = "mybucket";
-        #   org = "myorg";
-        #   token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
-        # };
-        # influxdb_qubic_wallet_metrics = {
-        #   type = "influxdb_logs";
-        #   inputs = [ "parse_qubic_wallet_balance" ];
-        #   endpoint = "http://localhost:8086";
-        #   measurement = "qubic_wallet_balance";
-        #   tags = [ "walletId" ];
-        #   bucket = "mybucket";
-        #   org = "myorg";
-        #   token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
-        # };
-        # influxdb_qubic_to_usd_metric = {
-        #   type = "influxdb_logs";
-        #   inputs = [ "parse_qubic_to_usd" ];
-        #   endpoint = "http://localhost:8086";
-        #   measurement = "qubic_to_usd";
-        #   bucket = "mybucket";
-        #   org = "myorg";
-        #   token = "g4pdIgFgeaW9d5qg4Am7xuWVlZbv9t2W_D47j9TRteDNTt74QTsEH36p1V6xcp1Lj_O4MsQD-L8wVl0kG7tvug==";
-        # };
         # debug_console = {
         #   type = "console";
         #   inputs = [ 
