@@ -55,13 +55,13 @@ in {
 
   boot.kernel.sysctl = { "vm.nr_hugepages" = 512; };
   
-  
+
   # Log monitoring
   services.vector = {
     enable = true;
     journaldAccess = true;
   };
   imports = [
-    ../../../modules/monitoring/qubic_logs.nix
+    ../../modules/monitoring/qubic_logs.nix
   ];
 }

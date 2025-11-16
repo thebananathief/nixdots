@@ -58,18 +58,6 @@
             }
           ];
         };
-        # converttz_qubic_logs = {
-        #   type = "remap";
-        #   inputs = [ "metric_qubic_logs" ];
-        #   source = ''
-        #     # Convert UTC to EST
-        #     .timestamp = format_timestamp!(
-        #         parse_timestamp!(.timestamp, "%+"), 
-        #         "%Y-%m-%d %H:%M:%S%.f %Z", 
-        #         timezone: "America/New_York"
-        #     )
-        #   '';
-        # };
       };
 
       sinks = {
@@ -81,15 +69,14 @@
           ];
           address = "0.0.0.0:9598";
         };
-        debug_console = {
-          type = "console";
-          inputs = [ 
-            # "converttz_qubic_logs"
-            "parse_qubic_logs"
-          ];
-          encoding.codec = "json";
-          encoding.json.pretty = true;
-        };
+        # debug_console = {
+        #   type = "console";
+        #   inputs = [ 
+        #     "parse_qubic_logs"
+        #   ];
+        #   encoding.codec = "json";
+        #   encoding.json.pretty = true;
+        # };
       };
     };
   };

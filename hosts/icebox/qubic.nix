@@ -62,6 +62,6 @@ in {
     journaldAccess = true;
   };
   imports = [
-    ../../../modules/monitoring/qubic_logs.nix
+    ../../modules/monitoring/qubic_logs.nix
   ];
 }
