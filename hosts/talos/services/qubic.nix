@@ -46,9 +46,12 @@ in {
       volumes = [
         "${ qubicConfig }:/app/appsettings.json:ro"
         "/dev/hugepages:/dev/hugepages"
-        "/etc/timezone:/etc/timezone:ro"
         "/etc/localtime:/etc/localtime:ro"
       ];
+      environment = {
+        TZ = "America/New_York";
+        Timezone = "America/New_York";
+      };
       devices = [
         "/dev/dri:/dev/dri"
       ];
