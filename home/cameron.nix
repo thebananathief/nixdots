@@ -21,4 +21,7 @@
     EDITOR = "hx";
     PLANDEX_SKIP_UPGRADE = "1";
   };
+  home.shellAliases = {
+    pdx = "plandex-cli";
+  };
 }
