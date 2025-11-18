@@ -28,6 +28,10 @@ in {
   environment.systemPackages = with pkgs; [
     plandex
   ];
+  # Annoying upgrade prompt at startup
+  environment.variables = {
+    PLANDEX_SKIP_UPGRADE = "1";
+  };
 
   home-manager.users.${username} = {
     imports = [
