@@ -92,6 +92,12 @@ let
           icon = "prometheus";
         }
         # {
+        #   name = "Perses";
+        #   uri = "http://perses.${ config.networking.fqdn }/";
+        #   description = "Dashboarding tool";
+        #   icon = "perses";
+        # }
+        # {
         #   name = "InfluxDB2";
         #   uri = "http://${ config.networking.fqdn }:8086/";
         #   description = "Time series database web UI";
