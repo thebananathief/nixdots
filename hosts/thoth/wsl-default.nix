@@ -24,7 +24,7 @@ in {
     nixos-wsl.nixosModules.wsl
   ];
 
-  environment.defaultPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     plandex
   ];
 
