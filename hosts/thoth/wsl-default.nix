@@ -24,9 +24,9 @@ in {
     nixos-wsl.nixosModules.wsl
   ];
 
-  # environment.systemPackages = with pkgs; [
-  #   plandex
-  # ];
+  environment.defaultPackages = with pkgs; [
+    plandex
+  ];
 
   home-manager.users.${username} = {
     imports = [
