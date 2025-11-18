@@ -16,4 +16,9 @@
   programs.opencode.enable = true;
 
   home.stateVersion = "23.05";
+
+  home.sessionVariables = {
+    EDITOR = "hx";
+    PLANDEX_SKIP_UPGRADE = "1";
+  };
 }
