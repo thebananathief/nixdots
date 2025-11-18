@@ -18,6 +18,7 @@
       rev = "cli/v${version}";
       hash = "sha256-xtK/6eK3Xm7vGgADsVzFOKaFI7E2uYFu/E/NiyeLWhk=";
     };
+    vendorHash = "sha256-K6KzOxiXZY9cuCh6mTYZ/QNh+yV4y5cQk2xjL3YMLQo=";
   });
 in {
   imports = [
