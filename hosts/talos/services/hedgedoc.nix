@@ -6,7 +6,7 @@ in {
         settings = {
             domain = "hedgedoc.${config.networking.fqdn}";
             port = 8019;
-        }
+        };
     };
 #   virtualisation.oci-containers.containers = {
 #     hedgedoc = {
