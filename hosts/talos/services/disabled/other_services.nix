@@ -22,31 +22,14 @@ in {
       image = "mattermost/focalboard";
       ports = [ "8014:8000" ];
     };
-    hedgedoc = {
-      image = "lscr.io/linuxserver/hedgedoc:latest";
+    filebrowser = {
+      image = "filebrowser/filebrowser:latest";
       volumes = [
-        "${ cfg.dataDir }/hedgedoc:/config"
+        "${ cfg.storageDir }/filebrowser:/srv"
+        "${ cfg.dataDir }/filebrowser/database.db:/database/filebrowser.db"
+        "${ cfg.dataDir }/filebrowser/.filebrowser.json:/.filebrowser.json"
       ];
-      ports = [ "8016:3000" ];
-      environment = {
-        # DB_HOST = "mysql";
-        # DB_PORT = 3306;
-        # DB_USER = "root";
-        # DB_PASS = "${ mysql_password }";
-        # DB_NAME = "hedgedoc";
-        CMD_CONFIG_FILE = ''
-        {
-          "dialect": "sqlite",
-          "storage": "/config/hedgedoc.sqlite"
-        }
-        '';
-        NODE_ENV = "production";
-        CMD_URL_ADDPORT = "true";
-        # CMD_DOMAIN = "notes.${ config.networking.fqdn }";
-        # CMD_PROTOCOL_USESSL = "false"; #optional - use if on a reverse proxy
-        # CMD_PORT = 3000; #optional
-        # CMD_ALLOW_ORIGIN = "['localhost']"; #optional
-      } // cfg.common_env;
+      ports = [ "8011:80" ];
     };
 
     dozzle = {
