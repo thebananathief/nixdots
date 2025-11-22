@@ -7,7 +7,7 @@ in {
       volumes = [
         "${ cfg.dataDir }/hedgedoc:/config"
       ];
-      ports = [ "8016:3000" ];
+      ports = [ "8019:3000" ];
       environment = {
         # DB_HOST = "mysql";
         # DB_PORT = 3306;
