@@ -29,4 +29,14 @@ in {
       } // cfg.common_env;
     };
   };
+
+  services.caddy.virtualHosts = {
+    "hedgedoc.${config.networking.fqdn}".extraConfig = ''
+      @denied not remote_ip private_ranges
+      abort @denied
+
+      tls internal
+      reverse_proxy localhost:8019
+    '';
+  };
 }
