@@ -4,7 +4,7 @@ in {
     services.hedgedoc = {
         enable = true;
         settings = {
-            domain = "hedgedoc.${config.networking.fqdn}";
+            # domain = "hedgedoc.${config.networking.fqdn}";
             port = 8019;
         };
     };
