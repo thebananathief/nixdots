@@ -11,7 +11,7 @@ in {
     ./options.nix
     ./syncthing.nix
     ./librespeed.nix
-    ./hedgedoc.nix
+    # ./hedgedoc.nix
     ./gitea.nix
     ./mediaserver
     ./qubic.nix
