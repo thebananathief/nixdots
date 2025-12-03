@@ -46,6 +46,12 @@ in {
       group = "radarr";
       isSystemUser = true;
     };
+    groups.bazarr = {};
+    users.bazarr = {
+      uid = 276;
+      group = "bazarr";
+      isSystemUser = true;
+    };
   };
 
   virtualisation.oci-containers.containers = {
@@ -108,6 +114,22 @@ in {
         "media"
       ];
     };
+    bazarr = {
+      image = "lscr.io/linuxserver/bazarr:latest";
+      pull = "newer";
+      volumes = [
+        "${cfg.dataDir}/bazarr:/config"
+        "${cfg.storageDir}:/storage"
+      ];
+      ports = ["6767:6767"];
+      environment = {
+        PUID = "276"; # bazarr
+        PGID = "987"; # media
+      } // cfg.common_env;
+      networks = [
+        "media"
+      ];
+    };
   };
 
   systemd.tmpfiles.rules = [
@@ -158,6 +180,14 @@ in {
 
       tls internal
       reverse_proxy localhost:7878
+    '';
+    # Bazarr
+    "bazarr.${ config.networking.fqdn }".extraConfig = ''
+      @denied not remote_ip private_ranges
+      abort @denied
+
+      tls internal
+      reverse_proxy localhost:6767
     '';
   };
 }
