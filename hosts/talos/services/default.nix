@@ -14,7 +14,7 @@ in {
     # ./hedgedoc.nix
     ./gitea.nix
     ./mediaserver
-    ./qubic.nix
+    # ./qubic.nix
     # ./homeassistant.nix
   ];
 
