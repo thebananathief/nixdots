@@ -3,6 +3,7 @@
   inherit (config.sops) secrets;
 in {
   imports = [
+    ./dns.nix
     ./caddy.nix
     ./starbase.nix
 
