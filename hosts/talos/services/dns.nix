@@ -11,10 +11,18 @@
       ];
       
       # Wildcard resolution: All *.talos.home.arpa resolves to your server's IP
-      address = ["/talos.home.arpa/192.168.0.12"];
+      address = [
+        "/talos.home.arpa/192.168.0.12"
+        "/talos/192.168.0.12"
+        "/styx/192.168.0.13"
+        "/homeassistant.local/192.168.0.14"
+      ];
       
-      # Treat this domain as local (no forwarding to upstream)
-      local = "/talos.home.arpa/";
+      # Treat these domains as local (no forwarding to upstream, authoritative)
+      local = [
+        "/talos.home.arpa/"
+        "/local/"  # Makes *.local local-only
+      ];
 
       # Bind only to specific IPs to avoid container network conflicts
       listen-address = [
