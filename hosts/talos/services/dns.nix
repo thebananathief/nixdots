@@ -4,16 +4,14 @@
     enable = true;
     settings = {
       # Upstream DNS servers for non-local queries (e.g., internet resolution)
-      servers = [
+      server = [
         "9.9.9.9"
         "8.8.8.8"
         "8.8.4.4"
       ];
       
       # Wildcard resolution: All *.talos.home.arpa resolves to your server's IP
-      addresses = {
-        "/talos.home.arpa/" = "192.168.0.12";
-      };
+      address = ["/talos.home.arpa/192.168.0.12"];
       
       # Treat this domain as local (no forwarding to upstream)
       local = "/talos.home.arpa/";
