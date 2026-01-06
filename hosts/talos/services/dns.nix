@@ -15,11 +15,12 @@
       
       # Treat this domain as local (no forwarding to upstream)
       local = "/talos.home.arpa/";
-      
+
       # Bind only to specific IPs to avoid container network conflicts
       listen-address = [
         "192.168.0.12"  # Your LAN IP
         "127.0.0.1"     # Loopback for local queries
+        "::1"
       ];
       
       # Enforce binding only to specified addresses/interfaces

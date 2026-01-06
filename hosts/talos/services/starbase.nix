@@ -279,7 +279,7 @@ in {
       abort @denied
 
       tls internal
-      reverse_proxy ::1:8000
+      reverse_proxy localhost:8000
     '';
   };
 }
