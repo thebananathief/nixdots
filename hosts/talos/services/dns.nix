@@ -26,7 +26,7 @@
 
       # Bind only to specific IPs to avoid container network conflicts
       listen-address = [
-        "192.168.0.12"  # Your LAN IP
+        "192.168.0.12"
         "127.0.0.1"     # Loopback for local queries
         "::1"
       ];
