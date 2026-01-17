@@ -274,7 +274,7 @@ in {
   services.caddy.virtualHosts = {
     # Bind to local network interface only
     # bind 192.168.0.0/24
-    "h.${ config.networking.fqdn }".extraConfig = ''
+    "${ config.networking.fqdn }".extraConfig = ''
       @denied not remote_ip private_ranges
       abort @denied
 
