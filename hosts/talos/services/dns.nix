@@ -5,9 +5,10 @@
     settings = {
       # Upstream DNS servers for non-local queries (e.g., internet resolution)
       server = [
-        "9.9.9.9"
+        "1.1.1.1"
         "8.8.8.8"
         "8.8.4.4"
+        "9.9.9.9"
       ];
       
       # Wildcard resolution: All *.talos.home.arpa resolves to your server's IP
