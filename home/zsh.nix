@@ -32,6 +32,7 @@
         zstyle ':autocomplete:*' ignored-input '..##'
 
         source ${dotfiles}/.shell_aliases
+        source "${dotfiles}/git-helpers"
       '';
       plugins = [
         {

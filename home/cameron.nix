@@ -18,6 +18,7 @@
   # programs.opencode.enable = true;
   home.packages = with pkgs; [
     bun
+    nodejs_25
     # these were outdated
     # opencode
     # opencode-desktop
