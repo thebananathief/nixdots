@@ -26,7 +26,10 @@
 
   home.stateVersion = "23.05";
 
-  # home.sessionVariables = {
-  #   EDITOR = "hx";
-  # };
+  home.sessionVariables = {
+    # EDITOR = "hx";
+  };
+  home.sessionPath = [
+    "${pkgs.bun}/bin"
+  ];
 }
