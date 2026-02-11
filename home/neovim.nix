@@ -16,7 +16,7 @@
       comment-nvim
       tagbar
       catppuccin-nvim
-      lualine
+      lualine-nvim
     ];
     viAlias = true;
     vimAlias = true;
