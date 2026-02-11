@@ -17,10 +17,11 @@
   # programs.opencode.enable = true;
   home.packages = with pkgs; [
     bun
-    opencode
-    opencode-desktop
-    claude-code
-    codex
+    # these were outdated
+    # opencode
+    # opencode-desktop
+    # claude-code
+    # codex
   ];
 
   home.stateVersion = "23.05";
