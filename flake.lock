@@ -3,14 +3,18 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "path": "git+ssh://git@github.com:thebananathief/dotfiles.git",
-        "type": "path"
+        "lastModified": 1770783137,
+        "narHash": "sha256-a/eVD0rU7uVg6vtzgOD89VLzGOUEF6HpRRjU+3tN30M=",
+        "ref": "refs/heads/main",
+        "rev": "f21ee237fc7affe2fcef7741de505df2e4855d5c",
+        "revCount": 293,
+        "type": "git",
+        "url": "ssh://git@github.com:22/thebananathief/dotfiles.git"
       },
       "original": {
-        "path": "git+ssh://git@github.com:thebananathief/dotfiles.git",
-        "type": "path"
-      },
-      "parent": []
+        "type": "git",
+        "url": "ssh://git@github.com:22/thebananathief/dotfiles.git"
+      }
     },
     "flake-compat": {
       "flake": false,
