@@ -66,7 +66,7 @@
     packages = with pkgs; [
       firefox
       tree
-      helix
+      neovim
     ];
   };
 

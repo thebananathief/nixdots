@@ -61,8 +61,7 @@
 
   # These packages are installed to all hosts
   environment.systemPackages = with pkgs; [
-    helix
-
+    neovim
     git
     wget
     curl
