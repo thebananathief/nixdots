@@ -2,6 +2,7 @@
   pkgs,
   lib,
   inputs,
+  config,
   ...
 }: rec {
   imports = [
@@ -30,6 +31,6 @@
     # EDITOR = "hx";
   };
   home.sessionPath = [
-    "${pkgs.bun}/bin"
+    "${config.home.homeDirectory}/.bun/bin"
   ];
 }
