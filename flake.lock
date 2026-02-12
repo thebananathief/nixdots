@@ -3,11 +3,11 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1770783137,
-        "narHash": "sha256-a/eVD0rU7uVg6vtzgOD89VLzGOUEF6HpRRjU+3tN30M=",
+        "lastModified": 1770854366,
+        "narHash": "sha256-sny4rNgg7+ZOZfwpB1CGggBLCs3Z1j/q76/r8m7ONsw=",
         "ref": "refs/heads/main",
-        "rev": "f21ee237fc7affe2fcef7741de505df2e4855d5c",
-        "revCount": 293,
+        "rev": "0a4d7882d5316d8a34a34fee672f8642962b2bc4",
+        "revCount": 346,
         "type": "git",
         "url": "ssh://git@github.com:22/thebananathief/dotfiles.git"
       },
@@ -39,11 +39,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1770779995,
-        "narHash": "sha256-Evbc+u49wYQ5uyEi/HHxVFEt3g/w4MZxkMXMe7McjRM=",
+        "lastModified": 1770818644,
+        "narHash": "sha256-DYS4jIRpRoKOzJjnR/QqEd/MlT4OZZpt8CrBLv+cjsE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "b3f43db171474132528be57610bfa5fb3b766879",
+        "rev": "0acbd1180697de56724821184ad2c3e6e7202cd7",
         "type": "github"
       },
       "original": {
