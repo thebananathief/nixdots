@@ -3,6 +3,7 @@
   lib,
   inputs,
   config,
+  dotfiles,
   ...
 }: rec {
   imports = [
@@ -30,6 +31,7 @@
 
   home.sessionVariables = {
     # EDITOR = "hx";
+    DOTFILES_DIR = "${dotfiles}";
   };
   home.sessionPath = [
     "${config.home.homeDirectory}/.bun/bin"
