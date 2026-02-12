@@ -31,6 +31,18 @@
       initContent = ''
         zstyle ':autocomplete:*' ignored-input '..##'
 
+        _find_dotfiles_dir() {
+          local candidate
+          for candidate in "$HOME/dotfiles" "$HOME/code/dotfiles" "$HOME/github/dotfiles"; do
+            if [[ -d "$candidate" ]]; then
+              echo "$candidate"
+              return 0
+            fi
+          done
+          return 1
+        }
+        export DOTFILES_DIR=$(_find_dotfiles_dir)
+
         [[ -f "${dotfiles}/.shell_aliases" ]] && source "${dotfiles}/.shell_aliases"
         [[ -f "${dotfiles}/git-helpers" ]] && source "${dotfiles}/git-helpers"
         [[ -f "${dotfiles}/git-sync" ]] && source "${dotfiles}/git-sync"
