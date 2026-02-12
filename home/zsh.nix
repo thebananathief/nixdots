@@ -31,8 +31,9 @@
       initContent = ''
         zstyle ':autocomplete:*' ignored-input '..##'
 
-        source ${dotfiles}/.shell_aliases
-        source "${dotfiles}/git-helpers"
+        [[ -f "${dotfiles}/.shell_aliases" ]] && source "${dotfiles}/.shell_aliases"
+        [[ -f "${dotfiles}/git-helpers" ]] && source "${dotfiles}/git-helpers"
+        [[ -f "${dotfiles}/git-sync" ]] && source "${dotfiles}/git-sync"
       '';
       plugins = [
         {
