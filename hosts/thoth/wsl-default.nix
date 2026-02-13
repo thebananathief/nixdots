@@ -13,8 +13,9 @@ in {
     nixos-wsl.nixosModules.wsl
   ];
 
-  # environment.systemPackages = with pkgs; [
-  # ];
+  environment.systemPackages = with pkgs; [
+    playwright
+  ];
 
   home-manager.users.${username} = {
     imports = [
