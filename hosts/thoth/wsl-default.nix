@@ -14,7 +14,7 @@ in {
   ];
 
   environment.systemPackages = with pkgs; [
-    playwright
+    playwright-core
   ];
 
   home-manager.users.${username} = {
